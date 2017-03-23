@@ -14,6 +14,7 @@
 		8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A89E8651E842E04001F7F71 /* Main.storyboard */; };
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
 		8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */; };
+		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		8A89E8781E842E04001F7F71 /* InspirationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspirationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsUITests.swift; sourceTree = "<group>"; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
 				8A89E8631E842E04001F7F71 /* Assets.xcassets */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
@@ -500,6 +504,7 @@
 				8A89E8831E842E04001F7F71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A89E8841E842E04001F7F71 /* Build configuration list for PBXNativeTarget "InspirationsTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +513,7 @@
 				8A89E8861E842E04001F7F71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A89E8871E842E04001F7F71 /* Build configuration list for PBXNativeTarget "InspirationsUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +522,7 @@
 				8A89E8891E842E04001F7F71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
