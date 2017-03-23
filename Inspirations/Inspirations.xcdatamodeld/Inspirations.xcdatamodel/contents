@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Author" representedClassName="Author" syncable="YES" codeGenerationType="class">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="fromAuthor" inverseEntity="Quote" syncable="YES"/>
+    </entity>
+    <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
+        <attribute name="quote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="fromAuthor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasQuotes" inverseEntity="Author" syncable="YES"/>
+        <relationship name="isAbout" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Theme" inverseName="fromQuote" inverseEntity="Theme" syncable="YES"/>
+    </entity>
+    <entity name="Theme" representedClassName="Theme" syncable="YES" codeGenerationType="class">
+        <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fromQuote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Quote" positionX="-270" positionY="-216" width="128" height="105"/>
+        <element name="Author" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Theme" positionX="-243" positionY="141" width="128" height="75"/>
+    </elements>
 </model>
