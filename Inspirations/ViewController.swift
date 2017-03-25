@@ -10,7 +10,8 @@ import Cocoa
 
 //comments to delete
 class ViewController: NSViewController {
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +27,7 @@ class ViewController: NSViewController {
         do {
             try fetchedResultsControler.performFetch()
             print ("The items are: \(fetchedResultsControler.fetchedObjects?.count)")
-            print ("fecthed results")
+            //let authorTest = (fetchedResultsControler.fetchedObjects?.first as! Quote).fromAuthor! as Author
             
         } catch {
             let fetchError = error as NSError
@@ -53,6 +54,8 @@ class ViewController: NSViewController {
     
     fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+        fetchRequest.relationshipKeyPathsForPrefetching = ["fromAuthor"]
+        fetchRequest.includesSubentities = true
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rating", ascending: true)]
         //fetchRequest.predicate = NSPredicate(format: "user.id = %@", self.friend!.id!)
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
@@ -72,14 +75,15 @@ class ViewController: NSViewController {
         let managedContext = appDelegate.managedObjectContext
         
         //Retrieve the current Data.
-        var listQuotes = [NSManagedObject]()
+        var listQuotes = [Quote]()//[NSManagedObject]()
         //let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
         do{
             let records = try managedContext.fetch(quotesRequest)
-            if let records = records as? [NSManagedObject]{
+            if let records = records as? [Quote]{
                 listQuotes=records
             }
             print("number of records is: \(listQuotes.count)")
+            print ("An Author is: \(listQuotes.first?.fromAuthor?.firstName)")
    
             
         }catch{
@@ -98,11 +102,9 @@ extension ViewController: NSFetchedResultsControllerDelegate{
 extension ViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        print ("The items2 are: \(fetchedResultsControler.fetchedObjects?.count)")
+        //print ("The items2 are: \(fetchedResultsControler.fetchedObjects?.count)")
         guard let quotesData =  fetchedResultsControler.fetchedObjects else {return 0}
-        
-        print ("The emthod is returning : \(quotesData.count)")
-        
+        //print ("The emthod is returning : \(quotesData.count)")
         return quotesData.count
     }
     
@@ -113,16 +115,28 @@ extension ViewController: NSTableViewDelegate {
     
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        
+        
+            //Test
+        
+           
+        
             //let textTemp = tableColumn?.title
             //print(" \(textTemp)")
+        let indexPath = IndexPath(item: row, section: 0)
+        guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
+        
         if tableColumn!.title == "Quote" {
-            return "test1"
+            return currQuote.quote
         }
         else if tableColumn!.title == "Author" {
-            return "Andres1"
+            
+            return currQuote.fromAuthor?.firstName
+            
         }
         return ""
     }
     
+   
 }
 
