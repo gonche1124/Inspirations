@@ -49,15 +49,15 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         quoteToAdd.quote=quoteT
         quoteToAdd.fromAuthor = authorToAdd
         
-        //CReate NSSet
+        //Create Topic
         let themeToAdd = Theme(context: managedContext)
         themeToAdd.topic = themeT
         quoteToAdd.addToIsAbout(themeToAdd)
-        //quoteToAdd.isAbout = NSSet(object: themeToAdd)
         
         //save
         do {
             try managedContext.save()
+            dismiss(self)
         }catch{
             print("Unable to save the data")
         }

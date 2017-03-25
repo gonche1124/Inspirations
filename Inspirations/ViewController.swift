@@ -91,6 +91,14 @@ class ViewController: NSViewController {
 //TableView extensions
 extension ViewController: NSFetchedResultsControllerDelegate{
     
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        quotesTable.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        quotesTable.endUpdates()
+    }
+    
 }
 
 
