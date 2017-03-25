@@ -52,7 +52,8 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         //CReate NSSet
         let themeToAdd = Theme(context: managedContext)
         themeToAdd.topic = themeT
-        quoteToAdd.isAbout = NSSet(object: themeToAdd)
+        quoteToAdd.addToIsAbout(themeToAdd)
+        //quoteToAdd.isAbout = NSSet(object: themeToAdd)
         
         //save
         do {

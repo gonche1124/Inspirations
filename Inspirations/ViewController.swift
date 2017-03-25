@@ -55,7 +55,6 @@ class ViewController: NSViewController {
     fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
-        //fetchRequest.predicate = NSPredicate(format: "user.id = %@", self.friend!.id!)
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -74,7 +73,6 @@ class ViewController: NSViewController {
         
         //Retrieve the current Data.
         var listQuotes = [Quote]()//[NSManagedObject]()
-        //let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
         do{
             let records = try managedContext.fetch(quotesRequest)
             if let records = records as? [Quote]{
@@ -100,9 +98,7 @@ extension ViewController: NSFetchedResultsControllerDelegate{
 extension ViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        //print ("The items2 are: \(fetchedResultsControler.fetchedObjects?.count)")
         guard let quotesData =  fetchedResultsControler.fetchedObjects else {return 0}
-        //print ("The emthod is returning : \(quotesData.count)")
         return quotesData.count
     }
     
@@ -117,7 +113,6 @@ extension ViewController: NSTableViewDelegate {
         let indexPath = IndexPath(item: row, section: 0)
         guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
         
-        print(currQuote.fromAuthor)
         
         if tableColumn!.title == "Quote" {
             return currQuote.quote
@@ -126,6 +121,9 @@ extension ViewController: NSTableViewDelegate {
             
             return currQuote.fromAuthor?.firstName
             
+        }
+        else if tableColumn!.title == "Theme" {
+            return (currQuote.isAbout?.allObjects.first as! Theme).topic
         }
         return ""
     }
