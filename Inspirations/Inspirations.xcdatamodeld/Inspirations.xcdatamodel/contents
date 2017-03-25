@@ -13,11 +13,11 @@
     </entity>
     <entity name="Theme" representedClassName="Theme" syncable="YES" codeGenerationType="class">
         <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="fromQuote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="fromQuote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Quote" positionX="-270" positionY="-216" width="128" height="105"/>
         <element name="Author" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="Theme" positionX="-243" positionY="141" width="128" height="75"/>
+        <element name="Quote" positionX="-270" positionY="-216" width="128" height="105"/>
+        <element name="Theme" positionX="-243" positionY="141" width="128" height="73"/>
     </elements>
 </model>

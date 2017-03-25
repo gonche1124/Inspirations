@@ -54,9 +54,7 @@ class ViewController: NSViewController {
     
     fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-        fetchRequest.relationshipKeyPathsForPrefetching = ["fromAuthor"]
-        fetchRequest.includesSubentities = true
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rating", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
         //fetchRequest.predicate = NSPredicate(format: "user.id = %@", self.friend!.id!)
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
@@ -116,15 +114,10 @@ extension ViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         
-        
-            //Test
-        
-           
-        
-            //let textTemp = tableColumn?.title
-            //print(" \(textTemp)")
         let indexPath = IndexPath(item: row, section: 0)
         guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
+        
+        print(currQuote.fromAuthor)
         
         if tableColumn!.title == "Quote" {
             return currQuote.quote
