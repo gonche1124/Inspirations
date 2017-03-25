@@ -133,6 +133,10 @@ extension ViewController: NSTableViewDelegate {
         else if tableColumn!.title == "Theme" {
             return (currQuote.isAbout?.allObjects.first as! Theme).topic
         }
+        else if tableColumn!.title == "Favorite"{
+            
+            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
+        }
         return ""
     }
     

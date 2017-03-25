@@ -23,9 +23,9 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     //Outlets
     @IBOutlet weak var quoteField: NSTextField!
     @IBOutlet weak var authorField: NSTextField!
-    @IBOutlet weak var ratingField: NSTextField!
     @IBOutlet weak var themesField: NSTextField!
     @IBOutlet weak var doneButton: NSButton!
+    @IBOutlet weak var favoriteQuote: NSButton!
     
     //Pushed the Done Button
     @IBAction func pushDoneButton(_ sender: Any) {
@@ -35,6 +35,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         let quoteT = self.quoteField.stringValue
         let authorT = self.authorField.stringValue
         let themeT = self.themesField.stringValue
+        let isFav = self.favoriteQuote.state
         
         //Get context
         let appDelegate = NSApplication.shared().delegate as! AppDelegate
@@ -47,6 +48,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         
         let quoteToAdd = Quote(context: managedContext)
         quoteToAdd.quote=quoteT
+        quoteToAdd.isFavorite=Bool(isFav as NSNumber)
         quoteToAdd.fromAuthor = authorToAdd
         
         //Create Topic
@@ -61,9 +63,6 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         }catch{
             print("Unable to save the data")
         }
-        
-        //For testing
-        print("\(quoteT) by \(authorT)")
         
     }
     
