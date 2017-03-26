@@ -15,6 +15,7 @@
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
 		8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */; };
 		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
+		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsUITests.swift; sourceTree = "<group>"; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
+		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
+				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8631E842E04001F7F71 /* Assets.xcassets */,
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
@@ -237,6 +240,7 @@
 			files = (
 				8A89E8641E842E04001F7F71 /* Assets.xcassets in Resources */,
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
+				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
