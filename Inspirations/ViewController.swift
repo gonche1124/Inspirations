@@ -72,6 +72,7 @@ class ViewController: NSViewController {
             for jsonItem in jsonArray {
                 
                 let currItem = jsonItem as! NSDictionary
+                print(currItem)
                 
                 //Create ManagedObjects
                 let theAuthor = Author(context: managedContext)
@@ -89,6 +90,7 @@ class ViewController: NSViewController {
                 //Save - Check if tihs is resource-heavy
                 //save
                 do {
+                    print("The quote is: \(theQuote.quote)")
                     try managedContext.save()
                     dismiss(self)
                 }catch{
@@ -96,8 +98,6 @@ class ViewController: NSViewController {
                 }
             }
             
-            
-            print(jsonArray)
         }catch{
             print("Error while parsing JSON: Handle it")
         }

@@ -778,9 +778,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbK-vh-aoi">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbK-vh-aoi">
                                 <rect key="frame" x="272" y="222" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h6m-dT-Gyn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -791,6 +790,8 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="nbK-vh-aoi" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HJu-7J-jYh"/>
+                            <constraint firstItem="B5L-ZM-2wO" firstAttribute="leading" secondItem="nbK-vh-aoi" secondAttribute="trailing" constant="32" id="OE0-UK-InB"/>
                             <constraint firstItem="mbK-bN-BtZ" firstAttribute="top" secondItem="B5L-ZM-2wO" secondAttribute="bottom" constant="34" id="Q40-yZ-FUF"/>
                             <constraint firstAttribute="trailing" secondItem="mbK-bN-BtZ" secondAttribute="trailing" id="XzY-qQ-g2D"/>
                             <constraint firstItem="B5L-ZM-2wO" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="au2-XP-fUB"/>
