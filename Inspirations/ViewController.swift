@@ -21,19 +21,19 @@ class ViewController: NSViewController {
         printCurrentData()
         
         //Tableview setup
-        quotesTable.delegate=self
-        quotesTable.dataSource=self
+//        quotesTable.delegate=self
+//        quotesTable.dataSource=self
         
         //Populate the NSFetched Controller
-        do {
-            try fetchedResultsControler.performFetch()
-            print ("The items are: \(fetchedResultsControler.fetchedObjects?.count)")
-            
-        } catch {
-            let fetchError = error as NSError
-            print("Unable to Perform Fetch Request")
-            print("\(fetchError), \(fetchError.localizedDescription)")
-        }
+//        do {
+//            try fetchedResultsControler.performFetch()
+//            print ("The items are: \(fetchedResultsControler.fetchedObjects?.count)")
+//            
+//        } catch {
+//            let fetchError = error as NSError
+//            print("Unable to Perform Fetch Request")
+//            print("\(fetchError), \(fetchError.localizedDescription)")
+//        }
     }
 
     override var representedObject: Any? {
@@ -90,7 +90,7 @@ class ViewController: NSViewController {
                 //Save - Check if tihs is resource-heavy
                 //save
                 do {
-                    print("The quote is: \(theQuote.quote)")
+                    print("The quote is: \(String(describing: theQuote.quote))")
                     try managedContext.save()
                     dismiss(self)
                 }catch{
@@ -111,21 +111,21 @@ class ViewController: NSViewController {
     
     
     // MARK: - TableView Methods
-    @IBOutlet weak var quotesTable: NSTableView!
-    
-    //Variables
+//    @IBOutlet weak var quotesTable: NSTableView!
+//    
+//    //Variables
     fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-
-    
-    fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
-        return frc
-    }()
+//
+//    
+//    fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
+//        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+//        frc.delegate = self
+//        return frc
+//    }()
     
     
     // MARK: - Helpers
@@ -145,7 +145,7 @@ class ViewController: NSViewController {
                 listQuotes=records
             }
             print("number of records is: \(listQuotes.count)")
-            print ("An Author is: \(listQuotes.first?.fromAuthor?.firstName)")
+            print ("An Author is: \(String(describing: listQuotes.first?.fromAuthor?.firstName))")
    
             
         }catch{
@@ -154,76 +154,76 @@ class ViewController: NSViewController {
     }
 }
 
-// MARK: - TableView extensions
-extension ViewController: NSFetchedResultsControllerDelegate{
-    
-    //MAKE SURE THE NUMBER OF ROWS GETS UPDATED ACCORDINGLY
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        quotesTable.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        quotesTable.endUpdates()
-        
-    }
-    
-    
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        switch (type){
-        case .insert:
-            if let indexPath = newIndexPath {
-                quotesTable.reloadData()
-                //quotesTable.insertRows(at: [indexPath], withAnimation: .effectGap)
-                
-            }
-        default:break;
-
-        }
-    }
-    
-}
-
-
-
-extension ViewController: NSTableViewDataSource {
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        guard let quotesData =  fetchedResultsControler.fetchedObjects else {return 0}
-        return quotesData.count
-    }
-    
-}
+//// MARK: - TableView extensions
+//extension ViewController: NSFetchedResultsControllerDelegate{
+//    
+//    //MAKE SURE THE NUMBER OF ROWS GETS UPDATED ACCORDINGLY
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        quotesTable.beginUpdates()
+//    }
+//    
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        quotesTable.endUpdates()
+//        
+//    }
+//    
+//    
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        
+//        switch (type){
+//        case .insert:
+//            if let indexPath = newIndexPath {
+//                quotesTable.reloadData()
+//                //quotesTable.insertRows(at: [indexPath], withAnimation: .effectGap)
+//                
+//            }
+//        default:break;
+//
+//        }
+//    }
+//    
+//}
 
 
-extension ViewController: NSTableViewDelegate {
-    
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        
-        let indexPath = IndexPath(item: row, section: 0)
-        guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
-        
-        
-        if tableColumn!.title == "Quote" {
-            return currQuote.quote
-        }
-        else if tableColumn!.title == "Author" {
-            
-            return currQuote.fromAuthor?.firstName
-            
-        }
-        else if tableColumn!.title == "Theme" {
-            return (currQuote.isAbout?.allObjects.first as! Theme).topic
-        }
-        else if tableColumn!.title == "Favorite"{
-            
-            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
-        }
-        return ""
-    }
-    
-   
-}
+
+//extension ViewController: NSTableViewDataSource {
+//    
+//    func numberOfRows(in tableView: NSTableView) -> Int {
+//        guard let quotesData =  fetchedResultsControler.fetchedObjects else {return 0}
+//        return quotesData.count
+//    }
+//    
+//}
+
+
+//extension ViewController: NSTableViewDelegate {
+//    
+//    
+//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+//        
+//        let indexPath = IndexPath(item: row, section: 0)
+//        guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
+//        
+//        
+//        if tableColumn!.title == "Quote" {
+//            return currQuote.quote
+//        }
+//        else if tableColumn!.title == "Author" {
+//            
+//            return currQuote.fromAuthor?.firstName
+//            
+//        }
+//        else if tableColumn!.title == "Theme" {
+//            return (currQuote.isAbout?.allObjects.first as! Theme).topic
+//        }
+//        else if tableColumn!.title == "Favorite"{
+//            
+//            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
+//        }
+//        return ""
+//    }
+//    
+//   
+//}
 
