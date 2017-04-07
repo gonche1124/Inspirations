@@ -17,6 +17,7 @@
 		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
 		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8AED20E71E95351D00F4E03A /* PlainTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED20E61E95351D00F4E03A /* PlainTable.swift */; };
+		8AED20E91E9596A600F4E03A /* BigViewTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED20E81E9596A600F4E03A /* BigViewTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8AED20E61E95351D00F4E03A /* PlainTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainTable.swift; sourceTree = "<group>"; };
+		8AED20E81E9596A600F4E03A /* BigViewTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BigViewTable.swift; path = ../BigViewTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8AED20E81E9596A600F4E03A /* BigViewTable.swift */,
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
@@ -272,6 +275,7 @@
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
+				8AED20E91E9596A600F4E03A /* BigViewTable.swift in Sources */,
 				8AED20E71E95351D00F4E03A /* PlainTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
