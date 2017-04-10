@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A783F891E9C2F81009127D7 /* leftPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A783F881E9C2F81009127D7 /* leftPane.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A783F881E9C2F81009127D7 /* leftPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leftPane.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8631E842E04001F7F71 /* Assets.xcassets */,
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
+				8A783F881E9C2F81009127D7 /* leftPane.swift */,
 				8AED20E61E95351D00F4E03A /* PlainTable.swift */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */,
@@ -273,6 +276,7 @@
 			files = (
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
+				8A783F891E9C2F81009127D7 /* leftPane.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
 				8AED20E91E9596A600F4E03A /* BigViewTable.swift in Sources */,

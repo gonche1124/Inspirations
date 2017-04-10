@@ -87,7 +87,6 @@ extension BigViewTable: NSTableViewDelegate{
         let currQuote = fetchedResultsControler.object(at: IndexPath(item: row, section: 0)) as? Quote
         cellView?.authorLabel.stringValue = (currQuote?.fromAuthor?.firstName)!
         cellView?.quoteLabel.stringValue = (currQuote?.quote)!
-        
         cellView?.bounds.size.width = tableView.bounds.size.height
         cellView!.layoutSubtreeIfNeeded()
         let height = cellView?.fittingSize.height
@@ -108,7 +107,8 @@ extension BigViewTable: NSTableViewDataSource{
     
     //Total Rows
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 20
+        return 20 //NOt time consuming
+        //return (fetchedResultsControler.fetchedObjects?.count)!
     }
     
     //Create View
