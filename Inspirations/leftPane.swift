@@ -38,4 +38,12 @@ class leftPane: NSViewController {
         }
     }
     
+    @IBAction func arrayControllerButton(_ sender: NSButton) {
+        
+        if let contentViewController = parent?.childViewControllers[1] as? NSTabViewController {
+            contentViewController.selectedTabViewItemIndex = 3
+        }
+    }
+    
+    
 }

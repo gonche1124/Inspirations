@@ -41,7 +41,7 @@ class SinglePhraseViewController: NSViewController {
     func updateQuote(quote: String){
         
         
-        let currFrame = quoteLabel.frame
+        //let currFrame = quoteLabel.frame
         quoteLabel.stringValue = quote
         let stringHeight: CGFloat = quoteLabel.attributedStringValue.size().height
         

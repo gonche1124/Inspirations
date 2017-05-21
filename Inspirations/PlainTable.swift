@@ -72,6 +72,7 @@ extension PlainTable: NSFetchedResultsControllerDelegate{
         case .insert:
             if let indexPath = newIndexPath {
                 quotesTable.reloadData()
+                print (indexPath)
             }
         default:break;
         }
