@@ -78,7 +78,7 @@ class SinglePhraseViewController: NSViewController {
             currItem-=1
             let currQuote = fetchedResultsController.object(at: NSIndexPath(forItem: currItem, inSection: 0) as IndexPath) as! Quote
             updateQuote(quote: currQuote.quote!)
-            updateAuthor(author: (currQuote.fromAuthor?.firstName)!)
+            //updateAuthor(author: (currQuote.fromAuthor?.firstName)!)
             updateStatistic(itemN: currItem)
         }
         
@@ -89,7 +89,7 @@ class SinglePhraseViewController: NSViewController {
             currItem+=1
             let currQuote = fetchedResultsController.object(at: NSIndexPath(forItem: currItem, inSection: 0) as IndexPath) as! Quote
             updateQuote(quote: currQuote.quote!)
-            updateAuthor(author: (currQuote.fromAuthor?.firstName)!)
+            //updateAuthor(author: (currQuote.fromAuthor?.firstName)!)
             updateStatistic(itemN: currItem)
         }
     }

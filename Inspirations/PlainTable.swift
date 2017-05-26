@@ -100,16 +100,17 @@ extension PlainTable: NSTableViewDelegate {
         if tableColumn!.title == "Quote" {
             return currQuote.quote
         }
-        else if tableColumn!.title == "Author" {
-            return currQuote.fromAuthor?.firstName
-        }
-        else if tableColumn!.title == "Theme" {
-            return (currQuote.isAbout?.allObjects.first as! Theme).topic
-        }
-        else if tableColumn!.title == "Favorite"{
-            
-            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
-        }
-        return ""
+//        else if tableColumn!.title == "Author" {
+//            return currQuote.fromAuthor?.firstName
+//        }
+//        else if tableColumn!.title == "Theme" {
+//            return (currQuote.isAbout?.allObjects.first as! Theme).topic
+//        }
+//        else if tableColumn!.title == "Favorite"{
+//            
+//            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
+//        }
+       return ""
     }
+    
 }

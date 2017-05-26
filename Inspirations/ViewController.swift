@@ -78,14 +78,19 @@ class ViewController: NSViewController {
                 let theAuthor = Author(context: managedContext)
                 let theQuote = Quote(context: managedContext)
                 let theThemes = Theme(context: managedContext)
+                let theTags = Tags(context: managedContext)
                 
                 //Configure the items
-                theAuthor.firstName = currItem.value(forKey: "Author") as? String
+                theAuthor.name = currItem.value(forKey: "Author") as? String
                 theQuote.quote = currItem.value(forKey: "Quote") as? String
+                theQuote.isFavorite = randomBool.randomElement() as! Bool
                 theThemes.topic = currItem.value(forKey: "Topics") as? String
-                theQuote.isAbout = NSSet(object: theThemes)
+                theTags.tag = randomTags.randomElement()
+                //theQuote.isAbout = NSSet(object: theThemes)
                 theQuote.fromAuthor = theAuthor
                 theQuote.isFavorite = false
+                theQuote.isAbout = theThemes
+                theQuote.tags = NSSet(object: theTags)
                 
                 //Save - Check if tihs is resource-heavy
                 //save
@@ -116,6 +121,8 @@ class ViewController: NSViewController {
 //    //Variables
     fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+    fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
+    fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
 //
 //    
 //    fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
@@ -145,7 +152,7 @@ class ViewController: NSViewController {
                 listQuotes=records
             }
             print("number of records is: \(listQuotes.count)")
-            print ("An Author is: \(String(describing: listQuotes.first?.fromAuthor?.firstName))")
+            //print ("An Author is: \(String(describing: listQuotes.first?.fromAuthor?.firstName))")
    
             
         }catch{
@@ -226,4 +233,12 @@ class ViewController: NSViewController {
 //    
 //   
 //}
+
+extension Array {
+    
+    //Random function to array
+    func randomElement() -> Element  {
+        return self[Int(arc4random_uniform(UInt32(self.count)))]
+    }
+}
 

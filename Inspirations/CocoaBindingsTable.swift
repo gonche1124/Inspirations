@@ -19,3 +19,29 @@ class CocoaBindingsTable: NSViewController {
     dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
     
 }
+
+////@objc(TransformerFromBinaryToFavorite)
+//class TransformerFromBinaryToFavorite: ValueTransformer {
+//    
+//    //What am I converting from
+//    override class func transformedValueClass() -> AnyClass {
+//        return NSString.self
+//    }
+//    
+//    //Are reverse tranformation allowed?
+//    override class func allowsReverseTransformation() -> Bool {
+//        return false;
+//    }
+//    
+//    
+//    func transformedValue(value: AnyObject?) -> AnyObject? { //Perform transformation
+//        //guard let type = value as? NSNumber else { return nil }
+//        return "test1" as AnyObject
+//        
+//    }
+//    
+//    
+//}
+
+
+

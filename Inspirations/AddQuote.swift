@@ -44,7 +44,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
 
         //Create NSManagedObject
         let authorToAdd = Author(context: managedContext)
-        authorToAdd.firstName=authorT
+        //authorToAdd.firstName=authorT
         
         let quoteToAdd = Quote(context: managedContext)
         quoteToAdd.quote=quoteT
@@ -54,7 +54,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         //Create Topic
         let themeToAdd = Theme(context: managedContext)
         themeToAdd.topic = themeT
-        quoteToAdd.addToIsAbout(themeToAdd)
+        //quoteToAdd.addToIsAbout(themeToAdd)
         
         //save
         do {
