@@ -20,20 +20,10 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         printCurrentData()
         
-        //Tableview setup
-//        quotesTable.delegate=self
-//        quotesTable.dataSource=self
-        
-        //Populate the NSFetched Controller
-//        do {
-//            try fetchedResultsControler.performFetch()
-//            print ("The items are: \(fetchedResultsControler.fetchedObjects?.count)")
-//            
-//        } catch {
-//            let fetchError = error as NSError
-//            print("Unable to Perform Fetch Request")
-//            print("\(fetchError), \(fetchError.localizedDescription)")
-//        }
+        //Set up left panel
+//        self.leftOutlineView.dataSource=self
+//        self.leftOutlineView.delegate = self
+
     }
 
     override var representedObject: Any? {
@@ -109,30 +99,22 @@ class ViewController: NSViewController {
         
     }
     
-    
-    
-    
-    
-    
-    
-    // MARK: - TableView Methods
-//    @IBOutlet weak var quotesTable: NSTableView!
-//    
-//    //Variables
+
+    //MARK: - Variables
+    //Variables
     fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
     fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
     fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
-//
-//    
-//    fileprivate lazy var fetchedResultsControler: NSFetchedResultsController<NSFetchRequestResult> = {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
-//        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-//        frc.delegate = self
-//        return frc
-//    }()
+    
+    
+    var mainItems: [NSString] = ["Quotes", "Fancy", "Authors", "Themes", "Big View"]
+    var secondaryItems: [NSString] = ["Top 5", "Weird", "Long", "Short", "Inspirational", "In english", "In spanish", "From Physicist", "From Actors"]
+    fileprivate lazy var leftSideItems: Dictionary<String, [String]> = ["Libraries": ["Quotes", "Fancy", "Authors", "Themes", "Big View"],  "Collections": [ "Top 5", "Weird", "Long", "Short", "Inspirational", "In english", "In spanish", "From Physicist", "From Actors"]]
+
+    //Outlets
+    @IBOutlet weak var leftOutlineView: NSOutlineView!
+    
     
     
     // MARK: - Helpers
@@ -152,8 +134,6 @@ class ViewController: NSViewController {
                 listQuotes=records
             }
             print("number of records is: \(listQuotes.count)")
-            //print ("An Author is: \(String(describing: listQuotes.first?.fromAuthor?.firstName))")
-   
             
         }catch{
             print("Could not print the records")
@@ -161,78 +141,48 @@ class ViewController: NSViewController {
     }
 }
 
-//// MARK: - TableView extensions
-//extension ViewController: NSFetchedResultsControllerDelegate{
-//    
-//    //MAKE SURE THE NUMBER OF ROWS GETS UPDATED ACCORDINGLY
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        quotesTable.beginUpdates()
-//    }
-//    
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        quotesTable.endUpdates()
-//        
-//    }
-//    
-//    
-//    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        
-//        switch (type){
-//        case .insert:
-//            if let indexPath = newIndexPath {
-//                quotesTable.reloadData()
-//                //quotesTable.insertRows(at: [indexPath], withAnimation: .effectGap)
-//                
-//            }
-//        default:break;
-//
-//        }
-//    }
-//    
-//}
+// MARK: - Extensions
+
+extension ViewController: NSOutlineViewDelegate {
+    
+    //provide the data object
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        return "Test Data"
+    }
+    
+    //Configure Cells
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        let currView = leftOutlineView.make(withIdentifier: "DataCell", owner: self) as? NSTableCellView
+        currView?.textField?.stringValue = "test 3"
+        return currView
+    }
+}
+
+extension ViewController: NSOutlineViewDataSource {
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if item == nil {
+            return 2 //leftSideItems.count
+        }
+        else{
+            
+            return 4 //leftSideItems[item as! String]!.count
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        return false
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        return "test Child"
+    }
+    
+    
 
 
-
-//extension ViewController: NSTableViewDataSource {
-//    
-//    func numberOfRows(in tableView: NSTableView) -> Int {
-//        guard let quotesData =  fetchedResultsControler.fetchedObjects else {return 0}
-//        return quotesData.count
-//    }
-//    
-//}
-
-
-//extension ViewController: NSTableViewDelegate {
-//    
-//    
-//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-//        
-//        let indexPath = IndexPath(item: row, section: 0)
-//        guard let currQuote = fetchedResultsControler.object(at: indexPath) as? Quote else {fatalError("Unexpected Object in FetchedResultsController")}
-//        
-//        
-//        if tableColumn!.title == "Quote" {
-//            return currQuote.quote
-//        }
-//        else if tableColumn!.title == "Author" {
-//            
-//            return currQuote.fromAuthor?.firstName
-//            
-//        }
-//        else if tableColumn!.title == "Theme" {
-//            return (currQuote.isAbout?.allObjects.first as! Theme).topic
-//        }
-//        else if tableColumn!.title == "Favorite"{
-//            
-//            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
-//        }
-//        return ""
-//    }
-//    
-//   
-//}
+    
+}
 
 extension Array {
     
