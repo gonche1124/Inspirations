@@ -43,7 +43,10 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
        
 
         //Create NSManagedObject
-        let authorToAdd = Author(context: managedContext)
+        //let authorToAdd = Author(context: managedContext)
+        let authorToAdd = self.findOrCreateObject(authorName: authorT) as! Author
+
+        
         //authorToAdd.firstName=authorT
         
         let quoteToAdd = Quote(context: managedContext)
@@ -66,5 +69,42 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         
     }
     
+    //Finds or create the object that the user input
+    func findOrCreateObject(authorName: String)->NSManagedObject {
+        
+        //Find object
+        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
+        let authorPredicate = NSPredicate(format: "name == %@", authorName)
+        authorFetch.predicate = authorPredicate
+        
+        //Execute fetch
+        do {
+            let existingAuthor = try moc.fetch(authorFetch) as! [Author]
+            
+            if existingAuthor.count > 0 {
+                print("Record already exists")
+                return existingAuthor.first!
+            }
+            else {
+                print("Had to create a new record")
+                let returnedAuthor = Author(context: moc)
+                returnedAuthor.name = authorName
+                return returnedAuthor
+            }
+            
+        }
+        catch {
+            fatalError(error as! String)
+        }
+    }
+            
+            
+       
+        
+        
 
+        
 }
+
+

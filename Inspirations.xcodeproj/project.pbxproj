@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */; };
 		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
-		8A783F891E9C2F81009127D7 /* leftPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A783F881E9C2F81009127D7 /* leftPane.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */; };
@@ -20,6 +19,7 @@
 		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
 		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8AED20E71E95351D00F4E03A /* PlainTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED20E61E95351D00F4E03A /* PlainTable.swift */; };
+		8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB528C1EDBADE50096B93F /* BigViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,6 @@
 /* Begin PBXFileReference section */
 		8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaBindingsTable.swift; sourceTree = "<group>"; };
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
-		8A783F881E9C2F81009127D7 /* leftPane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = leftPane.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8AED20E61E95351D00F4E03A /* PlainTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainTable.swift; sourceTree = "<group>"; };
+		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +89,7 @@
 		8A2572E11ED8B50900720C2A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
 				8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */,
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
 				8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */,
@@ -125,7 +126,6 @@
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8631E842E04001F7F71 /* Assets.xcassets */,
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
-				8A783F881E9C2F81009127D7 /* leftPane.swift */,
 				8AED20E61E95351D00F4E03A /* PlainTable.swift */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */,
@@ -288,7 +288,7 @@
 				8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
-				8A783F891E9C2F81009127D7 /* leftPane.swift in Sources */,
+				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
 				8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
