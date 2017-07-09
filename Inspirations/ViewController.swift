@@ -24,6 +24,18 @@ class ViewController: NSViewController {
         leftOutlineView.expandItem(nil, expandChildren: true)
 
     }
+    
+    //Test.....
+    //fileprivate lazy var fileTree = NSArray(contentsOfFile: customPath)
+    
+    
+    fileprivate lazy var fileTree2 =
+        [["label": "Views", "isGroup": true, "children":
+            ["Quotes", "Fancy", "Authors", "Themes", "Big View"]],
+        ["label":"Curated", "isGroup": true, "children":
+            ["Top 5", "Weird","From Physicist", "From Actors"]],
+        ["label":"Collections", "isGroup": true, "children":
+            [ "Long", "Short", "Inspirational", "In english", "In spanish"]]]
 
     override var representedObject: Any? {
         didSet {
@@ -31,6 +43,8 @@ class ViewController: NSViewController {
             //leftOutlineView.reloadData()
         }
     }
+    
+    fileprivate lazy var fileTree = NSArray(contentsOfFile: Bundle.main.path(forResource: "MyPlist", ofType: ".plist")!)
     
     //MARK: - Import methods
     @IBAction func importData(_ sender: NSButton) {
@@ -107,18 +121,23 @@ class ViewController: NSViewController {
     fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
     fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
     
-    var topLevelItems : [String] = ["Views", "Curated", "Collections"]
-    var mainItems: [String] = ["Quotes", "Fancy", "Authors", "Themes", "Big View"]
-    var curatedItems: [String] = ["Top 5", "Weird","From Physicist", "From Actors"]
-    var secondaryItems: [String] = [ "Long", "Short", "Inspirational", "In english", "In spanish"]
-    
-    fileprivate lazy var leftSideItems : Dictionary<String, Array<String>> = ["Views": ["Quotes", "Fancy", "Authors", "Themes", "Big View"], "Curated": ["Top 5", "Weird","From Physicist", "From Actors"], "Collections": [ "Long", "Short", "Inspirational", "In english", "In spanish"]]
-
+ 
     //Outlets
     @IBOutlet weak var leftOutlineView: NSOutlineView!
     @IBOutlet weak var containerView: NSView!
     
     // MARK: - Helpers
+    
+    //Function that determines whether an object contains a specific key
+    func itemCOntainsKey(itemToCheck: Any, keyToCheck: String)->Bool
+    {
+        var salida = false
+        if let salida2 = itemToCheck as? Dictionary<String, Any> {
+            salida = salida2.keys.contains("isGroup")
+        }
+        print (salida)
+        return salida
+    }
     
     //Function to print the number of elemtns in core data
     func printCurrentData(){
@@ -168,10 +187,6 @@ class ViewController: NSViewController {
         }
     }
     
-    
-    
-    
-    
 }
 
 // MARK: - Extensions
@@ -182,12 +197,15 @@ extension ViewController: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         //Check if it is root item
-        if topLevelItems.contains(item as! String){
+        if self.itemCOntainsKey(itemToCheck: item, keyToCheck: "children")
+        {
             let currView = leftOutlineView.make(withIdentifier: "HeaderCell", owner: self) as? NSTableCellView
-            currView?.textField?.stringValue = (item as! String).uppercased()
+            let itemHeader = item as! [String: Any] //Cast
+            currView?.textField?.stringValue = (itemHeader["label"] as! String).uppercased()
             return currView
         }
-        else {
+        else
+        {
             let currView = leftOutlineView.make(withIdentifier: "DataCell", owner: self) as? NSTableCellView
             currView?.textField?.stringValue = item as! String
             if (item as! String == "Quotes") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameUserGuest)}
@@ -197,15 +215,22 @@ extension ViewController: NSOutlineViewDelegate {
             if (item as! String == "Big View") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameNetwork)}
             
             return currView
+            
         }
     }
-    
     //Selection changed
     func outlineViewSelectionDidChange(_ notification: Notification) {
         let selectedItem = leftOutlineView.selectedRow
-        if ((selectedItem == 1) || (selectedItem == 3) || (selectedItem == 2)) {
+        
+        switch selectedItem {
+        case 1, 2, 5:
             let tabController = self.childViewControllers[0] as! NSTabViewController
             tabController.selectedTabViewItemIndex = selectedItem-1
+        case 3, 4:
+            let tabController = self.childViewControllers[0] as! NSTabViewController
+            tabController.selectedTabViewItemIndex = selectedItem-1
+        default:
+            print("Something else selected")
         }
     }
     
@@ -213,34 +238,44 @@ extension ViewController: NSOutlineViewDelegate {
 
 extension ViewController: NSOutlineViewDataSource {
     
-    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int
+    {
        //Check if it is root item
-        return item == nil ? topLevelItems.count : (leftSideItems[item as! String]?.count)!
+        if item == nil {
+            return fileTree!.count
+        }
+        else {
+            let arrayItems = (item as! [String:Any])["children"]
+            return (arrayItems as! NSArray).count
+        }
     }
     
     //Formats group cells
-    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-        return topLevelItems.contains(item as! String)
+    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool
+    {
+
+        return self.itemCOntainsKey(itemToCheck: item, keyToCheck: "isGroup")
     }
     
     //Wheather each item is expandable or not
-    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        return topLevelItems.contains(item as! String) ? true:false
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool
+    {
+        return self.itemCOntainsKey(itemToCheck: item, keyToCheck: "isGroup")
     }
     
     //Return the item depending ong the herarchy level
-    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        
-        if item == nil {
-            return topLevelItems[index]
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any
+    {
+        if (item == nil) {
+            return fileTree![index]
+        } // Root
+        else if (self.itemCOntainsKey(itemToCheck: item!, keyToCheck: "isGroup")){
+            return ((item as! Dictionary<String, Any>)["children"] as! Array)[index]
         }
-        else {
-            return leftSideItems[item as! String]?[index] ?? ""
+        else{
+            return ""
         }
     }
-    
-    
-    
 }
 
 extension Array {

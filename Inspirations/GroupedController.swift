@@ -37,10 +37,10 @@ class GroupedController: NSViewController {
         //Debugging
         print("number of section is: \(String(describing: frc.sections?.count))")
         
-        let s = frc.sections as! [NSFetchedResultsSectionInfo]
-        for item in s{
+        //let s = frc.sections as! [NSFetchedResultsSectionInfo]
+        //for item in s{
             //print("Number of items for section is: \(item.numberOfObjects) and the name is: \(item.name) and the indexTitle is: \(item.indexTitle)")
-        }
+        //}
         
     }
     
@@ -56,9 +56,11 @@ class GroupedController: NSViewController {
     
     fileprivate lazy var frc: NSFetchedResultsController <NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
+        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key:"isAbout.topic", ascending:false)]
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
+        //let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
         frc.delegate = self
         
         
@@ -162,7 +164,7 @@ extension GroupedController:NSOutlineViewDataSource{
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {
             //let s = frc.sections as! [NSFetchedResultsSectionInfo]
-            return (frc.sections as! [NSFetchedResultsSectionInfo])[index]
+            return (frc.sections!)[index]
         }
         else {
             return (item as! NSFetchedResultsSectionInfo).objects![index]

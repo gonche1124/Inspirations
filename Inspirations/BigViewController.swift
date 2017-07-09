@@ -14,7 +14,7 @@ class BigViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
-        quoteLabel.delegate = self
+        //quoteLabel.delegate = self
     }
     
     dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext

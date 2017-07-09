@@ -27,6 +27,10 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var doneButton: NSButton!
     @IBOutlet weak var favoriteQuote: NSButton!
     
+    
+    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    
+    
     //Pushed the Done Button
     @IBAction func pushDoneButton(_ sender: Any) {
         //Add save quote later

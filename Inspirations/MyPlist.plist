@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>children</key>
+		<array>
+			<string>Quotes</string>
+			<string>Fancy</string>
+			<string>Authors</string>
+			<string>Themes</string>
+			<string>Big View</string>
+		</array>
+		<key>isGroup</key>
+		<true/>
+		<key>label</key>
+		<string>Views</string>
+	</dict>
+	<dict>
+		<key>children</key>
+		<array>
+			<string>Top 5</string>
+			<string>Weird</string>
+			<string>From Physicist</string>
+			<string>From Actors</string>
+		</array>
+		<key>isGroup</key>
+		<true/>
+		<key>label</key>
+		<string>Curated</string>
+	</dict>
+	<dict>
+		<key>children</key>
+		<array>
+			<string>Long</string>
+			<string>Short</string>
+			<string>Inspirational</string>
+			<string>In english</string>
+			<string>In spanish</string>
+		</array>
+		<key>isGroup</key>
+		<true/>
+		<key>label</key>
+		<string>Collections</string>
+	</dict>
+</array>
+</plist>
