@@ -9,6 +9,8 @@
 import Cocoa
 
 class GroupedController: NSViewController {
+    
+    var typeOfGrouping: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +59,13 @@ class GroupedController: NSViewController {
     fileprivate lazy var frc: NSFetchedResultsController <NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
         //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key:"isAbout.topic", ascending:false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.typeOfGrouping, ascending: false)]
+
+        //fetchRequest.sortDescriptors = [NSSortDescriptor(key:"isAbout.topic", ascending:false)]
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
         //let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: self.typeOfGrouping, cacheName: nil)
+        //let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
         frc.delegate = self
         
         
@@ -131,12 +136,16 @@ extension GroupedController:NSOutlineViewDataSource{
         
         if (item is Quote){
             let resultingView = outlineView.make(withIdentifier: "DATACELL", owner: self) as!NSTableCellView
-            resultingView.textField?.stringValue=(item as! Quote).quote!
+            (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
+            if  ((resultingView.viewWithTag(2)) != nil) {
+                (resultingView.viewWithTag(2) as! NSTextField).stringValue = ((item as! Quote).fromAuthor?.name)!
+            }
+            //resultingView.textField?.stringValue=(item as! Quote).quote!
             return resultingView
         }
         else{
             let resultingView = outlineView.make(withIdentifier: "HEADERCELL", owner: self) as!NSTableCellView
-            resultingView.textField?.stringValue=(item as AnyObject).name
+            resultingView.textField?.stringValue=(item as AnyObject).name as! String
             return resultingView
         }
         
