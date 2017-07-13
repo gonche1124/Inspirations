@@ -44,7 +44,7 @@ class ViewController: NSViewController {
         }
     }
     
-    fileprivate lazy var fileTree = NSArray(contentsOfFile: Bundle.main.path(forResource: "MyPlist", ofType: ".plist")!)
+    fileprivate lazy var fileTree = NSArray(contentsOfFile: Bundle.main.path(forResource: "treeList", ofType: ".plist")!)
     
     //MARK: - Import methods
     @IBAction func importData(_ sender: NSButton) {
@@ -63,6 +63,44 @@ class ViewController: NSViewController {
         }
         
     }
+    
+    //Add a list to the tree view and refresh the data.
+    @IBAction func addListToTree(_ sender: NSButton) {
+        
+        let msg = NSAlert()
+        msg.addButton(withTitle: "OK")      // 1st button
+        msg.addButton(withTitle: "Cancel")  // 2nd button
+        msg.messageText = "Add list"
+        msg.informativeText = "Enter the name of the list you want to add"
+        
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        //txt.stringValue
+        
+        msg.accessoryView = txt
+        let response: NSModalResponse = msg.runModal()
+        
+        if (response == NSAlertFirstButtonReturn) {
+            print(txt.stringValue)
+        } else {
+            print("canceled")
+        }
+   
+    
+    }
+    //Deleted the selected list from the tree controller
+    @IBAction func deleteListFromTree(_ sender: NSButton) {
+        
+        let alert = NSAlert()
+        alert.informativeText = "Are you sure you want to delete de list?"
+        alert.messageText = "Delete List"
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        alert.runModal()
+        
+    }
+    
+    
     
     func importFromJSON(pathToFile: URL ){
         
@@ -207,12 +245,17 @@ extension ViewController: NSOutlineViewDelegate {
         else
         {
             let currView = leftOutlineView.make(withIdentifier: "DataCell", owner: self) as? NSTableCellView
+            let currItem = item as! [String:String]
+            currView?.textField?.stringValue = currItem["label"]!
+            currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem["iconName"]!)
+            /*
             currView?.textField?.stringValue = item as! String
             if (item as! String == "Quotes") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameUserGuest)}
             if (item as! String == "Fancy") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameBonjour)}
             if (item as! String == "Authors") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameHomeTemplate)}
             if (item as! String == "Themes") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameInfo)}
             if (item as! String == "Big View") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameNetwork)}
+ */
             
             return currView
             

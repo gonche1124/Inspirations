@@ -145,7 +145,7 @@ extension GroupedController:NSOutlineViewDataSource{
         }
         else{
             let resultingView = outlineView.make(withIdentifier: "HEADERCELL", owner: self) as!NSTableCellView
-            resultingView.textField?.stringValue=(item as AnyObject).name as! String
+            resultingView.textField?.stringValue=(item as AnyObject).name!!
             return resultingView
         }
         

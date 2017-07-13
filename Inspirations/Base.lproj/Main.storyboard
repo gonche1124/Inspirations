@@ -687,13 +687,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSd-Gg-HLc">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="342"/>
+                                <rect key="frame" x="0.0" y="24" width="150" height="318"/>
                                 <clipView key="contentView" drawsBackground="NO" id="83d-1Y-30x">
-                                    <rect key="frame" x="1" y="1" width="148" height="340"/>
+                                    <rect key="frame" x="1" y="1" width="148" height="316"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Ziz-64-Cnz" id="fqd-EH-e3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="340"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="316"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -828,14 +828,46 @@
                                     <segue destination="Tbm-IE-Mmr" kind="popover" popoverAnchorView="B5L-ZM-2wO" popoverBehavior="t" preferredEdge="maxY" id="2g8-BB-ZmT"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAP-nV-KQb">
+                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="KXe-M6-QGN"/>
+                                    <constraint firstAttribute="height" constant="24" id="zjE-LR-nDx"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zZn-YO-k0C">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addListToTree:" target="XfG-lQ-9wD" id="FOA-Og-BBe"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nOf-pK-EP7">
+                                <rect key="frame" x="24" y="0.0" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="cRN-px-B3t"/>
+                                    <constraint firstAttribute="width" constant="24" id="u1I-Cq-XAU"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DDQ-gB-G7O">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteListFromTree:" target="XfG-lQ-9wD" id="cae-eE-1oS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="eAP-nV-KQb" firstAttribute="top" secondItem="KSd-Gg-HLc" secondAttribute="bottom" id="2dc-2g-G2j"/>
+                            <constraint firstItem="nOf-pK-EP7" firstAttribute="leading" secondItem="eAP-nV-KQb" secondAttribute="trailing" id="7Sd-j4-Ohr"/>
                             <constraint firstItem="wne-Bb-0Mn" firstAttribute="leading" secondItem="KSd-Gg-HLc" secondAttribute="trailing" constant="8" id="Ave-ho-cFm"/>
                             <constraint firstItem="B5L-ZM-2wO" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HI9-MV-wSw"/>
                             <constraint firstItem="nbK-vh-aoi" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HJu-7J-jYh"/>
+                            <constraint firstItem="eAP-nV-KQb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="ITA-mI-Fi6"/>
                             <constraint firstItem="nbK-vh-aoi" firstAttribute="leading" secondItem="wne-Bb-0Mn" secondAttribute="trailing" constant="8" id="JD4-fs-XzA"/>
+                            <constraint firstAttribute="bottom" secondItem="eAP-nV-KQb" secondAttribute="bottom" id="KcO-Ab-vYv"/>
                             <constraint firstItem="wne-Bb-0Mn" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="L0h-7V-Wia"/>
-                            <constraint firstItem="wne-Bb-0Mn" firstAttribute="leading" secondItem="KSd-Gg-HLc" secondAttribute="trailing" constant="8" id="MaS-dd-0UN"/>
+                            <constraint firstAttribute="bottom" secondItem="nOf-pK-EP7" secondAttribute="bottom" id="Q6S-iq-GX4"/>
                             <constraint firstItem="yxm-Ha-QPy" firstAttribute="top" secondItem="wne-Bb-0Mn" secondAttribute="bottom" constant="19" id="QIv-no-SnN"/>
                             <constraint firstItem="nbK-vh-aoi" firstAttribute="leading" secondItem="wne-Bb-0Mn" secondAttribute="trailing" constant="8" id="QVq-ni-OVB"/>
                             <constraint firstAttribute="bottom" secondItem="yxm-Ha-QPy" secondAttribute="bottom" id="U5N-Ga-FjI"/>
@@ -846,7 +878,6 @@
                             <constraint firstItem="KSd-Gg-HLc" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="nGo-Gu-VrJ"/>
                             <constraint firstAttribute="trailing" secondItem="B5L-ZM-2wO" secondAttribute="trailing" constant="8" id="syk-Ov-JTx"/>
                             <constraint firstItem="yxm-Ha-QPy" firstAttribute="leading" secondItem="wne-Bb-0Mn" secondAttribute="leading" id="wBM-iR-6Kv"/>
-                            <constraint firstAttribute="bottom" secondItem="KSd-Gg-HLc" secondAttribute="bottom" id="z78-TG-BmA"/>
                         </constraints>
                     </view>
                     <connections>
@@ -861,7 +892,7 @@
         <!--Tab View Controller-->
         <scene sceneID="9wl-FV-w3p">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="t09-Ea-eWB" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="t09-Ea-eWB" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="jfR-td-I58"/>
                         <tabViewItem identifier="" id="LnN-vv-9bG"/>
@@ -869,7 +900,7 @@
                         <tabViewItem id="Q6L-Ui-bEz"/>
                         <tabViewItem id="Ovj-Ww-qRX"/>
                     </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="ROq-vN-sSc">
+                    <tabView key="tabView" id="ROq-vN-sSc">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
@@ -1687,6 +1718,8 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="grey heart" width="240" height="240"/>
         <image name="red heart" width="240" height="240"/>
     </resources>
