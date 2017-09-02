@@ -10,6 +10,8 @@ import Cocoa
 import Foundation
 
 
+
+
 //comments to delete
 class ViewController: NSViewController {
     
@@ -29,14 +31,14 @@ class ViewController: NSViewController {
     //fileprivate lazy var fileTree = NSArray(contentsOfFile: customPath)
     
     
-    fileprivate lazy var fileTree2 =
+    /*fileprivate lazy var fileTree2 =
         [["label": "Views", "isGroup": true, "children":
             ["Quotes", "Fancy", "Authors", "Themes", "Big View"]],
         ["label":"Curated", "isGroup": true, "children":
             ["Top 5", "Weird","From Physicist", "From Actors"]],
         ["label":"Collections", "isGroup": true, "children":
             [ "Long", "Short", "Inspirational", "In english", "In spanish"]]]
-
+*/
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
@@ -44,7 +46,7 @@ class ViewController: NSViewController {
         }
     }
     
-    fileprivate lazy var fileTree = NSArray(contentsOfFile: Bundle.main.path(forResource: "treeList", ofType: ".plist")!)
+    fileprivate lazy var fileTree = NSMutableArray(contentsOfFile: Bundle.main.path(forResource: "treeList", ofType: ".plist")!)
     
     //MARK: - Import methods
     @IBAction func importData(_ sender: NSButton) {
@@ -73,13 +75,14 @@ class ViewController: NSViewController {
         msg.messageText = "Add list"
         msg.informativeText = "Enter the name of the list you want to add"
         
+        //Add text field
         let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-        //txt.stringValue
-        
         msg.accessoryView = txt
+        
         let response: NSModalResponse = msg.runModal()
         
         if (response == NSAlertFirstButtonReturn) {
+            addItemToTreeFile(itemToAdd: txt.stringValue)
             print(txt.stringValue)
         } else {
             print("canceled")
@@ -88,6 +91,7 @@ class ViewController: NSViewController {
     
     }
     //Deleted the selected list from the tree controller
+    //TO IMPLEMENT
     @IBAction func deleteListFromTree(_ sender: NSButton) {
         
         let alert = NSAlert()
@@ -152,6 +156,16 @@ class ViewController: NSViewController {
     }
     
 
+    //MARK: - Export
+    
+    
+    @IBAction func exportCoreModel(_ sender: NSButton) {
+        ///////// IM WORKING HERE!!!
+        importExport().exportAllTheQuotes()
+        print ("this is a test")
+  
+    }
+    
     //MARK: - Variables
     //Variables
     fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
@@ -165,6 +179,36 @@ class ViewController: NSViewController {
     @IBOutlet weak var containerView: NSView!
     
     // MARK: - Helpers
+    //Function to add item to tree, refresh and write data.
+    func addItemToTreeFile(itemToAdd:String){
+        
+        //Create dict
+        let dictItem = ["label": itemToAdd, "iconName": "NSUser"]
+        var collectionDict = fileTree!.lastObject as? [String: Any]
+        var collectionItems = collectionDict!["children"] as! NSArray
+        collectionItems = collectionItems.adding(dictItem) as NSArray
+
+        //Add to fileTree
+        collectionDict?["children"] = collectionItems
+        fileTree?.removeLastObject()
+        fileTree?.add(collectionDict!)
+        
+        //reload data and save??
+        leftOutlineView.reloadData()
+        leftOutlineView.expandItem(nil, expandChildren: true)
+        writeCurrentTreeToFile()
+
+    }
+    
+    //Writes to file
+    //TO IMPLEMENT
+    func writeCurrentTreeToFile(){
+        
+       //if let bundlePath = Bundle.main.path(forResource: "treePlist", ofType: "plist") {
+        //fileTree?.write(to: URL(String:bundlePath), atomically: true)
+        //}
+        
+    }
     
     //Function that determines whether an object contains a specific key
     func itemCOntainsKey(itemToCheck: Any, keyToCheck: String)->Bool
