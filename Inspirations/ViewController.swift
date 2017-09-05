@@ -160,10 +160,7 @@ class ViewController: NSViewController {
     
     
     @IBAction func exportCoreModel(_ sender: NSButton) {
-        ///////// IM WORKING HERE!!!
         importExport().exportAllTheQuotes()
-        print ("this is a test")
-  
     }
     
     //MARK: - Variables
@@ -217,7 +214,7 @@ class ViewController: NSViewController {
         if let salida2 = itemToCheck as? Dictionary<String, Any> {
             salida = salida2.keys.contains("isGroup")
         }
-        print (salida)
+        //print (salida)
         return salida
     }
     
@@ -308,14 +305,25 @@ extension ViewController: NSOutlineViewDelegate {
     //Selection changed
     func outlineViewSelectionDidChange(_ notification: Notification) {
         let selectedItem = leftOutlineView.selectedRow
+        let dictChosen = self.leftOutlineView.item(atRow: selectedItem) as! Dictionary<String, String>
         
         switch selectedItem {
-        case 1, 2, 5:
+        case 1, 2:
             let tabController = self.childViewControllers[0] as! NSTabViewController
+            //print("\(selectedItem) is \(dictChosen["label"])")
             tabController.selectedTabViewItemIndex = selectedItem-1
-        case 3, 4:
+        case 4:
             let tabController = self.childViewControllers[0] as! NSTabViewController
-            tabController.selectedTabViewItemIndex = selectedItem-1
+            let currentTabController = tabController.childViewControllers[selectedItem-1] as! GroupedController
+            currentTabController.typeOfGrouping="fromAuthor.name"
+            tabController.selectedTabViewItemIndex = 5-1
+            //print("\(selectedItem) is \(dictChosen["label"])")
+        case 5:
+            let tabController = self.childViewControllers[0] as! NSTabViewController
+            let currentTabController = tabController.childViewControllers[selectedItem-1] as! GroupedController
+            currentTabController.typeOfGrouping="isAbout.topic"
+            tabController.selectedTabViewItemIndex = 5-1
+            //print("\(selectedItem) is \(dictChosen["label"])")
         default:
             print("Something else selected")
         }

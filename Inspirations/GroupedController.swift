@@ -10,25 +10,85 @@ import Cocoa
 
 class GroupedController: NSViewController {
     
-    var typeOfGrouping: String = ""
+    //MARK: VARIABLES
+    //Variables
+    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+    fileprivate lazy var frcAuthors: NSFetchedResultsController<NSFetchRequestResult> = {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
+        //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
+        frcTemp.delegate = self
+        
+        return frcTemp
+        
+    }()
+    fileprivate lazy var frcTopics: NSFetchedResultsController<NSFetchRequestResult> = {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isAbout.topic", ascending: false)]
+        //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
+        frcTemp.delegate = self
+        
+        return frcTemp
+        
+    }()
 
+    
+    //IBOutlets
+    @IBOutlet weak var groupedTable: NSOutlineView!
+
+    //"fromAuthor.name"
+    var typeOfGrouping: String = "" {
+        didSet{
+            self.view.displayIfNeeded()
+            
+            print(self.typeOfGrouping)
+        }
+    }//This is set through Interface Builder
+    
+    @IBAction func changeSource(_ sender: Any) {
+        if (self.typeOfGrouping=="fromAuthor.name"){
+            self.typeOfGrouping="isAbout.topic"
+            groupedTable.reloadData()
+            groupedTable.expandItem(nil, expandChildren: true)
+        }
+        else {
+            self.typeOfGrouping="fromAuthor.name"
+            groupedTable.reloadData()
+            groupedTable.expandItem(nil, expandChildren: true)
+            
+        }
+    }
+    
+    //MARK: METHODS
+    
+    //Setups after the view has load.
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         
-     
-        
         //Populate the NSFetched Controller
+        try! frcAuthors.performFetch()
+        try! frcTopics.performFetch()
+        
+        /*
         do{
-            try frc.performFetch()
-            print ("Total Items: \(String(describing: frc.fetchedObjects?.count))")
+            //try frc.performFetch()
+            try frcTopics.performFetch()
+            try frcAuthors.performFetch()
+            print ("Total Items: \(String(describing: frc.fetchedObjects?.count)) and sections is: \(frc.sections!.count)")
         } catch {
             let fetchError = error as NSError
             print("\(fetchError), \(fetchError.localizedDescription)")
         }
+ */
         
         //Table SetUp
-        groupedTable.reloadData()
+        //groupedTable.reloadData()
         groupedTable.delegate = self
         groupedTable.dataSource = self
         groupedTable.reloadData()
@@ -36,66 +96,29 @@ class GroupedController: NSViewController {
         //Setup Outlineview
         groupedTable.expandItem(nil, expandChildren: true)
         
-        //Debugging
-        print("number of section is: \(String(describing: frc.sections?.count))")
-        
-        //let s = frc.sections as! [NSFetchedResultsSectionInfo]
-        //for item in s{
-            //print("Number of items for section is: \(item.numberOfObjects) and the name is: \(item.name) and the indexTitle is: \(item.indexTitle)")
-        //}
-        
     }
-    
-    //IBOutlets
-    @IBOutlet weak var groupedTable: NSOutlineView!
-   
-    
-    //Variables
-    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-    
-    fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-
-    
-    fileprivate lazy var frc: NSFetchedResultsController <NSFetchRequestResult> = {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
-        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: self.typeOfGrouping, ascending: false)]
-
-        //fetchRequest.sortDescriptors = [NSSortDescriptor(key:"isAbout.topic", ascending:false)]
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        //let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: self.typeOfGrouping, cacheName: nil)
-        //let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
-        frc.delegate = self
-        
-        
-        
-        return frc
-        
-    }()
-    
     
     //Checks to see if an item is a header
     func isHeader(itemToTest: Any)->Bool {
-        //Make it more globally... is = "isKindfOfClass"
-        
-        var flagLocal:Bool
-        
-        if (itemToTest is Quote) {
-            flagLocal=false
-        }
-        else{
-            flagLocal=true
-        }
-        //let flagLocal = (itemToTest is Quote)
-        
-
-        return (flagLocal)
+        return itemToTest is Quote ? false:true
     }
+ 
+    //Initiates a fetchedResultController and returns it
+    func setUpFetchedResultsController(typeOfGrouping: String)->NSFetchedResultsController<NSFetchRequestResult> {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: typeOfGrouping, ascending: false)]
+        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: typeOfGrouping, cacheName: nil)
+        frcTemp.delegate = self
+        
+        return frcTemp
+        
+    }
+    
 }
 
 // MARK: - TableView Extensions
-
 
 //FetchedResultsControllerDelegate
 extension GroupedController: NSFetchedResultsControllerDelegate{
@@ -103,6 +126,7 @@ extension GroupedController: NSFetchedResultsControllerDelegate{
     //MAke SURE THE NUMBER OF ROWS GETS UPDATED ACCORDINGLY
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         groupedTable.beginUpdates()
+        print("controllerWillChangeContent")
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -135,13 +159,20 @@ extension GroupedController:NSOutlineViewDataSource{
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         if (item is Quote){
-            let resultingView = outlineView.make(withIdentifier: "DATACELL", owner: self) as!NSTableCellView
-            (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
-            if  ((resultingView.viewWithTag(2)) != nil) {
+            if self.typeOfGrouping == "isAbout.topic" {
+                let resultingView = outlineView.make(withIdentifier: "DATACELLWITHAUTHOR", owner: self) as!NSTableCellView
+                (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
                 (resultingView.viewWithTag(2) as! NSTextField).stringValue = ((item as! Quote).fromAuthor?.name)!
+                return resultingView
             }
-            //resultingView.textField?.stringValue=(item as! Quote).quote!
-            return resultingView
+            else {
+                let resultingView = outlineView.make(withIdentifier: "DATACELL", owner: self) as!NSTableCellView
+                (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
+                if  ((resultingView.viewWithTag(2)) != nil) {
+                    (resultingView.viewWithTag(2) as! NSTextField).stringValue = ((item as! Quote).fromAuthor?.name)!
+                }
+                return resultingView
+            }
         }
         else{
             let resultingView = outlineView.make(withIdentifier: "HEADERCELL", owner: self) as!NSTableCellView
@@ -154,13 +185,12 @@ extension GroupedController:NSOutlineViewDataSource{
     //check
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         
-        //NOt sure if this works
+        //Count the number of objects
         if (item == nil) {
-            let s = frc.sections!
-            return s.count
+            return (self.typeOfGrouping == "fromAuthor.name") ? frcAuthors.sections!.count : frcTopics.sections!.count
+            //return frc.sections!.count
         }
         else{
-            //print ("numberOfChildren for item \(String(describing: item))")
             return (item as! NSFetchedResultsSectionInfo).numberOfObjects
         }
     }
@@ -170,10 +200,11 @@ extension GroupedController:NSOutlineViewDataSource{
         return  self.isHeader(itemToTest:item)// ? true: false
     }
     
+    //Returns the child for the specific item at a specific index
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {
-            //let s = frc.sections as! [NSFetchedResultsSectionInfo]
-            return (frc.sections!)[index]
+            return (self.typeOfGrouping=="fromAuthor.name") ? (frcAuthors.sections!)[index] : (frcTopics.sections!)[index]
+            //return (frc.sections!)[index]
         }
         else {
             return (item as! NSFetchedResultsSectionInfo).objects![index]
@@ -190,19 +221,42 @@ extension GroupedController:NSOutlineViewDelegate{
         return "test YYY"
     }
     
+    //Determine if row is group item
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         return self.isHeader(itemToTest:item)
     }
     
+    //Calculate the height of the rows
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
         if (self.isHeader(itemToTest: item))
         {
             return 25
         }
         else {
-            return 48
+            
+            let maxWidth = (outlineView.tableColumns.first?.width)!-18*2
+            let constraint = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
+            //Get size of quote
+            let quoteText = (item as! Quote).quote! as NSString
+            let attributesDict = [NSFontAttributeName: NSFont.init(name: "Optima", size: 16.0)!]
+            let virtualLText = quoteText.boundingRect(with: constraint,
+                                                       options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                                       attributes: attributesDict)
+            //Get size of author if applicable
+            let authorString = (self.typeOfGrouping=="isAbout.topic") ? CGFloat(24+8) : CGFloat(0)
+
+            return virtualLText.height + authorString + 20*2
         }
     }
+    
+    //Recalculate height when screen moves
+    func outlineViewColumnDidResize(_ notification: Notification) {
+        
+        let AllIndex = IndexSet(integersIn:0..<self.groupedTable.numberOfRows)
+        self.groupedTable.noteHeightOfRows(withIndexesChanged: AllIndex)
+    }
+    
+    
     
 }
 

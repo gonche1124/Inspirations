@@ -46,6 +46,7 @@ extension QuoteController: NSTableViewDelegate {
  
         //Get the size of the table
         let tableWidth = tableView.tableColumns.first?.width
+        //print("The width of the column is: \(String(describing: tableWidth)) while the width of the table is: \(tableView.frame.width)")
         
         //Get the text size
         let quoteText: NSString = ((self.quotesArray.arrangedObjects as! NSArray).object(at: row) as! Quote).quote! as NSString

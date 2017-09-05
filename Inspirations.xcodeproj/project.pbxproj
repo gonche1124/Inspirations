@@ -10,7 +10,6 @@
 		8A06E9AB1F16F822007474C6 /* treeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A06E9AA1F16F822007474C6 /* treeList.plist */; };
 		8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
-		8A17C20A1F5907EA00814107 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2091F5907EA00814107 /* SwiftyJSON.swift */; };
 		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
 		8A308F261F0B48B600961057 /* GroupedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A308F251F0B48B600961057 /* GroupedController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
@@ -48,7 +47,6 @@
 		8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaBindingsTable.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
-		8A17C2091F5907EA00814107 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
 		8A308F251F0B48B600961057 /* GroupedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedController.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +138,6 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
-				8A17C2091F5907EA00814107 /* SwiftyJSON.swift */,
 				8A2572E11ED8B50900720C2A /* View Controllers */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
@@ -311,7 +308,6 @@
 				8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
-				8A17C20A1F5907EA00814107 /* SwiftyJSON.swift in Sources */,
 				8A308F261F0B48B600961057 /* GroupedController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
 				8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */,
