@@ -112,59 +112,7 @@ class ViewController: NSViewController {
         alert.runModal()
         
     }
-    
-    
-    //Alerady migrated to ImportExport
-    /*
-    func importFromJSON(pathToFile: URL ){
-        
-        //Read into Array
-        let jsonData = NSData(contentsOf: pathToFile)
-        do{
-            let jsonArray = try JSONSerialization.jsonObject(with: (jsonData)! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSMutableArray
-            
-            
-            //Iterate over evey item adding a NSMAnagedObject
-            for jsonItem in jsonArray {
-                
-                let currItem = jsonItem as! NSDictionary
-                print(currItem)
-                
-                //Create ManagedObjects
-                let theAuthor = findOrCreateObject(authorName: currItem.value(forKey: "Author") as! String) as! Author
-                let theQuote = Quote(context: managedContext)
-                let theThemes = Theme(context: managedContext)
-                let theTags = Tags(context: managedContext)
-                
-                //Configure the items
-                //theAuthor.name = currItem.value(forKey: "Author") as? String
-                theQuote.quote = currItem.value(forKey: "Quote") as? String
-                theQuote.isFavorite = randomBool.randomElement() as! Bool
-                theThemes.topic = currItem.value(forKey: "Topics") as? String
-                theTags.tag = randomTags.randomElement()
-                //theQuote.isAbout = NSSet(object: theThemes)
-                theQuote.fromAuthor = theAuthor
-                theQuote.isFavorite = false
-                theQuote.isAbout = theThemes
-                theQuote.tags = NSSet(object: theTags)
-                
-                //Save - Check if tihs is resource-heavy
-                //save
-                do {
-                    print("The quote is: \(String(describing: theQuote.quote))")
-                    try managedContext.save()
-                    dismiss(self)
-                }catch{
-                    print("Unable to save the data")
-                }
-            }
-            
-        }catch{
-            print("Error while parsing JSON: Handle it")
-        }
-        
-    }
-*/
+
 
     //MARK: - Export
     

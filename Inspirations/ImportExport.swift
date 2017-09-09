@@ -24,7 +24,6 @@ class importExport: NSObject {
     func retrieveArrayOfRecords()-> [Dictionary<String,Any>] {
         //get context
         let managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        
         //Retrieve the current Data.
         var listQuotes = [Dictionary<String,Any>]()
         do{
@@ -74,9 +73,28 @@ class importExport: NSObject {
     }
     
     // MARK: - Import
+    //Looks for an object, creates one if there is not one there.
+    func findOrCreateEntity(key: String, value: Any, entity: String, moc: NSManagedObjectContext)->NSManagedObject{
+        
+        //Configire search
+        let fetchReq=NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let fetchPredicate = NSPredicate(format: "%K == %@", key, value as! String)
+        fetchReq.predicate=fetchPredicate
+        
+        //Execute fetch
+        let managedObject = try! moc.fetch(fetchReq) as! [NSManagedObject]
+        if managedObject.count > 0 {
+            print("Already exists")
+            return managedObject.first as! NSManagedObject
+        }
+        else {
+            print ("Does not exist")
+            return NSEntityDescription.insertNewObject(forEntityName: entity, into: moc)
+        }
+    }
     
     //Returns an author (new or existing) depending on the value passed.
-    func findOrCreateObject(authorName: String)->NSManagedObject {
+    func findOrCreateObject2(authorName: String)->NSManagedObject {
         
         //Find object
         //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
@@ -105,39 +123,24 @@ class importExport: NSObject {
     //dictionary and in the moc passed as parameter
     func createManagedObject(attributes:Dictionary<String, Any>, Entity: String, inManagedObjectContext: NSManagedObjectContext)->NSManagedObject{
         
-        print("createManagedObject: \(Entity)")
-        
         var newObject: NSManagedObject
         switch Entity {
             case "fromAuthor":
-                newObject=Author(context: moc)
+                //newObject=Author(context: moc)
+                newObject=findOrCreateEntity(key: "name", value: attributes["name"]!, entity: "Author",  moc:moc)
             case "isAbout":
-                newObject=Theme(context: moc)
+                //newObject=Theme(context: moc)
+                newObject=findOrCreateEntity(key: "topic", value: attributes["topic"]!, entity: "Theme", moc:moc)
             case "tags":
-                newObject=Tags(context: moc)
+                //newObject=Tags(context: moc)
+                newObject=findOrCreateEntity(key: "tag", value: attributes["tag"]!, entity: "Tag", moc:moc)
             default:
-                newObject=Quote(context:moc)
+                //newObject=Quote(context:moc)
+                newObject=findOrCreateEntity(key: "quote", value: attributes["quote"]!, entity: "Quote", moc:moc)
         }
         
-        /*
-        if Entity == "Quote" {
-            newObject = Quote(context: moc)
-        }
-        else if Entity == "fromAuthor" {
-            newObject = Author(context: moc)
-        }
-        else if Entity == "isAbout" {
-            newObject = Theme(context: moc)
-        }
-        else if Entity == "tags" {
-            newObject = Tags(context: moc)
-            
-        }
-        else {
-            newObject = Quote(context: moc)
-        }
- */
         newObject.populateFromDictionary(attributesDictionary: attributes)
+        //try!moc.save() //Added this line after error on run due to changing removed object
         return newObject
     }
     
@@ -155,85 +158,19 @@ class importExport: NSObject {
                                                    Entity: "Quote",
                                                    inManagedObjectContext: moc) as! Quote
             
-            try! moc.save()
-            
-        }
-    }
-        //do{
-            //let jsonArray = try JSONSerialization.jsonObject(with: (jsonData)! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSMutableArray
-            //This code is not working!!!!
-            
-            /*
             do{
-                let jsonArray2 = try JSONSerialization.jsonObject(with: (jsonData)! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-                print ("The JSON array is:")
-                print (jsonArray2.object(at: 2))
-                print (jsonArray2.firstObject)
-                //print ("is type Array: \(jsonArray2.isKind(of: Array as! AnyClass))")
-                //print ("is type Dictionary: \(jsonArray2.isKind(of: Dictionary))")
-                print ("FInished printing JSON")
+                try moc.save()
             }
             catch{
-                print ("Unable to load the data")
                 print(error)
             }
-            */
             
-            //Iterate over evey item adding a NSMAnagedObject
-            /*
-           let jsonArray3 = ["a", "b", "c"]
-            for jsonItem in jsonArray3 {
-                
-                let currItem = jsonItem as! Dictionary<String, Any>
-                print(currItem)
-                print("The keys are: \(currItem.keys)")
-                print ("The values are: \(currItem.values)")
-                
-                //Test
-                let customObject = createManagedObject(attributes: currItem,
-                                                       Entity: "Quote",
-                                        inManagedObjectContext: moc)
-                
-                try! moc.save()
-                
-                
-                /*
-                //Create ManagedObjects
-                let theAuthor = findOrCreateObject(authorName: currItem.value(forKey: "Author") as! String) as! Author
-                let theQuote = Quote(context: moc)
-                let theThemes = Theme(context: moc)
-                let theTags = Tags(context: moc)
-                
-                //Configure the items
-                //theAuthor.name = currItem.value(forKey: "Author") as? String
-                theQuote.quote = currItem.value(forKey: "Quote") as? String
-                theQuote.isFavorite = [true, false].randomElement() 
-                theThemes.topic = currItem.value(forKey: "Topics") as? String
-                theTags.tag = ["Favorite", "Top 25", "Inspirational"].randomElement()
-                //theQuote.isAbout = NSSet(object: theThemes)
-                theQuote.fromAuthor = theAuthor
-                theQuote.isFavorite = false
-                theQuote.isAbout = theThemes
-                theQuote.tags = NSSet(object: theTags)
-                 */
- 
-                //Save - Check if tihs is resource-heavy
-                //save
-                do {
-                    //print("The quote is: \(String(describing: theQuote.quote))")
-                    try moc.save()
-                    //dismiss(self)
-                }catch{
-                    print("Unable to save the data")
-                }
-            }
-            
-        }catch{
-            print("Error while parsing JSON: Handle it")
         }
-        
     }
- */
+    
+        
+    
+
 }
 
  //MARK: -  Extensions
@@ -272,40 +209,40 @@ extension NSManagedObject{
     }
     
     //Populates the attributes from a dictionary
-    //To create
     func populateFromDictionary(attributesDictionary: Dictionary<String, Any>){
+        let moc2 = self.managedObjectContext
         
         for case let key as String in attributesDictionary.keys {
             let value = attributesDictionary[key] as! NSObject
-            
             //Check on-to-one relationship
             if value is Dictionary<String, Any> {
                 let IE = importExport()
                 let relationObject = IE.createManagedObject(attributes: value as! Dictionary<String, Any>,
-                                                                        Entity: key, inManagedObjectContext: IE.moc) as NSManagedObject
+                                                                Entity: key,
+                                                inManagedObjectContext: moc2!) as NSManagedObject
                 
-                self.setValue(relationObject, forKeyPath: key) //Check if this works
-                print("\(self.entity.managedObjectClassName!): added one to one relatinship for: \(key)")
+                self.setValue(relationObject, forKeyPath: key)
             }
         
             //Check one-to-many relationship
             else if value is NSArray {
-                print("This is a one to Many relatinship")
+                let objectSet = NSSet()
+                let IE = importExport()
+                for arrayItem in value as! NSArray {
+                    let setItem = IE.createManagedObject(attributes: arrayItem as! Dictionary<String, Any>,
+                                                         Entity: key, inManagedObjectContext: moc2!) as NSManagedObject
+                    objectSet.adding(setItem)
+                }
+                self.setValue(objectSet, forKeyPath: key)
             }
         
             //Check if it is an attribute
             else{
-                
-            if  !(value is NSNull) {
-                print (value)
-                self.setValue(value, forKey: key)
-                print("\(self.entity.managedObjectClassName!): Added an attribute \(value) for key \(key)")
+                if !(value is NSNull) {
+                    self.setValue(value, forKey: key)
+                }
             }
-            }
-            
-        
         }
-        print ("\(self.entity.managedObjectClassName!): finished populating")
     }
 }
 

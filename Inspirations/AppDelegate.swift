@@ -105,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+        managedObjectContext.mergePolicy=NSMergePolicy.mergeByPropertyStoreTrump //Custom Line of code to avoid duplicates.
         return managedObjectContext
     }()
 
