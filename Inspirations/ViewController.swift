@@ -54,10 +54,19 @@ class ViewController: NSViewController {
         let dialog = NSOpenPanel()
         dialog.title = "Choose a JSON file"
         dialog.showsResizeIndicator = true
-        dialog.allowedFileTypes = ["json"]
+        dialog.allowedFileTypes = ["json", "txt"]
+        
+        //For debugging only
+        //let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
+        let test = URL.init(string: "file:///Users/Gonche/Desktop/jsonTest.txt")
+        importExport().importFromJSONV2(pathToFile: test!)
+        
         
         if (dialog.runModal() == NSModalResponseOK) {
-            importFromJSON(pathToFile: dialog.url!)
+            print (dialog.url!)
+            importExport().importFromJSONV2(pathToFile: dialog.url!)
+            dismiss(self)
+            //importFromJSON(pathToFile: dialog.url!)
         }
         else{
             print("Cancel")
@@ -105,7 +114,8 @@ class ViewController: NSViewController {
     }
     
     
-    
+    //Alerady migrated to ImportExport
+    /*
     func importFromJSON(pathToFile: URL ){
         
         //Read into Array
@@ -154,7 +164,7 @@ class ViewController: NSViewController {
         }
         
     }
-    
+*/
 
     //MARK: - Export
     
@@ -239,6 +249,8 @@ class ViewController: NSViewController {
         }
     }
     
+    //Añready migrated to ImportExport
+    /*
     func findOrCreateObject(authorName: String)->NSManagedObject {
         
         //Find object
@@ -265,7 +277,7 @@ class ViewController: NSViewController {
             fatalError(error as! String)
         }
     }
-    
+    */
 }
 
 // MARK: - Extensions
