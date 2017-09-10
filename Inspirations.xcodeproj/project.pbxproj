@@ -138,12 +138,12 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8ACADE831F64B77500919332 /* Support */,
 				8A2572E11ED8B50900720C2A /* View Controllers */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8631E842E04001F7F71 /* Assets.xcassets */,
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
-				8A17C2051F58FB0900814107 /* ImportExport.swift */,
 				8AED20E61E95351D00F4E03A /* PlainTable.swift */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8A06E9AA1F16F822007474C6 /* treeList.plist */,
@@ -168,6 +168,14 @@
 				8A89E87E1E842E04001F7F71 /* Info.plist */,
 			);
 			path = InspirationsUITests;
+			sourceTree = "<group>";
+		};
+		8ACADE831F64B77500919332 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8A17C2051F58FB0900814107 /* ImportExport.swift */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

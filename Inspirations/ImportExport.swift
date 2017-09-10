@@ -84,38 +84,10 @@ class importExport: NSObject {
         //Execute fetch
         let managedObject = try! moc.fetch(fetchReq) as! [NSManagedObject]
         if managedObject.count > 0 {
-            print("Already exists")
             return managedObject.first as! NSManagedObject
         }
         else {
-            print ("Does not exist")
             return NSEntityDescription.insertNewObject(forEntityName: entity, into: moc)
-        }
-    }
-    
-    //Returns an author (new or existing) depending on the value passed.
-    func findOrCreateObject2(authorName: String)->NSManagedObject {
-        
-        //Find object
-        //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
-        let authorPredicate = NSPredicate(format: "name == %@", authorName)
-        authorFetch.predicate = authorPredicate
-        
-        //Execute fetch
-        do {
-            let existingAuthor = try moc.fetch(authorFetch) as! [Author]
-            if existingAuthor.count > 0 {
-                return existingAuthor.first!
-            }
-            else {
-                let returnedAuthor = Author(context: moc)
-                returnedAuthor.name = authorName
-                return returnedAuthor
-            }
-        }
-        catch {
-            fatalError(error as! String)
         }
     }
     
@@ -126,16 +98,12 @@ class importExport: NSObject {
         var newObject: NSManagedObject
         switch Entity {
             case "fromAuthor":
-                //newObject=Author(context: moc)
                 newObject=findOrCreateEntity(key: "name", value: attributes["name"]!, entity: "Author",  moc:moc)
             case "isAbout":
-                //newObject=Theme(context: moc)
                 newObject=findOrCreateEntity(key: "topic", value: attributes["topic"]!, entity: "Theme", moc:moc)
             case "tags":
-                //newObject=Tags(context: moc)
                 newObject=findOrCreateEntity(key: "tag", value: attributes["tag"]!, entity: "Tag", moc:moc)
             default:
-                //newObject=Quote(context:moc)
                 newObject=findOrCreateEntity(key: "quote", value: attributes["quote"]!, entity: "Quote", moc:moc)
         }
         
