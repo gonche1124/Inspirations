@@ -9,14 +9,6 @@
 import Cocoa
 
 
-//class quoteCell: NSTableCellView {
-//    
-//    @IBOutlet weak var labelQuote: NSTextField!
-//    @IBOutlet weak var labelAuthor: NSTextField!
-//    
-//    
-//}
-
 //Controller Class
 class QuoteController: NSViewController {
 
@@ -24,8 +16,11 @@ class QuoteController: NSViewController {
         super.viewDidLoad()
         
         // Do view setup here.
-        
-        
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        (self.parent as? ViewController)?.searchQuote.delegate = self
     }
     
     //Variables
@@ -64,3 +59,24 @@ extension QuoteController: NSTableViewDelegate {
     
 }
 
+extension QuoteController: NSSearchFieldDelegate {
+    
+    //Gets called everytime the text changes.
+    override func controlTextDidChange(_ obj: Notification) {
+        let searchString = (obj.object as? NSSearchField)!.stringValue
+        if searchString != "" {
+            self.quotesArray.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
+            self.quotesTable.reloadData()
+            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesArray.arrangedObjects as! NSArray).count)
+
+        }
+    }
+    
+    //Gets called when
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        self.quotesArray.filterPredicate=nil
+        self.quotesTable.reloadData()
+        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
+    }
+    
+}

@@ -49,6 +49,7 @@
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
 		8A308F251F0B48B600961057 /* GroupedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedController.swift; sourceTree = "<group>"; };
+		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -596,9 +597,10 @@
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */,
 				8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */,
 			);
-			currentVersion = 8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */;
+			currentVersion = 8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */;
 			path = Inspirations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

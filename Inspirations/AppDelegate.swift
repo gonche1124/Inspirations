@@ -73,7 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
             let url = self.applicationDocumentsDirectory.appendingPathComponent("Inspirations.storedata")
             do {
-                try coordinator!.addPersistentStore(ofType: NSXMLStoreType, configurationName: nil, at: url, options: nil)
+                let optionsMigration = [ NSInferMappingModelAutomaticallyOption : true,
+                                NSMigratePersistentStoresAutomaticallyOption : true] //Added for migration purposes.
+                try coordinator!.addPersistentStore(ofType: NSXMLStoreType, configurationName: nil, at: url, options: optionsMigration)
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                  

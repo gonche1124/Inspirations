@@ -9,7 +9,6 @@
 import Cocoa
 import Foundation
 
-//comments to delete
 class ViewController: NSViewController {
     
     
@@ -185,10 +184,17 @@ class ViewController: NSViewController {
     //Outlets
     @IBOutlet weak var leftOutlineView: NSOutlineView!
     @IBOutlet weak var containerView: NSView!
+    @IBOutlet weak var informationLabel: NSTextField!
+    @IBOutlet weak var searchQuote: NSSearchField!
+    
     //@IBOutlet weak var container2View: NSView!
     
     
     // MARK: - Helpers
+    func updateInfoLabel(parameter: Any){
+        self.informationLabel.stringValue = "Showing \(parameter) of the 33 records"
+    }
+    
     //Function to add item to tree, refresh and write data.
     func addItemToTreeFile(itemToAdd:String){
         
@@ -246,41 +252,13 @@ class ViewController: NSViewController {
                 listQuotes=records
             }
             print("number of records is: \(listQuotes.count)")
+            self.informationLabel.stringValue = "Showing \(listQuotes.count) of \(listQuotes.count)"
             
         }catch{
             print("Could not print the records")
         }
     }
     
-    //Añready migrated to ImportExport
-    /*
-    func findOrCreateObject(authorName: String)->NSManagedObject {
-        
-        //Find object
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
-        let authorPredicate = NSPredicate(format: "name == %@", authorName)
-        authorFetch.predicate = authorPredicate
-        
-        //Execute fetch
-        do {
-            let existingAuthor = try moc.fetch(authorFetch) as! [Author]
-            
-            if existingAuthor.count > 0 {
-                return existingAuthor.first!
-            }
-            else {
-                let returnedAuthor = Author(context: moc)
-                returnedAuthor.name = authorName
-                return returnedAuthor
-            }
-            
-        }
-        catch {
-            fatalError(error as! String)
-        }
-    }
-    */
 }
 
 // MARK: - Extensions

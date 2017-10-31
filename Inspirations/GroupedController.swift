@@ -12,31 +12,8 @@ class GroupedController: NSViewController {
     
     //MARK: VARIABLES
     //Variables
-    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-    fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-    fileprivate lazy var frcAuthors: NSFetchedResultsController<NSFetchRequestResult> = {
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.name", ascending: false)]
-        //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: "fromAuthor.name", cacheName: nil)
-        frcTemp.delegate = self
-        
-        return frcTemp
-        
-    }()
-    fileprivate lazy var frcTopics: NSFetchedResultsController<NSFetchRequestResult> = {
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "isAbout.topic", ascending: false)]
-        //let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
-        let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: "isAbout.topic", cacheName: nil)
-        frcTemp.delegate = self
-        
-        return frcTemp
-        
-    }()
-
+    fileprivate lazy var frcAuthors = self.setUpFetchedResultsController(typeOfGrouping: "fromAuthor.name")
+    fileprivate lazy var frcTopics = self.setUpFetchedResultsController(typeOfGrouping: "isAbout.topic")
     
     //IBOutlets
     @IBOutlet weak var groupedTable: NSOutlineView!
@@ -50,6 +27,7 @@ class GroupedController: NSViewController {
         }
     }//This is set through Interface Builder
     
+    //Check if this method is still valid.
     @IBAction func changeSource(_ sender: Any) {
         if (self.typeOfGrouping=="fromAuthor.name"){
             self.typeOfGrouping="isAbout.topic"
@@ -75,28 +53,19 @@ class GroupedController: NSViewController {
         try! frcAuthors.performFetch()
         try! frcTopics.performFetch()
         
-        /*
-        do{
-            //try frc.performFetch()
-            try frcTopics.performFetch()
-            try frcAuthors.performFetch()
-            print ("Total Items: \(String(describing: frc.fetchedObjects?.count)) and sections is: \(frc.sections!.count)")
-        } catch {
-            let fetchError = error as NSError
-            print("\(fetchError), \(fetchError.localizedDescription)")
-        }
- */
-        
         //Table SetUp
-        //groupedTable.reloadData()
         groupedTable.delegate = self
         groupedTable.dataSource = self
-        groupedTable.reloadData()
-        
-        //Setup Outlineview
-        groupedTable.expandItem(nil, expandChildren: true)
+        self.reloadDataAndExpand()
         
     }
+    
+    //Neccesary to voeride in order for the search to work.
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        (self.parent as! ViewController).searchQuote.delegate = self
+    }
+    
     
     //Checks to see if an item is a header
     func isHeader(itemToTest: Any)->Bool {
@@ -105,7 +74,7 @@ class GroupedController: NSViewController {
  
     //Initiates a fetchedResultController and returns it
     func setUpFetchedResultsController(typeOfGrouping: String)->NSFetchedResultsController<NSFetchRequestResult> {
-        
+
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: typeOfGrouping, ascending: false)]
         let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
@@ -113,7 +82,12 @@ class GroupedController: NSViewController {
         frcTemp.delegate = self
         
         return frcTemp
-        
+    }
+    
+    //Reloeds the data and expands teh view
+    func reloadDataAndExpand(){
+        self.groupedTable.reloadData()
+        self.groupedTable.expandItem(nil, expandChildren:true)
     }
     
 }
@@ -204,7 +178,6 @@ extension GroupedController:NSOutlineViewDataSource{
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {
             return (self.typeOfGrouping=="fromAuthor.name") ? (frcAuthors.sections!)[index] : (frcTopics.sections!)[index]
-            //return (frc.sections!)[index]
         }
         else {
             return (item as! NSFetchedResultsSectionInfo).objects![index]
@@ -255,11 +228,39 @@ extension GroupedController:NSOutlineViewDelegate{
         let AllIndex = IndexSet(integersIn:0..<self.groupedTable.numberOfRows)
         self.groupedTable.noteHeightOfRows(withIndexesChanged: AllIndex)
     }
+}
+
+//Extension fro search field
+extension GroupedController: NSSearchFieldDelegate{
     
+    //Called when user starts searching.
+//    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+//        print("Searchfield did start searching \(sender.stringValue)")
+//    }
+    //Called when the users finishes searching.
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        self.frcAuthors.fetchRequest.predicate = nil
+        try! self.frcAuthors.performFetch()
+        self.reloadDataAndExpand()
+    }
+    
+    override func controlTextDidChange(_ obj: Notification) {
+        let searchString = (obj.object as? NSSearchField)!.stringValue
+        if searchString == "" {
+            return
+        }
+        //let tempFetchReq = self.frcAuthors.fetchRequest
+        let tempPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
+        self.frcAuthors.fetchRequest.predicate = tempPredicate
+        try! self.frcAuthors.performFetch()
+        self.reloadDataAndExpand()
+        (self.parent as? ViewController)?.informationLabel.stringValue = "Showing \(self.frcAuthors.fetchedObjects!.count) of 33 records"
+
+        //Check out predicateWithSubstitutionVariables method to simplify code.
+    }
     
     
 }
-
 
 /*
 //TableViewDataSource

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="17B46a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Author" representedClassName="Author" syncable="YES" codeGenerationType="class">
+        <attribute name="birth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="fromAuthor" inverseEntity="Quote" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Playlist" representedClassName="Playlist" syncable="YES" codeGenerationType="class">
+        <attribute name="pName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="quotesInPlaylist" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Quote" syncable="YES"/>
+    </entity>
+    <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quote" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fromAuthor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasQuotes" inverseEntity="Author" syncable="YES"/>
+        <relationship name="isAbout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="fromQuote" inverseEntity="Theme" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="assignedToQuote" inverseEntity="Tag" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="quote"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Tag" representedClassName="Tags" syncable="YES" codeGenerationType="class">
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="assignedToQuote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="tags" inverseEntity="Quote" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="tag"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Theme" representedClassName="Theme" syncable="YES" codeGenerationType="class">
+        <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fromQuote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="topic"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Author" positionX="72" positionY="-72" width="128" height="88"/>
+        <element name="Quote" positionX="-270" positionY="-216" width="128" height="133"/>
+        <element name="Tag" positionX="-11" positionY="81" width="128" height="73"/>
+        <element name="Theme" positionX="-243" positionY="141" width="128" height="73"/>
+        <element name="Playlist" positionX="-29" positionY="-279" width="128" height="88"/>
+    </elements>
+</model>

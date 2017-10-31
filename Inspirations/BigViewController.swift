@@ -13,29 +13,34 @@ class BigViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
-        //quoteLabel.delegate = self
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        (self.parent as? ViewController)!.searchQuote.delegate=self
     }
     
     dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
     
-    @IBOutlet weak var quoteLabel: NSTextField!
-    
-    //Configures Text Label.
+    @IBOutlet var arrayController: NSArrayController!
 }
 
-extension BigViewController: NSTextFieldDelegate {
+//MARK: - Extensions
+extension BigViewController: NSSearchFieldDelegate{
     
-    ///// NOT WORKNG
-    func textDidChange(_ notification: Notification) {
-        print ("test textDidChange")
-        print ( "\(notification.name)")
-        print ("\(notification.description)")
-        print ("\(quoteLabel.stringValue)")
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        self.arrayController.filterPredicate=nil
+        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
     }
     
+    //Gets called everytime a user searches a character.
+    override func controlTextDidChange(_ obj: Notification) {
+        let searchString = (obj.object as? NSSearchField)!.stringValue
+        if searchString != "" {
+            self.arrayController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
+            self.arrayController.setSelectionIndex(1)
+            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.arrayController.arrangedObjects as! NSArray).count)
+        }
+    }
 }
 
-extension BigViewController: NSTextViewDelegate{
-    
-}
