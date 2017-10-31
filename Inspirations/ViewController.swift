@@ -61,14 +61,16 @@ class ViewController: NSViewController {
         }
         else if sender.indexOfSelectedItem == 3 {
             VCGroupedMixTable.view.frame = self.containerView.bounds
-            VCGroupedMixTable.typeOfGrouping = "ifromAuthor.name"
+            VCGroupedMixTable.typeOfGrouping = "fromAuthor.name"
+            VCGroupedMixTable.groupedTable.reloadData()
+            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
-            //VCGroupedTable.view.frame = self.containerView.bounds
-            //self.containerView.addSubview(VCGroupedTable.view)
         }
         else {
             VCGroupedMixTable.view.frame = self.containerView.bounds
             VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
+            VCGroupedMixTable.groupedTable.reloadData()
+            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
         }
         
