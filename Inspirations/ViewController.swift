@@ -9,9 +9,6 @@
 import Cocoa
 import Foundation
 
-
-
-
 //comments to delete
 class ViewController: NSViewController {
     
@@ -24,9 +21,58 @@ class ViewController: NSViewController {
         
         //Set up left panel
         leftOutlineView.expandItem(nil, expandChildren: true)
+        
+        
+        //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
+        VCPlainTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCPlainTable") as! CocoaBindingsTable
+        VCQuoteTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCQuotesTable") as! QuoteController
+        VCBigView = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCBigView") as! BigViewController
+        VCGroupedMixTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCGroupedMix") as! GroupedController
+        //Add controllers
+        self.addChildViewController(VCPlainTable)
+        self.addChildViewController(VCQuoteTable)
+        self.addChildViewController(VCBigView)
+        self.addChildViewController(VCGroupedMixTable)
+        //Set default view
+        VCBigView.view.frame = self.containerView.bounds
+        self.containerView.addSubview(VCBigView.view)
 
     }
     
+    //Selects the view controller to show depending on the button selected.
+    @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
+        //Remove all views.
+        for cView in self.containerView.subviews {
+            cView.removeFromSuperview()
+        }
+        //Show selected View
+        if sender.indexOfSelectedItem == 0 {
+            VCPlainTable.view.frame = self.containerView.bounds
+            self.containerView.addSubview(VCPlainTable.view)
+        }
+        else if sender.indexOfSelectedItem == 1 {
+            VCQuoteTable.view.frame = self.containerView.bounds
+            self.containerView.addSubview(VCQuoteTable.view)
+        }
+        else if sender.indexOfSelectedItem == 2 {
+            VCBigView.view.frame = self.containerView.bounds
+            self.containerView.addSubview(VCBigView.view)
+    
+        }
+        else if sender.indexOfSelectedItem == 3 {
+            VCGroupedMixTable.view.frame = self.containerView.bounds
+            VCGroupedMixTable.typeOfGrouping = "ifromAuthor.name"
+            self.containerView.addSubview(VCGroupedMixTable.view)
+            //VCGroupedTable.view.frame = self.containerView.bounds
+            //self.containerView.addSubview(VCGroupedTable.view)
+        }
+        else {
+            VCGroupedMixTable.view.frame = self.containerView.bounds
+            VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
+            self.containerView.addSubview(VCGroupedMixTable.view)
+        }
+        
+    }
     //Test.....
     //fileprivate lazy var fileTree = NSArray(contentsOfFile: customPath)
     
@@ -128,10 +174,17 @@ class ViewController: NSViewController {
     fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
     fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
     
+    //Controllers of different Views Final
+    var VCPlainTable : CocoaBindingsTable!
+    var VCQuoteTable : QuoteController!
+    var VCBigView : BigViewController!
+    var VCGroupedMixTable : GroupedController!
  
     //Outlets
     @IBOutlet weak var leftOutlineView: NSOutlineView!
     @IBOutlet weak var containerView: NSView!
+    //@IBOutlet weak var container2View: NSView!
+    
     
     // MARK: - Helpers
     //Function to add item to tree, refresh and write data.
@@ -266,7 +319,33 @@ extension ViewController: NSOutlineViewDelegate {
     func outlineViewSelectionDidChange(_ notification: Notification) {
         let selectedItem = leftOutlineView.selectedRow
         let dictChosen = self.leftOutlineView.item(atRow: selectedItem) as! Dictionary<String, String>
+        print(dictChosen["label"]!)
         
+        let tabController = self.childViewControllers[0] as! NSTabViewController
+        
+        switch dictChosen["label"]! {
+        case "Quote":
+            tabController.selectedTabViewItemIndex = 0
+        case "Authors":
+            let currentTabController = tabController.childViewControllers[3] as! GroupedController
+            currentTabController.typeOfGrouping="isAbout.topic"
+            tabController.selectedTabViewItemIndex = 3
+        case "Topics":
+            let currentTabController = tabController.childViewControllers[3] as! GroupedController
+            currentTabController.typeOfGrouping="fromAuthor.name"
+            tabController.selectedTabViewItemIndex = 4
+        case "Big View":
+            tabController.selectedTabViewItemIndex = 2
+        case "Single View":
+            tabController.selectedTabViewItemIndex = 1
+        default:
+            tabController.selectedTabViewItemIndex = 1
+        }
+        
+        
+        //THIS COMMENTED CODE WORKS
+        
+        /*
         switch selectedItem {
         case 1, 2:
             let tabController = self.childViewControllers[0] as! NSTabViewController
@@ -287,6 +366,7 @@ extension ViewController: NSOutlineViewDelegate {
         default:
             print("Something else selected")
         }
+ */
     }
     
 }
