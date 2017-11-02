@@ -126,6 +126,7 @@ extension GroupedController: NSFetchedResultsControllerDelegate{
 
 
 //NSOutlineViewDataSource
+//MARK: NSOutlineViewDataSource
 extension GroupedController:NSOutlineViewDataSource{
     
     //Suggested Methods to implement
@@ -187,6 +188,7 @@ extension GroupedController:NSOutlineViewDataSource{
 }
 
 //NSoutlineViewDelegate
+//MARK: NSOutlineViewDelegate
 extension GroupedController:NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
@@ -231,6 +233,7 @@ extension GroupedController:NSOutlineViewDelegate{
 }
 
 //Extension fro search field
+//MARK: NSSEarchFieldDelegate
 extension GroupedController: NSSearchFieldDelegate{
     
     //Called when user starts searching.

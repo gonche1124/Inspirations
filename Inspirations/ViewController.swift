@@ -17,6 +17,10 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         printCurrentData()
+        printPlaylistData()
+        
+        //To comment.
+        //addTempDefaultValues()
         
         //Set up left panel
         leftOutlineView.expandItem(nil, expandChildren: true)
@@ -237,6 +241,42 @@ class ViewController: NSViewController {
         return salida
     }
     
+    //To ERASE, only used for adding default values.
+    func addTempDefaultValues(){
+        //get context
+        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        //Adds two main playlists.
+        let principal = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: managedContext) as! Playlist
+        let folderList = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: managedContext) as! Playlist
+        principal.pName = "Library"
+        folderList.pName = "Lists"
+        principal.isLeaf=false
+        folderList.isLeaf=false
+        
+        //Adds subgroup of main
+        let mainList = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: managedContext) as! Playlist
+        mainList.pName = "Main"
+        mainList.pType = "General"
+        mainList.isInPlaylist=principal
+        
+        let favList = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: managedContext) as! Playlist
+        favList.pName = "Favorites"
+        favList.pType = "General"
+        mainList.isInPlaylist=principal
+        favList.isInPlaylist=principal
+        
+        try! managedContext.save()
+        
+        for i in 1...10 {
+            let tempList = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: managedContext) as! Playlist
+            tempList.pName = "random name \(i)"
+            tempList.isInPlaylist = folderList
+            try! managedContext.save()
+        }
+    }
+    
     //Function to print the number of elemtns in core data
     func printCurrentData(){
         
@@ -257,6 +297,20 @@ class ViewController: NSViewController {
         }catch{
             print("Could not print the records")
         }
+    }
+    
+    //Function to print playlist data.
+    func printPlaylistData(){
+        //get context
+        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        //Retrieve data.
+        let fetchR = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
+        let lists : [Playlist] = try! managedContext.fetch(fetchR) as! [Playlist]
+        print ("number of playlists is: \(lists.count)")
+        //print (lists)
+        
     }
     
 }

@@ -12,6 +12,7 @@
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
 		8A308F261F0B48B600961057 /* GroupedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A308F251F0B48B600961057 /* GroupedController.swift */; };
+		8A78DA711FAA77250096F711 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A78DA701FAA77250096F711 /* PlaylistController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */; };
@@ -50,6 +51,8 @@
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
 		8A308F251F0B48B600961057 /* GroupedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedController.swift; sourceTree = "<group>"; };
 		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
+		8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.1.xcdatamodel; sourceTree = "<group>"; };
+		8A78DA701FAA77250096F711 /* PlaylistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 		8A2572E11ED8B50900720C2A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8A78DA701FAA77250096F711 /* PlaylistController.swift */,
 				8A308F251F0B48B600961057 /* GroupedController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
 				8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */,
@@ -242,7 +246,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Gonche;
 				TargetAttributes = {
 					8A89E8581E842E03001F7F71 = {
@@ -316,6 +320,7 @@
 			files = (
 				8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
+				8A78DA711FAA77250096F711 /* PlaylistController.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8A308F261F0B48B600961057 /* GroupedController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
@@ -379,7 +384,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -387,7 +394,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -428,7 +439,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -436,7 +449,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -597,10 +614,11 @@
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */,
 				8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */,
 				8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */,
 			);
-			currentVersion = 8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */;
+			currentVersion = 8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */;
 			path = Inspirations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
