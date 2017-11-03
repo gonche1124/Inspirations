@@ -13,9 +13,12 @@ class PlaylistController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        //self.playlistOutlineView.expandItem(nil, expandChildren: true)
         self.playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
         
+        //Does nothing
+//        self.playlistOutlineView.reloadData()
+//        self.playlistOutlineView.setNeedsDisplay()
+//        self.playlistOutlineView.expandItem(nil, expandChildren: true)
     }
     
     //Variables
@@ -35,9 +38,20 @@ extension PlaylistController: NSOutlineViewDelegate{
         
         let typeOfCell : String = (((item as? NSTreeNode)?.isLeaf)! ? "DataCell" : "HeaderCell")
         let currView = self.playlistOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
+        
+        //Test to not make editable the Library. NOT WORKING.
+        if ((item as! NSTreeNode).parent?.representedObject as? Playlist)?.pName == "Library" {
+            currView?.textField?.backgroundColor = NSColor.blue
+            currView?.textField?.isEditable=false
+            currView?.textField?.isSelectable=false
+            print ("It is true")
+            }
+        currView?.textField?.stringValue = (((item as! NSTreeNode).representedObject as! Playlist).pName?.uppercased())!
+        currView?.imageView?.image = NSImage.init(imageLiteralResourceName: "red heart")
         return currView
         
     }
+    
     
     //Display Grouped cell
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
@@ -53,6 +67,11 @@ extension PlaylistController: NSOutlineViewDelegate{
 //MARK: NSOutlineViewDataSource
 extension PlaylistController: NSOutlineViewDataSource{
     
+    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+        return (item as! NSTreeNode).representedObject
+    }
+    
+    
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
         
@@ -65,7 +84,7 @@ extension PlaylistController: NSOutlineViewDataSource{
         
         //Get source data.
         let data: Data = info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.fileContents)! as Data
-        let rowIndexes: IndexSet = NSKeyedUnarchiver.unarchiveObject(with: data) as! IndexSet
+        let rowIndexes = NSKeyedUnarchiver.unarchiveObject(with: data) as! IndexSet
         let quotesSource = ((self.parent as! ViewController).VCPlainTable.quotesArrayController.arrangedObjects) as! NSArray
         
         //Add items to playlits.
