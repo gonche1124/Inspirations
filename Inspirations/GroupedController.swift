@@ -232,14 +232,10 @@ extension GroupedController:NSOutlineViewDelegate{
     }
 }
 
-//Extension fro search field
-//MARK: NSSEarchFieldDelegate
+
+//MARK: NSSearchFieldDelegate
 extension GroupedController: NSSearchFieldDelegate{
     
-    //Called when user starts searching.
-//    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-//        print("Searchfield did start searching \(sender.stringValue)")
-//    }
     //Called when the users finishes searching.
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         self.frcAuthors.fetchRequest.predicate = nil
@@ -247,12 +243,12 @@ extension GroupedController: NSSearchFieldDelegate{
         self.reloadDataAndExpand()
     }
     
+    //Calls everytime a user inputs a character.
     override func controlTextDidChange(_ obj: Notification) {
         let searchString = (obj.object as? NSSearchField)!.stringValue
         if searchString == "" {
             return
         }
-        //let tempFetchReq = self.frcAuthors.fetchRequest
         let tempPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
         self.frcAuthors.fetchRequest.predicate = tempPredicate
         try! self.frcAuthors.performFetch()

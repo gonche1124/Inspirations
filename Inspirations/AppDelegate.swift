@@ -16,9 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
      
-//        ValueTransformer.setValueTransformer(TransformerFromBinaryToFavorite, forName: "TransformerFromBinaryToFavorite")
-        
-        
+        //Register Transformer
+        //ValueTransformer.setValueTransformer(BooleanToString(), forName: NSValueTransformerName(rawValue: "BooleanToString"))
+        ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

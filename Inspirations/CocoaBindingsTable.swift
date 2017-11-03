@@ -31,7 +31,37 @@ class CocoaBindingsTable: NSViewController {
     
 }
 
+
+
+
 //MARK: - Extensions
+
+//MARK: NSTableViewDelegate
+extension CocoaBindingsTable: NSTableViewDelegate{
+    
+    //Dragging
+   
+}
+
+extension CocoaBindingsTable: NSTableViewDataSource{
+    
+    //Dragging methods
+    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+        //Get data.
+        let dataToDrag = (self.quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
+        //let firstObjectURI = dataToDrag.first?.objectID.uriRepresentation()
+        //pboard.declareTypes(["NSP"], owner: self)
+        
+        pboard.setData(NSKeyedArchiver.archivedData(withRootObject: rowIndexes), forType: NSGeneralPboard)
+        print (rowIndexes)
+        //print(dataToDrag)
+        return true
+    }
+
+}
+
+
+
 extension CocoaBindingsTable: NSSearchFieldDelegate{
     
     //Gts called when user ends searhing
@@ -53,28 +83,39 @@ extension CocoaBindingsTable: NSSearchFieldDelegate{
     
 }
 
-////@objc(TransformerFromBinaryToFavorite)
-//class TransformerFromBinaryToFavorite: ValueTransformer {
-//    
-//    //What am I converting from
-//    override class func transformedValueClass() -> AnyClass {
-//        return NSString.self
-//    }
-//    
-//    //Are reverse tranformation allowed?
-//    override class func allowsReverseTransformation() -> Bool {
-//        return false;
-//    }
-//    
-//    
-//    func transformedValue(value: AnyObject?) -> AnyObject? { //Perform transformation
-//        //guard let type = value as? NSNumber else { return nil }
-//        return "test1" as AnyObject
-//        
-//    }
-//    
-//    
-//}
+//Heart transformer to image.
+class BooleanToImage: ValueTransformer {
+    override class func transformedValueClass() -> AnyClass{
+        return NSImage.self
+    }
+    
+    override func transformedValue(_ value: Any?) -> Any? {
+        if value == nil {
+            return nil
+        }else {
+            return NSImage.init(imageLiteralResourceName: (value as! Bool) ? "red heart":"grey heart")
+        }
+    }
+    
+    //No Reverse.
+    override class func allowsReverseTransformation() -> Bool {
+        return false
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

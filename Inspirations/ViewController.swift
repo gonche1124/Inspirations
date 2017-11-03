@@ -309,6 +309,10 @@ class ViewController: NSViewController {
         let fetchR = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
         let lists : [Playlist] = try! managedContext.fetch(fetchR) as! [Playlist]
         print ("number of playlists is: \(lists.count)")
+        for list in lists {
+            let quotes = list.quotesInPlaylist
+            print ("Playlist \(list.pName!) has \(quotes!.count) quotes")
+        }
         //print (lists)
         
     }
