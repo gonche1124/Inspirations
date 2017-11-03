@@ -28,7 +28,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var favoriteQuote: NSButton!
     
     
-    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     
     //Pushed the Done Button
@@ -42,7 +42,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         let isFav = self.favoriteQuote.state
         
         //Get context
-        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
        
 
@@ -55,7 +55,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         
         let quoteToAdd = Quote(context: managedContext)
         quoteToAdd.quote=quoteT
-        quoteToAdd.isFavorite=Bool(isFav as NSNumber)
+        quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
         quoteToAdd.fromAuthor = authorToAdd
         
         //Create Topic
@@ -77,7 +77,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     func findOrCreateObject(authorName: String)->NSManagedObject {
         
         //Find object
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
         let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
         let authorPredicate = NSPredicate(format: "name == %@", authorName)
         authorFetch.predicate = authorPredicate

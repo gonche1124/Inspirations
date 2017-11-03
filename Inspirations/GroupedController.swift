@@ -77,7 +77,7 @@ class GroupedController: NSViewController {
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: typeOfGrouping, ascending: false)]
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
         let frcTemp = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: typeOfGrouping, cacheName: nil)
         frcTemp.delegate = self
         
@@ -135,13 +135,13 @@ extension GroupedController:NSOutlineViewDataSource{
         
         if (item is Quote){
             if self.typeOfGrouping == "isAbout.topic" {
-                let resultingView = outlineView.make(withIdentifier: "DATACELLWITHAUTHOR", owner: self) as!NSTableCellView
+                let resultingView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DATACELLWITHAUTHOR"), owner: self) as!NSTableCellView
                 (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
                 (resultingView.viewWithTag(2) as! NSTextField).stringValue = ((item as! Quote).fromAuthor?.name)!
                 return resultingView
             }
             else {
-                let resultingView = outlineView.make(withIdentifier: "DATACELL", owner: self) as!NSTableCellView
+                let resultingView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DATACELL"), owner: self) as!NSTableCellView
                 (resultingView.viewWithTag(1) as! NSTextField).stringValue = (item as! Quote).quote!
                 if  ((resultingView.viewWithTag(2)) != nil) {
                     (resultingView.viewWithTag(2) as! NSTextField).stringValue = ((item as! Quote).fromAuthor?.name)!
@@ -150,7 +150,7 @@ extension GroupedController:NSOutlineViewDataSource{
             }
         }
         else{
-            let resultingView = outlineView.make(withIdentifier: "HEADERCELL", owner: self) as!NSTableCellView
+            let resultingView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HEADERCELL"), owner: self) as!NSTableCellView
             resultingView.textField?.stringValue=(item as AnyObject).name!!
             return resultingView
         }
@@ -213,9 +213,9 @@ extension GroupedController:NSOutlineViewDelegate{
             let constraint = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
             //Get size of quote
             let quoteText = (item as! Quote).quote! as NSString
-            let attributesDict = [NSFontAttributeName: NSFont.init(name: "Optima", size: 16.0)!]
+            let attributesDict = [NSAttributedStringKey.font: NSFont.init(name: "Optima", size: 16.0)!]
             let virtualLText = quoteText.boundingRect(with: constraint,
-                                                       options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                                       options: [NSString.DrawingOptions.usesLineFragmentOrigin, NSString.DrawingOptions.usesFontLeading],
                                                        attributes: attributesDict)
             //Get size of author if applicable
             let authorString = (self.typeOfGrouping=="isAbout.topic") ? CGFloat(24+8) : CGFloat(0)

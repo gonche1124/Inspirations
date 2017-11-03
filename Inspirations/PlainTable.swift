@@ -34,14 +34,14 @@ class PlainTable: NSViewController {
     @IBOutlet weak var quotesTable: NSTableView!
     
     //Variables
-    fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
     
     fileprivate lazy var fetchedResultsController: NSFetchedResultsController <NSFetchRequestResult> = {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "fromAuthor.firstName", ascending: false)]
-        let moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
         return frc

@@ -14,12 +14,12 @@ class PlaylistController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         //self.playlistOutlineView.expandItem(nil, expandChildren: true)
-        self.playlistOutlineView.register(forDraggedTypes: [kUTTypeItem as String])
+        self.playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
         
     }
     
     //Variables
-    dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //Outlets
     @IBOutlet var treeArrayController: NSTreeController!
@@ -34,7 +34,7 @@ extension PlaylistController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         let typeOfCell : String = (((item as? NSTreeNode)?.isLeaf)! ? "DataCell" : "HeaderCell")
-        let currView = self.playlistOutlineView.make(withIdentifier: typeOfCell, owner: self) as? NSTableCellView
+        let currView = self.playlistOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         return currView
         
     }
@@ -43,15 +43,15 @@ extension PlaylistController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         return (!(item as? NSTreeNode)!.isLeaf)
     }
+    
+    //Selection changed.
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        print("Selection is now: \(self.playlistOutlineView.selectedRow)")
+    }
 }
 
 //MARK: NSOutlineViewDataSource
 extension PlaylistController: NSOutlineViewDataSource{
-    
-    //Drag
-    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
-        return true
-    }
     
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
@@ -60,23 +60,44 @@ extension PlaylistController: NSOutlineViewDataSource{
         return NSDragOperation.init(rawValue: destItem.isLeaf ?  1 : 0)
     }
     
+    //Perform the Drop, validating the data.
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
         
         //Get source data.
-        let data: Data = info.draggingPasteboard().data(forType: NSGeneralPboard)! as Data
+        let data: Data = info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.fileContents)! as Data
         let rowIndexes: IndexSet = NSKeyedUnarchiver.unarchiveObject(with: data) as! IndexSet
         let quotesSource = ((self.parent as! ViewController).VCPlainTable.quotesArrayController.arrangedObjects) as! NSArray
         
         //Add items to playlits.
         let destPlaylist = (item as! NSTreeNode).representedObject as! Playlist
         let quotesSet: NSMutableSet = destPlaylist.quotesInPlaylist! as! NSMutableSet
-        quotesSet.addObjects(from: quotesSource.objects(at: rowIndexes) as! [Any])
+        quotesSet.addObjects(from: quotesSource.objects(at: rowIndexes) )
         destPlaylist.quotesInPlaylist = quotesSet
         
         //Save
         try! destPlaylist.managedObjectContext?.save()
         
         return true
+    }
+}
+
+//Collection count becasue bindings is not working.
+class SetToCount: ValueTransformer {
+    override class func transformedValueClass() -> AnyClass{
+        return NSString.self
+    }
+    
+    override func transformedValue(_ value: Any?) -> Any? {
+        if value == nil {
+            return nil
+        }else {
+            return "\((value as! NSSet).count)"
+        }
+    }
+    
+    //No Reverse.
+    override class func allowsReverseTransformation() -> Bool {
+        return false
     }
 }
 

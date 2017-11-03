@@ -14,7 +14,7 @@ import Cocoa
 
 class importExport: NSObject {
     
-    fileprivate lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
 
     
     
@@ -23,7 +23,7 @@ class importExport: NSObject {
     //Return an Array with all the Quotes
     func retrieveArrayOfRecords()-> [Dictionary<String,Any>] {
         //get context
-        let managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+        let managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
         //Retrieve the current Data.
         var listQuotes = [Dictionary<String,Any>]()
         do{
@@ -58,7 +58,7 @@ class importExport: NSObject {
         dialog.canCreateDirectories=true
         dialog.directoryURL=try! FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         
-        if (dialog.runModal() == NSModalResponseOK){
+        if (dialog.runModal() == NSApplication.ModalResponse.OK){
             try! stringJSON.write(to: dialog.url!, atomically: false, encoding: .utf8)
         }
     }
@@ -84,7 +84,7 @@ class importExport: NSObject {
         //Execute fetch
         let managedObject = try! moc.fetch(fetchReq) as! [NSManagedObject]
         if managedObject.count > 0 {
-            return managedObject.first as! NSManagedObject
+            return managedObject.first!
         }
         else {
             return NSEntityDescription.insertNewObject(forEntityName: entity, into: moc)
@@ -122,7 +122,7 @@ class importExport: NSObject {
         for jsonItem in jsonArray {
             let currItem = jsonItem as! Dictionary<String, Any>
  
-            let customObject = createManagedObject(attributes: currItem,
+            _ = createManagedObject(attributes: currItem,
                                                    Entity: "Quote",
                                                    inManagedObjectContext: moc) as! Quote
             
@@ -180,7 +180,7 @@ extension NSManagedObject{
     func populateFromDictionary(attributesDictionary: Dictionary<String, Any>){
         let moc2 = self.managedObjectContext
         
-        for case let key as String in attributesDictionary.keys {
+        for case let key:String in attributesDictionary.keys {
             let value = attributesDictionary[key] as! NSObject
             //Check on-to-one relationship
             if value is Dictionary<String, Any> {

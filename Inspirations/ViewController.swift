@@ -27,10 +27,10 @@ class ViewController: NSViewController {
         
         
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
-        VCPlainTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCPlainTable") as! CocoaBindingsTable
-        VCQuoteTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCQuotesTable") as! QuoteController
-        VCBigView = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCBigView") as! BigViewController
-        VCGroupedMixTable = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "VCGroupedMix") as! GroupedController
+        VCPlainTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
+        VCQuoteTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
+        VCBigView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
+        VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! GroupedController
         //Add controllers
         self.addChildViewController(VCPlainTable)
         self.addChildViewController(VCQuoteTable)
@@ -113,7 +113,7 @@ class ViewController: NSViewController {
         importExport().importFromJSONV2(pathToFile: test!)
         
         
-        if (dialog.runModal() == NSModalResponseOK) {
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             print (dialog.url!)
             importExport().importFromJSONV2(pathToFile: dialog.url!)
             dismiss(self)
@@ -139,9 +139,9 @@ class ViewController: NSViewController {
         let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
         msg.accessoryView = txt
         
-        let response: NSModalResponse = msg.runModal()
+        let response: NSApplication.ModalResponse = msg.runModal()
         
-        if (response == NSAlertFirstButtonReturn) {
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
             addItemToTreeFile(itemToAdd: txt.stringValue)
             print(txt.stringValue)
         } else {
@@ -174,7 +174,7 @@ class ViewController: NSViewController {
     
     //MARK: - Variables
     //Variables
-    fileprivate lazy var managedContext = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
     fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
     fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
@@ -244,7 +244,7 @@ class ViewController: NSViewController {
     //To ERASE, only used for adding default values.
     func addTempDefaultValues(){
         //get context
-        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         //Adds two main playlists.
@@ -281,7 +281,7 @@ class ViewController: NSViewController {
     func printCurrentData(){
         
         //get context
-        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         //Retrieve the current Data.
@@ -302,7 +302,7 @@ class ViewController: NSViewController {
     //Function to print playlist data.
     func printPlaylistData(){
         //get context
-        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         //Retrieve data.
@@ -329,14 +329,14 @@ extension ViewController: NSOutlineViewDelegate {
         //Check if it is root item
         if self.itemCOntainsKey(itemToCheck: item, keyToCheck: "children")
         {
-            let currView = leftOutlineView.make(withIdentifier: "HeaderCell", owner: self) as? NSTableCellView
+            let currView = leftOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeaderCell"), owner: self) as? NSTableCellView
             let itemHeader = item as! [String: Any] //Cast
             currView?.textField?.stringValue = (itemHeader["label"] as! String).uppercased()
             return currView
         }
         else
         {
-            let currView = leftOutlineView.make(withIdentifier: "DataCell", owner: self) as? NSTableCellView
+            let currView = leftOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DataCell"), owner: self) as? NSTableCellView
             let currItem = item as! [String:String]
             currView?.textField?.stringValue = currItem["label"]!
             currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem["iconName"]!)

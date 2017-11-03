@@ -737,7 +737,7 @@
                                         <rect key="frame" x="636" y="6" width="105" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="pep-NQ-dVA"/>
-                                            <constraint firstAttribute="width" constant="93" id="qQv-nh-biA"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="qQv-nh-biA"/>
                                         </constraints>
                                         <buttonCell key="cell" type="push" title="Add Quote" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnL-Um-9Nb">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -887,7 +887,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="AMR-hg-XoO"/>
-                                                    <constraint firstAttribute="width" constant="24" id="KXe-M6-QGN"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="KXe-M6-QGN"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="T80-Qn-mvZ"/>
                                                     <constraint firstAttribute="height" constant="24" id="zjE-LR-nDx"/>
                                                 </constraints>
@@ -903,7 +903,7 @@
                                                 <rect key="frame" x="24" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="cRN-px-B3t"/>
-                                                    <constraint firstAttribute="width" constant="24" id="u1I-Cq-XAU"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="u1I-Cq-XAU"/>
                                                 </constraints>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DDQ-gB-G7O">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1206,6 +1206,7 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="IAJ-qg-Jd2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XCg-wu-PNT" secondAttribute="leading" id="JhY-hD-F28"/>
                             <constraint firstAttribute="trailing" secondItem="IAJ-qg-Jd2" secondAttribute="trailing" constant="14" id="My5-ai-r7c"/>
                             <constraint firstItem="IAJ-qg-Jd2" firstAttribute="top" secondItem="XCg-wu-PNT" secondAttribute="top" constant="10" id="SRi-sp-F74"/>
                         </constraints>
@@ -1577,6 +1578,7 @@
                                                         <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="pName"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="HEADERCELL" id="tZs-eG-TCr">
@@ -1593,6 +1595,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8Ov-VO-Ss7" secondAttribute="trailing" id="Cmm-nX-J0l"/>
                                                                 <constraint firstItem="8Ov-VO-Ss7" firstAttribute="leading" secondItem="tZs-eG-TCr" secondAttribute="leading" constant="2" id="Dwz-Br-DDb"/>
                                                                 <constraint firstItem="8Ov-VO-Ss7" firstAttribute="centerY" secondItem="tZs-eG-TCr" secondAttribute="centerY" id="Zg4-kh-xmp"/>
                                                             </constraints>
@@ -1800,7 +1803,7 @@
                                                                     <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSActionTemplate" id="fU3-dT-miY"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Miu-a9-CtS">
-                                                                    <rect key="frame" x="25" y="0.0" width="183" height="17"/>
+                                                                    <rect key="frame" x="25" y="0.0" width="139" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="4rW-DN-jfC">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1810,14 +1813,34 @@
                                                                         <binding destination="fV9-as-wUd" name="value" keyPath="objectValue.pName" id="Eca-IJ-NUX"/>
                                                                     </connections>
                                                                 </textField>
+                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZD9-OI-SOH">
+                                                                    <rect key="frame" x="170" y="0.0" width="35" height="17"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="rTi-MF-1wS"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="inline" title="999" bezelStyle="inline" alignment="center" enabled="NO" borderStyle="border" inset="2" id="bVe-vI-cKo">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <binding destination="fV9-as-wUd" name="title" keyPath="objectValue.quotesInPlaylist" id="5Cp-dQ-BUn">
+                                                                            <dictionary key="options">
+                                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                                <string key="NSValueTransformerName">SetToCount</string>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="centerY" secondItem="fV9-as-wUd" secondAttribute="centerY" id="8E7-4X-oXb"/>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="top" secondItem="Miu-a9-CtS" secondAttribute="top" id="AbI-rh-JEI"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Miu-a9-CtS" secondAttribute="trailing" constant="2" id="JT6-qI-mqy"/>
+                                                                <constraint firstItem="ZD9-OI-SOH" firstAttribute="leading" secondItem="Miu-a9-CtS" secondAttribute="trailing" constant="8" id="DJe-Cc-Sty"/>
+                                                                <constraint firstItem="ZD9-OI-SOH" firstAttribute="centerY" secondItem="Miu-a9-CtS" secondAttribute="centerY" id="MZD-fZ-8aG"/>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="bottom" secondItem="Miu-a9-CtS" secondAttribute="bottom" id="RIb-sG-jOw"/>
                                                                 <constraint firstItem="Miu-a9-CtS" firstAttribute="leading" secondItem="1bC-aN-7EY" secondAttribute="trailing" constant="7" id="csh-Cc-t5c"/>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="leading" secondItem="fV9-as-wUd" secondAttribute="leading" constant="3" id="rEZ-kt-lgc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ZD9-OI-SOH" secondAttribute="trailing" constant="3" id="sdm-Md-23H"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="1bC-aN-7EY" id="lwX-ak-oeL"/>
@@ -1875,7 +1898,7 @@
                     </connections>
                 </treeController>
             </objects>
-            <point key="canvasLocation" x="-707.5" y="899.5"/>
+            <point key="canvasLocation" x="-707.5" y="899"/>
         </scene>
     </scenes>
     <resources>

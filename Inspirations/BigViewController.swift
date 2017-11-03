@@ -20,7 +20,7 @@ class BigViewController: NSViewController {
         (self.parent as? ViewController)!.searchQuote.delegate=self
     }
     
-    dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet var arrayController: NSArrayController!
 }

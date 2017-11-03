@@ -23,7 +23,7 @@ class CocoaBindingsTable: NSViewController {
     }
     
     //Variables
-    dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //IBOutlets
     @IBOutlet var quotesArrayController: NSArrayController!
@@ -48,11 +48,12 @@ extension CocoaBindingsTable: NSTableViewDataSource{
     //Dragging methods
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
         //Get data.
-        let dataToDrag = (self.quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
+        //let dataToDrag = (self.quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
         //let firstObjectURI = dataToDrag.first?.objectID.uriRepresentation()
         //pboard.declareTypes(["NSP"], owner: self)
         
-        pboard.setData(NSKeyedArchiver.archivedData(withRootObject: rowIndexes), forType: NSGeneralPboard)
+        pboard.setData(NSKeyedArchiver.archivedData(withRootObject: rowIndexes), forType: NSPasteboard.PasteboardType.fileContents)
+        //NSPasteboard.Name.generalPboard
         print (rowIndexes)
         //print(dataToDrag)
         return true

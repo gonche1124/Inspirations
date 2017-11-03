@@ -24,7 +24,7 @@ class QuoteController: NSViewController {
     }
     
     //Variables
-    dynamic lazy var moc = (NSApplication.shared().delegate as! AppDelegate).managedObjectContext
+    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //IBOutlets
     @IBOutlet var quotesArray: NSArrayController!
@@ -45,7 +45,7 @@ extension QuoteController: NSTableViewDelegate {
         
         //Get the text size
         let quoteText: NSString = ((self.quotesArray.arrangedObjects as! NSArray).object(at: row) as! Quote).quote! as NSString
-        let textCalculation: CGSize = quoteText.size(withAttributes: [NSFontAttributeName: NSFont.init(name: "Helvetica", size: 18.0)!])
+        let textCalculation: CGSize = quoteText.size(withAttributes: [NSAttributedStringKey.font: NSFont.init(name: "Helvetica", size: 18.0)!])
         let finalSize = textCalculation.width/tableWidth!
         
         return 85+ceil(27*(finalSize-0.5))
