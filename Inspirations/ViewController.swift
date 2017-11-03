@@ -22,10 +22,6 @@ class ViewController: NSViewController {
         //To comment.
         //addTempDefaultValues()
         
-        //Set up left panel
-        leftOutlineView.expandItem(nil, expandChildren: true)
-        
-        
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
         VCPlainTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
         VCQuoteTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
@@ -78,18 +74,7 @@ class ViewController: NSViewController {
         }
         
     }
-    //Test.....
-    //fileprivate lazy var fileTree = NSArray(contentsOfFile: customPath)
-    
-    
-    /*fileprivate lazy var fileTree2 =
-        [["label": "Views", "isGroup": true, "children":
-            ["Quotes", "Fancy", "Authors", "Themes", "Big View"]],
-        ["label":"Curated", "isGroup": true, "children":
-            ["Top 5", "Weird","From Physicist", "From Actors"]],
-        ["label":"Collections", "isGroup": true, "children":
-            [ "Long", "Short", "Inspirational", "In english", "In spanish"]]]
-*/
+
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
@@ -126,48 +111,9 @@ class ViewController: NSViewController {
         
     }
     
-    //Add a list to the tree view and refresh the data.
-    @IBAction func addListToTree(_ sender: NSButton) {
-        
-        let msg = NSAlert()
-        msg.addButton(withTitle: "OK")      // 1st button
-        msg.addButton(withTitle: "Cancel")  // 2nd button
-        msg.messageText = "Add list"
-        msg.informativeText = "Enter the name of the list you want to add"
-        
-        //Add text field
-        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-        msg.accessoryView = txt
-        
-        let response: NSApplication.ModalResponse = msg.runModal()
-        
-        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
-            addItemToTreeFile(itemToAdd: txt.stringValue)
-            print(txt.stringValue)
-        } else {
-            print("canceled")
-        }
-   
-    
-    }
-    //Deleted the selected list from the tree controller
-    //TO IMPLEMENT
-    @IBAction func deleteListFromTree(_ sender: NSButton) {
-        
-        let alert = NSAlert()
-        alert.informativeText = "Are you sure you want to delete de list?"
-        alert.messageText = "Delete List"
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
-        alert.runModal()
-        
-    }
 
 
     //MARK: - Export
-    
-    
     @IBAction func exportCoreModel(_ sender: NSButton) {
         importExport().exportAllTheQuotes()
     }
@@ -176,8 +122,7 @@ class ViewController: NSViewController {
     //Variables
     fileprivate lazy var managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-    fileprivate lazy var randomTags: [String] = ["Favorite", "Top 25", "Inspirational"] //To erase...for testing
-    fileprivate lazy var randomBool: [NSNumber] = [true, false] // To erase....
+
     
     //Controllers of different Views Final
     var VCPlainTable : CocoaBindingsTable!
@@ -186,59 +131,13 @@ class ViewController: NSViewController {
     var VCGroupedMixTable : GroupedController!
  
     //Outlets
-    @IBOutlet weak var leftOutlineView: NSOutlineView!
     @IBOutlet weak var containerView: NSView!
     @IBOutlet weak var informationLabel: NSTextField!
     @IBOutlet weak var searchQuote: NSSearchField!
     
-    //@IBOutlet weak var container2View: NSView!
-    
-    
     // MARK: - Helpers
     func updateInfoLabel(parameter: Any){
         self.informationLabel.stringValue = "Showing \(parameter) of the 33 records"
-    }
-    
-    //Function to add item to tree, refresh and write data.
-    func addItemToTreeFile(itemToAdd:String){
-        
-        //Create dict
-        let dictItem = ["label": itemToAdd, "iconName": "NSUser"]
-        var collectionDict = fileTree!.lastObject as? [String: Any]
-        var collectionItems = collectionDict!["children"] as! NSArray
-        collectionItems = collectionItems.adding(dictItem) as NSArray
-
-        //Add to fileTree
-        collectionDict?["children"] = collectionItems
-        fileTree?.removeLastObject()
-        fileTree?.add(collectionDict!)
-        
-        //reload data and save??
-        leftOutlineView.reloadData()
-        leftOutlineView.expandItem(nil, expandChildren: true)
-        writeCurrentTreeToFile()
-
-    }
-    
-    //Writes to file
-    //TO IMPLEMENT
-    func writeCurrentTreeToFile(){
-        
-       //if let bundlePath = Bundle.main.path(forResource: "treePlist", ofType: "plist") {
-        //fileTree?.write(to: URL(String:bundlePath), atomically: true)
-        //}
-        
-    }
-    
-    //Function that determines whether an object contains a specific key
-    func itemCOntainsKey(itemToCheck: Any, keyToCheck: String)->Bool
-    {
-        var salida = false
-        if let salida2 = itemToCheck as? Dictionary<String, Any> {
-            salida = salida2.keys.contains("isGroup")
-        }
-        //print (salida)
-        return salida
     }
     
     //To ERASE, only used for adding default values.
@@ -312,150 +211,11 @@ class ViewController: NSViewController {
         for list in lists {
             let quotes = list.quotesInPlaylist
             print ("Playlist \(list.pName!) has \(quotes!.count) quotes")
+            list.pName == "Favorites" ? list.pType="red heart" : nil
+            list.pName == "Main" ? list.pType="BookShelf":nil
+            try! list.managedObjectContext?.save()
         }
         //print (lists)
         
     }
-    
 }
-
-// MARK: - Extensions
-
-extension ViewController: NSOutlineViewDelegate {
-    
-    //Configure Cells
-    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        
-        //Check if it is root item
-        if self.itemCOntainsKey(itemToCheck: item, keyToCheck: "children")
-        {
-            let currView = leftOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeaderCell"), owner: self) as? NSTableCellView
-            let itemHeader = item as! [String: Any] //Cast
-            currView?.textField?.stringValue = (itemHeader["label"] as! String).uppercased()
-            return currView
-        }
-        else
-        {
-            let currView = leftOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DataCell"), owner: self) as? NSTableCellView
-            let currItem = item as! [String:String]
-            currView?.textField?.stringValue = currItem["label"]!
-            currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem["iconName"]!)
-            /*
-            currView?.textField?.stringValue = item as! String
-            if (item as! String == "Quotes") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameUserGuest)}
-            if (item as! String == "Fancy") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameBonjour)}
-            if (item as! String == "Authors") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameHomeTemplate)}
-            if (item as! String == "Themes") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameInfo)}
-            if (item as! String == "Big View") {currView?.imageView?.image = NSImage.init(imageLiteralResourceName: NSImageNameNetwork)}
- */
-            
-            return currView
-            
-        }
-    }
-    //Selection changed
-    func outlineViewSelectionDidChange(_ notification: Notification) {
-        let selectedItem = leftOutlineView.selectedRow
-        let dictChosen = self.leftOutlineView.item(atRow: selectedItem) as! Dictionary<String, String>
-        print(dictChosen["label"]!)
-        
-        let tabController = self.childViewControllers[0] as! NSTabViewController
-        
-        switch dictChosen["label"]! {
-        case "Quote":
-            tabController.selectedTabViewItemIndex = 0
-        case "Authors":
-            let currentTabController = tabController.childViewControllers[3] as! GroupedController
-            currentTabController.typeOfGrouping="isAbout.topic"
-            tabController.selectedTabViewItemIndex = 3
-        case "Topics":
-            let currentTabController = tabController.childViewControllers[3] as! GroupedController
-            currentTabController.typeOfGrouping="fromAuthor.name"
-            tabController.selectedTabViewItemIndex = 4
-        case "Big View":
-            tabController.selectedTabViewItemIndex = 2
-        case "Single View":
-            tabController.selectedTabViewItemIndex = 1
-        default:
-            tabController.selectedTabViewItemIndex = 1
-        }
-        
-        
-        //THIS COMMENTED CODE WORKS
-        
-        /*
-        switch selectedItem {
-        case 1, 2:
-            let tabController = self.childViewControllers[0] as! NSTabViewController
-            //print("\(selectedItem) is \(dictChosen["label"])")
-            tabController.selectedTabViewItemIndex = selectedItem-1
-        case 4:
-            let tabController = self.childViewControllers[0] as! NSTabViewController
-            let currentTabController = tabController.childViewControllers[selectedItem-1] as! GroupedController
-            currentTabController.typeOfGrouping="fromAuthor.name"
-            tabController.selectedTabViewItemIndex = 5-1
-            //print("\(selectedItem) is \(dictChosen["label"])")
-        case 5:
-            let tabController = self.childViewControllers[0] as! NSTabViewController
-            let currentTabController = tabController.childViewControllers[selectedItem-1] as! GroupedController
-            currentTabController.typeOfGrouping="isAbout.topic"
-            tabController.selectedTabViewItemIndex = 5-1
-            //print("\(selectedItem) is \(dictChosen["label"])")
-        default:
-            print("Something else selected")
-        }
- */
-    }
-    
-}
-
-extension ViewController: NSOutlineViewDataSource {
-    
-    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int
-    {
-       //Check if it is root item
-        if item == nil {
-            return fileTree!.count
-        }
-        else {
-            let arrayItems = (item as! [String:Any])["children"]
-            return (arrayItems as! NSArray).count
-        }
-    }
-    
-    //Formats group cells
-    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool
-    {
-
-        return self.itemCOntainsKey(itemToCheck: item, keyToCheck: "isGroup")
-    }
-    
-    //Wheather each item is expandable or not
-    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool
-    {
-        return self.itemCOntainsKey(itemToCheck: item, keyToCheck: "isGroup")
-    }
-    
-    //Return the item depending ong the herarchy level
-    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any
-    {
-        if (item == nil) {
-            return fileTree![index]
-        } // Root
-        else if (self.itemCOntainsKey(itemToCheck: item!, keyToCheck: "isGroup")){
-            return ((item as! Dictionary<String, Any>)["children"] as! Array)[index]
-        }
-        else{
-            return ""
-        }
-    }
-}
-
-extension Array {
-    
-    //Random function to array
-    func randomElement() -> Element  {
-        return self[Int(arc4random_uniform(UInt32(self.count)))]
-    }
-}
-

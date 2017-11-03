@@ -36,18 +36,13 @@ extension PlaylistController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
-        let typeOfCell : String = (((item as? NSTreeNode)?.isLeaf)! ? "DataCell" : "HeaderCell")
+        let currItem = (item as! NSTreeNode).representedObject as! Playlist
+        let typeOfCell: String = (currItem.isLeaf) ? "DataCell": "HeaderCell"
         let currView = self.playlistOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         
-        //Test to not make editable the Library. NOT WORKING.
-        if ((item as! NSTreeNode).parent?.representedObject as? Playlist)?.pName == "Library" {
-            currView?.textField?.backgroundColor = NSColor.blue
-            currView?.textField?.isEditable=false
-            currView?.textField?.isSelectable=false
-            print ("It is true")
-            }
-        currView?.textField?.stringValue = (((item as! NSTreeNode).representedObject as! Playlist).pName?.uppercased())!
-        currView?.imageView?.image = NSImage.init(imageLiteralResourceName: "red heart")
+        //Set up
+        currView?.textField?.stringValue = (currItem.pName?.uppercased())!
+        currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem.pType!)
         return currView
         
     }
@@ -74,6 +69,10 @@ extension PlaylistController: NSOutlineViewDataSource{
     
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        
+        if item == nil {
+            return NSDragOperation.init(rawValue: 0)
+        }
         
         let destItem = (item as! NSTreeNode).representedObject as! Playlist
         return NSDragOperation.init(rawValue: destItem.isLeaf ?  1 : 0)

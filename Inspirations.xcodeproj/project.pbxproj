@@ -49,6 +49,7 @@
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.3.xcdatamodel; sourceTree = "<group>"; };
+		8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.2.xcdatamodel; sourceTree = "<group>"; };
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
 		8A308F251F0B48B600961057 /* GroupedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedController.swift; sourceTree = "<group>"; };
 		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
@@ -624,12 +625,13 @@
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */,
 				8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */,
 				8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */,
 				8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */,
 				8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */,
 			);
-			currentVersion = 8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */;
+			currentVersion = 8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */;
 			path = Inspirations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
