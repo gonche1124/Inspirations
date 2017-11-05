@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A06E9AB1F16F822007474C6 /* treeList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A06E9AA1F16F822007474C6 /* treeList.plist */; };
 		8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
@@ -44,7 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8A06E9AA1F16F822007474C6 /* treeList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = treeList.plist; sourceTree = "<group>"; };
 		8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaBindingsTable.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
 				8AED20E61E95351D00F4E03A /* PlainTable.swift */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
-				8A06E9AA1F16F822007474C6 /* treeList.plist */,
 				8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */,
 			);
 			path = Inspirations;
@@ -296,7 +293,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A89E8641E842E04001F7F71 /* Assets.xcassets in Resources */,
-				8A06E9AB1F16F822007474C6 /* treeList.plist in Resources */,
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 			);

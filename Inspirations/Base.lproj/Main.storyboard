@@ -1210,7 +1210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9E-Jr-Gtq">
-                                <rect key="frame" x="391" y="66" width="51" height="35"/>
+                                <rect key="frame" x="391" y="105" width="51" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="z7z-9M-m30"/>
                                 </constraints>
@@ -1224,7 +1224,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-Ty-fkt">
-                                <rect key="frame" x="18" y="130" width="445" height="40"/>
+                                <rect key="frame" x="18" y="155" width="445" height="40"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="aKn-q8-cT3">
                                     <font key="font" size="33" name="Optima-Italic"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1235,7 +1235,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5wE-0b-J6w">
-                                <rect key="frame" x="28" y="13" width="67" height="32"/>
+                                <rect key="frame" x="-6" y="-7" width="67" height="32"/>
                                 <buttonCell key="cell" type="push" title="prev" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="21N-X7-fy8">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1245,7 +1245,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ihn-Ia-bW8">
-                                <rect key="frame" x="112" y="13" width="69" height="32"/>
+                                <rect key="frame" x="61" y="-7" width="69" height="32"/>
                                 <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1w-uR-cpf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1256,16 +1256,19 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="top" constant="20" id="4nd-jR-P8T"/>
                             <constraint firstAttribute="trailing" secondItem="vNd-Ty-fkt" secondAttribute="trailing" constant="20" id="F7i-Rw-DHB"/>
-                            <constraint firstItem="N9E-Jr-Gtq" firstAttribute="top" secondItem="vNd-Ty-fkt" secondAttribute="bottom" constant="29" id="Mdo-1x-pac"/>
-                            <constraint firstItem="5wE-0b-J6w" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" constant="34" id="OAL-Xt-SAh"/>
+                            <constraint firstItem="N9E-Jr-Gtq" firstAttribute="top" secondItem="vNd-Ty-fkt" secondAttribute="bottom" constant="15" id="Mdo-1x-pac"/>
+                            <constraint firstItem="5wE-0b-J6w" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" id="OAL-Xt-SAh"/>
                             <constraint firstAttribute="trailing" secondItem="N9E-Jr-Gtq" secondAttribute="trailing" constant="41" id="PeF-hG-6Wy"/>
-                            <constraint firstAttribute="bottom" secondItem="5wE-0b-J6w" secondAttribute="bottom" constant="20" id="Pyy-x9-vxl"/>
-                            <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" constant="20" id="TYt-sK-WsU"/>
+                            <constraint firstAttribute="bottom" secondItem="5wE-0b-J6w" secondAttribute="bottom" id="Pyy-x9-vxl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ihn-Ia-bW8" secondAttribute="trailing" constant="357" id="Qyh-fl-0P6"/>
+                            <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" id="TYt-sK-WsU"/>
                             <constraint firstItem="vNd-Ty-fkt" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" constant="20" id="VLq-U5-azI"/>
-                            <constraint firstItem="ihn-Ia-bW8" firstAttribute="leading" secondItem="5wE-0b-J6w" secondAttribute="trailing" constant="29" id="k5C-vV-Yy5"/>
+                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="centerY" secondItem="1Yv-w4-r3l" secondAttribute="centerY" constant="-25" id="aOX-v8-7Cf"/>
+                            <constraint firstItem="ihn-Ia-bW8" firstAttribute="leading" secondItem="5wE-0b-J6w" secondAttribute="trailing" constant="12" id="k5C-vV-Yy5"/>
                             <constraint firstItem="vNd-Ty-fkt" firstAttribute="centerX" secondItem="1Yv-w4-r3l" secondAttribute="centerX" id="mZD-5Q-yUx"/>
-                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="centerY" secondItem="1Yv-w4-r3l" secondAttribute="centerY" id="xHy-5F-RFN"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="N9E-Jr-Gtq" secondAttribute="bottom" constant="25" id="oou-TO-R9j"/>
                         </constraints>
                     </view>
                     <connections>

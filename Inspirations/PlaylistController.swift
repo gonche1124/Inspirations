@@ -47,7 +47,6 @@ extension PlaylistController: NSOutlineViewDelegate{
         
     }
     
-    
     //Display Grouped cell
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         return (!(item as? NSTreeNode)!.isLeaf)
@@ -55,7 +54,14 @@ extension PlaylistController: NSOutlineViewDelegate{
     
     //Selection changed.
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        print("Selection is now: \(self.playlistOutlineView.selectedRow)")
+        
+        //Sets predicate on the current view.
+        
+        let selectedItem = self.treeArrayController.selectedObjects.first as! Playlist
+        if !selectedItem.isLeaf { return}
+        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName BEGINSWITH %@",selectedItem.pName!)
+        (self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
+
     }
 }
 
@@ -86,15 +92,11 @@ extension PlaylistController: NSOutlineViewDataSource{
         let rowIndexes = NSKeyedUnarchiver.unarchiveObject(with: data) as! IndexSet
         let quotesSource = ((self.parent as! ViewController).VCPlainTable.quotesArrayController.arrangedObjects) as! NSArray
         
-        //Add items to playlits.
+        //Simple version?
         let destPlaylist = (item as! NSTreeNode).representedObject as! Playlist
-        let quotesSet: NSMutableSet = destPlaylist.quotesInPlaylist! as! NSMutableSet
-        quotesSet.addObjects(from: quotesSource.objects(at: rowIndexes) )
-        destPlaylist.quotesInPlaylist = quotesSet
-        
-        //Save
-        try! destPlaylist.managedObjectContext?.save()
-        
+        destPlaylist.addToQuotesInPlaylist(NSSet(array: quotesSource.objects(at: rowIndexes)))
+        try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
+
         return true
     }
 }
