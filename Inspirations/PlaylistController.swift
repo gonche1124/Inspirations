@@ -18,8 +18,12 @@ class PlaylistController: NSViewController {
         //Does nothing
 //        self.playlistOutlineView.reloadData()
 //        self.playlistOutlineView.setNeedsDisplay()
-//        self.playlistOutlineView.expandItem(nil, expandChildren: true)
+        self.playlistOutlineView.expandItem(nil, expandChildren: true)
+        
     }
+    
+    
+
     
     //Variables
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
@@ -52,17 +56,26 @@ extension PlaylistController: NSOutlineViewDelegate{
         return (!(item as? NSTreeNode)!.isLeaf)
     }
     
+   
+    
     //Selection changed.
     func outlineViewSelectionDidChange(_ notification: Notification) {
         
         //Sets predicate on the current view.
-        
+        //TO DO: Guard this code agains bugs and unwrapping nil
         let selectedItem = self.treeArrayController.selectedObjects.first as! Playlist
         if !selectedItem.isLeaf { return}
-        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName BEGINSWITH %@",selectedItem.pName!)
+        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",selectedItem.pName!)
         (self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
 
     }
+    
+    //Check if item should be selectable
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        return (((item as! NSTreeNode).representedObject as? Playlist)?.isLeaf)!
+    }
+    
+    
 }
 
 //MARK: NSOutlineViewDataSource
@@ -71,7 +84,6 @@ extension PlaylistController: NSOutlineViewDataSource{
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         return (item as! NSTreeNode).representedObject
     }
-    
     
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {

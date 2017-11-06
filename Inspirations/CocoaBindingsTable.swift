@@ -47,15 +47,9 @@ extension CocoaBindingsTable: NSTableViewDataSource{
     
     //Dragging methods
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-        //Get data.
-        //let dataToDrag = (self.quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
-        //let firstObjectURI = dataToDrag.first?.objectID.uriRepresentation()
-        //pboard.declareTypes(["NSP"], owner: self)
-        
+        //Set data to be pasted on pasteboard
         pboard.setData(NSKeyedArchiver.archivedData(withRootObject: rowIndexes), forType: NSPasteboard.PasteboardType.fileContents)
-        //NSPasteboard.Name.generalPboard
-        print (rowIndexes)
-        //print(dataToDrag)
+
         return true
     }
 

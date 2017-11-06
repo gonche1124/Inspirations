@@ -192,10 +192,7 @@ class ViewController: NSViewController {
             }
             print("number of records is: \(listQuotes.count)")
             self.informationLabel.stringValue = "Showing \(listQuotes.count) of \(listQuotes.count)"
-            for quot in listQuotes {
-                //print ((quot.inPlaylist?.allObjects.last as! Playlist).pName)
-                print (quot.inPlaylist?.count)
-            }
+          
             
         }catch{
             print("Could not print the records")
