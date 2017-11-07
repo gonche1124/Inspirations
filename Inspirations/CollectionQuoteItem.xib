@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CollectionQuoteItem" customModule="Inspirations" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="471" height="214"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gr4-y1-Oy6">
+                    <rect key="frame" x="18" y="20" width="435" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="6xn-gP-v6N">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hvW-Ue-hwd">
+                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="bGw-52-b5R"/>
+                        <constraint firstAttribute="height" constant="25" id="u6E-wv-ZQ0"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="red heart" id="D8w-GG-ZZc"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="KxM-Ot-nzG">
+                    <rect key="frame" x="3" y="109" width="465" height="17"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="E4U-ym-dVr">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Gr4-y1-Oy6" secondAttribute="trailing" constant="20" symbolic="YES" id="3JC-AO-9fP"/>
+                <constraint firstAttribute="bottom" secondItem="hvW-Ue-hwd" secondAttribute="bottom" id="5lA-55-mAc"/>
+                <constraint firstAttribute="trailing" secondItem="KxM-Ot-nzG" secondAttribute="trailing" constant="5" id="Dzs-d5-2cf"/>
+                <constraint firstItem="KxM-Ot-nzG" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="L4j-BU-rQw"/>
+                <constraint firstItem="KxM-Ot-nzG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="NN8-uo-m4m"/>
+                <constraint firstItem="Gr4-y1-Oy6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="e9n-y0-Kkx"/>
+                <constraint firstItem="KxM-Ot-nzG" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" constant="-10" id="god-M0-Lzf"/>
+                <constraint firstItem="hvW-Ue-hwd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iuo-Te-HLU"/>
+                <constraint firstItem="KxM-Ot-nzG" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="j5h-yg-Yo7"/>
+                <constraint firstAttribute="bottom" secondItem="Gr4-y1-Oy6" secondAttribute="bottom" constant="20" symbolic="YES" id="whE-Q7-5Qg"/>
+            </constraints>
+            <point key="canvasLocation" x="129.5" y="119"/>
+        </customView>
+        <collectionViewItem id="Gjs-eo-Ue2" customClass="CollectionQuoteItem" customModule="Inspirations" customModuleProvider="target">
+            <connections>
+                <outlet property="authorLabel" destination="Gr4-y1-Oy6" id="dRl-D5-YnJ"/>
+                <outlet property="favoriteImage" destination="hvW-Ue-hwd" id="AFc-I8-Htz"/>
+                <outlet property="quoteLabel" destination="KxM-Ot-nzG" id="HUj-Sb-u4O"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="G1c-25-rIF"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+    <resources>
+        <image name="red heart" width="240" height="240"/>
+    </resources>
+</document>

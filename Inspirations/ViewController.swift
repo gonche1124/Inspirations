@@ -27,11 +27,13 @@ class ViewController: NSViewController {
         VCQuoteTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
         VCBigView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
         VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! GroupedController
+        VCCollectionView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
         //Add controllers
         self.addChildViewController(VCPlainTable)
         self.addChildViewController(VCQuoteTable)
         self.addChildViewController(VCBigView)
         self.addChildViewController(VCGroupedMixTable)
+        self.addChildViewController(VCCollectionView)
         //Set default view
         VCBigView.view.frame = self.containerView.bounds
         self.containerView.addSubview(VCBigView.view)
@@ -65,12 +67,16 @@ class ViewController: NSViewController {
             VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
         }
-        else {
+        else if sender.indexOfSelectedItem == 4 {
             VCGroupedMixTable.view.frame = self.containerView.bounds
             VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
             VCGroupedMixTable.groupedTable.reloadData()
             VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
+        }
+        else {
+            VCCollectionView.view.frame = self.containerView.bounds
+            self.containerView.addSubview(VCCollectionView.view)
         }
         
     }
@@ -129,6 +135,7 @@ class ViewController: NSViewController {
     var VCQuoteTable : QuoteController!
     var VCBigView : BigViewController!
     var VCGroupedMixTable : GroupedController!
+    var VCCollectionView : CollectionController!
  
     //Outlets
     @IBOutlet weak var containerView: NSView!
