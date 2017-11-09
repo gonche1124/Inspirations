@@ -28,19 +28,19 @@ class GroupedController: NSViewController {
     }//This is set through Interface Builder
     
     //Check if this method is still valid.
-    @IBAction func changeSource(_ sender: Any) {
-        if (self.typeOfGrouping=="fromAuthor.name"){
-            self.typeOfGrouping="isAbout.topic"
-            groupedTable.reloadData()
-            groupedTable.expandItem(nil, expandChildren: true)
-        }
-        else {
-            self.typeOfGrouping="fromAuthor.name"
-            groupedTable.reloadData()
-            groupedTable.expandItem(nil, expandChildren: true)
-            
-        }
-    }
+//    @IBAction func changeSource(_ sender: Any) {
+//        if (self.typeOfGrouping=="fromAuthor.name"){
+//            self.typeOfGrouping="isAbout.topic"
+//            groupedTable.reloadData()
+//            groupedTable.expandItem(nil, expandChildren: true)
+//        }
+//        else {
+//            self.typeOfGrouping="fromAuthor.name"
+//            groupedTable.reloadData()
+//            groupedTable.expandItem(nil, expandChildren: true)
+//            
+//        }
+//    }
     
     //MARK: METHODS
     
@@ -63,6 +63,7 @@ class GroupedController: NSViewController {
     //Neccesary to voeride in order for the search to work.
     override func viewWillAppear() {
         super.viewWillAppear()
+        (self.parent as! ViewController).searchQuote2.delegate=self
         (self.parent as! ViewController).searchQuote.delegate = self
     }
     
@@ -261,73 +262,3 @@ extension GroupedController: NSSearchFieldDelegate{
     
 }
 
-/*
-//TableViewDataSource
-extension GroupedController: NSTableViewDataSource {
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        guard let quotesData = frc.fetchedObjects else {return 0}
-        print ("total items in this section is: \(quotesData.count)")
-        return quotesData.count
-    }
-    
-  
-    
-    
-}
-
-// TableViewDelegate
-extension GroupedController: NSTableViewDelegate {
-    
-    //TEST
-    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
-        return row % 4 == 0 ? true: false
-    }
-    
-    
-    //View Based method
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        
-        print ("The table column identifier is: \(tableColumn?.identifier) and the row number is \(row)")
-        //print (type(of:frc.object(at: row)))
-        
-        
-        var resultingView: NSTableCellView
-        resultingView = tableView.make(withIdentifier: "dataRow", owner: self) as! NSTableCellView
-        //resultingView = tableView.make(withIdentifier: (tableColumn?.identifier)!, owner: self) as! NSTableCellView
-        resultingView.textField?.stringValue="test quote"//((frc.object(at: IndexPath(item: row, section: 0)) as? Quote)?.quote)!
-        
-        
-        
-        
-        
-        return resultingView
-    }
-    
-    /*func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        let indexPath = IndexPath(item: row, section: 0)
-        guard let currQuote = frc.object(at: indexPath) as? Quote
-            else {fatalError("Unexpected Object in FetchedResultsController")}
-        
-        print("\(tableColumn!.identifier)")
-        if tableColumn!.identifier == "quoteColumn" {
-            print ("TableView called and identifier is quoteColumn")
-
-            return currQuote.quote
-        }
-        //        else if tableColumn!.title == "Author" {
-        //            return currQuote.fromAuthor?.firstName
-        //        }
-        //        else if tableColumn!.title == "Theme" {
-        //            return (currQuote.isAbout?.allObjects.first as! Theme).topic
-        //        }
-        //        else if tableColumn!.title == "Favorite"{
-        //
-        //            if currQuote.isFavorite { return #imageLiteral(resourceName: "red heart")} else { return #imageLiteral(resourceName: "grey heart")}
-        //        }
-        return ""
-    } */
-    
-  
-}
- */

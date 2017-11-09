@@ -20,6 +20,7 @@ class QuoteController: NSViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
+        
         (self.parent as? ViewController)?.searchQuote.delegate = self
     }
     

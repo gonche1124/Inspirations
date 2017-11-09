@@ -11,7 +11,6 @@ import Cocoa
 //Item Controller
 class CollectionQuoteItem: NSCollectionViewItem {
 
-    
     @IBOutlet var authorLabel : NSTextField?
     @IBOutlet var quoteLabel : NSTextField?
     @IBOutlet var favoriteImage: NSImageView?
@@ -22,7 +21,6 @@ class CollectionQuoteItem: NSCollectionViewItem {
             if let quoteEntity = quoteEntity {
                 quoteLabel?.stringValue = quoteEntity.quote!
                 authorLabel?.stringValue = (quoteEntity.fromAuthor?.name!)!
-                
                 (quoteEntity.isFavorite) ? nil : (favoriteImage?.isHidden=true)
             }
         }
@@ -32,10 +30,9 @@ class CollectionQuoteItem: NSCollectionViewItem {
         super.viewDidLoad()
         self.view.wantsLayer=true
         self.view.layer?.cornerRadius=10
-        self.view.layer?.backgroundColor=NSColor.init(red: 163, green: 212, blue: 255, alpha: 0.5).cgColor
+        self.view.layer?.backgroundColor=NSColor.red.cgColor
     }
 }
-
 
 
 //View Controller
@@ -44,12 +41,15 @@ class CollectionController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-
+    }
+    
+    override func viewWillLayout() {
+        super.viewWillLayout()
+        currentCollectionView.collectionViewLayout?.invalidateLayout()
     }
     
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     @IBOutlet weak var currentCollectionView: NSCollectionView!
-    
     @IBOutlet var quotesController: NSArrayController!
 }
 
@@ -66,14 +66,19 @@ extension CollectionController: NSCollectionViewDataSource {
         
         let currItem = collectionView.makeItem(withIdentifier:NSUserInterfaceItemIdentifier(rawValue:"CollectionQuoteItem"), for: indexPath)
         guard let currView = currItem as? CollectionQuoteItem else {return currItem}
-        
         currView.quoteEntity = (self.quotesController.arrangedObjects as! NSArray)[indexPath.item] as? Quote
 
-        
         return currView
         
     }
-    
-    
-    
+}
+
+extension CollectionController: NSCollectionViewDelegateFlowLayout{
+    //Calculate the size for each item depending of the
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+        let viewW = collectionView.frame.width - 30
+        if viewW < 300 {return NSSize(width: viewW, height: viewW/2.1)}
+        else if (viewW >= 300) && (viewW < 600) {return NSSize(width: viewW/2, height: viewW/2/2.1)}
+        else {return NSSize(width: viewW/3, height: viewW/3/2.1)}
+    }
 }

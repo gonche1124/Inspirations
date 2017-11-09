@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
      
         //Register Transformer
-        //ValueTransformer.setValueTransformer(BooleanToString(), forName: NSValueTransformerName(rawValue: "BooleanToString"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
     }

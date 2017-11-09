@@ -40,6 +40,8 @@ class ViewController: NSViewController {
 
     }
     
+    
+    
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
         //Remove all views.
@@ -141,6 +143,11 @@ class ViewController: NSViewController {
     @IBOutlet weak var containerView: NSView!
     @IBOutlet weak var informationLabel: NSTextField!
     @IBOutlet weak var searchQuote: NSSearchField!
+    lazy var searchQuote2 : NSSearchField! = {
+        let items = self.view.window?.toolbar?.items
+        let thisSearch = try! items?.first(where: {$0.itemIdentifier.rawValue == "searchToolItem"})
+        return thisSearch!.view as! NSSearchField
+    }()
     
     // MARK: - Helpers
     func updateInfoLabel(parameter: Any){
