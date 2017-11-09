@@ -17,7 +17,7 @@ class BigViewController: NSViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        (self.parent as? ViewController)!.searchQuote.delegate=self
+        (self.parent as? ViewController)!.searchQuote2.delegate=self
     }
     
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext

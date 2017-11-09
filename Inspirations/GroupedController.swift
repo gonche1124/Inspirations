@@ -64,7 +64,7 @@ class GroupedController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         (self.parent as! ViewController).searchQuote2.delegate=self
-        (self.parent as! ViewController).searchQuote.delegate = self
+        //(self.parent as! ViewController).searchQuote.delegate = self
     }
     
     

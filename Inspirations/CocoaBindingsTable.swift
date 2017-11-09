@@ -19,20 +19,8 @@ class CocoaBindingsTable: NSViewController {
     //Set delegate of searcfiled when view will appear.
     override func viewWillAppear() {
         super.viewWillAppear()
-        //SEE IF I CAN OPTIMIZE THIS!!!!!
-        //self.parent?.view.window?.toolbar
-        let toolB = self.parent?.view.window?.toolbar?.items
-        let test = try! toolB?.first(where: {$0.itemIdentifier._rawValue == "searchToolItem"})
-        print ("This: \(test)")
-        //print("This is: \(toolB?.first(where:{($0.view?.identifier)!.rawValue=="toolBarSearch"}))")
-        for toolIt in toolB! {
-            print(toolIt.view?.className)
-            if let searchF = toolIt.view as? NSSearchField {
-                searchF.delegate = self
-            }
-        }
-        //print(self.parent?.view.window?.toolbar?.items.)
-        (self.parent as? ViewController)?.searchQuote.delegate=self
+
+        (self.parent as? ViewController)?.searchQuote2.delegate=self
     }
     
     //Variables

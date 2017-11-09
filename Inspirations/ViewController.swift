@@ -122,6 +122,7 @@ class ViewController: NSViewController {
 
 
     //MARK: - Export
+    //Connected through first responder
     @IBAction func exportCoreModel(_ sender: NSButton) {
         importExport().exportAllTheQuotes()
     }
