@@ -659,7 +659,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="-54"/>
+            <point key="canvasLocation" x="-41" y="-43"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -705,6 +705,43 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="AqB-ir-Bqw"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="q6m-YI-ImI"/>
+                                <toolbarItem implicitItemIdentifier="C8AE6906-AFFA-43FB-9951-B38A76D4A98C" label="Share" paletteLabel="Share" image="NSShareTemplate" id="C1U-f1-Daa">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="46" height="25"/>
+                                    <size key="maxSize" width="46" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="VbN-NB-udi">
+                                        <rect key="frame" x="0.0" y="14" width="46" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="overlaps" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" arrowPosition="noArrow" selectedItem="r8e-oT-K5d" id="5Tt-Vb-Q10">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="dqC-82-f7V">
+                                                <items>
+                                                    <menuItem state="on" image="NSShareTemplate" hidden="YES" id="r8e-oT-K5d"/>
+                                                    <menuItem isSeparatorItem="YES" id="g4i-fc-XBp"/>
+                                                    <menuItem title="Export Selected to CSV" id="V0T-Vl-9c0"/>
+                                                    <menuItem title="Export Selected to JSON" id="Ez1-vc-Y7C">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                    <menuItem title="Export Selected to XML" id="oa6-Mr-rb9">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="BCr-Jx-nVM"/>
+                                                    <menuItem title="Export All to CSV" id="kFC-iD-3Bn"/>
+                                                    <menuItem title="Export All to JSON" id="NC8-O7-zh6">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="exportCoreModel:" target="Oky-zY-oP4" id="P7l-2H-NTe"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Export ALL to XML" id="Tzr-Fy-O4a">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="90B06C31-CD79-4FD0-9DAB-9536F8818AB6" explicitItemIdentifier="searchToolItem" label="Custom View" paletteLabel="Custom View" id="qn7-Ki-6AQ" userLabel="Search Bar">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="22"/>
@@ -735,22 +772,6 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="844885E9-653C-40F4-9888-17CA08C91112" label="Custom View" paletteLabel="Custom View" image="NSShareTemplate" id="QkY-g9-Uon" userLabel="Export Button">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="46" height="25"/>
-                                    <size key="maxSize" width="46" height="25"/>
-                                    <button key="view" verticalHuggingPriority="750" id="CTq-pO-DGB">
-                                        <rect key="frame" x="15" y="14" width="46" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2uJ-SR-2Nz">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="exportCoreModel:" target="Oky-zY-oP4" id="a4g-IB-rF2"/>
-                                        </connections>
-                                    </button>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="2F0836D7-4FA8-4EFF-A0F3-406DB0BD8E10" label="Custom View" paletteLabel="Custom View" image="NSAddTemplate" id="8ho-vf-FpO" userLabel="Add Quote">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="46" height="25"/>
@@ -774,8 +795,8 @@
                                 <toolbarItem reference="q6m-YI-ImI"/>
                                 <toolbarItem reference="qn7-Ki-6AQ"/>
                                 <toolbarItem reference="q6m-YI-ImI"/>
+                                <toolbarItem reference="C1U-f1-Daa"/>
                                 <toolbarItem reference="UGQ-PP-9WM"/>
-                                <toolbarItem reference="QkY-g9-Uon"/>
                                 <toolbarItem reference="8ho-vf-FpO"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -855,7 +876,7 @@
                                 </subviews>
                                 <holdingPriorities>
                                     <real value="372"/>
-                                    <real value="212"/>
+                                    <real value="325"/>
                                 </holdingPriorities>
                             </splitView>
                         </subviews>

@@ -31,9 +31,11 @@ class ViewController: NSViewController {
         self.addChildViewController(VCBigView)
         self.addChildViewController(VCGroupedMixTable)
         self.addChildViewController(VCCollectionView)
+        
         //Set default view
         VCBigView.view.frame = self.containerView.bounds
         self.containerView.addSubview(VCBigView.view)
+        //TODO: get current controller. unify searchfield delegate.
 
     }
     

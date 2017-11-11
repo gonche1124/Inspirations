@@ -142,7 +142,6 @@ extension GroupedController:NSOutlineViewDataSource{
     
     //check
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        print ("numberOfChildrenCalled \(item)")
         //Count the number of objects
         if (item == nil) {
             return (self.typeOfGrouping == "fromAuthor.name") ? frcAuthors.sections!.count : frcTopics.sections!.count
