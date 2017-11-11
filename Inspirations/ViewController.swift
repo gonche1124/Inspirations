@@ -11,15 +11,12 @@ import Foundation
 
 class ViewController: NSViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         printCurrentData()
         //printPlaylistData()
-        
-        //To comment.
         //addTempDefaultValues()
         
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
@@ -40,57 +37,43 @@ class ViewController: NSViewController {
 
     }
     
-    
-    
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
         //Remove all views.
         for cView in self.containerView.subviews {
             cView.removeFromSuperview()
         }
-        //Show selected View
-        if sender.indexOfSelectedItem == 0 {
+        
+        //Pick view depending on button pressed.
+        switch sender.indexOfSelectedItem {
+        case 0:
             VCPlainTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCPlainTable.view)
-        }
-        else if sender.indexOfSelectedItem == 1 {
+        case 1:
             VCQuoteTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCQuoteTable.view)
-        }
-        else if sender.indexOfSelectedItem == 2 {
+        case 2:
             VCBigView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCBigView.view)
-    
-        }
-        else if sender.indexOfSelectedItem == 3 {
+        case 3:
             VCGroupedMixTable.view.frame = self.containerView.bounds
             VCGroupedMixTable.typeOfGrouping = "fromAuthor.name"
             VCGroupedMixTable.groupedTable.reloadData()
             VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
-        }
-        else if sender.indexOfSelectedItem == 4 {
+        case 4:
             VCGroupedMixTable.view.frame = self.containerView.bounds
             VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
             VCGroupedMixTable.groupedTable.reloadData()
             VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
-        }
-        else {
+        default:
             VCCollectionView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCCollectionView.view)
         }
         
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-            //leftOutlineView.reloadData()
-        }
-    }
-    
-    fileprivate lazy var fileTree = NSMutableArray(contentsOfFile: Bundle.main.path(forResource: "treeList", ofType: ".plist")!)
     
     //MARK: - Import methods
     @IBAction func importData(_ sender: NSButton) {
@@ -130,9 +113,7 @@ class ViewController: NSViewController {
     //MARK: - Variables
     //Variables
     fileprivate lazy var managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-    fileprivate lazy var quotesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
 
-    
     //Controllers of different Views Final
     var VCPlainTable : CocoaBindingsTable!
     var VCQuoteTable : QuoteController!
@@ -146,7 +127,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var searchQuote: NSSearchField!
     lazy var searchQuote2 : NSSearchField! = {
         let items = self.view.window?.toolbar?.items
-        let thisSearch = try! items?.first(where: {$0.itemIdentifier.rawValue == "searchToolItem"})
+        let thisSearch = items?.first(where: {$0.itemIdentifier.rawValue == "searchToolItem"})
         return thisSearch!.view as! NSSearchField
     }()
     
@@ -201,7 +182,7 @@ class ViewController: NSViewController {
         //Retrieve the current Data.
         var listQuotes = [Quote]()//[NSManagedObject]()
         do{
-            let records = try managedContext.fetch(quotesRequest)
+            let records = try managedContext.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "Quote"))
             if let records = records as? [Quote]{
                 listQuotes=records
             }

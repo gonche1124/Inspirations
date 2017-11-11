@@ -98,20 +98,3 @@ class BooleanToImage: ValueTransformer {
         return false
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

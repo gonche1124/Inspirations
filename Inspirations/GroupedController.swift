@@ -27,20 +27,6 @@ class GroupedController: NSViewController {
         }
     }//This is set through Interface Builder
     
-    //Check if this method is still valid.
-//    @IBAction func changeSource(_ sender: Any) {
-//        if (self.typeOfGrouping=="fromAuthor.name"){
-//            self.typeOfGrouping="isAbout.topic"
-//            groupedTable.reloadData()
-//            groupedTable.expandItem(nil, expandChildren: true)
-//        }
-//        else {
-//            self.typeOfGrouping="fromAuthor.name"
-//            groupedTable.reloadData()
-//            groupedTable.expandItem(nil, expandChildren: true)
-//            
-//        }
-//    }
     
     //MARK: METHODS
     
@@ -64,7 +50,6 @@ class GroupedController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         (self.parent as! ViewController).searchQuote2.delegate=self
-        //(self.parent as! ViewController).searchQuote.delegate = self
     }
     
     
@@ -124,9 +109,6 @@ extension GroupedController: NSFetchedResultsControllerDelegate{
     }
 }
 
-
-
-//NSOutlineViewDataSource
 //MARK: NSOutlineViewDataSource
 extension GroupedController:NSOutlineViewDataSource{
     
@@ -160,7 +142,7 @@ extension GroupedController:NSOutlineViewDataSource{
     
     //check
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        
+        print ("numberOfChildrenCalled \(item)")
         //Count the number of objects
         if (item == nil) {
             return (self.typeOfGrouping == "fromAuthor.name") ? frcAuthors.sections!.count : frcTopics.sections!.count
@@ -173,11 +155,13 @@ extension GroupedController:NSOutlineViewDataSource{
     
     //Check if an item is a header and let it be expandable
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        print("is item expandable called \(item)")
         return  self.isHeader(itemToTest:item)// ? true: false
     }
     
     //Returns the child for the specific item at a specific index
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        print("Child index of item called \(item) and index \(index)")
         if item == nil {
             return (self.typeOfGrouping=="fromAuthor.name") ? (frcAuthors.sections!)[index] : (frcTopics.sections!)[index]
         }

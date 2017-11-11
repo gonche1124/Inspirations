@@ -14,16 +14,14 @@ class PlaylistController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         self.playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
-        
-        //Does nothing
-//        self.playlistOutlineView.reloadData()
-//        self.playlistOutlineView.setNeedsDisplay()
-        self.playlistOutlineView.expandItem(nil, expandChildren: true)
-        
+        playlistOutlineView.expandItem(nil, expandChildren: true)
     }
     
-    
-
+    //Called before any of the other methods.
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        try! treeArrayController.fetch(with: nil, merge: false)
+    }
     
     //Variables
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
@@ -45,8 +43,15 @@ extension PlaylistController: NSOutlineViewDelegate{
         let currView = self.playlistOutlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         
         //Set up
-        currView?.textField?.stringValue = (currItem.pName?.uppercased())!
-        currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem.pType!)
+        if currItem.isLeaf {
+            currView?.imageView?.image = NSImage.init(imageLiteralResourceName: currItem.pType!)
+            (currView?.viewWithTag(1) as! NSButton).title = "\(currItem.quotesInPlaylist?.count ?? 0)"
+            currView?.textField?.stringValue = (currItem.pName)!
+        }
+        else {
+            currView?.textField?.stringValue = (currItem.pName?.uppercased())!
+        }
+        
         return currView
         
     }
@@ -56,17 +61,18 @@ extension PlaylistController: NSOutlineViewDelegate{
         return (!(item as? NSTreeNode)!.isLeaf)
     }
     
-   
-    
     //Selection changed.
     func outlineViewSelectionDidChange(_ notification: Notification) {
+        guard let outlineView = notification.object as? NSOutlineView else {
+            return
+        }
+        let sNode = outlineView.item(atRow: outlineView.selectedRow) as? NSTreeNode
+        let sPlaylist = sNode?.representedObject as? Playlist
         
-        //Sets predicate on the current view.
-        //TO DO: Guard this code agains bugs and unwrapping nil
-        let selectedItem = self.treeArrayController.selectedObjects.first as! Playlist
-        if !selectedItem.isLeaf { return}
-        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",selectedItem.pName!)
+        if !(sPlaylist?.isLeaf )! { return}
+        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",(sPlaylist?.pName!)!)
         (self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
+        // TODO: change for current controller.
 
     }
     
@@ -74,16 +80,40 @@ extension PlaylistController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
         return (((item as! NSTreeNode).representedObject as? Playlist)?.isLeaf)!
     }
-    
-    
 }
 
 //MARK: NSOutlineViewDataSource
 extension PlaylistController: NSOutlineViewDataSource{
     
+    //Sets the object represented. Mandatory
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
         return (item as! NSTreeNode).representedObject
     }
+
+    //Number of children of current item. Mandatory.
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        
+        guard let currItem = item as? NSTreeNode else {
+            return (treeArrayController.arrangedObjects.children?.count)!
+        }
+        return currItem.children!.count
+    }
+    
+    //Gets the child. Mandatory
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        
+        guard let nodeItem = item as? NSTreeNode else {
+            return treeArrayController.arrangedObjects.children![index]
+        }
+        return nodeItem.children![index]
+    }
+    
+    //Check if item is expandable. Mandatory
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        return !(item as! NSTreeNode).isLeaf
+    }
+    
+    //-------------- Drag n' Drop
     
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
@@ -108,6 +138,7 @@ extension PlaylistController: NSOutlineViewDataSource{
         let destPlaylist = (item as! NSTreeNode).representedObject as! Playlist
         destPlaylist.addToQuotesInPlaylist(NSSet(array: quotesSource.objects(at: rowIndexes)))
         try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
+        self.playlistOutlineView.reloadData()
 
         return true
     }

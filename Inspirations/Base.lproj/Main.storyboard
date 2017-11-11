@@ -854,7 +854,7 @@
                                     </customView>
                                 </subviews>
                                 <holdingPriorities>
-                                    <real value="449"/>
+                                    <real value="372"/>
                                     <real value="212"/>
                                 </holdingPriorities>
                             </splitView>
@@ -1644,7 +1644,7 @@
                                                 <size key="itemSize" width="210" height="100"/>
                                                 <edgeInsets key="sectionInset" left="5" right="5" top="5" bottom="5"/>
                                             </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" red="0.80390471220016479" green="0.9513506293296814" blue="0.8441617488861084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="kpg-BA-Zcd" id="0yK-qL-9V6"/>
                                                 <outlet property="delegate" destination="kpg-BA-Zcd" id="oq1-0c-tfK"/>
@@ -1733,7 +1733,7 @@
                                                     <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="pName"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="HeaderCell" id="9pn-wp-Uff">
+                                                        <tableCellView identifier="HeaderCell" id="9pn-wp-Uff" userLabel="Header Cell">
                                                             <rect key="frame" x="1" y="1" width="215" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1758,7 +1758,7 @@
                                                                 <outlet property="textField" destination="bhd-JT-yRA" id="wqh-ha-djZ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" id="fV9-as-wUd">
+                                                        <tableCellView identifier="DataCell" id="fV9-as-wUd" userLabel="Row Cell">
                                                             <rect key="frame" x="1" y="20" width="215" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1776,11 +1776,8 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
-                                                                    <connections>
-                                                                        <binding destination="fV9-as-wUd" name="value" keyPath="objectValue.pName" id="ywY-Hu-rAj"/>
-                                                                    </connections>
                                                                 </textField>
-                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZD9-OI-SOH">
+                                                                <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZD9-OI-SOH">
                                                                     <rect key="frame" x="177" y="0.0" width="35" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="rTi-MF-1wS"/>
@@ -1789,14 +1786,6 @@
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
-                                                                    <connections>
-                                                                        <binding destination="fV9-as-wUd" name="title" keyPath="objectValue.quotesInPlaylist" id="5Cp-dQ-BUn">
-                                                                            <dictionary key="options">
-                                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                                                <string key="NSValueTransformerName">SetToCount</string>
-                                                                            </dictionary>
-                                                                        </binding>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -1815,9 +1804,6 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
-                                                    <connections>
-                                                        <binding destination="3Zr-20-sWP" name="value" keyPath="arrangedObjects.pName" id="mW9-Cc-cFp"/>
-                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>

@@ -20,6 +20,7 @@ class CollectionQuoteItem: NSCollectionViewItem {
             guard isViewLoaded else {return}
             if let quoteEntity = quoteEntity {
                 quoteLabel?.stringValue = quoteEntity.quote!
+                quoteLabel?.toolTip = quoteEntity.quote!
                 authorLabel?.stringValue = (quoteEntity.fromAuthor?.name!)!
                 (quoteEntity.isFavorite) ? nil : (favoriteImage?.isHidden=true)
             }
@@ -30,7 +31,9 @@ class CollectionQuoteItem: NSCollectionViewItem {
         super.viewDidLoad()
         self.view.wantsLayer=true
         self.view.layer?.cornerRadius=10
-        self.view.layer?.backgroundColor=NSColor.red.cgColor
+        self.view.layer?.borderWidth = 2
+        self.view.layer?.borderColor = NSColor.blue.cgColor
+        //self.view.layer?.backgroundColor=NSColor.red.cgColor
     }
 }
 
@@ -81,4 +84,26 @@ extension CollectionController: NSCollectionViewDelegateFlowLayout{
         else if (viewW >= 300) && (viewW < 600) {return NSSize(width: viewW/2, height: viewW/2/2.1)}
         else {return NSSize(width: viewW/3, height: viewW/3/2.1)}
     }
+}
+
+//MARK: NSSearchFieldDelegate
+extension CollectionController: NSSearchFieldDelegate{
+    
+    //Gts called when user ends searhing
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        self.quotesController.filterPredicate = nil
+        self.currentCollectionView.reloadData()
+        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
+    }
+    
+    //Gets called when user searches
+    override func controlTextDidChange(_ obj: Notification) {
+        let tempSearch = (obj.object as? NSSearchField)!.stringValue
+        if tempSearch != "" {
+            self.quotesController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@", tempSearch)
+            self.currentCollectionView.reloadData()
+            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesController.arrangedObjects as! NSArray).count)
+        }
+    }
+    
 }
