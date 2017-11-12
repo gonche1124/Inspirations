@@ -92,7 +92,6 @@ extension PlaylistController: NSOutlineViewDataSource{
 
     //Number of children of current item. Mandatory.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        
         guard let currItem = item as? NSTreeNode else {
             return (treeArrayController.arrangedObjects.children?.count)!
         }

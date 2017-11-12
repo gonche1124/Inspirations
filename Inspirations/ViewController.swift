@@ -23,14 +23,16 @@ class ViewController: NSViewController {
         VCPlainTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
         VCQuoteTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
         VCBigView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
-        VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! GroupedController
+        VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
         VCCollectionView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
+        VCTag = NSStoryboard(name: NSStoryboard.Name(rawValue:"Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
         //Add controllers
         self.addChildViewController(VCPlainTable)
         self.addChildViewController(VCQuoteTable)
         self.addChildViewController(VCBigView)
         self.addChildViewController(VCGroupedMixTable)
         self.addChildViewController(VCCollectionView)
+        
         
         //Set default view
         VCBigView.view.frame = self.containerView.bounds
@@ -49,28 +51,31 @@ class ViewController: NSViewController {
         //Pick view depending on button pressed.
         switch sender.indexOfSelectedItem {
         case 0:
-            VCPlainTable.view.frame = self.containerView.bounds
+            //VCPlainTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCPlainTable.view)
         case 1:
-            VCQuoteTable.view.frame = self.containerView.bounds
+            //VCQuoteTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCQuoteTable.view)
         case 2:
-            VCBigView.view.frame = self.containerView.bounds
+            //VCBigView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCBigView.view)
         case 3:
             VCGroupedMixTable.view.frame = self.containerView.bounds
-            VCGroupedMixTable.typeOfGrouping = "fromAuthor.name"
-            VCGroupedMixTable.groupedTable.reloadData()
-            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
+            VCGroupedMixTable.authorsTable.reloadData()
+            VCGroupedMixTable.authorsTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
         case 4:
-            VCGroupedMixTable.view.frame = self.containerView.bounds
-            VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
-            VCGroupedMixTable.groupedTable.reloadData()
-            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
-            self.containerView.addSubview(VCGroupedMixTable.view)
+            VCTag.view.frame = self.containerView.bounds
+            self.containerView.addSubview(VCTag.view)
+            
+            //VCGroupedMixTable.view.frame = self.containerView.bounds
+            
+//            VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
+//            VCGroupedMixTable.groupedTable.reloadData()
+//            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
+//            self.containerView.addSubview(VCGroupedMixTable.view)
         default:
-            VCCollectionView.view.frame = self.containerView.bounds
+            //VCCollectionView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCCollectionView.view)
         }
         
@@ -120,9 +125,10 @@ class ViewController: NSViewController {
     var VCPlainTable : CocoaBindingsTable!
     var VCQuoteTable : QuoteController!
     var VCBigView : BigViewController!
-    var VCGroupedMixTable : GroupedController!
+    var VCGroupedMixTable : AuthorsController!
     var VCCollectionView : CollectionController!
- 
+    var VCTag : ThemesController!
+    
     //Outlets
     @IBOutlet weak var containerView: NSView!
     @IBOutlet weak var informationLabel: NSTextField!

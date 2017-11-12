@@ -17,8 +17,6 @@ class importExport: NSObject {
     fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
 
     
-    
-    
     // MARK: - Export
     //Return an Array with all the Quotes
     func retrieveArrayOfRecords()-> [Dictionary<String,Any>] {
