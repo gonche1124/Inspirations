@@ -51,13 +51,13 @@ class ViewController: NSViewController {
         //Pick view depending on button pressed.
         switch sender.indexOfSelectedItem {
         case 0:
-            //VCPlainTable.view.frame = self.containerView.bounds
+            VCPlainTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCPlainTable.view)
         case 1:
-            //VCQuoteTable.view.frame = self.containerView.bounds
+            VCQuoteTable.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCQuoteTable.view)
         case 2:
-            //VCBigView.view.frame = self.containerView.bounds
+            VCBigView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCBigView.view)
         case 3:
             VCGroupedMixTable.view.frame = self.containerView.bounds

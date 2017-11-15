@@ -17,29 +17,29 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         // Do view setup here.
         //doneButton.isEnabled=false
         quoteField.delegate=self
-        authorField.delegate=self
     }
     
     //Outlets
     @IBOutlet weak var quoteField: NSTextField!
-    @IBOutlet weak var authorField: NSTextField!
-    @IBOutlet weak var themesField: NSTextField!
+    //@IBOutlet weak var themesField: NSTextField!
     @IBOutlet weak var doneButton: NSButton!
     @IBOutlet weak var favoriteQuote: NSButton!
-    
+    @IBOutlet weak var authorField: NSComboBox!
+    @IBOutlet weak var themeField: NSComboBox!
     
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    @objc dynamic lazy var ImEx = importExport()
     
     
     //Pushed the Done Button
     @IBAction func pushDoneButton(_ sender: Any) {
-        //Add save quote later
         
-        //Fetch data
+        //Get data
         let quoteT = self.quoteField.stringValue
-        let authorT = self.authorField.stringValue
-        let themeT = self.themesField.stringValue
+        //let authorT = self.authorField.stringValue
+        let themeT = self.themeField.objectValue as? String
         let isFav = self.favoriteQuote.state
+        let authorT = self.authorField.objectValue as? String
         
         //Get context
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
@@ -48,20 +48,22 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
 
         //Create NSManagedObject
         //let authorToAdd = Author(context: managedContext)
-        let authorToAdd = self.findOrCreateObject(authorName: authorT) as! Author
+        let authorToAdd = ImEx.findOrCreateEntity(key: "name", value: authorT, entity: "Author", moc: managedContext) as! Author
+        authorToAdd.name = authorT
+        //let authorToAdd = self.findOrCreateObject(authorName: authorT) as! Author
 
-        
-        //authorToAdd.firstName=authorT
-        
+        //let quoteToAdd2 = ImEx.findOrCreateEntity(key: "quote", value: <#T##Any#>, entity: <#T##String#>, moc: <#T##NSManagedObjectContext#>)
         let quoteToAdd = Quote(context: managedContext)
         quoteToAdd.quote=quoteT
         quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
         quoteToAdd.fromAuthor = authorToAdd
         
         //Create Topic
-        let themeToAdd = Theme(context: managedContext)
-        themeToAdd.topic = themeT
+        let themeToAdd=ImEx.findOrCreateEntity(key: "topic", value: themeT, entity: "Theme", moc: managedContext) as! Theme
+        //let themeToAdd = Theme(context: managedContext)
+        //themeToAdd.topic = themeT
         //quoteToAdd.addToIsAbout(themeToAdd)
+        quoteToAdd.isAbout = themeToAdd
         
         //save
         do {
@@ -74,41 +76,34 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     }
     
     //Finds or create the object that the user input
-    func findOrCreateObject(authorName: String)->NSManagedObject {
-        
-        //Find object
-        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-        let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
-        let authorPredicate = NSPredicate(format: "name == %@", authorName)
-        authorFetch.predicate = authorPredicate
-        
-        //Execute fetch
-        do {
-            let existingAuthor = try moc.fetch(authorFetch) as! [Author]
-            
-            if existingAuthor.count > 0 {
-                print("Record already exists")
-                return existingAuthor.first!
-            }
-            else {
-                print("Had to create a new record")
-                let returnedAuthor = Author(context: moc)
-                returnedAuthor.name = authorName
-                return returnedAuthor
-            }
-            
-        }
-        catch {
-            fatalError(error as! String)
-        }
-    }
-            
-            
-       
-        
-        
-
-        
+//    func findOrCreateObject(authorName: String)->NSManagedObject {
+//
+//        //Find object
+//        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+//        let authorFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Author")
+//        let authorPredicate = NSPredicate(format: "name == %@", authorName)
+//        authorFetch.predicate = authorPredicate
+//
+//        //Execute fetch
+//        do {
+//            let existingAuthor = try moc.fetch(authorFetch) as! [Author]
+//
+//            if existingAuthor.count > 0 {
+//                print("Record already exists")
+//                return existingAuthor.first!
+//            }
+//            else {
+//                print("Had to create a new record")
+//                let returnedAuthor = Author(context: moc)
+//                returnedAuthor.name = authorName
+//                return returnedAuthor
+//            }
+//
+//        }
+//        catch {
+//            fatalError(error as! String)
+//        }
+//    }
 }
 
 

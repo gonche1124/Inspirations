@@ -79,22 +79,4 @@ extension CocoaBindingsTable: NSSearchFieldDelegate{
     
 }
 
-//Heart transformer to image.
-class BooleanToImage: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSImage.self
-    }
-    
-    override func transformedValue(_ value: Any?) -> Any? {
-        if value == nil {
-            return nil
-        }else {
-            return NSImage.init(imageLiteralResourceName: (value as! Bool) ? "red heart":"grey heart")
-        }
-    }
-    
-    //No Reverse.
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
-}
+

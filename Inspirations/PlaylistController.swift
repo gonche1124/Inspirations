@@ -143,24 +143,6 @@ extension PlaylistController: NSOutlineViewDataSource{
     }
 }
 
-//Collection count becasue bindings is not working.
-class SetToCount: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSString.self
-    }
-    
-    override func transformedValue(_ value: Any?) -> Any? {
-        if value == nil {
-            return nil
-        }else {
-            return "\((value as! NSSet).count)"
-        }
-    }
-    
-    //No Reverse.
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
-}
+
 
 

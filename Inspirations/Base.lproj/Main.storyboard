@@ -1345,11 +1345,11 @@
             <objects>
                 <viewController title="Add Quote" showSeguePresentationStyle="single" id="Tbm-IE-Mmr" customClass="AddQuote" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="CcV-r4-217">
-                        <rect key="frame" x="0.0" y="0.0" width="363" height="439"/>
+                        <rect key="frame" x="0.0" y="0.0" width="363" height="390"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ga4-Cv-xvI">
-                                <rect key="frame" x="130" y="397" width="103" height="22"/>
+                                <rect key="frame" x="130" y="348" width="103" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Add Quote" id="6xM-kZ-2ju">
                                     <font key="font" metaFont="system" size="18"/>
@@ -1358,7 +1358,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9T-Rq-avw">
-                                <rect key="frame" x="22" y="366" width="45" height="17"/>
+                                <rect key="frame" x="22" y="317" width="45" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Quote:" id="Qns-Jh-gtN">
                                     <font key="font" metaFont="system"/>
@@ -1367,7 +1367,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7I-B4-Hyu">
-                                <rect key="frame" x="26" y="253" width="50" height="17"/>
+                                <rect key="frame" x="26" y="204" width="50" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Theme:" id="brI-Ec-Umo">
                                     <font key="font" metaFont="system"/>
@@ -1376,7 +1376,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JlL-tD-Y0B">
-                                <rect key="frame" x="24" y="330" width="319" height="37"/>
+                                <rect key="frame" x="24" y="281" width="319" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="VHz-jf-B90">
                                     <font key="font" metaFont="system"/>
@@ -1385,7 +1385,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3h-yr-9AW">
-                                <rect key="frame" x="26" y="305" width="49" height="17"/>
+                                <rect key="frame" x="26" y="256" width="49" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author:" id="p21-wZ-JkK">
                                     <font key="font" metaFont="system"/>
@@ -1393,48 +1393,16 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tqk-N2-J3e">
-                                <rect key="frame" x="28" y="278" width="315" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="yid-Td-NeD">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9z4-hG-l7f">
-                                <rect key="frame" x="28" y="223" width="96" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="bga-aD-r4e">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="joN-Fy-imI">
-                                <rect key="frame" x="132" y="222" width="48" height="48"/>
+                                <rect key="frame" x="295" y="161" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="grey heart" imagePosition="only" alignment="center" alternateImage="red heart" imageScaling="proportionallyUpOrDown" inset="2" id="Xe7-gy-2Rt">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hWt-vx-Tl9">
-                                <rect key="frame" x="188" y="219" width="157" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="yDY-zq-5bT">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <objectValues>
-                                        <string>Item 1</string>
-                                        <string>Item 2</string>
-                                        <string>Item 3</string>
-                                    </objectValues>
-                                </comboBoxCell>
-                            </comboBox>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbj-Uk-mda">
-                                <rect key="frame" x="22" y="187" width="65" height="32"/>
+                                <rect key="frame" x="22" y="26" width="326" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kif-1o-v2x">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1445,7 +1413,7 @@
                                 </connections>
                             </button>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGF-BX-vqJ">
-                                <rect key="frame" x="190" y="172" width="155" height="26"/>
+                                <rect key="frame" x="28" y="225" width="317" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" numberOfVisibleItems="5" id="wmU-Pk-Fgj">
                                     <font key="font" metaFont="system"/>
@@ -1456,8 +1424,17 @@
                                     <binding destination="SIS-MX-oyV" name="content" keyPath="arrangedObjects.name" id="ckP-ga-ILw"/>
                                 </connections>
                             </comboBox>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Zk-hx-coF">
+                                <rect key="frame" x="26" y="138" width="37" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tags:" id="Wlg-e5-cjb">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <tokenField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fno-bv-GYN">
-                                <rect key="frame" x="28" y="123" width="314" height="22"/>
+                                <rect key="frame" x="28" y="81" width="314" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" completionDelay="1" tokenStyle="rounded" id="Pom-kK-Wuu">
                                     <font key="font" metaFont="system"/>
@@ -1465,14 +1442,28 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </tokenFieldCell>
                             </tokenField>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="smC-LC-tHS">
+                                <rect key="frame" x="28" y="172" width="254" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" numberOfVisibleItems="5" id="Jhe-0S-vmM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </comboBoxCell>
+                                <connections>
+                                    <binding destination="nK2-yr-QSl" name="content" keyPath="arrangedObjects.topic" id="3S4-Nl-BcM"/>
+                                </connections>
+                            </comboBox>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="authorField" destination="tqk-N2-J3e" id="6kH-mu-SqU"/>
+                        <outlet property="authorField" destination="QGF-BX-vqJ" id="Qx9-A3-qnm"/>
+                        <outlet property="authorGuess" destination="QGF-BX-vqJ" id="9di-GF-ZD3"/>
                         <outlet property="doneButton" destination="gbj-Uk-mda" id="Z4h-Nd-XPs"/>
                         <outlet property="favoriteQuote" destination="joN-Fy-imI" id="LlK-BJ-SkW"/>
                         <outlet property="quoteField" destination="JlL-tD-Y0B" id="FCZ-uV-SbW"/>
-                        <outlet property="themesField" destination="9z4-hG-l7f" id="6kx-ye-fpU"/>
+                        <outlet property="themeField" destination="smC-LC-tHS" id="sMn-gJ-eBI"/>
+                        <outlet property="themeField2" destination="smC-LC-tHS" id="vln-rI-MNX"/>
                     </connections>
                 </viewController>
                 <customObject id="9qb-Dj-jAY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1481,8 +1472,13 @@
                         <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="2jO-Z1-fgP"/>
                     </connections>
                 </arrayController>
+                <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="nK2-yr-QSl" userLabel="Theme Controller">
+                    <connections>
+                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="TqQ-Z6-vwt"/>
+                    </connections>
+                </arrayController>
             </objects>
-            <point key="canvasLocation" x="1008.5" y="262.5"/>
+            <point key="canvasLocation" x="1008.5" y="238"/>
         </scene>
         <!--Authors Controller-->
         <scene sceneID="l3I-wK-UWm">
@@ -1573,6 +1569,10 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="N5U-Rs-CmS" id="7Hr-vT-wpV"/>
+                                                <outlet property="delegate" destination="N5U-Rs-CmS" id="MNA-3R-FAo"/>
+                                            </connections>
                                         </outlineView>
                                     </subviews>
                                 </clipView>
