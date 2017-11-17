@@ -672,30 +672,51 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="7217210B-F480-49AC-991A-6270639F3CDA" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="bnN-B6-VgV">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="4C065B89-0BA0-4525-9C23-2743599A9876" label="Custom View" paletteLabel="Custom View" id="Oaq-9A-MVu">
+                                <toolbarItem implicitItemIdentifier="F276344F-2BAD-4B57-9B51-2B9686DBD35D" label="" paletteLabel="Custom View" id="J20-iR-VwE" userLabel="Pop Up">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="103" height="24"/>
-                                    <size key="maxSize" width="218" height="24"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="cjU-zq-AAb">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="List" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="0zX-Pw-ImQ" id="oTB-S2-IfV">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="Kdv-pR-MIG">
+                                                <items>
+                                                    <menuItem title="List" state="on" id="0zX-Pw-ImQ"/>
+                                                    <menuItem title="Quotes" id="xBP-mX-qfD"/>
+                                                    <menuItem title="Read" id="DMu-eO-0vv"/>
+                                                    <menuItem title="Authors" id="lps-iT-ftU">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                    <menuItem title="Topics" id="fHb-Bd-l1z">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                    <menuItem title="Other" id="Zwk-AU-WpA">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="4C065B89-0BA0-4525-9C23-2743599A9876" label="Custom View" paletteLabel="Custom View" id="Oaq-9A-MVu" userLabel="Segment">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="103" height="22"/>
+                                    <size key="maxSize" width="383" height="27"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="AjM-fy-EQT">
-                                        <rect key="frame" x="0.0" y="14" width="218" height="24"/>
+                                        <rect key="frame" x="0.0" y="14" width="365" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="KbJ-9b-Csf">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment image="NSListViewTemplate" width="32"/>
-                                                <segment image="QuoteView" width="32" selected="YES" tag="1"/>
-                                                <segment image="NSBookmarksTemplate" width="32">
-                                                    <nil key="label"/>
-                                                </segment>
-                                                <segment image="NSUser">
-                                                    <nil key="label"/>
-                                                </segment>
-                                                <segment image="NSActionTemplate">
-                                                    <nil key="label"/>
-                                                </segment>
-                                                <segment image="NSFlowViewTemplate">
-                                                    <nil key="label"/>
-                                                </segment>
+                                                <segment label="List" imageScaling="proportionallyUpOrDown" width="54" selected="YES"/>
+                                                <segment label="Quotes" width="53" tag="1"/>
+                                                <segment label="Read" width="53"/>
+                                                <segment label="Authors"/>
+                                                <segment label="Topics"/>
+                                                <segment label="Other"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -1304,6 +1325,17 @@
                                     <action selector="selectNext:" target="GDU-Jh-yzC" id="I4m-Vh-4yT"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrZ-I0-pWS">
+                                <rect key="frame" x="190" y="-7" width="80" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aZt-rF-TUI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="remove:" target="GDU-Jh-yzC" id="Gqq-3K-Slq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="vNd-Ty-fkt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="top" constant="20" id="4nd-jR-P8T"/>
@@ -1458,12 +1490,12 @@
                     </view>
                     <connections>
                         <outlet property="authorField" destination="QGF-BX-vqJ" id="Qx9-A3-qnm"/>
-                        <outlet property="authorGuess" destination="QGF-BX-vqJ" id="9di-GF-ZD3"/>
                         <outlet property="doneButton" destination="gbj-Uk-mda" id="Z4h-Nd-XPs"/>
                         <outlet property="favoriteQuote" destination="joN-Fy-imI" id="LlK-BJ-SkW"/>
                         <outlet property="quoteField" destination="JlL-tD-Y0B" id="FCZ-uV-SbW"/>
+                        <outlet property="tagController" destination="e5C-t4-xE8" id="Vf5-ei-sQv"/>
+                        <outlet property="tagsToken" destination="Fno-bv-GYN" id="2e3-zR-TEU"/>
                         <outlet property="themeField" destination="smC-LC-tHS" id="sMn-gJ-eBI"/>
-                        <outlet property="themeField2" destination="smC-LC-tHS" id="vln-rI-MNX"/>
                     </connections>
                 </viewController>
                 <customObject id="9qb-Dj-jAY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1475,6 +1507,11 @@
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="nK2-yr-QSl" userLabel="Theme Controller">
                     <connections>
                         <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="TqQ-Z6-vwt"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Tag" automaticallyPreparesContent="YES" id="e5C-t4-xE8" userLabel="Tag Controller">
+                    <connections>
+                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="I2f-ai-Xe5"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -2008,15 +2045,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSBookmarksTemplate" width="17" height="18"/>
-        <image name="NSFlowViewTemplate" width="18" height="10"/>
-        <image name="NSListViewTemplate" width="14" height="10"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSShareTemplate" width="11" height="16"/>
-        <image name="NSUser" width="32" height="32"/>
-        <image name="QuoteView" width="40" height="40"/>
         <image name="QuotesPlaylist" width="192" height="192"/>
         <image name="grey heart" width="240" height="240"/>
         <image name="popUpButtonCell:5Tt-Vb-Q10:image" width="1" height="1">
