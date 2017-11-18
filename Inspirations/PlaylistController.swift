@@ -52,6 +52,7 @@ extension PlaylistController: NSOutlineViewDelegate{
             currView?.textField?.stringValue = (currItem.pName?.uppercased())!
         }
         
+        currView?.layoutSubtreeIfNeeded()
         return currView
         
     }
