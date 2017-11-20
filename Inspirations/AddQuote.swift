@@ -71,10 +71,12 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         quoteToAdd.quote=quoteT
         quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
         quoteToAdd.fromAuthor = authorToAdd
+        if tags != nil {
         for item in tags! {
             let currTag = Tags(context: moc)
             currTag.tag = item as? String
             quoteToAdd.addToTags(currTag)
+        }
         }
         
         //Create Topic

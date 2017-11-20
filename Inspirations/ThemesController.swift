@@ -120,17 +120,6 @@ extension ThemesController:NSOutlineViewDelegate{
         return currView
     }
     
-    //Method 2 of trying to setup height.
-    func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
-
-        let typeOfCell: String = (!(item as! NSTreeNode).isTheme()) ? "DataCell": "HeaderCell"
-        var currView = tagsOultineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
-        if let currViewParam = currView {
-            currView = configureViewForItem(typeOfCell, item, currViewParam)
-            currView?.layoutSubtreeIfNeeded()
-        }
-        return (currView?.frame.height)!
-    }
     
     //Identify group rows to float.
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {

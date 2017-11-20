@@ -671,7 +671,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="453" y="313" width="849" height="421"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="7217210B-F480-49AC-991A-6270639F3CDA" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="bnN-B6-VgV">
+                        <toolbar key="toolbar" implicitIdentifier="7217210B-F480-49AC-991A-6270639F3CDA" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="bnN-B6-VgV">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="F276344F-2BAD-4B57-9B51-2B9686DBD35D" label="" paletteLabel="Custom View" id="J20-iR-VwE" userLabel="Pop Up">
                                     <nil key="toolTip"/>
@@ -702,7 +702,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4C065B89-0BA0-4525-9C23-2743599A9876" label="Custom View" paletteLabel="Custom View" id="Oaq-9A-MVu" userLabel="Segment">
+                                <toolbarItem implicitItemIdentifier="4C065B89-0BA0-4525-9C23-2743599A9876" label="Views" paletteLabel="Views" id="Oaq-9A-MVu" userLabel="Segment">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="103" height="22"/>
                                     <size key="maxSize" width="383" height="27"/>
@@ -764,7 +764,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="90B06C31-CD79-4FD0-9DAB-9536F8818AB6" explicitItemIdentifier="searchToolItem" label="Custom View" paletteLabel="Custom View" id="qn7-Ki-6AQ" userLabel="Search Bar">
+                                <toolbarItem implicitItemIdentifier="90B06C31-CD79-4FD0-9DAB-9536F8818AB6" explicitItemIdentifier="searchToolItem" label="Search" paletteLabel="Search" id="qn7-Ki-6AQ" userLabel="Search Bar">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="150" height="22"/>
@@ -778,7 +778,7 @@
                                         </searchFieldCell>
                                     </searchField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="23787DCD-0CB8-4D11-9CA4-5769B65919CC" label="Custom View" paletteLabel="Custom View" id="UGQ-PP-9WM" userLabel="Import Button">
+                                <toolbarItem implicitItemIdentifier="23787DCD-0CB8-4D11-9CA4-5769B65919CC" label="Import" paletteLabel="Import" id="UGQ-PP-9WM" userLabel="Import Button">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="75" height="25"/>
                                     <size key="maxSize" width="90" height="25"/>
@@ -822,6 +822,12 @@
                                 <toolbarItem reference="8ho-vf-FpO"/>
                             </defaultToolbarItems>
                         </toolbar>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isOpaque" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="tMb-q2-fmA"/>
                         </connections>
@@ -1197,7 +1203,7 @@
                                                                             </constraints>
                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Queeeeeeeote" id="DLB-8A-wiI">
                                                                                 <font key="font" size="18" name="Optima-Italic"/>
-                                                                                <color key="textColor" name="Inspire - Color-0"/>
+                                                                                <color key="textColor" name="Sea Wave - Color"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -1211,7 +1217,7 @@
                                                                             </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Author" id="hzN-FC-gky">
                                                                                 <font key="font" metaFont="system" size="15"/>
-                                                                                <color key="textColor" name="Inspire - Color-1"/>
+                                                                                <color key="textColor" name="Lonely tree - Color-3"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -1605,28 +1611,42 @@
                                                                 <outlet property="textField" destination="8Ov-VO-Ss7" id="4w5-eF-BQP"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" misplaced="YES" id="E1e-mh-8ht">
+                                                        <tableCellView identifier="DataCell" id="E1e-mh-8ht">
                                                             <rect key="frame" x="1" y="34" width="472" height="66"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pnw-Rm-VCm">
-                                                                    <rect key="frame" x="16" y="15" width="440" height="27"/>
+                                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xR6-Q2-rxs">
+                                                                    <rect key="frame" x="18" y="15" width="436" height="36"/>
+                                                                    <subviews>
+                                                                        <textField horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pnw-Rm-VCm">
+                                                                            <rect key="frame" x="-2" y="0.0" width="440" height="36"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="20" id="Bco-lf-mYb"/>
+                                                                            </constraints>
+                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="gP1-6C-sIn">
+                                                                                <font key="font" size="18" name="Optima-Italic"/>
+                                                                                <color key="textColor" name="Inspire - Color-0"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                    </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Bco-lf-mYb"/>
+                                                                        <constraint firstItem="pnw-Rm-VCm" firstAttribute="leading" secondItem="xR6-Q2-rxs" secondAttribute="leading" id="Sri-Nh-c8Z"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="pnw-Rm-VCm" secondAttribute="trailing" id="aIY-cQ-qgd"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="gP1-6C-sIn">
-                                                                        <font key="font" size="18" name="Optima-Italic"/>
-                                                                        <color key="textColor" name="Inspire - Color-0"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
+                                                                    <visibilityPriorities>
+                                                                        <integer value="1000"/>
+                                                                    </visibilityPriorities>
+                                                                    <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
+                                                                    </customSpacing>
+                                                                </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="pnw-Rm-VCm" firstAttribute="leading" secondItem="E1e-mh-8ht" secondAttribute="leading" constant="18" id="7hL-Dv-33d"/>
-                                                                <constraint firstAttribute="bottom" secondItem="pnw-Rm-VCm" secondAttribute="bottom" constant="15" id="PCZ-pb-Zx0"/>
-                                                                <constraint firstItem="pnw-Rm-VCm" firstAttribute="centerY" secondItem="E1e-mh-8ht" secondAttribute="centerY" id="XPd-KE-pL6"/>
-                                                                <constraint firstItem="pnw-Rm-VCm" firstAttribute="top" secondItem="E1e-mh-8ht" secondAttribute="top" constant="15" id="uEW-1E-1xj"/>
-                                                                <constraint firstAttribute="trailing" secondItem="pnw-Rm-VCm" secondAttribute="trailing" constant="18" id="wBH-52-Hrf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="xR6-Q2-rxs" secondAttribute="bottom" constant="15" id="OaQ-xS-NKh"/>
+                                                                <constraint firstAttribute="trailing" secondItem="xR6-Q2-rxs" secondAttribute="trailing" constant="18" id="fG2-0t-UGh"/>
+                                                                <constraint firstItem="xR6-Q2-rxs" firstAttribute="top" secondItem="E1e-mh-8ht" secondAttribute="top" constant="15" id="qoL-aO-NEb"/>
+                                                                <constraint firstItem="xR6-Q2-rxs" firstAttribute="leading" secondItem="E1e-mh-8ht" secondAttribute="leading" constant="18" id="zGf-7l-2nL"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="pnw-Rm-VCm" id="M6a-2F-N6Z"/>
@@ -1690,10 +1710,7 @@
                                         <collectionView id="471-Nc-EKA">
                                             <rect key="frame" x="0.0" y="0.0" width="479" height="158"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="ZLJ-MW-6GA">
-                                                <size key="itemSize" width="210" height="100"/>
-                                                <edgeInsets key="sectionInset" left="5" right="5" top="5" bottom="5"/>
-                                            </collectionViewFlowLayout>
+                                            <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfColumns="1" id="iuj-d4-OyD"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="kpg-BA-Zcd" id="0yK-qL-9V6"/>
@@ -2222,6 +2239,12 @@ AAAAAAAcgQ
         </namedColor>
         <namedColor name="Inspire - Color-2">
             <color red="0.67500001192092896" green="0.94099998474121094" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Lonely tree - Color-3">
+            <color red="0.75300002098083496" green="0.75300002098083496" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Sea Wave - Color">
+            <color red="0.0080000003799796104" green="0.32899999618530273" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

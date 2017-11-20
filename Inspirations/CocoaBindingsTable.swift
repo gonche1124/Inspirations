@@ -19,7 +19,6 @@ class CocoaBindingsTable: NSViewController {
     //Set delegate of searcfiled when view will appear.
     override func viewWillAppear() {
         super.viewWillAppear()
-
         (self.parent as? ViewController)?.searchQuote2.delegate=self
     }
     
@@ -30,6 +29,33 @@ class CocoaBindingsTable: NSViewController {
     @IBOutlet var quotesArrayController: NSArrayController!
     @IBOutlet weak var columnsTable: NSTableView!
     
+    //Get keyboard keystrokes.
+    override func keyDown(with event: NSEvent) {
+        interpretKeyEvents([event])
+    }
+    
+    //Delete record.
+    override func deleteBackward(_ sender: Any?) {
+
+        let selectedIndex = columnsTable.selectedRowIndexes
+        let confirmationD = NSAlert()
+        confirmationD.messageText = "Delete Records"
+        confirmationD.informativeText = "Are you sure you want to delete the \(selectedIndex.count) selected Quotes?"
+        confirmationD.addButton(withTitle: "Ok")
+        confirmationD.addButton(withTitle: "Cancel")
+        confirmationD.alertStyle = .critical
+        let result = confirmationD.runModal()
+        if result == .alertFirstButtonReturn{
+            columnsTable.beginUpdates()
+            quotesArrayController.remove(atArrangedObjectIndexes: selectedIndex)
+            columnsTable.endUpdates()
+        }
+        
+
+    }
+    
+    
+    
 }
 
 
@@ -39,9 +65,7 @@ class CocoaBindingsTable: NSViewController {
 
 //MARK: NSTableViewDelegate
 extension CocoaBindingsTable: NSTableViewDelegate{
-    
     //Dragging
-   
 }
 
 extension CocoaBindingsTable: NSTableViewDataSource{
@@ -53,7 +77,6 @@ extension CocoaBindingsTable: NSTableViewDataSource{
 
         return true
     }
-
 }
 
 
@@ -76,7 +99,6 @@ extension CocoaBindingsTable: NSSearchFieldDelegate{
             (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesArrayController.arrangedObjects as! NSArray).count)
         }
     }
-    
 }
 
 

@@ -13,7 +13,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        
         // Do any additional setup after loading the view.
         printCurrentData()
         //printPlaylistData()
@@ -40,6 +41,12 @@ class ViewController: NSViewController {
         //TODO: get current controller. unify searchfield delegate.
 
     }
+    
+    //TO erase
+    override func viewDidAppear() {
+        super.viewDidAppear()
+    }
+    
     
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
