@@ -51,7 +51,6 @@ class BooleanToImage: ValueTransformer {
 }
 
 //MARK: - NSTreeNodeExtension
-//Class to avoid subclassing.
 extension NSTreeNode {
     //Checks if is Leaf in Themes controller
     func isTheme()->Bool{

@@ -14,6 +14,9 @@ class PlaylistController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         self.playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
+        playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileContents])
+        playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType.URL])
+        
         playlistOutlineView.expandItem(nil, expandChildren: true)
     }
     
@@ -129,16 +132,18 @@ extension PlaylistController: NSOutlineViewDataSource{
     //Perform the Drop, validating the data.
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
         
-        //Get source data.
-        let data: Data = info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.fileContents)! as Data
-        let rowIndexes = NSKeyedUnarchiver.unarchiveObject(with: data) as! IndexSet
-        let quotesSource = ((self.parent as! ViewController).VCPlainTable.quotesArrayController.arrangedObjects) as! NSArray
-        
-        //Simple version?
-        let destPlaylist = (item as! NSTreeNode).representedObject as! Playlist
-        destPlaylist.addToQuotesInPlaylist(NSSet(array: quotesSource.objects(at: rowIndexes)))
+        //Test to Drag Objects instead of index.
+        let selectedData = info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.fileContents)!
+        let selectedURI = NSKeyedUnarchiver.unarchiveObject(with: selectedData) as! NSArray
+        let objectsIDs = selectedURI.map({moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0 as! URL)})
+        let quotesSelected = objectsIDs.map({moc.object(with: $0 as! NSManagedObjectID)})
+
+        //Insert objects.
+        let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
+        destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesSelected))
         try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
         self.playlistOutlineView.reloadData()
+        
 
         return true
     }

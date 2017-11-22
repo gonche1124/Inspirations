@@ -32,6 +32,19 @@ class QuoteController: NSViewController {
 }
 
 // MARK: Extensions
+extension QuoteController: NSTableViewDataSource{
+    
+    //Drag -n- Drop
+    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+        
+        let selectedQuotes = (quotesArray.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
+        let selectedURI = selectedQuotes.map({$0.objectID.uriRepresentation()})
+        pboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
+        return true
+    }
+    
+}
+
 
 extension QuoteController: NSSearchFieldDelegate {
     

@@ -50,8 +50,6 @@ class CocoaBindingsTable: NSViewController {
             quotesArrayController.remove(atArrangedObjectIndexes: selectedIndex)
             columnsTable.endUpdates()
         }
-        
-
     }
     
     
@@ -73,8 +71,9 @@ extension CocoaBindingsTable: NSTableViewDataSource{
     //Dragging methods
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
         //Set data to be pasted on pasteboard
-        pboard.setData(NSKeyedArchiver.archivedData(withRootObject: rowIndexes), forType: NSPasteboard.PasteboardType.fileContents)
-
+        let selectedQuotes = (quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
+        let selectedURI = selectedQuotes.map({$0.objectID.uriRepresentation()})
+        pboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
         return true
     }
 }
