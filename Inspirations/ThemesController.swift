@@ -83,6 +83,14 @@ extension ThemesController:NSOutlineViewDataSource{
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return (item as! NSTreeNode).isTheme()
     }
+    
+    //Drag -n- Drop
+    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
+        //Set data to be pasted on pasteboard
+        let selectedURI = items.map({(($0 as! NSTreeNode).representedObject as! Quote).objectID.uriRepresentation()})
+        pasteboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
+        return true
+    }
 
 }
 

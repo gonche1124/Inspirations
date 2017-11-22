@@ -1557,7 +1557,7 @@
                                     <rect key="frame" x="1" y="1" width="475" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="zjw-p7-LXn" id="Asd-57-zIH" userLabel="Authors Table">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="66" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="zjw-p7-LXn" id="Asd-57-zIH" userLabel="Authors Table">
                                             <rect key="frame" x="0.0" y="0.0" width="475" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1931,10 +1931,10 @@
             </objects>
             <point key="canvasLocation" x="-708" y="899"/>
         </scene>
-        <!--Tags Controller-->
+        <!--Theme Controller-->
         <scene sceneID="TIz-Ao-QeS">
             <objects>
-                <viewController storyboardIdentifier="VCTags" id="v0c-fd-9wA" userLabel="Tags Controller" customClass="ThemesController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VCTags" id="v0c-fd-9wA" userLabel="Theme Controller" customClass="ThemesController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="rbV-pr-tcj">
                         <rect key="frame" x="0.0" y="0.0" width="477" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1945,7 +1945,7 @@
                                     <rect key="frame" x="1" y="1" width="475" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="73" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="L23-PG-fdc" id="uZg-Il-enF" userLabel="Tags table">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="73" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="L23-PG-fdc" id="uZg-Il-enF" userLabel="Themes table">
                                             <rect key="frame" x="0.0" y="0.0" width="475" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
