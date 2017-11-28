@@ -34,6 +34,7 @@ class CollectionQuoteItem: NSCollectionViewItem {
         self.view.layer?.borderWidth = 2
         self.view.layer?.borderColor = NSColor.blue.cgColor
         //self.view.layer?.backgroundColor=NSColor.red.cgColor
+        self.view.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
@@ -44,6 +45,26 @@ class CollectionController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        //Programatically configure Layout.
+        let flowLayout = NSCollectionViewFlowLayout()
+        flowLayout.estimatedItemSize = NSSize(width: 250, height: 250/2.1)
+        flowLayout.scrollDirection = .vertical
+        flowLayout.sectionInset = NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        currentCollectionView.collectionViewLayout = flowLayout
+        currentCollectionView.reloadData()
+        
+        
+//        let gridLayout = NSCollectionViewGridLayout()
+//        gridLayout.minimumItemSize = NSSize(width: 200, height: 200/2.1)
+//        gridLayout.maximumItemSize = NSSize(width: 300, height: 300/2.1)
+//        gridLayout.minimumInteritemSpacing = 10
+//        gridLayout.margins = NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        currentCollectionView.collectionViewLayout = gridLayout
+//
+        
+        
+        
     }
     
     override func viewWillLayout() {
@@ -55,6 +76,8 @@ class CollectionController: NSViewController {
     @IBOutlet weak var currentCollectionView: NSCollectionView!
     @IBOutlet var quotesController: NSArrayController!
 }
+
+
 
 
 extension CollectionController: NSCollectionViewDataSource {
@@ -78,12 +101,14 @@ extension CollectionController: NSCollectionViewDataSource {
 
 extension CollectionController: NSCollectionViewDelegateFlowLayout{
     //Calculate the size for each item depending of the
-    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        let viewW = collectionView.frame.width - 30
-        if viewW < 300 {return NSSize(width: viewW, height: viewW/2.1)}
-        else if (viewW >= 300) && (viewW < 600) {return NSSize(width: viewW/2, height: viewW/2/2.1)}
-        else {return NSSize(width: viewW/3, height: viewW/3/2.1)}
-    }
+//    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
+//        let viewW = collectionView.frame.width - 30
+//        if viewW < 300 {return NSSize(width: viewW, height: viewW/2.1)}
+//        else if (viewW >= 300) && (viewW < 600) {return NSSize(width: viewW/2, height: viewW/2/2.1)}
+//        else {return NSSize(width: viewW/3, height: viewW/3/2.1)}
+//    }
+    
+    
 }
 
 //MARK: NSSearchFieldDelegate

@@ -82,7 +82,7 @@ class ViewController: NSViewController {
 //            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
 //            self.containerView.addSubview(VCGroupedMixTable.view)
         default:
-            //VCCollectionView.view.frame = self.containerView.bounds
+            VCCollectionView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCCollectionView.view)
         }
         
