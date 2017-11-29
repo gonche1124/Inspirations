@@ -17,11 +17,8 @@ class SetToCount: ValueTransformer {
     }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        guard let valueSet = value as? NSSet else {
-            return nil
-        }
+        guard let valueSet = value as? NSSet else {return nil}
         return "\(valueSet.count)"
-      
     }
     
     //No Reverse.
@@ -57,12 +54,8 @@ class stringToImage: ValueTransformer {
     }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        if value == nil {
-            return nil
-        }else {
-            return NSImage(named: NSImage.Name(value as! String))
-            //return NSImage.init(imageLiteralResourceName: (value as! Bool) ? "red heart":"grey heart")
-        }
+        guard let imgName = value as? String else {return nil}
+        return NSImage(named: NSImage.Name(imgName))
     }
     
     //No Reverse.
@@ -83,3 +76,11 @@ extension NSTreeNode {
         return ((self.representedObject as! NSManagedObject).className == "Author")
     }
 }
+
+//MARK: - isLeaf for NSManagedObject
+extension NSManagedObject {
+    
+    var isLeafQuote: Bool {get {return self.className == "Quote"}}
+
+}
+

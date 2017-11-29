@@ -27,6 +27,9 @@ class ViewController: NSViewController {
         VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
         VCCollectionView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
         VCTag = NSStoryboard(name: NSStoryboard.Name(rawValue:"Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
+        
+        
+        
         //Add controllers
         self.addChildViewController(VCPlainTable)
         self.addChildViewController(VCQuoteTable)
@@ -82,6 +85,8 @@ class ViewController: NSViewController {
 //            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
 //            self.containerView.addSubview(VCGroupedMixTable.view)
         default:
+    
+            
             VCCollectionView.view.frame = self.containerView.bounds
             self.containerView.addSubview(VCCollectionView.view)
         }

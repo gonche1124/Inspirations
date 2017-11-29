@@ -17,18 +17,16 @@ class PlaylistController: NSViewController {
         playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileContents])
         playlistOutlineView.registerForDraggedTypes([NSPasteboard.PasteboardType.URL])
         
-        //playlistOutlineView.expandItem(nil, expandChildren: true)
         
         //Sort descriptors
         let sortDesc = NSSortDescriptor(key: "pName", ascending: true)
         treeArrayController.sortDescriptors = [sortDesc]
+        
+        //Outlineview NOT WORKING.
+        playlistOutlineView.expandItem(nil, expandChildren: true)
     }
     
-    //Called before any of the other methods.
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        //try! treeArrayController.fetch(with: nil, merge: false)
-    }
+
     
     //Variables
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
@@ -103,13 +101,7 @@ extension PlaylistController: NSOutlineViewDelegate{
     //Selection changed.
     func outlineViewSelectionDidChange(_ notification: Notification) {
 
-        //Figure out how to get the selected Objetc
-        let tNode = (treeArrayController.selectedNodes.first?.representedObject) as! Playlist
-        print (tNode.pName)
-
-
-
-
+        //playlistOutlineView.expandItem(nil, expandChildren: true)
         guard let outlineView = notification.object as? NSOutlineView else {
             return
         }
