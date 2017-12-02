@@ -71,22 +71,24 @@ extension CocoaBindingsTable: NSTableViewDelegate{
 extension CocoaBindingsTable: NSTableViewDataSource{
     
     //Dragging methods
-    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-        print("write rows")
-        //Set data to be pasted on pasteboard
-        let selectedQuotes = (quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
-        let selectedURI = selectedQuotes.map({$0.objectID.uriRepresentation()})
-        pboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
-        return true
-    }
+//    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+//        print("write rows")
+//        //Set data to be pasted on pasteboard
+//        let selectedQuotes = (quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
+//        let selectedURI = selectedQuotes.map({$0.objectID.uriRepresentation()})
+//        pboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
+//        return true
+//    }
     
     //Dragging method accoridng to WWDC 2016
-//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-//        let thisQuote = (quotesArrayController.arrangedObjects as! NSArray).object(at: row) as? Quote
-//        let thisItem = NSPasteboardItem()
-//        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: NSPasteboard.PasteboardType.string)
-//        return thisItem
-//    }
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        //let thisQuote2 = tableView.tableColumns[0].obj
+        let thisQuote = (quotesArrayController.arrangedObjects as! NSArray).object(at: row) as? Quote
+        let thisItem = NSPasteboardItem()
+        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
+        
+        return thisItem
+    }
 }
 
 

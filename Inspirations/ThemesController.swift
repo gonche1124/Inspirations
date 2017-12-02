@@ -30,54 +30,11 @@ class ThemesController: NSViewController {
         
         //Set up search field.
         (self.parent as? ViewController)?.searchQuote2.delegate = self
-        
-        
     }
-    
-    //Awake from NIB to prefetch controllers.
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        try! themeController.fetch(with: nil, merge: false)
-    }
-    
-    //Neccesary to voeride in order for the search to work.
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        //(self.parent as! ViewController).searchQuote2.delegate=self
-    }
-    
-    //Reloeds the data and expands teh view
-    func reloadDataAndExpand(){
-        self.tagsOultineView.reloadData()
-        self.tagsOultineView.expandItem(nil, expandChildren:true)
-    }
-    
 }
 
 //MARK: - NSOutlineViewDataSource
 extension ThemesController:NSOutlineViewDataSource{
-    
-    //Sets teh object associated witha  row. Mandatory?
-    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-        return (item as! NSTreeNode).representedObject
-    }
-    
-    //Gets number of children. Mandatory
-    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        
-        guard let currItem = item as? NSTreeNode else {
-            return (themeController.arrangedObjects.children?.count)!
-        }
-        return (currItem.isTheme()) ? (currItem.children?.count)! : 0
-    }
-    
-    //Gets the child. Mandatory
-    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        guard let nodeItem = item as? NSTreeNode else {
-            return themeController.arrangedObjects.children![index]
-        }
-        return nodeItem.children![index]
-    }
     
     //Check if item is expandable. Mandatory
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -85,59 +42,45 @@ extension ThemesController:NSOutlineViewDataSource{
     }
     
     //Drag -n- Drop
-    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
-        //Set data to be pasted on pasteboard
-        let selectedURI = items.map({(($0 as! NSTreeNode).representedObject as! Quote).objectID.uriRepresentation()})
-        pasteboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
-        return true
-    }
+//    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
+//        //Set data to be pasted on pasteboard
+//        let selectedURI = items.map({(($0 as! NSTreeNode).representedObject as! Quote).objectID.uriRepresentation()})
+//        pasteboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
+//        return true
+//    }
 
+    // WWDC 2016 method.
+    func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+        guard let sQuote = (item as? NSTreeNode)!.representedObject as? Quote else {return nil}
+        let thisItem = NSPasteboardItem()
+        thisItem.setString(sQuote.objectID.uriRepresentation().absoluteString, forType: .string)
+        return thisItem
+    }
+//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+//        //let thisQuote2 = tableView.tableColumns[0].obj
+//        let thisQuote = (quotesArrayController.arrangedObjects as! NSArray).object(at: row) as? Quote
+//        let thisItem = NSPasteboardItem()
+//        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
+//
+//        return thisItem
+//    }
 }
 
-//NSoutlineViewDelegate
 //MARK: NSOutlineViewDelegate
 extension ThemesController:NSOutlineViewDelegate{
-    
-    //Draws the cell-view.
-    func configureViewForItem(_ typeOfCell: String, _ item: Any, _ currView: NSTableCellView?) -> NSTableCellView? {
-        //Set up view
-        if typeOfCell == "HeaderCell" {
-            let currItem = (item as! NSTreeNode).representedObject as! Theme
-            currView?.textField?.stringValue = (currItem.topic!.uppercased())
-        }else{
-            guard let currItem = (item as! NSTreeNode).representedObject as? Quote else {
-                currView?.textField?.stringValue = "Didnt work"
-                return currView
-            }
-            (currView?.viewWithTag(1) as! NSTextField).stringValue = currItem.quote!
-            (currView?.viewWithTag(2) as! NSTextField).stringValue = (currItem.fromAuthor?.name!)!
-            
-        }
-        return currView
-    }
     
     //Returns View for Row.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
 
         let typeOfCell: String = (!(item as! NSTreeNode).isTheme()) ? "DataCell": "HeaderCell"
-        var currView = tagsOultineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
-        if let currViewParam = currView {
-            currView = configureViewForItem(typeOfCell, item, currViewParam)
-        }
-    
+        let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
+
         return currView
     }
-    
     
     //Identify group rows to float.
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         return (item as! NSTreeNode).isTheme()
-    }
-    
-    //Recalculate height when screen moves
-    func outlineViewColumnDidResize(_ notification: Notification) {
-        let AllIndex = IndexSet(integersIn:0..<self.tagsOultineView.numberOfRows)
-        self.tagsOultineView.noteHeightOfRows(withIndexesChanged: AllIndex)
     }
 }
 
@@ -148,7 +91,8 @@ extension ThemesController: NSSearchFieldDelegate{
     //Called when the users finishes searching.
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         themeController.fetchPredicate = nil
-        self.reloadDataAndExpand()
+        tagsOultineView.reloadData()
+        tagsOultineView.expandItem(nil, expandChildren: true)
     }
     
     //Calls everytime a user inputs a character.
@@ -160,7 +104,8 @@ extension ThemesController: NSSearchFieldDelegate{
         }
         let tempPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
         themeController.fetchPredicate = tempPredicate
-        self.reloadDataAndExpand()
+        tagsOultineView.reloadData()
+        tagsOultineView.expandItem(nil, expandChildren: true)
         //(self.parent as? ViewController)?.informationLabel.stringValue = "Showing \(self.frcAuthors.fetchedObjects!.count) of 33 records"
         
         //Check out predicateWithSubstitutionVariables method to simplify code.

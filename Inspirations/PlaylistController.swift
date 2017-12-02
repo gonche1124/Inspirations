@@ -163,18 +163,16 @@ extension PlaylistController: NSOutlineViewDataSource{
     }
 
     //Perform the Drop, validating the data.
-    //TODO: Simplify code
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
 
-        //Test to Drag Objects instead of index.
-        let selectedData = info.draggingPasteboard().data(forType: NSPasteboard.PasteboardType.fileContents)!
-        let selectedURI = NSKeyedUnarchiver.unarchiveObject(with: selectedData) as! NSArray
-        let objectsIDs = selectedURI.map({moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0 as! URL)})
-        let quotesSelected = objectsIDs.map({moc.object(with: $0 as! NSManagedObjectID)})
+        //WWDC 2016 method
+        let sURL: [URL] = info.draggingPasteboard().pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
+        let sOBID: [NSManagedObjectID] = sURL.map({(moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0))!})
+        let quotesS = sOBID.map({moc.object(with: $0 )})
 
         //Insert objects.
         let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
-        destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesSelected))
+        destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesS))
         try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
         self.playlistOutlineView.reloadData()
 

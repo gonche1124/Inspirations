@@ -1998,6 +1998,9 @@
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="BtM-ce-6Ke" name="value" keyPath="objectValue.topic" id="FwW-UR-99B"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -2028,6 +2031,9 @@
                                                                                 <color key="textColor" name="Inspire - Color-0"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="na0-GV-zwc" name="value" keyPath="objectValue.quote" id="9Us-aq-Jzb"/>
+                                                                            </connections>
                                                                         </textField>
                                                                         <textField identifier="authorLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="ZDU-Sa-hRr">
                                                                             <rect key="frame" x="-2" y="0.0" width="432" height="19"/>
@@ -2036,6 +2042,9 @@
                                                                                 <color key="textColor" name="Inspire - Color-1"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="na0-GV-zwc" name="value" keyPath="objectValue.fromAuthor.name" id="YLb-uv-Gxo"/>
+                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
@@ -2069,6 +2078,8 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <binding destination="uns-Lg-V2z" name="content" keyPath="arrangedObjects" id="9Im-XC-kD6"/>
+                                                <binding destination="uns-Lg-V2z" name="selectionIndexPaths" keyPath="selectionIndexPaths" previousBinding="9Im-XC-kD6" id="dME-az-DiU"/>
                                                 <outlet property="dataSource" destination="v0c-fd-9wA" id="cOm-pv-1lq"/>
                                                 <outlet property="delegate" destination="v0c-fd-9wA" id="Nps-3E-90a"/>
                                             </connections>
@@ -2098,7 +2109,7 @@
                     </connections>
                 </viewController>
                 <customObject id="USF-bM-VfI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <treeController mode="entity" entityName="Theme" fetchPredicateFormat="" automaticallyPreparesContent="YES" childrenKeyPath="fromQuote" id="uns-Lg-V2z" userLabel="Themes Controller">
+                <treeController mode="entity" entityName="Theme" fetchPredicateFormat="" automaticallyPreparesContent="YES" childrenKeyPath="fromQuote" leafKeyPath="isLeafQuote" id="uns-Lg-V2z" userLabel="Themes Controller">
                     <connections>
                         <binding destination="v0c-fd-9wA" name="managedObjectContext" keyPath="moc" id="ctp-QI-Miv"/>
                     </connections>
