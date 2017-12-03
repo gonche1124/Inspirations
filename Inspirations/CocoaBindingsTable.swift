@@ -52,9 +52,6 @@ class CocoaBindingsTable: NSViewController {
             columnsTable.endUpdates()
         }
     }
-    
-    
-    
 }
 
 
@@ -69,16 +66,6 @@ extension CocoaBindingsTable: NSTableViewDelegate{
 }
 
 extension CocoaBindingsTable: NSTableViewDataSource{
-    
-    //Dragging methods
-//    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-//        print("write rows")
-//        //Set data to be pasted on pasteboard
-//        let selectedQuotes = (quotesArrayController.arrangedObjects as! NSArray).objects(at: rowIndexes) as! [Quote]
-//        let selectedURI = selectedQuotes.map({$0.objectID.uriRepresentation()})
-//        pboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
-//        return true
-//    }
     
     //Dragging method accoridng to WWDC 2016
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {

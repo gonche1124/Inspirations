@@ -21,14 +21,14 @@ class importExport: NSObject {
     //Return an Array with all the Quotes
     func retrieveArrayOfRecords()-> [Dictionary<String,Any>] {
         //get context
-        let managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+        //let managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
         //Retrieve the current Data.
         var listQuotes = [Dictionary<String,Any>]()
         do{
             let fetchRequestAsDictionary=NSFetchRequest<NSFetchRequestResult>(entityName:"Quote")
             fetchRequestAsDictionary.returnsObjectsAsFaults=false
             fetchRequestAsDictionary.relationshipKeyPathsForPrefetching=["fromAuthor.name"]
-            let records = try managedContext.fetch(fetchRequestAsDictionary)
+            let records = try moc.fetch(fetchRequestAsDictionary)
             
             for case let item as Quote in records {
                 listQuotes.append(item.convertToDictionary())
@@ -96,7 +96,7 @@ class importExport: NSObject {
         var newObject: NSManagedObject
         switch Entity {
             case "fromAuthor":
-                newObject=findOrCreateEntity(key: "name", value: attributes["name"]!, entity: "Author",  moc:moc)
+                newObject=findOrCreateEntity(key: "name", value: ((attributes["name"]!) as AnyObject).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), entity: "Author",  moc:moc)
             case "isAbout":
                 newObject=findOrCreateEntity(key: "topic", value: attributes["topic"]!, entity: "Theme", moc:moc)
             case "tags":
@@ -147,30 +147,21 @@ extension NSManagedObject{
     func convertToDictionary() -> Dictionary<String, Any>{
         
         //Get Attributes of object into a dictionary
-        let attDict = self.entity.attributeKeys
-        var dict=self.dictionaryWithValues(forKeys: attDict)
+        var dict = self.dictWithAttributes()
         
-        //Get relationships
-        for relationship in self.entity.relationshipsByName {
-            let value = self.value(forKey: relationship.key)
-            //Case is 1 to 1
-            if let oneToOneR = value as? NSManagedObject {
-                dict[relationship.key]=oneToOneR.dictionaryWithValuesOfAttributes()
-            }
-            //Case 1 to Many
-            else if let oneToMany = value as? NSSet{
-                var dictArray = [[String: Any]]()
-                for case let relatedObject as NSManagedObject in oneToMany {
-                    dictArray.append(relatedObject.dictionaryWithValuesOfAttributes())
-                }
-                dict[relationship.key]=dictArray
-            }
+        //Get relationships 1->1
+        _ = self.entity.toOneRelationshipKeys.map({dict[$0]=(self.value(forKey: $0) as? NSManagedObject)?.dictWithAttributes()})
+
+        //Get relationships 1->Many
+        let toMany = self.entity.toManyRelationshipKeys
+        for thisKey in toMany {
+            dict[thisKey] = (self.value(forKey: thisKey) as? NSSet)?.allObjects.map({($0 as? NSManagedObject)?.dictWithAttributes()})
         }
        return dict
     }
     
     //Returns a dictionary with keys as attributes and values as values.
-    func dictionaryWithValuesOfAttributes()->Dictionary<String,Any>{
+    func dictWithAttributes()->Dictionary<String,Any>{
         return self.dictionaryWithValues(forKeys: self.entity.attributeKeys)
     }
     

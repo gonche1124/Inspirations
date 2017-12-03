@@ -1170,8 +1170,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView misplaced="YES" id="5z2-yr-6dV">
-                                                            <rect key="frame" x="1" y="1" width="472" height="85"/>
+                                                        <tableCellView id="5z2-yr-6dV">
+                                                            <rect key="frame" x="1" y="1" width="472" height="84"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jY7-iJ-qRx" userLabel="FavoriteBar">
@@ -1308,31 +1308,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="481" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9E-Jr-Gtq">
-                                <rect key="frame" x="391" y="105" width="51" height="35"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2A5-8V-EOs">
+                                <rect key="frame" x="20" y="109" width="441" height="83"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-Ty-fkt">
+                                        <rect key="frame" x="-2" y="43" width="445" height="40"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="aKn-q8-cT3">
+                                            <font key="font" size="33" name="Optima-Italic"/>
+                                            <color key="textColor" name="Inspire - Color-0"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="GDU-Jh-yzC" name="value" keyPath="selection.quote" id="Nfg-1M-thR"/>
+                                        </connections>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9E-Jr-Gtq">
+                                        <rect key="frame" x="-2" y="0.0" width="445" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="47" id="gWv-eT-Svo"/>
+                                            <constraint firstAttribute="height" constant="35" id="z7z-9M-m30"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="OF9-bv-ZWV">
+                                            <font key="font" size="20" name="Optima-Regular"/>
+                                            <color key="textColor" name="Inspire - Color-1"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="GDU-Jh-yzC" name="value" keyPath="selection.fromAuthor.name" id="C6g-hF-IVo"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="z7z-9M-m30"/>
+                                    <constraint firstAttribute="trailing" secondItem="vNd-Ty-fkt" secondAttribute="trailing" id="2lL-YI-R5g"/>
+                                    <constraint firstItem="vNd-Ty-fkt" firstAttribute="leading" secondItem="2A5-8V-EOs" secondAttribute="leading" id="DLv-vo-nZg"/>
+                                    <constraint firstAttribute="trailing" secondItem="N9E-Jr-Gtq" secondAttribute="trailing" id="Jh9-Rv-RrU"/>
+                                    <constraint firstItem="N9E-Jr-Gtq" firstAttribute="leading" secondItem="2A5-8V-EOs" secondAttribute="leading" id="wTR-St-ihZ"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="OF9-bv-ZWV">
-                                    <font key="font" size="20" name="Optima-Regular"/>
-                                    <color key="textColor" name="Inspire - Color-1"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="GDU-Jh-yzC" name="value" keyPath="selection.fromAuthor.name" id="C6g-hF-IVo"/>
-                                </connections>
-                            </textField>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-Ty-fkt">
-                                <rect key="frame" x="18" y="155" width="445" height="40"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="aKn-q8-cT3">
-                                    <font key="font" size="33" name="Optima-Italic"/>
-                                    <color key="textColor" name="Inspire - Color-0"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="GDU-Jh-yzC" name="value" keyPath="selection.quote" id="Nfg-1M-thR"/>
-                                </connections>
-                            </textField>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5wE-0b-J6w">
                                 <rect key="frame" x="-6" y="-7" width="67" height="32"/>
                                 <buttonCell key="cell" type="push" title="prev" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="21N-X7-fy8">
@@ -1355,22 +1375,17 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="top" constant="20" id="4nd-jR-P8T"/>
-                            <constraint firstItem="N9E-Jr-Gtq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="leading" id="B2m-Wd-Ihr"/>
                             <constraint firstAttribute="bottom" secondItem="5wE-0b-J6w" secondAttribute="bottom" id="C5H-16-X2U"/>
-                            <constraint firstAttribute="trailing" secondItem="vNd-Ty-fkt" secondAttribute="trailing" constant="20" id="F7i-Rw-DHB"/>
                             <constraint firstAttribute="trailing" secondItem="ihn-Ia-bW8" secondAttribute="trailing" id="M2Z-mY-XLt"/>
-                            <constraint firstItem="N9E-Jr-Gtq" firstAttribute="top" secondItem="vNd-Ty-fkt" secondAttribute="bottom" constant="15" id="Mdo-1x-pac"/>
-                            <constraint firstItem="5wE-0b-J6w" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" id="OAL-Xt-SAh"/>
-                            <constraint firstAttribute="trailing" secondItem="N9E-Jr-Gtq" secondAttribute="trailing" constant="41" id="PeF-hG-6Wy"/>
-                            <constraint firstAttribute="bottom" secondItem="5wE-0b-J6w" secondAttribute="bottom" id="Pyy-x9-vxl"/>
+                            <constraint firstItem="2A5-8V-EOs" firstAttribute="centerX" secondItem="1Yv-w4-r3l" secondAttribute="centerX" id="NDN-Zp-2aQ"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2A5-8V-EOs" secondAttribute="bottom" constant="20" id="OSU-4C-MTN"/>
+                            <constraint firstItem="2A5-8V-EOs" firstAttribute="centerY" secondItem="1Yv-w4-r3l" secondAttribute="centerY" id="RJt-z9-L14"/>
                             <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" id="TYt-sK-WsU"/>
-                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" constant="20" id="VLq-U5-azI"/>
-                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="centerY" secondItem="1Yv-w4-r3l" secondAttribute="centerY" constant="-25" id="aOX-v8-7Cf"/>
                             <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" id="avi-0O-mPT"/>
+                            <constraint firstAttribute="trailing" secondItem="2A5-8V-EOs" secondAttribute="trailing" constant="20" id="cLW-l2-0pU"/>
+                            <constraint firstItem="2A5-8V-EOs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="top" constant="20" id="eDy-MP-jcb"/>
                             <constraint firstItem="5wE-0b-J6w" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" id="f9Y-cc-DkP"/>
-                            <constraint firstItem="vNd-Ty-fkt" firstAttribute="centerX" secondItem="1Yv-w4-r3l" secondAttribute="centerX" id="mZD-5Q-yUx"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="N9E-Jr-Gtq" secondAttribute="bottom" constant="25" id="oou-TO-R9j"/>
+                            <constraint firstItem="2A5-8V-EOs" firstAttribute="leading" secondItem="1Yv-w4-r3l" secondAttribute="leading" constant="20" id="pjb-uA-uvK"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -1389,7 +1404,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1608" y="791"/>
+            <point key="canvasLocation" x="1607.5" y="791"/>
         </scene>
         <!--Add Quote-->
         <scene sceneID="R4t-YF-8aM">
@@ -1579,8 +1594,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="HeaderCell" misplaced="YES" id="tZs-eG-TCr">
-                                                            <rect key="frame" x="1" y="1" width="472" height="31"/>
+                                                        <tableCellView identifier="HeaderCell" id="tZs-eG-TCr">
+                                                            <rect key="frame" x="1" y="1" width="472" height="26"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8Ov-VO-Ss7">
@@ -1607,7 +1622,7 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="DataCell" id="E1e-mh-8ht">
-                                                            <rect key="frame" x="1" y="34" width="472" height="66"/>
+                                                            <rect key="frame" x="1" y="29" width="472" height="66"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pnw-Rm-VCm">
@@ -1758,13 +1773,13 @@
                                     <action selector="addChild:" target="3Zr-20-sWP" id="rb3-u7-ffy"/>
                                 </connections>
                             </button>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qp-N0-sfY">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qp-N0-sfY">
                                 <rect key="frame" x="0.0" y="23" width="220" height="363"/>
                                 <clipView key="contentView" drawsBackground="NO" id="eZg-ra-dkD">
                                     <rect key="frame" x="1" y="1" width="218" height="361"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" indentationPerLevel="8" outlineTableColumn="f6A-78-9RK" id="cbd-XW-QHq">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="f6A-78-9RK" id="cbd-XW-QHq">
                                             <rect key="frame" x="0.0" y="0.0" width="218" height="361"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1786,11 +1801,14 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="HeaderCell" id="9pn-wp-Uff" userLabel="Header Cell">
-                                                            <rect key="frame" x="1" y="1" width="215" height="36"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <rect key="frame" x="1" y="1" width="215" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-JT-yRA">
-                                                                    <rect key="frame" x="0.0" y="8" width="215" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="215" height="14"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="14" id="yFl-ed-s6p"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="0xY-Tt-LoP">
                                                                         <font key="font" metaFont="systemBold" size="12"/>
                                                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1806,19 +1824,16 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="bhd-JT-yRA" firstAttribute="leading" secondItem="9pn-wp-Uff" secondAttribute="leading" constant="2" id="CI8-bm-V9U"/>
-                                                                <constraint firstItem="bhd-JT-yRA" firstAttribute="centerY" secondItem="9pn-wp-Uff" secondAttribute="centerY" id="Ddq-BC-Yru"/>
                                                                 <constraint firstItem="bhd-JT-yRA" firstAttribute="leading" secondItem="9pn-wp-Uff" secondAttribute="leading" constant="2" id="XFU-sT-ZnY"/>
-                                                                <constraint firstAttribute="bottom" secondItem="bhd-JT-yRA" secondAttribute="bottom" constant="8" id="dm0-JD-rMD"/>
                                                                 <constraint firstAttribute="trailing" secondItem="bhd-JT-yRA" secondAttribute="trailing" constant="2" id="llT-fD-tbQ"/>
-                                                                <constraint firstItem="bhd-JT-yRA" firstAttribute="top" secondItem="9pn-wp-Uff" secondAttribute="top" constant="8" id="vNO-eU-0t3"/>
+                                                                <constraint firstItem="bhd-JT-yRA" firstAttribute="top" secondItem="9pn-wp-Uff" secondAttribute="top" constant="3" id="m3w-5s-gnM"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="bhd-JT-yRA" id="wqh-ha-djZ"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" misplaced="YES" id="fV9-as-wUd" userLabel="Row Cell">
-                                                            <rect key="frame" x="1" y="39" width="215" height="40"/>
+                                                        <tableCellView identifier="DataCell" id="fV9-as-wUd" userLabel="Row Cell">
+                                                            <rect key="frame" x="1" y="20" width="215" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Miu-a9-CtS">
@@ -1851,7 +1866,7 @@
                                                                     </connections>
                                                                 </imageView>
                                                                 <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZD9-OI-SOH">
-                                                                    <rect key="frame" x="177" y="11" width="35" height="17"/>
+                                                                    <rect key="frame" x="177" y="10" width="35" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="rTi-MF-1wS"/>
                                                                     </constraints>
@@ -1870,11 +1885,9 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="1bC-aN-7EY" secondAttribute="bottom" constant="2" id="3TV-ZE-hJx"/>
-                                                                <constraint firstItem="Miu-a9-CtS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fV9-as-wUd" secondAttribute="top" constant="5" id="3gw-o9-rd4"/>
                                                                 <constraint firstItem="Miu-a9-CtS" firstAttribute="centerY" secondItem="fV9-as-wUd" secondAttribute="centerY" id="GaJ-od-LS2"/>
                                                                 <constraint firstItem="ZD9-OI-SOH" firstAttribute="centerY" secondItem="fV9-as-wUd" secondAttribute="centerY" id="ILi-7n-YTq"/>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="leading" secondItem="fV9-as-wUd" secondAttribute="leading" constant="5" id="IS0-5U-Gts"/>
-                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Miu-a9-CtS" secondAttribute="bottom" constant="5" id="Qph-HR-ukA"/>
                                                                 <constraint firstItem="1bC-aN-7EY" firstAttribute="top" secondItem="fV9-as-wUd" secondAttribute="top" constant="2" id="Ucc-hV-6Os"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ZD9-OI-SOH" secondAttribute="trailing" constant="3" id="VBt-Jj-dhu"/>
                                                                 <constraint firstItem="Miu-a9-CtS" firstAttribute="centerX" secondItem="fV9-as-wUd" secondAttribute="centerX" id="w9z-T4-bkJ"/>
@@ -1960,13 +1973,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="477" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="75" horizontalPageScroll="10" verticalLineScroll="75" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Y-YC-omn">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="86" horizontalPageScroll="10" verticalLineScroll="86" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Y-YC-omn">
                                 <rect key="frame" x="0.0" y="0.0" width="477" height="300"/>
                                 <clipView key="contentView" id="kcr-h1-wwU">
                                     <rect key="frame" x="1" y="1" width="475" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="73" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="L23-PG-fdc" id="uZg-Il-enF" userLabel="Themes table">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="84" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" autoresizesOutlineColumn="YES" outlineTableColumn="L23-PG-fdc" id="uZg-Il-enF" userLabel="Themes table">
                                             <rect key="frame" x="0.0" y="0.0" width="475" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1987,8 +2000,8 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="HeaderCell" misplaced="YES" id="BtM-ce-6Ke">
-                                                            <rect key="frame" x="1" y="1" width="472" height="31"/>
+                                                        <tableCellView identifier="HeaderCell" id="BtM-ce-6Ke">
+                                                            <rect key="frame" x="1" y="1" width="472" height="26"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-l5-uTe">
@@ -2014,8 +2027,8 @@
                                                                 <outlet property="textField" destination="lMe-l5-uTe" id="SzO-bV-Oda"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" misplaced="YES" id="na0-GV-zwc">
-                                                            <rect key="frame" x="1" y="34" width="472" height="73"/>
+                                                        <tableCellView identifier="DataCell" id="na0-GV-zwc">
+                                                            <rect key="frame" x="1" y="29" width="472" height="84"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ehX-Tv-S0B">

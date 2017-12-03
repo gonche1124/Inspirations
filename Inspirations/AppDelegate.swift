@@ -131,7 +131,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
-    func windowWillReturnUndoManager(window: NSWindow) -> UndoManager? {
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
         // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
         return managedObjectContext.undoManager
     }

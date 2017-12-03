@@ -23,6 +23,9 @@ class BigViewController: NSViewController {
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet var arrayController: NSArrayController!
+    
+
+    
 }
 
 //MARK: - Extensions
