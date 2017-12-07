@@ -48,6 +48,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     
     
     //Pushed the Done Button
+    //REVIEW TO MAKE SURE IT WOTKS
     @IBAction func pushDoneButton(_ sender: Any) {
         
         //Get data
@@ -63,7 +64,8 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
        
 
         //Create NSManagedObject
-        let authorToAdd = ImEx.findOrCreateEntity(key: "name", value: authorT, entity: "Author", moc: managedContext) as! Author
+        let authorToAdd = ImEx.createNSManagedObject(fromDict:["name": authorT, "className": "Author"]) as! Author
+        //let authorToAdd = ImEx.findOrCreateEntity(key: "name", value: authorT, entityString: "Author", moc2: managedContext) as! Author
         authorToAdd.name = authorT
 
         //let quoteToAdd2 = ImEx.findOrCreateEntity(key: "quote", value: <#T##Any#>, entity: <#T##String#>, moc: <#T##NSManagedObjectContext#>)
@@ -80,7 +82,8 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         }
         
         //Create Topic
-        let themeToAdd=ImEx.findOrCreateEntity(key: "topic", value: themeT, entity: "Theme", moc: managedContext) as! Theme
+        let themeToAdd = ImEx.createNSManagedObject(fromDict: ["className":"Theme", "topic": themeT]) as! Theme
+        //let themeToAdd=ImEx.findOrCreateEntity(key: "topic", value: themeT, entityString: "Theme", moc2: managedContext) as! Theme
         //let themeToAdd = Theme(context: managedContext)
         //themeToAdd.topic = themeT
         //quoteToAdd.addToIsAbout(themeToAdd)

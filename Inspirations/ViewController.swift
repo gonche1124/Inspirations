@@ -13,7 +13,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        //To erase
+        //testing()
         
         // Do any additional setup after loading the view.
         printCurrentData()
@@ -48,6 +49,28 @@ class ViewController: NSViewController {
     //TO erase
     override func viewDidAppear() {
         super.viewDidAppear()
+    }
+    
+    func testing(){
+        //Quote
+        let frQute = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
+        frQute.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", "quote", "aa11")
+        let thisQuote = try! managedContext.fetch(frQute)
+        
+        //Playlist
+        let frQPL = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
+        frQPL.predicate = NSPredicate(format: "%K == %@", "pName", "A666")
+        let thisPlaylist = try! managedContext.fetch(frQPL)
+        
+        //Print
+        print(thisQuote.first)
+        
+        //Add Playlist to Quote & Save.
+        (thisQuote.first as! Quote).addToInPlaylist(thisPlaylist.first as! Playlist)
+        print(thisQuote.first)
+        try! managedContext.save()
+        
+        print("finished")
     }
     
     
@@ -104,20 +127,20 @@ class ViewController: NSViewController {
         
         //For debugging only
         //let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
-        let test = URL.init(string: "file:///Users/Gonche/Desktop/jsonTest.txt")
+        let test = URL.init(string: "file:///Users/Gonche/Desktop/newmethod2.txt")
         importExport().importFromJSONV2(pathToFile: test!)
         
         
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            print (dialog.url!)
-            importExport().importFromJSONV2(pathToFile: dialog.url!)
-            dismiss(self)
-            //importFromJSON(pathToFile: dialog.url!)
-        }
-        else{
-            print("Cancel")
-            return
-        }
+//        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+//            print (dialog.url!)
+//            importExport().importFromJSONV2(pathToFile: dialog.url!)
+//            dismiss(self)
+//            //importFromJSON(pathToFile: dialog.url!)
+//        }
+//        else{
+//            print("Cancel")
+//            return
+//        }
         
     }
     

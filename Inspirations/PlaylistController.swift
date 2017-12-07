@@ -51,11 +51,23 @@ class PlaylistController: NSViewController {
     //Add item.
     @IBAction func addItem(_ sender: Any) {
     
-        //let myIndexPath = IndexPath(
-        //treeArrayController.selectedNodes.first.add
-        treeArrayController.addChild(sender)
-        //treeArrayController.add(sender)
-        playlistOutlineView.reloadData()
+        //Ask for Name:
+        //TODO: Implement ask for playlistName
+        
+//        //Gets the big Playlist
+        let frequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
+        frequest.predicate = NSPredicate(format: "pName == %@", "Lists")
+        frequest.fetchLimit=1
+        let bigPlaylist = try! moc.fetch(frequest) as! [Playlist]
+
+        //Sets the new one
+        let newPlay = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: moc) as! Playlist
+        newPlay.pName = "PlaylistYYY"
+        newPlay.isInPlaylist = bigPlaylist.first
+        
+        //Save
+        try! self.moc.save()
+
     }
     
     

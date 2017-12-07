@@ -76,6 +76,7 @@
 		8AB7CC311FB2518E0080ED4F /* CollectionQuoteItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionQuoteItem.xib; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.4.xcdatamodel; sourceTree = "<group>"; };
 		8AED20E61E95351D00F4E03A /* PlainTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainTable.swift; sourceTree = "<group>"; };
 		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -645,13 +646,14 @@
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */,
 				8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */,
 				8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */,
 				8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */,
 				8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */,
 				8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */,
 			);
-			currentVersion = 8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */;
+			currentVersion = 8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */;
 			path = Inspirations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
