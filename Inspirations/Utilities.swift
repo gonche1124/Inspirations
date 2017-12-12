@@ -77,10 +77,40 @@ extension NSTreeNode {
     }
 }
 
-//MARK: - isLeaf for NSManagedObject
+//MARK: - NSManagedObject extensions
 extension NSManagedObject {
     
-    var isLeafQuote: Bool {get {return self.className == "Quote"}}
+    var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
+    
+    var sortingKey:String {get {
+        switch self.className {
+        case "Quote":
+            return (self as! Quote).quote!
+        case "Author":
+            return (self as! Author).name!
+        case "Theme":
+            return (self as! Theme).topic!
+        default:
+            return ""
+        }
+        }}
 
 }
+
+//MARK: - NSDialog
+extension NSAlert {
+    
+    static func showAlert(title: String?, message: String?, style: NSAlert.Style = .critical, withOk: Bool=true, andCancel:Bool=true) -> NSAlert {
+        let alert = NSAlert()
+        if let title = title {alert.messageText = title}
+        if let message = message {alert.informativeText = message}
+        if withOk {alert.addButton(withTitle: "Ok")}
+        if andCancel {alert.addButton(withTitle: "Cancel")}
+        alert.alertStyle = style
+
+        return alert
+    }
+}
+
+
 

@@ -96,11 +96,7 @@ class importExport: NSObject {
     
     //Suport the JSON parser.
     func nullToNil(value : Any?) -> Any? {
-        if value is NSNull {
-            return nil
-        } else {
-            return value
-        }
+        return (value is NSNull) ? nil : value
     }
     
     func createNSManagedObject(fromDict: Dictionary<String,Any>, includingRelations: Bool=false)->NSManagedObject{
@@ -130,63 +126,6 @@ class importExport: NSObject {
         return newEntity
     }
     
-
-    //FIn test
-    
-    
-    //Looks for an object, creates one if there is not one there.
-//    func findOrCreateEntity(key: String, value: Any, entityString: String, moc2: NSManagedObjectContext)->NSManagedObject{
-//
-//        //Testing to move up with only 1 key of uniqueness
-//        guard let uniqKey = moc.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityString]?.uniquenessConstraints.first?.first as? String else {
-//            return NSEntityDescription.insertNewObject(forEntityName: entityString, into: moc2)
-//        }
-////        guard let uniqKey = Quote.entity().uniquenessConstraints.first?.first as? String else {
-////            return NSEntityDescription.insertNewObject(forEntityName: entityString, into: moc2)
-////        }
-//        let fRequ = NSFetchRequest<NSFetchRequestResult>(entityName: entityString)
-//        let thisP = NSPredicate(format: "%K == %@", uniqKey, value as! String)
-//        fRequ.predicate = thisP
-//
-//
-//
-//        //Configire search
-//        let fetchReq=NSFetchRequest<NSFetchRequestResult>(entityName: entityString)
-//        let fetchPredicate = NSPredicate(format: "%K == %@", key, value as! String)
-//        fetchReq.predicate=fetchPredicate
-//
-//        //Execute fetch
-//        let managedObject = try! moc2.fetch(fetchReq) as! [NSManagedObject]
-//        if managedObject.count > 0 {
-//            return managedObject.first!
-//        }
-//        else {
-//            return NSEntityDescription.insertNewObject(forEntityName: entityString, into: moc2)
-//        }
-//    }
-    
-    //Creates a managed Object for the specified class, with the attributes as
-    //dictionary and in the moc passed as parameter
-    
-//    func createManagedObject(attributes:Dictionary<String, Any>, Entity: String, inManagedObjectContext: NSManagedObjectContext)->NSManagedObject{
-//
-//        var newObject: NSManagedObject
-//        switch Entity {
-//            case "fromAuthor":
-//                newObject=findOrCreateEntity(key: "name", value: ((attributes["name"]!) as AnyObject).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), entityString: "Author",  moc2:moc)
-//            case "isAbout":
-//                newObject=findOrCreateEntity(key: "topic", value: attributes["topic"]!, entityString: "Theme", moc2:moc)
-//            case "tags":
-//                newObject=findOrCreateEntity(key: "tag", value: attributes["tag"]!, entityString: "Tag", moc2:moc)
-//            default:
-//                newObject=findOrCreateEntity(key: "quote", value: attributes["quote"]!, entityString: "Quote", moc2:moc)
-//        }
-//
-//        newObject.populateFromDictionary(attributesDictionary: attributes)
-//        //try!moc.save() //Added this line after error on run due to changing removed object
-//        return newObject
-//    }
-    
     //Import data from a JSON file
     func importFromJSONV2(pathToFile: URL ){
         
@@ -196,14 +135,10 @@ class importExport: NSObject {
         
         //COuld convert to higher order??
         for jsonItem in jsonArray {
-            let currItem = jsonItem as! Dictionary<String, Any>
+            //let currItem = jsonItem as! Dictionary<String, Any>
             
-            _ = createNSManagedObject(fromDict: currItem, includingRelations: true)
+            _ = createNSManagedObject(fromDict: jsonItem, includingRelations: true)
  
-//            _ = createManagedObject(attributes: currItem,
-//                                                   Entity: "Quote",
-//                                                   inManagedObjectContext: moc) as! Quote
-//
             do{
                 try moc.save()
             }
@@ -220,15 +155,15 @@ class importExport: NSObject {
 //Extension to NSMAnagedObject to enable conversion into a NSDictionary
 extension NSManagedObject{
     
-    func addObject(value: NSManagedObject, forKey key: String) {
-        let items = self.mutableSetValue(forKey: key)
-        items.add(value)
-    }
-    
-    func removeObject(value: NSManagedObject, forKey key: String) {
-        let items = self.mutableSetValue(forKey: key)
-        items.remove(value)
-    }
+//    func addObject(value: NSManagedObject, forKey key: String) {
+//        let items = self.mutableSetValue(forKey: key)
+//        items.add(value)
+//    }
+//
+//    func removeObject(value: NSManagedObject, forKey key: String) {
+//        let items = self.mutableSetValue(forKey: key)
+//        items.remove(value)
+//    }
     
     
     //Only does one level with recursivity. TO DO: Figure out how to remove that constraint.
@@ -255,44 +190,6 @@ extension NSManagedObject{
         entityDict["className"] = self.entity.name
         return entityDict
     }
-    
-//    //Populates the attributes from a dictionary
-//    func populateFromDictionary(attributesDictionary: Dictionary<String, Any>){
-//        let moc2 = self.managedObjectContext
-//
-//        for case let key:String in attributesDictionary.keys {
-//            let value = attributesDictionary[key] as! NSObject
-//            //Check on-to-one relationship
-//            if value is Dictionary<String, Any> {
-//                let IE = importExport()
-//                let relationObject = IE.createManagedObject(attributes: value as! Dictionary<String, Any>,
-//                                                                Entity: key,
-//                                                inManagedObjectContext: moc2!) as NSManagedObject
-//
-//                self.setValue(relationObject, forKeyPath: key)
-//            }
-//
-//            //Check one-to-many relationship
-//            else if value is NSArray {
-//                let objectSet = NSSet()
-//                let IE = importExport()
-//                for arrayItem in value as! NSArray {
-//                    let setItem = IE.createManagedObject(attributes: arrayItem as! Dictionary<String, Any>,
-//                                                         Entity: key, inManagedObjectContext: moc2!) as NSManagedObject
-//                    objectSet.adding(setItem)
-//                }
-//                self.setValue(objectSet, forKeyPath: key)
-//            }
-//
-//            //Check if it is an attribute
-//            else{
-//                if !(value is NSNull) {
-//                    self.setValue(value, forKey: key)
-//                }
-//            }
-//        }
-//    }
-
 }
 
 

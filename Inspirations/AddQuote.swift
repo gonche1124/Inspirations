@@ -9,30 +9,28 @@
 import Cocoa
 
 
-class AddQuote: NSViewController, NSTextFieldDelegate {
+class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelegate {
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do view setup here.
-        //doneButton.isEnabled=false
-        quoteField.delegate=self
+//        doneButton.isEnabled=false
+//        quoteField.delegate=self
+//        authorField.delegate=self
+//        themeField.delegate=self
         
         //Add target methods.
         tagsToken.delegate=self
-        print(tagController.arrangedObjects)
         
         
+        //Testing Observers
+        //author2.addObserver(self, forKeyPath: "testing", options: [.old, .new], context: nil)
         
-        //test
-//        let request = NSFetchRequest<Author>(entityName: "Author")
-//        request.predicate = NSPredicate(format: "hasQuotes.@count == 0 ")
-//        let toDelete = try! moc.fetch(request)
-//        print (toDelete)
-//        moc.delete(toDelete.first!)
-//        try! moc.save()
+        //addObserver(self, forKeyPath: #keyPath(self.author2), options: [.old, .new], context: nil)
         
     }
+    
     
     //Outlets
     @IBOutlet weak var quoteField: NSTextField!
@@ -46,6 +44,14 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     @objc dynamic lazy var ImEx = importExport()
     
+    //called everytime an objects end editing.
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        //Validate button.
+        let bool1 = quoteField.stringValue.count > 2
+        let bool2 = authorField.stringValue.count > 2
+        let bool3 = themeField.stringValue.count > 2
+        doneButton.isEnabled = (bool1 && bool2 && bool3) ? true:false
+    }
     
     //Pushed the Done Button
     //REVIEW TO MAKE SURE IT WOTKS
@@ -53,23 +59,18 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         
         //Get data
         let quoteT = self.quoteField.stringValue
-        let themeT = self.themeField.stringValue //self.themeField.objectValue as? String
+        let themeT = self.themeField.stringValue
         let isFav = self.favoriteQuote.state
-        let authorT = self.authorField.stringValue//self.authorField.objectValue as? String
+        let authorT = self.authorField.stringValue
         let tags = self.tagsToken.objectValue as? NSArray
-        
-        //Get context
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
        
 
         //Create NSManagedObject
         let authorToAdd = ImEx.createNSManagedObject(fromDict:["name": authorT, "className": "Author"]) as! Author
-        //let authorToAdd = ImEx.findOrCreateEntity(key: "name", value: authorT, entityString: "Author", moc2: managedContext) as! Author
         authorToAdd.name = authorT
 
         //let quoteToAdd2 = ImEx.findOrCreateEntity(key: "quote", value: <#T##Any#>, entity: <#T##String#>, moc: <#T##NSManagedObjectContext#>)
-        let quoteToAdd = Quote(context: managedContext)
+        let quoteToAdd = Quote(context: moc)
         quoteToAdd.quote=quoteT
         quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
         quoteToAdd.fromAuthor = authorToAdd
@@ -83,15 +84,11 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
         
         //Create Topic
         let themeToAdd = ImEx.createNSManagedObject(fromDict: ["className":"Theme", "topic": themeT]) as! Theme
-        //let themeToAdd=ImEx.findOrCreateEntity(key: "topic", value: themeT, entityString: "Theme", moc2: managedContext) as! Theme
-        //let themeToAdd = Theme(context: managedContext)
-        //themeToAdd.topic = themeT
-        //quoteToAdd.addToIsAbout(themeToAdd)
         quoteToAdd.isAbout = themeToAdd
         
         //save
         do {
-            try managedContext.save()
+            try moc.save()
             dismiss(self)
         }catch{
             print("Unable to save the data")
@@ -103,7 +100,7 @@ class AddQuote: NSViewController, NSTextFieldDelegate {
 extension AddQuote: NSTokenFieldDelegate{
     
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
-        return ["Happy"]
+        return ["Happy", "Test", "Work", "Life"]
         
         //return tagController.arrangedObjects as! NSArray as! [Any]
     }

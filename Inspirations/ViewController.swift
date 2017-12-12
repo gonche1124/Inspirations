@@ -27,7 +27,7 @@ class ViewController: NSViewController {
         VCBigView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
         VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
         VCCollectionView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
-        VCTag = NSStoryboard(name: NSStoryboard.Name(rawValue:"Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
+        VCTheme = NSStoryboard(name: NSStoryboard.Name(rawValue:"Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
         
         
         
@@ -37,6 +37,7 @@ class ViewController: NSViewController {
         self.addChildViewController(VCBigView)
         self.addChildViewController(VCGroupedMixTable)
         self.addChildViewController(VCCollectionView)
+        self.addChildViewController(VCTheme)
         
         
         //Set default view
@@ -47,31 +48,11 @@ class ViewController: NSViewController {
     }
     
     //TO erase
-    override func viewDidAppear() {
-        super.viewDidAppear()
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        print("test")
+        print (self.view.window?.title)
     }
     
-    func testing(){
-        //Quote
-        let frQute = NSFetchRequest<NSFetchRequestResult>(entityName: "Quote")
-        frQute.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", "quote", "aa11")
-        let thisQuote = try! managedContext.fetch(frQute)
-        
-        //Playlist
-        let frQPL = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
-        frQPL.predicate = NSPredicate(format: "%K == %@", "pName", "A666")
-        let thisPlaylist = try! managedContext.fetch(frQPL)
-        
-        //Print
-        print(thisQuote.first)
-        
-        //Add Playlist to Quote & Save.
-        (thisQuote.first as! Quote).addToInPlaylist(thisPlaylist.first as! Playlist)
-        print(thisQuote.first)
-        try! managedContext.save()
-        
-        print("finished")
-    }
     
     
     //Selects the view controller to show depending on the button selected.
@@ -98,8 +79,11 @@ class ViewController: NSViewController {
             VCGroupedMixTable.authorsTable.expandItem(nil, expandChildren: true)
             self.containerView.addSubview(VCGroupedMixTable.view)
         case 4:
-            VCTag.view.frame = self.containerView.bounds
-            self.containerView.addSubview(VCTag.view)
+            VCTheme.view.frame = self.containerView.bounds
+            VCTheme.tagsOultineView.reloadData()
+            VCTheme.tagsOultineView.expandItem(nil, expandChildren: true)
+            self.containerView.addSubview(VCTheme.view)
+            
             
             //VCGroupedMixTable.view.frame = self.containerView.bounds
             
@@ -162,7 +146,7 @@ class ViewController: NSViewController {
     var VCBigView : BigViewController!
     var VCGroupedMixTable : AuthorsController!
     var VCCollectionView : CollectionController!
-    var VCTag : ThemesController!
+    var VCTheme : ThemesController!
     
     //Outlets
     @IBOutlet weak var containerView: NSView!

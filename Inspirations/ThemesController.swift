@@ -26,10 +26,14 @@ class ThemesController: NSViewController {
         // Do view setup here.
         
         //Table SetUp
-        tagsOultineView.expandItem(nil, expandChildren: true)
-        
-        //Set up search field.
-        (self.parent as? ViewController)?.searchQuote2.delegate = self
+        themeController.sortDescriptors = [NSSortDescriptor(key:"sortingKey", ascending:true)]
+
+    }
+    
+    //Neccesary to voeride in order for the search to work.
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        (self.parent as! ViewController).searchQuote2.delegate=self
     }
 }
 
@@ -41,13 +45,6 @@ extension ThemesController:NSOutlineViewDataSource{
         return (item as! NSTreeNode).isTheme()
     }
     
-    //Drag -n- Drop
-//    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
-//        //Set data to be pasted on pasteboard
-//        let selectedURI = items.map({(($0 as! NSTreeNode).representedObject as! Quote).objectID.uriRepresentation()})
-//        pasteboard.setData(NSKeyedArchiver.archivedData(withRootObject:selectedURI), forType: NSPasteboard.PasteboardType.fileContents)
-//        return true
-//    }
 
     // WWDC 2016 method.
     func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
@@ -56,14 +53,6 @@ extension ThemesController:NSOutlineViewDataSource{
         thisItem.setString(sQuote.objectID.uriRepresentation().absoluteString, forType: .string)
         return thisItem
     }
-//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-//        //let thisQuote2 = tableView.tableColumns[0].obj
-//        let thisQuote = (quotesArrayController.arrangedObjects as! NSArray).object(at: row) as? Quote
-//        let thisItem = NSPasteboardItem()
-//        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
-//
-//        return thisItem
-//    }
 }
 
 //MARK: NSOutlineViewDelegate
@@ -73,9 +62,7 @@ extension ThemesController:NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
 
         let typeOfCell: String = (!(item as! NSTreeNode).isTheme()) ? "DataCell": "HeaderCell"
-        let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
-
-        return currView
+        return outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
     }
     
     //Identify group rows to float.
@@ -91,8 +78,8 @@ extension ThemesController: NSSearchFieldDelegate{
     //Called when the users finishes searching.
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         themeController.fetchPredicate = nil
-        tagsOultineView.reloadData()
-        tagsOultineView.expandItem(nil, expandChildren: true)
+        //tagsOultineView.reloadData()
+        //tagsOultineView.expandItem(nil, expandChildren: true)
     }
     
     //Calls everytime a user inputs a character.
@@ -104,8 +91,8 @@ extension ThemesController: NSSearchFieldDelegate{
         }
         let tempPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
         themeController.fetchPredicate = tempPredicate
-        tagsOultineView.reloadData()
-        tagsOultineView.expandItem(nil, expandChildren: true)
+        //tagsOultineView.reloadData()
+        //tagsOultineView.expandItem(nil, expandChildren: true)
         //(self.parent as? ViewController)?.informationLabel.stringValue = "Showing \(self.frcAuthors.fetchedObjects!.count) of 33 records"
         
         //Check out predicateWithSubstitutionVariables method to simplify code.
