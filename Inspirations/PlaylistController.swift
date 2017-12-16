@@ -18,9 +18,14 @@ class PlaylistController: NSViewController {
         //Sort descriptors.
         treeArrayController.sortDescriptors = [NSSortDescriptor(key: "pName", ascending: true)]
         
-        //Outlineview NOT WORKING.
-        playlistOutlineView.expandItem(nil, expandChildren: true)
+        //Outlineview IMPROVE
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.playlistOutlineView.expandItem(nil, expandChildren: true)
+        }
     }
+    
+   
     
     //Variables
     @objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
@@ -79,7 +84,8 @@ extension PlaylistController: NSOutlineViewDelegate{
         //print (sPlaylist)
         //if !(sPlaylist?.isLeaf )! { return}
         if ((sNode?.isLeaf)!){return}
-        let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",(sPlaylist.pName!))
+        print(sPlaylist)
+        //let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",(sPlaylist.pName!))
         //(self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
         // TODO: change for current controller.
 
@@ -114,7 +120,8 @@ extension PlaylistController: NSOutlineViewDataSource{
         //Insert objects.
         let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
         destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesS))
-        try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
+        try! moc.save()
+        //try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
         self.playlistOutlineView.reloadData()
 
         return true

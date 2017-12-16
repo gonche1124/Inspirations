@@ -44,17 +44,12 @@ class ViewController: NSViewController {
         VCBigView.view.frame = self.containerView.bounds
         self.containerView.addSubview(VCBigView.view)
         //TODO: get current controller. unify searchfield delegate.
+        
+      
+        
+    }
+    
 
-    }
-    
-    //TO erase
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        print("test")
-        print (self.view.window?.title)
-    }
-    
-    
-    
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
         //Remove all views.
