@@ -24,7 +24,10 @@ class BigViewController: NSViewController {
     
     @IBOutlet var arrayController: NSArrayController!
     
-
+    override func swipe(with event: NSEvent) {
+        (event.deltaX < 0 ) ? arrayController.selectNext(nil):arrayController.selectPrevious(nil)
+    }
+    
     
 }
 
