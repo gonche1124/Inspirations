@@ -1100,6 +1100,7 @@
                                             <connections>
                                                 <binding destination="Paa-0K-gYi" name="content" keyPath="arrangedObjects" id="QYf-iF-jcv"/>
                                                 <binding destination="Paa-0K-gYi" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="QYf-iF-jcv" id="GMV-yy-SHp"/>
+                                                <binding destination="Paa-0K-gYi" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="GMV-yy-SHp" id="1Bt-3p-NQ2"/>
                                                 <outlet property="dataSource" destination="eP2-EX-TRi" id="T1c-k8-FTg"/>
                                                 <outlet property="delegate" destination="eP2-EX-TRi" id="mBI-QT-2Cp"/>
                                             </connections>

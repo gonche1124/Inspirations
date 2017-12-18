@@ -105,16 +105,15 @@ class ViewController: NSViewController {
         dialog.allowedFileTypes = ["json", "txt"]
         
         //For debugging only
-        //let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
-        let test = URL.init(string: "file:///Users/Gonche/Desktop/newmethod2.txt")
+        ////let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
+        let test = URL.init(string: "file:///Users/Gonche/Desktop/exportQuotesProverbia.txt")
+        //let test = URL.init(string: "file:///Users/Gonche/Desktop/export3v5.txt")
         importExport().importFromJSONV2(pathToFile: test!)
         
         
 //        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-//            print (dialog.url!)
 //            importExport().importFromJSONV2(pathToFile: dialog.url!)
 //            dismiss(self)
-//            //importFromJSON(pathToFile: dialog.url!)
 //        }
 //        else{
 //            print("Cancel")

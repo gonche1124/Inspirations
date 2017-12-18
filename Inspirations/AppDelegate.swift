@@ -24,7 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
         
         //Sets color of main Window
-        NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
+        //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
+        NSApp.mainWindow?.backgroundColor=NSColor.white
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

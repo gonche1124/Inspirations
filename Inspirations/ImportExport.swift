@@ -116,10 +116,21 @@ class importExport: NSObject {
         
         //Fill To Many relationships
         for currKey in newEntity.entity.toManyRelationshipKeys {
+            guard let arrayToAdd = (fromDict[currKey] as? NSArray) else {continue}
+            let newItems = arrayToAdd.map({createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
             let allItems = newEntity.mutableSetValue(forKey: currKey)
-            let newItems = (fromDict[currKey] as! NSArray).map({createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
             allItems.addObjects(from: newItems)
             newEntity.setValue(allItems, forKey: currKey)
+//            do{
+//                let newItems = try (fromDict[currKey] as! NSArray).map({createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
+//                let allItems = newEntity.mutableSetValue(forKey: currKey)
+//                allItems.addObjects(from: newItems)
+//                newEntity.setValue(allItems, forKey: currKey)
+//            }
+//            catch {
+//                print("No objects found for the attribute \(currKey)")
+//            }
+           
         }
         
         try! moc.save()
