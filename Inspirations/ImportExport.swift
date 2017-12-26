@@ -14,7 +14,10 @@ import Cocoa
 
 class importExport: NSObject {
     
+    //Variables
     fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    fileprivate lazy var bMoc = (NSApp.delegate as! AppDelegate).privateQueueContext
+    var progressInstance: Progress?
 
     
     // MARK: - Export
@@ -70,17 +73,15 @@ class importExport: NSObject {
     
     // MARK: - Import
     
-    //MARK: - Test
-    
     //Test for simplification
     //Looks for object, if does not find one it creates it.
     func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>)->NSManagedObject{
         
         //Get uniqueness key
-        let currEntDes = moc.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+        let currEntDes = bMoc.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         //The case where there is no unique key will not happen, this can be erased if easier way to flaten and access first object is found.
         guard let uniqKey = currEntDes?.uniquenessConstraints[0].first as? String else {
-            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc)
+            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: bMoc)
         }
         
         //Create fetchRequest
@@ -88,94 +89,83 @@ class importExport: NSObject {
         fRequest.predicate = NSPredicate(format: "%K == %@", uniqKey, attributesDict[uniqKey] as! String)
         
         //Fetch
-        let allObjects = try! moc.fetch(fRequest) as! [NSManagedObject]
-        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc)
+        let allObjects = try! bMoc.fetch(fRequest) as! [NSManagedObject]
+        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: bMoc)
 
     }
     
     
     //Suport the JSON parser.
+    /// Checks if the value is NULL or not.
+    ///
+    /// - Parameter value: vale to check if it is null.
+    /// - Returns: Original value or nil.
     func nullToNil(value : Any?) -> Any? {
         return (value is NSNull) ? nil : value
     }
     
     func createNSManagedObject(fromDict: Dictionary<String,Any>, includingRelations: Bool=false)->NSManagedObject{
-        //Fetch or create new entity.
-        let entityName = fromDict["className"] as! String
-        let newEntity = findOrCreateObject(entityName: entityName, attributesDict: fromDict)
         
-        //Populate attributes is working after nullToNil
-        _=newEntity.entity.attributeKeys.map({newEntity.setValue(nullToNil(value:fromDict[$0]), forKey: $0)})
-        
-        //Check if it needs to fill relationships.
-         if !includingRelations {return newEntity}
-        
-        //Fill 1 to 1 relationships
-        let oneToOne = newEntity.entity.toOneRelationshipKeys
-        _=oneToOne.map({newEntity.setValue(createNSManagedObject(fromDict: fromDict[$0] as! Dictionary<String, Any>), forKey: $0)})
-        
-        //Fill To Many relationships
-        for currKey in newEntity.entity.toManyRelationshipKeys {
-            guard let arrayToAdd = (fromDict[currKey] as? NSArray) else {continue}
-            let newItems = arrayToAdd.map({createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
-            let allItems = newEntity.mutableSetValue(forKey: currKey)
-            allItems.addObjects(from: newItems)
-            newEntity.setValue(allItems, forKey: currKey)
-//            do{
-//                let newItems = try (fromDict[currKey] as! NSArray).map({createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
-//                let allItems = newEntity.mutableSetValue(forKey: currKey)
-//                allItems.addObjects(from: newItems)
-//                newEntity.setValue(allItems, forKey: currKey)
-//            }
-//            catch {
-//                print("No objects found for the attribute \(currKey)")
-//            }
-           
-        }
-        
-        try! moc.save()
+        //DispatchQueue.global(qos: .background).async{
+            //Fetch or create new entity.
+            let entityName = fromDict["className"] as! String
+            let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict)
+            
+            //Populate attributes is working after nullToNil
+            _=newEntity.entity.attributeKeys.map({newEntity.setValue(self.nullToNil(value:fromDict[$0]), forKey: $0)})
+            
+            //Check if it needs to fill relationships.
+            //if !includingRelations {return newEntity}
+            if includingRelations {
+                //Fill 1 to 1 relationships
+                let oneToOne = newEntity.entity.toOneRelationshipKeys
+                _=oneToOne.map({newEntity.setValue(self.createNSManagedObject(fromDict: fromDict[$0] as! Dictionary<String, Any>), forKey: $0)})
+                
+                //Fill To Many relationships
+                for currKey in newEntity.entity.toManyRelationshipKeys {
+                    guard let arrayToAdd = (fromDict[currKey] as? NSArray) else {continue}
+                    let newItems = arrayToAdd.map({self.createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
+                    let allItems = newEntity.mutableSetValue(forKey: currKey)
+                    allItems.addObjects(from: newItems)
+                    newEntity.setValue(allItems, forKey: currKey)
+                }
+            }
+            try! self.bMoc.save()
+        //}
+ 
         return newEntity
+      
     }
     
-    //Import data from a JSON file
-    func importFromJSONV2(pathToFile: URL ){
-        
-        //Read into Array
+    //Parse JSON File
+    func parseJSONFile(pathToFile: URL)->[Dictionary<String, Any>]{
         let jsonData = NSData(contentsOf: pathToFile)
         let jsonArray = try! JSONSerialization.jsonObject(with: (jsonData)! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! [Dictionary<String, Any>]
         
-        //COuld convert to higher order??
-        for jsonItem in jsonArray {
-            //let currItem = jsonItem as! Dictionary<String, Any>
-            
-            _ = createNSManagedObject(fromDict: jsonItem, includingRelations: true)
- 
-            do{
-                try moc.save()
-            }
-            catch{
-                print(error)
-            }
-            
-        }
+        self.progressInstance = Progress(totalUnitCount: Int64(jsonArray.count))
+        return jsonArray
+        
     }
     
+    
+    //Import data from a JSON file
+    func importFromJSONV2(array: [Dictionary<String, Any>]){
+        
+        DispatchQueue.global(qos: .background).async {
+            for (n,jsonItem) in array.enumerated() {
+                //print("procesed item \(n)")
+                //print ("\(jsonItem["quote"])")
+                _ = self.createNSManagedObject(fromDict: jsonItem, includingRelations: true)
+                self.progressInstance?.completedUnitCount = Int64(n)
+                try! self.bMoc.save()
+            }
+        }
+    }
 }
 
  //MARK: -  Extensions
 //Extension to NSMAnagedObject to enable conversion into a NSDictionary
 extension NSManagedObject{
-    
-//    func addObject(value: NSManagedObject, forKey key: String) {
-//        let items = self.mutableSetValue(forKey: key)
-//        items.add(value)
-//    }
-//
-//    func removeObject(value: NSManagedObject, forKey key: String) {
-//        let items = self.mutableSetValue(forKey: key)
-//        items.remove(value)
-//    }
-    
     
     //Only does one level with recursivity. TO DO: Figure out how to remove that constraint.
     //TODO: Include boolean to include relationships.

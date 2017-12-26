@@ -117,6 +117,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         managedObjectContext.mergePolicy=NSMergePolicy.mergeByPropertyStoreTrump //Custom Line of code to avoid duplicates.
         return managedObjectContext
     }()
+    
+    lazy var privateQueueContext: NSManagedObjectContext = {
+        //Returns a private managed object context used for multithreading.
+        let coordinator = self.persistentStoreCoordinator
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = coordinator
+        //managedObjectContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+        return managedObjectContext
+    }()
 
     // MARK: - Core Data Saving and Undo support
 

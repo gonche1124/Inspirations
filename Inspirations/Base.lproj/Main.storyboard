@@ -674,7 +674,7 @@
                     <window key="window" title="Inspiration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="453" y="313" width="852" height="421"/>
+                        <rect key="contentRect" x="453" y="313" width="1032" height="421"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="7217210B-F480-49AC-991A-6270639F3CDA" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="bnN-B6-VgV">
                             <allowedToolbarItems>
@@ -786,7 +786,7 @@
                                 <toolbarItem implicitItemIdentifier="23787DCD-0CB8-4D11-9CA4-5769B65919CC" label="Import" paletteLabel="Import" image="Artboard2" id="UGQ-PP-9WM" userLabel="Import Button">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="45" height="25"/>
-                                    <size key="maxSize" width="90" height="25"/>
+                                    <size key="maxSize" width="50" height="25"/>
                                     <button key="view" verticalHuggingPriority="750" id="5Xd-iS-pdS">
                                         <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -794,10 +794,10 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <connections>
-                                            <action selector="importData:" target="Oky-zY-oP4" id="371-Dq-fHe"/>
-                                        </connections>
                                     </button>
+                                    <connections>
+                                        <segue destination="EKd-P7-27A" kind="sheet" id="xlA-65-obT"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="2F0836D7-4FA8-4EFF-A0F3-406DB0BD8E10" label="Add" paletteLabel="Add Quote" image="NSAddTemplate" id="8ho-vf-FpO" userLabel="Add Quote">
                                     <nil key="toolTip"/>
@@ -837,18 +837,18 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="259.5" y="325.5"/>
+            <point key="canvasLocation" x="75" y="300.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="804" height="470"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1058" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jh5-vK-4Gb">
-                                <rect key="frame" x="0.0" y="0.0" width="804" height="470"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1058" height="470"/>
                                 <subviews>
                                     <customView id="S7O-2j-qny" userLabel="Left Side View">
                                         <rect key="frame" x="0.0" y="0.0" width="195" height="470"/>
@@ -871,14 +871,14 @@
                                         </constraints>
                                     </customView>
                                     <customView id="4Qa-89-8NX" userLabel="Right Side View">
-                                        <rect key="frame" x="196" y="0.0" width="608" height="470"/>
+                                        <rect key="frame" x="196" y="0.0" width="862" height="470"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="yxm-Ha-QPy" userLabel="main display">
-                                                <rect key="frame" x="0.0" y="24" width="608" height="446"/>
+                                                <rect key="frame" x="0.0" y="24" width="862" height="446"/>
                                             </containerView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yvc-bW-KF0">
-                                                <rect key="frame" x="-2" y="0.0" width="612" height="24"/>
+                                                <rect key="frame" x="-2" y="0.0" width="866" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="NDG-PS-dCc"/>
                                                 </constraints>
@@ -920,7 +920,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="882"/>
+            <point key="canvasLocation" x="73" y="912"/>
         </scene>
         <!--Plain Table-->
         <scene sceneID="nli-i0-kpp">
@@ -1526,7 +1526,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1001" y="728.5"/>
+            <point key="canvasLocation" x="1012" y="-267"/>
         </scene>
         <!--Big View Controller-->
         <scene sceneID="alO-lg-sfH">
@@ -1794,6 +1794,103 @@
                 </arrayController>
             </objects>
             <point key="canvasLocation" x="979.5" y="210.5"/>
+        </scene>
+        <!--Import Controller-->
+        <scene sceneID="5IR-cq-mMB">
+            <objects>
+                <viewController id="EKd-P7-27A" customClass="ImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="roQ-i0-pEA">
+                        <rect key="frame" x="0.0" y="0.0" width="488" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rHX-Ws-VK1">
+                                <rect key="frame" x="18" y="72" width="76" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Path to File:" id="fuO-lm-x6x">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PAB-AI-KPz">
+                                <rect key="frame" x="20" y="49" width="359" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="tIc-sD-sOQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5mh-U3-qJg">
+                                <rect key="frame" x="387" y="50" width="81" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Choose File" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wDX-Rm-GCm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="chooseFile:" target="EKd-P7-27A" id="OL3-Br-5OU"/>
+                                </connections>
+                            </button>
+                            <progressIndicator hidden="YES" wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="yhn-tN-1dZ">
+                                <rect key="frame" x="20" y="19" width="294" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1g-Yf-foc">
+                                <rect key="frame" x="394" y="13" width="80" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dAf-O2-dkn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="importQuotes:" target="EKd-P7-27A" id="FHg-T4-Owu"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1O-6o-UfM">
+                                <rect key="frame" x="312" y="13" width="82" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pNU-jn-Xhx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="EKd-P7-27A" id="GU1-hm-iBO"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfr-C6-bw4">
+                                <rect key="frame" x="18" y="104" width="61" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Import" id="1e8-Sl-B0h">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjD-kK-dg1">
+                                <rect key="frame" x="18" y="12" width="298" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Importing" id="BUo-VK-7ax">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="importButton" destination="V1g-Yf-foc" id="8iO-Nh-eXA"/>
+                        <outlet property="pathTextField" destination="PAB-AI-KPz" id="iJ4-sh-525"/>
+                        <outlet property="statusLabel" destination="yjD-kK-dg1" id="Lz7-Bd-XT2"/>
+                        <outlet property="statusProgress" destination="yhn-tN-1dZ" id="Oj8-Km-gBj"/>
+                    </connections>
+                </viewController>
+                <customObject id="UC6-od-fJc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1036" y="501.5"/>
         </scene>
         <!--Authors Controller-->
         <scene sceneID="l3I-wK-UWm">

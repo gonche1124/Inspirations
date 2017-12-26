@@ -14,10 +14,10 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //To erase
-        //testing()
+        testCode()
         
         // Do any additional setup after loading the view.
-        printCurrentData()
+        //printCurrentData() //Uses lots of memory.
         //printPlaylistData()
         //addTempDefaultValues()
         
@@ -45,10 +45,23 @@ class ViewController: NSViewController {
         self.containerView.addSubview(VCBigView.view)
         //TODO: get current controller. unify searchfield delegate.
         
-      
-        
     }
     
+    //Erase afterwards
+    func testCode(){
+        let cMOC=(NSApp.delegate as! AppDelegate).managedObjectContext
+        let fetchR = NSFetchRequest<Theme>(entityName: "Theme")
+        
+        let allThemes = try! cMOC.fetch(fetchR) as [Theme]
+        
+        for (_, cTheme) in allThemes.enumerated(){
+            if cTheme.fromQuote?.count == 0 {
+                cMOC.delete(cTheme)
+            }
+        }
+        try! cMOC.save()
+        
+    }
 
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
@@ -108,17 +121,17 @@ class ViewController: NSViewController {
         ////let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
         let test = URL.init(string: "file:///Users/Gonche/Desktop/exportQuotesProverbia.txt")
         //let test = URL.init(string: "file:///Users/Gonche/Desktop/export3v5.txt")
-        importExport().importFromJSONV2(pathToFile: test!)
+        //importExport().importFromJSONV2(pathToFile: test!)
         
         
-//        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-//            importExport().importFromJSONV2(pathToFile: dialog.url!)
-//            dismiss(self)
-//        }
-//        else{
-//            print("Cancel")
-//            return
-//        }
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            //importExport().importFromJSONV2(pathToFile: dialog.url!)
+            dismiss(self)
+        }
+        else{
+            print("Cancel")
+            return
+        }
         
     }
     

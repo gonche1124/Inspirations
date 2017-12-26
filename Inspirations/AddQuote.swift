@@ -15,20 +15,8 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
         
         super.viewDidLoad()
         // Do view setup here.
-//        doneButton.isEnabled=false
-//        quoteField.delegate=self
-//        authorField.delegate=self
-//        themeField.delegate=self
-        
         //Add target methods.
         tagsToken.delegate=self
-        
-        
-        //Testing Observers
-        //author2.addObserver(self, forKeyPath: "testing", options: [.old, .new], context: nil)
-        
-        //addObserver(self, forKeyPath: #keyPath(self.author2), options: [.old, .new], context: nil)
-        
     }
     
     
@@ -42,7 +30,7 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
     
     @IBOutlet var tagController: NSArrayController!
     @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-    @objc dynamic lazy var ImEx = importExport()
+    //@objc dynamic lazy var ImEx = importExport()
     
     //called everytime an objects end editing.
     override func controlTextDidEndEditing(_ obj: Notification) {
@@ -66,10 +54,9 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
        
 
         //Create NSManagedObject
-        let authorToAdd = ImEx.createNSManagedObject(fromDict:["name": authorT, "className": "Author"]) as! Author
+        let authorToAdd = NSEntityDescription.insertNewObject(forEntityName: "Author", into: moc) as! Author
         authorToAdd.name = authorT
 
-        //let quoteToAdd2 = ImEx.findOrCreateEntity(key: "quote", value: <#T##Any#>, entity: <#T##String#>, moc: <#T##NSManagedObjectContext#>)
         let quoteToAdd = Quote(context: moc)
         quoteToAdd.quote=quoteT
         quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
@@ -83,7 +70,8 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
         }
         
         //Create Topic
-        let themeToAdd = ImEx.createNSManagedObject(fromDict: ["className":"Theme", "topic": themeT]) as! Theme
+        let themeToAdd = NSEntityDescription.insertNewObject(forEntityName: "Theme", into: moc) as! Theme
+        themeToAdd.topic = themeT
         quoteToAdd.isAbout = themeToAdd
         
         //save
@@ -100,9 +88,8 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
 extension AddQuote: NSTokenFieldDelegate{
     
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
-        return ["Happy", "Test", "Work", "Life"]
-        
-        //return tagController.arrangedObjects as! NSArray as! [Any]
+        //return ["Happy", "Test", "Work", "Life"]
+        return (tagController.arrangedObjects as! [Tags]).map({$0.tag})
     }
     
 }
