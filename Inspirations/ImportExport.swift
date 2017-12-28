@@ -115,7 +115,6 @@ class importExport: NSObject {
             _=newEntity.entity.attributeKeys.map({newEntity.setValue(self.nullToNil(value:fromDict[$0]), forKey: $0)})
             
             //Check if it needs to fill relationships.
-            //if !includingRelations {return newEntity}
             if includingRelations {
                 //Fill 1 to 1 relationships
                 let oneToOne = newEntity.entity.toOneRelationshipKeys
