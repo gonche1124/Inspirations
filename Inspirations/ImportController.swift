@@ -47,6 +47,7 @@ class ImportController: NSViewController {
         let importJson = importExport()
         let arrayOfQuotes = importJson.parseJSONFile(pathToFile: self.urlToImport!)
         importJson.progressInstance!.addObserver(self, forKeyPath: "fractionCompleted", options: [], context: nil)
+        importJson.progressInstance!.addObserver(self, forKeyPath: "completedUnitCount", options: [], context: nil)
         self.statusLabel.isHidden=false
         self.statusProgress.isHidden=false
         importJson.importFromJSONV2(array:arrayOfQuotes)
@@ -54,11 +55,20 @@ class ImportController: NSViewController {
     
     //MARK: - Key-Value Oberving
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    
-        if let progressMade = object as? Progress {
-            DispatchQueue.main.async {
-                self.statusProgress.doubleValue=progressMade.fractionCompleted
-                self.statusLabel.stringValue = progressMade.localizedAdditionalDescription
+        
+        if let progressMade = object as? Progress{
+            if keyPath == "completedUnitCount" {
+                if progressMade.completedUnitCount>=progressMade.totalUnitCount {
+                    self.statusLabel.stringValue = "Finished"
+                    self.dismiss(nil)
+                }
+            }
+            if keyPath == "fractionCompleted" {
+                DispatchQueue.main.async {
+                    self.statusProgress.doubleValue=progressMade.fractionCompleted
+                    self.statusLabel.stringValue = progressMade.localizedAdditionalDescription
+                }
+                
             }
         }
         

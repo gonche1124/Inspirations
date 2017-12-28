@@ -16,7 +16,6 @@ class importExport: NSObject {
     
     //Variables
     fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-    fileprivate lazy var bMoc = (NSApp.delegate as! AppDelegate).privateQueueContext
     var progressInstance: Progress?
 
     
@@ -75,13 +74,13 @@ class importExport: NSObject {
     
     //Test for simplification
     //Looks for object, if does not find one it creates it.
-    func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>)->NSManagedObject{
+    func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
         
         //Get uniqueness key
-        let currEntDes = bMoc.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+        let currEntDes = inContext.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         //The case where there is no unique key will not happen, this can be erased if easier way to flaten and access first object is found.
         guard let uniqKey = currEntDes?.uniquenessConstraints[0].first as? String else {
-            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: bMoc)
+            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
         }
         
         //Create fetchRequest
@@ -89,8 +88,8 @@ class importExport: NSObject {
         fRequest.predicate = NSPredicate(format: "%K == %@", uniqKey, attributesDict[uniqKey] as! String)
         
         //Fetch
-        let allObjects = try! bMoc.fetch(fRequest) as! [NSManagedObject]
-        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: bMoc)
+        let allObjects = try! inContext.fetch(fRequest) as! [NSManagedObject]
+        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
 
     }
     
@@ -104,12 +103,13 @@ class importExport: NSObject {
         return (value is NSNull) ? nil : value
     }
     
-    func createNSManagedObject(fromDict: Dictionary<String,Any>, includingRelations: Bool=false)->NSManagedObject{
+    func createNSManagedObject(fromDict: Dictionary<String,Any>, includingRelations: Bool=false, inContext: NSManagedObjectContext)->NSManagedObject{
         
         //DispatchQueue.global(qos: .background).async{
             //Fetch or create new entity.
             let entityName = fromDict["className"] as! String
-            let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict)
+            let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict, inContext: inContext)
+            //let newEntity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
             
             //Populate attributes is working after nullToNil
             _=newEntity.entity.attributeKeys.map({newEntity.setValue(self.nullToNil(value:fromDict[$0]), forKey: $0)})
@@ -119,18 +119,24 @@ class importExport: NSObject {
             if includingRelations {
                 //Fill 1 to 1 relationships
                 let oneToOne = newEntity.entity.toOneRelationshipKeys
-                _=oneToOne.map({newEntity.setValue(self.createNSManagedObject(fromDict: fromDict[$0] as! Dictionary<String, Any>), forKey: $0)})
+                _=oneToOne.map({newEntity.setValue(self.createNSManagedObject(fromDict: fromDict[$0] as! Dictionary<String, Any>, includingRelations: false, inContext: inContext ), forKey: $0)})
                 
                 //Fill To Many relationships
                 for currKey in newEntity.entity.toManyRelationshipKeys {
                     guard let arrayToAdd = (fromDict[currKey] as? NSArray) else {continue}
-                    let newItems = arrayToAdd.map({self.createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>)})
+                    let newItems = arrayToAdd.map({self.createNSManagedObject(fromDict: $0 as! Dictionary<String, Any>, includingRelations: false, inContext: inContext)})
                     let allItems = newEntity.mutableSetValue(forKey: currKey)
                     allItems.addObjects(from: newItems)
                     newEntity.setValue(allItems, forKey: currKey)
                 }
             }
-            try! self.bMoc.save()
+//        do {
+//            try self.bMoc.save()
+//        }
+//        catch let error as NSError {
+//            print("Could not save bMoc:\n \(error)")
+//        }
+        
         //}
  
         return newEntity
@@ -150,17 +156,26 @@ class importExport: NSObject {
     
     //Import data from a JSON file
     func importFromJSONV2(array: [Dictionary<String, Any>]){
-        
-        DispatchQueue.global(qos: .background).async {
-            for (n,jsonItem) in array.enumerated() {
-                //print("procesed item \(n)")
-                //print ("\(jsonItem["quote"])")
-                _ = self.createNSManagedObject(fromDict: jsonItem, includingRelations: true)
-                self.progressInstance?.completedUnitCount = Int64(n)
-                try! self.bMoc.save()
+        //Method that works.
+        let privateMOC = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
+        privateMOC.parent = (NSApp.delegate as! AppDelegate).managedObjectContext
+        privateMOC.mergePolicy=NSMergePolicy.mergeByPropertyStoreTrump
+        privateMOC.perform {
+            for (n, jsonItem) in array.enumerated(){
+                _=self.createNSManagedObject(fromDict: jsonItem, includingRelations: true, inContext: privateMOC)
+                self.progressInstance?.completedUnitCount=Int64(n)
+            }
+            do{
+                try privateMOC.save()
+                self.moc.performAndWait {
+                    do{ try self.moc.save()}
+                    catch {fatalError("Failure to save context: \(error)")}
+                }
+            }
+            catch {fatalError("Failure to save context: \(error)")}
             }
         }
-    }
+    
 }
 
  //MARK: -  Extensions

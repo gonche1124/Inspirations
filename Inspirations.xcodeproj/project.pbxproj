@@ -74,6 +74,7 @@
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
 		8AAE34D01FB7AC1200FC704A /* ThemesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesController.swift; sourceTree = "<group>"; };
+		8AB420731FF2EBE700317816 /* InspirationsV2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.5.xcdatamodel; sourceTree = "<group>"; };
 		8AB7CC251FB218800080ED4F /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		8AB7CC311FB2518E0080ED4F /* CollectionQuoteItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionQuoteItem.xib; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
@@ -650,6 +651,7 @@
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8AB420731FF2EBE700317816 /* InspirationsV2.5.xcdatamodel */,
 				8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */,
 				8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */,
 				8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */,

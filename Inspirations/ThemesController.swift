@@ -78,8 +78,10 @@ extension ThemesController: NSSearchFieldDelegate{
     //Called when the users finishes searching.
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         themeController.fetchPredicate = nil
+        try! themeController.fetch(with: nil, merge: false)
         //tagsOultineView.reloadData()
         //tagsOultineView.expandItem(nil, expandChildren: true)
+        tagsOultineView.expandItem(nil, expandChildren: true)
     }
     
     //Calls everytime a user inputs a character.
@@ -89,8 +91,9 @@ extension ThemesController: NSSearchFieldDelegate{
         if searchString == "" {
             return
         }
-        let tempPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
+        let tempPredicate = NSPredicate(format: "topic CONTAINS[cd] %@",searchString)
         themeController.fetchPredicate = tempPredicate
+        try! themeController.fetch(with: nil, merge: false)
         //tagsOultineView.reloadData()
         //tagsOultineView.expandItem(nil, expandChildren: true)
         //(self.parent as? ViewController)?.informationLabel.stringValue = "Showing \(self.frcAuthors.fetchedObjects!.count) of 33 records"

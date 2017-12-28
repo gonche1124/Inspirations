@@ -14,22 +14,23 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //To erase
-        testCode()
+        //testCode()
         
-        // Do any additional setup after loading the view.
-        //printCurrentData() //Uses lots of memory.
-        //printPlaylistData()
-        //addTempDefaultValues()
+        //Add observers.
+        let moc = (NSApp.delegate as? AppDelegate)?.managedObjectContext
+        let notiCenter = NotificationCenter.default
+        notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: moc)
+            //notiCenter.addObserver(self, forKeyPath: #managedObjectContextDidSave, options: [], context: nil)
+        
         
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
-        VCPlainTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
-        VCQuoteTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
-        VCBigView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
-        VCGroupedMixTable = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
-        VCCollectionView = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
-        VCTheme = NSStoryboard(name: NSStoryboard.Name(rawValue:"Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
-        
-        
+        let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        VCPlainTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
+        VCQuoteTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
+        VCBigView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
+        VCGroupedMixTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
+        VCCollectionView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
+        VCTheme = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
         
         //Add controllers
         self.addChildViewController(VCPlainTable)
@@ -47,21 +48,18 @@ class ViewController: NSViewController {
         
     }
     
-    //Erase afterwards
-    func testCode(){
-        let cMOC=(NSApp.delegate as! AppDelegate).managedObjectContext
-        let fetchR = NSFetchRequest<Theme>(entityName: "Theme")
+    //Called when an object gets updated.
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
         
-        let allThemes = try! cMOC.fetch(fetchR) as [Theme]
-        
-        for (_, cTheme) in allThemes.enumerated(){
-            if cTheme.fromQuote?.count == 0 {
-                cMOC.delete(cTheme)
-            }
+        let moc = (NSApp.delegate as! AppDelegate).managedObjectContext
+        if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
+            //Delete Authors & Themes.
+            _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
+            _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
         }
-        try! cMOC.save()
-        
     }
+    
 
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
@@ -109,34 +107,6 @@ class ViewController: NSViewController {
     }
 
     
-    //MARK: - Import methods
-    @IBAction func importData(_ sender: NSButton) {
-        
-        let dialog = NSOpenPanel()
-        dialog.title = "Choose a JSON file"
-        dialog.showsResizeIndicator = true
-        dialog.allowedFileTypes = ["json", "txt"]
-        
-        //For debugging only
-        ////let test = URL(fileURLWithPath: "file:///Users/Gonche/Desktop/jsonTest.txt")
-        let test = URL.init(string: "file:///Users/Gonche/Desktop/exportQuotesProverbia.txt")
-        //let test = URL.init(string: "file:///Users/Gonche/Desktop/export3v5.txt")
-        //importExport().importFromJSONV2(pathToFile: test!)
-        
-        
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            //importExport().importFromJSONV2(pathToFile: dialog.url!)
-            dismiss(self)
-        }
-        else{
-            print("Cancel")
-            return
-        }
-        
-    }
-    
-
-
     //MARK: - Export
     //Connected through first responder
     @IBAction func exportCoreModel(_ sender: NSButton) {

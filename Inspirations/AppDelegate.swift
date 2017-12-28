@@ -11,10 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
-    func windowDidResize(_ notification: Notification) {
-        print("resized window")
-    }
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
      
@@ -118,14 +114,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         return managedObjectContext
     }()
     
-    lazy var privateQueueContext: NSManagedObjectContext = {
-        //Returns a private managed object context used for multithreading.
-        let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        //managedObjectContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
-        return managedObjectContext
-    }()
 
     // MARK: - Core Data Saving and Undo support
 

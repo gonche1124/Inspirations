@@ -771,11 +771,11 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="90B06C31-CD79-4FD0-9DAB-9536F8818AB6" explicitItemIdentifier="searchToolItem" label="Search" paletteLabel="Search" id="qn7-Ki-6AQ" userLabel="Search Bar">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="96" height="22"/>
-                                    <size key="maxSize" width="150" height="22"/>
+                                    <size key="minSize" width="150" height="22"/>
+                                    <size key="maxSize" width="225" height="22"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="iKD-Ip-qAM">
-                                        <rect key="frame" x="0.0" y="14" width="150" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="225" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="3Gy-cC-JFb">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1832,7 +1832,7 @@
                                     <action selector="chooseFile:" target="EKd-P7-27A" id="OL3-Br-5OU"/>
                                 </connections>
                             </button>
-                            <progressIndicator hidden="YES" wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="yhn-tN-1dZ">
+                            <progressIndicator hidden="YES" wantsLayer="YES" fixedFrame="YES" maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="yhn-tN-1dZ">
                                 <rect key="frame" x="20" y="19" width="294" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
