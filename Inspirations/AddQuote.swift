@@ -35,9 +35,9 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
     //called everytime an objects end editing.
     override func controlTextDidEndEditing(_ obj: Notification) {
         //Validate button.
-        let bool1 = quoteField.stringValue.count > 2
-        let bool2 = authorField.stringValue.count > 2
-        let bool3 = themeField.stringValue.count > 2
+        let bool1 = quoteField.stringValue.count > 1
+        let bool2 = authorField.stringValue.count > 1
+        let bool3 = themeField.stringValue.count > 1
         doneButton.isEnabled = (bool1 && bool2 && bool3) ? true:false
     }
     
@@ -89,7 +89,7 @@ extension AddQuote: NSTokenFieldDelegate{
     
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
         //return ["Happy", "Test", "Work", "Life"]
-        return (tagController.arrangedObjects as! [Tags]).map({$0.tag})
+        return (tagController.arrangedObjects as! [Tags]).map({$0.tag!})
     }
     
 }

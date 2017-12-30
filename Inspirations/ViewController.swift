@@ -22,31 +22,50 @@ class ViewController: NSViewController {
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: moc)
             //notiCenter.addObserver(self, forKeyPath: #managedObjectContextDidSave, options: [], context: nil)
         
+        //Not working
+        let toolItems = NSApp.mainWindow?.toolbar?.items
+        if let segControl = toolItems?.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl {
+            segControl.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
+        }
+        
+        if let toolBar = self.view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl{
+            toolBar.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
+        }
         
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
         let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        VCPlainTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
-        VCQuoteTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
-        VCBigView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
-        VCGroupedMixTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
-        VCCollectionView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
-        VCTheme = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
-        
+//        VCPlainTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
+//        VCQuoteTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
+//        VCBigView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
+//        VCGroupedMixTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCGroupedMix")) as! AuthorsController
+//        VCCollectionView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCCollection")) as! CollectionController
+//        VCTheme = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue:"VCTags")) as! ThemesController
+//
         //Add controllers
-        self.addChildViewController(VCPlainTable)
-        self.addChildViewController(VCQuoteTable)
-        self.addChildViewController(VCBigView)
-        self.addChildViewController(VCGroupedMixTable)
-        self.addChildViewController(VCCollectionView)
-        self.addChildViewController(VCTheme)
+//        self.addChildViewController(VCPlainTable)
+//        self.addChildViewController(VCQuoteTable)
+//        self.addChildViewController(VCBigView)
+//        self.addChildViewController(VCGroupedMixTable)
+//        self.addChildViewController(VCCollectionView)
+//        self.addChildViewController(VCTheme)
         
         
         //Set default view
-        VCBigView.view.frame = self.containerView.bounds
-        self.containerView.addSubview(VCBigView.view)
+//        VCBigView.view.frame = self.containerView.bounds
+//        self.containerView.addSubview(VCBigView.view)
         //TODO: get current controller. unify searchfield delegate.
         
     }
+    
+    //Function from observers.
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath=="selectedSegmentIndex" {
+            print ("index changed to")
+        }
+    }
+    
+    
     
     //Called when an object gets updated.
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
@@ -58,51 +77,64 @@ class ViewController: NSViewController {
             _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
             _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
         }
+        
+        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
+           
+            //Using extensions
+            if let mainPl=Playlist.firstWith(predicate: NSPredicate(format: "pName == %@", "Main"), inContext: moc) as? Playlist{
+                _=qList.map({$0.addToInPlaylist(mainPl)})
+            }
+        }
     }
     
 
     //Selects the view controller to show depending on the button selected.
     @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
-        //Remove all views.
-        for cView in self.containerView.subviews {
-            cView.removeFromSuperview()
-        }
         
-        //Pick view depending on button pressed.
-        switch sender.indexOfSelectedItem {
-        case 0:
-            VCPlainTable.view.frame = self.containerView.bounds
-            self.containerView.addSubview(VCPlainTable.view)
-        case 1:
-            VCQuoteTable.view.frame = self.containerView.bounds
-            self.containerView.addSubview(VCQuoteTable.view)
-        case 2:
-            VCBigView.view.frame = self.containerView.bounds
-            self.containerView.addSubview(VCBigView.view)
-        case 3:
-            VCGroupedMixTable.view.frame = self.containerView.bounds
-            VCGroupedMixTable.authorsTable.reloadData()
-            VCGroupedMixTable.authorsTable.expandItem(nil, expandChildren: true)
-            self.containerView.addSubview(VCGroupedMixTable.view)
-        case 4:
-            VCTheme.view.frame = self.containerView.bounds
-            VCTheme.tagsOultineView.reloadData()
-            VCTheme.tagsOultineView.expandItem(nil, expandChildren: true)
-            self.containerView.addSubview(VCTheme.view)
-            
-            
-            //VCGroupedMixTable.view.frame = self.containerView.bounds
-            
-//            VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
-//            VCGroupedMixTable.groupedTable.reloadData()
-//            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
+        guard let tabView = self.childViewControllers.first(where: {$0.className == "NSTabViewController"})  as? NSTabViewController else {return}
+        tabView.selectedTabViewItemIndex = sender.selectedSegment
+        
+        
+//        //Remove all views.
+//        for cView in self.containerView.subviews {
+//            cView.removeFromSuperview()
+//        }
+//
+//        //Pick view depending on button pressed.
+//        switch sender.indexOfSelectedItem {
+//        case 0:
+//            VCPlainTable.view.frame = self.containerView.bounds
+//            self.containerView.addSubview(VCPlainTable.view)
+//        case 1:
+//            VCQuoteTable.view.frame = self.containerView.bounds
+//            self.containerView.addSubview(VCQuoteTable.view)
+//        case 2:
+//            VCBigView.view.frame = self.containerView.bounds
+//            self.containerView.addSubview(VCBigView.view)
+//        case 3:
+//            VCGroupedMixTable.view.frame = self.containerView.bounds
+//            VCGroupedMixTable.authorsTable.reloadData()
+//            VCGroupedMixTable.authorsTable.expandItem(nil, expandChildren: true)
 //            self.containerView.addSubview(VCGroupedMixTable.view)
-        default:
-    
-            
-            VCCollectionView.view.frame = self.containerView.bounds
-            self.containerView.addSubview(VCCollectionView.view)
-        }
+//        case 4:
+//            VCTheme.view.frame = self.containerView.bounds
+//            VCTheme.tagsOultineView.reloadData()
+//            VCTheme.tagsOultineView.expandItem(nil, expandChildren: true)
+//            self.containerView.addSubview(VCTheme.view)
+//
+//
+//            //VCGroupedMixTable.view.frame = self.containerView.bounds
+//
+////            VCGroupedMixTable.typeOfGrouping = "isAbout.topic"
+////            VCGroupedMixTable.groupedTable.reloadData()
+////            VCGroupedMixTable.groupedTable.expandItem(nil, expandChildren: true)
+////            self.containerView.addSubview(VCGroupedMixTable.view)
+//        default:
+//
+//
+//            VCCollectionView.view.frame = self.containerView.bounds
+//            self.containerView.addSubview(VCCollectionView.view)
+//        }
         
     }
 
@@ -118,12 +150,12 @@ class ViewController: NSViewController {
     fileprivate lazy var managedContext = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
 
     //Controllers of different Views Final
-    var VCPlainTable : CocoaBindingsTable!
-    var VCQuoteTable : QuoteController!
-    var VCBigView : BigViewController!
-    var VCGroupedMixTable : AuthorsController!
-    var VCCollectionView : CollectionController!
-    var VCTheme : ThemesController!
+//    var VCPlainTable : CocoaBindingsTable!
+//    var VCQuoteTable : QuoteController!
+//    var VCBigView : BigViewController!
+//    var VCGroupedMixTable : AuthorsController!
+//    var VCCollectionView : CollectionController!
+//    var VCTheme : ThemesController!
     
     //Outlets
     @IBOutlet weak var containerView: NSView!

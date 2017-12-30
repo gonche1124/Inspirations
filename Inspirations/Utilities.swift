@@ -10,6 +10,22 @@ import Foundation
 import Cocoa
 
 // MARK: - Value Transformers
+
+//Tooltip for plain table.
+class SetToCompoundString: ValueTransformer {
+    override class func transformedValueClass() -> AnyClass{
+        return NSString.self
+    }
+    
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let valueSet = value as? Set<Tags> else {return nil}
+        return valueSet.map({$0.tag!}).joined(separator: "\n")
+    }
+    
+    //No Reverse.
+    override class func allowsReverseTransformation() -> Bool {return false}
+}
+
 //Collection count becasue bindings is not working.
 class SetToCount: ValueTransformer {
     override class func transformedValueClass() -> AnyClass{
@@ -82,6 +98,7 @@ extension NSManagedObject {
     
     var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
+    //Used to sort elements.
     var sortingKey:String {get {
         switch self.className {
         case "Quote":
@@ -94,6 +111,16 @@ extension NSManagedObject {
             return ""
         }
         }}
+    
+    //Easy way to minimize boilerplate code.
+    class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
+        request.predicate=predicate
+        request.fetchLimit=1
+        
+        guard let results = try! inContext.fetch(request).first as? NSManagedObject else {return nil}
+        return results
+    }
 
 }
 
@@ -112,5 +139,25 @@ extension NSAlert {
     }
 }
 
-
+//MARK: - NSView
+//extension NSView {
+//    func fadeIn(){
+//        NSView.ani
+//    }
+//}
+//
+//
+//
+//extension UIView {
+//    func fadeIn(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+//        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+//            self.alpha = 1.0
+//        }, completion: completion)  }
+//    
+//    func fadeOut(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+//        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+//            self.alpha = 0.0
+//        }, completion: completion)
+//    }
+//}
 
