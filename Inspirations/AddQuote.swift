@@ -29,7 +29,7 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
     @IBOutlet weak var tagsToken: NSTokenField!
     
     @IBOutlet var tagController: NSArrayController!
-    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     //@objc dynamic lazy var ImEx = importExport()
     
     //called everytime an objects end editing.

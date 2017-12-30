@@ -13,7 +13,7 @@ class ThemesController: NSViewController {
     
     //MARK: VARIABLES
     //Variables
-    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
    
     //IBOutlets
     @IBOutlet weak var tagsOultineView: NSOutlineView!

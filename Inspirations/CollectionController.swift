@@ -72,7 +72,7 @@ class CollectionController: NSViewController {
         currentCollectionView.collectionViewLayout?.invalidateLayout()
     }
     
-    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     @IBOutlet weak var currentCollectionView: NSCollectionView!
     @IBOutlet var quotesController: NSArrayController!
 }

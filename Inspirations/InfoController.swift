@@ -33,7 +33,7 @@ class InfoController: NSViewController {
     @IBOutlet var playlistController: NSArrayController!
     
     @objc dynamic lazy var areItemsEditable: Bool = false
-    @objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
     
     //Refrence to a specific View controller
     @objc dynamic lazy var currentVC: NSArrayController? = {

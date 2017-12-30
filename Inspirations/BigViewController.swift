@@ -24,11 +24,27 @@ class BigViewController: NSViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        //(self.parent as? ViewController)!.searchQuote2.delegate=self
+        
+        //Set searchfield.
+        if let searchField = mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view as? NSSearchField{
+            //Get dictionaries
+            let dQuotes = self.searchBindingDictionary(withName: "Quote", andPredicate: "quote CONTAINS[cd] $value")
+            let dAuthor = self.searchBindingDictionary(withName: "Author", andPredicate: "fromAuthor.name CONTAINS[cd] $value")
+            let dThemes = self.searchBindingDictionary(withName: "Themes", andPredicate: "isAbout.topic CONTAINS[cd] $value")
+            let dTags = self.searchBindingDictionary(withName: "Tags", andPredicate: "tags.tag CONTAINS[cd] $value")
+            let dAll = self.searchBindingDictionary(withName: "All", andPredicate: "(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)")
+            //Set up bindings
+            searchField.bind(.predicate, to: arrayController, withKeyPath: "filterPredicate", options:dAll)
+            searchField.bind(NSBindingName("predicate2"), to: arrayController, withKeyPath: "filterPredicate", options:dAuthor)
+            searchField.bind(NSBindingName("predicate3"), to: arrayController, withKeyPath: "filterPredicate", options:dQuotes)
+            searchField.bind(NSBindingName("predicate4"), to: arrayController, withKeyPath: "filterPredicate", options:dThemes)
+            searchField.bind(NSBindingName("predicate5"), to: arrayController, withKeyPath: "filterPredicate", options:dTags)
+        }
+        
     }
     
     //VAriables
-    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     @IBOutlet var arrayController: NSArrayController!
     @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var previousButton: NSButton!

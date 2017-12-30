@@ -15,16 +15,34 @@ class CocoaBindingsTable: NSViewController {
     //View will Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
+    
     
     //Set delegate of searcfiled when view will appear.
     override func viewWillAppear() {
         super.viewWillAppear()
-        (self.parent as? ViewController)?.searchQuote2.delegate=self
+        
+        //Bind the array controller to the nssearchfield
+        if let searchField = mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view as? NSSearchField{
+            //Get dictionaries
+            let dQuotes = self.searchBindingDictionary(withName: "Quote", andPredicate: "quote CONTAINS[cd] $value")
+            let dAuthor = self.searchBindingDictionary(withName: "Author", andPredicate: "fromAuthor.name CONTAINS[cd] $value")
+            let dThemes = self.searchBindingDictionary(withName: "Themes", andPredicate: "isAbout.topic CONTAINS[cd] $value")
+            let dTags = self.searchBindingDictionary(withName: "Tags", andPredicate: "tags.tag CONTAINS[cd] $value")
+            let dAll = self.searchBindingDictionary(withName: "All", andPredicate: "(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)")
+            //Set up bindings
+            searchField.bind(.predicate, to: quotesArrayController, withKeyPath: "filterPredicate", options:dAll)
+            searchField.bind(NSBindingName("predicate2"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dAuthor)
+            searchField.bind(NSBindingName("predicate3"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dQuotes)
+            searchField.bind(NSBindingName("predicate4"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dThemes)
+            searchField.bind(NSBindingName("predicate5"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dTags)
+            
+        }
+      
     }
     
-    //Variables
-    @objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+ 
     
     //IBOutlets
     @IBOutlet var quotesArrayController: NSArrayController!
@@ -80,24 +98,24 @@ extension CocoaBindingsTable: NSTableViewDataSource{
 
 
 
-extension CocoaBindingsTable: NSSearchFieldDelegate{
-    
-    //Gts called when user ends searhing
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        self.quotesArrayController.filterPredicate = nil
-        self.columnsTable.reloadData()
-        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
-    }
-    
-    //Gets called when user searches
-    override func controlTextDidChange(_ obj: Notification) {
-        let tempSearch = (obj.object as? NSSearchField)!.stringValue
-        if tempSearch != "" {
-            self.quotesArrayController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@", tempSearch)
-            self.columnsTable.reloadData()
-            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesArrayController.arrangedObjects as! NSArray).count)
-        }
-    }
-}
+//extension CocoaBindingsTable: NSSearchFieldDelegate{
+//
+//    //Gts called when user ends searhing
+//    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+//        self.quotesArrayController.filterPredicate = nil
+//        self.columnsTable.reloadData()
+//        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
+//    }
+//
+//    //Gets called when user searches
+//    override func controlTextDidChange(_ obj: Notification) {
+//        let tempSearch = (obj.object as? NSSearchField)!.stringValue
+//        if tempSearch != "" {
+//            self.quotesArrayController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@", tempSearch)
+//            self.columnsTable.reloadData()
+//            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesArrayController.arrangedObjects as! NSArray).count)
+//        }
+//    }
+//}
 
 

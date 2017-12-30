@@ -28,7 +28,7 @@ class PlaylistController: NSViewController {
    
     
     //Variables
-    @objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
+    //@objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
     
     //Outlets
     @IBOutlet var treeArrayController: NSTreeController!

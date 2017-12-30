@@ -139,25 +139,20 @@ extension NSAlert {
     }
 }
 
-//MARK: - NSView
-//extension NSView {
-//    func fadeIn(){
-//        NSView.ani
-//    }
-//}
-//
-//
-//
-//extension UIView {
-//    func fadeIn(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-//        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//            self.alpha = 1.0
-//        }, completion: completion)  }
-//    
-//    func fadeOut(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
-//        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//            self.alpha = 0.0
-//        }, completion: completion)
-//    }
-//}
+//MARK: - NSViewController
+extension NSViewController{
+    
+    var mainToolbarItems: Array<NSToolbarItem>?  {return (NSApp.mainWindow?.toolbar?.items) ?? nil} //Easy access to toolbar
+    
+    var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
+    
+    //Dictionary to bind searchfield to array controller
+    func searchBindingDictionary(withName title:String="Quote", andPredicate predicate:String="quote CONTAINS[cd] $value")-> [NSBindingOption:Any]{
+        let mainDictionary=[NSBindingOption(rawValue: "NSDisplayName"):title,
+                            NSBindingOption(rawValue: "NSPredicateFormat"):predicate,
+                            NSBindingOption(rawValue: "NSValidatesImmediately"):0,
+                            NSBindingOption(rawValue: "NSRaisesForNotApplicableKeys"):1] as [NSBindingOption : Any]
+        return mainDictionary
+    }
+}
 
