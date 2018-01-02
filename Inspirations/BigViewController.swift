@@ -22,6 +22,18 @@ class BigViewController: NSViewController {
         let areaP = NSTrackingArea.init(rect: previousButton.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         previousButton.addTrackingArea(areaP)
         previousButton.alphaValue=0
+        
+    }
+    
+    override func viewWillDisappear() {
+        super .viewWillDisappear()
+        
+        //Show info label
+        if let infoLabel = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField {
+            if let hConstraint = infoLabel.constraints.first(where: {$0.identifier=="heightOfLabel"}){
+                hConstraint.constant=24
+            }
+        }
     }
     
     override func viewWillAppear() {
@@ -30,6 +42,13 @@ class BigViewController: NSViewController {
         //Bind the array controller to the nssearchfield
         if let searchField = self.mainSearchField as? NSSearchField, let quoteC = arrayController {
             self.bind(searchField: searchField, toQuoteController: quoteC)
+        }
+        
+        //Hide info label.
+        if let infoLabel = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField {
+            if let hConstraint = infoLabel.constraints.first(where: {$0.identifier=="heightOfLabel"}){
+                hConstraint.constant=0
+            }
         }
                 
     }
