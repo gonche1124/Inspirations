@@ -724,7 +724,7 @@
                                     <rect key="frame" x="1" y="0.0" width="733" height="299"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ym9-vT-1H2" viewBased="YES" id="KDE-tG-cHD">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ym9-vT-1H2" viewBased="YES" id="KDE-tG-cHD">
                                             <rect key="frame" x="0.0" y="0.0" width="733" height="276"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -744,7 +744,7 @@
                                                     </textFieldCell>
                                                     <prototypeCellViews>
                                                         <tableCellView id="TTs-O3-WmV">
-                                                            <rect key="frame" x="1" y="1" width="30" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="29.5" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MeC-S6-vfC">
@@ -809,7 +809,7 @@
                                                         <binding destination="Paa-0K-gYi" name="value" keyPath="arrangedObjects.tags.tag.@count" id="Gmp-xd-iCr"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="141.5" minWidth="40" maxWidth="1000" id="vIQ-2v-gI2" userLabel="Author">
+                                                <tableColumn identifier="" width="141.5" minWidth="60" maxWidth="1000" id="vIQ-2v-gI2" userLabel="Author">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Author">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -823,7 +823,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="G3L-5u-BaN">
-                                                            <rect key="frame" x="79.5" y="1" width="141" height="17"/>
+                                                            <rect key="frame" x="79.5" y="1" width="141.5" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Tk-3Xb">
@@ -848,7 +848,7 @@
                                                         <binding destination="Paa-0K-gYi" name="value" keyPath="arrangedObjects.fromAuthor.name" id="5x3-nB-FqJ"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="400" minWidth="400" maxWidth="1000000" id="JBU-l0-Dp1" userLabel="Quote">
+                                                <tableColumn identifier="" width="400" minWidth="100" maxWidth="1000000" id="JBU-l0-Dp1" userLabel="Quote">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Quote">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -875,6 +875,7 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <binding destination="In4-S3-As8" name="value" keyPath="objectValue.quote" id="c47-Gf-ruX"/>
+                                                                        <binding destination="In4-S3-As8" name="toolTip" keyPath="objectValue.quote" id="DZJ-VW-smq"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -887,7 +888,7 @@
                                                         <binding destination="Paa-0K-gYi" name="value" keyPath="arrangedObjects.quote" id="9yi-cb-gQN"/>
                                                     </connections>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="104" minWidth="10" maxWidth="3.4028234663852886e+38" id="9t1-A3-vOK" userLabel="Topic">
+                                                <tableColumn identifier="" width="104" minWidth="80" maxWidth="150" id="9t1-A3-vOK" userLabel="Topic">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Topic">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -938,7 +939,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ls3-Al-F1a">
-                                    <rect key="frame" x="1" y="283" width="733" height="16"/>
+                                    <rect key="frame" x="1" y="283" width="732" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ayx-zI-475">
@@ -1106,6 +1107,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="XEZ-rI-TCg" name="content" keyPath="arrangedObjects" id="o3X-ky-dxl"/>
+                                                <binding destination="XEZ-rI-TCg" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="o3X-ky-dxl" id="0lG-u5-0Nz"/>
                                                 <outlet property="dataSource" destination="1B8-Ka-okj" id="4kk-QR-IAu"/>
                                                 <outlet property="delegate" destination="1B8-Ka-okj" id="CKg-6R-DU1"/>
                                             </connections>
@@ -1130,14 +1132,28 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="authorsController" destination="Hji-ur-3F5" id="5mw-5F-EFM"/>
                         <outlet property="quotesArray" destination="XEZ-rI-TCg" id="XTl-YN-lcP"/>
                         <outlet property="quotesTable" destination="7Dy-uS-jFY" id="a8Q-ys-sMr"/>
+                        <outlet property="themesController" destination="lDp-lc-YI2" id="bD3-67-oGv"/>
                     </connections>
                 </viewController>
                 <customObject id="TEs-JW-Lnz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="XEZ-rI-TCg">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
                     <connections>
                         <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="moc" id="2dC-21-nRL"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="Hji-ur-3F5">
+                    <connections>
+                        <binding destination="XEZ-rI-TCg" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.fromAuthor" id="hul-ZG-c96"/>
+                        <binding destination="XEZ-rI-TCg" name="contentObject" keyPath="selection.fromAuthor" previousBinding="hul-ZG-c96" id="3dv-i0-7YP"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="lDp-lc-YI2">
+                    <connections>
+                        <binding destination="XEZ-rI-TCg" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.isAbout" id="0xW-Ru-1WI"/>
+                        <binding destination="XEZ-rI-TCg" name="contentObject" keyPath="selection.isAbout" previousBinding="0xW-Ru-1WI" id="S8H-yf-ybq"/>
                     </connections>
                 </arrayController>
             </objects>

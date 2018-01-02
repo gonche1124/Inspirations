@@ -17,30 +17,21 @@ class BigViewController: NSViewController {
         //Set up tracking areas.
         let areaN = NSTrackingArea.init(rect: nextButton.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         nextButton.addTrackingArea(areaN)
+        nextButton.alphaValue=0
         
         let areaP = NSTrackingArea.init(rect: previousButton.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         previousButton.addTrackingArea(areaP)
+        previousButton.alphaValue=0
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        //Set searchfield.
-        if let searchField = mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view as? NSSearchField{
-            //Get dictionaries
-            let dQuotes = self.searchBindingDictionary(withName: "Quote", andPredicate: "quote CONTAINS[cd] $value")
-            let dAuthor = self.searchBindingDictionary(withName: "Author", andPredicate: "fromAuthor.name CONTAINS[cd] $value")
-            let dThemes = self.searchBindingDictionary(withName: "Themes", andPredicate: "isAbout.topic CONTAINS[cd] $value")
-            let dTags = self.searchBindingDictionary(withName: "Tags", andPredicate: "tags.tag CONTAINS[cd] $value")
-            let dAll = self.searchBindingDictionary(withName: "All", andPredicate: "(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)")
-            //Set up bindings
-            searchField.bind(.predicate, to: arrayController, withKeyPath: "filterPredicate", options:dAll)
-            searchField.bind(NSBindingName("predicate2"), to: arrayController, withKeyPath: "filterPredicate", options:dAuthor)
-            searchField.bind(NSBindingName("predicate3"), to: arrayController, withKeyPath: "filterPredicate", options:dQuotes)
-            searchField.bind(NSBindingName("predicate4"), to: arrayController, withKeyPath: "filterPredicate", options:dThemes)
-            searchField.bind(NSBindingName("predicate5"), to: arrayController, withKeyPath: "filterPredicate", options:dTags)
+        //Bind the array controller to the nssearchfield
+        if let searchField = self.mainSearchField as? NSSearchField, let quoteC = arrayController {
+            self.bind(searchField: searchField, toQuoteController: quoteC)
         }
-        
+                
     }
     
     //VAriables

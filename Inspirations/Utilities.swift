@@ -146,6 +146,8 @@ extension NSViewController{
     
     var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
     
+    var mainSearchField: NSView {return ((self.mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view) ?? nil)!} //Easy access to searchtoolbar
+    
     //Dictionary to bind searchfield to array controller
     func searchBindingDictionary(withName title:String="Quote", andPredicate predicate:String="quote CONTAINS[cd] $value")-> [NSBindingOption:Any]{
         let mainDictionary=[NSBindingOption(rawValue: "NSDisplayName"):title,
@@ -153,6 +155,34 @@ extension NSViewController{
                             NSBindingOption(rawValue: "NSValidatesImmediately"):0,
                             NSBindingOption(rawValue: "NSRaisesForNotApplicableKeys"):1] as [NSBindingOption : Any]
         return mainDictionary
+    }
+    
+    //Set up search field
+    func bind(searchField: NSSearchField, toQuoteController controller: NSArrayController){
+        //Get dictionaries
+        let dQuotes = self.searchBindingDictionary(withName: "Quote", andPredicate: "quote CONTAINS[cd] $value")
+        let dAuthor = self.searchBindingDictionary(withName: "Author", andPredicate: "fromAuthor.name CONTAINS[cd] $value")
+        let dThemes = self.searchBindingDictionary(withName: "Themes", andPredicate: "isAbout.topic CONTAINS[cd] $value")
+        let dTags = self.searchBindingDictionary(withName: "Tags", andPredicate: "tags.tag CONTAINS[cd] $value")
+        let dAll = self.searchBindingDictionary(withName: "All", andPredicate: "(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)")
+        //Set up bindings
+        searchField.bind(.predicate, to: controller, withKeyPath: "filterPredicate", options:dAll)
+        searchField.bind(NSBindingName("predicate2"), to: controller, withKeyPath: "filterPredicate", options:dAuthor)
+        searchField.bind(NSBindingName("predicate3"), to: controller, withKeyPath: "filterPredicate", options:dQuotes)
+        searchField.bind(NSBindingName("predicate4"), to: controller, withKeyPath: "filterPredicate", options:dThemes)
+        searchField.bind(NSBindingName("predicate5"), to: controller, withKeyPath: "filterPredicate", options:dTags)
+    }
+
+    //Set up infoLabel
+    func bind(infoLabel:NSTextField, toQuotes qc:NSArrayController, andAuthor ac:NSArrayController, andThemes tc:NSArrayController){
+        
+        let displayP = "%{value1}@ of %{value2}@ Selected, %{value3}@ authors, %{value4}@ Topics"
+        
+        infoLabel.bind(NSBindingName("displayPatternValue1"), to: qc, withKeyPath: "selection.@count", options: [NSBindingOption(rawValue: "NSDisplayPattern"):displayP])
+        infoLabel.bind(NSBindingName("displayPatternValue2"), to: qc, withKeyPath: "arrangedObjects.@count", options: [NSBindingOption(rawValue: "NSDisplayPattern"):displayP])
+        infoLabel.bind(NSBindingName("displayPatternValue3"), to: ac, withKeyPath: "arrangedObjects.@count", options:[NSBindingOption(rawValue: "NSDisplayPattern"):displayP])
+        infoLabel.bind(NSBindingName("displayPatternValue4"), to: tc, withKeyPath: "arrangedObjects.@count", options:[NSBindingOption(rawValue: "NSDisplayPattern"):displayP])
+        
     }
 }
 

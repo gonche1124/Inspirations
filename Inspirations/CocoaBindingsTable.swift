@@ -24,36 +24,18 @@ class CocoaBindingsTable: NSViewController {
         super.viewWillAppear()
         
         //Bind the array controller to the nssearchfield
-        if let searchField = mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view as? NSSearchField{
-            //Get dictionaries
-            let dQuotes = self.searchBindingDictionary(withName: "Quote", andPredicate: "quote CONTAINS[cd] $value")
-            let dAuthor = self.searchBindingDictionary(withName: "Author", andPredicate: "fromAuthor.name CONTAINS[cd] $value")
-            let dThemes = self.searchBindingDictionary(withName: "Themes", andPredicate: "isAbout.topic CONTAINS[cd] $value")
-            let dTags = self.searchBindingDictionary(withName: "Tags", andPredicate: "tags.tag CONTAINS[cd] $value")
-            let dAll = self.searchBindingDictionary(withName: "All", andPredicate: "(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)")
-            //Set up bindings
-            searchField.bind(.predicate, to: quotesArrayController, withKeyPath: "filterPredicate", options:dAll)
-            searchField.bind(NSBindingName("predicate2"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dAuthor)
-            searchField.bind(NSBindingName("predicate3"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dQuotes)
-            searchField.bind(NSBindingName("predicate4"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dThemes)
-            searchField.bind(NSBindingName("predicate5"), to: quotesArrayController, withKeyPath: "filterPredicate", options:dTags)
-            
+        if let searchField = self.mainSearchField as? NSSearchField, let quoteC = quotesArrayController {
+            self.bind(searchField: searchField, toQuoteController: quoteC)
         }
         
         //Bind Information Label.
-      
-        if let infoLabel2 = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField{
-            
-            infoLabel2.bind(NSBindingName("displayPatternValue1"), to: quotesArrayController, withKeyPath: "selection.@count", options: [NSBindingOption(rawValue: "NSDisplayPattern"):"%{value1}@ of %{value2}@ Selected, %{value3}@ authors, %{value4}@ Topics"])
-            infoLabel2.bind(NSBindingName("displayPatternValue2"), to: quotesArrayController, withKeyPath: "arrangedObjects.@count", options: [NSBindingOption(rawValue: "NSDisplayPattern"):"%{value1}@ of %{value2}@ Selected, %{value3}@ authors, %{value4}@ Topics"])
-            //infoLabel2.bind(NSBindingName("displayPatternValue3"), to: quotesArrayController, withKeyPath: "selection.@count.fromAuthor", options: [NSBindingOption(rawValue: "NSDisplayPattern"):"%{value1}@ of %{value2}@ Selected, %{value3}@ authors"])
-            infoLabel2.bind(NSBindingName("displayPatternValue3"), to: authorsController, withKeyPath: "arrangedObjects.@count", options:[NSBindingOption(rawValue: "NSDisplayPattern"):"%{value1}@ of %{value2}@ Selected, %{value3}@ authors, %{value4}@ Topics"])
-            infoLabel2.bind(NSBindingName("displayPatternValue4"), to: themesController, withKeyPath: "arrangedObjects.@count", options:[NSBindingOption(rawValue: "NSDisplayPattern"):"%{value1}@ of %{value2}@ Selected, %{value3}@ authors, %{value4}@ Topics"])
-            //infoLabel2.stringValue="test"
-            
-            
-            //infoLabel2.bind(.displayPatternValue, to: quotesArrayController, withKeyPath: "displayValuePattern", options: [])
+        if let infoL = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField{
+            self.bind(infoLabel: infoL,
+                      toQuotes: quotesArrayController,
+                      andAuthor: authorsController,
+                      andThemes: themesController)
         }
+                
     }
     
  
@@ -62,8 +44,8 @@ class CocoaBindingsTable: NSViewController {
     @IBOutlet var quotesArrayController: NSArrayController!
     @IBOutlet weak var columnsTable: NSTableView!
     @IBOutlet var authorsController: NSArrayController!
-    
     @IBOutlet var themesController: NSArrayController!
+    
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {
         interpretKeyEvents([event])
