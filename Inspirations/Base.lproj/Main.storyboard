@@ -635,7 +635,7 @@
                                                     <segue destination="dnW-AG-tIj" kind="embed" id="UAm-Of-VV3"/>
                                                 </connections>
                                             </containerView>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yvc-bW-KF0">
+                                            <textField identifier="infoLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="yvc-bW-KF0">
                                                 <rect key="frame" x="-2" y="0.0" width="866" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="NDG-PS-dCc"/>
@@ -953,14 +953,30 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="authorsController" destination="1rF-ib-b76" id="wvA-TC-CQW"/>
                         <outlet property="columnsTable" destination="KDE-tG-cHD" id="fPI-zA-XyX"/>
                         <outlet property="quotesArrayController" destination="Paa-0K-gYi" id="ZQN-7P-0L8"/>
+                        <outlet property="themesController" destination="Lo7-X3-HrK" id="e9O-jq-fIr"/>
                     </connections>
                 </viewController>
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="Paa-0K-gYi">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
                     <connections>
                         <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="moc" id="rT8-ff-Xyt"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="1rF-ib-b76">
+                    <connections>
+                        <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.fromAuthor" id="rE1-B7-M8o"/>
+                        <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.fromAuthor" previousBinding="rE1-B7-M8o" id="v1C-Gy-u2v"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.moc" id="1d7-xy-u4R"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="Lo7-X3-HrK">
+                    <connections>
+                        <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.isAbout" id="ehs-E8-ED4"/>
+                        <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.isAbout" previousBinding="ehs-E8-ED4" id="r05-7N-tIM"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.moc" id="XW6-vY-EJF"/>
                     </connections>
                 </arrayController>
             </objects>

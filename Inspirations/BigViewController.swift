@@ -44,7 +44,6 @@ class BigViewController: NSViewController {
     }
     
     //VAriables
-    //@objc dynamic lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
     @IBOutlet var arrayController: NSArrayController!
     @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var previousButton: NSButton!
@@ -67,26 +66,6 @@ class BigViewController: NSViewController {
             previousButton.animator().alphaValue=0
         })
     }
-    
-
 }
 
-//MARK: - Extensions
-extension BigViewController: NSSearchFieldDelegate{
-    
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        self.arrayController.filterPredicate=nil
-        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
-    }
-    
-    //Gets called everytime a user searches a character.
-    override func controlTextDidChange(_ obj: Notification) {
-        let searchString = (obj.object as? NSSearchField)!.stringValue
-        if searchString != "" {
-            self.arrayController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@",searchString)
-            self.arrayController.setSelectionIndex(1)
-            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.arrayController.arrangedObjects as! NSArray).count)
-        }
-    }
-}
 
