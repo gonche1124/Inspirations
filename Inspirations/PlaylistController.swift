@@ -25,11 +25,6 @@ class PlaylistController: NSViewController {
         }
     }
     
-   
-    
-    //Variables
-    //@objc dynamic lazy var moc = (NSApp.delegate as! AppDelegate).managedObjectContext
-    
     //Outlets
     @IBOutlet var treeArrayController: NSTreeController!
     @IBOutlet weak var playlistOutlineView: NSOutlineView!
@@ -71,20 +66,30 @@ extension PlaylistController: NSOutlineViewDelegate{
         return (!(item as? NSTreeNode)!.isLeaf)
     }
 
+    
     //Selection changed.
     func outlineViewSelectionDidChange(_ notification: Notification) {
 
-        //playlistOutlineView.expandItem(nil, expandChildren: true)
-        guard let outlineView = notification.object as? NSOutlineView else {
-            return
-        }
+        //Get playlist item
+        guard let outlineView = notification.object as? NSOutlineView else {return} //Check is outlineView
         let sNode = outlineView.item(atRow: outlineView.selectedRow) as? NSTreeNode
+        if (!(sNode?.isLeaf)!){return} //Check if is not playlist
         guard let sPlaylist = sNode?.representedObject as? Playlist else {return}
-        // (sNode)
-        //print (sPlaylist)
-        //if !(sPlaylist?.isLeaf )! { return}
-        if ((sNode?.isLeaf)!){return}
-        print(sPlaylist)
+      
+        
+        
+        //FIX - Make conform to protocols to get arrayController from NSControllers.
+        let tabController = NSApp.mainWindow?.contentViewController?.childViewControllers.first(where: {$0.className=="NSTabViewController"}) as? NSTabViewController
+        //let qArray2 = tabController?.childViewControllers[(tabController?.selectedTabViewItemIndex)!].currentQuoteController
+        let qArray = (tabController?.childViewControllers[(tabController?.selectedTabViewItemIndex)!] as? CocoaBindingsTable)?.quotesArrayController
+        qArray?.fetchPredicate=NSPredicate(format: "inPlaylist.pName CONTAINS[CD] %@", sPlaylist.pName!)
+     
+        
+        
+        
+        //let qController = NSApp.mainWindow?.contentView?.subviews.first(where: {$0.className==NST})
+        
+        
         //let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",(sPlaylist.pName!))
         //(self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
         // TODO: change for current controller.
@@ -121,7 +126,6 @@ extension PlaylistController: NSOutlineViewDataSource{
         let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
         destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesS))
         try! moc.save()
-        //try! (NSApplication.shared.delegate as! AppDelegate).managedObjectContext.save()
         self.playlistOutlineView.reloadData()
 
         return true

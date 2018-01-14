@@ -11,11 +11,10 @@ import Cocoa
 
 class CocoaBindingsTable: NSViewController {
     
-    
     //View will Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
     }
     
     
@@ -74,13 +73,6 @@ class CocoaBindingsTable: NSViewController {
 
 
 //MARK: - Extensions
-
-//MARK: NSTableViewDelegate
-extension CocoaBindingsTable: NSTableViewDelegate{
-    //Dragging
-    
-}
-
 extension CocoaBindingsTable: NSTableViewDataSource{
     
     //Dragging method accoridng to WWDC 2016
@@ -94,26 +86,25 @@ extension CocoaBindingsTable: NSTableViewDataSource{
     }
 }
 
-
-
-//extension CocoaBindingsTable: NSSearchFieldDelegate{
-//
-//    //Gts called when user ends searhing
-//    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-//        self.quotesArrayController.filterPredicate = nil
-//        self.columnsTable.reloadData()
-//        (self.parent as? ViewController)?.updateInfoLabel(parameter: "All")
+//extension CocoaBindingsTable: ControllerProtocol {
+//    override var currentQuoteController: NSArrayController? {
+//        return quotesArrayController
 //    }
 //
-//    //Gets called when user searches
-//    override func controlTextDidChange(_ obj: Notification) {
-//        let tempSearch = (obj.object as? NSSearchField)!.stringValue
-//        if tempSearch != "" {
-//            self.quotesArrayController.filterPredicate = NSPredicate(format: "fromAuthor.name CONTAINS[cd] %@", tempSearch)
-//            self.columnsTable.reloadData()
-//            (self.parent as? ViewController)?.updateInfoLabel(parameter: (self.quotesArrayController.arrangedObjects as! NSArray).count)
-//        }
+//    var currentAuthorController: NSArrayController? {
+//        return authorsController
 //    }
+//
+//    var currentThemesController: NSArrayController? {
+//        return themesController
+//    }
+//
+//    var currentTagsController: NSArrayController? {
+//        return nil
+//    }
+//
+//
 //}
+
 
 

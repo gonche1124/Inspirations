@@ -19,7 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
         ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
-        
+        ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
+
         
         //Sets color of main Window
         //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)

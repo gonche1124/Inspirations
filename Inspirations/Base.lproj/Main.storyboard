@@ -744,7 +744,7 @@
                                                     </textFieldCell>
                                                     <prototypeCellViews>
                                                         <tableCellView id="TTs-O3-WmV">
-                                                            <rect key="frame" x="1" y="1" width="30" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="29" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MeC-S6-vfC">
@@ -874,8 +874,8 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="In4-S3-As8" name="value" keyPath="objectValue.quote" id="c47-Gf-ruX"/>
                                                                         <binding destination="In4-S3-As8" name="toolTip" keyPath="objectValue.quote" id="DZJ-VW-smq"/>
+                                                                        <binding destination="In4-S3-As8" name="value" keyPath="objectValue.quote" id="c47-Gf-ruX"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -939,7 +939,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ls3-Al-F1a">
-                                    <rect key="frame" x="1" y="283" width="469" height="16"/>
+                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ayx-zI-475">
@@ -1164,54 +1164,18 @@
             <objects>
                 <viewController title="Info" showSeguePresentationStyle="single" id="ft8-At-g8I" customClass="InfoController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="sDy-cn-Sdq">
-                        <rect key="frame" x="0.0" y="0.0" width="248" height="425"/>
+                        <rect key="frame" x="0.0" y="0.0" width="248" height="557"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-hY-4bg">
-                                <rect key="frame" x="7" y="121" width="54" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Playlists" id="irT-qn-M3T">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <tokenField verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="K6y-B4-nfA">
-                                <rect key="frame" x="67" y="100" width="161" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="border" alignment="left" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="80H-e4-Aoi">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </tokenFieldCell>
-                                <connections>
-                                    <binding destination="Zxa-un-qZM" name="value" keyPath="arrangedObjects.pName" id="gnX-Z4-J6X"/>
-                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="ktu-eM-B5F"/>
-                                </connections>
-                            </tokenField>
-                            <tokenField verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="oRm-w6-wKA">
-                                <rect key="frame" x="65" y="37" width="165" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <tokenFieldCell key="cell" selectable="YES" editable="YES" alignment="left" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="Krl-3A-uus">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </tokenFieldCell>
-                                <connections>
-                                    <binding destination="Zxa-un-qZM" name="value" keyPath="arrangedObjects.pName" id="bFJ-uR-kW5"/>
-                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="OQ7-i3-Igj"/>
-                                    <outlet property="delegate" destination="ft8-At-g8I" id="dn5-6H-ICp"/>
-                                </connections>
-                            </tokenField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="g3k-St-AvL">
-                                <rect key="frame" x="0.0" y="282" width="248" height="5"/>
+                                <rect key="frame" x="0.0" y="414" width="248" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box fixedFrame="YES" title="Author" translatesAutoresizingMaskIntoConstraints="NO" id="zng-Mg-5JU" userLabel="Author Box">
-                                <rect key="frame" x="12" y="166" width="219" height="110"/>
+                                <rect key="frame" x="7" y="298" width="234" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="cYz-PV-GAQ">
-                                    <rect key="frame" x="2" y="2" width="215" height="93"/>
+                                    <rect key="frame" x="2" y="2" width="230" height="93"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDC-qf-5r8">
@@ -1283,7 +1247,7 @@
                                 </view>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9O-Ir-UxA">
-                                <rect key="frame" x="16" y="311" width="56" height="14"/>
+                                <rect key="frame" x="16" y="443" width="56" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Favorite:" id="Y0j-Rc-fg6">
                                     <font key="font" metaFont="smallSystem"/>
@@ -1292,7 +1256,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTv-nh-RPl">
-                                <rect key="frame" x="22" y="293" width="50" height="14"/>
+                                <rect key="frame" x="22" y="425" width="50" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Theme:" id="ppk-bk-sUH">
                                     <font key="font" metaFont="smallSystem"/>
@@ -1301,7 +1265,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQc-HL-XoT">
-                                <rect key="frame" x="7" y="334" width="234" height="11"/>
+                                <rect key="frame" x="7" y="466" width="234" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Added on XXXX" id="Moy-5t-kMB">
                                     <font key="font" metaFont="miniSystem"/>
@@ -1319,8 +1283,8 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="HQM-dV-64C">
-                                <rect key="frame" x="78" y="288" width="158" height="22"/>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="HQM-dV-64C">
+                                <rect key="frame" x="78" y="420" width="158" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" buttonBordered="NO" numberOfVisibleItems="5" id="Atc-dl-3P8">
                                     <font key="font" metaFont="smallSystem"/>
@@ -1329,6 +1293,7 @@
                                 </comboBoxCell>
                                 <connections>
                                     <binding destination="m2A-lZ-aCF" name="content" keyPath="arrangedObjects.topic" id="gbe-Tb-2PG"/>
+                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" previousBinding="GKX-GO-aDL" id="jeV-wQ-QaR"/>
                                     <binding destination="dar-nR-U8v" name="value" keyPath="selection.isAbout.topic" previousBinding="gbe-Tb-2PG" id="YnH-bh-eT6">
                                         <dictionary key="options">
                                             <bool key="NSConditionallySetsEditable" value="YES"/>
@@ -1338,9 +1303,9 @@
                                 </connections>
                             </comboBox>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="9pN-pd-sVG">
-                                <rect key="frame" x="13" y="348" width="228" height="65"/>
+                                <rect key="frame" x="9" y="480" width="230" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="mGO-hr-jEr">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="mGO-hr-jEr">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1352,7 +1317,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5H-ga-kva">
-                                <rect key="frame" x="12" y="1" width="233" height="32"/>
+                                <rect key="frame" x="11" y="13" width="233" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Edit" alternateTitle="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="b2M-4z-KTF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -1363,24 +1328,108 @@
                                 </connections>
                             </button>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="iUY-4i-NqY">
-                                <rect key="frame" x="0.0" y="159" width="248" height="5"/>
+                                <rect key="frame" x="0.0" y="291" width="248" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MRR-5h-jHp">
-                                <rect key="frame" x="6" y="58" width="55" height="17"/>
+                            <box fixedFrame="YES" borderType="bezel" title="Playlists" translatesAutoresizingMaskIntoConstraints="NO" id="VzS-4l-LVS" userLabel="Playlists Box">
+                                <rect key="frame" x="6" y="181" width="235" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Playlist2" id="b4Z-mj-j0Y">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                <view key="contentView" id="L3d-5f-gnS">
+                                    <rect key="frame" x="3" y="3" width="229" height="86"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tokenField identifier="playlistTokenField" verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="K6y-B4-nfA" userLabel="Playlist Token Field">
+                                            <rect key="frame" x="7" y="22" width="211" height="54"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <tokenFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="80H-e4-Aoi">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </tokenFieldCell>
+                                            <connections>
+                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="ktu-eM-B5F"/>
+                                                <binding destination="dar-nR-U8v" name="value" keyPath="selection.inPlaylist" id="oVx-HC-HBo">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">SetToArray</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <outlet property="delegate" destination="ft8-At-g8I" id="kAL-Mi-TeX"/>
+                                            </connections>
+                                        </tokenField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2mB-bJ-cCG">
+                                            <rect key="frame" x="7" y="7" width="195" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total Playlists" id="Cu3-3P-p32">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="dar-nR-U8v" name="displayPatternValue1" keyPath="selection.inPlaylist.@count" id="YzW-0X-QcY">
+                                                    <dictionary key="options">
+                                                        <string key="NSDisplayPattern">Total: %{value1}@</string>
+                                                        <string key="NSMultipleValuesPlaceholder">-1</string>
+                                                        <string key="NSNoSelectionPlaceholder">0</string>
+                                                        <string key="NSNotApplicablePlaceholder">-2</string>
+                                                        <string key="NSNullPlaceholder">-3</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </box>
+                            <box fixedFrame="YES" title="Tags" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-bl-twH" userLabel="Tags Box">
+                                <rect key="frame" x="7" y="63" width="234" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="HSV-SO-omh">
+                                    <rect key="frame" x="2" y="2" width="230" height="97"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tokenField identifier="tagsTokenField" verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="oRm-w6-wKA" userLabel="Tags Token Field">
+                                            <rect key="frame" x="4" y="31" width="215" height="58"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <tokenFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="Krl-3A-uus">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </tokenFieldCell>
+                                            <connections>
+                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="OQ7-i3-Igj"/>
+                                                <binding destination="dar-nR-U8v" name="value" keyPath="selection.tags" id="H2P-RM-9kl">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">SetToArray</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <outlet property="delegate" destination="ft8-At-g8I" id="dn5-6H-ICp"/>
+                                            </connections>
+                                        </tokenField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MRR-5h-jHp">
+                                            <rect key="frame" x="4" y="12" width="78" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total Tags" id="b4Z-mj-j0Y">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="dar-nR-U8v" name="displayPatternValue1" keyPath="selection.tags.@count" id="N73-Q3-u3o">
+                                                    <dictionary key="options">
+                                                        <string key="NSDisplayPattern">Total: %{value1}@</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </box>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="editButton" destination="V5H-ga-kva" id="klv-Ta-jQY"/>
                         <outlet property="playlistController" destination="Zxa-un-qZM" id="ghK-8e-ejx"/>
                         <outlet property="quotesController" destination="dar-nR-U8v" id="hwN-TA-wKh"/>
+                        <outlet property="tagsControlller" destination="FWZ-co-hOW" id="VqI-tD-pOE"/>
                     </connections>
                 </viewController>
                 <customObject id="20z-pz-iyu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1390,9 +1439,9 @@
                         <binding destination="ft8-At-g8I" name="selectionIndexes" keyPath="self.currentVC.selectionIndexes" id="VUW-B1-efh"/>
                     </connections>
                 </arrayController>
-                <arrayController mode="entity" entityName="Playlist" id="Zxa-un-qZM" userLabel="Playlists">
+                <arrayController mode="entity" entityName="Playlist" automaticallyPreparesContent="YES" id="Zxa-un-qZM" userLabel="Playlists">
                     <connections>
-                        <binding destination="dar-nR-U8v" name="contentSet" keyPath="selection.inPlaylist" id="05V-R0-gTQ"/>
+                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="dSi-XQ-IE3"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="m2A-lZ-aCF" userLabel="Themes">
@@ -1400,8 +1449,13 @@
                         <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="04q-OB-8Yr"/>
                     </connections>
                 </arrayController>
+                <arrayController mode="entity" entityName="Tag" automaticallyPreparesContent="YES" id="FWZ-co-hOW" userLabel="Tags">
+                    <connections>
+                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="3h3-AB-p1O"/>
+                    </connections>
+                </arrayController>
             </objects>
-            <point key="canvasLocation" x="1012" y="-267.5"/>
+            <point key="canvasLocation" x="1005" y="-545.5"/>
         </scene>
         <!--Big View Controller-->
         <scene sceneID="alO-lg-sfH">
@@ -1996,23 +2050,23 @@ Gw
             <objects>
                 <viewController id="QOB-qB-dPp" customClass="PlaylistController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Rll-bg-JNy">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="386"/>
+                        <rect key="frame" x="0.0" y="0.0" width="217" height="386"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cee-W8-1Ns">
-                                <rect key="frame" x="2" y="-7" width="215" height="400"/>
+                                <rect key="frame" x="2" y="-7" width="213" height="400"/>
                                 <clipView key="contentView" drawsBackground="NO" id="98V-Qw-alX">
-                                    <rect key="frame" x="0.0" y="0.0" width="215" height="400"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="213" height="400"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" outlineTableColumn="CKB-gf-fPl" id="Zai-QB-OlV" userLabel="Source List">
-                                            <rect key="frame" x="0.0" y="0.0" width="215" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="213" height="393"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="212" minWidth="16" maxWidth="1000" id="CKB-gf-fPl">
+                                                <tableColumn identifier="" width="210" minWidth="16" maxWidth="1000" id="CKB-gf-fPl">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2026,11 +2080,11 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="HeaderCell" id="G5l-d6-J8g">
-                                                            <rect key="frame" x="1" y="1" width="212" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="210" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Xq-MH-4hQ">
-                                                                    <rect key="frame" x="0.0" y="1" width="212" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="210" height="14"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="JS9-go-Vb1">
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -2051,7 +2105,7 @@ Gw
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="DataCell" id="lrt-PW-f65">
-                                                            <rect key="frame" x="1" y="20" width="212" height="17"/>
+                                                            <rect key="frame" x="1" y="20" width="210" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView translatesAutoresizingMaskIntoConstraints="NO" id="oOD-b5-p7N">
@@ -2069,7 +2123,7 @@ Gw
                                                                     </connections>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="brG-Ff-yTh">
-                                                                    <rect key="frame" x="25" y="0.0" width="187" height="17"/>
+                                                                    <rect key="frame" x="25" y="0.0" width="185" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="0H3-6Y-cp7">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2080,13 +2134,13 @@ Gw
                                                                     </connections>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlp-gb-Wd7">
-                                                                    <rect key="frame" x="166" y="-1" width="43" height="17"/>
+                                                                    <rect key="frame" x="164" y="-1" width="43" height="17"/>
                                                                     <buttonCell key="cell" type="inline" title="Inline" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="qic-hc-Cdj">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInPlaylist" id="uQ6-I0-aa8">
+                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInPlaylist" id="bqj-bb-1MD">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCount</string>
                                                                             </dictionary>
@@ -2121,9 +2175,10 @@ Gw
                                         </outlineView>
                                     </subviews>
                                     <nil key="backgroundColor"/>
+                                    <edgeInsets key="contentInsets" left="0.0" right="0.0" top="7" bottom="0.0"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="lmx-3i-jqq">
-                                    <rect key="frame" x="1" y="119" width="238" height="15"/>
+                                    <rect key="frame" x="0.0" y="384" width="213" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="X7y-Hj-3SV">
@@ -2185,7 +2240,7 @@ Gw
                     </connections>
                 </treeController>
             </objects>
-            <point key="canvasLocation" x="-708" y="899"/>
+            <point key="canvasLocation" x="-709.5" y="899"/>
         </scene>
         <!--Theme Controller-->
         <scene sceneID="TIz-Ao-QeS">

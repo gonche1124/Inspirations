@@ -26,7 +26,7 @@ class SetToCompoundString: ValueTransformer {
     override class func allowsReverseTransformation() -> Bool {return false}
 }
 
-//Collection count becasue bindings is not working.
+//Collection count becasue bindings is not working. /Playist View
 class SetToCount: ValueTransformer {
     override class func transformedValueClass() -> AnyClass{
         return NSString.self
@@ -78,6 +78,28 @@ class stringToImage: ValueTransformer {
     override class func allowsReverseTransformation() -> Bool {
         return false
     }
+}
+
+//Token field converter.
+class SetToArray: ValueTransformer {
+    override class func transformedValueClass() -> AnyClass{
+        return NSArray.self
+    }
+    
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let nsmoSet = value as? Set<NSManagedObject> else {return nil}
+        return Array(nsmoSet)
+    }
+    
+    override class func allowsReverseTransformation() -> Bool {
+        return true
+    }
+    
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let array = value as? [NSManagedObject] else { return nil }
+        return Set(array)
+    }
+ 
 }
 
 //MARK: - NSTreeNodeExtension
@@ -140,7 +162,7 @@ extension NSAlert {
 }
 
 //MARK: - NSViewController
-extension NSViewController{
+extension NSViewController {
     
     var mainToolbarItems: Array<NSToolbarItem>?  {return (NSApp.mainWindow?.toolbar?.items) ?? nil} //Easy access to toolbar
     
@@ -184,5 +206,40 @@ extension NSViewController{
         infoLabel.bind(NSBindingName("displayPatternValue4"), to: tc, withKeyPath: "arrangedObjects.@count", options:[NSBindingOption(rawValue: "NSDisplayPattern"):displayP])
         
     }
+
+
 }
+
+
+
+//Protocols for controllers of tabView
+@objc protocol ControllerProtocol{
+    @objc optional var currentQuoteController: NSArrayController? {get} //optional variables.
+    @objc optional var currentAuthorController: NSArrayController? {get}
+    @objc optional var currentThemesController: NSArrayController? {get}
+    @objc optional var currentTagsController: NSArrayController? {get}
+}
+
+//Protocol for main controller
+protocol mainViewController{
+    var selectedQuoteController: NSArrayController {get}
+    var selectedAuthorController: NSArrayController {get}
+}
+
+extension NSViewController: ControllerProtocol {
+    var currentQuoteController: NSArrayController?{
+        switch self.className {
+        case "CocoaBindingsTable":
+            return (self as! CocoaBindingsTable).quotesArrayController
+        case "QuoteController":
+            return (self as! QuoteController).quotesArray
+        case "BigViewController":
+            return (self as! BigViewController).arrayController
+        default:
+            return nil
+        }
+    }
+}
+
+
 
