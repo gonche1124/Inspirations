@@ -50,15 +50,24 @@ class BooleanToImage: ValueTransformer {
     }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        if value == nil {
-            return nil
-        }else {
-            return NSImage.init(imageLiteralResourceName: (value as! Bool) ? "red heart":"grey heart")
-        }
+        
+        guard let bValue = value as? Bool else {return nil}
+        return NSImage.init(imageLiteralResourceName: bValue ? "red heart":"grey heart")
+        
+//        if value == nil {
+//            return nil
+//        }else {
+//            return NSImage.init(imageLiteralResourceName: (value as! Bool) ? "red heart":"grey heart")
+//        }
     }
     
     //No Reverse.
     override class func allowsReverseTransformation() -> Bool {
+        return true
+    }
+    
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        print (value)
         return false
     }
 }
@@ -168,7 +177,9 @@ extension NSViewController {
     
     var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
     
-    var mainSearchField: NSView {return ((self.mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view) ?? nil)!} //Easy access to searchtoolbar
+    var mainSearchField: NSView? {return ((self.mainToolbarItems?.first(where: {$0.itemIdentifier.rawValue=="searchToolItem"})?.view) ?? nil)!} //Easy access to searchtoolbar
+    //TODO: Giving errors
+    //WARNING
     
     //Dictionary to bind searchfield to array controller
     func searchBindingDictionary(withName title:String="Quote", andPredicate predicate:String="quote CONTAINS[cd] $value")-> [NSBindingOption:Any]{

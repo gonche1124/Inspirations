@@ -33,7 +33,7 @@ class ViewController: NSViewController {
         }
         
         //Initialize and add the different Views that the App will use. (Check if efficient management of resources).
-        let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+ //       let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
 //        VCPlainTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCPlainTable")) as! CocoaBindingsTable
 //        VCQuoteTable = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCQuotesTable")) as! QuoteController
 //        VCBigView = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "VCBigView")) as! BigViewController
@@ -73,14 +73,22 @@ class ViewController: NSViewController {
         
         let moc = (NSApp.delegate as! AppDelegate).managedObjectContext
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
-            //Delete Authors & Themes.
+            //Delete Orphan Authors & Themes.
             _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
             _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
+        
+            //Update Favorites playlist.
+            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favPl=Playlist.firstWith(predicate: NSPredicate(format: "pName == %@", "Favorites"), inContext: moc) as? Playlist {
+      
+                _=qList.filter({$0.isFavorite==true}).map({$0.addToInPlaylist(favPl)})
+                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromInPlaylist(favPl)})
+            }
+        
         }
         
         if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
            
-            //Using extensions
+            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
             if let mainPl=Playlist.firstWith(predicate: NSPredicate(format: "pName == %@", "Main"), inContext: moc) as? Playlist{
                 _=qList.map({$0.addToInPlaylist(mainPl)})
             }

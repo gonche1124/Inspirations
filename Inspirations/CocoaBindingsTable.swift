@@ -17,7 +17,6 @@ class CocoaBindingsTable: NSViewController {
                 
     }
     
-    
     //Set delegate of searcfiled when view will appear.
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -36,8 +35,6 @@ class CocoaBindingsTable: NSViewController {
         }
                 
     }
-    
- 
     
     //IBOutlets
     @IBOutlet var quotesArrayController: NSArrayController!
@@ -85,6 +82,8 @@ extension CocoaBindingsTable: NSTableViewDataSource{
         return thisItem
     }
 }
+
+
 
 //extension CocoaBindingsTable: ControllerProtocol {
 //    override var currentQuoteController: NSArrayController? {

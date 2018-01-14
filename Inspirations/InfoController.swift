@@ -8,6 +8,7 @@
 
 import Cocoa
 
+
 class InfoController: NSViewController {
 
     override func viewDidLoad() {
@@ -55,12 +56,12 @@ class InfoController: NSViewController {
 extension InfoController: NSTokenFieldDelegate{
     
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
-        
+        print(substring)
         if tokenField.identifier==NSUserInterfaceItemIdentifier("playlistTokenField") {
-            return (playlistController.arrangedObjects as! [Playlist]).map({$0.pName!})
+            return (playlistController.arrangedObjects as! [Playlist]).map({$0.pName!}).filter({$0.hasPrefix(substring)})
         }
         else {
-            return (tagsControlller.arrangedObjects as! [Tags]).map({$0.tag!})
+            return (tagsControlller.arrangedObjects as! [Tags]).map({$0.tag!}).filter({$0.hasPrefix(substring)})
         }
     }
     
@@ -75,16 +76,19 @@ extension InfoController: NSTokenFieldDelegate{
         return nil
     }
     
+    //Add Entities when a name is entered.
     func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {
         
+        //Playlist token field.
         if tokenField.identifier==NSUserInterfaceItemIdentifier("playlistTokenField"){
             let newPlaylist = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: moc) as! Playlist
-            newPlaylist.pName = tokens[0] as! String
+            newPlaylist.pName = tokens[0] as? String
             return [newPlaylist]//(representedObject as? Playlist)?.pName!
         }
+        //Tags toekn field
         else if tokenField.identifier==NSUserInterfaceItemIdentifier("tagsTokenField"){
             let newTag = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: moc) as! Tags
-            newTag.tag = tokens[0] as! String
+            newTag.tag = tokens[0] as? String
             return [newTag]
         }
         return tokens

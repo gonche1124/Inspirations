@@ -750,7 +750,7 @@
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MeC-S6-vfC">
                                                                     <rect key="frame" x="3" y="0.0" width="17" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="a48-e1-COQ"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSActionTemplate" id="a48-e1-COQ"/>
                                                                     <connections>
                                                                         <binding destination="TTs-O3-WmV" name="value" keyPath="objectValue.isFavorite" id="h2n-0g-YMu">
                                                                             <dictionary key="options">
@@ -1168,7 +1168,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="g3k-St-AvL">
-                                <rect key="frame" x="0.0" y="414" width="248" height="5"/>
+                                <rect key="frame" x="0.0" y="414" width="248" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box fixedFrame="YES" title="Author" translatesAutoresizingMaskIntoConstraints="NO" id="zng-Mg-5JU" userLabel="Author Box">
@@ -1179,10 +1179,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDC-qf-5r8">
-                                            <rect key="frame" x="60" y="18" width="145" height="17"/>
+                                            <rect key="frame" x="60" y="18" width="145" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total phrases" id="hy4-Iu-Nx4">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total phrases" id="hy4-Iu-Nx4">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1196,46 +1196,46 @@
                                             </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTI-FS-irL">
-                                            <rect key="frame" x="19" y="43" width="37" height="17"/>
+                                            <rect key="frame" x="19" y="43" width="37" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Birth:" id="b0X-Nd-m70">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Birth:" id="b0X-Nd-m70">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqo-PT-lkE">
-                                            <rect key="frame" x="60" y="43" width="94" height="17"/>
+                                            <rect key="frame" x="60" y="43" width="94" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1999" id="Uov-ri-MX7">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1999" id="Uov-ri-MX7">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iKz-5q-qaV">
-                                            <rect key="frame" x="12" y="18" width="44" height="17"/>
+                                            <rect key="frame" x="12" y="18" width="44" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total:" id="Wqp-FA-baH">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total:" id="Wqp-FA-baH">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="89e-il-wvd">
-                                            <rect key="frame" x="7" y="68" width="49" height="17"/>
+                                            <rect key="frame" x="7" y="68" width="49" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Name:" id="ztx-AE-8sQ">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Name:" id="ztx-AE-8sQ">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIN-eU-l8F">
-                                            <rect key="frame" x="60" y="68" width="120" height="17"/>
+                                            <rect key="frame" x="60" y="68" width="120" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="John Doe" id="32e-YQ-58D">
-                                                <font key="font" metaFont="system"/>
+                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="John Doe" id="32e-YQ-58D">
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1293,13 +1293,13 @@
                                 </comboBoxCell>
                                 <connections>
                                     <binding destination="m2A-lZ-aCF" name="content" keyPath="arrangedObjects.topic" id="gbe-Tb-2PG"/>
-                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" previousBinding="GKX-GO-aDL" id="jeV-wQ-QaR"/>
                                     <binding destination="dar-nR-U8v" name="value" keyPath="selection.isAbout.topic" previousBinding="gbe-Tb-2PG" id="YnH-bh-eT6">
                                         <dictionary key="options">
                                             <bool key="NSConditionallySetsEditable" value="YES"/>
                                         </dictionary>
                                     </binding>
                                     <binding destination="ft8-At-g8I" name="editable" keyPath="self.areItemsEditable" id="GKX-GO-aDL"/>
+                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" previousBinding="GKX-GO-aDL" id="jeV-wQ-QaR"/>
                                 </connections>
                             </comboBox>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="9pN-pd-sVG">
@@ -1347,12 +1347,12 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </tokenFieldCell>
                                             <connections>
-                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="ktu-eM-B5F"/>
                                                 <binding destination="dar-nR-U8v" name="value" keyPath="selection.inPlaylist" id="oVx-HC-HBo">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">SetToArray</string>
                                                     </dictionary>
                                                 </binding>
+                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="ktu-eM-B5F"/>
                                                 <outlet property="delegate" destination="ft8-At-g8I" id="kAL-Mi-TeX"/>
                                             </connections>
                                         </tokenField>
@@ -1395,12 +1395,12 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </tokenFieldCell>
                                             <connections>
-                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="OQ7-i3-Igj"/>
                                                 <binding destination="dar-nR-U8v" name="value" keyPath="selection.tags" id="H2P-RM-9kl">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">SetToArray</string>
                                                     </dictionary>
                                                 </binding>
+                                                <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="OQ7-i3-Igj"/>
                                                 <outlet property="delegate" destination="ft8-At-g8I" id="dn5-6H-ICp"/>
                                             </connections>
                                         </tokenField>
@@ -1423,6 +1423,18 @@
                                     </subviews>
                                 </view>
                             </box>
+                            <button focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yp-Mu-285">
+                                <rect key="frame" x="76" y="439" width="46" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" focusRingType="none" inset="2" id="WHu-dL-Qdj">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="ft8-At-g8I" name="enabled" keyPath="self.areItemsEditable" id="Shp-PY-H2m"/>
+                                    <binding destination="dar-nR-U8v" name="value" keyPath="selection.isFavorite" id="NBR-f1-bXW"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -1439,7 +1451,7 @@
                         <binding destination="ft8-At-g8I" name="selectionIndexes" keyPath="self.currentVC.selectionIndexes" id="VUW-B1-efh"/>
                     </connections>
                 </arrayController>
-                <arrayController mode="entity" entityName="Playlist" automaticallyPreparesContent="YES" id="Zxa-un-qZM" userLabel="Playlists">
+                <arrayController mode="entity" entityName="Playlist" fetchPredicateFormat="isInPlaylist.pName==&quot;Lists&quot;" automaticallyPreparesContent="YES" id="Zxa-un-qZM" userLabel="Playlists">
                     <connections>
                         <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="dSi-XQ-IE3"/>
                     </connections>
@@ -1455,7 +1467,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1005" y="-545.5"/>
+            <point key="canvasLocation" x="1005" y="-310.5"/>
         </scene>
         <!--Big View Controller-->
         <scene sceneID="alO-lg-sfH">
