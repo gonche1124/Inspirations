@@ -31,7 +31,7 @@ class BigViewController: NSViewController {
         //Show info label
         if let infoLabel = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField {
             if let hConstraint = infoLabel.constraints.first(where: {$0.identifier=="heightOfLabel"}){
-                hConstraint.constant=24
+                hConstraint.constant=oldLabelHeight!//24
             }
         }
     }
@@ -39,14 +39,10 @@ class BigViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        //Bind the array controller to the nssearchfield
-        if let searchField = self.mainSearchField as? NSSearchField, let quoteC = arrayController {
-            self.bind(searchField: searchField, toQuoteController: quoteC)
-        }
-        
         //Hide info label.
         if let infoLabel = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField {
             if let hConstraint = infoLabel.constraints.first(where: {$0.identifier=="heightOfLabel"}){
+                oldLabelHeight=hConstraint.constant
                 hConstraint.constant=0
             }
         }
@@ -57,6 +53,7 @@ class BigViewController: NSViewController {
     @IBOutlet var arrayController: NSArrayController!
     @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var previousButton: NSButton!
+    var oldLabelHeight:CGFloat?
     
     //Swipe event detected
     override func swipe(with event: NSEvent) {

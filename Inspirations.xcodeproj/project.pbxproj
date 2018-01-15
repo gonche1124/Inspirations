@@ -11,7 +11,6 @@
 		8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
-		8A308F261F0B48B600961057 /* AuthorsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A308F251F0B48B600961057 /* AuthorsController.swift */; };
 		8A78DA711FAA77250096F711 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A78DA701FAA77250096F711 /* PlaylistController.swift */; };
 		8A853A601FDDEBD500CFDE5F /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A853A5F1FDDEBD500CFDE5F /* InfoController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
@@ -21,11 +20,10 @@
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
 		8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */; };
 		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
-		8AAE34D11FB7AC1200FC704A /* ThemesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE34D01FB7AC1200FC704A /* ThemesController.swift */; };
-		8AB7CC261FB218800080ED4F /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7CC251FB218800080ED4F /* CollectionController.swift */; };
-		8AB7CC331FB2518E0080ED4F /* CollectionQuoteItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AB7CC311FB2518E0080ED4F /* CollectionQuoteItem.xib */; };
 		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8ADBCF641FBBEFA5007523FF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities.swift */; };
+		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
+		8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A2200D126800F7E1D9 /* WindowController.swift */; };
 		8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B35F1FECA94D008A361F /* ImportController.swift */; };
 		8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB528C1EDBADE50096B93F /* BigViewController.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +53,6 @@
 		8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.3.xcdatamodel; sourceTree = "<group>"; };
 		8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.2.xcdatamodel; sourceTree = "<group>"; };
 		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
-		8A308F251F0B48B600961057 /* AuthorsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorsController.swift; sourceTree = "<group>"; };
 		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
 		8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.1.xcdatamodel; sourceTree = "<group>"; };
 		8A78DA701FAA77250096F711 /* PlaylistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
@@ -73,12 +70,11 @@
 		8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsUITests.swift; sourceTree = "<group>"; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
-		8AAE34D01FB7AC1200FC704A /* ThemesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesController.swift; sourceTree = "<group>"; };
 		8AB420731FF2EBE700317816 /* InspirationsV2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.5.xcdatamodel; sourceTree = "<group>"; };
-		8AB7CC251FB218800080ED4F /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
-		8AB7CC311FB2518E0080ED4F /* CollectionQuoteItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionQuoteItem.xib; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
+		8ADDA7A2200D126800F7E1D9 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.4.xcdatamodel; sourceTree = "<group>"; };
 		8AE9B35F1FECA94D008A361F /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
 		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
@@ -121,11 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				8A853A5F1FDDEBD500CFDE5F /* InfoController.swift */,
-				8AB7CC251FB218800080ED4F /* CollectionController.swift */,
 				8A78DA701FAA77250096F711 /* PlaylistController.swift */,
-				8A308F251F0B48B600961057 /* AuthorsController.swift */,
 				8AE9B35F1FECA94D008A361F /* ImportController.swift */,
-				8AAE34D01FB7AC1200FC704A /* ThemesController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
 				8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */,
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
@@ -159,10 +152,11 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
+				8ADDA7A2200D126800F7E1D9 /* WindowController.swift */,
 				8AB7CC2B1FB24E1D0080ED4F /* Resources */,
 				8ACADE831F64B77500919332 /* Support */,
 				8A2572E11ED8B50900720C2A /* View Controllers */,
-				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */,
@@ -192,7 +186,6 @@
 		8AB7CC2B1FB24E1D0080ED4F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8AB7CC311FB2518E0080ED4F /* CollectionQuoteItem.xib */,
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
 			);
 			name = Resources;
@@ -201,6 +194,7 @@
 		8ACADE831F64B77500919332 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
 				8A17C2051F58FB0900814107 /* ImportExport.swift */,
 				8ADBCF631FBBEFA5007523FF /* Utilities.swift */,
 			);
@@ -317,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AB7CC331FB2518E0080ED4F /* CollectionQuoteItem.xib in Resources */,
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
@@ -346,20 +339,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */,
-				8AB7CC261FB218800080ED4F /* CollectionController.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A78DA711FAA77250096F711 /* PlaylistController.swift in Sources */,
+				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
-				8A308F261F0B48B600961057 /* AuthorsController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
 				8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */,
 				8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */,
 				8A853A601FDDEBD500CFDE5F /* InfoController.swift in Sources */,
+				8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
 				8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */,
-				8AAE34D11FB7AC1200FC704A /* ThemesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

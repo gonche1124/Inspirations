@@ -14,10 +14,15 @@ class InfoController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-       // _=self.view.subviews.filter({$0.tag==2}).map({($0 as! NSTextField).isBordered=false})
         _=self.view.subviews.filter({$0.tag == 2}).map({($0 as! NSTextField).drawsBackground=areItemsEditable})
     }
     
+    override func viewWillAppear() {
+        if let ro = NSApp.windows[0].contentViewController?.representedObject as? SharedItems{
+            self.representedObject=ro
+        }
+        super.viewWillAppear()
+    }
    
     
     @IBAction func makeEditable(_ sender: NSButton) {
@@ -37,19 +42,7 @@ class InfoController: NSViewController {
     @IBOutlet var tagsControlller: NSArrayController!
     
     @objc dynamic lazy var areItemsEditable: Bool = false
-    
-    //Refrence to a specific View controller
-    //TODO: Add protocols to NSTabControlelr to avoid boilerplate code "current XXX controller"
-    @objc dynamic lazy var currentVC: NSArrayController? = {
-        let childC=NSApp.mainWindow?.contentViewController?.childViewControllers
-        guard let tabC=childC?.first(where: {$0.className=="NSTabViewController"}) as? NSTabViewController else {return nil}
-        guard let ccB=tabC.childViewControllers[0] as? CocoaBindingsTable else {return nil}
-        return ccB.quotesArrayController
-    }()
-
-    
-    
-    
+        
 }
 
 //Token Field Delegate

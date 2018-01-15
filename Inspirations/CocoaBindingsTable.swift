@@ -20,20 +20,7 @@ class CocoaBindingsTable: NSViewController {
     //Set delegate of searcfiled when view will appear.
     override func viewWillAppear() {
         super.viewWillAppear()
-        
-        //Bind the array controller to the nssearchfield
-        if let searchField = self.mainSearchField as? NSSearchField, let quoteC = quotesArrayController {
-            self.bind(searchField: searchField, toQuoteController: quoteC)
-        }
-        
-        //Bind Information Label.
-        if let infoL = NSApp.mainWindow?.contentView?.viewWithTag(1) as? NSTextField{
-            self.bind(infoLabel: infoL,
-                      toQuotes: quotesArrayController,
-                      andAuthor: authorsController,
-                      andThemes: themesController)
-        }
-                
+
     }
     
     //IBOutlets
@@ -41,6 +28,12 @@ class CocoaBindingsTable: NSViewController {
     @IBOutlet weak var columnsTable: NSTableView!
     @IBOutlet var authorsController: NSArrayController!
     @IBOutlet var themesController: NSArrayController!
+    
+    override var representedObject: Any?{
+        didSet{
+            print("This was called \(self.description)")
+        }
+    }
     
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {
@@ -83,27 +76,6 @@ extension CocoaBindingsTable: NSTableViewDataSource{
     }
 }
 
-
-
-//extension CocoaBindingsTable: ControllerProtocol {
-//    override var currentQuoteController: NSArrayController? {
-//        return quotesArrayController
-//    }
-//
-//    var currentAuthorController: NSArrayController? {
-//        return authorsController
-//    }
-//
-//    var currentThemesController: NSArrayController? {
-//        return themesController
-//    }
-//
-//    var currentTagsController: NSArrayController? {
-//        return nil
-//    }
-//
-//
-//}
 
 
 

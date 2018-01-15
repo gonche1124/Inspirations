@@ -8,9 +8,7 @@
 
 import Cocoa
 
-protocol progressMade: ProgressReporting {
-    
-}
+protocol progressMade: ProgressReporting {}
 
 class ImportController: NSViewController {
 
@@ -22,8 +20,6 @@ class ImportController: NSViewController {
     @IBOutlet weak var pathTextField: NSTextField!
     
     var urlToImport:URL?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

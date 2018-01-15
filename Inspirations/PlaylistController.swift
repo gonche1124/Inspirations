@@ -76,30 +76,14 @@ extension PlaylistController: NSOutlineViewDelegate{
         if (!(sNode?.isLeaf)!){return} //Check if is not playlist
         guard let sPlaylist = sNode?.representedObject as? Playlist else {return}
       
-        
-        
-        //FIX - Make conform to protocols to get arrayController from NSControllers.
-        let tabController = NSApp.mainWindow?.contentViewController?.childViewControllers.first(where: {$0.className=="NSTabViewController"}) as? NSTabViewController
-        //let qArray2 = tabController?.childViewControllers[(tabController?.selectedTabViewItemIndex)!].currentQuoteController
-        let qArray = (tabController?.childViewControllers[(tabController?.selectedTabViewItemIndex)!] as? CocoaBindingsTable)?.quotesArrayController
-        qArray?.fetchPredicate=NSPredicate(format: "inPlaylist.pName CONTAINS[CD] %@", sPlaylist.pName!)
-     
-        
-        
-        
-        //let qController = NSApp.mainWindow?.contentView?.subviews.first(where: {$0.className==NST})
-        
-        
-        //let currPredicate = NSPredicate(format: "ANY inPlaylist.pName = %@",(sPlaylist.pName!))
-        //(self.parent as! ViewController).VCPlainTable.quotesArrayController.filterPredicate = currPredicate
-        // TODO: change for current controller.
+        //Change the predicate of the main controller
+        if let sharedItems = self.representedObject as? SharedItems {
+            sharedItems.mainQuoteController?.fetchPredicate=NSPredicate(format: "inPlaylist.pName CONTAINS[CD] %@", sPlaylist.pName!)
+            sharedItems.mainQuoteController?.fetch(nil)
 
+        }     
     }
 
-    //Check if item should be selectable
-//    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
-//        return (item as! NSTreeNode).isLeaf
-//    }
 }
 
 //MARK: NSOutlineViewDataSource
