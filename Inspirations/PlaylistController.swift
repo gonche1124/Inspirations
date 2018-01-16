@@ -31,22 +31,25 @@ class PlaylistController: NSViewController {
     
     //Add item.
     @IBAction func addItem(_ sender: Any) {
-    
-        //Ask for Name:
-        //TODO: Implement ask for playlistName
         
-//        //Gets the big Playlist
-        let frequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
-        frequest.predicate = NSPredicate(format: "pName == %@", "Lists")
-        let bigPlaylist = try! moc.fetch(frequest) as! [Playlist]
+       //Gets the Parent Playlist
+        let listsPlaylist = Playlist.firstWith(predicate: NSPredicate(format: "pName == %@", "Lists"), inContext: moc) as? Playlist
 
-        //Sets the new one
-        let newPlay = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: moc) as! Playlist
-        newPlay.pName = "PlaylistYYY3"
-        newPlay.isInPlaylist = bigPlaylist.first
-        
-        //Save
-        try! self.moc.save()
+        //Get the name of the New playlist
+        let alert = NSAlert.createAlert(title: "Playlist", message: "Please enter name:", style: .informational, withCancel: true, andTextField: true)
+        let result = alert.runModal()
+        if  result == .alertFirstButtonReturn{
+            if let textField = alert.accessoryView as? NSTextField,
+                textField.stringValue.count > 1 {
+                
+                //Sets the new one
+                let newPlay = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: self.moc) as! Playlist
+                newPlay.pName = textField.stringValue
+                newPlay.isInPlaylist = listsPlaylist
+                try! self.moc.save()
+                
+            }
+        }
     }
 }
 

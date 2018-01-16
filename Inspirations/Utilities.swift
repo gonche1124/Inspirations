@@ -68,6 +68,22 @@ extension NSAlert {
 
         return alert
     }
+    
+    static func createAlert(title: String?, message: String?, style: NSAlert.Style = .critical, withCancel:Bool=true, andTextField:Bool=false) -> NSAlert {
+        let alert = NSAlert()
+        if let title = title {alert.messageText = title}
+        if let message = message {alert.informativeText = message}
+        alert.addButton(withTitle: "Ok")
+        if withCancel {alert.addButton(withTitle: "Cancel")}
+        if andTextField{
+            let textField = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+            textField.placeholderString="Playlist"
+            alert.accessoryView=textField
+        }
+        alert.alertStyle = style
+        
+        return alert
+    }
 }
 
 //MARK: - NSViewController
