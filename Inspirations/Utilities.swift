@@ -129,19 +129,8 @@ extension NSViewController: ControllerProtocol {
 @objcMembers
 class SharedItems: NSObject {
    
-    var selectionIndexes: IndexSet = IndexSet()
+    //var selectionIndexes: IndexSet = IndexSet()
     
-    //NSArray Controllers
-    //TODO: Check if all are neccesary?
-//    var mainQuoteController:NSArrayController? {
-//        let arrayController = NSArrayController()
-//        arrayController.managedObjectContext=(NSApp.delegate as? AppDelegate)?.managedObjectContext
-//        arrayController.automaticallyPreparesContent=true
-//        arrayController.fetch(nil)
-//        arrayController.entityName="Quote"
-//        print("Total items is: \((arrayController.arrangedObjects as! NSArray).count)")
-//        return arrayController
-//    }
     var mainQuoteController:NSArrayController?
     var authorController:NSArrayController?
     var themeController:NSArrayController?

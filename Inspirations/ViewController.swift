@@ -21,14 +21,14 @@ class ViewController: NSViewController {
             //notiCenter.addObserver(self, forKeyPath: #managedObjectContextDidSave, options: [], context: nil)
         
         //Not working
-        let toolItems = NSApp.mainWindow?.toolbar?.items
-        if let segControl = toolItems?.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl {
-            segControl.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
-        }
+//        let toolItems = NSApp.mainWindow?.toolbar?.items
+//        if let segControl = toolItems?.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl {
+//            segControl.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
+//        }
         
-        if let toolBar = self.view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl{
-            toolBar.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
-        }
+//        if let toolBar = self.view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue=="segmentButton"})?.view as? NSSegmentedControl{
+//            toolBar.addObserver(self, forKeyPath: "selectedSegmentIndex", options: [], context: nil)
+//        }
         
     }
     
@@ -44,12 +44,12 @@ class ViewController: NSViewController {
     }
     
     //Function from observers.
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if keyPath=="selectedSegmentIndex" {
-            print ("index changed to")
-        }
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//
+//        if keyPath=="selectedSegmentIndex" {
+//            print ("index changed to")
+//        }
+//    }
     
     //Called when an object gets updated.
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {

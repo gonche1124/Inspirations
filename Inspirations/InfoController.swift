@@ -21,6 +21,14 @@ class InfoController: NSViewController {
         if let ro = NSApp.windows[0].contentViewController?.representedObject as? SharedItems{
             self.representedObject=ro
         }
+//        for item in (NSApp.windows[0].contentViewController?.childViewControllers)!{
+//            if let tabView = item as? NSTabViewController {
+//                if let table = tabView.childViewControllers[tabView.selectedTabViewItemIndex] as? CocoaBindingsTable{
+//                    print(table.quotesArrayController.selectionIndexes.count)
+//                    print(table.columnsTable.selectedRowIndexes.count)
+//                }
+//            }
+//        }
         super.viewWillAppear()
     }
    

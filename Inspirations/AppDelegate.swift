@@ -11,17 +11,19 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
+    //Window Delegate methods.
+    func windowDidResize(_ notification: Notification) {
+        print("Resized")
+    }
+    
+     func applicationWillFinishLaunching(_ notification: Notification) {
+        print("C")
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
      
-        //Register Transformer
-        ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
-        ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
-        ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
-        ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
-        ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
 
-        
         //Sets color of main Window
         //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
         NSApp.mainWindow?.backgroundColor=NSColor.white
