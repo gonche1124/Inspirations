@@ -10,12 +10,13 @@ import Cocoa
 
 class WindowController: NSWindowController {
     
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
 
-    override func windowDidLoad() {
-        super.windowDidLoad()
-    
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    override func windowWillLoad() {
+        super.windowWillLoad()
         
         //register Values transformers.
         ValueTransformer.setValueTransformer(CollectionToCount(), forName: NSValueTransformerName(rawValue:"myCollectionToCount"))
@@ -24,7 +25,26 @@ class WindowController: NSWindowController {
         ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
-        ValueTransformer.setValueTransformer(CollectionToCount(), forName: NSValueTransformerName(rawValue:"CollectionToCount"))
+        //ValueTransformer.setValueTransformer(DoNothingTransformer(), forName: NSValueTransformerName(rawValue:"myDoNothingTransformer"))
+        
+    }
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+    
+        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        
+        //register Values transformers.
+//        ValueTransformer.setValueTransformer(CollectionToCount(), forName: NSValueTransformerName(rawValue:"myCollectionToCount"))
+//        ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
+//        ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
+//        ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
+//        ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
+//        ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
+//        ValueTransformer.setValueTransformer(DoNothingTransformer(), forName: NSValueTransformerName(rawValue:"myDoNothingTransformer"))
+
+        
+        
         
         let sharedItems=SharedItems()
         //self.quoteController.bind(.selectionIndexes, to: sharedItems.selectionIndexes, withKeyPath: "self.selectionIndexes", options: [:])
@@ -35,6 +55,14 @@ class WindowController: NSWindowController {
         self.window?.delegate=NSApp.delegate as? AppDelegate
     }
     
+    
+    //TODO:
+    //- (void)awakeFromNib {
+//    [super awakeFromNib];
+//    if (! self.representedObject) {
+//    self.representedObject = <your_model_object>;
+//    }
+//}
     
     
     //MARK: - Variables

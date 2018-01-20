@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
      func applicationWillFinishLaunching(_ notification: Notification) {
-        print("C")
+        
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

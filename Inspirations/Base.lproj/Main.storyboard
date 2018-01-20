@@ -643,7 +643,7 @@
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="alY-J4-zDz" userLabel="Quotes">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="alY-J4-zDz" userLabel="Quotes">
                     <connections>
                         <binding destination="B8D-0N-5wS" name="managedObjectContext" keyPath="self.moc" id="trw-uz-ZGm"/>
                     </connections>
@@ -708,25 +708,31 @@
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue3" keyPath="selection.@count.@distinctUnionOfObjects.fromAuthor" previousBinding="0LQ-Pz-afN" id="Wjr-0l-r3a">
+                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue3" keyPath="selection.@distinctUnionOfObjects.fromAuthor" previousBinding="0LQ-Pz-afN" id="Kix-e1-ueb">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
-                                                            <string key="NSNoSelectionPlaceholder">None</string>
+                                                            <string key="NSMultipleValuesPlaceholder">Various Objects</string>
+                                                            <string key="NSNoSelectionPlaceholder">0</string>
                                                             <string key="NSNotApplicablePlaceholder">NA</string>
-                                                            <string key="NSNullPlaceholder">Null</string>
+                                                            <string key="NSNullPlaceholder">0</string>
+                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="RLP-y7-VHS" name="displayPatternValue4" keyPath="arrangedObjects.@count" previousBinding="Wjr-0l-r3a" id="zJU-c5-dUU">
+                                                    <binding destination="RLP-y7-VHS" name="displayPatternValue4" keyPath="arrangedObjects.@count" previousBinding="Kix-e1-ueb" id="Hkh-hB-jB5">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue5" keyPath="selection.@count.@distinctUnionOfObjects.isAbout" previousBinding="zJU-c5-dUU" id="God-4e-ErC">
+                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue5" keyPath="selection.@distinctUnionOfObjects.isAbout" previousBinding="Hkh-hB-jB5" id="bcb-AQ-sGR">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
+                                                            <string key="NSNoSelectionPlaceholder">0</string>
+                                                            <string key="NSNotApplicablePlaceholder">NA</string>
+                                                            <string key="NSNullPlaceholder">0</string>
+                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="OWR-uS-pSa" name="displayPatternValue6" keyPath="arrangedObjects.@count" previousBinding="God-4e-ErC" id="GbM-yy-6zY">
+                                                    <binding destination="OWR-uS-pSa" name="displayPatternValue6" keyPath="arrangedObjects.@count" previousBinding="bcb-AQ-sGR" id="vmn-w1-SKE">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
                                                         </dictionary>
@@ -770,11 +776,12 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
+                        <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
                         <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="7hP-4t-ML9"/>
                         <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="2ki-Qg-q7I"/>
+                        <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="RLP-y7-VHS" userLabel="Authors">
@@ -1074,11 +1081,11 @@
                     </connections>
                 </viewController>
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
                     <connections>
                         <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="moc" id="rT8-ff-Xyt"/>
-                        <binding destination="eP2-EX-TRi" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="M5M-gu-Lin"/>
                         <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="zez-0a-Oaz"/>
+                        <binding destination="eP2-EX-TRi" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="M5M-gu-Lin"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="1rF-ib-b76">
@@ -1254,11 +1261,11 @@
                     </connections>
                 </viewController>
                 <customObject id="TEs-JW-Lnz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
                     <connections>
                         <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="moc" id="2dC-21-nRL"/>
-                        <binding destination="1B8-Ka-okj" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="DaV-mB-KzM"/>
                         <binding destination="1B8-Ka-okj" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="DnO-vy-36B"/>
+                        <binding destination="1B8-Ka-okj" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="DaV-mB-KzM"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="Hji-ur-3F5">
@@ -1564,8 +1571,8 @@
                 <customObject id="20z-pz-iyu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" preservesSelection="NO" avoidsEmptySelection="NO" id="dar-nR-U8v" userLabel="Quotes Array">
                     <connections>
-                        <binding destination="ft8-At-g8I" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="QPC-pC-IK2"/>
                         <binding destination="ft8-At-g8I" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="jre-MD-YO6"/>
+                        <binding destination="ft8-At-g8I" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="QPC-pC-IK2"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Playlist" fetchPredicateFormat="isInPlaylist.pName==&quot;Lists&quot;" automaticallyPreparesContent="YES" id="Zxa-un-qZM" userLabel="Playlists">
@@ -1686,11 +1693,11 @@
                     </connections>
                 </viewController>
                 <customObject id="lse-UF-EUT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="GDU-Jh-yzC">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="GDU-Jh-yzC">
                     <connections>
                         <binding destination="EjF-pN-ldH" name="managedObjectContext" keyPath="moc" id="oZ0-yV-tUt"/>
-                        <binding destination="EjF-pN-ldH" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="eU2-xW-wcV"/>
                         <binding destination="EjF-pN-ldH" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="3Wr-mK-41s"/>
+                        <binding destination="EjF-pN-ldH" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="eU2-xW-wcV"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -2049,7 +2056,7 @@ Gw
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInPlaylist" id="bqj-bb-1MD">
+                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInPlaylist" id="uY1-6f-D7Y">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCount</string>
                                                                             </dictionary>

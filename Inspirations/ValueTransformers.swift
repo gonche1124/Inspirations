@@ -104,28 +104,10 @@ class SetToArray: ValueTransformer {
 //General collection to count.
 class CollectionToCount: ValueTransformer{
     
-    override class func transformedValueClass() -> AnyClass{
-        return NSString.self
-    }
-    
     override  func transformedValue(_ value: Any?) -> Any? {
-        if let mObject = value as? NSManagedObject {
-            print("1 object selected")
-            return 1
-        }
-        if let mSet = value as? NSSet {
-            print("\(mSet.count) set selected")
-            return mSet.count
-        }
-        if let mArray = value as? NSArray {
-            print("\(mArray.count) array selected")
-            return mArray.count
-        }
-        print("Nothing selected")
-        return nil
+        guard let oneManagedObject = value as? [NSManagedObject] else {return nil}
+        return oneManagedObject.count
     }
     
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
 }
+

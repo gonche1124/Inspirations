@@ -92,8 +92,6 @@ class ViewController: NSViewController {
     @IBOutlet var quoteController: NSArrayController!
 
     
-    
-    
     //MARK: - Export
     //Connected through first responder
     @IBAction func exportCoreModel(_ sender: NSButton) {
@@ -105,41 +103,5 @@ class ViewController: NSViewController {
     //Outlets
     @IBOutlet weak var containerView: NSView!
     @IBOutlet weak var informationLabel: NSTextField!
-    @IBOutlet weak var searchQuote: NSSearchField!
-    lazy var searchQuote2 : NSSearchField! = {
-        let items = self.view.window?.toolbar?.items
-        let thisSearch = items?.first(where: {$0.itemIdentifier.rawValue == "searchToolItem"})
-        return thisSearch!.view as! NSSearchField
-    }()
     
-
-    
-    
-    // MARK: - Helpers
-    func updateInfoLabel(parameter: Any){
-        self.informationLabel.stringValue = "Showing \(parameter) of the 33 records"
-    }
-    
-    //Function to print the number of elemtns in core data
-//    func printCurrentData(){
-//
-//        //get context
-//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-//        let managedContext = appDelegate.managedObjectContext
-//
-//        //Retrieve the current Data.
-//        var listQuotes = [Quote]()//[NSManagedObject]()
-//        do{
-//            let records = try managedContext.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "Quote"))
-//            if let records = records as? [Quote]{
-//                listQuotes=records
-//            }
-//            print("number of records is: \(listQuotes.count)")
-//            self.informationLabel.stringValue = "Showing \(listQuotes.count) of \(listQuotes.count)"
-//
-//
-//        }catch{
-//            print("Could not print the records")
-//        }
-//    }
 }
