@@ -494,12 +494,19 @@
                                     <popUpButton key="view" verticalHuggingPriority="750" id="VbN-NB-udi">
                                         <rect key="frame" x="0.0" y="14" width="46" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="popUpButtonCell:5Tt-Vb-Q10:image" imagePosition="overlaps" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" selectedItem="r8e-oT-K5d" id="5Tt-Vb-Q10">
+                                        <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="popUpButtonCell:5Tt-Vb-Q10:image" imagePosition="overlaps" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" id="5Tt-Vb-Q10">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="dqC-82-f7V">
                                                 <items>
                                                     <menuItem state="on" image="NSShareTemplate" hidden="YES" id="r8e-oT-K5d"/>
+                                                    <menuItem title="Set Quote as Background" id="gcS-ha-fQp">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="setSelectedQuoteAsDesktopBackground:" target="Oky-zY-oP4" id="t2S-Ap-C9I"/>
+                                                            <binding destination="alY-J4-zDz" name="enabled" keyPath="selectedObjects.@count" id="eTv-2m-B6v"/>
+                                                        </connections>
+                                                    </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="g4i-fc-XBp"/>
                                                     <menuItem title="Export Selected to CSV" id="V0T-Vl-9c0"/>
                                                     <menuItem title="Export Selected to JSON" id="Ez1-vc-Y7C">
@@ -708,28 +715,9 @@
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue3" keyPath="selection.@distinctUnionOfObjects.fromAuthor" previousBinding="0LQ-Pz-afN" id="Kix-e1-ueb">
-                                                        <dictionary key="options">
-                                                            <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
-                                                            <string key="NSMultipleValuesPlaceholder">Various Objects</string>
-                                                            <string key="NSNoSelectionPlaceholder">0</string>
-                                                            <string key="NSNotApplicablePlaceholder">NA</string>
-                                                            <string key="NSNullPlaceholder">0</string>
-                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
-                                                        </dictionary>
-                                                    </binding>
                                                     <binding destination="RLP-y7-VHS" name="displayPatternValue4" keyPath="arrangedObjects.@count" previousBinding="Kix-e1-ueb" id="Hkh-hB-jB5">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
-                                                        </dictionary>
-                                                    </binding>
-                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue5" keyPath="selection.@distinctUnionOfObjects.isAbout" previousBinding="Hkh-hB-jB5" id="bcb-AQ-sGR">
-                                                        <dictionary key="options">
-                                                            <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
-                                                            <string key="NSNoSelectionPlaceholder">0</string>
-                                                            <string key="NSNotApplicablePlaceholder">NA</string>
-                                                            <string key="NSNullPlaceholder">0</string>
-                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
                                                         </dictionary>
                                                     </binding>
                                                     <binding destination="OWR-uS-pSa" name="displayPatternValue6" keyPath="arrangedObjects.@count" previousBinding="bcb-AQ-sGR" id="vmn-w1-SKE">
@@ -740,6 +728,25 @@
                                                     <binding destination="yn4-ph-Lzq" name="displayPatternValue1" keyPath="selection.@count" id="Rn7-6g-uZH">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue3" keyPath="selection.@distinctUnionOfObjects.fromAuthor" previousBinding="0LQ-Pz-afN" id="Kix-e1-ueb">
+                                                        <dictionary key="options">
+                                                            <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
+                                                            <string key="NSMultipleValuesPlaceholder">Various Objects</string>
+                                                            <string key="NSNoSelectionPlaceholder">0</string>
+                                                            <string key="NSNotApplicablePlaceholder">NA</string>
+                                                            <string key="NSNullPlaceholder">0</string>
+                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <binding destination="yn4-ph-Lzq" name="displayPatternValue5" keyPath="selection.@distinctUnionOfObjects.isAbout" previousBinding="Hkh-hB-jB5" id="bcb-AQ-sGR">
+                                                        <dictionary key="options">
+                                                            <string key="NSDisplayPattern">%{value1}@ of %{value2}@ Quotes, %{value3}@ of %{value4}@ Authors, %{value5}@ of %{value6}@ Topics Selected</string>
+                                                            <string key="NSNoSelectionPlaceholder">0</string>
+                                                            <string key="NSNotApplicablePlaceholder">NA</string>
+                                                            <string key="NSNullPlaceholder">0</string>
+                                                            <string key="NSValueTransformerName">myCollectionToCount</string>
                                                         </dictionary>
                                                     </binding>
                                                 </connections>
@@ -778,9 +785,9 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
                         <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="7hP-4t-ML9"/>
                         <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="2ki-Qg-q7I"/>
+                        <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
                         <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
                     </connections>
                 </arrayController>
@@ -2315,6 +2322,6 @@ AAAAAAAcgQ
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="W2x-KH-09j"/>
+        <segue reference="Gbk-BP-9U0"/>
     </inferredMetricsTieBreakers>
 </document>

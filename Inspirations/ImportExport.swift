@@ -70,9 +70,88 @@ class importExport: NSObject {
         return "[]"
     }
     
-    // MARK: - Import
+    //MARK: - Background Image.
+    func mergeThis(quote: Quote, onImageWithPath imgPath: NSURL){
+        
+        //Get 3 items to merge.
+        let phrase = quote.quote! as NSString
+        let author = "-"+(quote.fromAuthor?.name!)! as! NSString
+        let bImage = NSImage.init(contentsOf: imgPath as URL)!
+        
+        //Get attributes to draw and CGRects for each one.
+        var attrs = self.getDictionaryWithAttributes(for: "Quote")
+        var attrsA = self.getDictionaryWithAttributes(for: "Author")
+        let imgSize = bImage.size
+        let quoteRect = NSRect.init(x: imgSize.width*0.1, y: imgSize.height*0.1, width: imgSize.width*0.8, height: imgSize.height*0.65)
+        let authorRect = NSRect.init(x: imgSize.width*0.1, y: imgSize.height*0.75, width: imgSize.width*0.8, height: imgSize.height*0.15)
+        let bkground = NSRect.init(x: imgSize.width*0.1, y: imgSize.height*0.1, width: imgSize.width*0.8, height: imgSize.height*0.8)
+        
+        //Get sizes to fit the rect.
+        let accFontQuote = calculateFont(toFit: quoteRect, withString: phrase, minSize: 12, maxSize: 500, andAttributes: attrs)
+        let accFontAuthor = calculateFont(toFit: authorRect, withString: author, minSize: 12, maxSize: 350, andAttributes: attrsA)
+        attrs[.font]=accFontQuote
+        attrsA[.font]=accFontAuthor
+        
+        let cView = NSView.init()
+        cView.wantsLayer=true
+        cView.layer?.backgroundColor=NSColor.red.cgColor
+        cView.layer?.cornerRadius=4
+        
+        //Draw
+        bImage.lockFocusFlipped(true)
+        cView.draw(bkground)
+        NSColor.red.setFill()
+        //CGRect.fill(bkground)
+        _=NSRect.fill(bkground)
+        phrase.draw(in: quoteRect, withAttributes: attrs)
+        author.draw(in: authorRect, withAttributes: attrsA)
+        bImage.unlockFocus()
+        
+        //Testing, write to file
+        let imageRep = NSBitmapImageRep.imageReps(with: bImage.tiffRepresentation!)
+        let imageData = (imageRep[0] as! NSBitmapImageRep).representation(using: .jpeg, properties: [:])
+        try! imageData?.write(to: imgPath as URL)
+       
+        //Set as Backdrop.
+        //TODO: Set as background.
+        print ("Done")
+        
+        
+    }
     
-    //Test for simplification
+    //Returns an NSFont instance that fits the NSRect given with the text provided.
+    func calculateFont(toFit rect:NSRect, withString: NSString, minSize:Int, maxSize:Int, andAttributes: [NSAttributedStringKey:Any])->NSFont{
+        let boundingSize = NSSize.init(width: rect.width, height: .greatestFiniteMagnitude)
+        for i in minSize...maxSize{
+            var attrs : [NSAttributedStringKey:Any] = [:] as Dictionary
+            attrs[.font] = NSFont.init(name: "HelveticaNeue-Thin", size: CGFloat(i))
+            let drawRect = withString.boundingRect(with: boundingSize, options: .usesLineFragmentOrigin, attributes: attrs)
+            if drawRect.size.height >= rect.size.height {
+                return NSFont.init(name: "HelveticaNeue-Thin", size: CGFloat(i-1))!
+            }
+        }
+        
+        return NSFont.init(name: "HelveticaNeue-Thin", size: CGFloat(maxSize))!
+    }
+
+    //Returns a dictionary to draw the text.
+    func getDictionaryWithAttributes(for typeOftext: String)->[NSAttributedStringKey : NSObject]{
+    
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        paragraphStyle.alignment = (typeOftext=="Quote" ? .justified:.right)
+        let attrs = [NSAttributedStringKey.font: NSFont(name: "HelveticaNeue-Thin",
+                                                        size: (typeOftext=="Quote" ? 500:200))!,
+                     NSAttributedStringKey.foregroundColor: NSColor.white,
+                     NSAttributedStringKey.paragraphStyle: paragraphStyle,
+                     NSAttributedStringKey.backgroundColor: NSColor.gray.withAlphaComponent(0.3)]
+        
+        return attrs
+    }
+    
+    
+    // MARK: - Import
+    //TODO: Check if it is needed.
     //Looks for object, if does not find one it creates it.
     func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
         

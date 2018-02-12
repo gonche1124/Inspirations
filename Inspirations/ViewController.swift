@@ -98,6 +98,42 @@ class ViewController: NSViewController {
         importExport().exportAllTheQuotes()
     }
     
+    //Connected through first responder.
+    @IBAction func setSelectedQuoteAsDesktopBackground(_ sender: NSButton){
+        print ("Set as background image.")
+        
+        //get current quote(first)
+        let selectedQuote:Quote = ((representedObject as! SharedItems).mainQuoteController?.selectedObjects.first as? Quote)!
+        
+        //Get the path to the desktop image.
+        let imagePathAlias = NSWorkspace().desktopImageURL(for: NSScreen.main!)
+        let imagePath: NSURL = try! NSURL.init(resolvingAliasFileAt: imagePathAlias!, options: NSURL.BookmarkResolutionOptions())
+        
+        //Check if it already has a quote, if so, delete and ind original path.
+    
+        //duplicate path/image.
+        //TODO: Handle duplicate items.
+        let budleID = Bundle.main.bundleIdentifier
+        let fileManager = FileManager.default
+        let possibleUrl = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        let newName = budleID!+"/"+(imagePath.lastPathComponent?.replacingOccurrences(of: ".jpg", with: "-new.jpg"))!
+        let newURL = NSURL(fileURLWithPath: newName, relativeTo: possibleUrl.first)
+        try! fileManager.copyItem(at: imagePath.absoluteURL!, to: newURL as URL)
+        
+        //Set Quote.
+        importExport().mergeThis(quote: selectedQuote, onImageWithPath: newURL)
+        
+        
+        //Append text.
+        
+        //Set as background image.
+        //https://gist.github.com/greenywd/d7fdc3d3933fc42f3aaa2d4fccca3944
+        //https://gist.github.com/pthrasher/12e06e24c2f6c542dfa1
+        
+        
+    }
+    
+    
     //MARK: - Variables
     
     //Outlets
