@@ -593,7 +593,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <segue destination="Tbm-IE-Mmr" kind="popover" identifier="" popoverAnchorView="B9R-hW-2He" popoverBehavior="t" preferredEdge="maxY" id="Vr3-aH-8vi"/>
+                                            <segue destination="Tbm-IE-Mmr" kind="popover" identifier="addQuoteSegue" popoverAnchorView="B9R-hW-2He" popoverBehavior="t" preferredEdge="maxY" id="Vr3-aH-8vi"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -773,10 +773,10 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="m8X-zN-I6n"/>
                         <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="2ki-Qg-q7I"/>
                         <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
                         <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
+                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="m8X-zN-I6n"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="RLP-y7-VHS" userLabel="Authors">
@@ -1078,23 +1078,23 @@
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
                     <connections>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fi1-3j-cd1"/>
                         <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="zez-0a-Oaz"/>
                         <binding destination="eP2-EX-TRi" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="M5M-gu-Lin"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fi1-3j-cd1"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="1rF-ib-b76">
                     <connections>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="p4c-WL-tkd"/>
                         <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.fromAuthor" id="rE1-B7-M8o"/>
                         <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.fromAuthor" previousBinding="rE1-B7-M8o" id="v1C-Gy-u2v"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="p4c-WL-tkd"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="Lo7-X3-HrK">
                     <connections>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fn8-cf-kkj"/>
                         <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.isAbout" id="ehs-E8-ED4"/>
                         <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.isAbout" previousBinding="ehs-E8-ED4" id="r05-7N-tIM"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fn8-cf-kkj"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1258,9 +1258,9 @@
                 <customObject id="TEs-JW-Lnz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
                     <connections>
-                        <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="self.representedObject.moc" id="np1-Vh-UeA"/>
                         <binding destination="1B8-Ka-okj" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="DnO-vy-36B"/>
                         <binding destination="1B8-Ka-okj" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="DaV-mB-KzM"/>
+                        <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="self.representedObject.moc" id="np1-Vh-UeA"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="Hji-ur-3F5">
@@ -1572,17 +1572,17 @@
                 </arrayController>
                 <arrayController mode="entity" entityName="Playlist" fetchPredicateFormat="isInPlaylist.pName==&quot;Lists&quot;" automaticallyPreparesContent="YES" id="Zxa-un-qZM" userLabel="Playlists">
                     <connections>
-                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="dSi-XQ-IE3"/>
+                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.representedObject.moc" id="20g-Lt-O14"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="m2A-lZ-aCF" userLabel="Themes">
                     <connections>
-                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="04q-OB-8Yr"/>
+                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.representedObject.moc" id="Ive-O9-EKX"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Tag" automaticallyPreparesContent="YES" id="FWZ-co-hOW" userLabel="Tags">
                     <connections>
-                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.moc" id="3h3-AB-p1O"/>
+                        <binding destination="ft8-At-g8I" name="managedObjectContext" keyPath="self.representedObject.moc" id="SVy-Wr-pQj"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1692,9 +1692,9 @@
                 <customObject id="lse-UF-EUT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="GDU-Jh-yzC">
                     <connections>
-                        <binding destination="EjF-pN-ldH" name="managedObjectContext" keyPath="self.representedObject.moc" id="CO3-jt-FHe"/>
                         <binding destination="EjF-pN-ldH" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="3Wr-mK-41s"/>
                         <binding destination="EjF-pN-ldH" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="eU2-xW-wcV"/>
+                        <binding destination="EjF-pN-ldH" name="managedObjectContext" keyPath="self.representedObject.moc" id="CO3-jt-FHe"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1845,17 +1845,17 @@
                 <customObject id="9qb-Dj-jAY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="SIS-MX-oyV" userLabel="Authors Controller">
                     <connections>
-                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="2jO-Z1-fgP"/>
+                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="self.representedObject.moc" id="A3K-IE-tIL"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="nK2-yr-QSl" userLabel="Theme Controller">
                     <connections>
-                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="TqQ-Z6-vwt"/>
+                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="self.representedObject.moc" id="Q2f-KK-Xoo"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Tag" automaticallyPreparesContent="YES" id="e5C-t4-xE8" userLabel="Tag Controller">
                     <connections>
-                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="moc" id="I2f-ai-Xe5"/>
+                        <binding destination="Tbm-IE-Mmr" name="managedObjectContext" keyPath="self.representedObject.moc" id="mFX-Bx-jzb"/>
                     </connections>
                 </arrayController>
             </objects>

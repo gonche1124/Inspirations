@@ -54,6 +54,12 @@ class WindowController: NSWindowController {
         self.window?.delegate=NSApp.delegate as? AppDelegate
     }
     
+    //Set up code for a new segue from the window
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard let destController = segue.destinationController as? AddQuote else {return}
+        destController.representedObject = self.contentViewController?.representedObject
+    }
+    
     //MARK: - Variables
     @objc var moc: NSManagedObjectContext = ((NSApp.delegate as? AppDelegate)?.managedObjectContext)!
     @IBOutlet var quoteController: NSArrayController!
