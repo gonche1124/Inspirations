@@ -773,7 +773,7 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="7hP-4t-ML9"/>
+                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="m8X-zN-I6n"/>
                         <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="2ki-Qg-q7I"/>
                         <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
                         <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
@@ -781,12 +781,12 @@
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="RLP-y7-VHS" userLabel="Authors">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="MqF-nI-wwp"/>
+                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="qAE-vF-APx"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="OWR-uS-pSa" userLabel="Themes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.moc" id="lzE-eq-IaB"/>
+                        <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="BWo-eg-0cm"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1078,23 +1078,23 @@
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
                     <connections>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="moc" id="rT8-ff-Xyt"/>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fi1-3j-cd1"/>
                         <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="zez-0a-Oaz"/>
                         <binding destination="eP2-EX-TRi" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="M5M-gu-Lin"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="1rF-ib-b76">
                     <connections>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="p4c-WL-tkd"/>
                         <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.fromAuthor" id="rE1-B7-M8o"/>
                         <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.fromAuthor" previousBinding="rE1-B7-M8o" id="v1C-Gy-u2v"/>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.moc" id="1d7-xy-u4R"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="Lo7-X3-HrK">
                     <connections>
+                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fn8-cf-kkj"/>
                         <binding destination="Paa-0K-gYi" name="contentArrayForMultipleSelection" keyPath="selection.@distinctUnionOfObjects.isAbout" id="ehs-E8-ED4"/>
                         <binding destination="Paa-0K-gYi" name="contentObject" keyPath="selection.isAbout" previousBinding="ehs-E8-ED4" id="r05-7N-tIM"/>
-                        <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.moc" id="XW6-vY-EJF"/>
                     </connections>
                 </arrayController>
             </objects>
@@ -1258,7 +1258,7 @@
                 <customObject id="TEs-JW-Lnz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
                     <connections>
-                        <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="moc" id="2dC-21-nRL"/>
+                        <binding destination="1B8-Ka-okj" name="managedObjectContext" keyPath="self.representedObject.moc" id="np1-Vh-UeA"/>
                         <binding destination="1B8-Ka-okj" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="DnO-vy-36B"/>
                         <binding destination="1B8-Ka-okj" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="DaV-mB-KzM"/>
                     </connections>
@@ -1692,7 +1692,7 @@
                 <customObject id="lse-UF-EUT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="GDU-Jh-yzC">
                     <connections>
-                        <binding destination="EjF-pN-ldH" name="managedObjectContext" keyPath="moc" id="oZ0-yV-tUt"/>
+                        <binding destination="EjF-pN-ldH" name="managedObjectContext" keyPath="self.representedObject.moc" id="CO3-jt-FHe"/>
                         <binding destination="EjF-pN-ldH" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="3Wr-mK-41s"/>
                         <binding destination="EjF-pN-ldH" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="eU2-xW-wcV"/>
                     </connections>
@@ -2150,7 +2150,7 @@ Gw
                 <customObject id="HeY-dM-Ypq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <treeController mode="entity" entityName="Playlist" fetchPredicateFormat="isInPlaylist == nil" automaticallyPreparesContent="YES" childrenKeyPath="includesPlaylists" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="3Zr-20-sWP">
                     <connections>
-                        <binding destination="QOB-qB-dPp" name="managedObjectContext" keyPath="moc" id="fDp-FS-TLP"/>
+                        <binding destination="QOB-qB-dPp" name="managedObjectContext" keyPath="self.representedObject.moc" id="js4-o5-lJL"/>
                     </connections>
                 </treeController>
             </objects>

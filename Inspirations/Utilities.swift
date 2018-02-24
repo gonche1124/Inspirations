@@ -130,7 +130,7 @@ extension NSViewController: ControllerProtocol {
 class SharedItems: NSObject {
    
     //var selectionIndexes: IndexSet = IndexSet()
-    
+    var moc:NSManagedObjectContext?
     var mainQuoteController:NSArrayController?
     var authorController:NSArrayController?
     var themeController:NSArrayController?
