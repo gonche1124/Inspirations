@@ -1078,7 +1078,11 @@
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
                     <connections>
-                        <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="zez-0a-Oaz"/>
+                        <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="giA-8x-z8x">
+                            <dictionary key="options">
+                                <bool key="NSDeletesObjectsOnRemove" value="YES"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="eP2-EX-TRi" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="M5M-gu-Lin"/>
                         <binding destination="eP2-EX-TRi" name="managedObjectContext" keyPath="self.representedObject.moc" id="fi1-3j-cd1"/>
                     </connections>

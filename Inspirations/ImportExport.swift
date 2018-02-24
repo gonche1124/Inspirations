@@ -151,21 +151,22 @@ class importExport: NSObject {
     
     
     // MARK: - Import
+    
     //TODO: Check if it is needed.
     //Looks for object, if does not find one it creates it.
     func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
-        
+
         //Get uniqueness key
         let currEntDes = inContext.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
         //The case where there is no unique key will not happen, this can be erased if easier way to flaten and access first object is found.
         guard let uniqKey = currEntDes?.uniquenessConstraints[0].first as? String else {
             return NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
         }
-        
+
         //Create fetchRequest
         let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fRequest.predicate = NSPredicate(format: "%K == %@", uniqKey, attributesDict[uniqKey] as! String)
-        
+
         //Fetch
         let allObjects = try! inContext.fetch(fRequest) as! [NSManagedObject]
         return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
@@ -187,11 +188,11 @@ class importExport: NSObject {
         //DispatchQueue.global(qos: .background).async{
             //Fetch or create new entity.
             let entityName = fromDict["className"] as! String
-            let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict, inContext: inContext)
-            //let newEntity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
+            //let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict, inContext: inContext)
+            let newEntity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
             
             //Populate attributes is working after nullToNil
-            _=newEntity.entity.attributeKeys.map({newEntity.setValue(self.nullToNil(value:fromDict[$0]), forKey: $0)})
+        _=newEntity.entity.attributeKeys.map({newEntity.setValue(self.nullToNil(value:fromDict[$0]), forKey: $0)})
             
             //Check if it needs to fill relationships.
             if includingRelations {
@@ -222,7 +223,7 @@ class importExport: NSObject {
     }
     
     //Parse JSON File
-    func parseJSONFile(pathToFile: URL)->[Dictionary<String, Any>]{
+    func parseJSONFileToArray(pathToFile: URL)->[Dictionary<String, Any>]{
         let jsonData = NSData(contentsOf: pathToFile)
         let jsonArray = try! JSONSerialization.jsonObject(with: (jsonData)! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! [Dictionary<String, Any>]
         

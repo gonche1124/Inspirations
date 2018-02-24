@@ -41,7 +41,7 @@ class ImportController: NSViewController {
     
     @IBAction func importQuotes(_ sender: NSButton) {
         let importJson = importExport()
-        let arrayOfQuotes = importJson.parseJSONFile(pathToFile: self.urlToImport!)
+        let arrayOfQuotes = importJson.parseJSONFileToArray(pathToFile: self.urlToImport!)
         importJson.progressInstance!.addObserver(self, forKeyPath: "fractionCompleted", options: [], context: nil)
         importJson.progressInstance!.addObserver(self, forKeyPath: "completedUnitCount", options: [], context: nil)
         self.statusLabel.isHidden=false
