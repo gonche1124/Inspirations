@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
-    //Window Delegate methods.
+    //Window Delegate methods
     func windowDidResize(_ notification: Notification) {
         print("Resized")
     }
