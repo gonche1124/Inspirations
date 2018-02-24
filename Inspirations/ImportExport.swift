@@ -75,7 +75,7 @@ class importExport: NSObject {
         
         //Get 3 items to merge.
         let phrase = quote.quote! as NSString
-        let author = "-"+(quote.fromAuthor?.name!)! as! NSString
+        let author = "-"+(quote.fromAuthor?.name!)! as NSString
         let bImage = NSImage.init(contentsOf: imgPath as URL)!
         
         //Get attributes to draw and CGRects for each one.

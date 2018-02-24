@@ -489,7 +489,7 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="q6m-YI-ImI"/>
                                 <toolbarItem implicitItemIdentifier="C8AE6906-AFFA-43FB-9951-B38A76D4A98C" label="Share" paletteLabel="Share" image="NSShareTemplate" id="C1U-f1-Daa">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="46" height="25"/>
+                                    <size key="minSize" width="46" height="28"/>
                                     <size key="maxSize" width="46" height="28"/>
                                     <popUpButton key="view" verticalHuggingPriority="750" id="VbN-NB-udi">
                                         <rect key="frame" x="0.0" y="14" width="46" height="28"/>
@@ -507,24 +507,12 @@
                                                             <binding destination="alY-J4-zDz" name="enabled" keyPath="selectedObjects.@count" id="eTv-2m-B6v"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem isSeparatorItem="YES" id="g4i-fc-XBp"/>
-                                                    <menuItem title="Export Selected to CSV" id="V0T-Vl-9c0"/>
-                                                    <menuItem title="Export Selected to JSON" id="Ez1-vc-Y7C">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                    <menuItem title="Export Selected to XML" id="oa6-Mr-rb9">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="BCr-Jx-nVM"/>
-                                                    <menuItem title="Export All to CSV" id="kFC-iD-3Bn"/>
                                                     <menuItem title="Export All to JSON" id="NC8-O7-zh6">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="exportCoreModel:" target="Oky-zY-oP4" id="P7l-2H-NTe"/>
                                                         </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Export ALL to XML" id="Tzr-Fy-O4a">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
                                                 </items>
                                             </menu>
@@ -1180,7 +1168,7 @@
                                                                             </constraints>
                                                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Queeeeeeeote" id="DLB-8A-wiI">
                                                                                 <font key="font" size="18" name="Optima-Italic"/>
-                                                                                <color key="textColor" name="Sea Wave - Color"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -1194,7 +1182,7 @@
                                                                             </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Author" id="hzN-FC-gky">
                                                                                 <font key="font" metaFont="system" size="15"/>
-                                                                                <color key="textColor" name="Lonely tree - Color-3"/>
+                                                                                <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
@@ -1675,12 +1663,14 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5wE-0b-J6w" secondAttribute="trailing" constant="20" symbolic="YES" id="8vk-tQ-NKp"/>
                             <constraint firstAttribute="bottom" secondItem="5wE-0b-J6w" secondAttribute="bottom" id="C5H-16-X2U"/>
                             <constraint firstAttribute="trailing" secondItem="ihn-Ia-bW8" secondAttribute="trailing" id="M2Z-mY-XLt"/>
                             <constraint firstItem="2A5-8V-EOs" firstAttribute="centerX" secondItem="1Yv-w4-r3l" secondAttribute="centerX" id="NDN-Zp-2aQ"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2A5-8V-EOs" secondAttribute="bottom" constant="20" id="OSU-4C-MTN"/>
                             <constraint firstItem="2A5-8V-EOs" firstAttribute="centerY" secondItem="1Yv-w4-r3l" secondAttribute="centerY" id="RJt-z9-L14"/>
                             <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" id="TYt-sK-WsU"/>
+                            <constraint firstItem="ihn-Ia-bW8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="leading" constant="20" symbolic="YES" id="adO-qN-rio"/>
                             <constraint firstAttribute="bottom" secondItem="ihn-Ia-bW8" secondAttribute="bottom" id="avi-0O-mPT"/>
                             <constraint firstAttribute="trailing" secondItem="2A5-8V-EOs" secondAttribute="trailing" constant="20" id="cLW-l2-0pU"/>
                             <constraint firstItem="2A5-8V-EOs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1Yv-w4-r3l" secondAttribute="top" constant="20" id="eDy-MP-jcb"/>
@@ -2080,6 +2070,7 @@ Gw
                                                                 <constraint firstItem="oOD-b5-p7N" firstAttribute="top" secondItem="brG-Ff-yTh" secondAttribute="top" id="aLn-mm-Kys"/>
                                                                 <constraint firstItem="brG-Ff-yTh" firstAttribute="bottom" secondItem="hlp-gb-Wd7" secondAttribute="bottom" id="dw5-68-SfC"/>
                                                                 <constraint firstItem="brG-Ff-yTh" firstAttribute="leading" secondItem="oOD-b5-p7N" secondAttribute="trailing" constant="7" id="fiO-nq-6tR"/>
+                                                                <constraint firstItem="hlp-gb-Wd7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lrt-PW-f65" secondAttribute="leading" constant="20" symbolic="YES" id="rJf-G9-bEf"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="oOD-b5-p7N" id="pfr-jU-hCB"/>
@@ -2313,12 +2304,6 @@ AAAAAAAcgQ
         </namedColor>
         <namedColor name="Inspire - Color-1">
             <color red="0.082000002264976501" green="0.58399999141693115" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Lonely tree - Color-3">
-            <color red="0.75300002098083496" green="0.75300002098083496" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Sea Wave - Color">
-            <color red="0.0080000003799796104" green="0.32899999618530273" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
