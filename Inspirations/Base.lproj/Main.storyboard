@@ -773,8 +773,12 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="yn4-ph-Lzq" userLabel="Quotes">
                     <connections>
-                        <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="2ki-Qg-q7I"/>
-                        <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="2ki-Qg-q7I" id="BwM-tH-lS1"/>
+                        <binding destination="XfG-lQ-9wD" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="cef-6W-5xG">
+                            <dictionary key="options">
+                                <bool key="NSDeletesObjectsOnRemove" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="XfG-lQ-9wD" name="contentArrayForMultipleSelection" keyPath="self.representedObject.mainQuoteController.arrangedObjects" previousBinding="cef-6W-5xG" id="iml-Eh-8jU"/>
                         <binding destination="XfG-lQ-9wD" name="selectionIndexes" keyPath="self.representedObject.mainQuoteController.selectionIndexes" id="LQP-Li-8oO"/>
                         <binding destination="XfG-lQ-9wD" name="managedObjectContext" keyPath="self.representedObject.moc" id="m8X-zN-I6n"/>
                     </connections>
@@ -2311,6 +2315,6 @@ AAAAAAAcgQ
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gbk-BP-9U0"/>
+        <segue reference="W2x-KH-09j"/>
     </inferredMetricsTieBreakers>
 </document>
