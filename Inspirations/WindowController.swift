@@ -64,4 +64,20 @@ class WindowController: NSWindowController {
     @objc var moc: NSManagedObjectContext = ((NSApp.delegate as? AppDelegate)?.managedObjectContext)!
     @IBOutlet var quoteController: NSArrayController!
     
+    //MARK: - Actions
+    //TODO: improve.
+    @IBAction func changeQuotes(_ sender: NSSegmentedControl) {
+        print("changeOfQuotes with: \(sender.indexOfSelectedItem)")
+        
+        if let splitController=self.contentViewController as? NSSplitViewController{
+            splitController.splitViewItems[1].isCollapsed=true
+            splitController.splitViewItems[2].isCollapsed=true
+            splitController.splitViewItems[3].isCollapsed=true
+            splitController.splitViewItems[sender.indexOfSelectedItem+1].isCollapsed=false
+
+            print("It is a split controller with: \(sender)")
+        }
+        
+    }
+    
 }

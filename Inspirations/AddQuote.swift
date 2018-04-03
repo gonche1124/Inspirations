@@ -14,8 +14,6 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do view setup here.
-        //Add target methods.
         tagsToken.delegate=self
     }
     

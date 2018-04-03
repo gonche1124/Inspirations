@@ -124,6 +124,25 @@ extension NSViewController: ControllerProtocol {
     }
 }
 
+//Neccesary if I want to avoid making a class for it.
+extension NSSplitViewController{
+    override open var representedObject: Any?{
+        didSet{
+            print("RepresentedObjectCalled on SPLITVIEW CONTROLLER")
+            for child in self.childViewControllers{
+                child.representedObject=self.representedObject
+            }
+        }
+    }
+    
+//    @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
+//
+//        guard let tabView = self.childViewControllers.first(where: {$0.className == "NSTabViewController"})  as? NSTabViewController else {return}
+//        tabView.selectedTabViewItemIndex = sender.selectedSegment
+//
+//    }
+}
+
 
 //MARK: - Shared Class
 @objcMembers
