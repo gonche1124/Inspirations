@@ -32,16 +32,17 @@ class ViewController: NSViewController {
         
     }
     
-    override var representedObject: Any?{
-        didSet{
-            for item in self.childViewControllers{
-                item.representedObject=representedObject
-                for item2 in item.childViewControllers{
-                    item2.representedObject=representedObject
-                }
-            }
-        }
-    }
+    //UNCOMMMENT
+//    override var representedObject: Any?{
+//        didSet{
+//            for item in self.childViewControllers{
+//                item.representedObject=representedObject
+//                for item2 in item.childViewControllers{
+//                    item2.representedObject=representedObject
+//                }
+//            }
+//        }
+//    }
     
     //Function from observers.
 //    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -79,14 +80,6 @@ class ViewController: NSViewController {
         }
     }
     
-
-    //Selects the view controller to show depending on the button selected.
-    @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
-        
-        guard let tabView = self.childViewControllers.first(where: {$0.className == "NSTabViewController"})  as? NSTabViewController else {return}
-        tabView.selectedTabViewItemIndex = sender.selectedSegment
-        
-    }
 
     //MARK: - Variables
     @IBOutlet var quoteController: NSArrayController!

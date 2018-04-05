@@ -29,11 +29,11 @@ class CocoaBindingsTable: NSViewController {
     @IBOutlet var authorsController: NSArrayController!
     @IBOutlet var themesController: NSArrayController!
     
-    override var representedObject: Any?{
-        didSet{
-            print("This was called \(self.description)")
-        }
-    }
+//    override var representedObject: Any?{
+//        didSet{
+//            print("This was called \(self.description)")
+//        }
+//    }
     
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {

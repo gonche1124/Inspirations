@@ -128,20 +128,23 @@ extension NSViewController: ControllerProtocol {
 extension NSSplitViewController{
     override open var representedObject: Any?{
         didSet{
-            print("RepresentedObjectCalled on SPLITVIEW CONTROLLER")
             for child in self.childViewControllers{
                 child.representedObject=self.representedObject
             }
         }
     }
-    
-//    @IBAction func changeViewOfQuotes(_ sender: NSSegmentedControl) {
-//
-//        guard let tabView = self.childViewControllers.first(where: {$0.className == "NSTabViewController"})  as? NSTabViewController else {return}
-//        tabView.selectedTabViewItemIndex = sender.selectedSegment
-//
-//    }
 }
+
+extension NSTabViewController{
+    override open var representedObject: Any?{
+        didSet{
+            for child in self.childViewControllers{
+                child.representedObject=self.representedObject
+            }
+        }
+    }
+}
+
 
 
 //MARK: - Shared Class
