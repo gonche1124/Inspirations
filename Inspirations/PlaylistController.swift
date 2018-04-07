@@ -33,19 +33,19 @@ class PlaylistController: NSViewController {
     @IBAction func addItem(_ sender: Any) {
         
        //Gets the Parent Playlist
-        let listsPlaylist = Playlist.firstWith(predicate: NSPredicate(format: "pName == %@", "Lists"), inContext: moc) as? Playlist
+        let listsPlaylist = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Lists"), inContext: moc) as? Tags
 
         //Get the name of the New playlist
-        let alert = NSAlert.createAlert(title: "Playlist", message: "Please enter name:", style: .informational, withCancel: true, andTextField: true)
+        let alert = NSAlert.createAlert(title: "Tags", message: "Please enter name:", style: .informational, withCancel: true, andTextField: true)
         let result = alert.runModal()
         if  result == .alertFirstButtonReturn{
             if let textField = alert.accessoryView as? NSTextField,
                 textField.stringValue.count > 1 {
                 
                 //Sets the new one
-                let newPlay = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: self.moc) as! Playlist
-                newPlay.pName = textField.stringValue
-                newPlay.isInPlaylist = listsPlaylist
+                let newPlay = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: self.moc) as! Tags
+                newPlay.tagName = textField.stringValue
+                newPlay.isInTag = listsPlaylist
                 try! self.moc.save()
                 
             }
@@ -58,7 +58,7 @@ class PlaylistController: NSViewController {
 extension PlaylistController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-            let currItem = (item as! NSTreeNode).representedObject as! Playlist
+            let currItem = (item as! NSTreeNode).representedObject as! Tags
             let typeOfCell: String = (currItem.isLeaf) ? "DataCell": "HeaderCell"
             let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         return currView
@@ -77,11 +77,11 @@ extension PlaylistController: NSOutlineViewDelegate{
         guard let outlineView = notification.object as? NSOutlineView else {return} //Check is outlineView
         let sNode = outlineView.item(atRow: outlineView.selectedRow) as? NSTreeNode
         if (!(sNode?.isLeaf)!){return} //Check if is not playlist
-        guard let sPlaylist = sNode?.representedObject as? Playlist else {return}
+        guard let sPlaylist = sNode?.representedObject as? Tags else {return}
       
         //Change the predicate of the main controller
         if let sharedItems = self.representedObject as? SharedItems {
-            sharedItems.mainQuoteController?.fetchPredicate=NSPredicate(format: "inPlaylist.pName CONTAINS[CD] %@", sPlaylist.pName!)
+            sharedItems.mainQuoteController?.fetchPredicate=NSPredicate(format: "hasTags.tagName CONTAINS[CD] %@", sPlaylist.tagName!)
             sharedItems.mainQuoteController?.fetch(nil)
 
         }     
@@ -95,7 +95,7 @@ extension PlaylistController: NSOutlineViewDataSource{
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
         
-        guard let destItem = (item as? NSTreeNode)?.representedObject as? Playlist else {
+        guard let destItem = (item as? NSTreeNode)?.representedObject as? Tags else {
             return NSDragOperation.init(rawValue: 0)
         }
         return NSDragOperation.init(rawValue: destItem.isLeaf ?  1 : 0)
@@ -110,8 +110,8 @@ extension PlaylistController: NSOutlineViewDataSource{
         let quotesS = sOBID.map({moc.object(with: $0 )})
 
         //Insert objects.
-        let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
-        destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesS))
+        let destPlaylist2 = (item as! NSTreeNode).representedObject as! Tags
+        destPlaylist2.addToQuotesInTag(NSSet(array: quotesS))
         try! moc.save()
         self.playlistOutlineView.reloadData()
 

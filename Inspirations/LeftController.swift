@@ -30,6 +30,12 @@ class LeftController: NSViewController {
         
     }
     
+    override var representedObject: Any?{
+        didSet{
+            print("DID SET")
+        }
+    }
+    
     //MARK: - Outlets
     @IBOutlet weak var leftList: NSOutlineView!
     
@@ -40,8 +46,8 @@ extension LeftController: NSOutlineViewDelegate{
     //Choose the right cell to show.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
-        guard  let currItem = (item as? NSTreeNode)?.representedObject as? Playlist else {return nil}
-        let typeOfCell: String = (currItem.isLeaf) ? "SecondLevel": "FirstLevel"
+        guard  let currItem = (item as? NSTreeNode)?.representedObject as? Tags else {return nil}
+        let typeOfCell: String = (currItem.subTags!.count>0) ? "SecondLevel": "FirstLevel"
         let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         return currView
         
@@ -54,7 +60,7 @@ extension LeftController: NSOutlineViewDataSource{
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
         
-        guard let destItem = (item as? NSTreeNode)?.representedObject as? Playlist else {
+        guard let destItem = (item as? NSTreeNode)?.representedObject as? Tags else {
             return NSDragOperation.init(rawValue: 0)
         }
         return NSDragOperation.init(rawValue: destItem.isLeaf ?  1 : 0)
@@ -69,8 +75,8 @@ extension LeftController: NSOutlineViewDataSource{
         let quotesS = sOBID.map({moc.object(with: $0 )})
         
         //Insert objects.
-        let destPlaylist2 = (item as! NSTreeNode).representedObject as! Playlist
-        destPlaylist2.addToQuotesInPlaylist(NSSet(array: quotesS))
+        let destPlaylist2 = (item as! NSTreeNode).representedObject as! Tags
+        destPlaylist2.addToQuotesInTag(NSSet(array: quotesS))
         try! moc.save()
         //self.playlistOutlineView.reloadData()
         

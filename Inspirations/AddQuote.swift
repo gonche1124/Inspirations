@@ -60,8 +60,8 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
         if tags != nil {
         for item in tags! {
             let currTag = Tags(context: moc)
-            currTag.tag = item as? String
-            quoteToAdd.addToTags(currTag)
+            currTag.tagName = item as? String
+            quoteToAdd.addToHasTags(currTag)
         }
         }
         
@@ -85,7 +85,7 @@ extension AddQuote: NSTokenFieldDelegate{
     
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
         //return ["Happy", "Test", "Work", "Life"]
-        return (tagController.arrangedObjects as! [Tags]).map({$0.tag!})
+        return (tagController.arrangedObjects as! [Tags]).map({$0.tagName!})
     }
     
 }

@@ -888,7 +888,7 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="8ZI-0V-NY4" name="value" keyPath="objectValue.pName" id="cyE-hR-h8a"/>
+                                                                        <binding destination="8ZI-0V-NY4" name="value" keyPath="objectValue.tagName" id="YgK-xl-T7m"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -905,11 +905,11 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="oDP-Sr-fnR">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="Sea Wave - Color-3"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="Vdd-DG-Yod" name="value" keyPath="objectValue.pName" id="Zs6-Xd-nWp"/>
+                                                                        <binding destination="Vdd-DG-Yod" name="value" keyPath="objectValue.tagName" id="gyD-9F-5JU"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -930,7 +930,7 @@
                                     <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="MLp-am-KUt">
-                                    <rect key="frame" x="1" y="254" width="192" height="16"/>
+                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="o6e-i2-e5v">
@@ -948,7 +948,7 @@
                         <outlet property="sourceItemView" destination="caW-MJ-cb1" id="JDc-Tc-L00"/>
                     </connections>
                 </viewController>
-                <treeController mode="entity" entityName="Playlist" fetchPredicateFormat="isInPlaylist == nil" automaticallyPreparesContent="YES" childrenKeyPath="includesPlaylists" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="P1a-sZ-0hq">
+                <treeController mode="entity" entityName="Tags" fetchPredicateFormat="isInTag == nil" automaticallyPreparesContent="YES" childrenKeyPath="subTags" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="P1a-sZ-0hq">
                     <connections>
                         <binding destination="b9R-IT-fdO" name="managedObjectContext" keyPath="self.representedObject.moc" id="sLY-GV-NqH"/>
                     </connections>
@@ -1042,12 +1042,12 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="diF-74-evR" name="toolTip" keyPath="objectValue.tags" id="Tkk-Sh-eZ8">
+                                                                        <binding destination="diF-74-evR" name="toolTip" keyPath="objectValue.hasTags" id="4id-r6-snH">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCompoundString</string>
                                                                             </dictionary>
                                                                         </binding>
-                                                                        <binding destination="diF-74-evR" name="value" keyPath="objectValue.tags.@count" id="KSC-mS-PMY"/>
+                                                                        <binding destination="diF-74-evR" name="value" keyPath="objectValue.hasTags.@count" id="Dwd-83-scP"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -1056,9 +1056,6 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
-                                                    <connections>
-                                                        <binding destination="Paa-0K-gYi" name="value" keyPath="arrangedObjects.tags.tag.@count" id="Gmp-xd-iCr"/>
-                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" width="141.5" minWidth="60" maxWidth="1000" id="vIQ-2v-gI2" userLabel="Author">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Author">
@@ -2172,7 +2169,7 @@ Gw
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="G5l-d6-J8g" name="value" keyPath="objectValue.pName" id="RYF-2Q-qhZ"/>
+                                                                        <binding destination="G5l-d6-J8g" name="value" keyPath="objectValue.tagName" id="Hes-X8-Bu9"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -2211,7 +2208,7 @@ Gw
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="lrt-PW-f65" name="value" keyPath="objectValue.pName" id="w0w-Ti-Kyd"/>
+                                                                        <binding destination="lrt-PW-f65" name="value" keyPath="objectValue.tagType" id="vP8-HZ-RRP"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlp-gb-Wd7">
@@ -2221,7 +2218,7 @@ Gw
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInPlaylist" id="uY1-6f-D7Y">
+                                                                        <binding destination="lrt-PW-f65" name="title" keyPath="objectValue.quotesInTag" id="bMO-72-LJf">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCount</string>
                                                                             </dictionary>
@@ -2472,6 +2469,9 @@ AAAAAAAcgQ
         </namedColor>
         <namedColor name="Inspire - Color-1">
             <color red="0.082000002264976501" green="0.58399999141693115" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Sea Wave - Color-3">
+            <color red="0.66299998760223389" green="0.9100000262260437" blue="0.86299997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

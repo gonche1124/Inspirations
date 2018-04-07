@@ -17,6 +17,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
      func applicationWillFinishLaunching(_ notification: Notification) {
+        //TODO: Check if this is the right place for this.
+        var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+        var libr = Tags(context: moc)
+        libr.tagName="Library2"
+//        var main = Tags(context: moc)
+//        main.tagName="Main"
+//        main.isInTag=libr
+//        var fav = Tags(context: moc)
+//        fav.tagName="Favorites"
+//        libr.addToSubTags(fav)
+        var lists = Tags(context: moc)
+        lists.tagName="Lists2"
+        var att = Tags(context: moc)
+        att.tagName="Tags2"
+        
+        let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Library"), inContext: moc)
+        print("Test")
         
     }
     

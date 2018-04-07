@@ -59,20 +59,20 @@ extension InfoController: NSTokenFieldDelegate{
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
         print(substring)
         if tokenField.identifier==NSUserInterfaceItemIdentifier("playlistTokenField") {
-            return (playlistController.arrangedObjects as! [Playlist]).map({$0.pName!}).filter({$0.hasPrefix(substring)})
+            return (playlistController.arrangedObjects as! [Tags]).map({$0.tagName!}).filter({$0.hasPrefix(substring)})
         }
         else {
-            return (tagsControlller.arrangedObjects as! [Tags]).map({$0.tag!}).filter({$0.hasPrefix(substring)})
+            return (tagsControlller.arrangedObjects as! [Tags]).map({$0.tagName!}).filter({$0.hasPrefix(substring)})
         }
     }
     
     //Strings displayed in the tokenfield.
     func tokenField(_ tokenField: NSTokenField, displayStringForRepresentedObject representedObject: Any) -> String? {
         if tokenField.identifier==NSUserInterfaceItemIdentifier("playlistTokenField"){
-            return (representedObject as? Playlist)?.pName!
+            return (representedObject as? Tags)?.tagName!
         }
         else if tokenField.identifier==NSUserInterfaceItemIdentifier("tagsTokenField"){
-            return (representedObject as? Tags)?.tag!
+            return (representedObject as? Tags)?.tagName!
         }
         return nil
     }
@@ -82,14 +82,14 @@ extension InfoController: NSTokenFieldDelegate{
         
         //Playlist token field.
         if tokenField.identifier==NSUserInterfaceItemIdentifier("playlistTokenField"){
-            let newPlaylist = NSEntityDescription.insertNewObject(forEntityName: "Playlist", into: moc) as! Playlist
-            newPlaylist.pName = tokens[0] as? String
+            let newPlaylist = NSEntityDescription.insertNewObject(forEntityName: "Tags", into: moc) as! Tags
+            newPlaylist.tagName = tokens[0] as? String
             return [newPlaylist]//(representedObject as? Playlist)?.pName!
         }
         //Tags toekn field
         else if tokenField.identifier==NSUserInterfaceItemIdentifier("tagsTokenField"){
             let newTag = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: moc) as! Tags
-            newTag.tag = tokens[0] as? String
+            newTag.tagName = tokens[0] as? String
             return [newTag]
         }
         return tokens

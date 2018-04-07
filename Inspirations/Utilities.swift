@@ -24,10 +24,15 @@ extension NSTreeNode {
     }
 }
 
+//MARK: - Tags
+extension Tags{
+    var isLeafTree: Bool {get {return self.subTags!.count>0}}
+}
+
 //MARK: - NSManagedObject extensions
 extension NSManagedObject {
     
-    var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
+    //var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
     //Used to sort elements.
     var sortingKey:String {get {
