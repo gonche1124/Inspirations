@@ -13,27 +13,48 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     //Window Delegate methods
     func windowDidResize(_ notification: Notification) {
-        print("Resized")
+        //print("Resized")
     }
     
      func applicationWillFinishLaunching(_ notification: Notification) {
-        //TODO: Check if this is the right place for this.
-        var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-        var libr = Tags(context: moc)
-        libr.tagName="Library2"
-//        var main = Tags(context: moc)
-//        main.tagName="Main"
-//        main.isInTag=libr
-//        var fav = Tags(context: moc)
-//        fav.tagName="Favorites"
-//        libr.addToSubTags(fav)
-        var lists = Tags(context: moc)
-        lists.tagName="Lists2"
-        var att = Tags(context: moc)
-        att.tagName="Tags2"
         
-        let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Library"), inContext: moc)
-        print("Test")
+        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tags")
+        //let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as! Tags
+        //results.tagName="Favorites"
+        //let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        //let batchUpdate = 
+//        let main = Tags(context: moc)
+//        main.tagName="Lists"
+//        main.isLeaf=false
+        
+        do{
+            print("TOTAL TAGS: \(try! moc.fetch(fetchRequest).count)")
+            //let first = try! moc.fetch(fetchRequest).first
+            //try moc.execute(deleteRequest)
+            //try moc.delete(first as! NSManagedObject)
+            try moc.save()
+        }
+        catch{
+            print("Could not save the batch delete")
+        }
+        //TODO: Check if this is the right place for this.
+        //var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
+//        var libr = Tags(context: moc)
+//        libr.tagName="Library2"
+////        var main = Tags(context: moc)
+////        main.tagName="Main"
+////        main.isInTag=libr
+////        var fav = Tags(context: moc)
+////        fav.tagName="Favorites"
+////        libr.addToSubTags(fav)
+//        var lists = Tags(context: moc)
+//        lists.tagName="Lists2"
+//        var att = Tags(context: moc)
+//        att.tagName="Tags2"
+//
+//        let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Library"), inContext: moc)
+//        print("Test")
         
     }
     

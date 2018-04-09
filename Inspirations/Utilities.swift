@@ -34,6 +34,8 @@ extension NSManagedObject {
     
     //var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
+    
+    
     //Used to sort elements.
     var sortingKey:String {get {
         switch self.className {

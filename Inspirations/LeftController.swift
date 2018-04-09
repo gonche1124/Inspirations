@@ -47,7 +47,7 @@ extension LeftController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         guard  let currItem = (item as? NSTreeNode)?.representedObject as? Tags else {return nil}
-        let typeOfCell: String = (currItem.subTags!.count>0) ? "SecondLevel": "FirstLevel"
+        let typeOfCell: String = (currItem.subTags?.count==0) ? "SecondLevel": "FirstLevel"
         let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         return currView
         
