@@ -11,6 +11,21 @@ import Cocoa
 
 // MARK: - Value Transformers
 
+//String to Upper case.
+class StringToUpperCase: ValueTransformer{
+    override class func transformedValueClass() -> AnyClass{
+        return NSString.self
+    }
+    
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let stringValue = value as? String else {return nil}
+        return stringValue.uppercased()
+    }
+    
+    override class func allowsReverseTransformation() -> Bool {return false}
+}
+
+
 //Tooltip for plain table.
 class SetToCompoundString: ValueTransformer {
     override class func transformedValueClass() -> AnyClass{

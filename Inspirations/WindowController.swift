@@ -25,6 +25,8 @@ class WindowController: NSWindowController {
         ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
+        ValueTransformer.setValueTransformer(StringToUpperCase(), forName: NSValueTransformerName(rawValue:"StringToUpperCase"))
+        
         
         //create the security containers to store the data.
         //TODO: Check if this is neccesary!

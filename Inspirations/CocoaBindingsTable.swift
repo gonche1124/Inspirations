@@ -57,6 +57,24 @@ class CocoaBindingsTable: NSViewController {
             columnsTable.endUpdates()
         }
     }
+    
+    //MARK: - Menu Actions
+    //Marks as favorite the selected quotes.
+    @IBAction func setFavorite(_ sender: NSMenuItem) {
+        
+        guard let selectedQuotes=self.quotesArrayController.selectedObjects as? [Quote] else {          return}
+        
+        _=selectedQuotes.map({$0.isFavorite=(sender.identifier!.rawValue=="favorite") ? true : false})
+        try! self.moc.save()
+        
+        
+    }
+    
+    //Edit the selected quote.
+    @IBAction func editQuote(_ sender: NSMenuItem) {
+        print ("edit quote")
+    }
+    
 }
 
 

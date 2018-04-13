@@ -14,14 +14,13 @@ class LeftController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
+        //Regoster for dragging.
         self.sourceItemView?.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
-        
 
-//
-//        //Sort descriptors.
-//        treeArrayController.sortDescriptors = [NSSortDescriptor(key: "pName", ascending: true)]
-//
-//        //Outlineview IMPROVE
+        //Sort descriptors.
+        treeArrayController.sortDescriptors = [NSSortDescriptor(key: "tagName", ascending: true)]
+
+        //Outlineview IMPROVE
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             (self.sourceItemView as? NSOutlineView)?.expandItem(nil, expandChildren: true)
@@ -30,16 +29,43 @@ class LeftController: NSViewController {
         
     }
     
-    override var representedObject: Any?{
-        didSet{
-            print("DID SET")
-        }
-    }
-    
     //MARK: - Outlets
     @IBOutlet weak var leftList: NSOutlineView!
+    @IBOutlet var treeArrayController: NSTreeController!
+    //lazy var customSort:NSSortDescriptor = NSSortDescriptor(key: "tagName", ascending: true)
     
 }
+
+
+//MARK: - Extensions
+extension LeftController: NSSearchFieldDelegate, NSTextFieldDelegate{
+    
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        print("Began with: \(sender.stringValue)")
+    }
+    
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        print("Ended with: \(sender.stringValue)")
+        self.treeArrayController.fetchPredicate=NSPredicate(format: "isInTag == nil")
+        (self.sourceItemView as? NSOutlineView)?.reloadData()
+    }
+    
+    override func controlTextDidChange(_ obj: Notification) {
+        let searchBar=obj.object as? NSSearchField
+        
+        if searchBar?.stringValue=="" {
+            self.treeArrayController.fetchPredicate=NSPredicate(format: "isInTag == nil")
+        }else{
+            self.treeArrayController.fetchPredicate=NSPredicate(format: "(tagName CONTAINS[CD] %@)", (searchBar?.stringValue)!)
+        }
+        
+        //Update interface.
+        (self.sourceItemView as? NSOutlineView)?.reloadData()
+        
+    }
+    
+}
+
 
 extension LeftController: NSOutlineViewDelegate{
     
@@ -51,6 +77,12 @@ extension LeftController: NSOutlineViewDelegate{
         let currView = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: typeOfCell), owner: self) as? NSTableCellView
         return currView
         
+    }
+    
+    //Display Grouped cell --Formats table as a sourcelist.
+    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+        guard let item = item as? NSTreeNode else {return false}
+        return (!(item).isLeaf)
     }
 }
 

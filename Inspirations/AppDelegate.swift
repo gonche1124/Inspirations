@@ -18,43 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
      func applicationWillFinishLaunching(_ notification: Notification) {
         
-        let moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tags")
-        //let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as! Tags
-        //results.tagName="Favorites"
-        //let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        //let batchUpdate = 
-//        let main = Tags(context: moc)
-//        main.tagName="Lists"
-//        main.isLeaf=false
-        
-        do{
-            print("TOTAL TAGS: \(try! moc.fetch(fetchRequest).count)")
-            //let first = try! moc.fetch(fetchRequest).first
-            //try moc.execute(deleteRequest)
-            //try moc.delete(first as! NSManagedObject)
-            try moc.save()
-        }
-        catch{
-            print("Could not save the batch delete")
-        }
-        //TODO: Check if this is the right place for this.
-        //var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext
-//        var libr = Tags(context: moc)
-//        libr.tagName="Library2"
-////        var main = Tags(context: moc)
-////        main.tagName="Main"
-////        main.isInTag=libr
-////        var fav = Tags(context: moc)
-////        fav.tagName="Favorites"
-////        libr.addToSubTags(fav)
-//        var lists = Tags(context: moc)
-//        lists.tagName="Lists2"
-//        var att = Tags(context: moc)
-//        att.tagName="Tags2"
-//
-//        let results=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Library"), inContext: moc)
-//        print("Test")
+        //Register for NSManagedObject Notifications
+        let notiCenter = NotificationCenter.default
+        notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
         
     }
     
@@ -221,6 +187,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // If we got here, it is time to quit.
         return .terminateNow
     }
+    
+    //MARK: - Core Data Notifications
+    @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        let moc=self.managedObjectContext
+        if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
+            //Delete childless Authors & Themes.
+            _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
+            _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
+            
+            //Update Favorites playlist.
+            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
+                
+                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favTag)})
+                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favTag)})
+            }
+            
+        }
+        
+        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
+            
+            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
+            if let mainTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as? Tags{
+                _=qList.map({$0.addToHasTags(mainTag)})
+            }
+        }
+    }
+    
 
 }
 
