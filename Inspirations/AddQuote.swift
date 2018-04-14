@@ -11,12 +11,12 @@ import Cocoa
 
 class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelegate {
 
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         tagsToken.delegate=self
     }
-    
+        
     
     //Outlets
     @IBOutlet weak var quoteField: NSTextField!
@@ -25,7 +25,6 @@ class AddQuote: NSViewController, NSControlTextEditingDelegate, NSComboBoxDelega
     @IBOutlet weak var authorField: NSComboBox!
     @IBOutlet weak var themeField: NSComboBox!
     @IBOutlet weak var tagsToken: NSTokenField!
-    
     @IBOutlet var tagController: NSArrayController!
     
     //called everytime an objects end editing.

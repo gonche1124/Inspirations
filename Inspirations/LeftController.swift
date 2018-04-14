@@ -28,7 +28,9 @@ class LeftController: NSViewController {
         }
         
     }
+
     
+ 
     //MARK: - Outlets
     @IBOutlet weak var leftList: NSOutlineView!
     @IBOutlet var treeArrayController: NSTreeController!
@@ -40,12 +42,7 @@ class LeftController: NSViewController {
 //MARK: - Extensions
 extension LeftController: NSSearchFieldDelegate, NSTextFieldDelegate{
     
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        print("Began with: \(sender.stringValue)")
-    }
-    
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        print("Ended with: \(sender.stringValue)")
         self.treeArrayController.fetchPredicate=NSPredicate(format: "isInTag == nil")
         (self.sourceItemView as? NSOutlineView)?.reloadData()
     }

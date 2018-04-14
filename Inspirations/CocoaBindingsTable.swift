@@ -58,6 +58,19 @@ class CocoaBindingsTable: NSViewController {
         }
     }
     
+    //Sets the information for the edit controller.
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier!.rawValue=="editSegue" {
+              print("Segue will perform.")
+            let destSegue=segue.destinationController as? AddQuote
+            destSegue?.title="Edit Quote"
+            destSegue?.representedObject=self.representedObject
+            destSegue?.view.layer?.backgroundColor=NSColor.red as! CGColor
+            print("Segue will perform.2")
+        }
+      
+    }
+    
     //MARK: - Menu Actions
     //Marks as favorite the selected quotes.
     @IBAction func setFavorite(_ sender: NSMenuItem) {
