@@ -18,10 +18,10 @@ class CocoaBindingsTable: NSViewController {
     }
     
     //Set delegate of searcfiled when view will appear.
-    override func viewWillAppear() {
-        super.viewWillAppear()
-
-    }
+//    override func viewWillAppear() {
+//        super.viewWillAppear()
+//
+//    }
     
     //IBOutlets
     @IBOutlet var quotesArrayController: NSArrayController!
@@ -29,11 +29,6 @@ class CocoaBindingsTable: NSViewController {
     @IBOutlet var authorsController: NSArrayController!
     @IBOutlet var themesController: NSArrayController!
     
-//    override var representedObject: Any?{
-//        didSet{
-//            print("This was called \(self.description)")
-//        }
-//    }
     
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {
@@ -60,22 +55,21 @@ class CocoaBindingsTable: NSViewController {
     
     //Sets the information for the edit controller.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier!.rawValue=="editSegue" {
-              print("Segue will perform.")
-            let destSegue=segue.destinationController as? AddQuote
-            destSegue?.title="Edit Quote"
-            destSegue?.representedObject=self.representedObject
-            destSegue?.view.layer?.backgroundColor=NSColor.red as! CGColor
-            print("Segue will perform.2")
+        if segue.identifier?.rawValue=="editSegue", let destC = segue.destinationController as? AddQuote{
+                destC.title="Edit Quote"
+                destC.representedObject=self.representedObject
+                destC.selectedManagedObjects=quotesArrayController.selectedObjects as! [Quote]?
+                destC.doneButtonText="Update"
+            }
         }
       
-    }
+    
     
     //MARK: - Menu Actions
     //Marks as favorite the selected quotes.
     @IBAction func setFavorite(_ sender: NSMenuItem) {
         
-        guard let selectedQuotes=self.quotesArrayController.selectedObjects as? [Quote] else {          return}
+        guard let selectedQuotes=quotesArrayController.selectedObjects as? [Quote] else {          return}
         
         _=selectedQuotes.map({$0.isFavorite=(sender.identifier!.rawValue=="favorite") ? true : false})
         try! self.moc.save()
