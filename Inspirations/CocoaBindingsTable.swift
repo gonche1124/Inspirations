@@ -33,13 +33,30 @@ class CocoaBindingsTable: NSViewController {
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {
         interpretKeyEvents([event])
+        //fn makes this flow happen.
+        let modFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if modFlags.contains(.command) {
+            switch event.characters{
+            case "i":
+                self.performSegue(withIdentifier:.init("editSegue"), sender: self)
+            case "f":
+                self.setFavorite(!modFlags.contains(.shift))
+            default:
+            break
+            }
+        }
+       
     }
+    
+    //Command+I
+    
     
     //Delete record.
     override func deleteBackward(_ sender: Any?) {
 
         let selectedIndex = columnsTable.selectedRowIndexes
         let confirmationD = NSAlert()
+        
         confirmationD.messageText = "Delete Records"
         confirmationD.informativeText = "Are you sure you want to delete the \(selectedIndex.count) selected Quotes?"
         confirmationD.addButton(withTitle: "Ok")
@@ -67,11 +84,15 @@ class CocoaBindingsTable: NSViewController {
     
     //MARK: - Menu Actions
     //Marks as favorite the selected quotes.
-    @IBAction func setFavorite(_ sender: NSMenuItem) {
+    @IBAction func setFavorite(_ sender: Any) {
         
-        guard let selectedQuotes=quotesArrayController.selectedObjects as? [Quote] else {          return}
-        
-        _=selectedQuotes.map({$0.isFavorite=(sender.identifier!.rawValue=="favorite") ? true : false})
+        guard let selectedQuotes=quotesArrayController.selectedObjects as? [Quote] else {       return}
+        if let menu = sender as? NSMenuItem{
+            _=selectedQuotes.map({$0.isFavorite=(menu.identifier!.rawValue=="favorite") ? true : false})
+        }
+        if let keyStrike = sender as? Bool{
+            _=selectedQuotes.map({$0.isFavorite=keyStrike})
+        }
         try! self.moc.save()
         
         
