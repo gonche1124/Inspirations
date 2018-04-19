@@ -528,34 +528,28 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
-                                            <binding destination="alY-J4-zDz" name="predicate3" keyPath="filterPredicate" previousBinding="PeL-Rf-Naa" id="1C5-Ko-S3e">
-                                                <dictionary key="options">
-                                                    <string key="NSDisplayName">Themes</string>
-                                                    <string key="NSPredicateFormat">isAbout.topic CONTAINS[cd] $value</string>
-                                                </dictionary>
-                                            </binding>
-                                            <binding destination="alY-J4-zDz" name="predicate4" keyPath="filterPredicate" previousBinding="1C5-Ko-S3e" id="Cu5-aV-jKL">
-                                                <dictionary key="options">
-                                                    <string key="NSDisplayName">Tags</string>
-                                                    <string key="NSPredicateFormat">tags.tag CONTAINS[cd] $value</string>
-                                                </dictionary>
-                                            </binding>
-                                            <binding destination="alY-J4-zDz" name="predicate2" keyPath="filterPredicate" previousBinding="neS-nl-vFK" id="PeL-Rf-Naa">
+                                            <binding destination="alY-J4-zDz" name="predicate2" keyPath="filterPredicate" previousBinding="bEP-zl-5rp" id="zbM-uH-YqG">
                                                 <dictionary key="options">
                                                     <string key="NSDisplayName">Author</string>
                                                     <string key="NSPredicateFormat">fromAuthor.name CONTAINS[cd] $value</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="alY-J4-zDz" name="predicate5" keyPath="filterPredicate" previousBinding="Cu5-aV-jKL" id="jpQ-Ei-u98">
+                                            <binding destination="alY-J4-zDz" name="predicate3" keyPath="filterPredicate" previousBinding="zbM-uH-YqG" id="8Yg-lY-YNH">
+                                                <dictionary key="options">
+                                                    <string key="NSDisplayName">Themes</string>
+                                                    <string key="NSPredicateFormat">isAbout.topic CONTAINS[cd] $value</string>
+                                                </dictionary>
+                                            </binding>
+                                            <binding destination="alY-J4-zDz" name="predicate4" keyPath="filterPredicate" previousBinding="8Yg-lY-YNH" id="dLY-tM-HA4">
                                                 <dictionary key="options">
                                                     <string key="NSDisplayName">Quote</string>
                                                     <string key="NSPredicateFormat">quote CONTAINS[cd] $value</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="alY-J4-zDz" name="predicate" keyPath="filterPredicate" id="neS-nl-vFK">
+                                            <binding destination="alY-J4-zDz" name="predicate" keyPath="filterPredicate" id="bEP-zl-5rp">
                                                 <dictionary key="options">
                                                     <string key="NSDisplayName">All</string>
-                                                    <string key="NSPredicateFormat">(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value) OR (tags.tag CONTAINS[cd] $value)</string>
+                                                    <string key="NSPredicateFormat">(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value)</string>
                                                 </dictionary>
                                             </binding>
                                         </connections>
@@ -1501,7 +1495,7 @@
                                                     <rect key="frame" x="1" y="1" width="285" height="86"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textView importsGraphics="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Xfa-kO-irK">
+                                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Xfa-kO-irK">
                                                             <rect key="frame" x="0.0" y="0.0" width="285" height="86"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1509,7 +1503,11 @@
                                                             <size key="maxSize" width="463" height="10000000"/>
                                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <connections>
-                                                                <binding destination="GMt-xs-UJf" name="attributedString" keyPath="selection.quote" id="Ub2-EJ-oc1"/>
+                                                                <binding destination="GMt-xs-UJf" name="attributedString" keyPath="selection.quote" id="oyK-4k-5lG">
+                                                                    <dictionary key="options">
+                                                                        <string key="NSValueTransformerName">AttributedStringToString</string>
+                                                                    </dictionary>
+                                                                </binding>
                                                             </connections>
                                                         </textView>
                                                     </subviews>
@@ -1637,6 +1635,9 @@
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <binding destination="GMt-xs-UJf" name="value" keyPath="selection.isFavorite" id="aze-7C-Bfa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

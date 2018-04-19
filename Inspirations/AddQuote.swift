@@ -15,7 +15,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tagsToken.delegate=self
+        //tagsToken.delegate=self
         self.doneButton.title=doneButtonText
         
         if let selectedObjects=selectedManagedObjects{
@@ -31,10 +31,6 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
         super.viewWillAppear()
         self.doneButton.window?.makeFirstResponder(doneButton)
         
-        //In case user cancels.
-        //self.moc.undoManager?.beginUndoGrouping()
-        
-       
     }
     
     //Variables
@@ -63,13 +59,6 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
         self.moc.rollback()
         dismiss(self)
         
-        //self.moc.undoManager?.endUndoGrouping()
-        //self.moc.undo()
-        //let undoM=self.moc.undoManager
-        //self.moc.rollback()
-        //let myMOC=(self.representedObject as? SharedItems)?.moc
-        //myMOC?.rollback()
-        //dismiss(self)
     }
     //REVIEW TO MAKE SURE IT WOTKS
     @IBAction func pushDoneButton(_ sender: Any) {
@@ -103,6 +92,18 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
 //        themeToAdd.topic = themeT
 //        quoteToAdd.isAbout = themeToAdd
         
+        let mainTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Tags"), inContext: self.moc) as? Tags
+        if (doneButtonText=="Add"), let newTags = self.tagsToken.objectValue as? [String]{
+            for item in newTags{
+                let currTag = Tags(context:self.moc)
+                currTag.isLeaf=true
+                currTag.tagName = item
+                currTag.isInTag=mainTag
+                selectedManagedObjects.first?.addToHasTags(currTag)
+            }
+        }
+        
+        
         //save
         do {
             try moc.save()
@@ -118,23 +119,10 @@ extension AddQuote: NSTokenFieldDelegate{
     
     //Return the list of possible tags to fill
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
-        return (tagController.arrangedObjects as! [Tags]).map({$0.tagName!})
+        return (tagController.arrangedObjects as! [Tags]).map({$0.tagName!}).filter({$0.hasPrefix(substring)})
     }
     
 }
 
-//extension AddQuote: NSControlTextEditingDelegate{
-//
-//    //called everytime an objects end editing.
-//    override func controlTextDidEndEditing(_ obj: Notification) {
-//        //Validate button.
-//        let bool1 = quoteField.stringValue.count > 1
-//        let bool2 = authorField.stringValue.count > 1
-//        let bool3 = themeField.stringValue.count > 1
-//        doneButton.isEnabled = (bool1 && bool2 && bool3) ? true:false
-//
-//    }
-//
-//}
 
 

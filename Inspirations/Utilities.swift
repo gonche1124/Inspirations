@@ -102,34 +102,36 @@ extension NSViewController {
 
 
 
+
+
 //Protocols for controllers of tabView
-@objc protocol ControllerProtocol{
-    @objc optional var currentQuoteController: NSArrayController? {get} //optional variables.
-    @objc optional var currentAuthorController: NSArrayController? {get}
-    @objc optional var currentThemesController: NSArrayController? {get}
-    @objc optional var currentTagsController: NSArrayController? {get}
-}
+//@objc protocol ControllerProtocol{
+//    @objc optional var currentQuoteController: NSArrayController? {get} //optional variables.
+//    @objc optional var currentAuthorController: NSArrayController? {get}
+//    @objc optional var currentThemesController: NSArrayController? {get}
+//    @objc optional var currentTagsController: NSArrayController? {get}
+//}
 
 //Protocol for main controller
-protocol mainViewController{
-    var selectedQuoteController: NSArrayController {get}
-    var selectedAuthorController: NSArrayController {get}
-}
+//protocol mainViewController{
+//    var selectedQuoteController: NSArrayController {get}
+//    var selectedAuthorController: NSArrayController {get}
+//}
 
-extension NSViewController: ControllerProtocol {
-    var currentQuoteController: NSArrayController?{
-        switch self.className {
-        case "CocoaBindingsTable":
-            return (self as! CocoaBindingsTable).quotesArrayController
-        case "QuoteController":
-            return (self as! QuoteController).quotesArray
-        case "BigViewController":
-            return (self as! BigViewController).arrayController
-        default:
-            return nil
-        }
-    }
-}
+//extension NSViewController: ControllerProtocol {
+//    var currentQuoteController: NSArrayController?{
+//        switch self.className {
+//        case "CocoaBindingsTable":
+//            return (self as! CocoaBindingsTable).quotesArrayController
+//        case "QuoteController":
+//            return (self as! QuoteController).quotesArray
+//        case "BigViewController":
+//            return (self as! BigViewController).arrayController
+//        default:
+//            return nil
+//        }
+//    }
+//}
 
 //Neccesary if I want to avoid making a class for it.
 extension NSSplitViewController{
@@ -161,10 +163,6 @@ class SharedItems: NSObject {
     //var selectionIndexes: IndexSet = IndexSet()
     var moc:NSManagedObjectContext?
     var mainQuoteController:NSArrayController?
-    var authorController:NSArrayController?
-    var themeController:NSArrayController?
-    var tagController:NSArrayController?
-    var playlistController:NSArrayController?
     
 }
 

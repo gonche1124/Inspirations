@@ -126,3 +126,18 @@ class CollectionToCount: ValueTransformer{
     
 }
 
+//NSAttributed String to normal string.
+class AttributedStringToString: ValueTransformer{
+//    override func transformedValue(_ value: Any?) -> Any? {
+//        guard let simpleString = value as? NSAttributedString else {return value}
+//        return simpleString.string
+//    }
+    
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let simpleString = value as? NSAttributedString else {return nil}
+        return simpleString.string
+    }
+    
+    
+}
+

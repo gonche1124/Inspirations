@@ -65,7 +65,11 @@ class CocoaBindingsTable: NSViewController {
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             columnsTable.beginUpdates()
-            (self.representedObject as! SharedItems).mainQuoteController?.remove(atArrangedObjectIndexes: selectedIndex)            
+            
+            _=self.quotesArrayController.selectedObjects.map({moc.delete($0 as! NSManagedObject)})
+            
+            
+           // (self.representedObject as! SharedItems).mainQuoteController?.remove(atArrangedObjectIndexes: selectedIndex)            
             columnsTable.endUpdates()
         }
     }
