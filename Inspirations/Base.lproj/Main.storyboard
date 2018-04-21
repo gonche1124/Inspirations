@@ -528,16 +528,16 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
-                                            <binding destination="alY-J4-zDz" name="predicate2" keyPath="filterPredicate" previousBinding="bEP-zl-5rp" id="zbM-uH-YqG">
-                                                <dictionary key="options">
-                                                    <string key="NSDisplayName">Author</string>
-                                                    <string key="NSPredicateFormat">fromAuthor.name CONTAINS[cd] $value</string>
-                                                </dictionary>
-                                            </binding>
                                             <binding destination="alY-J4-zDz" name="predicate3" keyPath="filterPredicate" previousBinding="zbM-uH-YqG" id="8Yg-lY-YNH">
                                                 <dictionary key="options">
                                                     <string key="NSDisplayName">Themes</string>
                                                     <string key="NSPredicateFormat">isAbout.topic CONTAINS[cd] $value</string>
+                                                </dictionary>
+                                            </binding>
+                                            <binding destination="alY-J4-zDz" name="predicate" keyPath="filterPredicate" id="bEP-zl-5rp">
+                                                <dictionary key="options">
+                                                    <string key="NSDisplayName">All</string>
+                                                    <string key="NSPredicateFormat">(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value)</string>
                                                 </dictionary>
                                             </binding>
                                             <binding destination="alY-J4-zDz" name="predicate4" keyPath="filterPredicate" previousBinding="8Yg-lY-YNH" id="dLY-tM-HA4">
@@ -546,10 +546,10 @@
                                                     <string key="NSPredicateFormat">quote CONTAINS[cd] $value</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="alY-J4-zDz" name="predicate" keyPath="filterPredicate" id="bEP-zl-5rp">
+                                            <binding destination="alY-J4-zDz" name="predicate2" keyPath="filterPredicate" previousBinding="bEP-zl-5rp" id="zbM-uH-YqG">
                                                 <dictionary key="options">
-                                                    <string key="NSDisplayName">All</string>
-                                                    <string key="NSPredicateFormat">(quote CONTAINS[cd] $value) OR (fromAuthor.name CONTAINS[cd] $value) OR (isAbout.topic CONTAINS[cd] $value)</string>
+                                                    <string key="NSDisplayName">Author</string>
+                                                    <string key="NSPredicateFormat">fromAuthor.name CONTAINS[cd] $value</string>
                                                 </dictionary>
                                             </binding>
                                         </connections>
@@ -733,7 +733,7 @@
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="Vdd-DG-Yod" name="title" keyPath="objectValue.quotesInTag" id="QBe-Bz-thV">
+                                                                        <binding destination="Vdd-DG-Yod" name="title" keyPath="objectValue.quotesInTag" id="uPe-vu-pSM">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCount</string>
                                                                             </dictionary>
@@ -945,6 +945,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="1rF-ib-b76" name="value" keyPath="arrangedObjects.hasTags.@count" id="c6a-cT-u3T"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="" width="141.5" minWidth="60" maxWidth="1000" id="vIQ-2v-gI2" userLabel="Author">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Author">
@@ -1622,6 +1625,11 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </tokenFieldCell>
                                                 <connections>
+                                                    <binding destination="GMt-xs-UJf" name="value" keyPath="selection.hasTags" id="hqi-yc-h3w">
+                                                        <dictionary key="options">
+                                                            <string key="NSValueTransformerName">SetToTokenArray</string>
+                                                        </dictionary>
+                                                    </binding>
                                                     <outlet property="delegate" destination="Tbm-IE-Mmr" id="lCI-Q4-vB7"/>
                                                 </connections>
                                             </tokenField>

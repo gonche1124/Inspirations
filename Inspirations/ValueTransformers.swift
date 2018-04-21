@@ -11,50 +11,31 @@ import Cocoa
 
 // MARK: - Value Transformers
 
-//String to Upper case.
+//String to Upper case for Left Controller.
 class StringToUpperCase: ValueTransformer{
-    override class func transformedValueClass() -> AnyClass{
-        return NSString.self
-    }
     
     override func transformedValue(_ value: Any?) -> Any? {
-        guard let stringValue = value as? String else {return nil}
+        guard let stringValue = value as? String else {return value}
         return stringValue.uppercased()
     }
-    
-    override class func allowsReverseTransformation() -> Bool {return false}
 }
 
 
-//Tooltip for plain table.
+//Tooltip for CocoaBindings table.
 class SetToCompoundString: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSString.self
-    }
     
     override func transformedValue(_ value: Any?) -> Any? {
         guard let valueSet = value as? Set<Tags> else {return nil}
         return valueSet.map({$0.tagName!}).joined(separator: "\n")
     }
-    
-    //No Reverse.
-    override class func allowsReverseTransformation() -> Bool {return false}
 }
 
-//Collection count becasue bindings is not working. /Playist View
+//Collection count because bindings is not working. /Playist View
 class SetToCount: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSString.self
-    }
     
     override func transformedValue(_ value: Any?) -> Any? {
         guard let valueSet = value as? NSSet else {return nil}
         return "\(valueSet.count)"
-    }
-    
-    //No Reverse.
-    override class func allowsReverseTransformation() -> Bool {
-        return false
     }
 }
 
@@ -77,67 +58,37 @@ class BooleanToImage: ValueTransformer {
 
 }
 
-//Heart transformer to image.
-class stringToImage: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSImage.self
-    }
-    
-    override func transformedValue(_ value: Any?) -> Any? {
-        guard let imgName = value as? String else {return nil}
-        return NSImage(named: NSImage.Name(imgName))
-    }
-    
-    //No Reverse.
-    override class func allowsReverseTransformation() -> Bool {
-        return false
-    }
-}
-
 //Token field converter.
-class SetToArray: ValueTransformer {
-    override class func transformedValueClass() -> AnyClass{
-        return NSArray.self
-    }
+class SetToTokenArray: ValueTransformer {
     
     override func transformedValue(_ value: Any?) -> Any? {
-        guard let nsmoSet = value as? Set<NSManagedObject> else {return nil}
-        return Array(nsmoSet)
-    }
-    
-    override class func allowsReverseTransformation() -> Bool {
-        return true
+        guard let nsmoSet = value as? Set<Tags> else {return nil}
+        return nsmoSet.map({$0.tagName})
     }
     
     override func reverseTransformedValue(_ value: Any?) -> Any? {
-        guard let array = value as? [NSManagedObject] else { return nil }
-        return Set(array)
-    }
-    
-}
-
-//General collection to count.
-class CollectionToCount: ValueTransformer{
-    
-    override  func transformedValue(_ value: Any?) -> Any? {
-        guard let oneManagedObject = value as? [NSManagedObject] else {return nil}
-        return oneManagedObject.count
+        guard let sArray = value as? [String] else { return nil }
+        var tagSet = Set<Tags>()
+        let moc:NSManagedObjectContext = ((NSApp.delegate as? AppDelegate)?.managedObjectContext)!
+        let mainTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Tags"), inContext: moc) as? Tags
+        for item in sArray{
+            let currTag = Tags(context:moc)
+            currTag.isLeaf=true
+            currTag.tagName = item
+            currTag.isInTag=mainTag
+            tagSet.insert(currTag)
+        }
+        return tagSet
     }
     
 }
 
 //NSAttributed String to normal string.
 class AttributedStringToString: ValueTransformer{
-//    override func transformedValue(_ value: Any?) -> Any? {
-//        guard let simpleString = value as? NSAttributedString else {return value}
-//        return simpleString.string
-//    }
     
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         guard let simpleString = value as? NSAttributedString else {return nil}
         return simpleString.string
     }
-    
-    
 }
 

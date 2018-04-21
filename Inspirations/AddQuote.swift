@@ -15,22 +15,18 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tagsToken.delegate=self
         self.doneButton.title=doneButtonText
         
         if let selectedObjects=selectedManagedObjects{
             quoteController.content=selectedObjects
             quoteController.addSelectedObjects(selectedObjects)
-            
         }
-        
     }
     
     //Set the Button as the first responder (Highlighted item).
     override func viewWillAppear() {
         super.viewWillAppear()
         self.doneButton.window?.makeFirstResponder(doneButton)
-        
     }
     
     //Variables
@@ -38,10 +34,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     var selectionIndexes:IndexSet!
     var doneButtonText:String!
     
-    
-    
     //Outlets
-    @IBOutlet weak var quoteField: NSTextField!
     @IBOutlet weak var doneButton: NSButton!
     @IBOutlet weak var favoriteQuote: NSButton!
     @IBOutlet weak var authorField: NSComboBox!
@@ -62,48 +55,6 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     }
     //REVIEW TO MAKE SURE IT WOTKS
     @IBAction func pushDoneButton(_ sender: Any) {
-        
-        //Get data
-//        let quoteT = self.quoteField.stringValue
-//        let themeT = self.themeField.stringValue
-//        let isFav = self.favoriteQuote.state
-//        let authorT = self.authorField.stringValue
-//        let tags = self.tagsToken.objectValue as? NSArray
-//
-//
-//        //Create NSManagedObject
-//        let authorToAdd = NSEntityDescription.insertNewObject(forEntityName: "Author", into: moc) as! Author
-//        authorToAdd.name = authorT
-//
-//        let quoteToAdd = Quote(context: moc)
-//        quoteToAdd.quote=quoteT
-//        quoteToAdd.isFavorite=Bool(truncating: isFav as NSNumber)
-//        quoteToAdd.fromAuthor = authorToAdd
-//        if tags != nil {
-//        for item in tags! {
-//            let currTag = Tags(context: moc)
-//            currTag.tagName = item as? String
-//            quoteToAdd.addToHasTags(currTag)
-//        }
-//        }
-//
-//        //Create Topic
-//        let themeToAdd = NSEntityDescription.insertNewObject(forEntityName: "Theme", into: moc) as! Theme
-//        themeToAdd.topic = themeT
-//        quoteToAdd.isAbout = themeToAdd
-        
-        let mainTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Tags"), inContext: self.moc) as? Tags
-        if (doneButtonText=="Add"), let newTags = self.tagsToken.objectValue as? [String]{
-            for item in newTags{
-                let currTag = Tags(context:self.moc)
-                currTag.isLeaf=true
-                currTag.tagName = item
-                currTag.isInTag=mainTag
-                selectedManagedObjects.first?.addToHasTags(currTag)
-            }
-        }
-        
-        
         //save
         do {
             try moc.save()

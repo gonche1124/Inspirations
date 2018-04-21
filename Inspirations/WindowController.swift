@@ -19,12 +19,10 @@ class WindowController: NSWindowController {
         super.windowWillLoad()
         
         //register Values transformers.
-        ValueTransformer.setValueTransformer(CollectionToCount(), forName: NSValueTransformerName(rawValue:"myCollectionToCount"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
-        ValueTransformer.setValueTransformer(stringToImage(), forName: NSValueTransformerName(rawValue:"stringToImage"))
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
-        ValueTransformer.setValueTransformer(SetToArray(), forName: NSValueTransformerName(rawValue:"SetToArray"))
+        ValueTransformer.setValueTransformer(SetToTokenArray(), forName: NSValueTransformerName(rawValue:"SetToTokenArray"))
         ValueTransformer.setValueTransformer(StringToUpperCase(), forName: NSValueTransformerName(rawValue:"StringToUpperCase"))
         ValueTransformer.setValueTransformer(AttributedStringToString(), forName: NSValueTransformerName(rawValue:"AttributedStringToString"))
 
