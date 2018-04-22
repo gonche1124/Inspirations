@@ -34,8 +34,6 @@ extension NSManagedObject {
     
     //var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
-    
-    
     //Used to sort elements.
     var sortingKey:String {get {
         switch self.className {
@@ -97,41 +95,8 @@ extension NSAlert {
 extension NSViewController {
         
     var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
-    
 }
 
-
-
-
-
-//Protocols for controllers of tabView
-//@objc protocol ControllerProtocol{
-//    @objc optional var currentQuoteController: NSArrayController? {get} //optional variables.
-//    @objc optional var currentAuthorController: NSArrayController? {get}
-//    @objc optional var currentThemesController: NSArrayController? {get}
-//    @objc optional var currentTagsController: NSArrayController? {get}
-//}
-
-//Protocol for main controller
-//protocol mainViewController{
-//    var selectedQuoteController: NSArrayController {get}
-//    var selectedAuthorController: NSArrayController {get}
-//}
-
-//extension NSViewController: ControllerProtocol {
-//    var currentQuoteController: NSArrayController?{
-//        switch self.className {
-//        case "CocoaBindingsTable":
-//            return (self as! CocoaBindingsTable).quotesArrayController
-//        case "QuoteController":
-//            return (self as! QuoteController).quotesArray
-//        case "BigViewController":
-//            return (self as! BigViewController).arrayController
-//        default:
-//            return nil
-//        }
-//    }
-//}
 
 //Neccesary if I want to avoid making a class for it.
 extension NSSplitViewController{
@@ -154,13 +119,50 @@ extension NSTabViewController{
     }
 }
 
+//Testing
+class MyTableCellView:NSTableCellView{
+    
+    override var backgroundStyle: NSView.BackgroundStyle{
+        didSet{
+            if backgroundStyle == .dark{
+                //self.layer?.backgroundColor = NSColor.green.cgColor
+                self.textField?.textColor = NSColor.controlColor
+            }
+//            else {
+//                //self.textField?.textColor = NSColor.controlColor//self.layer?.backgroundColor = NSColor.clear.cgColor
+//            }
+        }
+    }
+    
+    
+    
+    
+}
+
+
+
+
+//Testing.
+class MyRowView: NSTableRowView {
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        
+        if isSelected == true {
+            self.selectedBackgroundColor.set()
+            //NSColor.green.set()
+            dirtyRect.fill()
+        }
+    }
+    
+    @IBInspectable
+    var selectedBackgroundColor:NSColor = NSColor.red
+}
 
 
 //MARK: - Shared Class
 @objcMembers
 class SharedItems: NSObject {
    
-    //var selectionIndexes: IndexSet = IndexSet()
     var moc:NSManagedObjectContext?
     var mainQuoteController:NSArrayController?
     

@@ -29,23 +29,19 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
         self.doneButton.window?.makeFirstResponder(doneButton)
     }
     
+    //MARK: - Variables
     //Variables
     var selectedManagedObjects:[Quote]!
     var selectionIndexes:IndexSet!
     var doneButtonText:String!
     
     //Outlets
-    @IBOutlet weak var doneButton: NSButton!
-    @IBOutlet weak var favoriteQuote: NSButton!
-    @IBOutlet weak var authorField: NSComboBox!
-    @IBOutlet weak var themeField: NSComboBox!
-    @IBOutlet weak var tagsToken: NSTokenField!
-    
+    @IBOutlet weak var doneButton: NSButton!    
     @IBOutlet var tagController: NSArrayController!
     @IBOutlet weak var quoteController: NSArrayController!
     
 
-    
+    //MARK: - Actions
     //Pushed the Done Button
     @IBAction func cancelChanges(_ sender: NSButton) {
         
@@ -66,6 +62,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     }
 }
 
+//MARK: - Extensions
 extension AddQuote: NSTokenFieldDelegate{
     
     //Return the list of possible tags to fill

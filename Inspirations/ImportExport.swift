@@ -177,7 +177,7 @@ class importExport: NSObject {
     //Suport the JSON parser.
     /// Checks if the value is NULL or not.
     ///
-    /// - Parameter value: vale to check if it is null.
+    /// - Parameter Value: vale to check if it is null.
     /// - Returns: Original value or nil.
     func nullToNil(value : Any?) -> Any? {
         return (value is NSNull) ? nil : value

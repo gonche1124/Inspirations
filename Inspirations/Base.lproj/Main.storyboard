@@ -1106,17 +1106,17 @@
                     <items>
                         <menuItem title="Set Favorite" keyEquivalent="f" identifier="favorite" id="Hij-hE-gxj">
                             <connections>
-                                <action selector="setFavorite:" target="eP2-EX-TRi" id="44f-Z2-dc8"/>
+                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="44f-Z2-dc8"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Set Unfavorite" keyEquivalent="F" identifier="unfavorite" id="o3I-GP-xpe">
                             <connections>
-                                <action selector="setFavorite:" target="eP2-EX-TRi" id="tWB-Md-Kkd"/>
+                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="tWB-Md-Kkd"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Edit" keyEquivalent="i" id="PsD-Hr-9Ax">
                             <connections>
-                                <action selector="editQuote:" target="eP2-EX-TRi" id="kSS-Bz-Rl8"/>
+                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="kSS-Bz-Rl8"/>
                                 <segue destination="Tbm-IE-Mmr" kind="modal" identifier="editSegue" id="uJL-3z-luH"/>
                             </connections>
                         </menuItem>
@@ -1216,7 +1216,7 @@
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="5RB-rp-WQ8"/>
                                                                             </constraints>
-                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Queeeeeeeote" id="DLB-8A-wiI">
+                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Quote Placeholder" id="DLB-8A-wiI">
                                                                                 <font key="font" size="18" name="Optima-Italic"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1729,13 +1729,9 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="authorField" destination="uzA-R5-57S" id="fwB-u5-co0"/>
                         <outlet property="doneButton" destination="jg4-5g-m9L" id="ZLy-7N-8L8"/>
-                        <outlet property="favoriteQuote" destination="wlE-oZ-bxt" id="xJB-Sl-dH2"/>
                         <outlet property="quoteController" destination="GMt-xs-UJf" id="hcz-2h-wMV"/>
                         <outlet property="tagController" destination="e5C-t4-xE8" id="Vf5-ei-sQv"/>
-                        <outlet property="tagsToken" destination="kGq-rR-YvU" id="Hmn-Kw-Z3k"/>
-                        <outlet property="themeField" destination="8IQ-OD-zpd" id="kfl-Qh-CQa"/>
                     </connections>
                 </viewController>
                 <customObject id="9qb-Dj-jAY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

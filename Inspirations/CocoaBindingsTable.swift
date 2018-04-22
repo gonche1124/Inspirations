@@ -40,7 +40,7 @@ class CocoaBindingsTable: NSViewController {
             case "i":
                 self.performSegue(withIdentifier:.init("editSegue"), sender: self)
             case "f":
-                self.setFavorite(!modFlags.contains(.shift))
+                self.setFavorite2(!modFlags.contains(.shift))
             default:
             break
             }
@@ -88,9 +88,9 @@ class CocoaBindingsTable: NSViewController {
     
     //MARK: - Menu Actions
     //Marks as favorite the selected quotes.
-    @IBAction func setFavorite(_ sender: Any) {
+    @IBAction func setFavorite2(_ sender: Any) {
         
-        guard let selectedQuotes=quotesArrayController.selectedObjects as? [Quote] else {       return}
+        guard let selectedQuotes=quotesArrayController.selectedObjects as? [Quote] else {return}
         if let menu = sender as? NSMenuItem{
             _=selectedQuotes.map({$0.isFavorite=(menu.identifier!.rawValue=="favorite") ? true : false})
         }
@@ -124,6 +124,17 @@ extension CocoaBindingsTable: NSTableViewDataSource{
         
         return thisItem
     }
+}
+
+//Used to set the background color of selected view.
+extension CocoaBindingsTable: NSTableViewDelegate{
+//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+//        return MyRowView()
+//    }
+//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+//        return MyRowView()
+//    }
+
 }
 
 
