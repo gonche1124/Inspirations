@@ -849,7 +849,7 @@
         <!--Plain Table-->
         <scene sceneID="nli-i0-kpp">
             <objects>
-                <viewController title="Plain Table" storyboardIdentifier="VCPlainTable" id="eP2-EX-TRi" customClass="CocoaBindingsTable" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Plain Table" storyboardIdentifier="VCPlainTable" id="eP2-EX-TRi" customClass="MasterViewController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XCg-wu-PNT">
                         <rect key="frame" x="0.0" y="0.0" width="471" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -861,7 +861,7 @@
                                     <rect key="frame" x="1" y="0.0" width="469" height="299"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ym9-vT-1H2" viewBased="YES" id="KDE-tG-cHD">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ym9-vT-1H2" viewBased="YES" id="KDE-tG-cHD" userLabel="Columns Table">
                                             <rect key="frame" x="0.0" y="0.0" width="469" height="276"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1095,10 +1095,8 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="authorsController" destination="1rF-ib-b76" id="wvA-TC-CQW"/>
-                        <outlet property="columnsTable" destination="KDE-tG-cHD" id="fPI-zA-XyX"/>
-                        <outlet property="quotesArrayController" destination="Paa-0K-gYi" id="ZQN-7P-0L8"/>
-                        <outlet property="themesController" destination="Lo7-X3-HrK" id="e9O-jq-fIr"/>
+                        <outlet property="mainTableView" destination="KDE-tG-cHD" id="jKg-ux-Sk8"/>
+                        <outlet property="quotesAC" destination="Paa-0K-gYi" id="n8s-hX-JNQ"/>
                     </connections>
                 </viewController>
                 <customObject id="PWy-rw-Hya" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1106,23 +1104,22 @@
                     <items>
                         <menuItem title="Set Favorite" keyEquivalent="f" identifier="favorite" id="Hij-hE-gxj">
                             <connections>
-                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="44f-Z2-dc8"/>
+                                <action selector="setFavorite:" target="eP2-EX-TRi" id="vC5-s4-9Mz"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Set Unfavorite" keyEquivalent="F" identifier="unfavorite" id="o3I-GP-xpe">
                             <connections>
-                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="tWB-Md-Kkd"/>
+                                <action selector="setFavorite:" target="eP2-EX-TRi" id="ind-7R-T5j"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Edit" keyEquivalent="i" id="PsD-Hr-9Ax">
                             <connections>
-                                <action selector="setFavorite2:" target="eP2-EX-TRi" id="kSS-Bz-Rl8"/>
                                 <segue destination="Tbm-IE-Mmr" kind="modal" identifier="editSegue" id="uJL-3z-luH"/>
                             </connections>
                         </menuItem>
                     </items>
                 </menu>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="Paa-0K-gYi" userLabel="Quote Array Controller">
                     <connections>
                         <binding destination="eP2-EX-TRi" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="giA-8x-z8x">
                             <dictionary key="options">
@@ -1153,7 +1150,7 @@
         <!--Quotes Table-->
         <scene sceneID="dRH-P5-sqO">
             <objects>
-                <viewController title="Quotes Table" storyboardIdentifier="VCQuotesTable" id="1B8-Ka-okj" customClass="QuoteController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Quotes Table" storyboardIdentifier="VCQuotesTable" id="1B8-Ka-okj" customClass="MasterViewController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="nQk-aZ-Xuj">
                         <rect key="frame" x="0.0" y="0.0" width="477" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1277,6 +1274,7 @@
                                                 <binding destination="XEZ-rI-TCg" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="o3X-ky-dxl" id="0lG-u5-0Nz"/>
                                                 <outlet property="dataSource" destination="1B8-Ka-okj" id="4kk-QR-IAu"/>
                                                 <outlet property="delegate" destination="1B8-Ka-okj" id="CKg-6R-DU1"/>
+                                                <outlet property="menu" destination="Py4-gx-vR0" id="0vX-90-9lf"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -1299,13 +1297,22 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="authorsController" destination="Hji-ur-3F5" id="5mw-5F-EFM"/>
-                        <outlet property="quotesArray" destination="XEZ-rI-TCg" id="XTl-YN-lcP"/>
-                        <outlet property="quotesTable" destination="7Dy-uS-jFY" id="a8Q-ys-sMr"/>
-                        <outlet property="themesController" destination="lDp-lc-YI2" id="bD3-67-oGv"/>
+                        <outlet property="mainTableView" destination="7Dy-uS-jFY" id="E2L-ja-7Kg"/>
+                        <outlet property="quotesAC" destination="XEZ-rI-TCg" id="7gp-Qu-Ib6"/>
                     </connections>
                 </viewController>
                 <customObject id="TEs-JW-Lnz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="Py4-gx-vR0">
+                    <items>
+                        <menuItem title="Set Favorite" keyEquivalent="f" id="iHt-fK-bvN"/>
+                        <menuItem title="Set Unfavorite" keyEquivalent="F" id="UCO-Qw-P3x"/>
+                        <menuItem title="Edit" keyEquivalent="i" id="xo9-tl-faL">
+                            <connections>
+                                <segue destination="Tbm-IE-Mmr" kind="modal" identifier="editSegue" id="D0e-wa-IHS"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
                 <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" alwaysUsesMultipleValuesMarker="YES" id="XEZ-rI-TCg">
                     <connections>
                         <binding destination="1B8-Ka-okj" name="contentArray" keyPath="self.representedObject.mainQuoteController.arrangedObjects" id="DnO-vy-36B"/>
@@ -2005,6 +2012,6 @@ AAAAAAAcgQ
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uJL-3z-luH"/>
+        <segue reference="D0e-wa-IHS"/>
     </inferredMetricsTieBreakers>
 </document>

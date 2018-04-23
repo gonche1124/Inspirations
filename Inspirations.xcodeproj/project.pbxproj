@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
-		8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
-		8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */; };
@@ -48,12 +46,10 @@
 /* Begin PBXFileReference section */
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaBindingsTable.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.3.xcdatamodel; sourceTree = "<group>"; };
 		8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.2.xcdatamodel; sourceTree = "<group>"; };
-		8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteController.swift; path = ../QuoteController.swift; sourceTree = "<group>"; };
 		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
 		8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.1.xcdatamodel; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,9 +116,7 @@
 				8AE614C02072F134003CB950 /* LeftController.swift */,
 				8AE9B35F1FECA94D008A361F /* ImportController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
-				8A2572DF1ED8B4CB00720C2A /* QuoteController.swift */,
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
-				8A1442031ECF935F00B6B7D4 /* CocoaBindingsTable.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
 				8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */,
 			);
@@ -356,14 +350,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A2572E01ED8B4CB00720C2A /* QuoteController.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
 				8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */,
-				8A1442041ECF935F00B6B7D4 /* CocoaBindingsTable.swift in Sources */,
 				8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8AE614C12072F134003CB950 /* LeftController.swift in Sources */,

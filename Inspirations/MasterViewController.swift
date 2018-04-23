@@ -20,6 +20,7 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
     
     //MARK: - Properties and Outlets.
     @IBOutlet var quotesAC: NSArrayController!
+    @IBOutlet var mainTableView: NSTableView?
     
     
     //MARK: - Actions.
@@ -64,7 +65,31 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
                 break
             }
         }
+    }
+    
+    //Delete selected Records.
+    override func deleteBackward(_ sender: Any?) {
         
+        let totObjects = quotesAC.selectedObjects.count//columnsTable.selectedRowIndexes
+        let confirmationD = NSAlert()
+        
+        confirmationD.messageText = "Delete Records"
+        confirmationD.informativeText = "Are you sure you want to delete the \(totObjects) selected Quotes?"
+        confirmationD.addButton(withTitle: "Ok")
+        confirmationD.addButton(withTitle: "Cancel")
+        confirmationD.alertStyle = .critical
+        let result = confirmationD.runModal()
+        if result == .alertFirstButtonReturn{
+            self.mainTableView?.beginUpdates()
+    
+            //columnsTable.beginUpdates()
+            quotesAC.selectedObjects.forEach({moc.delete($0 as! NSManagedObject)})
+            //_=self.quotesArrayController.selectedObjects.map({moc.delete($0 as! NSManagedObject)})
+            self.mainTableView?.endUpdates()
+            
+            // (self.representedObject as! SharedItems).mainQuoteController?.remove(atArrangedObjectIndexes: selectedIndex)
+            //columnsTable.endUpdates()
+        }
     }
     
     
