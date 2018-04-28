@@ -188,7 +188,6 @@ class importExport: NSObject {
         //DispatchQueue.global(qos: .background).async{
             //Fetch or create new entity.
             let entityName = fromDict["className"] as! String
-            //let newEntity = self.findOrCreateObject(entityName: entityName, attributesDict: fromDict, inContext: inContext)
             let newEntity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
             
             //Populate attributes is working after nullToNil
@@ -209,14 +208,6 @@ class importExport: NSObject {
                     newEntity.setValue(allItems, forKey: currKey)
                 }
             }
-//        do {
-//            try self.bMoc.save()
-//        }
-//        catch let error as NSError {
-//            print("Could not save bMoc:\n \(error)")
-//        }
-        
-        //}
  
         return newEntity
       
@@ -242,7 +233,8 @@ class importExport: NSObject {
         privateMOC.perform {
             for (n, jsonItem) in array.enumerated(){
                 _=self.createNSManagedObject(fromDict: jsonItem, includingRelations: true, inContext: privateMOC)
-                self.progressInstance?.completedUnitCount=Int64(n)
+                self.progressInstance?.completedUnitCount=Int64(n+1)
+                
             }
             do{
                 try privateMOC.save()
@@ -269,7 +261,12 @@ extension NSManagedObject{
         var dict = self.dictWithAttributes()
         
         //Get relationships 1->1
-        _ = self.entity.toOneRelationshipKeys.map({dict[$0]=(self.value(forKey: $0) as? NSManagedObject)?.dictWithAttributes()})
+        self.entity.toOneRelationshipKeys.forEach({
+            dict[$0]=(self.value(forKey: $0) as? NSManagedObject)?.dictWithAttributes()
+            
+        })
+        
+        //_ = self.entity.toOneRelationshipKeys.map({dict[$0]=(self.value(forKey: $0) as? NSManagedObject)?.dictWithAttributes()})
 
         //Get relationships 1->Many
         let toMany = self.entity.toManyRelationshipKeys

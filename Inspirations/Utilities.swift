@@ -12,17 +12,17 @@ import Cocoa
 
 
 //MARK: - NSTreeNodeExtension
-extension NSTreeNode {
-    //Checks if is Leaf in Themes controller
-    func isTheme()->Bool{
-        return ((self.representedObject as! NSManagedObject).className == "Theme")
-    }
-    
-    //Checks if is Leaf in Themes controller
-    func isAuthor()->Bool{
-        return ((self.representedObject as! NSManagedObject).className == "Author")
-    }
-}
+//extension NSTreeNode {
+//    //Checks if is Leaf in Themes controller
+//    func isTheme()->Bool{
+//        return ((self.representedObject as! NSManagedObject).className == "Theme")
+//    }
+//
+//    //Checks if is Leaf in Themes controller
+//    func isAuthor()->Bool{
+//        return ((self.representedObject as! NSManagedObject).className == "Author")
+//    }
+//}
 
 //MARK: - Tags
 extension Tags{
@@ -119,30 +119,46 @@ extension NSTabViewController{
     }
 }
 
-//Testing
+//MARK: - NSTableCellView
+//My Table Cell used for enhance design.
 class MyTableCellView:NSTableCellView{
     
+    
+    //IBDEsignables
+    @IBInspectable var mainLabelColor: NSColor = NSColor.yellow
+    @IBInspectable var secondarylabelColor: NSColor = NSColor.yellow
+    @IBInspectable var selectedMainLabelColor: NSColor = NSColor.green
+    @IBInspectable var selectedSecondaryLabelColor: NSColor = NSColor.green
+    
+    //Outlets
+    @IBOutlet weak var mainLabel: NSTextField?
+    @IBOutlet weak var secondaryLabel: NSTextField?
+    
     override var backgroundStyle: NSView.BackgroundStyle{
-        didSet{
-            if backgroundStyle == .dark{
-                //self.layer?.backgroundColor = NSColor.green.cgColor
-                self.textField?.textColor = NSColor.controlColor
+        set{
+            if let rowView = self.superview as? NSTableRowView {
+                super.backgroundStyle = rowView.isSelected ? .dark : .light
             }
-//            else {
-//                //self.textField?.textColor = NSColor.controlColor//self.layer?.backgroundColor = NSColor.clear.cgColor
-//            }
+            
+            if self.backgroundStyle == .dark{
+                mainLabel?.textColor = selectedMainLabelColor
+                secondaryLabel?.textColor = selectedSecondaryLabelColor
+            }
+            else {
+                mainLabel?.textColor = mainLabelColor
+                secondaryLabel?.textColor = secondarylabelColor
+            }
+        }
+        get{
+            return super.backgroundStyle
         }
     }
-    
-    
-    
-    
+
 }
 
 
 
-
-//Testing.
+//MARK: - NSTableRowView
 class MyRowView: NSTableRowView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -155,7 +171,7 @@ class MyRowView: NSTableRowView {
     }
     
     @IBInspectable
-    var selectedBackgroundColor:NSColor = NSColor.red
+    var selectedBackgroundColor:NSColor = NSColor.selectedMenuItemColor
 }
 
 

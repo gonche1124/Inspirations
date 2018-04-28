@@ -39,7 +39,7 @@ class LeftController: NSViewController {
 }
 
 
-//MARK: - Extensions
+//MARK: - Search Field
 extension LeftController: NSSearchFieldDelegate, NSTextFieldDelegate{
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
@@ -57,13 +57,15 @@ extension LeftController: NSSearchFieldDelegate, NSTextFieldDelegate{
         }
         
         //Update interface.
-        (self.sourceItemView as? NSOutlineView)?.reloadData()
+        guard let listView = self.sourceItemView as? NSOutlineView else {return}
+        listView.reloadData()
+        listView.expandItem(nil, expandChildren: true)
         
     }
     
 }
 
-
+//MARK: - NSOutlineViewDelegate.
 extension LeftController: NSOutlineViewDelegate{
     
     //Choose the right cell to show.
@@ -80,6 +82,16 @@ extension LeftController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         guard let item = item as? NSTreeNode else {return false}
         return (!(item).isLeaf)
+    }
+    
+    //Set fetchPredicate of main Array Controller.
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        let thisoutlineView = notification.object as? NSOutlineView
+        
+        //TODO: Set NSPredicate as property of core data.
+        let selectedTag: Tags = self.treeArrayController.selectedObjects.first as! Tags
+        let mainQuotecontroller = (self.representedObject as? SharedItems)?.mainQuoteController
+        mainQuotecontroller?.fetchPredicate=NSPredicate(format: "ANY hasTags.tagName IN %@", selectedTag.tagName!)
     }
 }
 
@@ -107,7 +119,6 @@ extension LeftController: NSOutlineViewDataSource{
         let destPlaylist2 = (item as! NSTreeNode).representedObject as! Tags
         destPlaylist2.addToQuotesInTag(NSSet(array: quotesS))
         try! moc.save()
-        //self.playlistOutlineView.reloadData()
         
         return true
     }

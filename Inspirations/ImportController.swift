@@ -47,16 +47,22 @@ class ImportController: NSViewController {
         self.statusLabel.isHidden=false
         self.statusProgress.isHidden=false
         importJson.importFromJSONV2(array:arrayOfQuotes)
+     
+       
     }
     
     //MARK: - Key-Value Oberving
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
+        //Use completedUnitCount >= totalUnitCount (unless indetermineate or zero)
         if let progressMade = object as? Progress{
             if keyPath == "completedUnitCount" {
                 if progressMade.completedUnitCount>=progressMade.totalUnitCount {
-                    self.statusLabel.stringValue = "Finished"
-                    self.dismiss(nil)
+                    DispatchQueue.main.async {
+                        self.dismiss(nil)
+                        //self.statusLabel.stringValue = "Finished"
+                    }
+                    
+             
                 }
             }
             if keyPath == "fractionCompleted" {

@@ -962,7 +962,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="G3L-5u-BaN">
+                                                        <tableCellView id="G3L-5u-BaN" customClass="MyTableCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="79.5" y="1" width="142" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -971,16 +971,24 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="VKS-Tb-vJZ">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <binding destination="G3L-5u-BaN" name="value" keyPath="objectValue.fromAuthor.name" id="bsW-gu-S0r"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="mainLabelColor">
+                                                                    <color key="value" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedMainLabelColor">
+                                                                    <color key="value" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <outlet property="textField" destination="dBW-Tk-3Xb" id="EsN-Yc-3Dm"/>
+                                                                <outlet property="mainLabel" destination="dBW-Tk-3Xb" id="cn6-9B-M29"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -1182,7 +1190,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="5z2-yr-6dV">
+                                                        <tableCellView id="5z2-yr-6dV" customClass="MyTableCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="472" height="84"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1262,8 +1270,23 @@
                                                                 <constraint firstAttribute="trailing" secondItem="cZe-Dh-Fdf" secondAttribute="trailing" constant="18" id="yUg-F1-dxE"/>
                                                                 <constraint firstItem="jY7-iJ-qRx" firstAttribute="leading" secondItem="5z2-yr-6dV" secondAttribute="leading" constant="1" id="zNG-As-Lz3"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="secondarylabelColor">
+                                                                    <color key="value" name="Lonely tree - Color-3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="mainLabelColor">
+                                                                    <color key="value" name="Inspire - Color-0"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedMainLabelColor">
+                                                                    <color key="value" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedSecondaryLabelColor">
+                                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <outlet property="textField" destination="Taq-nk-ROI" id="bc7-qD-55b"/>
+                                                                <outlet property="mainLabel" destination="Taq-nk-ROI" id="fUL-fl-2QZ"/>
+                                                                <outlet property="secondaryLabel" destination="ja7-Qo-cUo" id="fgf-k0-r5y"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -2005,10 +2028,16 @@ AAAAAAAcgQ
         </image>
         <image name="red heart" width="240" height="240"/>
         <namedColor name="Inspire - Color-0">
+            <color red="0.1330000013" green="0.32499998810000003" blue="0.47099998589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Inspire - Color-0">
             <color red="0.13300000131130219" green="0.32499998807907104" blue="0.47099998593330383" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Inspire - Color-1">
             <color red="0.082000002264976501" green="0.58399999141693115" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Lonely tree - Color-3">
+            <color red="0.75300002099999996" green="0.75300002099999996" blue="0.75300002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
