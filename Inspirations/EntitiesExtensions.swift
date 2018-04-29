@@ -32,3 +32,22 @@ extension Quote{
         }
     }
 }
+
+//MARK: - Tags
+extension Tags{
+    
+    //Update the smartPredicate when the tagName changes.
+    public override func didChangeValue(forKey key: String) {
+        if key == "tagName" {
+            if self.isInTag?.tagName != "Library"{
+                let predicate = NSPredicate(format: "ANY hasTags.tagName IN %@", self.tagName!)
+                self.smartPredicate = predicate.predicateFormat
+            }
+        }
+    }
+    
+    //Used to check if it is a leafTree
+    var isLeafTree: Bool {get {return self.subTags!.count>0}}
+    
+    
+}

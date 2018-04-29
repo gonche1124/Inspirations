@@ -12,7 +12,6 @@ class LeftController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
         
         //Regoster for dragging.
         self.sourceItemView?.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
@@ -24,7 +23,6 @@ class LeftController: NSViewController {
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             (self.sourceItemView as? NSOutlineView)?.expandItem(nil, expandChildren: true)
-            //self.sourceItemView.expandItem(nil, expandChildren: true)
         }
         
     }
@@ -86,12 +84,21 @@ extension LeftController: NSOutlineViewDelegate{
     
     //Set fetchPredicate of main Array Controller.
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        let thisoutlineView = notification.object as? NSOutlineView
         
-        //TODO: Set NSPredicate as property of core data.
-        let selectedTag: Tags = self.treeArrayController.selectedObjects.first as! Tags
+        let thisTag: Tags = self.treeArrayController.selectedObjects.first as! Tags
         let mainQuotecontroller = (self.representedObject as? SharedItems)?.mainQuoteController
-        mainQuotecontroller?.fetchPredicate=NSPredicate(format: "ANY hasTags.tagName IN %@", selectedTag.tagName!)
+        let predicate: NSPredicate? = (thisTag.smartPredicate != nil) ? NSPredicate(format: thisTag.smartPredicate!): nil
+        mainQuotecontroller?.fetchPredicate=predicate
+       
+    }
+    
+    //Check if the item can be selected.
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        
+        if let selNode = item as? NSTreeNode, let selTag = selNode.representedObject as? Tags{
+            return (selTag.isInTag == nil) ? false:true
+        }
+        return false
     }
 }
 

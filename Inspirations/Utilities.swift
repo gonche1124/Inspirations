@@ -9,18 +9,8 @@
 import Foundation
 import Cocoa
 
-
-//MARK: - Tags
-extension Tags{
-    var isLeafTree: Bool {get {return self.subTags!.count>0}}
-}
-
-
 //MARK: - NSManagedObject extensions
 extension NSManagedObject {
-    
-    
-    //var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
     //Used to sort elements.
     var sortingKey:String {get {
@@ -83,16 +73,17 @@ extension NSAlert {
 extension NSViewController {
         
     var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
+    
 }
+
+
 
 
 //Neccesary if I want to avoid making a class for it.
 extension NSSplitViewController{
     override open var representedObject: Any?{
         didSet{
-            for child in self.childViewControllers{
-                child.representedObject=self.representedObject
-            }
+            childViewControllers.forEach({$0.representedObject=self.representedObject})
         }
     }
 }
@@ -100,9 +91,7 @@ extension NSSplitViewController{
 extension NSTabViewController{
     override open var representedObject: Any?{
         didSet{
-            for child in self.childViewControllers{
-                child.representedObject=self.representedObject
-            }
+            childViewControllers.forEach({$0.representedObject=self.representedObject})
         }
     }
 }
