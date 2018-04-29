@@ -10,27 +10,15 @@ import Foundation
 import Cocoa
 
 
-
-//MARK: - NSTreeNodeExtension
-//extension NSTreeNode {
-//    //Checks if is Leaf in Themes controller
-//    func isTheme()->Bool{
-//        return ((self.representedObject as! NSManagedObject).className == "Theme")
-//    }
-//
-//    //Checks if is Leaf in Themes controller
-//    func isAuthor()->Bool{
-//        return ((self.representedObject as! NSManagedObject).className == "Author")
-//    }
-//}
-
 //MARK: - Tags
 extension Tags{
     var isLeafTree: Bool {get {return self.subTags!.count>0}}
 }
 
+
 //MARK: - NSManagedObject extensions
 extension NSManagedObject {
+    
     
     //var isLeafQuote: Bool {get {return self.className == "Quote"}} //Used in NSTreeController
     
@@ -165,7 +153,6 @@ class MyRowView: NSTableRowView {
         
         if isSelected == true {
             self.selectedBackgroundColor.set()
-            //NSColor.green.set()
             dirtyRect.fill()
         }
     }

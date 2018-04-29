@@ -43,10 +43,12 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
     //Sets the information for the edit controller.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier?.rawValue=="editSegue", let destC = segue.destinationController as? AddQuote{
+            try! self.moc.save()
             destC.title="Edit Quote"
             destC.representedObject=self.representedObject
             destC.selectedManagedObjects=quotesAC.selectedObjects as! [Quote]?
             destC.doneButtonText="Update"
+            destC.moc.commitEditing()
         }
     }
     

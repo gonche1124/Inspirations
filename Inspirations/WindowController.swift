@@ -58,12 +58,14 @@ class WindowController: NSWindowController {
     //Set up code for a new segue from the window
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let destController = segue.destinationController as? AddQuote else {return}
+        try! self.moc.save()
         destController.representedObject = self.contentViewController?.representedObject
         destController.doneButtonText="Add"
         let addQuote=Quote(context: moc)
         addQuote.fromAuthor=Author(context: moc)
         addQuote.isAbout=Theme(context: moc)
         destController.selectedManagedObjects=[addQuote]
+        
     }
     
     //MARK: - Variables

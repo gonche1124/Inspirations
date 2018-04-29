@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F35e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F45c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Author" representedClassName="Author" syncable="YES" codeGenerationType="class">
         <attribute name="birth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -50,8 +50,8 @@
     </entity>
     <elements>
         <element name="Author" positionX="-99" positionY="-268" width="128" height="88"/>
+        <element name="Quote" positionX="-270" positionY="-216" width="128" height="135"/>
         <element name="Tags" positionX="81" positionY="-166" width="128" height="178"/>
-        <element name="Quote" positionX="-270" positionY="-216" width="128" height="133"/>
         <element name="Theme" positionX="-243" positionY="17" width="128" height="73"/>
     </elements>
 </model>
