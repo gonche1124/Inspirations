@@ -102,11 +102,11 @@ class ViewController: NSViewController {
         let imagePathAlias = NSWorkspace().desktopImageURL(for: NSScreen.main!)
         let imagePath: NSURL = try! NSURL.init(resolvingAliasFileAt: imagePathAlias!, options: NSURL.BookmarkResolutionOptions())
         
-        //TODO: Check for duplicate in desktop image.
+        //////////////Check for duplicate in desktop image.
         //Check if it already has a quote, if so, delete and ind original path.
     
         //duplicate path/image.
-        //TODO: Handle duplicate items.
+        //////////////Handle duplicate items.
         let budleID = Bundle.main.bundleIdentifier
         let fileManager = FileManager.default
         let possibleUrl = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)

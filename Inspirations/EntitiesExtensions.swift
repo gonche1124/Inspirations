@@ -49,5 +49,20 @@ extension Tags{
     //Used to check if it is a leafTree
     var isLeafTree: Bool {get {return self.subTags!.count>0}}
     
+    //Used to show the count of the actual
+//    public var totalQuotes: Any? {
+//        get{
+//            self.willAccessValue(forKey: "totalQuotes")
+//            let text = self.primitiveValue(forKey: "totalQuotes") as? String
+//            self.didAccessValue(forKey: "totalQuotes")
+//            return text
+//        }
+//        set{
+//            self.willChangeValue(forKey:"totalQuotes")
+//            self.setPrimitiveValue(newValue, forKey: "totalQuotes")
+//            self.didChangeValue(forKey: "totalQuotes")
+//        }
+//    }
+    
     
 }

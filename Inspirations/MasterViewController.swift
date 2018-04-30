@@ -98,7 +98,6 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
     //MARK: - NSTableViewDataSource
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         
-        //TODO: See if it works with selectedObjects.
         let thisQuote = (quotesAC.arrangedObjects as! NSArray).object(at: row) as? Quote
         let thisItem = NSPasteboardItem()
         thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)

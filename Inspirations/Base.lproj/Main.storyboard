@@ -733,7 +733,7 @@
                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <binding destination="Vdd-DG-Yod" name="title" keyPath="objectValue.quotesInTag" id="uPe-vu-pSM">
+                                                                        <binding destination="Vdd-DG-Yod" name="title" keyPath="objectValue.quotesInTag" id="j4H-6L-mtU">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCount</string>
                                                                             </dictionary>

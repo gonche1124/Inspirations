@@ -113,7 +113,7 @@ class importExport: NSObject {
         try! imageData?.write(to: imgPath as URL)
        
         //Set as Backdrop.
-        //TODO: Set as background.
+        ///////////////////Set as background.
         print ("Done")
         
         
