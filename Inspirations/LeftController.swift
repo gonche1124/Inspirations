@@ -85,12 +85,13 @@ extension LeftController: NSOutlineViewDelegate{
     //Set fetchPredicate of main Array Controller.
     func outlineViewSelectionDidChange(_ notification: Notification) {
         
-        let thisTag: Tags = self.treeArrayController.selectedObjects.first as! Tags
+        guard let thisTag: Tags = self.treeArrayController.selectedObjects.first as? Tags else {return} //Neeed in case user selects main row
         let mainQuotecontroller = (self.representedObject as? SharedItems)?.mainQuoteController
         let predicate: NSPredicate? = (thisTag.smartPredicate != nil) ? NSPredicate(format: thisTag.smartPredicate!): nil
         mainQuotecontroller?.fetchPredicate=predicate
-       
     }
+    
+
     
     //Check if the item can be selected.
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {

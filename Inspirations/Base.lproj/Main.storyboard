@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -468,7 +469,7 @@
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="AjM-fy-EQT">
                                         <rect key="frame" x="0.0" y="14" width="127" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="KbJ-9b-Csf">
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="KbJ-9b-Csf">
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment toolTip="List View" image="NSColumnViewTemplate" imageScaling="proportionallyUpOrDown" width="41" selected="YES"/>
@@ -505,7 +506,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="All" usesSingleLineMode="YES" bezelStyle="round" id="3Gy-cC-JFb">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="Inspire - Main"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
@@ -667,13 +668,13 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XLI-2o-84u">
-                                                                    <rect key="frame" x="0.0" y="2" width="201" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="-4" width="201" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="43r-u2-DQU"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="B9k-YN-PC2">
-                                                                        <font key="font" metaFont="systemBold" size="14"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="B9k-YN-PC2">
+                                                                        <font key="font" metaFont="systemSemibold" size="11"/>
+                                                                        <color key="textColor" name="Autum Fooliage"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
@@ -687,24 +688,29 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="XLI-2o-84u" firstAttribute="centerX" secondItem="8ZI-0V-NY4" secondAttribute="centerX" id="BBW-6Y-Oix"/>
-                                                                <constraint firstItem="XLI-2o-84u" firstAttribute="top" secondItem="8ZI-0V-NY4" secondAttribute="top" constant="-2" id="FAe-HK-AxS"/>
+                                                                <constraint firstItem="XLI-2o-84u" firstAttribute="top" secondItem="8ZI-0V-NY4" secondAttribute="top" constant="4" id="FAe-HK-AxS"/>
                                                                 <constraint firstItem="XLI-2o-84u" firstAttribute="leading" secondItem="8ZI-0V-NY4" secondAttribute="leading" constant="2" id="FzO-X4-oDm"/>
                                                             </constraints>
-                                                            <connections>
-                                                                <outlet property="textField" destination="XLI-2o-84u" id="1yd-i6-IWy"/>
-                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="SecondLevel" id="Vdd-DG-Yod">
+                                                        <tableCellView identifier="SecondLevel" id="Vdd-DG-Yod" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="21" width="201" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eqB-SZ-Hv1">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eqB-SZ-Hv1" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="156" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="oDP-Sr-fnR">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Stone"/>
+                                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
+                                                                            <color key="value" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
+                                                                            <color key="value" name="Stone"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <binding destination="Vdd-DG-Yod" name="value" keyPath="objectValue.tagName" id="gyD-9F-5JU"/>
                                                                     </connections>
@@ -734,9 +740,6 @@
                                                                 <constraint firstAttribute="trailing" secondItem="8g1-fU-QHk" secondAttribute="trailing" constant="3" id="g5j-fK-4UT"/>
                                                                 <constraint firstItem="eqB-SZ-Hv1" firstAttribute="leading" secondItem="Vdd-DG-Yod" secondAttribute="leading" constant="2" id="rJa-eY-iFc"/>
                                                             </constraints>
-                                                            <connections>
-                                                                <outlet property="textField" destination="eqB-SZ-Hv1" id="4VN-dy-OIF"/>
-                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -797,7 +800,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Lists" usesSingleLineMode="YES" bezelStyle="round" id="qdu-Fi-1Bx">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="Inspire - Main"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
                                 <connections>
@@ -904,18 +907,23 @@
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="diF-74-evR">
+                                                        <tableCellView id="diF-74-evR" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="33.5" y="1" width="43" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrE-AM-DTg">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrE-AM-DTg" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="43" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="XX" id="F0G-59-8i4">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Black Shadow"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
+                                                                            <color key="value" name="Black Shadow"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <binding destination="diF-74-evR" name="toolTip" keyPath="objectValue.hasTags" id="4id-r6-snH">
                                                                             <dictionary key="options">
@@ -948,31 +956,28 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="G3L-5u-BaN" customClass="MyTableCellView" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView id="G3L-5u-BaN" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="79.5" y="1" width="142" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Tk-3Xb">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Tk-3Xb" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="141" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="VKS-Tb-vJZ">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Black Shadow"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
+                                                                            <color key="value" name="Black Shadow"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <binding destination="G3L-5u-BaN" name="value" keyPath="objectValue.fromAuthor.name" id="bsW-gu-S0r"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="mainLabelColor">
-                                                                    <color key="value" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedMainLabelColor">
-                                                                    <color key="value" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <outlet property="mainLabel" destination="dBW-Tk-3Xb" id="cn6-9B-M29"/>
                                                             </connections>
@@ -995,18 +1000,23 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="In4-S3-As8">
+                                                        <tableCellView id="In4-S3-As8" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="224" y="1" width="160" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4C-Ws-61t">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4C-Ws-61t" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="d6h-4J-kLh">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Black Shadow"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
+                                                                            <color key="value" name="Black Shadow"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <binding destination="In4-S3-As8" name="toolTip" keyPath="objectValue.quote" id="DZJ-VW-smq"/>
                                                                         <binding destination="In4-S3-As8" name="value" keyPath="objectValue.quote" id="c47-Gf-ruX"/>
@@ -1035,18 +1045,23 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="oas-Ix-beb">
+                                                        <tableCellView id="oas-Ix-beb" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="387" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xte-lX-KkL">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xte-lX-KkL" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="LvN-o7-iuw">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Black Shadow"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
+                                                                            <color key="value" name="Black Shadow"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <binding destination="oas-Ix-beb" name="value" keyPath="objectValue.isAbout.topic" id="vVV-VT-3Mx"/>
                                                                     </connections>
@@ -1139,7 +1154,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1024" y="980"/>
+            <point key="canvasLocation" x="1023.5" y="980"/>
         </scene>
         <!--Quotes Table-->
         <scene sceneID="dRH-P5-sqO">
@@ -1261,7 +1276,7 @@
                                                                     <color key="value" name="Lonely tree - Color-3"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="mainLabelColor">
-                                                                    <color key="value" name="Inspire - Color-0"/>
+                                                                    <color key="value" name="Inspire - Main"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="selectedMainLabelColor">
                                                                     <color key="value" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -1389,7 +1404,7 @@
                                         <rect key="frame" x="-2" y="43" width="445" height="40"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="aKn-q8-cT3">
                                             <font key="font" size="33" name="Optima-Italic"/>
-                                            <color key="textColor" name="Inspire - Color-0"/>
+                                            <color key="textColor" name="Inspire - Main"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -1404,7 +1419,7 @@
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="OF9-bv-ZWV">
                                             <font key="font" size="20" name="Optima-Regular"/>
-                                            <color key="textColor" name="Inspire - Color-1"/>
+                                            <color key="textColor" name="Black Shadow"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -1884,11 +1899,29 @@ Gw
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="grey heart" width="240" height="240"/>
         <image name="red heart" width="240" height="240"/>
+        <namedColor name="Autum Fooliage">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black Shadow">
+            <color red="0.1650000066" green="0.19200000170000001" blue="0.1959999949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black Shadow">
+            <color red="0.16500000655651093" green="0.19200000166893005" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black Shadow">
+            <color red="0.1650000066" green="0.19200000170000001" blue="0.1959999949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black Shadow">
+            <color red="0.1650000066" green="0.19200000170000001" blue="0.1959999949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black Shadow">
+            <color red="0.1650000066" green="0.19200000170000001" blue="0.1959999949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Inspire - Color-0">
             <color red="0.1330000013" green="0.32499998810000003" blue="0.47099998589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Inspire - Color-1">
-            <color red="0.082000002264976501" green="0.58399999141693115" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Inspire - Main">
+            <color red="0.1330000013" green="0.32499998810000003" blue="0.47099998589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Inspire - Main">
             <color red="0.1330000013" green="0.32499998810000003" blue="0.47099998589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1899,8 +1932,14 @@ Gw
         <namedColor name="Lonely tree - Color-3">
             <color red="0.75300002099999996" green="0.75300002099999996" blue="0.75300002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Stone">
+            <color red="0.20000000000000001" green="0.41960784313725491" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Stone">
+            <color red="0.20000000000000001" green="0.41960784309999999" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vr3-aH-8vi"/>
+        <segue reference="uJL-3z-luH"/>
     </inferredMetricsTieBreakers>
 </document>

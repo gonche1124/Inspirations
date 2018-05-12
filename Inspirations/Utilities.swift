@@ -118,6 +118,7 @@ class MyTableCellView:NSTableCellView{
             }
             
             if self.backgroundStyle == .dark{
+                
                 mainLabel?.textColor = selectedMainLabelColor
                 secondaryLabel?.textColor = selectedSecondaryLabelColor
             }
@@ -150,6 +151,33 @@ class MyRowView: NSTableRowView {
     var selectedBackgroundColor:NSColor = NSColor.selectedMenuItemColor
 }
 
+//Class to allow color selection through Interface
+class GoncheTextField: NSTextField {
+    
+    @IBInspectable var selectedTextColor:NSColor = NSColor.selectedTextColor
+    @IBInspectable var textColor2: NSColor = NSColor.textColor
+}
+
+//Class to simplify code for drawing and selecting.
+class GoncheCellView: NSTableCellView {
+    
+    override var backgroundStyle: NSView.BackgroundStyle{
+        set{
+            if let rowView = self.superview as? NSTableRowView {
+                super.backgroundStyle = rowView.isSelected ? .dark : .light
+            }
+            let textFieldArray = subviews.filter({$0 is GoncheTextField}) as! [GoncheTextField]
+            if self.backgroundStyle == .dark{
+                textFieldArray.forEach({$0.textColor = $0.selectedTextColor})
+            }
+            else {
+                textFieldArray.forEach({$0.textColor = $0.textColor2})
+            }
+        }
+        get{ return super.backgroundStyle}
+    }
+    
+}
 
 //MARK: - Shared Class
 @objcMembers
@@ -160,9 +188,7 @@ class SharedItems: NSObject {
     
 }
 
-//MARK: - NSButton
-extension NSButton {
-    
-}
+
+
 
 
