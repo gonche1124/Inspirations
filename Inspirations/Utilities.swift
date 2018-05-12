@@ -160,4 +160,9 @@ class SharedItems: NSObject {
     
 }
 
+//MARK: - NSButton
+extension NSButton {
+    
+}
+
 

@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         //Sets color of main Window
         //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
-        NSApp.mainWindow?.backgroundColor=NSColor.white
+        //NSApp.mainWindow?.backgroundColor=NSColor.white
     
     }
 

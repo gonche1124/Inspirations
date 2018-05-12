@@ -10,10 +10,16 @@ import Cocoa
 
 class WindowController: NSWindowController {
     
+    //IBInspectable variable.
+    @IBInspectable var toolbarColor: NSColor = NSColor.white
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.window?.backgroundColor = toolbarColor //self.backgroundColor
         
     }
+    
+    
 
     override func windowWillLoad() {
         super.windowWillLoad()
@@ -53,6 +59,7 @@ class WindowController: NSWindowController {
         
         self.contentViewController?.representedObject=sharedItems
         self.window?.delegate=NSApp.delegate as? AppDelegate
+        
     }
     
     //Set up code for a new segue from the window
