@@ -20,6 +20,11 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
         if let selectedObjects=selectedManagedObjects{
             quoteController.content=selectedObjects
             quoteController.addSelectedObjects(selectedObjects)
+            //TODO: BINDINGS IS NOT AN OPTION. TAGS NOT SAVED, CREATED, OR ERROR IS THROWN.
+            if let tagsArray = selectedObjects.first?.hasTags?.allObjects as NSArray?{
+                tagsTokenField.objectValue = tagsArray
+            }
+            
         }
     }
     
@@ -39,6 +44,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     @IBOutlet weak var doneButton: NSButton!    
     @IBOutlet var tagController: NSArrayController!
     @IBOutlet weak var quoteController: NSArrayController!
+    @IBOutlet weak var tagsTokenField: NSTokenField!
     
 
     //MARK: - Actions
@@ -52,11 +58,19 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     //REVIEW TO MAKE SURE IT WOTKS
     @IBAction func pushDoneButton(_ sender: Any) {
         //save
+        
+//        if let tagArray = self.tagsTokenField.objectValue as? [Tags] {
+//            self.selectedManagedObjects.first?.addToHasTags(NSSet.init(array:tagArray))
+//        }
+        
+        
+        
         do {
             try moc.save()
             dismiss(self)
         }catch{
             print("Unable to save the data")
+            dismiss(self)
         }
         
     }
@@ -70,6 +84,34 @@ extension AddQuote: NSTokenFieldDelegate{
         return (tagController.arrangedObjects as! [Tags]).map({$0.tagName!}).filter({$0.hasPrefix(substring)})
     }
     
+    
+    //Called everytime a new Tag is added.
+    func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {
+        
+        //Fetch Tag if it exists already.
+        let currQuote = selectedManagedObjects.first
+        if let existingTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", tokens.first as! String), inContext: moc) as? Tags{
+            existingTag.addToQuotesInTag(currQuote!)
+            return [existingTag]
+        }
+        
+        //Cteate new Tag
+        let newTag = Tags(context:moc)
+        newTag.isLeaf = true
+        newTag.tagName = tokens.first as? String
+        let mainTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Tags"), inContext: moc) as? Tags
+        mainTag?.addToSubTags(newTag) //THE OTEHRWAY AROUND FOR WHATEVER REASON DIDNT WORK.
+        newTag.addToQuotesInTag(currQuote!)
+        return [newTag]
+    }
+    
+    //SHow string for representedObject.
+    func tokenField(_ tokenField: NSTokenField, displayStringForRepresentedObject representedObject: Any) -> String? {
+        if let currTag = representedObject as? Tags, let tagName=currTag.tagName {
+            return tagName
+        }
+        return nil
+    }
 }
 
 

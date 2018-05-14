@@ -48,7 +48,7 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
             destC.representedObject=self.representedObject
             destC.selectedManagedObjects=quotesAC.selectedObjects as! [Quote]?
             destC.doneButtonText="Update"
-            destC.moc.commitEditing()
+            //destC.moc.commitEditing()
         }
     }
     
