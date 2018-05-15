@@ -20,7 +20,6 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
         if let selectedObjects=selectedManagedObjects{
             quoteController.content=selectedObjects
             quoteController.addSelectedObjects(selectedObjects)
-            //TODO: BINDINGS IS NOT AN OPTION. TAGS NOT SAVED, CREATED, OR ERROR IS THROWN.
             if let tagsArray = selectedObjects.first?.hasTags?.allObjects as NSArray?{
                 tagsTokenField.objectValue = tagsArray
             }
@@ -58,13 +57,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
     //REVIEW TO MAKE SURE IT WOTKS
     @IBAction func pushDoneButton(_ sender: Any) {
         //save
-        
-//        if let tagArray = self.tagsTokenField.objectValue as? [Tags] {
-//            self.selectedManagedObjects.first?.addToHasTags(NSSet.init(array:tagArray))
-//        }
-        
-        
-        
+
         do {
             try moc.save()
             dismiss(self)
@@ -95,13 +88,15 @@ extension AddQuote: NSTokenFieldDelegate{
             return [existingTag]
         }
         
-        //Cteate new Tag
+        //Create new Tag
         let newTag = Tags(context:moc)
         newTag.isLeaf = true
         newTag.tagName = tokens.first as? String
         let mainTag = Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Tags"), inContext: moc) as? Tags
-        mainTag?.addToSubTags(newTag) //THE OTEHRWAY AROUND FOR WHATEVER REASON DIDNT WORK.
+        mainTag?.addToSubTags(newTag) //THE OTHERWAY AROUND FOR WHATEVER REASON DIDNT WORK.
+        newTag.isInTag=mainTag //Just testing. This line makes the graph on Tags complete.
         newTag.addToQuotesInTag(currQuote!)
+        currQuote?.addToHasTags(newTag) //Just testing.
         return [newTag]
     }
     

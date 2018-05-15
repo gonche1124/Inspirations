@@ -154,24 +154,24 @@ class importExport: NSObject {
     
     //TODO: Check if it is needed.
     //Looks for object, if does not find one it creates it.
-    func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
-
-        //Get uniqueness key
-        let currEntDes = inContext.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
-        //The case where there is no unique key will not happen, this can be erased if easier way to flaten and access first object is found.
-        guard let uniqKey = currEntDes?.uniquenessConstraints[0].first as? String else {
-            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
-        }
-
-        //Create fetchRequest
-        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fRequest.predicate = NSPredicate(format: "%K == %@", uniqKey, attributesDict[uniqKey] as! String)
-
-        //Fetch
-        let allObjects = try! inContext.fetch(fRequest) as! [NSManagedObject]
-        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
-
-    }
+//    func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
+//
+//        //Get uniqueness key
+//        let currEntDes = inContext.persistentStoreCoordinator?.managedObjectModel.entitiesByName[entityName]
+//        //The case where there is no unique key will not happen, this can be erased if easier way to flaten and access first object is found.
+//        guard let uniqKey = currEntDes?.uniquenessConstraints[0].first as? String else {
+//            return NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
+//        }
+//
+//        //Create fetchRequest
+//        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+//        fRequest.predicate = NSPredicate(format: "%K == %@", uniqKey, attributesDict[uniqKey] as! String)
+//
+//        //Fetch
+//        let allObjects = try! inContext.fetch(fRequest) as! [NSManagedObject]
+//        return (allObjects.count>0) ? allObjects[0]:NSEntityDescription.insertNewObject(forEntityName: entityName, into: inContext)
+//
+//    }
     
     
     //Suport the JSON parser.
@@ -254,7 +254,6 @@ class importExport: NSObject {
 extension NSManagedObject{
     
     //Only does one level with recursivity. TO DO: Figure out how to remove that constraint.
-    //TODO: Include boolean to include relationships.
     func convertToDictionary() -> Dictionary<String, Any>{
         
         //Get Attributes of object into a dictionary

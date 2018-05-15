@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 
-class MasterViewController: NSViewController, NSTableViewDataSource{
+class MasterViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate{
     
     //Initialization code.
     override func viewDidLoad() {
@@ -21,6 +21,9 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
     //MARK: - Properties and Outlets.
     @IBOutlet var quotesAC: NSArrayController!
     @IBOutlet var mainTableView: NSTableView?
+    @IBInspectable var selectedBackgroundColor:NSColor = NSColor.selectedControlColor
+    
+    
     
     
     //MARK: - Actions.
@@ -105,6 +108,29 @@ class MasterViewController: NSViewController, NSTableViewDataSource{
         return thisItem
     }
     
+    //MARK: - NSTableViewDelegate
+    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        return MyRowView(color: self.selectedBackgroundColor)
+    }
+}
+
+//MARK: - NSTableRowView
+class MyRowView: NSTableRowView {
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        
+        if isSelected == true {
+            self.selectedBackgroundColor.set()
+            dirtyRect.fill()
+        }
+    }
     
+    //Convinience initializer
+    convenience init(color: NSColor){
+        self.init()
+        self.selectedBackgroundColor=color
+    }
+    
+    var selectedBackgroundColor:NSColor = NSColor.selectedControlColor
 }
 

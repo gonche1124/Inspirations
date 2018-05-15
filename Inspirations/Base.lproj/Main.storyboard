@@ -643,7 +643,7 @@
                                     <rect key="frame" x="1" y="0.0" width="204" height="312"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" headerView="Aki-jq-Fgu" viewBased="YES" indentationPerLevel="16" outlineTableColumn="wb4-F8-ukL" id="caW-MJ-cb1">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" headerView="Aki-jq-Fgu" viewBased="YES" indentationPerLevel="14" outlineTableColumn="wb4-F8-ukL" id="caW-MJ-cb1">
                                             <rect key="frame" x="0.0" y="0.0" width="204" height="289"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
@@ -705,7 +705,7 @@
                                                                     </textFieldCell>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                                                            <color key="value" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="value" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor2">
                                                                             <color key="value" name="Stone"/>
@@ -821,6 +821,11 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kCB-n4-UZB" secondAttribute="trailing" constant="20" symbolic="YES" id="wZ8-cd-D6e"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedBackgroundColor">
+                            <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="0.66502568490000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="sourceItemView" destination="caW-MJ-cb1" id="JDc-Tc-L00"/>
                         <outlet property="treeArrayController" destination="P1a-sZ-0hq" id="kKt-re-uMv"/>
@@ -1103,6 +1108,11 @@
                             </scrollView>
                         </subviews>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedBackgroundColor">
+                            <color key="value" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="mainTableView" destination="KDE-tG-cHD" id="jKg-ux-Sk8"/>
                         <outlet property="quotesAC" destination="Paa-0K-gYi" id="n8s-hX-JNQ"/>
@@ -1232,7 +1242,7 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ja7-Qo-cUo">
-                                                                            <rect key="frame" x="-2" y="0.0" width="440" height="19"/>
+                                                                            <rect key="frame" x="-2" y="0.0" width="425" height="19"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="19" id="fF1-4P-pBL"/>
                                                                             </constraints>
@@ -1250,7 +1260,7 @@
                                                                         <constraint firstAttribute="trailing" secondItem="Taq-nk-ROI" secondAttribute="trailing" id="5s1-pK-PWC"/>
                                                                         <constraint firstItem="Taq-nk-ROI" firstAttribute="leading" secondItem="cZe-Dh-Fdf" secondAttribute="leading" id="R0A-cg-TOQ"/>
                                                                         <constraint firstItem="ja7-Qo-cUo" firstAttribute="leading" secondItem="cZe-Dh-Fdf" secondAttribute="leading" id="SJH-Bt-jZb"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="ja7-Qo-cUo" secondAttribute="trailing" id="UBL-99-cic"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="ja7-Qo-cUo" secondAttribute="trailing" constant="15" id="UBL-99-cic"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
@@ -1921,6 +1931,6 @@ Gw
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uJL-3z-luH"/>
+        <segue reference="D0e-wa-IHS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -98,58 +98,10 @@ extension NSTabViewController{
 
 //MARK: - NSTableCellView
 //My Table Cell used for enhance design.
-class MyTableCellView:NSTableCellView{
-    
-    
-    //IBDEsignables
-    @IBInspectable var mainLabelColor: NSColor = NSColor.yellow
-    @IBInspectable var secondarylabelColor: NSColor = NSColor.yellow
-    @IBInspectable var selectedMainLabelColor: NSColor = NSColor.green
-    @IBInspectable var selectedSecondaryLabelColor: NSColor = NSColor.green
-    
-    //Outlets
-    @IBOutlet weak var mainLabel: NSTextField?
-    @IBOutlet weak var secondaryLabel: NSTextField?
-    
-    override var backgroundStyle: NSView.BackgroundStyle{
-        set{
-            if let rowView = self.superview as? NSTableRowView {
-                super.backgroundStyle = rowView.isSelected ? .dark : .light
-            }
-            
-            if self.backgroundStyle == .dark{
-                
-                mainLabel?.textColor = selectedMainLabelColor
-                secondaryLabel?.textColor = selectedSecondaryLabelColor
-            }
-            else {
-                mainLabel?.textColor = mainLabelColor
-                secondaryLabel?.textColor = secondarylabelColor
-            }
-        }
-        get{
-            return super.backgroundStyle
-        }
-    }
-
-}
 
 
 
-//MARK: - NSTableRowView
-class MyRowView: NSTableRowView {
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        
-        if isSelected == true {
-            self.selectedBackgroundColor.set()
-            dirtyRect.fill()
-        }
-    }
-    
-    @IBInspectable
-    var selectedBackgroundColor:NSColor = NSColor.selectedMenuItemColor
-}
+
 
 //Class to allow color selection through Interface
 class GoncheTextField: NSTextField {

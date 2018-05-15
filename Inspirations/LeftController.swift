@@ -32,6 +32,8 @@ class LeftController: NSViewController {
     //MARK: - Outlets
     @IBOutlet weak var leftList: NSOutlineView!
     @IBOutlet var treeArrayController: NSTreeController!
+    @IBInspectable var selectedBackgroundColor:NSColor = NSColor.selectedControlColor
+
     //lazy var customSort:NSSortDescriptor = NSSortDescriptor(key: "tagName", ascending: true)
     
 }
@@ -100,6 +102,11 @@ extension LeftController: NSOutlineViewDelegate{
             return (selTag.isInTag == nil) ? false:true
         }
         return false
+    }
+    
+    //Customize the selection color for the rows.
+    func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+        return MyRowView(color: self.selectedBackgroundColor)
     }
 }
 

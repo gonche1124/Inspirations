@@ -28,23 +28,22 @@ class WindowController: NSWindowController {
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(SetToCount(), forName: NSValueTransformerName(rawValue:"SetToCount"))
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
-        ValueTransformer.setValueTransformer(SetToTokenArray(), forName: NSValueTransformerName(rawValue:"SetToTokenArray"))
         ValueTransformer.setValueTransformer(StringToUpperCase(), forName: NSValueTransformerName(rawValue:"StringToUpperCase"))
         ValueTransformer.setValueTransformer(AttributedStringToString(), forName: NSValueTransformerName(rawValue:"AttributedStringToString"))
 
         
         //create the security containers to store the data.
-        //TODO: Check if this is neccesary!
-        let fm = FileManager.default
-        let appGroupName = "Gonche.Inspirations"//"Z123456789.com.example.app-group"
-        let groupContainerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)
-        try! fm.createDirectory(at: groupContainerURL!, withIntermediateDirectories: true, attributes: nil)
-        
-       //Create the application support folder.
-        let bundleID = Bundle.main.bundleIdentifier
-        let appSupportDir = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        let suppPath = appSupportDir[0].appendingPathComponent(bundleID!)
-        try! fm.createDirectory(at: suppPath, withIntermediateDirectories: true, attributes: nil)
+//        //TODO: Check if this is neccesary!
+//        let fm = FileManager.default
+//        let appGroupName = "Gonche.Inspirations"//"Z123456789.com.example.app-group"
+//        let groupContainerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)
+//        try! fm.createDirectory(at: groupContainerURL!, withIntermediateDirectories: true, attributes: nil)
+//
+//       //Create the application support folder.
+//        let bundleID = Bundle.main.bundleIdentifier
+//        let appSupportDir = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+//        let suppPath = appSupportDir[0].appendingPathComponent(bundleID!)
+//        try! fm.createDirectory(at: suppPath, withIntermediateDirectories: true, attributes: nil)
         
         
         
@@ -80,7 +79,6 @@ class WindowController: NSWindowController {
     @IBOutlet var quoteController: NSArrayController!
     
     //MARK: - Actions
-    //TODO: improve.
     @IBAction func changeQuotes(_ sender: NSSegmentedControl) {
         
         if let splitController=self.contentViewController as? NSSplitViewController{
