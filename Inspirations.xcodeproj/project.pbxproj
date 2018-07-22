@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A01F86721054CA1007D1E3F /* Alternate Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86521054CA1007D1E3F /* Alternate Storyboard.storyboard */; };
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A01F86621054CA1007D1E3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Alternate Storyboard.storyboard"; sourceTree = "<group>"; };
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				8A89E8651E842E04001F7F71 /* Main.storyboard */,
+				8A01F86521054CA1007D1E3F /* Alternate Storyboard.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
+				8A01F86721054CA1007D1E3F /* Alternate Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8A01F86521054CA1007D1E3F /* Alternate Storyboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A01F86621054CA1007D1E3F /* Base */,
+			);
+			name = "Alternate Storyboard.storyboard";
+			sourceTree = "<group>";
+		};
 		8A89E8651E842E04001F7F71 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
