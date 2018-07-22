@@ -33,7 +33,7 @@ class WindowController: NSWindowController {
 
         
         //create the security containers to store the data.
-//        //TODO: Check if this is neccesary!
+//       
 //        let fm = FileManager.default
 //        let appGroupName = "Gonche.Inspirations"//"Z123456789.com.example.app-group"
 //        let groupContainerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: appGroupName)

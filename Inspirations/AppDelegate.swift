@@ -26,35 +26,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-     
+        print(self.applicationDocumentsDirectory.path)
 
         //Sets color of main Window
         //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
         //NSApp.mainWindow?.backgroundColor=NSColor.white
         
         //TO Erase after is working.
-        let fetchR = NSFetchRequest<Tags>(entityName: "Tags")
-        let tagsArray = try! self.managedObjectContext.fetch(fetchR)
-        tagsArray.forEach({
-
-
-            if ($0.isInTag?.tagName) != nil {
-                  print ("Not to Delete:")
-            }
-            else {
-                if $0.isLeaf {
-                    print ("To Delete:")
-                    self.managedObjectContext.delete($0)
-                }
-                else {
-                print ("Not To Delete:")
-                }
-            }
-            print("\($0.tagName), isLeaf=\($0.isLeaf) inside \($0.isInTag?.tagName)")
-
-        })
-        try! self.managedObjectContext.save()
-        print("Finished")
+//        let fetchR = NSFetchRequest<Tags>(entityName: "Tags")
+//        let tagsArray = try! self.managedObjectContext.fetch(fetchR)
+//        tagsArray.forEach({
+//
+//
+//            if ($0.isInTag?.tagName) != nil {
+//                  print ("Not to Delete:")
+//            }
+//            else {
+//                if $0.isLeaf {
+//                    print ("To Delete:")
+//                    self.managedObjectContext.delete($0)
+//                }
+//                else {
+//                print ("Not To Delete:")
+//                }
+//            }
+//            print("\($0.tagName), isLeaf=\($0.isLeaf) inside \($0.isInTag?.tagName)")
+//
+//        })
+//        try! self.managedObjectContext.save()
+//        print("Finished")
     
     }
 

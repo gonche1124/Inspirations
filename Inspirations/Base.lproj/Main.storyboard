@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -984,7 +984,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
-                                                                <outlet property="mainLabel" destination="dBW-Tk-3Xb" id="cn6-9B-M29"/>
+                                                                <outlet property="textField" destination="dBW-Tk-3Xb" id="uFi-Sr-JRF"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -1201,7 +1201,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="5z2-yr-6dV" customClass="MyTableCellView" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView id="5z2-yr-6dV">
                                                             <rect key="frame" x="1" y="1" width="472" height="84"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1281,24 +1281,6 @@
                                                                 <constraint firstAttribute="trailing" secondItem="cZe-Dh-Fdf" secondAttribute="trailing" constant="18" id="yUg-F1-dxE"/>
                                                                 <constraint firstItem="jY7-iJ-qRx" firstAttribute="leading" secondItem="5z2-yr-6dV" secondAttribute="leading" constant="1" id="zNG-As-Lz3"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="secondarylabelColor">
-                                                                    <color key="value" name="Lonely tree - Color-3"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="mainLabelColor">
-                                                                    <color key="value" name="Inspire - Main"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedMainLabelColor">
-                                                                    <color key="value" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="selectedSecondaryLabelColor">
-                                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <outlet property="mainLabel" destination="Taq-nk-ROI" id="fUL-fl-2QZ"/>
-                                                                <outlet property="secondaryLabel" destination="ja7-Qo-cUo" id="fgf-k0-r5y"/>
-                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -1922,9 +1904,6 @@ Gw
         </namedColor>
         <namedColor name="Inspire - Main">
             <color red="0.12941176470588237" green="0.32156862745098042" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Lonely tree - Color-3">
-            <color red="0.75300002099999996" green="0.75300002099999996" blue="0.75300002099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Stone">
             <color red="0.20000000000000001" green="0.41960784313725491" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
