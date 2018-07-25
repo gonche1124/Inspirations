@@ -6,7 +6,12 @@
 //  Copyright © 2018 Gonche. All rights reserved.
 //
 
+
+
+
+
 import Cocoa
+
 
 class LeftController: NSViewController {
 
