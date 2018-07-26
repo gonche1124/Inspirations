@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86521054CA1007D1E3F /* Alternate.storyboard */; };
+		8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */; };
+		8A01F86D210972A2007D1E3F /* AlternateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86C210972A2007D1E3F /* AlternateController.swift */; };
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		8A01F86621054CA1007D1E3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Alternate.storyboard; sourceTree = "<group>"; };
+		8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Tabs Display.storyboard"; sourceTree = "<group>"; };
+		8A01F86C210972A2007D1E3F /* AlternateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateController.swift; sourceTree = "<group>"; };
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
@@ -109,9 +113,19 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A01F86C210972A2007D1E3F /* AlternateController.swift */,
+				8A01F869210947E6007D1E3F /* Tabs Views */,
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
 			);
 			name = Alternate;
+			sourceTree = "<group>";
+		};
+		8A01F869210947E6007D1E3F /* Tabs Views */ = {
+			isa = PBXGroup;
+			children = (
+				8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */,
+			);
+			name = "Tabs Views";
 			sourceTree = "<group>";
 		};
 		8A164B161F59186D004F0810 /* Frameworks */ = {
@@ -330,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
+				8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
@@ -383,6 +398,7 @@
 				8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8AE614C12072F134003CB950 /* LeftController.swift in Sources */,
+				8A01F86D210972A2007D1E3F /* AlternateController.swift in Sources */,
 				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
 				8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */,
 				8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */,

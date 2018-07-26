@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kzV-eP-Aw2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab View Controller-->
+        <scene sceneID="Qdd-2p-az1">
+            <objects>
+                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="2" id="kzV-eP-Aw2" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem identifier="" id="kKt-r2-gNY"/>
+                        <tabViewItem identifier="" id="hrO-kJ-Wa6"/>
+                        <tabViewItem id="yfy-Cu-mNm"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="HBR-da-Nfa">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <connections>
+                            <outlet property="delegate" destination="kzV-eP-Aw2" id="uEh-b6-MtQ"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="HBR-da-Nfa" id="R7d-hM-AqM"/>
+                        <segue destination="m8M-8y-p42" kind="relationship" relationship="tabItems" id="v6y-1I-BoN"/>
+                        <segue destination="N8L-5l-A6x" kind="relationship" relationship="tabItems" id="PtE-GK-8rg"/>
+                        <segue destination="QgQ-9F-cEP" kind="relationship" relationship="tabItems" id="FAc-zA-JgT"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="p1q-jt-Tdr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="23" y="100"/>
+        </scene>
+        <!--Plain-->
+        <scene sceneID="Dwc-7k-PUx">
+            <objects>
+                <viewController title="Plain" showSeguePresentationStyle="single" id="m8M-8y-p42" sceneMemberID="viewController">
+                    <view key="view" id="bvf-jH-Y3v">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIg-vB-Mmq">
+                                <rect key="frame" x="126" y="132" width="70" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Plain" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KlY-bh-GLU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="ipj-Cp-v1s" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="-86"/>
+        </scene>
+        <!--Explore-->
+        <scene sceneID="xOo-gm-u63">
+            <objects>
+                <viewController title="Explore" showSeguePresentationStyle="single" id="N8L-5l-A6x" sceneMemberID="viewController">
+                    <view key="view" id="CKC-zH-m6L">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRl-6j-ZBZ">
+                                <rect key="frame" x="149" y="198" width="86" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Explore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cTo-5s-tdb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="qdT-pd-5wV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693" y="286"/>
+        </scene>
+        <!--Read-->
+        <scene sceneID="Og7-oj-MB9">
+            <objects>
+                <viewController title="Read" id="QgQ-9F-cEP" sceneMemberID="viewController">
+                    <view key="view" id="bvp-ma-49v">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-na-es3">
+                                <rect key="frame" x="227" y="139" width="71" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Read" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e6h-Fs-f1A">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="V4C-29-G5r" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="23" y="536"/>
+        </scene>
+    </scenes>
+</document>
