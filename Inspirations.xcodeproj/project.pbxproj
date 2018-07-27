@@ -10,6 +10,7 @@
 		8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86521054CA1007D1E3F /* Alternate.storyboard */; };
 		8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */; };
 		8A01F86D210972A2007D1E3F /* AlternateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86C210972A2007D1E3F /* AlternateController.swift */; };
+		8A01F870210A9A52007D1E3F /* Core Data ERD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */; };
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
@@ -51,6 +52,7 @@
 		8A01F86621054CA1007D1E3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Alternate.storyboard; sourceTree = "<group>"; };
 		8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Tabs Display.storyboard"; sourceTree = "<group>"; };
 		8A01F86C210972A2007D1E3F /* AlternateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateController.swift; sourceTree = "<group>"; };
+		8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD.xcdatamodel"; sourceTree = "<group>"; };
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A01F86C210972A2007D1E3F /* AlternateController.swift */,
 				8A01F869210947E6007D1E3F /* Tabs Views */,
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
@@ -394,6 +397,7 @@
 				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
+				8A01F870210A9A52007D1E3F /* Core Data ERD.xcdatamodeld in Sources */,
 				8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */,
 				8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
@@ -702,6 +706,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */,
+			);
+			currentVersion = 8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */;
+			path = "Core Data ERD.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
