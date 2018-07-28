@@ -14,6 +14,8 @@
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
+		8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A546152210D240F00B6E588 /* Smart List Editor.storyboard */; };
+		8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A546154210D2A7400B6E588 /* Smar List Controller.swift */; };
 		8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63182220956CF000091FA6 /* EntitiesExtensions.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
@@ -57,6 +59,8 @@
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A546151210C02C000B6E588 /* Core Data ERD V2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD V2.xcdatamodel"; sourceTree = "<group>"; };
+		8A546152210D240F00B6E588 /* Smart List Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Smart List Editor.storyboard"; sourceTree = "<group>"; };
+		8A546154210D2A7400B6E588 /* Smar List Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Smar List Controller.swift"; sourceTree = "<group>"; };
 		8A63182220956CF000091FA6 /* EntitiesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesExtensions.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A546152210D240F00B6E588 /* Smart List Editor.storyboard */,
+				8A546154210D2A7400B6E588 /* Smar List Controller.swift */,
 				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A01F86C210972A2007D1E3F /* AlternateController2.swift */,
 				8A01F869210947E6007D1E3F /* Tabs Views */,
@@ -340,6 +346,7 @@
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
 				8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
+				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
 			);
@@ -382,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
 				8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */,

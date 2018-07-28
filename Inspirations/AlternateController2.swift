@@ -33,6 +33,10 @@ class AlternateController2: NSViewController {
         listView.expandItem(nil, expandChildren: true)
     }
     
+    @IBAction func deleteSelectedLibraryItem(_ sender: Any) {
+    }
+    
+    
 }
 
 //NSOutlineViewDataSource Extension.

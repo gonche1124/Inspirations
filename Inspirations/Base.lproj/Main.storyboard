@@ -913,7 +913,7 @@
                                                     </textFieldCell>
                                                     <prototypeCellViews>
                                                         <tableCellView id="diF-74-evR" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="33.5" y="1" width="43" height="17"/>
+                                                            <rect key="frame" x="34" y="1" width="43" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrE-AM-DTg" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
@@ -962,7 +962,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="G3L-5u-BaN" customClass="GoncheCellView" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="79.5" y="1" width="142" height="17"/>
+                                                            <rect key="frame" x="80" y="1" width="142" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Tk-3Xb" customClass="GoncheTextField" customModule="Inspirations" customModuleProvider="target">
