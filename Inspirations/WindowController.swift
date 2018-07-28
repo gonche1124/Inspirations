@@ -68,8 +68,8 @@ class WindowController: NSWindowController {
         destController.representedObject = self.contentViewController?.representedObject
         destController.doneButtonText="Add"
         let addQuote=Quote(context: moc)
-        addQuote.fromAuthor=Author(context: moc)
-        addQuote.isAbout=Theme(context: moc)
+        //addQuote.fromAuthor=Author(context: moc)
+        //addQuote.isAbout=Theme(context: moc)
         destController.selectedManagedObjects=[addQuote]
         
     }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86521054CA1007D1E3F /* Alternate.storyboard */; };
 		8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */; };
-		8A01F86D210972A2007D1E3F /* AlternateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86C210972A2007D1E3F /* AlternateController.swift */; };
+		8A01F86D210972A2007D1E3F /* AlternateController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86C210972A2007D1E3F /* AlternateController2.swift */; };
 		8A01F870210A9A52007D1E3F /* Core Data ERD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */; };
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
@@ -17,7 +17,6 @@
 		8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63182220956CF000091FA6 /* EntitiesExtensions.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
-		8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */; };
 		8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A89E8651E842E04001F7F71 /* Main.storyboard */; };
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
 		8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */; };
@@ -51,21 +50,17 @@
 /* Begin PBXFileReference section */
 		8A01F86621054CA1007D1E3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Alternate.storyboard; sourceTree = "<group>"; };
 		8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Tabs Display.storyboard"; sourceTree = "<group>"; };
-		8A01F86C210972A2007D1E3F /* AlternateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateController.swift; sourceTree = "<group>"; };
+		8A01F86C210972A2007D1E3F /* AlternateController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateController2.swift; sourceTree = "<group>"; };
 		8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD.xcdatamodel"; sourceTree = "<group>"; };
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
-		8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.3.xcdatamodel; sourceTree = "<group>"; };
-		8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.2.xcdatamodel; sourceTree = "<group>"; };
-		8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.xcdatamodel; sourceTree = "<group>"; };
+		8A546151210C02C000B6E588 /* Core Data ERD V2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD V2.xcdatamodel"; sourceTree = "<group>"; };
 		8A63182220956CF000091FA6 /* EntitiesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesExtensions.swift; sourceTree = "<group>"; };
-		8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.1.xcdatamodel; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Inspirations.xcdatamodel; sourceTree = "<group>"; };
 		8A89E8661E842E04001F7F71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A89E8681E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E86D1E842E04001F7F71 /* InspirationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspirationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,14 +70,11 @@
 		8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsUITests.swift; sourceTree = "<group>"; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
-		8A8D448A20795BA000AA1CDD /* InspirationsV2.6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.6.xcdatamodel; sourceTree = "<group>"; };
-		8AB420731FF2EBE700317816 /* InspirationsV2.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.5.xcdatamodel; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
 		8ADDA7A2200D126800F7E1D9 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		8AE614C02072F134003CB950 /* LeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftController.swift; sourceTree = "<group>"; };
-		8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InspirationsV2.4.xcdatamodel; sourceTree = "<group>"; };
 		8AE9B35F1FECA94D008A361F /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
 		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
-				8A01F86C210972A2007D1E3F /* AlternateController.swift */,
+				8A01F86C210972A2007D1E3F /* AlternateController2.swift */,
 				8A01F869210947E6007D1E3F /* Tabs Views */,
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
 			);
@@ -193,7 +185,6 @@
 				8A2572E11ED8B50900720C2A /* View Controllers */,
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
-				8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */,
 				8A03C0B01FBEA390008D74BA /* Assets.xcassets */,
 			);
 			path = Inspirations;
@@ -402,8 +393,7 @@
 				8ADDA7A3200D126800F7E1D9 /* WindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8AE614C12072F134003CB950 /* LeftController.swift in Sources */,
-				8A01F86D210972A2007D1E3F /* AlternateController.swift in Sources */,
-				8A89E8621E842E04001F7F71 /* Inspirations.xcdatamodeld in Sources */,
+				8A01F86D210972A2007D1E3F /* AlternateController2.swift in Sources */,
 				8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */,
 				8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */,
 			);
@@ -709,27 +699,11 @@
 		8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8A546151210C02C000B6E588 /* Core Data ERD V2.xcdatamodel */,
 				8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */,
 			);
 			currentVersion = 8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */;
 			path = "Core Data ERD.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		8A89E8601E842E04001F7F71 /* Inspirations.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8A8D448A20795BA000AA1CDD /* InspirationsV2.6.xcdatamodel */,
-				8AB420731FF2EBE700317816 /* InspirationsV2.5.xcdatamodel */,
-				8AE8B4BE1FD7968400170136 /* InspirationsV2.4.xcdatamodel */,
-				8A1F11B61FAD250B007B0299 /* InspirationsV2.2.xcdatamodel */,
-				8A1F11B51FACBDF3007B0299 /* InspirationsV2.3.xcdatamodel */,
-				8A78DA6F1FAA53470096F711 /* InspirationsV2.1.xcdatamodel */,
-				8A364B551FA9352A0053EB90 /* InspirationsV2.xcdatamodel */,
-				8A89E8611E842E04001F7F71 /* Inspirations.xcdatamodel */,
-			);
-			currentVersion = 8A8D448A20795BA000AA1CDD /* InspirationsV2.6.xcdatamodel */;
-			path = Inspirations.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

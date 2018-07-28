@@ -29,12 +29,12 @@ class importExport: NSObject {
             fetchRequestAsDictionary.returnsObjectsAsFaults=false
             fetchRequestAsDictionary.relationshipKeyPathsForPrefetching=["fromAuthor.name"]
             let records = try moc.fetch(fetchRequestAsDictionary)
-            
+
             for case let item as Quote in records {
                 listQuotes.append(item.convertToDictionary())
             }
            return listQuotes
-            
+
         }catch{
             print("Could not print the records")
             fatalError(error as! String)
@@ -74,8 +74,8 @@ class importExport: NSObject {
     func mergeThis(quote: Quote, onImageWithPath imgPath: NSURL){
         
         //Get 3 items to merge.
-        let phrase = quote.quote! as NSString
-        let author = "-"+(quote.fromAuthor?.name!)! as NSString
+        let phrase = quote.quoteString! as NSString
+        let author = "-"+(quote.from?.name!)! as NSString
         let bImage = NSImage.init(contentsOf: imgPath as URL)!
         
         //Get attributes to draw and CGRects for each one.

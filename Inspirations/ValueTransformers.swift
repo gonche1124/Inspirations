@@ -24,10 +24,10 @@ class StringToUpperCase: ValueTransformer{
 //Tooltip for CocoaBindings table.
 class SetToCompoundString: ValueTransformer {
     
-    override func transformedValue(_ value: Any?) -> Any? {
-        guard let valueSet = value as? Set<Tags> else {return nil}
-        return valueSet.map({$0.tagName!}).joined(separator: "\n")
-    }
+//    override func transformedValue(_ value: Any?) -> Any? {
+//        guard let valueSet = value as? Set<Tags> else {return nil}
+//        return valueSet.map({$0.tagName!}).joined(separator: "\n")
+//    }
 }
 
 //Collection count because bindings is not working. /Playist View

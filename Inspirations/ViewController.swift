@@ -54,30 +54,30 @@ class ViewController: NSViewController {
     
     //Called when an object gets updated.
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        //let moc = (NSApp.delegate as! AppDelegate).managedObjectContext
-        if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
-            //Delete Orphan Authors & Themes.
-            _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
-            _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
-        
-            //Update Favorites playlist.
-            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favPl=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
-      
-                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favPl)})
-                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favPl)})
-            }
-        
-        }
-        
-        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
-           
-            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
-            if let mainPl=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Main"), inContext: moc) as? Tags{
-                _=qList.map({$0.addToHasTags    (mainPl)})
-            }
-        }
+//        guard let userInfo = notification.userInfo else { return }
+//        
+//        //let moc = (NSApp.delegate as! AppDelegate).managedObjectContext
+//        if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
+//            //Delete Orphan Authors & Themes.
+//            _=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
+//            _=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
+//        
+//            //Update Favorites playlist.
+//            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favPl=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
+//      
+//                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favPl)})
+//                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favPl)})
+//            }
+//        
+//        }
+//        
+//        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
+//           
+//            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
+//            if let mainPl=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Main"), inContext: moc) as? Tags{
+//                _=qList.map({$0.addToHasTags    (mainPl)})
+//            }
+//        }
     }
     
 

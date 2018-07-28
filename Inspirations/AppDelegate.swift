@@ -22,11 +22,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
         
+        //createObjectsIfTheyDontExist()
+        
+        
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         print(self.applicationDocumentsDirectory.path)
+        
 
         //Sets color of main Window
         //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
@@ -73,7 +77,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "Inspirations", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "Core Data ERD", withExtension: "momd")!
+        //let modelURL = Bundle.main.url(forResource: "Inspirations", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
@@ -218,28 +223,64 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         let moc=self.managedObjectContext
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
-            //Delete childless Authors & Themes.
-            //_=updated.filter({$0.className == "Author"}).filter({($0 as! Author).hasQuotes?.count==0}).map({moc.delete($0)})
-            //_=updated.filter({$0.className == "Theme"}).filter({($0 as! Theme).fromQuote?.count==0}).map({moc.delete($0)})
+
             
             //Update Favorites playlist.
-            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
-                
-                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favTag)})
-                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favTag)})
+//            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
+//
+//                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favTag)})
+//                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favTag)})
             }
             
-        }
+       // }
         
-        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
-            
-            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
-            if let mainTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as? Tags{
-                _=qList.map({$0.addToHasTags(mainTag)})
-            }
-        }
+//        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
+//
+//            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
+//            if let mainTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as? Tags{
+//                _=qList.map({$0.addToHasTags(mainTag)})
+//            }
+//        }
     }
     
+    //TODO
+    func createObjectsIfTheyDontExist() {
+        
+        //Create root items.
+        let libRoot = create(object: "LibraryItem", withAttributes: ["isRootItem":true, "isShown":true, "name":"Library"]) as! LibraryItem
+        let tagRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Tags"]) as! LibraryItem
+        let lanRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Languages"]) as! LibraryItem
+        let collRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Lists"]) as! LibraryItem
+        
+        //Only for testing:
+        for item in ["Library", "Favorites"]{
+            let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":item]) as! LibraryItem
+            coreItem.belongsToLibraryItem=libRoot
+        }
+        for tag in ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"]{
+            let coreItem=create(object: "Tag", withAttributes: ["isRootItem":false, "isShown":true, "name":tag]) as! Tag
+            coreItem.belongsToLibraryItem=tagRoot
+        }
+        for language in ["Spanish", "English", "French", "German", "Mandarin"]{
+            let coreItem=create(object: "Language", withAttributes: ["isRootItem":false, "isShown":true, "name":language]) as! Language
+            coreItem.belongsToLibraryItem=lanRoot
+        }
+        for lista in ["Top 25", "For Work", "From Movies", "In songs", "Crazy"]{
+            let coreItem=create(object: "QuoteList", withAttributes: ["isRootItem":false, "isShown":true, "name":lista]) as! QuoteList
+            coreItem.belongsToLibraryItem=collRoot
+        }
+        
+        
+        try! self.managedObjectContext.save()
+    }
+    
+    //TODO
+    func create(object: String, withAttributes:Dictionary<String, Any>)->NSManagedObject{
+        let coreEntity: NSManagedObject = NSEntityDescription.insertNewObject(forEntityName: object, into: self.managedObjectContext)
+        coreEntity.setValuesForKeys(withAttributes)
+        return coreEntity
+    }
 
 }
+
 

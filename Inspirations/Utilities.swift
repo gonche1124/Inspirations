@@ -13,18 +13,18 @@ import Cocoa
 extension NSManagedObject {
     
     //Used to sort elements.
-    var sortingKey:String {get {
-        switch self.className {
-        case "Quote":
-            return (self as! Quote).quote!
-        case "Author":
-            return (self as! Author).name!
-        case "Theme":
-            return (self as! Theme).topic!
-        default:
-            return ""
-        }
-        }}
+//    var sortingKey:String {get {
+//        switch self.className {
+//        case "Quote":
+//            return (self as! Quote).quote!
+//        case "Author":
+//            return (self as! Author).name!
+//        case "Theme":
+//            return (self as! Theme).topic!
+//        default:
+//            return ""
+//        }
+//        }}
     
     //Easy way to minimize boilerplate code.
     class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
