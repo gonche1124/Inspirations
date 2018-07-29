@@ -10,165 +10,390 @@
             <objects>
                 <viewController id="9a5-nc-lBX" customClass="Smar_List_Controller" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="1BK-2E-8HU">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="221"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="0.0" y="0.0" width="441" height="138"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-cc-b2d">
-                                <rect key="frame" x="35" y="180" width="69" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="List Name:" id="tSl-g9-rOn">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Td-9y-pCx">
-                                <rect key="frame" x="113" y="175" width="203" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Jla-cE-pIV">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agv-l4-JpQ">
-                                <rect key="frame" x="89" y="13" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wl3-zC-L9H">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="createList:" target="9a5-nc-lBX" id="Fh6-ra-r2N"/>
-                                </connections>
-                            </button>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-gS-rcq">
-                                <rect key="frame" x="20" y="75" width="410" height="80"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <clipView key="contentView" ambiguous="YES" id="Mcb-l1-pgT">
-                                    <rect key="frame" x="1" y="1" width="408" height="78"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <predicateEditor verticalHuggingPriority="750" ambiguous="YES" nestingMode="compound" canRemoveAllRows="YES" rowHeight="25" id="kyt-83-f2g">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="84"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <rowTemplates>
-                                                <predicateEditorRowTemplate rowType="compound" id="XWD-pP-I8T">
-                                                    <popUpMenus>
-                                                        <menu id="Hbs-Qk-e4h">
-                                                            <items>
-                                                                <menuItem title="Any" state="on" id="P5B-fa-T24">
-                                                                    <integer key="representedObject" value="2"/>
-                                                                </menuItem>
-                                                                <menuItem title="All" id="12u-6X-V5p">
-                                                                    <integer key="representedObject" value="1"/>
-                                                                </menuItem>
-                                                            </items>
-                                                        </menu>
-                                                        <menu id="rbg-fn-u70">
-                                                            <items>
-                                                                <menuItem title="of the following are true" state="on" id="gKi-N8-YPj"/>
-                                                            </items>
-                                                        </menu>
-                                                    </popUpMenus>
-                                                </predicateEditorRowTemplate>
-                                                <predicateEditorRowTemplate rowType="simple" id="zXf-QS-L0D">
-                                                    <array key="leftExpressionObject">
-                                                        <expression type="keyPath">
-                                                            <string key="keyPath">name</string>
-                                                        </expression>
-                                                        <expression type="keyPath">
-                                                            <string key="keyPath">address</string>
-                                                        </expression>
-                                                        <expression type="keyPath">
-                                                            <string key="keyPath">sign</string>
-                                                        </expression>
-                                                    </array>
-                                                    <integer key="rightExpressionObject" value="700"/>
-                                                    <popUpMenus>
-                                                        <menu id="mRD-VK-eSm">
-                                                            <items>
-                                                                <menuItem title="name" state="on" id="Gfk-VP-0yI">
-                                                                    <expression key="representedObject" type="keyPath">
-                                                                        <string key="keyPath">name</string>
-                                                                    </expression>
-                                                                </menuItem>
-                                                                <menuItem title="address" id="G8y-VG-PbB">
-                                                                    <expression key="representedObject" type="keyPath">
-                                                                        <string key="keyPath">address</string>
-                                                                    </expression>
-                                                                </menuItem>
-                                                                <menuItem title="sign" id="QS8-HR-U3N">
-                                                                    <expression key="representedObject" type="keyPath">
-                                                                        <string key="keyPath">sign</string>
-                                                                    </expression>
-                                                                </menuItem>
-                                                            </items>
-                                                        </menu>
-                                                        <menu id="HEZ-4X-b0M">
-                                                            <items>
-                                                                <menuItem title="contains" state="on" id="lgy-Cr-EwO">
-                                                                    <integer key="representedObject" value="99"/>
-                                                                </menuItem>
-                                                                <menuItem title="begins with" id="L2Z-4f-UuM">
-                                                                    <integer key="representedObject" value="8"/>
-                                                                </menuItem>
-                                                                <menuItem title="ends with" id="mYj-CC-Zqg">
-                                                                    <integer key="representedObject" value="9"/>
-                                                                </menuItem>
-                                                                <menuItem title="is" id="jMK-an-vHF">
-                                                                    <integer key="representedObject" value="4"/>
-                                                                </menuItem>
-                                                                <menuItem title="is not" id="0qm-Lj-7ZS">
-                                                                    <integer key="representedObject" value="5"/>
-                                                                </menuItem>
-                                                            </items>
-                                                        </menu>
-                                                    </popUpMenus>
-                                                </predicateEditorRowTemplate>
-                                            </rowTemplates>
-                                        </predicateEditor>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.91000002619999998" alpha="1" colorSpace="calibratedWhite"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Zrg-7X-Amd">
-                                    <rect key="frame" x="-100" y="-100" width="360" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QKh-HG-azW">
-                                    <rect key="frame" x="393" y="1" width="16" height="78"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-L8-0KP">
-                                <rect key="frame" x="220" y="13" width="82" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xDt-ug-fez">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
+                            <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="flC-TH-309">
+                                <rect key="frame" x="12" y="12" width="417" height="114"/>
+                                <subviews>
+                                    <customView misplaced="YES" id="6oy-YF-xsC" userLabel="Top">
+                                        <rect key="frame" x="0.0" y="0.0" width="417" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Td-9y-pCx">
+                                                <rect key="frame" x="93" y="35" width="206" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="206" id="dEA-dn-nap"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Jla-cE-pIV">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uhk-dA-e8i">
+                                                <rect key="frame" x="310" y="37" width="98" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Is Smart List" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ovF-W1-pbn">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="showPredicateEditor:" target="9a5-nc-lBX" id="iQj-Tp-yfe"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="agv-l4-JpQ">
+                                                <rect key="frame" x="129" y="-1" width="81" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wl3-zC-L9H">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="createList:" target="9a5-nc-lBX" id="Fh6-ra-r2N"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-L8-0KP">
+                                                <rect key="frame" x="217" y="1" width="82" height="30"/>
+                                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xDt-ug-fez">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="dismissController:" target="9a5-nc-lBX" id="adZ-ty-aRm"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uhk-dA-e8i">
-                                <rect key="frame" x="334" y="177" width="98" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Is Smart List" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ovF-W1-pbn">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showPredicateEditor:" target="9a5-nc-lBX" id="iQj-Tp-yfe"/>
-                                </connections>
-                            </button>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="dismissController:" target="9a5-nc-lBX" id="adZ-ty-aRm"/>
+                                                </connections>
+                                            </button>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-cc-b2d">
+                                                <rect key="frame" x="15" y="38" width="69" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="List Name:" id="tSl-g9-rOn">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Aie-L8-0KP" secondAttribute="trailing" constant="124" id="2ei-kZ-GFz"/>
+                                            <constraint firstAttribute="bottom" secondItem="agv-l4-JpQ" secondAttribute="bottom" constant="6" id="2kF-3a-vTQ"/>
+                                            <constraint firstItem="Uhk-dA-e8i" firstAttribute="leading" secondItem="4Td-9y-pCx" secondAttribute="trailing" constant="13" id="6iz-p1-kV2"/>
+                                            <constraint firstAttribute="width" constant="417" id="883-Lg-bl1"/>
+                                            <constraint firstItem="Aie-L8-0KP" firstAttribute="leading" secondItem="agv-l4-JpQ" secondAttribute="trailing" constant="19" id="8QH-SZ-e67"/>
+                                            <constraint firstItem="Aie-L8-0KP" firstAttribute="top" secondItem="4Td-9y-pCx" secondAttribute="bottom" constant="8" id="B01-HK-g3d"/>
+                                            <constraint firstItem="4Td-9y-pCx" firstAttribute="leading" secondItem="4l6-cc-b2d" secondAttribute="trailing" constant="11" id="QXN-70-guy"/>
+                                            <constraint firstAttribute="bottom" secondItem="Aie-L8-0KP" secondAttribute="bottom" constant="8" id="XIu-WD-vwe"/>
+                                            <constraint firstItem="agv-l4-JpQ" firstAttribute="leading" secondItem="6oy-YF-xsC" secondAttribute="leading" constant="135" id="hYn-eC-ILz"/>
+                                            <constraint firstItem="4Td-9y-pCx" firstAttribute="baseline" secondItem="4l6-cc-b2d" secondAttribute="baseline" id="i6o-uS-w3s"/>
+                                            <constraint firstItem="4Td-9y-pCx" firstAttribute="baseline" secondItem="Uhk-dA-e8i" secondAttribute="baseline" id="mGs-iG-XAO"/>
+                                            <constraint firstItem="4Td-9y-pCx" firstAttribute="leading" secondItem="6oy-YF-xsC" secondAttribute="leading" constant="93" id="sGr-Gs-zz1"/>
+                                            <constraint firstItem="agv-l4-JpQ" firstAttribute="top" secondItem="4Td-9y-pCx" secondAttribute="bottom" constant="8" id="sZt-ho-5di"/>
+                                            <constraint firstItem="4Td-9y-pCx" firstAttribute="top" secondItem="6oy-YF-xsC" secondAttribute="top" constant="6" id="wzv-Oj-gx1"/>
+                                        </constraints>
+                                    </customView>
+                                    <customView misplaced="YES" id="Hm3-3t-Apd" userLabel="Bottom">
+                                        <rect key="frame" x="0.0" y="67" width="417" height="47"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-gS-rcq">
+                                                <rect key="frame" x="0.0" y="0.0" width="417" height="50"/>
+                                                <clipView key="contentView" id="Mcb-l1-pgT">
+                                                    <rect key="frame" x="1" y="1" width="415" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <predicateEditor verticalHuggingPriority="750" nestingMode="compound" canRemoveAllRows="YES" rowHeight="25" id="kyt-83-f2g">
+                                                            <rect key="frame" x="0.0" y="0.0" width="415" height="150"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <rowTemplates>
+                                                                <predicateEditorRowTemplate rowType="compound" id="XWD-pP-I8T" userLabel="AND OR NOT">
+                                                                    <popUpMenus>
+                                                                        <menu id="Hbs-Qk-e4h">
+                                                                            <items>
+                                                                                <menuItem title="Any" state="on" id="P5B-fa-T24">
+                                                                                    <integer key="representedObject" value="2"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="All" id="12u-6X-V5p">
+                                                                                    <integer key="representedObject" value="1"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="rbg-fn-u70">
+                                                                            <items>
+                                                                                <menuItem title="of the following are true" state="on" id="gKi-N8-YPj"/>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                                <predicateEditorRowTemplate rowType="simple" id="zXf-QS-L0D" userLabel="Quote String">
+                                                                    <array key="leftExpressionObject">
+                                                                        <expression type="keyPath">
+                                                                            <string key="keyPath">quoteString</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <integer key="rightExpressionObject" value="700"/>
+                                                                    <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
+                                                                    <popUpMenus>
+                                                                        <menu id="mRD-VK-eSm">
+                                                                            <items>
+                                                                                <menuItem title="quoteString" state="on" id="Gfk-VP-0yI">
+                                                                                    <expression key="representedObject" type="keyPath">
+                                                                                        <string key="keyPath">quoteString</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="HEZ-4X-b0M">
+                                                                            <items>
+                                                                                <menuItem title="contains" state="on" id="lgy-Cr-EwO">
+                                                                                    <integer key="representedObject" value="99"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="ends with" id="mYj-CC-Zqg">
+                                                                                    <integer key="representedObject" value="9"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is" id="jMK-an-vHF">
+                                                                                    <integer key="representedObject" value="4"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is like" id="FpW-6z-I6t">
+                                                                                    <integer key="representedObject" value="7"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="matches" id="qoN-vz-zKy">
+                                                                                    <integer key="representedObject" value="6"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="begins with" id="AAW-Dd-CrZ">
+                                                                                    <integer key="representedObject" value="8"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                                <predicateEditorRowTemplate rowType="simple" id="tQW-K9-x4R" userLabel="Favorite">
+                                                                    <array key="leftExpressionObject">
+                                                                        <expression type="keyPath">
+                                                                            <string key="keyPath">isFavorite</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <array key="rightExpressionObject">
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">YES</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">NO</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <popUpMenus>
+                                                                        <menu id="igz-fn-GOI">
+                                                                            <items>
+                                                                                <menuItem title="isFavorite" state="on" id="FEU-xv-lgB">
+                                                                                    <expression key="representedObject" type="keyPath">
+                                                                                        <string key="keyPath">isFavorite</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="EFY-Ik-q9q">
+                                                                            <items>
+                                                                                <menuItem title="is" state="on" id="ORW-Kq-zbe">
+                                                                                    <integer key="representedObject" value="4"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is not" id="WxM-MV-15d">
+                                                                                    <integer key="representedObject" value="5"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="Rdm-Ta-a65">
+                                                                            <items>
+                                                                                <menuItem title="YES" state="on" id="M4o-Dv-c5h">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">YES</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="NO" id="HVF-sK-ulf">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">NO</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                                <predicateEditorRowTemplate rowType="simple" id="ida-hm-ql9" userLabel="Tot Words">
+                                                                    <array key="leftExpressionObject">
+                                                                        <expression type="keyPath">
+                                                                            <string key="keyPath">totalWords</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">totalLetters</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <integer key="rightExpressionObject" value="300"/>
+                                                                    <popUpMenus>
+                                                                        <menu id="O4q-J9-Njg">
+                                                                            <items>
+                                                                                <menuItem title="totalWords" state="on" id="prH-dS-eUg">
+                                                                                    <expression key="representedObject" type="keyPath">
+                                                                                        <string key="keyPath">totalWords</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="totalLetters" id="iaR-vm-Sb1">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">totalLetters</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="WGW-bN-6DX">
+                                                                            <items>
+                                                                                <menuItem title="is" state="on" id="Hni-yn-z5m">
+                                                                                    <integer key="representedObject" value="4"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is less than" id="DFV-WK-LO2">
+                                                                                    <integer key="representedObject" value="0"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is greater than" id="6Uu-fX-Fb6">
+                                                                                    <integer key="representedObject" value="2"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is greater than or equal to" id="ZcV-aj-yCY">
+                                                                                    <integer key="representedObject" value="3"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is less than or equal to" id="KUY-so-Iom">
+                                                                                    <integer key="representedObject" value="1"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                                <predicateEditorRowTemplate rowType="simple" id="hy3-XW-dvJ" userLabel="Author">
+                                                                    <array key="leftExpressionObject">
+                                                                        <expression type="keyPath">
+                                                                            <string key="keyPath">from.name</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <integer key="rightExpressionObject" value="700"/>
+                                                                    <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
+                                                                    <popUpMenus>
+                                                                        <menu id="NcF-37-yyT">
+                                                                            <items>
+                                                                                <menuItem title="from.name" state="on" id="3vV-Jg-5rN">
+                                                                                    <expression key="representedObject" type="keyPath">
+                                                                                        <string key="keyPath">from.name</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="WFq-6d-6jD">
+                                                                            <items>
+                                                                                <menuItem title="contains" state="on" id="dRD-1j-0WN">
+                                                                                    <integer key="representedObject" value="99"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="begins with" id="lsN-MY-Bmm">
+                                                                                    <integer key="representedObject" value="8"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="ends with" id="ORf-f8-dLX">
+                                                                                    <integer key="representedObject" value="9"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is" id="7HQ-Zq-HMg">
+                                                                                    <integer key="representedObject" value="4"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="matches" id="Huf-ij-4e1">
+                                                                                    <integer key="representedObject" value="6"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is like" id="og0-1L-uZj">
+                                                                                    <integer key="representedObject" value="7"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                                <predicateEditorRowTemplate rowType="simple" id="xh4-WY-I9c" userLabel="Theme">
+                                                                    <array key="leftExpressionObject">
+                                                                        <expression type="keyPath">
+                                                                            <string key="keyPath">isAbout.themeName</string>
+                                                                        </expression>
+                                                                    </array>
+                                                                    <integer key="rightExpressionObject" value="700"/>
+                                                                    <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
+                                                                    <popUpMenus>
+                                                                        <menu id="0Oc-HJ-GGD">
+                                                                            <items>
+                                                                                <menuItem title="isAbout.themeName" state="on" id="Mu2-4y-xyN">
+                                                                                    <expression key="representedObject" type="keyPath">
+                                                                                        <string key="keyPath">isAbout.themeName</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                        <menu id="1lV-F6-ca9">
+                                                                            <items>
+                                                                                <menuItem title="contains" state="on" id="nrb-b7-08g">
+                                                                                    <integer key="representedObject" value="99"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="begins with" id="fsW-CQ-V5J">
+                                                                                    <integer key="representedObject" value="8"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="ends with" id="4X8-dy-uUG">
+                                                                                    <integer key="representedObject" value="9"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is" id="Z7T-1I-wfq">
+                                                                                    <integer key="representedObject" value="4"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is not" id="IjW-m2-ifu">
+                                                                                    <integer key="representedObject" value="5"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="matches" id="gLg-Of-Hev">
+                                                                                    <integer key="representedObject" value="6"/>
+                                                                                </menuItem>
+                                                                                <menuItem title="is like" id="q8V-j1-7V4">
+                                                                                    <integer key="representedObject" value="7"/>
+                                                                                </menuItem>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpMenus>
+                                                                </predicateEditorRowTemplate>
+                                                            </rowTemplates>
+                                                            <connections>
+                                                                <action selector="predicatedChanged:" target="9a5-nc-lBX" id="Iry-4c-zrA"/>
+                                                            </connections>
+                                                        </predicateEditor>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.91000002619999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                </clipView>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Yo3-cf-xvX"/>
+                                                </constraints>
+                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Zrg-7X-Amd">
+                                                    <rect key="frame" x="-100" y="-100" width="360" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QKh-HG-azW">
+                                                    <rect key="frame" x="400" y="1" width="16" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                            </scrollView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Teo-gS-rcq" secondAttribute="trailing" id="3Mz-fo-Ohn"/>
+                                            <constraint firstItem="Teo-gS-rcq" firstAttribute="leading" secondItem="Hm3-3t-Apd" secondAttribute="leading" id="4FJ-gf-l6h"/>
+                                            <constraint firstItem="Teo-gS-rcq" firstAttribute="top" secondItem="Hm3-3t-Apd" secondAttribute="top" id="LWL-AD-i2J"/>
+                                            <constraint firstAttribute="bottom" secondItem="Teo-gS-rcq" secondAttribute="bottom" id="aS9-4S-g72"/>
+                                        </constraints>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="flC-TH-309" secondAttribute="bottom" constant="12" id="KLm-1e-1bU"/>
+                            <constraint firstItem="flC-TH-309" firstAttribute="top" secondItem="1BK-2E-8HU" secondAttribute="top" constant="12" id="R0k-aE-RZf"/>
+                            <constraint firstAttribute="trailing" secondItem="flC-TH-309" secondAttribute="trailing" constant="12" id="T48-mN-evY"/>
+                            <constraint firstItem="flC-TH-309" firstAttribute="leading" secondItem="1BK-2E-8HU" secondAttribute="leading" constant="12" id="UlN-bn-ddv"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="Hm3-3t-Apd" id="lwr-tj-Oz8"/>
                         <outlet property="createButton" destination="agv-l4-JpQ" id="hyk-9r-Tjz"/>
+                        <outlet property="heightScrollViewPredicate" destination="Yo3-cf-xvX" id="Zs0-Az-pef"/>
                         <outlet property="isSmartList" destination="Uhk-dA-e8i" id="0oF-Ox-np7"/>
                         <outlet property="nameTextField" destination="4Td-9y-pCx" id="bHn-JH-nuY"/>
                         <outlet property="predicateScrollView" destination="Teo-gS-rcq" id="nvB-n3-fss"/>
@@ -177,7 +402,7 @@ Gw
                 </viewController>
                 <customObject id="dUX-oq-BQw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128" y="135.5"/>
+            <point key="canvasLocation" x="127.5" y="144"/>
         </scene>
     </scenes>
 </document>

@@ -14,10 +14,13 @@ class AlternateController2: NSViewController {
     @IBOutlet weak var listView: NSOutlineView!
     
     @objc var myMOC: NSManagedObjectContext = (NSApp.delegate as! AppDelegate).managedObjectContext
+    let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
+    let pred=NSPredicate(format: "isRootItem == YES")
+
 
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
-        let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
-        let pred=NSPredicate(format: "isRootItem == YES")
+        //let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
+        //let pred=NSPredicate(format: "isRootItem == YES")
         let sortingO=NSSortDescriptor(key: "name", ascending: true)
         fr.sortDescriptors=[sortingO]
         fr.predicate=pred
@@ -36,6 +39,17 @@ class AlternateController2: NSViewController {
     @IBAction func deleteSelectedLibraryItem(_ sender: Any) {
     }
     
+    //Update search field when user enters text.
+    override func controlTextDidChange(_ obj: Notification) {
+        if let searchF = obj.object as? NSSearchField {
+            let searchPredicate = NSPredicate(format: "name contains [CD] %@ AND isRootItem=NO", searchF.stringValue)
+            
+            listFRC.fetchRequest.predicate=(searchF.stringValue=="") ? pred:searchPredicate
+            try! listFRC.performFetch()
+            listView.reloadData()
+            listView.expandItem(nil, expandChildren: true)
+        }
+    }
     
 }
 

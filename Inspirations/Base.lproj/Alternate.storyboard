@@ -464,7 +464,7 @@
                                                 </buttonCell>
                                                 <connections>
                                                     <outlet property="menu" destination="Gaz-Sn-zex" id="M9k-gy-59m"/>
-                                                    <segue destination="BxZ-uW-2MU" kind="popover" popoverAnchorView="mqt-II-czk" popoverBehavior="t" preferredEdge="maxY" id="AFD-yr-noe"/>
+                                                    <segue destination="BxZ-uW-2MU" kind="popover" popoverAnchorView="mqt-II-czk" popoverBehavior="t" preferredEdge="maxX" id="AFD-yr-noe"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uNt-ye-U4X" userLabel="Delete">
@@ -485,6 +485,9 @@
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </searchFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="gvZ-1i-Bh3" id="7eQ-HE-Dxu"/>
+                                                </connections>
                                             </searchField>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5d9-lo-PYf" userLabel="List">
                                                 <rect key="frame" x="0.0" y="20" width="152" height="306"/>
