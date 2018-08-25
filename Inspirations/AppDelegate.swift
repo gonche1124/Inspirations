@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
         
         //createObjectsIfTheyDontExist()
-        
+        //createRandomQuotes()
         
     }
     
@@ -279,6 +279,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let coreEntity: NSManagedObject = NSEntityDescription.insertNewObject(forEntityName: object, into: self.managedObjectContext)
         coreEntity.setValuesForKeys(withAttributes)
         return coreEntity
+    }
+    
+    //For Testing only
+    func createRandomQuotes(){
+        let quoteA: [String]=["Love is in the Air"
+            ,"Reach for the moon, even if  you miss you will land among the starts"
+            , "What a wonderful world it was"
+            , "Wierd is just a point of view"
+            , "Random is life"
+            , "Travel lightly"]
+        let authorA=["John", "Mike", "Andres", "Felipe", "Geoff"]
+        let isF = [true, false]
+        for _ in 1...100{
+            let thisQuote = Quote(context: self.managedObjectContext)
+            thisQuote.quoteString = quoteA[Int(arc4random_uniform(UInt32(quoteA.count)))]
+            let currAuthor = Author(context: managedObjectContext)
+            currAuthor.name = authorA[Int(arc4random_uniform(UInt32(authorA.count)))]
+            thisQuote.from=currAuthor
+            thisQuote.isFavorite=isF[Int(arc4random_uniform(UInt32(isF.count)))]
+        }
+        try! self.managedObjectContext.save()
     }
 
 }

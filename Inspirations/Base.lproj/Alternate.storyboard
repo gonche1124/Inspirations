@@ -421,11 +421,63 @@
         <scene sceneID="bMd-Yp-ZsB">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="0T4-WD-gnI" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
+                    <window key="window" title="Gonche" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="163" y="199" width="487" height="246"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="Fp4-eG-h8C">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="e6b-nv-9hy"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="5Mz-36-bxw"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="51H-Z8-9zY"/>
+                                <toolbarItem implicitItemIdentifier="E6962184-A3B1-4D6D-BA25-D18B8732354B" explicitItemIdentifier="mainSearchField" label="Search" paletteLabel="Search Field" id="Cue-ch-q3L">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="22"/>
+                                    <size key="maxSize" width="96" height="22"/>
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="0Xx-UZ-MRd">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ygv-D1-Hg2">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Zdu-vf-aOV"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="XoW-kg-Cuf"/>
+                                <toolbarItem implicitItemIdentifier="06FD1E7B-CB5E-48C8-812D-9A937615851F" label="Views" paletteLabel="Views" id="1oh-Le-P6p">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="103" height="23"/>
+                                    <size key="maxSize" width="188" height="24"/>
+                                    <segmentedControl key="view" identifier="segmentedButton" verticalHuggingPriority="750" id="8nX-PZ-WXm">
+                                        <rect key="frame" x="0.0" y="14" width="182" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="drq-mV-dFv">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="List"/>
+                                                <segment label="Explore" selected="YES" tag="1"/>
+                                                <segment label="Large"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="changeTabView:" target="VGa-f0-ucZ" id="N0U-Kf-aQe"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="Zdu-vf-aOV"/>
+                                <toolbarItem reference="e6b-nv-9hy"/>
+                                <toolbarItem reference="5Mz-36-bxw"/>
+                                <toolbarItem reference="XoW-kg-Cuf"/>
+                                <toolbarItem reference="1oh-Le-P6p"/>
+                                <toolbarItem reference="XoW-kg-Cuf"/>
+                                <toolbarItem reference="Cue-ch-q3L"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="0T4-WD-gnI" id="pjw-eE-n2d"/>
                         </connections>
@@ -489,13 +541,13 @@
                                                     <outlet property="delegate" destination="gvZ-1i-Bh3" id="7eQ-HE-Dxu"/>
                                                 </connections>
                                             </searchField>
-                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5d9-lo-PYf" userLabel="List">
+                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5d9-lo-PYf" userLabel="List">
                                                 <rect key="frame" x="0.0" y="20" width="152" height="306"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="HDR-YJ-edE">
                                                     <rect key="frame" x="1" y="1" width="150" height="304"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="kdl-Y5-6Iu" id="MHG-gB-lbk">
+                                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="4" outlineTableColumn="kdl-Y5-6Iu" id="MHG-gB-lbk">
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="304"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="0.0"/>
@@ -652,7 +704,7 @@
                                                     <containerView translatesAutoresizingMaskIntoConstraints="NO" id="MlQ-QV-cxj" userLabel="Tab Container">
                                                         <rect key="frame" x="0.0" y="29" width="376" height="252"/>
                                                         <connections>
-                                                            <segue destination="34z-Ir-26p" kind="embed" id="Jds-L4-wpt"/>
+                                                            <segue destination="34z-Ir-26p" kind="embed" identifier="tabsSegue" id="Jds-L4-wpt"/>
                                                         </connections>
                                                     </containerView>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-sH-6ut" userLabel="Bottom Bar">
@@ -729,7 +781,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="embeddedController" destination="MlQ-QV-cxj" id="BAe-Se-18v"/>
+                        <outlet property="embeddedTabs" destination="MlQ-QV-cxj" id="yKT-Iv-gS6"/>
                         <outlet property="listView" destination="MHG-gB-lbk" id="suh-48-5TY"/>
+                        <outlet property="statusTextField" destination="Dbf-nk-867" id="qPB-FJ-FhA"/>
+                        <outlet property="tabContainer" destination="MlQ-QV-cxj" id="Fak-GG-ftt"/>
+                        <outlet property="tableSearchField" destination="kS5-5r-c48" id="boP-VX-OlZ"/>
                     </connections>
                 </viewController>
                 <customObject id="vG5-RB-6ka" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

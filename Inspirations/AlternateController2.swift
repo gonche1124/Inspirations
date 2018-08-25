@@ -9,15 +9,31 @@
 import Cocoa
 
 class AlternateController2: NSViewController {
+   
 
+    @IBOutlet weak var tabContainer: NSView!
+    
     //Properties
     @IBOutlet weak var listView: NSOutlineView!
     
+    @IBOutlet weak var tableSearchField: NSSearchField!
+    
+    @IBOutlet weak var statusTextField: NSTextField!
     @objc var myMOC: NSManagedObjectContext = (NSApp.delegate as! AppDelegate).managedObjectContext
     let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
     let pred=NSPredicate(format: "isRootItem == YES")
 
+    lazy var mainSearchField:NSSearchField? = {
+        var thisSearchBar:NSSearchField?
+        //let searchToolBarItem = (NSApp.mainWindow?.toolbar?.items)?.first(where: {$0.itemIdentifier.rawValue; "mainSearchField"}){
+            
+        //}
+        return thisSearchBar!
+    }()
+    
+    //let parentWindowController =//self.view.window.toolbar as! NSToolbar
 
+    
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
         //let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
         //let pred=NSPredicate(format: "isRootItem == YES")
@@ -29,11 +45,30 @@ class AlternateController2: NSViewController {
         return frc
     }() //as NSFetchedResultsController
    
-    
+    @IBAction func changeTabView(_ sender: NSSegmentedControl){
+        if let tabViewController = self.childViewControllers[0] as? NSTabViewController{
+            tabViewController.selectedTabViewItemIndex=sender.selectedSegment //TODO: Check if can sync, if not to make select tab.
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Custom loading Setup
         listView.expandItem(nil, expandChildren: true)
+    }
+    
+    //Used to pass data between storyboards/segues.
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let tabsController = segue.destinationController as? NSTabViewController {
+            for tabItem in tabsController.tabViewItems {
+                if let viewController = tabItem.viewController as? TablesController {
+                    viewController.searchField=tableSearchField
+                    viewController.infoString=statusTextField
+                }
+            }
+        }
+        
     }
     
     @IBAction func deleteSelectedLibraryItem(_ sender: Any) {
@@ -43,7 +78,6 @@ class AlternateController2: NSViewController {
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
             let searchPredicate = NSPredicate(format: "name contains [CD] %@ AND isRootItem=NO", searchF.stringValue)
-            
             listFRC.fetchRequest.predicate=(searchF.stringValue=="") ? pred:searchPredicate
             try! listFRC.performFetch()
             listView.reloadData()
@@ -123,5 +157,16 @@ enum Entities:String{
     case theme="Theme"
     case library="LibraryItem"
     case collection="QuoteList"
+}
+
+enum LibraryType:String{
+    case tag="tagImage"
+    case folder="folderImage"
+    case language="languageImage"
+    case smartList="smartListImage"
+    case list="listImage"
+    case favorites="favoritesImage"
+    case mainLibrary="mainLibraryImage"
+    case rootItem="noImage"
 }
 
