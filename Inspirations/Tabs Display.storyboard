@@ -9,14 +9,14 @@
         <!--Tab View Controller-->
         <scene sceneID="Qdd-2p-az1">
             <objects>
-                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="2" tabStyle="unspecified" id="kzV-eP-Aw2" sceneMemberID="viewController">
+                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="0" id="kzV-eP-Aw2" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="kKt-r2-gNY"/>
                         <tabViewItem identifier="" id="hrO-kJ-Wa6"/>
                         <tabViewItem id="yfy-Cu-mNm"/>
                     </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="HBR-da-Nfa">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="314"/>
+                    <tabView key="tabView" misplaced="YES" type="noTabsNoBorder" id="HBR-da-Nfa">
+                        <rect key="frame" x="0.0" y="0.0" width="421" height="314"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <font key="font" metaFont="message"/>
                         <connections>
@@ -40,7 +40,7 @@
                 <viewController title="Plain" showSeguePresentationStyle="single" id="m8M-8y-p42" customClass="TablesController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="bvf-jH-Y3v">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mm9-0v-0Ha">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -49,7 +49,7 @@
                                     <rect key="frame" x="1" y="23" width="448" height="276"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l7V-eD-Y6W" viewBased="YES" id="eKh-zw-w3Y" userLabel="Plain Table">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l7V-eD-Y6W" viewBased="YES" id="eKh-zw-w3Y" userLabel="Plain Table">
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="276"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -194,13 +194,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="60" horizontalPageScroll="10" verticalLineScroll="60" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T0-qC-dOz">
+                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="60" horizontalPageScroll="10" verticalLineScroll="60" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T0-qC-dOz">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <clipView key="contentView" id="pyO-Dv-y6X">
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <clipView key="contentView" ambiguous="YES" id="pyO-Dv-y6X">
                                     <rect key="frame" x="1" y="1" width="448" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="58" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzd-Jw-Ak7">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="58" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzd-Jw-Ak7">
                                             <rect key="frame" x="0.0" y="0.0" width="454" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -224,7 +225,7 @@
                                                             <rect key="frame" x="1" y="1" width="451" height="58"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hMG-3t-nr6">
+                                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hMG-3t-nr6">
                                                                     <rect key="frame" x="8" y="8" width="435" height="42"/>
                                                                     <subviews>
                                                                         <textField horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-7z-vVp">
@@ -285,12 +286,6 @@
                                 </scroller>
                             </scrollView>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="8T0-qC-dOz" secondAttribute="trailing" id="7ef-aS-AqS"/>
-                            <constraint firstAttribute="bottom" secondItem="8T0-qC-dOz" secondAttribute="bottom" id="EVo-Mw-rHZ"/>
-                            <constraint firstItem="8T0-qC-dOz" firstAttribute="top" secondItem="CKC-zH-m6L" secondAttribute="top" id="ltc-oc-Uqn"/>
-                            <constraint firstItem="8T0-qC-dOz" firstAttribute="leading" secondItem="CKC-zH-m6L" secondAttribute="leading" id="oYH-AZ-lof"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="table" destination="Gzd-Jw-Ak7" id="lDL-Hc-iQm"/>
@@ -321,7 +316,7 @@
                 </viewController>
                 <customObject id="V4C-29-G5r" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23" y="536"/>
+            <point key="canvasLocation" x="37" y="607"/>
         </scene>
     </scenes>
 </document>

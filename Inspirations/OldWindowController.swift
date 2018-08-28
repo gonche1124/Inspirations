@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class WindowController: NSWindowController {
+class OldWindowController: NSWindowController {
     
     //IBInspectable variable.
     @IBInspectable var toolbarColor: NSColor = NSColor.white

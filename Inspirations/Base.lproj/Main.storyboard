@@ -425,7 +425,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="OldWindowController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Inspiration" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -632,7 +632,7 @@
         <!--Left Side-->
         <scene sceneID="QEf-v7-1VJ">
             <objects>
-                <viewController id="b9R-IT-fdO" userLabel="Left Side" customClass="LeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b9R-IT-fdO" userLabel="Left Side" customClass="OldLeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="QeG-IN-BXh">
                         <rect key="frame" x="0.0" y="0.0" width="206" height="335"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1910,6 +1910,6 @@ Gw
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D0e-wa-IHS"/>
+        <segue reference="Vr3-aH-8vi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,9 @@ class TablesController: NSViewController {
     var infoString: NSTextField?
     @IBOutlet weak var table: NSTableView?
     
+    @IBAction func ddd_test(_ sender:Any){
+        print("ddd_test")
+    }
     
     lazy var tableFRC:NSFetchedResultsController<Quote> = {
 
@@ -58,7 +61,6 @@ extension TablesController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.table?.beginUpdates()
     }
-    
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.table?.endUpdates()

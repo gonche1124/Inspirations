@@ -66,9 +66,10 @@ class Smar_List_Controller: NSViewController {
         try! moc.save() //save
         
         //Refresh main list
-        let leftController=NSApp.mainWindow?.contentViewController as? AlternateController2
-        leftController?.listView.reloadData()
-        leftController?.listView.expandItem(nil, expandChildren: true)
+        //TODO: Rewrite to make compatible with NSSPlitviewController
+        //let leftController=NSApp.mainWindow?.contentViewController as? AlternateController2
+        //leftController?.listView.reloadData()
+        //leftController?.listView.expandItem(nil, expandChildren: true)
     
         self.dismiss(self)
     }
