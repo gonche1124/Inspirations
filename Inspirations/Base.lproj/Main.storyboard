@@ -1783,10 +1783,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="1736.5" y="422.5"/>
         </scene>
-        <!--Import Controller-->
+        <!--Old Import Controller-->
         <scene sceneID="5IR-cq-mMB">
             <objects>
-                <viewController id="EKd-P7-27A" customClass="ImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EKd-P7-27A" customClass="OldImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="roQ-i0-pEA">
                         <rect key="frame" x="0.0" y="0.0" width="488" height="145"/>
                         <autoresizingMask key="autoresizingMask"/>

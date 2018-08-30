@@ -10,7 +10,7 @@ import Cocoa
 
 protocol progressMade: ProgressReporting {}
 
-class ImportController: NSViewController {
+class OldImportController: NSViewController {
 
     
     //Outlets.
@@ -40,7 +40,7 @@ class ImportController: NSViewController {
     }
     
     @IBAction func importQuotes(_ sender: NSButton) {
-        let importJson = importExport()
+        let importJson = oldImportExport()
         let arrayOfQuotes = importJson.parseJSONFileToArray(pathToFile: self.urlToImport!)
         importJson.progressInstance!.addObserver(self, forKeyPath: "fractionCompleted", options: [], context: nil)
         importJson.progressInstance!.addObserver(self, forKeyPath: "completedUnitCount", options: [], context: nil)

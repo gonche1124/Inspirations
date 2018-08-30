@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Author" representedClassName="Author" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hasSaid" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasSaid" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Language" representedClassName="Language" parentEntity="LibraryItem" syncable="YES" codeGenerationType="class">
         <attribute name="localizedName" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,8 +21,8 @@
         <attribute name="quoteString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalLetters" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="from" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
-        <relationship name="isAbout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
+        <relationship name="from" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
+        <relationship name="isAbout" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
         <relationship name="isIncludedIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
         <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
@@ -36,16 +36,16 @@
     </entity>
     <entity name="Theme" representedClassName="Theme" syncable="YES" codeGenerationType="class">
         <attribute name="themeName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasQuotes" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <fetchRequest name="nameExists" entity="LibraryItem" predicateString="isRootItem == 0 AND name == &quot;&quot;"/>
     <elements>
-        <element name="Author" positionX="-146" positionY="195" width="128" height="75"/>
+        <element name="Author" positionX="-146" positionY="195" width="128" height="73"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="268" positionY="-90" width="128" height="30"/>
-        <element name="Quote" positionX="-90" positionY="-81" width="128" height="180"/>
+        <element name="LibraryItem" positionX="241" positionY="-117" width="128" height="30"/>
+        <element name="Quote" positionX="-90" positionY="-81" width="128" height="178"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>
-        <element name="Theme" positionX="-279" positionY="-18" width="128" height="75"/>
+        <element name="Theme" positionX="-279" positionY="-18" width="128" height="73"/>
     </elements>
 </model>

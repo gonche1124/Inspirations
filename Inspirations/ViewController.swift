@@ -88,7 +88,7 @@ class ViewController: NSViewController {
     //MARK: - Export
     //Connected through first responder
     @IBAction func exportCoreModel(_ sender: NSButton) {
-        importExport().exportAllTheQuotes()
+        oldImportExport().exportAllTheQuotes()
     }
     
     //Connected through first responder.
@@ -115,7 +115,7 @@ class ViewController: NSViewController {
         try! fileManager.copyItem(at: imagePath.absoluteURL!, to: newURL as URL)
         
         //Set Quote.
-        importExport().mergeThis(quote: selectedQuote, onImageWithPath: newURL)
+        oldImportExport().mergeThis(quote: selectedQuote, onImageWithPath: newURL)
         
         
         //Append text.

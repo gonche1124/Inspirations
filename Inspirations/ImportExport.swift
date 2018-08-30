@@ -12,7 +12,7 @@ import Cocoa
 
 
 
-class importExport: NSObject {
+class oldImportExport: NSObject {
     
     //Variables
     fileprivate lazy var moc = (NSApplication.shared.delegate as! AppDelegate).managedObjectContext

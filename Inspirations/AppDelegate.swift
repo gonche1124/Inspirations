@@ -290,14 +290,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             , "Random is life"
             , "Travel lightly"]
         let authorA=["John", "Mike", "Andres", "Felipe", "Geoff"]
+        let themeN = ["Love", "Faith", "Courage"]
         let isF = [true, false]
-        for _ in 1...100{
-            let thisQuote = Quote(context: self.managedObjectContext)
+        for _ in 1...20{
+            let thisQuote = Quote(context: managedObjectContext)
             thisQuote.quoteString = quoteA[Int(arc4random_uniform(UInt32(quoteA.count)))]
             let currAuthor = Author(context: managedObjectContext)
             currAuthor.name = authorA[Int(arc4random_uniform(UInt32(authorA.count)))]
             thisQuote.from=currAuthor
             thisQuote.isFavorite=isF[Int(arc4random_uniform(UInt32(isF.count)))]
+            let currTheme = Theme(context: managedObjectContext)
+            currTheme.themeName = themeN[Int(arc4random_uniform(UInt32(themeN.count)))]
+            thisQuote.isAbout=currTheme
         }
         try! self.managedObjectContext.save()
     }

@@ -17,6 +17,8 @@
 		8A11672A213376AC00AC2E08 /* RightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A116729213376AC00AC2E08 /* RightController.swift */; };
 		8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */; };
 		8A11672E2134E32A00AC2E08 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672D2134E32A00AC2E08 /* Extras.swift */; };
+		8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */; };
+		8A11673421363BA200AC2E08 /* ImporterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11673321363BA200AC2E08 /* ImporterController.swift */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A546152210D240F00B6E588 /* Smart List Editor.storyboard */; };
@@ -33,7 +35,7 @@
 		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
 		8ADDA7A3200D126800F7E1D9 /* OldWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A2200D126800F7E1D9 /* OldWindowController.swift */; };
 		8AE614C12072F134003CB950 /* OldLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE614C02072F134003CB950 /* OldLeftController.swift */; };
-		8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B35F1FECA94D008A361F /* ImportController.swift */; };
+		8AE9B3601FECA94D008A361F /* OldImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B35F1FECA94D008A361F /* OldImportController.swift */; };
 		8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB528C1EDBADE50096B93F /* BigViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		8A116729213376AC00AC2E08 /* RightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightController.swift; sourceTree = "<group>"; };
 		8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalWindow.swift; sourceTree = "<group>"; };
 		8A11672D2134E32A00AC2E08 /* Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
+		8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImportMultiple.storyboard; sourceTree = "<group>"; };
+		8A11673321363BA200AC2E08 /* ImporterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterController.swift; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
@@ -89,7 +93,7 @@
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
 		8ADDA7A2200D126800F7E1D9 /* OldWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldWindowController.swift; sourceTree = "<group>"; };
 		8AE614C02072F134003CB950 /* OldLeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldLeftController.swift; sourceTree = "<group>"; };
-		8AE9B35F1FECA94D008A361F /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
+		8AE9B35F1FECA94D008A361F /* OldImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldImportController.swift; sourceTree = "<group>"; };
 		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,11 +125,11 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A11673321363BA200AC2E08 /* ImporterController.swift */,
+				8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */,
+				8A1167302134F1DB00AC2E08 /* Smart Controller */,
+				8A11672F2134F1C000AC2E08 /* Split Controller */,
 				8A1167272133672700AC2E08 /* PrincipalView.swift */,
-				8A116729213376AC00AC2E08 /* RightController.swift */,
-				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
-				8A11672521335BCF00AC2E08 /* LeftController.swift */,
-				8A546152210D240F00B6E588 /* Smart List Editor.storyboard */,
 				8A546154210D2A7400B6E588 /* Smar List Controller.swift */,
 				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A11672D2134E32A00AC2E08 /* Extras.swift */,
@@ -144,6 +148,24 @@
 			name = "Tabs Views";
 			sourceTree = "<group>";
 		};
+		8A11672F2134F1C000AC2E08 /* Split Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A116729213376AC00AC2E08 /* RightController.swift */,
+				8A11672521335BCF00AC2E08 /* LeftController.swift */,
+			);
+			name = "Split Controller";
+			sourceTree = "<group>";
+		};
+		8A1167302134F1DB00AC2E08 /* Smart Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
+				8A546152210D240F00B6E588 /* Smart List Editor.storyboard */,
+			);
+			name = "Smart Controller";
+			sourceTree = "<group>";
+		};
 		8A164B161F59186D004F0810 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				8AE614C02072F134003CB950 /* OldLeftController.swift */,
-				8AE9B35F1FECA94D008A361F /* ImportController.swift */,
+				8AE9B35F1FECA94D008A361F /* OldImportController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
 				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
@@ -361,6 +383,7 @@
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
 				8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
+				8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */,
 				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
@@ -404,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A11673421363BA200AC2E08 /* ImporterController.swift in Sources */,
 				8A11672A213376AC00AC2E08 /* RightController.swift in Sources */,
 				8A11672621335BCF00AC2E08 /* LeftController.swift in Sources */,
 				8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */,
@@ -416,7 +440,7 @@
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,
 				8A01F870210A9A52007D1E3F /* Core Data ERD.xcdatamodeld in Sources */,
-				8AE9B3601FECA94D008A361F /* ImportController.swift in Sources */,
+				8AE9B3601FECA94D008A361F /* OldImportController.swift in Sources */,
 				8ADDA7A3200D126800F7E1D9 /* OldWindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A1167282133672700AC2E08 /* PrincipalView.swift in Sources */,

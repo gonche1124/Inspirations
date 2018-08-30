@@ -85,6 +85,13 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
+                                        <menuItem title="Import..." id="2Am-XL-aGa">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="UfG-VC-tKj" kind="modal" id="hQN-6Z-c9H"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="NgL-qr-jOa"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
@@ -415,7 +422,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="299" y="-151"/>
+            <point key="canvasLocation" x="267" y="-290"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="bMd-Yp-ZsB">
@@ -535,7 +542,7 @@
                 </windowController>
                 <customObject id="VGa-f0-ucZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-211" y="3"/>
+            <point key="canvasLocation" x="-234" y="255"/>
         </scene>
         <!--Right Controller-->
         <scene sceneID="gib-Oy-lX9">
@@ -556,10 +563,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
                                                 <subviews>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-dX-XIs" userLabel="Top Bar">
-                                                        <rect key="frame" x="216" y="289" width="68" height="38"/>
+                                                        <rect key="frame" x="216" y="285" width="68" height="42"/>
                                                         <subviews>
                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZSk-1c-b79">
-                                                                <rect key="frame" x="-6" y="2" width="80" height="32"/>
+                                                                <rect key="frame" x="-6" y="4" width="80" height="32"/>
                                                                 <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TyM-w3-M2B">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
@@ -577,13 +584,13 @@
                                                         </customSpacing>
                                                     </stackView>
                                                     <containerView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MlQ-QV-cxj" userLabel="Tab Container">
-                                                        <rect key="frame" x="0.0" y="29" width="500" height="252"/>
+                                                        <rect key="frame" x="0.0" y="25" width="500" height="252"/>
                                                         <connections>
                                                             <segue destination="34z-Ir-26p" kind="embed" identifier="tabsSegue" id="Jds-L4-wpt"/>
                                                         </connections>
                                                     </containerView>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-sH-6ut" userLabel="Bottom Bar">
-                                                        <rect key="frame" x="137" y="0.0" width="227" height="21"/>
+                                                        <rect key="frame" x="201" y="0.0" width="99" height="17"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dbf-nk-867" userLabel="statusLabel">
                                                                 <rect key="frame" x="-2" y="0.0" width="103" height="17"/>
@@ -593,27 +600,11 @@
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nnb-MF-XaG">
-                                                                <rect key="frame" x="101" y="-7" width="132" height="32"/>
-                                                                <buttonCell key="cell" type="push" title="Import Multiple" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WBc-AV-tXM">
-                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="system"/>
-                                                                </buttonCell>
-                                                                <connections>
-                                                                    <segue destination="UfG-VC-tKj" kind="popover" popoverAnchorView="Nnb-MF-XaG" popoverBehavior="t" preferredEdge="maxY" id="TcV-Xv-QIF"/>
-                                                                </connections>
-                                                            </button>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="Nnb-MF-XaG" firstAttribute="top" secondItem="ycu-sH-6ut" secondAttribute="top" id="83K-UZ-Yp6"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Nnb-MF-XaG" secondAttribute="bottom" id="myD-Uo-xwM"/>
-                                                        </constraints>
                                                         <visibilityPriorities>
-                                                            <integer value="1000"/>
                                                             <integer value="1000"/>
                                                         </visibilityPriorities>
                                                         <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
                                                             <real value="3.4028234663852886e+38"/>
                                                         </customSpacing>
                                                     </stackView>
@@ -671,7 +662,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="187" y="677.5"/>
+            <point key="canvasLocation" x="1047" y="460"/>
         </scene>
         <!--Principal View-->
         <scene sceneID="emN-5y-h2U">
@@ -696,7 +687,7 @@
                 </splitViewController>
                 <customObject id="gUM-0W-Wtx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397" y="212"/>
+            <point key="canvasLocation" x="465" y="291"/>
         </scene>
         <!--Left Controller-->
         <scene sceneID="u8S-Qu-zaQ">
@@ -879,7 +870,7 @@
                 <controllerPlaceholder id="AxN-ZL-JAM" userLabel="Export" sceneMemberID="viewController"/>
                 <customObject id="5He-et-PVv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="695" y="507"/>
+            <point key="canvasLocation" x="1199" y="801"/>
         </scene>
         <!--Import Multiple-->
         <scene sceneID="eWo-9c-sen">
@@ -887,7 +878,7 @@
                 <controllerPlaceholder id="UfG-VC-tKj" userLabel="Import Multiple" sceneMemberID="viewController"/>
                 <customObject id="T4z-5G-5bG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="695" y="714"/>
+            <point key="canvasLocation" x="628" y="-19"/>
         </scene>
         <!--Smart List Editor-->
         <scene sceneID="31j-SP-Ov7">
@@ -904,7 +895,7 @@
                 <customObject id="JyY-M8-1v5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <splitViewItem id="ZNT-NM-7Yg"/>
             </objects>
-            <point key="canvasLocation" x="332" y="996"/>
+            <point key="canvasLocation" x="791" y="793"/>
         </scene>
     </scenes>
     <resources>
