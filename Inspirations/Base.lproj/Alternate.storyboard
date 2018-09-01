@@ -875,7 +875,7 @@
         <!--Import Multiple-->
         <scene sceneID="eWo-9c-sen">
             <objects>
-                <controllerPlaceholder id="UfG-VC-tKj" userLabel="Import Multiple" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="ImportMultiple" id="UfG-VC-tKj" userLabel="Import Multiple" sceneMemberID="viewController"/>
                 <customObject id="T4z-5G-5bG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="628" y="-19"/>

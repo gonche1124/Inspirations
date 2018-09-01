@@ -293,15 +293,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let themeN = ["Love", "Faith", "Courage"]
         let isF = [true, false]
         for _ in 1...20{
-            let thisQuote = Quote(context: managedObjectContext)
-            thisQuote.quoteString = quoteA[Int(arc4random_uniform(UInt32(quoteA.count)))]
-            let currAuthor = Author(context: managedObjectContext)
-            currAuthor.name = authorA[Int(arc4random_uniform(UInt32(authorA.count)))]
-            thisQuote.from=currAuthor
-            thisQuote.isFavorite=isF[Int(arc4random_uniform(UInt32(isF.count)))]
-            let currTheme = Theme(context: managedObjectContext)
-            currTheme.themeName = themeN[Int(arc4random_uniform(UInt32(themeN.count)))]
-            thisQuote.isAbout=currTheme
+            
+            //TODO: create NSMANAgedObject(context:moc) convinience init.
+            let thisQuote = NSEntityDescription.insertNewObject(forEntityName: "Quote", into: managedObjectContext) as? Quote//Quote(context: managedObjectContext)
+            thisQuote?.quoteString = quoteA[Int(arc4random_uniform(UInt32(quoteA.count)))]
+            let currAuthor = NSEntityDescription.insertNewObject(forEntityName: "Author", into: managedObjectContext) as? Author//Author(context: managedObjectContext)
+            currAuthor?.name = authorA[Int(arc4random_uniform(UInt32(authorA.count)))]
+            thisQuote?.from=currAuthor
+            thisQuote?.isFavorite=isF[Int(arc4random_uniform(UInt32(isF.count)))]
+            let currTheme = NSEntityDescription.insertNewObject(forEntityName: "Theme", into: managedObjectContext) as? Theme//Theme(context: managedObjectContext)
+            currTheme?.themeName = themeN[Int(arc4random_uniform(UInt32(themeN.count)))]
+            thisQuote?.isAbout=currTheme
         }
         try! self.managedObjectContext.save()
     }

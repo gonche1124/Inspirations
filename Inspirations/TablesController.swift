@@ -11,23 +11,19 @@ import Cocoa
 class TablesController: NSViewController {
     
     //Variables
-    @objc var myMOC: NSManagedObjectContext = (NSApp.delegate as! AppDelegate).managedObjectContext
+    //@objc var myMOC: NSManagedObjectContext = (NSApp.delegate as! AppDelegate).managedObjectContext
     let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
     let pred=NSPredicate(value: true)
-    var searchField: NSSearchField?
+    //var searchField: NSSearchField?
     var infoString: NSTextField?
     @IBOutlet weak var table: NSTableView?
     
-    @IBAction func ddd_test(_ sender:Any){
-        print("ddd_test")
-    }
     
     lazy var tableFRC:NSFetchedResultsController<Quote> = {
-
         let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
         fr.sortDescriptors=[sortingO]
         fr.predicate=pred
-        let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: myMOC, sectionNameKeyPath: nil, cacheName: nil)
+        let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
         try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
         return frc
@@ -43,7 +39,6 @@ class TablesController: NSViewController {
                   sField.delegate=self
             }
         }
-        //self.searchField?.delegate=self
     }
     
     //USed to set as delegate the 
@@ -52,6 +47,27 @@ class TablesController: NSViewController {
             if let sField = searchToolbarItem.view as? NSSearchField {
                 sField.delegate=self
             }
+        }
+    }
+    
+    //Intercept keystrokes
+    override func keyDown(with event: NSEvent) {
+        interpretKeyEvents([event])
+    }
+    
+    //Delete selected Records.
+    override func deleteBackward(_ sender: Any?) {
+        let confirmationD = NSAlert()
+        confirmationD.messageText = "Delete Records"
+        confirmationD.informativeText = "Are you sure you want to delete the \(table?.numberOfSelectedRows) selected Quotes?"
+        confirmationD.addButton(withTitle: "Ok")
+        confirmationD.addButton(withTitle: "Cancel")
+        confirmationD.alertStyle = .warning
+        let result = confirmationD.runModal()
+        if result == .alertFirstButtonReturn{
+            self.table?.beginUpdates()
+            table?.selectedRowIndexes.forEach({moc.delete(tableFRC.fetchedObjects![$0])})
+            self.table?.endUpdates()
         }
     }
 }
@@ -63,10 +79,39 @@ extension TablesController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.table?.reloadData()
         self.table?.endUpdates()
-        
     }
     
+    //HAS A BUG
+    /*
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+           table?.insertRows(at: IndexSet([newIndexPath!.item]), withAnimation: .slideDown)
+        case .delete:
+            
+            let updated = max(min(indexPath!.item, (table?.numberOfRows)!-1),0)//TO circumvent bug
+            print("Index is: \(indexPath?.item) and proxy is: \(updated) and totRows is: \(table?.numberOfRows)")
+            self.table?.removeRows(at: IndexSet([updated]), withAnimation: .slideLeft) //BUG with out of bounds index
+        case .update:
+            print("update")
+        case .move:
+            print("move")
+//            if let indexPath = indexPath {
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//            }
+//
+//            if let newIndexPath = newIndexPath {
+//                tableView.insertRows(at: [newIndexPath], with: .fade)
+//            }
+            break;
+        }
+    }
+ */
+    
+    
+
 }
 
 //MARK: - NSSearchFieldDelegate
@@ -80,7 +125,6 @@ extension TablesController: NSSearchFieldDelegate {
             tableFRC.fetchRequest.predicate=(searchF.stringValue=="") ? pred: searchPredicate
             try! tableFRC.performFetch()
             self.table?.reloadData()
-            
         }
     }
 }
@@ -95,7 +139,6 @@ extension TablesController: NSTableViewDataSource{
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         return tableFRC.fetchedObjects?[row]
     }
-    
 }
 
 //MARK: - TableViewDelegate
@@ -131,7 +174,6 @@ extension TablesController: NSTableViewDelegate{
 
 
 class ExploreCell: NSTableCellView{
-    
     @IBOutlet weak var quoteField: NSTextField!
     @IBOutlet weak var authorField: NSTextField!
 }

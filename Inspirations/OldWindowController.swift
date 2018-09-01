@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+/*
 class OldWindowController: NSWindowController {
     
     //IBInspectable variable.
@@ -89,3 +89,4 @@ class OldWindowController: NSWindowController {
     }
     
 }
+ */
