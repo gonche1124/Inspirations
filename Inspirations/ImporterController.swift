@@ -15,37 +15,84 @@ class ImporterController: NSViewController {
         // Do view setup here.
     }
     
-    @IBAction func importSelectedFile(_ sender: Any){
-        let pathString = Bundle.main.path(forResource: "JSONTODELETE", ofType: ".json")
-        let path2 = URL(fileURLWithPath: pathString!)
-        //let filePath = URL(fileURLWithPath: "/Users/Gonche/Desktop/exportedOnFeb24.txt")
-        
-        let jsonString = """
-    {
-    "quoteString": "empor tempor commodo sit nisi",
-    "isFavorite": 1,
-    "from": {"name": "Juan Harmon"},
-    "isAbout": {"themeName":"commodo"},
-    }
-"""
- 
-        let jsonData2 = jsonString.data(using: .utf8)!
-        let jsonData = (try! String(contentsOf: path2)).data(using:.utf8)!
-        let decoder = JSONDecoder()
-        decoder.userInfo[CodingUserInfoKey.managedContext!]=moc
-        
-        try! decoder.decode([Quote].self, from: jsonData)
-        try! moc.save()
-        
-        //Get keys??
-        /*
-        var results = [String:[AnyObject]]()
-        let jsonDict = try! JSONSerialization.jsonObject(with: jsonData, options:JSONSerialization.ReadingOptions.mutableContainers);
-        for (key, value) in jsonResult {
-            print("key \(key) value2 \(value)")
+    //Properties
+    @IBOutlet weak var pathToFile: NSTextField!
+    var jsonURL: URL?
+    @IBOutlet weak var importProgressIndicator: NSProgressIndicator!
+    
+    @IBOutlet weak var fieldName: NSTextField!
+    
+    //MARK: - Actions
+    //Chooses a file.
+    @IBAction func chooseFile(_ sender: NSButton) {
+        let dialog = NSOpenPanel()
+        dialog.title                   = "Choose a .json file";
+        dialog.showsResizeIndicator    = true;
+        dialog.showsHiddenFiles        = false;
+        dialog.canChooseDirectories    = false;
+        dialog.canCreateDirectories    = true;
+        dialog.allowsMultipleSelection = false;
+        dialog.allowedFileTypes        = ["txt", "json"];
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            if let result = dialog.url {
+                pathToFile.stringValue=result.absoluteString
+                self.jsonURL = result
+            }
         }
- */
+        print("test")
+    }
+    
+    //Decodes selected file.
+    @IBAction func importSelectedFile(_ sender: Any){
         
+        //pathToFile.stringValue = "file:///Users/Gonche/Desktop/JSONTODELETE.json"
+        //pathToFile.stringValue = "/Users/Gonche/Desktop/export3v5.txt"
+        pathToFile.stringValue = "/Users/Gonche/Desktop/exportedOnFeb24.txt"
+        self.jsonURL = URL(fileURLWithPath: pathToFile.stringValue)
+        
+        if pathToFile.stringValue.count > 0{
+            
+            //create private moc to avoid potential thread errors.
+            let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            privateMOC.mergePolicy=NSMergePolicy.mergeByPropertyObjectTrump
+            privateMOC.parent = moc
+            
+            
+            //let jsonString = (try! String(contentsOf: jsonURL!))
+            let testData = try! Data.init(contentsOf: jsonURL!)
+            let decoder = JSONDecoder()
+            decoder.userInfo[CodingUserInfoKey.managedContext!]=privateMOC
+            decoder.userInfo[CodingUserInfoKey.progressText!]=self.fieldName
+            
+            //Parse data
+            self.importProgressIndicator.isHidden=false
+            self.importProgressIndicator.usesThreadedAnimation=true
+            self.importProgressIndicator.startAnimation(nil)
+            self.fieldName.isHidden=false
+            
+            privateMOC.perform {
+                do {
+          
+                    let quotesImported = try decoder.decode([Quote].self, from: testData)
+                    DispatchQueue.main.async {
+                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes"
+                    }
+                    //Save
+                    try privateMOC.save()
+                    DispatchQueue.main.async {
+                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes"
+                    }
+                    try self.moc.save()
+                    //TODO: Send notification that XXX number of quotes have been imoprted.
+                    
+                    //Dismiss
+                    self.dismiss(nil)
+                    
+                }catch  {
+                    print("caught: \(error)")
+                }
+            }
+        }
     }
     
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Cocoa
 
 @objc(Quote)
 public class Quote: NSManagedObject, Codable{
@@ -19,7 +20,7 @@ public class Quote: NSManagedObject, Codable{
     //Keys
     private enum CodingKeys: String, CodingKey {
         case isFavorite = "isFavorite"
-        case quoteString = "quoteString"
+        case quoteString = "quote"
         case totalLetters = "totalLetters"
         case totalWords = "totalWords"
         case from = "fromAuthor"
@@ -27,6 +28,11 @@ public class Quote: NSManagedObject, Codable{
         case isIncludedIn = "inPlaylist"
         case isTaggedWith = "isTaggedWith"
         case spelledIn = "spelledIn"
+    }
+    
+    //Check for custom initialization for dynamic keys.
+    private enum myAlt:String, CodingKey{
+        case quoting = "quote"
     }
     
     //Properties
@@ -47,12 +53,24 @@ public class Quote: NSManagedObject, Codable{
             let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
                 fatalError("Failed to decode Quote")}
         
+        
+        //https://stackoverflow.com/questions/35574928/update-change-the-rawvalue-of-a-enum-in-swift
+        
         self.init(entity:  entity, insertInto: moc)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         //self.isFavorite = (try container.decodeIfPresent(Bool.self, forKey: .isFavorite))! //What happens if is string/int?
-        self.quoteString = try container.decodeIfPresent(String.self, forKey: .quoteString)
-        self.from = try container.decodeIfPresent(Author.self, forKey: .from)
-        self.isAbout = try container.decodeIfPresent(Theme.self, forKey: .isAbout)
+        self.quoteString = try container.decode(String.self, forKey: .quoteString)
+        self.from = try container.decode(Author.self, forKey: .from) //TODO: Make case for multiple keys.
+        self.isAbout = try container.decode(Theme.self, forKey: .isAbout)
+        
+        //ProgressBar
+        if let textField = decoder.userInfo[CodingUserInfoKey.progressText!] as? NSTextField,
+            let totItems = decoder.codingPath.first?.intValue {
+            DispatchQueue.main.async {
+                textField.stringValue="Imported \(totItems) quotes"
+            }
+
+        }
     }
     
     //Encodable
@@ -74,7 +92,8 @@ public class Quote: NSManagedObject, Codable{
         if key == "quoteString" {
             
             //TODO: Count number of words & characters
-            print("Changed)
+            let a=1
+            //print("Changed")
             //self.totalLetters = Int16(self.quoteString?.count)
             //self.totalWords = Int16(self.quoteString?.count)
         }

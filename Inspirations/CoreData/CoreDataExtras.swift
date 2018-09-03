@@ -13,6 +13,7 @@ import CoreData
 extension CodingUserInfoKey{
     static let managedContext = CodingUserInfoKey(rawValue: "managedContext")
     static let customCodingKeys = CodingUserInfoKey(rawValue: "customCodingKeys")
+    static let progressText = CodingUserInfoKey(rawValue: "progressText")
 }
 
 extension LibraryItem{

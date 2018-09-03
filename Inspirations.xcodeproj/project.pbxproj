@@ -143,9 +143,8 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A2C312A213C9D6A00B8F3E1 /* Importer */,
 				8A1167552137903900AC2E08 /* Core Data */,
-				8A11673321363BA200AC2E08 /* ImporterController.swift */,
-				8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */,
 				8A1167302134F1DB00AC2E08 /* Smart Controller */,
 				8A11672F2134F1C000AC2E08 /* Split Controller */,
 				8A1167272133672700AC2E08 /* PrincipalView.swift */,
@@ -219,6 +218,15 @@
 				8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		8A2C312A213C9D6A00B8F3E1 /* Importer */ = {
+			isa = PBXGroup;
+			children = (
+				8A11673321363BA200AC2E08 /* ImporterController.swift */,
+				8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */,
+			);
+			name = Importer;
 			sourceTree = "<group>";
 		};
 		8A63181F2095682400091FA6 /* NSManagedObjects */ = {

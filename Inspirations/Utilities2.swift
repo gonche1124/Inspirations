@@ -27,14 +27,14 @@ extension NSManagedObject {
 //        }}
     
     //Easy way to minimize boilerplate code.
-    class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
-        request.predicate=predicate
-        request.fetchLimit=1
-        
-        guard let results = try! inContext.fetch(request).first as? NSManagedObject else {return nil}
-        return results
-    }
+//    class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
+//        request.predicate=predicate
+//        request.fetchLimit=1
+//        
+//        guard let results = try! inContext.fetch(request).first as? NSManagedObject else {return nil}
+//        return results
+//    }
 
 }
 

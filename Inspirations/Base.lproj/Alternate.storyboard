@@ -85,8 +85,7 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
-                                        <menuItem title="Import..." id="2Am-XL-aGa">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Import..." keyEquivalent="I" id="2Am-XL-aGa">
                                             <connections>
                                                 <segue destination="UfG-VC-tKj" kind="modal" id="hQN-6Z-c9H"/>
                                             </connections>
@@ -563,10 +562,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
                                                 <subviews>
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-dX-XIs" userLabel="Top Bar">
-                                                        <rect key="frame" x="216" y="285" width="68" height="42"/>
+                                                        <rect key="frame" x="216" y="306" width="68" height="21"/>
                                                         <subviews>
                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZSk-1c-b79">
-                                                                <rect key="frame" x="-6" y="4" width="80" height="32"/>
+                                                                <rect key="frame" x="-6" y="-7" width="80" height="32"/>
                                                                 <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TyM-w3-M2B">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
@@ -584,7 +583,7 @@
                                                         </customSpacing>
                                                     </stackView>
                                                     <containerView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MlQ-QV-cxj" userLabel="Tab Container">
-                                                        <rect key="frame" x="0.0" y="25" width="500" height="252"/>
+                                                        <rect key="frame" x="0.0" y="25" width="500" height="273"/>
                                                         <connections>
                                                             <segue destination="34z-Ir-26p" kind="embed" identifier="tabsSegue" id="Jds-L4-wpt"/>
                                                         </connections>

@@ -34,7 +34,7 @@ public class Author: NSManagedObject, Codable {
         
         self.init(entity:  entity, insertInto: moc)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.name = try container.decode(String.self, forKey: .name)
     }
     
     //Encodable
