@@ -6,18 +6,17 @@
 //  Copyright © 2018 Gonche. All rights reserved.
 //
 
+
+//TODO: Make method that updates and reloads controller with given predicate
 import Cocoa
 
 class TablesController: NSViewController {
     
     //Variables
-    //@objc var myMOC: NSManagedObjectContext = (NSApp.delegate as! AppDelegate).managedObjectContext
     let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
     let pred=NSPredicate(value: true)
-    //var searchField: NSSearchField?
     var infoString: NSTextField?
     @IBOutlet weak var table: NSTableView?
-    
     
     lazy var tableFRC:NSFetchedResultsController<Quote> = {
         let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
@@ -39,6 +38,10 @@ class TablesController: NSViewController {
                   sField.delegate=self
             }
         }
+        
+        //Setup Notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
+        
     }
     
     //USed to set as delegate the 
@@ -70,6 +73,38 @@ class TablesController: NSViewController {
             self.table?.endUpdates()
         }
     }
+    
+    //Left selection changed
+    @objc func leftTableChangedSelection(notification: Notification){
+        if let selectedLib = notification.object as? LibraryItem {
+            let uPredicate: NSPredicate
+            switch(selectedLib.libraryType){
+            case LibraryType.favorites.rawValue:
+                uPredicate = NSPredicate(format:"isFavorite == TRUE")
+            case LibraryType.language.rawValue:
+                uPredicate = NSPredicate(format: "isSpelledIn.name CONTAINS [CD] %@", selectedLib.name!)
+            case LibraryType.list.rawValue:
+                uPredicate = NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@", selectedLib.name!)
+            case LibraryType.smartList.rawValue:
+                uPredicate = ((selectedLib as? QuoteList)?.smartPredicate as? NSPredicate)!
+            case LibraryType.tag.rawValue:
+                uPredicate = NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", selectedLib.name!)
+            case LibraryType.mainLibrary.rawValue:
+                uPredicate = self.pred
+            default:
+                uPredicate = NSPredicate(value: true)
+            }
+            self.updatesController(withPredicate: uPredicate)
+        }
+    }
+    
+    //Sets predicate passed as parameter to frc
+    func updatesController(withPredicate predicate:NSPredicate){
+        tableFRC.fetchRequest.predicate=predicate//(searchF.stringValue=="") ? pred: searchPredicate
+        try! tableFRC.performFetch()
+        self.table?.reloadData()
+    }
+    
 }
 //MARK: - NSFetchedResultsControllerDelegate
 extension TablesController: NSFetchedResultsControllerDelegate {
@@ -121,10 +156,12 @@ extension TablesController: NSSearchFieldDelegate {
     //TODO: Include a comprehensive predicate by using templates.
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
-            let searchPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", searchF.stringValue, searchF.stringValue, searchF.stringValue)
-            tableFRC.fetchRequest.predicate=(searchF.stringValue=="") ? pred: searchPredicate
-            try! tableFRC.performFetch()
-            self.table?.reloadData()
+            if searchF.stringValue=="" {
+                self.updatesController(withPredicate: self.pred)
+            }else{
+                let searchPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", searchF.stringValue, searchF.stringValue, searchF.stringValue)
+                self.updatesController(withPredicate:searchPredicate)
+            }
         }
     }
 }
@@ -138,6 +175,16 @@ extension TablesController: NSTableViewDataSource{
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         return tableFRC.fetchedObjects?[row]
+    }
+    
+    //Copy Pasting
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        
+        let thisQuote = tableFRC.fetchedObjects?[tableView.selectedRow] as? Quote
+        let thisItem = NSPasteboardItem()
+        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
+        
+        return thisItem
     }
 }
 

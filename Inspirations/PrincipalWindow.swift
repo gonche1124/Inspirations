@@ -20,10 +20,9 @@ class PrincipalWindow: NSWindowController {
     }
     
     //Actions
-    @IBAction func segmentedAction(_ sender: NSSegmentedControl) {
-        
-        //let myNoti = Notification(name: Notification.Name(rawValue: "selectedViewChanged"), object: sender)
+    @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
+
     }
     
     //Outlets

@@ -6,7 +6,7 @@
     </entity>
     <entity name="Language" representedClassName="Language" parentEntity="LibraryItem" syncable="YES">
         <attribute name="localizedName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hasQuotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="spelledIn" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="spelledIn" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="LibraryItem" representedClassName="LibraryItem" syncable="YES">
         <attribute name="isRootItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -15,6 +15,12 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="belongsToLibraryItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="hasLibraryItems" inverseEntity="LibraryItem" syncable="YES"/>
         <relationship name="hasLibraryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LibraryItem" inverseName="belongsToLibraryItem" inverseEntity="LibraryItem" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+                <constraint value="isRootItem"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES">
         <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -23,13 +29,13 @@
         <attribute name="totalWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="from" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
         <relationship name="isAbout" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
-        <relationship name="isIncludedIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
+        <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
         <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
     </entity>
     <entity name="QuoteList" representedClassName="QuoteList" parentEntity="LibraryItem" syncable="YES">
         <attribute name="smartPredicate" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="hasQuotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="isIncludedIn" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isIncludedIn" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" parentEntity="LibraryItem" syncable="YES">
         <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isTaggedWith" inverseEntity="Quote" syncable="YES"/>
@@ -42,7 +48,7 @@
     <elements>
         <element name="Author" positionX="-146" positionY="195" width="128" height="73"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="133"/>
+        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="135"/>
         <element name="Quote" positionX="-90" positionY="-81" width="128" height="178"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>

@@ -37,7 +37,6 @@
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A89E8651E842E04001F7F71 /* Main.storyboard */; };
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
-		8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */; };
 		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
 		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities2.swift */; };
@@ -103,7 +102,6 @@
 		8A89E8711E842E04001F7F71 /* InspirationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsTests.swift; sourceTree = "<group>"; };
 		8A89E8731E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E8781E842E04001F7F71 /* InspirationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspirationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationsUITests.swift; sourceTree = "<group>"; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
@@ -143,6 +141,7 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A2C312A213C9D6A00B8F3E1 /* Importer */,
 				8A1167552137903900AC2E08 /* Core Data */,
 				8A1167302134F1DB00AC2E08 /* Smart Controller */,
@@ -263,7 +262,6 @@
 			children = (
 				8A1167762138980500AC2E08 /* JSONTODELETE.json */,
 				8A01F868210924BA007D1E3F /* Alternate */,
-				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8ADDA7A2200D126800F7E1D9 /* OldWindowController.swift */,
 				8A63181F2095682400091FA6 /* NSManagedObjects */,
 				8AB7CC2B1FB24E1D0080ED4F /* Resources */,
@@ -288,7 +286,6 @@
 		8A89E87B1E842E04001F7F71 /* InspirationsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8A89E87C1E842E04001F7F71 /* InspirationsUITests.swift */,
 				8A89E87E1E842E04001F7F71 /* Info.plist */,
 			);
 			path = InspirationsUITests;
@@ -515,7 +512,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A89E87D1E842E04001F7F71 /* InspirationsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

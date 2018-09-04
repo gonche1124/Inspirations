@@ -27,20 +27,14 @@ class RightController: NSViewController {
        
     }
     
-    @IBAction func ccc_test(_ sender:Any){
-        print("ccc_test")
-    }
     
     //Changes the TAB View.
     @IBAction func changeSelectedTabView(_ sender: Any){
         if let segmentedControl = (sender as? NSNotification)?.object as? NSSegmentedControl{
             if let tabViewController = self.childViewControllers[0] as? NSTabViewController{
-                tabViewController.selectedTabViewItemIndex=segmentedControl.selectedSegment //TODO: Check if can sync, if not to make select tab.
+                tabViewController.selectedTabViewItemIndex=segmentedControl.selectedSegment 
             }
-            
         }
-        print("Test")
-        
     }
     
 }

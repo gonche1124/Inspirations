@@ -42,7 +42,7 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var totalWords: Int16
     @NSManaged public var from: Author?
     @NSManaged public var isAbout: Theme?
-    @NSManaged public var isIncludedIn: QuoteList?
+    @NSManaged public var isIncludedIn: NSSet?
     @NSManaged public var isTaggedWith: NSSet?
     @NSManaged public var spelledIn: Language?
     
@@ -62,12 +62,17 @@ public class Quote: NSManagedObject, Codable{
         self.quoteString = try container.decode(String.self, forKey: .quoteString)
         self.from = try container.decode(Author.self, forKey: .from) //TODO: Make case for multiple keys.
         self.isAbout = try container.decode(Theme.self, forKey: .isAbout)
+        if let inLists = try container.decodeIfPresent([QuoteList].self, forKey: .isIncludedIn){
+            self.addToIsIncludedIn(NSSet(array: inLists))
+        }
         
         //ProgressBar
         if let textField = decoder.userInfo[CodingUserInfoKey.progressText!] as? NSTextField,
             let totItems = decoder.codingPath.first?.intValue {
             DispatchQueue.main.async {
-                textField.stringValue="Imported \(totItems) quotes"
+                let formatter = NumberFormatter()
+                formatter.numberStyle = NumberFormatter.Style.decimal
+                textField.stringValue="Imported \(formatter.string(for: totItems)!) quotes"
             }
 
         }
@@ -90,12 +95,11 @@ public class Quote: NSManagedObject, Codable{
     //Others
     override public func didChangeValue(forKey key: String) {
         if key == "quoteString" {
-            
-            //TODO: Count number of words & characters
-            let a=1
-            //print("Changed")
-            //self.totalLetters = Int16(self.quoteString?.count)
-            //self.totalWords = Int16(self.quoteString?.count)
+            let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
+            if let components = self.quoteString?.components(separatedBy: chararacterSet).filter({!$0.isEmpty}){
+                self.totalWords = Int16(components.count)
+                self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
+            }
         }
     }
 }
@@ -114,5 +118,23 @@ extension Quote {
     
     @objc(removeIsTaggedWith:)
     @NSManaged public func removeFromIsTaggedWith(_ values: NSSet)
+    
+}
+
+
+// MARK: Generated accessors for isIncludedIn
+extension Quote {
+    
+    @objc(addIsIncludedInObject:)
+    @NSManaged public func addToIsIncludedIn(_ value: QuoteList)
+    
+    @objc(removeIsIncludedInObject:)
+    @NSManaged public func removeFromIsIncludedIn(_ value: QuoteList)
+    
+    @objc(addIsIncludedIn:)
+    @NSManaged public func addToIsIncludedIn(_ values: NSSet)
+    
+    @objc(removeIsIncludedIn:)
+    @NSManaged public func removeFromIsIncludedIn(_ values: NSSet)
     
 }

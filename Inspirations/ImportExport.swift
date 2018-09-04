@@ -152,7 +152,7 @@ class oldImportExport: NSObject {
     
     // MARK: - Import
     
-    //TODO: Check if it is needed.
+    //Check if it is needed.
     //Looks for object, if does not find one it creates it.
 //    func findOrCreateObject(entityName: String, attributesDict: Dictionary<String,Any>, inContext: NSManagedObjectContext)->NSManagedObject{
 //

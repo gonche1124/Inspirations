@@ -17,6 +17,6 @@ public class Language: LibraryItem {
     }
     
     @NSManaged public var localizedName: String?
-    @NSManaged public var hasQuotes: Quote?
+    @NSManaged public var hasQuotes: NSSet?
     
 }

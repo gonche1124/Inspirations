@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
         
-        //createObjectsIfTheyDontExist()
+        createObjectsIfTheyDontExist()
         //createRandomQuotes()
         
     }
@@ -247,26 +247,31 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func createObjectsIfTheyDontExist() {
         
         //Create root items.
-        let libRoot = create(object: "LibraryItem", withAttributes: ["isRootItem":true, "isShown":true, "name":"Library"]) as! LibraryItem
-        let tagRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Tags"]) as! LibraryItem
-        let lanRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Languages"]) as! LibraryItem
-        let collRoot=create(object: "LibraryItem", withAttributes:["isRootItem":true, "isShown":true, "name":"Lists"]) as! LibraryItem
+        let libRoot = LibraryItem.getRootItem(withName: "Library", inContext: managedObjectContext)
+        let tagRoot = LibraryItem.getRootItem(withName: "Tags", inContext: managedObjectContext)
+        let lanRoot = LibraryItem.getRootItem(withName: "Languages", inContext: managedObjectContext)
+        let collRoot = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
         
         //Only for testing:
-        for item in ["Library", "Favorites"]{
-            let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":item]) as! LibraryItem
-            coreItem.belongsToLibraryItem=libRoot
-        }
+        let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":"Favoritos", "libraryType":LibraryType.favorites.rawValue]) as! LibraryItem
+        coreItem.belongsToLibraryItem=libRoot
+        let coreItem2=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":"Library", "libraryType":LibraryType.mainLibrary.rawValue]) as! LibraryItem
+        coreItem2.belongsToLibraryItem=libRoot
+        
+//        for item in ["Library", "Favoritos"]{
+//            let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":item, "libraryType":LibraryType.favorites.rawValue]) as! LibraryItem
+//            coreItem.belongsToLibraryItem=libRoot
+//        }
         for tag in ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"]{
-            let coreItem=create(object: "Tag", withAttributes: ["isRootItem":false, "isShown":true, "name":tag]) as! Tag
+            let coreItem=create(object: "Tag", withAttributes: ["isRootItem":false, "isShown":true, "name":tag, "libraryType":LibraryType.tag.rawValue]) as! Tag
             coreItem.belongsToLibraryItem=tagRoot
         }
         for language in ["Spanish", "English", "French", "German", "Mandarin"]{
-            let coreItem=create(object: "Language", withAttributes: ["isRootItem":false, "isShown":true, "name":language]) as! Language
+            let coreItem=create(object: "Language", withAttributes: ["isRootItem":false, "isShown":true, "name":language, "libraryType":LibraryType.language.rawValue]) as! Language
             coreItem.belongsToLibraryItem=lanRoot
         }
         for lista in ["Top 25", "For Work", "From Movies", "In songs", "Crazy"]{
-            let coreItem=create(object: "QuoteList", withAttributes: ["isRootItem":false, "isShown":true, "name":lista]) as! QuoteList
+            let coreItem=create(object: "QuoteList", withAttributes: ["isRootItem":false, "isShown":true, "name":lista, "libraryType":LibraryType.list.rawValue]) as! QuoteList
             coreItem.belongsToLibraryItem=collRoot
         }
         

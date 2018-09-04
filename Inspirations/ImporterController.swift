@@ -16,10 +16,9 @@ class ImporterController: NSViewController {
     }
     
     //Properties
-    @IBOutlet weak var pathToFile: NSTextField!
     var jsonURL: URL?
+    @IBOutlet weak var pathToFile: NSTextField!
     @IBOutlet weak var importProgressIndicator: NSProgressIndicator!
-    
     @IBOutlet weak var fieldName: NSTextField!
     
     //MARK: - Actions
@@ -35,21 +34,16 @@ class ImporterController: NSViewController {
         dialog.allowedFileTypes        = ["txt", "json"];
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             if let result = dialog.url {
-                pathToFile.stringValue=result.absoluteString
+                pathToFile.stringValue=result.path
                 self.jsonURL = result
             }
         }
-        print("test")
     }
     
     //Decodes selected file.
     @IBAction func importSelectedFile(_ sender: Any){
         
-        //pathToFile.stringValue = "file:///Users/Gonche/Desktop/JSONTODELETE.json"
-        //pathToFile.stringValue = "/Users/Gonche/Desktop/export3v5.txt"
-        pathToFile.stringValue = "/Users/Gonche/Desktop/exportedOnFeb24.txt"
-        self.jsonURL = URL(fileURLWithPath: pathToFile.stringValue)
-        
+        //self.jsonURL = URL(fileURLWithPath: pathToFile.stringValue)
         if pathToFile.stringValue.count > 0{
             
             //create private moc to avoid potential thread errors.
@@ -57,8 +51,7 @@ class ImporterController: NSViewController {
             privateMOC.mergePolicy=NSMergePolicy.mergeByPropertyObjectTrump
             privateMOC.parent = moc
             
-            
-            //let jsonString = (try! String(contentsOf: jsonURL!))
+            //Create Decoder and Data
             let testData = try! Data.init(contentsOf: jsonURL!)
             let decoder = JSONDecoder()
             decoder.userInfo[CodingUserInfoKey.managedContext!]=privateMOC
@@ -69,25 +62,32 @@ class ImporterController: NSViewController {
             self.importProgressIndicator.usesThreadedAnimation=true
             self.importProgressIndicator.startAnimation(nil)
             self.fieldName.isHidden=false
-            
             privateMOC.perform {
                 do {
-          
                     let quotesImported = try decoder.decode([Quote].self, from: testData)
                     DispatchQueue.main.async {
-                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes"
+                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes to child moc"
                     }
                     //Save
                     try privateMOC.save()
                     DispatchQueue.main.async {
                         self.fieldName.stringValue="Saving \(quotesImported.count) quotes"
                     }
-                    try self.moc.save()
+                    //Saves to moc in main thread.
+                    self.moc.perform {
+                        do{
+                            try self.moc.save()
+                        }catch{
+                            print("caught MOC: \(error)")
+                        }
+                    }
+                    
                     //TODO: Send notification that XXX number of quotes have been imoprted.
                     
                     //Dismiss
-                    self.dismiss(nil)
-                    
+                    DispatchQueue.main.async {
+                        self.dismiss(nil)
+                    }
                 }catch  {
                     print("caught: \(error)")
                 }

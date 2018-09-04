@@ -31,6 +31,8 @@ enum LibraryType:String{
     case rootItem="noImage"
 }
 
+//Notification extensions
 extension Notification.Name {
     static let selectedViewChanged = Notification.Name("selectedViewChanged")
+    static let leftSelectionChanged = Notification.Name("leftSelectionChanged")
 }

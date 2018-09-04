@@ -19,23 +19,29 @@ extension CodingUserInfoKey{
 extension LibraryItem{
     //gets root item with given name or creates one if does not exists.
     class func getRootItem(withName itemName:String, inContext:NSManagedObjectContext)->LibraryItem{
-        let request=NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
-        request.predicate = NSPredicate(format: "name == %@", itemName)
-        request.fetchLimit=1
         
-        if let results = try! inContext.fetch(request).first as? LibraryItem {return results}
+        let pred = NSPredicate(format: "name == %@ AND isRootItem == YES", itemName)
+        if let fetchedItem = LibraryItem.firstWith(predicate: pred, inContext: inContext) as? LibraryItem {
+            return fetchedItem
+        }
         
-        //Creat Library Item
+//        let request=NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
+//        request.predicate = NSPredicate(format: "name == %@", itemName)
+//        request.fetchLimit=1
+//
+//        if let results = try! inContext.fetch(request).first as? LibraryItem {return results}
+        
+        //Creat Library Item because it did not existed.
         let newItem = LibraryItem(context: inContext)
         newItem.isRootItem=true
+        newItem.isShown=true
         newItem.name=itemName
+        newItem.libraryType=LibraryType.rootItem.rawValue
         return newItem
     }
 }
 
 extension NSManagedObject {
-    
-    
     
     //Get first item with predicate
     class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{

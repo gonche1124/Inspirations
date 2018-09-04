@@ -15,6 +15,11 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="belongsToLibraryItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="hasLibraryItems" inverseEntity="LibraryItem" syncable="YES"/>
         <relationship name="hasLibraryItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="belongsToLibraryItem" inverseEntity="LibraryItem" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
         <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -41,7 +46,7 @@
     <elements>
         <element name="Author" positionX="-146" positionY="195" width="128" height="75"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="268" positionY="-90" width="128" height="133"/>
+        <element name="LibraryItem" positionX="268" positionY="-90" width="128" height="135"/>
         <element name="Quote" positionX="-90" positionY="-81" width="128" height="180"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>
