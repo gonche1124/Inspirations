@@ -31,13 +31,8 @@ class TablesController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-
-        //Link the searchfield.
-        if let searchToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "mainSearchField"}){
-            if let sField = searchToolbarItem.view as? NSSearchField {
-                  sField.delegate=self
-            }
-        }
+        
+        
         
         //Setup Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
@@ -84,7 +79,7 @@ class TablesController: NSViewController {
             case LibraryType.language.rawValue:
                 uPredicate = NSPredicate(format: "isSpelledIn.name CONTAINS [CD] %@", selectedLib.name!)
             case LibraryType.list.rawValue:
-                uPredicate = NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@", selectedLib.name!)
+                uPredicate = NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  selectedLib.name!)//TODO: Make sure this predicate is working.
             case LibraryType.smartList.rawValue:
                 uPredicate = ((selectedLib as? QuoteList)?.smartPredicate as? NSPredicate)!
             case LibraryType.tag.rawValue:
@@ -117,36 +112,6 @@ extension TablesController: NSFetchedResultsControllerDelegate {
         self.table?.reloadData()
         self.table?.endUpdates()
     }
-    
-    //HAS A BUG
-    /*
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-           table?.insertRows(at: IndexSet([newIndexPath!.item]), withAnimation: .slideDown)
-        case .delete:
-            
-            let updated = max(min(indexPath!.item, (table?.numberOfRows)!-1),0)//TO circumvent bug
-            print("Index is: \(indexPath?.item) and proxy is: \(updated) and totRows is: \(table?.numberOfRows)")
-            self.table?.removeRows(at: IndexSet([updated]), withAnimation: .slideLeft) //BUG with out of bounds index
-        case .update:
-            print("update")
-        case .move:
-            print("move")
-//            if let indexPath = indexPath {
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-//            }
-//
-//            if let newIndexPath = newIndexPath {
-//                tableView.insertRows(at: [newIndexPath], with: .fade)
-//            }
-            break;
-        }
-    }
- */
-    
-    
-
 }
 
 //MARK: - NSSearchFieldDelegate
@@ -180,10 +145,9 @@ extension TablesController: NSTableViewDataSource{
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         
-        let thisQuote = tableFRC.fetchedObjects?[tableView.selectedRow] as? Quote
+        let thisQuote = tableFRC.fetchedObjects?[row]
         let thisItem = NSPasteboardItem()
         thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
-        
         return thisItem
     }
 }
@@ -211,7 +175,7 @@ extension TablesController: NSTableViewDelegate{
     //Changing the selection.
     func tableViewSelectionDidChange(_ notification: Notification) {
         if let myTable = notification.object as? NSTableView {
-            self.infoString?.stringValue = "\(myTable.numberOfSelectedRows) quotes out of \(myTable.numberOfRows)"
+            NotificationCenter.default.post(Notification(name: .selectedRowsChaged, object: myTable, userInfo: nil))
         }
     }
 

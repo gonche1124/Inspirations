@@ -427,12 +427,12 @@
         <scene sceneID="bMd-Yp-ZsB">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="0T4-WD-gnI" customClass="PrincipalWindow" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Gonche" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
+                    <window key="window" title="Inspirations" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="163" y="199" width="553" height="260"/>
+                        <rect key="contentRect" x="355" y="265" width="553" height="260"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="Fp4-eG-h8C">
+                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="Fp4-eG-h8C">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="e6b-nv-9hy"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="5Mz-36-bxw"/>
@@ -453,7 +453,27 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Zdu-vf-aOV"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="XoW-kg-Cuf"/>
-                                <toolbarItem implicitItemIdentifier="06FD1E7B-CB5E-48C8-812D-9A937615851F" label="Views" paletteLabel="Views" id="1oh-Le-P6p" userLabel="Views Selected">
+                                <toolbarItem implicitItemIdentifier="AD6B3976-D442-4044-851F-21F886770DB5" explicitItemIdentifier="segmentedButtonImage" label="Views" paletteLabel="Views" id="ySO-UO-BhQ" userLabel="Views Selected Image">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="103" height="23"/>
+                                    <size key="maxSize" width="215" height="24"/>
+                                    <segmentedControl key="view" identifier="segmentedButton" verticalHuggingPriority="750" id="XNF-kp-jWe">
+                                        <rect key="frame" x="0.0" y="14" width="105" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="K3K-wc-KKw">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment toolTip="Shows quotes in a column based view" image="NSColumnViewTemplate" selected="YES"/>
+                                                <segment toolTip="Shows quotes in a row based view" image="NSListViewTemplate" tag="1"/>
+                                                <segment toolTip="Shows quotes one at a time" image="NSQuickLookTemplate"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="segmentedAction:" target="0T4-WD-gnI" id="0wo-a0-uIr"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="06FD1E7B-CB5E-48C8-812D-9A937615851F" explicitItemIdentifier="segmentedButtonString" label="Views" paletteLabel="Views" id="1oh-Le-P6p" userLabel="Views Selected String">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="103" height="23"/>
                                     <size key="maxSize" width="200" height="24"/>
@@ -463,9 +483,9 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="drq-mV-dFv">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="List"/>
-                                                <segment label="Explore" selected="YES" tag="1"/>
-                                                <segment label="Large"/>
+                                                <segment label="List" toolTip="Shows quotes in a column based view" selected="YES"/>
+                                                <segment label="Explore" toolTip="Shows quotes in a row based view" tag="1"/>
+                                                <segment label="Large" toolTip="Shows quotes one at a time"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -500,6 +520,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <segue destination="AxN-ZL-JAM" kind="popover" popoverAnchorView="m1q-oA-5JL" popoverBehavior="t" preferredEdge="maxY" id="K1z-4Z-Iua"/>
+                                        </connections>
                                     </button>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="44490A23-C864-4E21-B054-D376C6D4A796" label="New" paletteLabel="New" image="NSAddTemplate" id="N6T-ka-aco">
@@ -548,100 +571,60 @@
             <objects>
                 <viewController id="gvZ-1i-Bh3" customClass="RightController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="TbD-zR-Fvr">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
-                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="356"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T6t-rF-JnT">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-Af-5DR">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="356"/>
                                 <subviews>
-                                    <customView id="myL-bw-FKO" userLabel="Right View">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <containerView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MlQ-QV-cxj" userLabel="Tab Container">
+                                        <rect key="frame" x="0.0" y="37" width="500" height="319"/>
+                                        <connections>
+                                            <segue destination="34z-Ir-26p" kind="embed" identifier="tabsSegue" id="Jds-L4-wpt"/>
+                                        </connections>
+                                    </containerView>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-sH-6ut" userLabel="Bottom Bar">
+                                        <rect key="frame" x="199" y="0.0" width="103" height="36"/>
                                         <subviews>
-                                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-Af-5DR">
-                                                <rect key="frame" x="0.0" y="0.0" width="500" height="327"/>
-                                                <subviews>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-dX-XIs" userLabel="Top Bar">
-                                                        <rect key="frame" x="216" y="306" width="68" height="21"/>
-                                                        <subviews>
-                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZSk-1c-b79">
-                                                                <rect key="frame" x="-6" y="-7" width="80" height="32"/>
-                                                                <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TyM-w3-M2B">
-                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="system"/>
-                                                                </buttonCell>
-                                                                <connections>
-                                                                    <segue destination="AxN-ZL-JAM" kind="sheet" id="X6b-o7-rld"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <visibilityPriorities>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                    <containerView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MlQ-QV-cxj" userLabel="Tab Container">
-                                                        <rect key="frame" x="0.0" y="25" width="500" height="273"/>
-                                                        <connections>
-                                                            <segue destination="34z-Ir-26p" kind="embed" identifier="tabsSegue" id="Jds-L4-wpt"/>
-                                                        </connections>
-                                                    </containerView>
-                                                    <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-sH-6ut" userLabel="Bottom Bar">
-                                                        <rect key="frame" x="201" y="0.0" width="99" height="17"/>
-                                                        <subviews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dbf-nk-867" userLabel="statusLabel">
-                                                                <rect key="frame" x="-2" y="0.0" width="103" height="17"/>
-                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Current Statistic" id="yLi-bT-gdL">
-                                                                    <font key="font" metaFont="system"/>
-                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                </textFieldCell>
-                                                            </textField>
-                                                        </subviews>
-                                                        <visibilityPriorities>
-                                                            <integer value="1000"/>
-                                                        </visibilityPriorities>
-                                                        <customSpacing>
-                                                            <real value="3.4028234663852886e+38"/>
-                                                        </customSpacing>
-                                                    </stackView>
-                                                </subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dbf-nk-867" userLabel="statusLabel">
+                                                <rect key="frame" x="-2" y="7" width="107" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="MlQ-QV-cxj" secondAttribute="trailing" id="5Da-nh-t7C"/>
-                                                    <constraint firstItem="MlQ-QV-cxj" firstAttribute="leading" secondItem="KZg-Af-5DR" secondAttribute="leading" id="Tyc-TX-awn"/>
+                                                    <constraint firstAttribute="height" constant="22" id="3Ej-TY-KqD"/>
                                                 </constraints>
-                                                <visibilityPriorities>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                    <integer value="1000"/>
-                                                </visibilityPriorities>
-                                                <customSpacing>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                    <real value="3.4028234663852886e+38"/>
-                                                </customSpacing>
-                                            </stackView>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Current Statistic" id="yLi-bT-gdL">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="KZg-Af-5DR" firstAttribute="leading" secondItem="myL-bw-FKO" secondAttribute="leading" id="BAN-ay-Otp"/>
-                                            <constraint firstAttribute="trailing" secondItem="KZg-Af-5DR" secondAttribute="trailing" id="aW0-c0-Ilb"/>
-                                            <constraint firstItem="KZg-Af-5DR" firstAttribute="top" secondItem="myL-bw-FKO" secondAttribute="top" id="hkk-ry-8cE"/>
-                                            <constraint firstAttribute="bottom" secondItem="KZg-Af-5DR" secondAttribute="bottom" id="r2K-eD-jfq"/>
-                                        </constraints>
-                                    </customView>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
-                                <holdingPriorities>
-                                    <real value="376"/>
-                                </holdingPriorities>
-                            </splitView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MlQ-QV-cxj" secondAttribute="trailing" id="5Da-nh-t7C"/>
+                                    <constraint firstItem="MlQ-QV-cxj" firstAttribute="leading" secondItem="KZg-Af-5DR" secondAttribute="leading" id="Tyc-TX-awn"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="T6t-rF-JnT" secondAttribute="trailing" id="2Ql-p7-Y8H"/>
-                            <constraint firstAttribute="bottom" secondItem="T6t-rF-JnT" secondAttribute="bottom" id="KD7-wk-1Ym"/>
-                            <constraint firstItem="T6t-rF-JnT" firstAttribute="top" secondItem="TbD-zR-Fvr" secondAttribute="top" id="lhR-K9-ciE"/>
-                            <constraint firstItem="T6t-rF-JnT" firstAttribute="leading" secondItem="TbD-zR-Fvr" secondAttribute="leading" id="wqt-cs-RT0"/>
+                            <constraint firstAttribute="bottom" secondItem="KZg-Af-5DR" secondAttribute="bottom" id="ZfP-VF-2H5"/>
+                            <constraint firstItem="KZg-Af-5DR" firstAttribute="leading" secondItem="TbD-zR-Fvr" secondAttribute="leading" id="gJk-NM-mym"/>
+                            <constraint firstItem="KZg-Af-5DR" firstAttribute="top" secondItem="TbD-zR-Fvr" secondAttribute="top" id="i6Z-6o-bCX"/>
+                            <constraint firstAttribute="trailing" secondItem="KZg-Af-5DR" secondAttribute="trailing" id="n3H-Rm-QeG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -663,15 +646,15 @@
             </objects>
             <point key="canvasLocation" x="1047" y="460"/>
         </scene>
-        <!--Principal View-->
+        <!--My Split Controller-->
         <scene sceneID="emN-5y-h2U">
             <objects>
-                <splitViewController id="KAN-2L-YNM" customClass="PrincipalView" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController showSeguePresentationStyle="single" id="KAN-2L-YNM" customClass="MySplitController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="bT1-F7-Ce5" userLabel="Left Side"/>
-                        <splitViewItem holdingPriority="255" behavior="contentList" id="7Nr-0F-sa6" userLabel="Right Side"/>
+                        <splitViewItem behavior="contentList" id="7Nr-0F-sa6" userLabel="Right Side"/>
                     </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="3jE-6u-P1b">
+                    <splitView key="splitView" arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" id="3jE-6u-P1b">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <connections>
@@ -691,7 +674,7 @@
         <!--Left Controller-->
         <scene sceneID="u8S-Qu-zaQ">
             <objects>
-                <viewController id="CWl-5U-TPh" customClass="LeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="CWl-5U-TPh" customClass="LeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="39X-Tg-9tL">
                         <rect key="frame" x="0.0" y="0.0" width="175" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -869,7 +852,7 @@
                 <controllerPlaceholder id="AxN-ZL-JAM" userLabel="Export" sceneMemberID="viewController"/>
                 <customObject id="5He-et-PVv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1199" y="801"/>
+            <point key="canvasLocation" x="222" y="7"/>
         </scene>
         <!--Import Multiple-->
         <scene sceneID="eWo-9c-sen">
@@ -900,7 +883,9 @@
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSColumnViewTemplate" width="16" height="10"/>
         <image name="NSListViewTemplate" width="14" height="10"/>
+        <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>

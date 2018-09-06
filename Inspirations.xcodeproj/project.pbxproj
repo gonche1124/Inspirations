@@ -13,7 +13,6 @@
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
 		8A116724212A260000AC2E08 /* TablesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A116723212A260000AC2E08 /* TablesController.swift */; };
 		8A11672621335BCF00AC2E08 /* LeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672521335BCF00AC2E08 /* LeftController.swift */; };
-		8A1167282133672700AC2E08 /* PrincipalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1167272133672700AC2E08 /* PrincipalView.swift */; };
 		8A11672A213376AC00AC2E08 /* RightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A116729213376AC00AC2E08 /* RightController.swift */; };
 		8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */; };
 		8A11672E2134E32A00AC2E08 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672D2134E32A00AC2E08 /* Extras.swift */; };
@@ -71,7 +70,6 @@
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A116723212A260000AC2E08 /* TablesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesController.swift; sourceTree = "<group>"; };
 		8A11672521335BCF00AC2E08 /* LeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftController.swift; sourceTree = "<group>"; };
-		8A1167272133672700AC2E08 /* PrincipalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalView.swift; sourceTree = "<group>"; };
 		8A116729213376AC00AC2E08 /* RightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightController.swift; sourceTree = "<group>"; };
 		8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalWindow.swift; sourceTree = "<group>"; };
 		8A11672D2134E32A00AC2E08 /* Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 				8A1167552137903900AC2E08 /* Core Data */,
 				8A1167302134F1DB00AC2E08 /* Smart Controller */,
 				8A11672F2134F1C000AC2E08 /* Split Controller */,
-				8A1167272133672700AC2E08 /* PrincipalView.swift */,
 				8A546154210D2A7400B6E588 /* Smar List Controller.swift */,
 				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A11672D2134E32A00AC2E08 /* Extras.swift */,
@@ -489,7 +486,6 @@
 				8ADDA7A3200D126800F7E1D9 /* OldWindowController.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
 				8A2C3121213A04A600B8F3E1 /* LibraryItem+CoreData.swift in Sources */,
-				8A1167282133672700AC2E08 /* PrincipalView.swift in Sources */,
 				8A11672E2134E32A00AC2E08 /* Extras.swift in Sources */,
 				8AE614C12072F134003CB950 /* OldLeftController.swift in Sources */,
 				8A2C3125213A052000B8F3E1 /* Theme+CoreData.swift in Sources */,

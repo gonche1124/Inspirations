@@ -35,4 +35,5 @@ enum LibraryType:String{
 extension Notification.Name {
     static let selectedViewChanged = Notification.Name("selectedViewChanged")
     static let leftSelectionChanged = Notification.Name("leftSelectionChanged")
+    static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
 }
