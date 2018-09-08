@@ -8,20 +8,23 @@
 
 
 //TODO: Make method that updates and reloads controller with given predicate
+//TODO: Display right click menu to show delete, favorites, add to list, etc
 import Cocoa
 
 class TablesController: NSViewController {
     
     //Variables
     let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
-    let pred=NSPredicate(value: true)
-    var infoString: NSTextField?
+    var deletesFromDatabase=false  //TODO: Implement
+    var selectedLeftItem:LibraryItem? //TODO: Implement
+    
+    //let pred=NSPredicate(value: true)
     @IBOutlet weak var table: NSTableView?
     
     lazy var tableFRC:NSFetchedResultsController<Quote> = {
         let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
         fr.sortDescriptors=[sortingO]
-        fr.predicate=pred
+        fr.predicate=NSPredicate(value: true)
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
         try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
@@ -76,19 +79,25 @@ class TablesController: NSViewController {
             switch(selectedLib.libraryType){
             case LibraryType.favorites.rawValue:
                 uPredicate = NSPredicate(format:"isFavorite == TRUE")
+                self.deletesFromDatabase=false //TODO: Check if this can be done with a key value observer.
             case LibraryType.language.rawValue:
                 uPredicate = NSPredicate(format: "isSpelledIn.name CONTAINS [CD] %@", selectedLib.name!)
+                self.deletesFromDatabase=false
             case LibraryType.list.rawValue:
+                self.deletesFromDatabase=true
                 uPredicate = NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  selectedLib.name!)//TODO: Make sure this predicate is working.
             case LibraryType.smartList.rawValue:
                 uPredicate = ((selectedLib as? QuoteList)?.smartPredicate as? NSPredicate)!
             case LibraryType.tag.rawValue:
+                self.deletesFromDatabase=true
                 uPredicate = NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", selectedLib.name!)
             case LibraryType.mainLibrary.rawValue:
-                uPredicate = self.pred
+                uPredicate = NSPredicate(value: true)
+                self.deletesFromDatabase=true
             default:
                 uPredicate = NSPredicate(value: true)
             }
+            self.selectedLeftItem=selectedLib
             self.updatesController(withPredicate: uPredicate)
         }
     }
@@ -119,10 +128,11 @@ extension TablesController: NSSearchFieldDelegate {
     
     //Searchfield
     //TODO: Include a comprehensive predicate by using templates.
+    //TODO: Simplify program flow
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
             if searchF.stringValue=="" {
-                self.updatesController(withPredicate: self.pred)
+                self.updatesController(withPredicate: NSPredicate(value: true))
             }else{
                 let searchPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", searchF.stringValue, searchF.stringValue, searchF.stringValue)
                 self.updatesController(withPredicate:searchPredicate)
@@ -134,10 +144,12 @@ extension TablesController: NSSearchFieldDelegate {
 //MARK: - NSTableViewDataSource
 extension TablesController: NSTableViewDataSource{
     
+    //Total rows
     func numberOfRows(in tableView: NSTableView) -> Int {
         return (tableFRC.fetchedObjects?.count)!
     }
     
+    //Object for row number
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         return tableFRC.fetchedObjects?[row]
     }

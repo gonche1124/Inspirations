@@ -60,6 +60,11 @@ extension LeftController: NSOutlineViewDelegate{
         let typeOfCell:String=(libItem?.isRootItem)! ? "HeaderCell":"DataCell"
         myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
         myCell?.textField?.stringValue=(libItem?.name!)!
+        guard let itemImage = NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {
+            myCell?.imageView?.image=NSImage.init(named: .folder) //TODO: make it right with an NSIMAGE extensions?
+            return myCell
+        }
+        myCell?.imageView?.image=itemImage
         return myCell
     }
     
