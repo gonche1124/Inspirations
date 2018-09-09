@@ -540,9 +540,9 @@
                                 <toolbarItem implicitItemIdentifier="23787DCD-0CB8-4D11-9CA4-5769B65919CC" label="Import" paletteLabel="Import" image="Import Slice" id="UGQ-PP-9WM" userLabel="Import Button">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="25"/>
-                                    <size key="maxSize" width="40" height="25"/>
+                                    <size key="maxSize" width="56" height="25"/>
                                     <button key="view" verticalHuggingPriority="750" id="5Xd-iS-pdS">
-                                        <rect key="frame" x="1" y="14" width="40" height="25"/>
+                                        <rect key="frame" x="0.0" y="14" width="56" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="Import Slice" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="XpC-cy-6ir">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1910,6 +1910,6 @@ Gw
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D0e-wa-IHS"/>
+        <segue reference="uJL-3z-luH"/>
     </inferredMetricsTieBreakers>
 </document>

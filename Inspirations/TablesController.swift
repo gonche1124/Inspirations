@@ -16,10 +16,19 @@ class TablesController: NSViewController {
     //Variables
     let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
     var deletesFromDatabase=false  //TODO: Implement
-    var selectedLeftItem:LibraryItem? //TODO: Implement
+    var selectedLeftItem:LibraryItem? {
+        didSet{
+            let newBool = (selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
+            self.deletesFromDatabase=newBool
+           
+        }
+    }
+    
     
     //let pred=NSPredicate(value: true)
     @IBOutlet weak var table: NSTableView?
+    
+    @IBOutlet var menuToCorrectBug: NSMenu!
     
     lazy var tableFRC:NSFetchedResultsController<Quote> = {
         let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
@@ -34,8 +43,6 @@ class TablesController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
-        
         
         //Setup Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
@@ -56,6 +63,38 @@ class TablesController: NSViewController {
         interpretKeyEvents([event])
     }
     
+    //Action upadte favorites.
+    @IBAction func setFavorite(_ sender: Any){
+        
+        //self.table?.selectedRowIndexes
+        //TODO: Implemented a selectedOjects method for tableview or fetchedResultsController
+        //MAKE SURE IT GETS CALLED
+        //IDEA: Convert to NSArray and use objects(atIndex)
+        let newValue = (menu?.identifier!.rawValue == "favorite")
+        let selectedIndex = self.table?.selectedRowIndexes.map({$0})
+        self.table?.selectedRowIndexes.forEach({
+            print($0)
+        })
+        print("WOW")
+//        self.table?.selectedRowIndexes.map({
+//            let objectItem = self.tableFRC.object(at: $1)
+//            objectItem.isFavorite=newValue
+//        })
+//        self.tableFRC.object(at: <#T##IndexPath#>)
+//        print(self.tableFRC.fetchedObjects![1...2])
+        
+        
+//        guard let selectedQuotes=quotesAC.selectedObjects as? [Quote] else {return}
+//        if let menu = sender as? NSMenuItem{
+//            _=selectedQuotes.map({$0.isFavorite=(menu.identifier!.rawValue=="favorite") ? true : false})
+//        }
+//        if let keyStrike = sender as? Bool{
+//            _=selectedQuotes.map({$0.isFavorite=keyStrike})
+//        }
+//        try! self.moc.save()
+        
+    }
+    
     //Delete selected Records.
     override func deleteBackward(_ sender: Any?) {
         let confirmationD = NSAlert()
@@ -74,31 +113,10 @@ class TablesController: NSViewController {
     
     //Left selection changed
     @objc func leftTableChangedSelection(notification: Notification){
-        if let selectedLib = notification.object as? LibraryItem {
-            let uPredicate: NSPredicate
-            switch(selectedLib.libraryType){
-            case LibraryType.favorites.rawValue:
-                uPredicate = NSPredicate(format:"isFavorite == TRUE")
-                self.deletesFromDatabase=false //TODO: Check if this can be done with a key value observer.
-            case LibraryType.language.rawValue:
-                uPredicate = NSPredicate(format: "isSpelledIn.name CONTAINS [CD] %@", selectedLib.name!)
-                self.deletesFromDatabase=false
-            case LibraryType.list.rawValue:
-                self.deletesFromDatabase=true
-                uPredicate = NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  selectedLib.name!)//TODO: Make sure this predicate is working.
-            case LibraryType.smartList.rawValue:
-                uPredicate = ((selectedLib as? QuoteList)?.smartPredicate as? NSPredicate)!
-            case LibraryType.tag.rawValue:
-                self.deletesFromDatabase=true
-                uPredicate = NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", selectedLib.name!)
-            case LibraryType.mainLibrary.rawValue:
-                uPredicate = NSPredicate(value: true)
-                self.deletesFromDatabase=true
-            default:
-                uPredicate = NSPredicate(value: true)
-            }
-            self.selectedLeftItem=selectedLib
-            self.updatesController(withPredicate: uPredicate)
+        if let selectedLib = notification.object as? LibraryItem,
+            let newPredicate = NSPredicate.predicateFor(libraryItem: selectedLib){
+                self.selectedLeftItem=selectedLib
+                self.updatesController(withPredicate: newPredicate)
         }
     }
     

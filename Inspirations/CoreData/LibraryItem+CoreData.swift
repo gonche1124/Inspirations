@@ -34,6 +34,7 @@ public class LibraryItem: NSManagedObject {
     @NSManaged public var belongsToLibraryItem: LibraryItem?
     @NSManaged public var hasLibraryItems: NSOrderedSet? //Set<LibraryItem>//NSOrderedSet?
     
+    
     //Decodable
 //    public required convenience init(from decoder: Decoder) throws {
 //

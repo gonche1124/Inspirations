@@ -31,6 +31,25 @@ enum LibraryType:String{
     case rootItem="noImage"
 }
 
+//
+
+
+//Suggestion from SWIFT GitHUB to make array conform to subscript ndexset
+//extension Collection {
+//    subscript<T: Sequence>(idx: T) -> [Element]
+//        where T.Element == Index {
+//        get { return idx.map{ self[$0] } }
+//    }
+//}
+//
+//extension MutableCollection {
+//    subscript<T: Sequence>(idx: T) -> [Element]
+//        where T.Element == Index {
+//        get { return idx.map{ self[$0] } }
+//        set { zip(idx, newValue).map{ (i, x) in self[i] = x } }
+//    }
+//}
+
 
 
 //Notification extensions
@@ -40,6 +59,68 @@ extension Notification.Name {
     static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
 }
 
-//NStableview extensions
+//Extension of NSPredicate for easy building
+extension NSPredicate{
+    
+    //String searchs
+    static var pIsFavorite:String = "isFavorite == TRUE"
+    static var pSpelledIn:String = "isSpelledIn.name CONTAINS [CD] %@"
+    static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
+    static var pIsRoot:String = "isRootItem == YES"
+    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
+    
+    //Predciate for left searchfield
+    static func leftPredicate(withText:String)->NSPredicate{
+        if withText == "" { return NSPredicate(format: pIsRoot)}
+        return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
+    }
+    
+    //Predicate for selected left item
+    static func predicateFor(libraryItem:LibraryItem)->NSPredicate? {
+        switch libraryItem.libraryType {
+        case LibraryType.favorites.rawValue:
+            return NSPredicate(format: pIsFavorite)
+        case LibraryType.language.rawValue:
+            return NSPredicate(format: pSpelledIn, libraryItem.name!)
+        case LibraryType.list.rawValue:
+            return NSPredicate(format: pInList,  libraryItem.name!)
+        case LibraryType.smartList.rawValue:
+            return ((libraryItem as? QuoteList)?.smartPredicate as? NSPredicate)!
+        case LibraryType.tag.rawValue:
+            return NSPredicate(format: pIsTagged, libraryItem.name!)
+        case LibraryType.mainLibrary.rawValue:
+            return NSPredicate(value: true)
+        default:
+            return nil
+        }
+    }
+}
+
+//Core Data extensions
+extension LibraryItem{
+    
+    //Used to sort elements.
+//    var sortingKey:String {
+//        get {
+//            if self.isRootItem && self.name=="Main"{
+//                return " "
+//            }else{
+//                return self.name!
+//            }
+//            }
+//
+//    }
+}
+
+//TODO: Implement protocols to simplify code.
+//protocol MyProtocol {
+//    static var sortingKey:String{get}
+//}
+//
+//extension MyProtocol where Self:LibraryItem{
+//    static var sortingKey:String{
+//        return self.name
+//    }
+//}
 
 

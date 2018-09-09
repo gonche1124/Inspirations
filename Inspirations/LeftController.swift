@@ -16,9 +16,10 @@ class LeftController: NSViewController {
     let startPredicate=NSPredicate(format: "isRootItem == YES")
  
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
+        //let fr = (NSApp.delegate as? AppDelegate)?.managedObjectModel.fetchRequestTemplate(forName: "fetchForLeftView")
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
         fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)]
-        fr.predicate=startPredicate
+        fr.predicate=self.startPredicate
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
         try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
@@ -42,8 +43,10 @@ extension LeftController: NSTextFieldDelegate {
     //Update search field when user enters text.
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
+            //let searchPredicate=NSPredicate.leftPredicate(withText: searchF.stringValue)
             let searchPredicate = NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", searchF.stringValue)
-            listFRC.fetchRequest.predicate=(searchF.stringValue=="") ? startPredicate:searchPredicate
+            //listFRC.fetchRequest.predicate=searchPredicate
+            listFRC.fetchRequest.predicate=(searchF.stringValue=="") ? self.startPredicate:searchPredicate
             try! listFRC.performFetch()
             listView.reloadData()
             listView.expandItem(nil, expandChildren: true)
@@ -60,29 +63,32 @@ extension LeftController: NSOutlineViewDelegate{
         let typeOfCell:String=(libItem?.isRootItem)! ? "HeaderCell":"DataCell"
         myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
         myCell?.textField?.stringValue=(libItem?.name!)!
-        guard let itemImage = NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {
+        guard let itemImage = libItem?.libraryType as? String else {//NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {
             myCell?.imageView?.image=NSImage.init(named: .folder) //TODO: make it right with an NSIMAGE extensions?
             return myCell
         }
-        myCell?.imageView?.image=itemImage
+        myCell?.imageView?.image=NSImage.init(named: NSImage.Name(itemImage))
         return myCell
     }
     
     //Determines if triangle should be shown.
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
         let libItem=item as? LibraryItem
-        return !(libItem?.isRootItem)! && (libItem?.hasLibraryItems?.count)!>0
-//        if !(libItem?.isRootItem)! && (libItem?.hasLibraryItems?.count)!>0 {
-//            return true
-//        }
-//        return false
+        return (libItem?.isRootItem)!
+        //return !(libItem?.isRootItem)! && (libItem?.hasLibraryItems?.count)!>0
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+        guard let libItem=item as? LibraryItem else {
+            return false
+        }
+        return libItem.isRootItem
     }
     
     //Changes the selection
     func outlineViewSelectionDidChange(_ notification: Notification) {
         //Posts notification globally
         if let outlineView = notification.object as? NSOutlineView,
-            outlineView.selectedRowIndexes.count==1,
             let selectedItem = outlineView.item(atRow: outlineView.selectedRow) as? LibraryItem,
             !selectedItem.isRootItem {
                 NotificationCenter.default.post(Notification(name: .leftSelectionChanged, object:selectedItem))
@@ -109,19 +115,15 @@ extension LeftController: NSOutlineViewDataSource {
         return ((item as? LibraryItem)?.hasLibraryItems?.count)!>0 ? true:false
     }
     
-    //Retursn the item in a given position.
-    //TODO: Simplify
+    //Return the item in a given position.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if item == nil {
-            return listFRC.fetchedObjects![index]
-        }
-        else{
-            return (item as? LibraryItem)?.hasLibraryItems![index]
-        }
+            guard let  libItem = item as? LibraryItem else {return listFRC.fetchedObjects![index]}
+            return libItem.hasLibraryItems![index]
     }
     
+    //TODO: Look what this method is used for
     func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-        return listFRC.fetchedObjects
+        return item //listFRC.fetchedObjects
     }
     
     //Required for editing.

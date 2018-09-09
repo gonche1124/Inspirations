@@ -22,12 +22,13 @@ class PrincipalWindow: NSWindowController {
     //Actions
     @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
-
+        
     }
     
     //Outlets
 
     @IBOutlet weak var mainSearchField: NSSearchField!
+    
     
     //Variables
     var recentSearches = [String]()
@@ -44,5 +45,20 @@ class PrincipalWindow: NSWindowController {
         
         return menu
     }()
+    
+    
+    
+}
 
+
+
+extension PrincipalWindow:NSWindowDelegate{
+    
+    //TODO: Think of seomthing useful for this notification.
+    func windowDidResize(_ notification: Notification) {
+        print("Rezising to: \((notification.object as? NSWindow)?.frame.size.width)")
+    }
+    
+    
+    
 }

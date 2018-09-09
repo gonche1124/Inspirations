@@ -8,6 +8,8 @@
 
 import Cocoa
 
+
+//TODO: Change size to ask first what type of item you want ot add through combobox and remove checkbox.
 class Smar_List_Controller: NSViewController {
 
     override func viewDidLoad() {

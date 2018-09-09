@@ -192,6 +192,7 @@
                                             <connections>
                                                 <outlet property="dataSource" destination="m8M-8y-p42" id="n0f-ua-SfN"/>
                                                 <outlet property="delegate" destination="m8M-8y-p42" id="QlV-y4-shs"/>
+                                                <outlet property="menu" destination="mEJ-co-eYC" id="fLo-8I-OGI"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -212,10 +213,60 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="menuToCorrectBug" destination="mEJ-co-eYC" id="5d5-z6-xph"/>
                         <outlet property="table" destination="eKh-zw-w3Y" id="nD0-EX-uZg"/>
                     </connections>
                 </viewController>
                 <customObject id="ipj-Cp-v1s" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="mEJ-co-eYC">
+                    <items>
+                        <menuItem title="Set Favorite" keyEquivalent="f" identifier="favorite" id="VtA-Q2-iDE">
+                            <connections>
+                                <action selector="setFavorite:" target="m8M-8y-p42" id="KOs-5u-1Tw"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Set Unfavorite" keyEquivalent="F" identifier="unfavorite" id="CJc-YC-3Ec">
+                            <connections>
+                                <action selector="setFavorite:" target="m8M-8y-p42" id="tlD-So-OlJ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="AUw-wC-jw7"/>
+                        <menuItem title="Delete" id="p3A-ya-wjh">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="WYi-4h-7jZ"/>
+                        <menuItem title="Edit" keyEquivalent="i" id="qfa-OG-xMW"/>
+                        <menuItem title="Copy" id="Axf-Rf-Yiq">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Export" id="S97-Wb-qHJ">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="ZWh-KN-mj1"/>
+                        <menuItem title="Add to List" id="fU7-WX-mG8">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Add to List" id="2Zl-ax-iTX">
+                                <items>
+                                    <menuItem title="Item" id="ZSU-YB-zUr">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </menuItem>
+                        <menuItem title="Add Tags" id="Yyo-rY-Udi">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Add Tags" id="DAO-wD-rwh">
+                                <items>
+                                    <menuItem title="Item" id="C6d-SF-mhn">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="693" y="-86"/>
         </scene>
