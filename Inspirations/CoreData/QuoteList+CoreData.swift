@@ -29,7 +29,7 @@ public class QuoteList: LibraryItem, Codable {
     }
     
     //Properties
-    @NSManaged public var smartPredicate: NSObject?
+    @NSManaged public var smartPredicate: NSPredicate?
     @NSManaged public var hasQuotes: NSSet?
     
     //Decodable
@@ -58,6 +58,26 @@ public class QuoteList: LibraryItem, Codable {
         try container.encode(isShown, forKey: .isShown)
         try container.encode(libraryType, forKey: .libraryType)
         try container.encode(name, forKey: .name)
+    }
+    
+    //Convinience init
+    public convenience init?(inMOC:NSManagedObjectContext, andName:String, withSmartList:NSPredicate?=nil){
+        guard let entity = NSEntityDescription.entity(forEntityName: "QuoteList", in: inMOC),
+            andName != "" else {
+                fatalError("Failed to create Quote List")}
+        
+        self.init(entity: entity, insertInto: inMOC)
+        self.libraryType = LibraryType.list.rawValue
+        self.name=andName
+        self.isShown=true
+        self.isRootItem=false
+        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: inMOC)
+        if (withSmartList != nil)  {
+            self.smartPredicate=withSmartList
+            self.libraryType=LibraryType.smartList.rawValue
+        }
+        print("For testing to delete")
+        
     }
 }
 

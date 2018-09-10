@@ -51,10 +51,23 @@ public class Tag: LibraryItem, Codable {
     //Codable
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .isRootItem)
+        try container.encode(isRootItem, forKey: .isRootItem)
         try container.encode(isShown, forKey: .isShown)
         try container.encode(libraryType, forKey: .libraryType)
         try container.encode(name, forKey: .name)
+    }
+    
+    public convenience init?(inMOC:NSManagedObjectContext, andName:String){
+        guard let entity = NSEntityDescription.entity(forEntityName: "Tag", in: inMOC),
+        andName != "" else {
+            fatalError("Failed to create Tag")}
+        
+        self.init(entity: entity, insertInto: inMOC)
+        self.libraryType = LibraryType.tag.rawValue
+        self.name=andName
+        self.isShown=true
+        self.isRootItem=false
+        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: inMOC)
     }
     
 }

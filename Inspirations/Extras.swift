@@ -31,26 +31,13 @@ enum LibraryType:String{
     case rootItem="noImage"
 }
 
-//
-
-
-//Suggestion from SWIFT GitHUB to make array conform to subscript ndexset
-//extension Collection {
-//    subscript<T: Sequence>(idx: T) -> [Element]
-//        where T.Element == Index {
-//        get { return idx.map{ self[$0] } }
-//    }
-//}
-//
-//extension MutableCollection {
-//    subscript<T: Sequence>(idx: T) -> [Element]
-//        where T.Element == Index {
-//        get { return idx.map{ self[$0] } }
-//        set { zip(idx, newValue).map{ (i, x) in self[i] = x } }
-//    }
-//}
-
-
+//NSPopupbutton selection
+enum Selection:Int{
+    case tag = 0
+    case list = 1
+    case smartList = 2
+    case folder = 3
+}
 
 //Notification extensions
 extension Notification.Name {
@@ -96,21 +83,6 @@ extension NSPredicate{
     }
 }
 
-//Core Data extensions
-extension LibraryItem{
-    
-    //Used to sort elements.
-//    var sortingKey:String {
-//        get {
-//            if self.isRootItem && self.name=="Main"{
-//                return " "
-//            }else{
-//                return self.name!
-//            }
-//            }
-//
-//    }
-}
 
 //TODO: Implement protocols to simplify code.
 //protocol MyProtocol {

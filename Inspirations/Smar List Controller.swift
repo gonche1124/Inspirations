@@ -23,17 +23,16 @@ class Smar_List_Controller: NSViewController {
     @IBOutlet weak var bottomView: NSView!
     @IBOutlet weak var heightScrollViewPredicate: NSLayoutConstraint!
     @IBOutlet weak var nameTextField: NSTextField!
-    @IBOutlet weak var isSmartList: NSButton!
+    @IBOutlet weak var typeOfItem: NSPopUpButton!
     @IBOutlet weak var createButton: NSButton!
     @IBOutlet weak var predicateScrollView: NSScrollView!
     @IBOutlet weak var predicateView: NSPredicateEditor!
     
-    @IBAction func showPredicateEditor(_ sender: NSButton) {
-        if sender.state==NSButton.StateValue.on {
+   @IBAction func showPredicateEditor(_ sender: NSPopUpButton) {
+    if sender.selectedTag() == Selection.smartList.rawValue {
             bottomView.isHidden=false
             resizePredicateScrollView(predicateView)
-        }
-        else {
+        }else {
             bottomView.isHidden=true
         }
     }
@@ -47,7 +46,7 @@ class Smar_List_Controller: NSViewController {
     
     //Anytime there is action on thepredicate.
     @IBAction func predicatedChanged(_ sender: NSPredicateEditor) {
-        if isSmartList.state==NSButton.StateValue.on {
+        if typeOfItem.selectedTag()==Selection.smartList.rawValue {//isSmartList.state==NSButton.StateValue.on {
             resizePredicateScrollView(sender)
         }
     }
@@ -56,25 +55,23 @@ class Smar_List_Controller: NSViewController {
     @IBAction func createList(_ sender: NSButton) {
         //Configure new list.
         let nameOfList = nameTextField.stringValue
-        let newList = NSEntityDescription.insertNewObject(forEntityName: Entities.collection.rawValue, into: moc) as? QuoteList
-        newList?.name = nameOfList
-        if isSmartList.state==NSButton.StateValue.on {
-            newList?.smartPredicate=predicateView.predicate
+        switch typeOfItem.selectedTag() {
+        case Selection.smartList.rawValue:
+            _=QuoteList.init(inMOC: moc, andName: nameOfList, withSmartList: predicateView.predicate)
+        case Selection.tag.rawValue:
+            _=QuoteList.init(inMOC: moc, andName: nameOfList)
+        case Selection.list.rawValue:
+            _ = QuoteList.init(inMOC: moc, andName: nameOfList)
+        case Selection.folder.rawValue:
+            print("To implement")
+        default:
+            self.dismiss(self) //TODO: Show Error message
         }
-        //Add it to the parent list.
-        let mainList = LibraryItem.firstWith(predicate: NSPredicate(format:"name == 'Lists'"), inContext: moc) as? LibraryItem
-        newList?.belongsToLibraryItem=mainList
         
         try! moc.save() //save
-        
-        //Refresh main list
-        //TODO: Rewrite to make compatible with NSSPlitviewController
-        //let leftController=NSApp.mainWindow?.contentViewController as? AlternateController2
-        //leftController?.listView.reloadData()
-        //leftController?.listView.expandItem(nil, expandChildren: true)
-    
         self.dismiss(self)
     }
 }
+
 
 
