@@ -110,7 +110,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <predicateEditor verticalHuggingPriority="750" nestingMode="compound" canRemoveAllRows="YES" rowHeight="25" id="kyt-83-f2g">
-                                                            <rect key="frame" x="0.0" y="0.0" width="415" height="150"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <rowTemplates>
                                                                 <predicateEditorRowTemplate rowType="compound" id="XWD-pP-I8T" userLabel="AND OR NOT">
@@ -137,6 +137,21 @@ Gw
                                                                         <expression type="keyPath">
                                                                             <string key="keyPath">quoteString</string>
                                                                         </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">from.name</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">isAbout.themeName</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">isTaggedWith.name</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">spelledIn.name</string>
+                                                                        </expression>
+                                                                        <expression type="constant">
+                                                                            <string key="constantValue">isIncludedIn.name</string>
+                                                                        </expression>
                                                                     </array>
                                                                     <integer key="rightExpressionObject" value="700"/>
                                                                     <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
@@ -146,6 +161,31 @@ Gw
                                                                                 <menuItem title="quoteString" state="on" id="Gfk-VP-0yI">
                                                                                     <expression key="representedObject" type="keyPath">
                                                                                         <string key="keyPath">quoteString</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="from.name" id="14a-B2-Xrg">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">from.name</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="isAbout.themeName" id="JXZ-gs-EOl">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">isAbout.themeName</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="isTaggedWith.name" id="P4G-RM-Yi1">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">isTaggedWith.name</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="spelledIn.name" id="dkJ-V2-uqh">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">spelledIn.name</string>
+                                                                                    </expression>
+                                                                                </menuItem>
+                                                                                <menuItem title="isIncludedIn.name" id="Ivc-w7-c8W">
+                                                                                    <expression key="representedObject" type="constant">
+                                                                                        <string key="constantValue">isIncludedIn.name</string>
                                                                                     </expression>
                                                                                 </menuItem>
                                                                             </items>
@@ -265,93 +305,6 @@ Gw
                                                                                 </menuItem>
                                                                                 <menuItem title="is less than or equal to" id="KUY-so-Iom">
                                                                                     <integer key="representedObject" value="1"/>
-                                                                                </menuItem>
-                                                                            </items>
-                                                                        </menu>
-                                                                    </popUpMenus>
-                                                                </predicateEditorRowTemplate>
-                                                                <predicateEditorRowTemplate rowType="simple" id="hy3-XW-dvJ" userLabel="Author">
-                                                                    <array key="leftExpressionObject">
-                                                                        <expression type="keyPath">
-                                                                            <string key="keyPath">from.name</string>
-                                                                        </expression>
-                                                                    </array>
-                                                                    <integer key="rightExpressionObject" value="700"/>
-                                                                    <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
-                                                                    <popUpMenus>
-                                                                        <menu id="NcF-37-yyT">
-                                                                            <items>
-                                                                                <menuItem title="from.name" state="on" id="3vV-Jg-5rN">
-                                                                                    <expression key="representedObject" type="keyPath">
-                                                                                        <string key="keyPath">from.name</string>
-                                                                                    </expression>
-                                                                                </menuItem>
-                                                                            </items>
-                                                                        </menu>
-                                                                        <menu id="WFq-6d-6jD">
-                                                                            <items>
-                                                                                <menuItem title="contains" state="on" id="dRD-1j-0WN">
-                                                                                    <integer key="representedObject" value="99"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="begins with" id="lsN-MY-Bmm">
-                                                                                    <integer key="representedObject" value="8"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="ends with" id="ORf-f8-dLX">
-                                                                                    <integer key="representedObject" value="9"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="is" id="7HQ-Zq-HMg">
-                                                                                    <integer key="representedObject" value="4"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="matches" id="Huf-ij-4e1">
-                                                                                    <integer key="representedObject" value="6"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="is like" id="og0-1L-uZj">
-                                                                                    <integer key="representedObject" value="7"/>
-                                                                                </menuItem>
-                                                                            </items>
-                                                                        </menu>
-                                                                    </popUpMenus>
-                                                                </predicateEditorRowTemplate>
-                                                                <predicateEditorRowTemplate rowType="simple" id="xh4-WY-I9c" userLabel="Theme">
-                                                                    <array key="leftExpressionObject">
-                                                                        <expression type="keyPath">
-                                                                            <string key="keyPath">isAbout.themeName</string>
-                                                                        </expression>
-                                                                    </array>
-                                                                    <integer key="rightExpressionObject" value="700"/>
-                                                                    <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
-                                                                    <popUpMenus>
-                                                                        <menu id="0Oc-HJ-GGD">
-                                                                            <items>
-                                                                                <menuItem title="isAbout.themeName" state="on" id="Mu2-4y-xyN">
-                                                                                    <expression key="representedObject" type="keyPath">
-                                                                                        <string key="keyPath">isAbout.themeName</string>
-                                                                                    </expression>
-                                                                                </menuItem>
-                                                                            </items>
-                                                                        </menu>
-                                                                        <menu id="1lV-F6-ca9">
-                                                                            <items>
-                                                                                <menuItem title="contains" state="on" id="nrb-b7-08g">
-                                                                                    <integer key="representedObject" value="99"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="begins with" id="fsW-CQ-V5J">
-                                                                                    <integer key="representedObject" value="8"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="ends with" id="4X8-dy-uUG">
-                                                                                    <integer key="representedObject" value="9"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="is" id="Z7T-1I-wfq">
-                                                                                    <integer key="representedObject" value="4"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="is not" id="IjW-m2-ifu">
-                                                                                    <integer key="representedObject" value="5"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="matches" id="gLg-Of-Hev">
-                                                                                    <integer key="representedObject" value="6"/>
-                                                                                </menuItem>
-                                                                                <menuItem title="is like" id="q8V-j1-7V4">
-                                                                                    <integer key="representedObject" value="7"/>
                                                                                 </menuItem>
                                                                             </items>
                                                                         </menu>
