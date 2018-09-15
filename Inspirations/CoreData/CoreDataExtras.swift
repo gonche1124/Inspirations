@@ -25,12 +25,6 @@ extension LibraryItem{
             return fetchedItem
         }
         
-//        let request=NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
-//        request.predicate = NSPredicate(format: "name == %@", itemName)
-//        request.fetchLimit=1
-//
-//        if let results = try! inContext.fetch(request).first as? LibraryItem {return results}
-        
         //Creat Library Item because it did not existed.
         let newItem = LibraryItem(context: inContext)
         newItem.isRootItem=true
@@ -53,6 +47,9 @@ extension NSManagedObject {
         return results
     }
 }
+
+
+
 
 //TODO: Check if this is useful
 /*

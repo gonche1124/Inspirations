@@ -18,7 +18,7 @@ class LeftController: NSViewController {
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
         //let fr = (NSApp.delegate as? AppDelegate)?.managedObjectModel.fetchRequestTemplate(forName: "fetchForLeftView")
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
-        fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)]
+        fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)] //""name
         fr.predicate=self.startPredicate
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
@@ -133,9 +133,7 @@ extension LeftController: NSOutlineViewDataSource {
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
     
-        guard let destItem = item as? LibraryItem else {
-                return NSDragOperation.init(rawValue: 0)
-            }
+        guard let destItem = item as? LibraryItem else {return NSDragOperation.init(rawValue: 0)}
         let canDragg = (!destItem.isRootItem && (destItem.libraryType == LibraryType.list.rawValue || destItem.libraryType == LibraryType.tag.rawValue))
         return NSDragOperation.init(rawValue: canDragg ?  1 : 0)
         }

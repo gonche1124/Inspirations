@@ -48,7 +48,7 @@
     <elements>
         <element name="Author" positionX="-146" positionY="195" width="128" height="73"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="135"/>
+        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="133"/>
         <element name="Quote" positionX="-90" positionY="-81" width="128" height="178"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>

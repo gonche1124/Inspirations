@@ -7,7 +7,6 @@
 //
 
 
-//TODO: Make method that updates and reloads controller with given predicate
 //TODO: Display right click menu to show delete, favorites, add to list, etc
 import Cocoa
 
@@ -30,12 +29,14 @@ class TablesController: NSViewController {
     
     @IBOutlet var menuToCorrectBug: NSMenu!
     
-    lazy var tableFRC:NSFetchedResultsController<Quote> = {
+    lazy var tableFRC:GFetchResultsController<Quote> = {
         let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
         fr.sortDescriptors=[sortingO]
         fr.predicate=NSPredicate(value: true)
-        let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        let frc=GFetchResultsController(fetchRequest: fr, context: moc, Quote.self)
         frc.delegate=self
+        frc.delegatedTable=self.table!
+        //frc.associatedTable=self.table
         try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
         return frc
     }() //as NSFetchedResultsController
@@ -65,33 +66,10 @@ class TablesController: NSViewController {
     
     //Action upadte favorites.
     @IBAction func setFavorite(_ sender: Any){
-        
-        //self.table?.selectedRowIndexes
-        //TODO: Implemented a selectedOjects method for tableview or fetchedResultsController
-        //MAKE SURE IT GETS CALLED
-        //IDEA: Convert to NSArray and use objects(atIndex)
+
         let newValue = (menu?.identifier!.rawValue == "favorite")
-        let selectedIndex = self.table?.selectedRowIndexes.map({$0})
-        self.table?.selectedRowIndexes.forEach({
-            print($0)
-        })
-        print("WOW")
-//        self.table?.selectedRowIndexes.map({
-//            let objectItem = self.tableFRC.object(at: $1)
-//            objectItem.isFavorite=newValue
-//        })
-//        self.tableFRC.object(at: <#T##IndexPath#>)
-//        print(self.tableFRC.fetchedObjects![1...2])
-        
-        
-//        guard let selectedQuotes=quotesAC.selectedObjects as? [Quote] else {return}
-//        if let menu = sender as? NSMenuItem{
-//            _=selectedQuotes.map({$0.isFavorite=(menu.identifier!.rawValue=="favorite") ? true : false})
-//        }
-//        if let keyStrike = sender as? Bool{
-//            _=selectedQuotes.map({$0.isFavorite=keyStrike})
-//        }
-//        try! self.moc.save()
+        self.tableFRC.selectedObjects?.forEach({$0.isFavorite=newValue})
+        try! self.moc.save()
         
     }
     
@@ -106,9 +84,11 @@ class TablesController: NSViewController {
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             self.table?.beginUpdates()
-            table?.selectedRowIndexes.forEach({moc.delete(tableFRC.fetchedObjects![$0])})
+            self.tableFRC.selectedObjects?.forEach({moc.delete($0)})
+            //table?.selectedRowIndexes.forEach({moc.delete(tableFRC.fetchedObjects![$0])})
             self.table?.endUpdates()
         }
+        //TODO: Should save the deletions?
     }
     
     //Left selection changed
@@ -152,7 +132,7 @@ extension TablesController: NSSearchFieldDelegate {
             if searchF.stringValue=="" {
                 self.updatesController(withPredicate: NSPredicate(value: true))
             }else{
-                let searchPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", searchF.stringValue, searchF.stringValue, searchF.stringValue)
+                let searchPredicate = NSPredicate.mainFilter(withString: searchF.stringValue)
                 self.updatesController(withPredicate:searchPredicate)
             }
         }
