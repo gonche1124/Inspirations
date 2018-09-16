@@ -304,13 +304,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Gzd-Jw-Ak7">
-                                            <rect key="frame" x="0.0" y="0.0" width="454" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="427" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" editable="NO" width="451" minWidth="40" maxWidth="1000" id="x6c-nv-wBh">
+                                                <tableColumn identifier="" editable="NO" width="424" minWidth="40" maxWidth="1000" id="x6c-nv-wBh">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -324,25 +324,25 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="exploreCell" id="Wws-CG-PNa" customClass="ExploreCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="404" height="70"/>
+                                                            <rect key="frame" x="1" y="1" width="424" height="70"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hMG-3t-nr6">
-                                                                    <rect key="frame" x="8" y="12" width="388" height="46"/>
+                                                                    <rect key="frame" x="12" y="12" width="400" height="46"/>
                                                                     <subviews>
-                                                                        <textField horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-7z-vVp">
-                                                                            <rect key="frame" x="6" y="27" width="376" height="19"/>
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-7z-vVp">
+                                                                            <rect key="frame" x="-2" y="27" width="404" height="19"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="1VH-VP-8mh"/>
                                                                             </constraints>
-                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="dZG-ff-4z2">
+                                                                            <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="dZG-ff-4z2">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="l1M-xf-bsH">
-                                                                            <rect key="frame" x="6" y="0.0" width="370" height="19"/>
+                                                                            <rect key="frame" x="6" y="0.0" width="376" height="19"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="19" id="0Db-zy-cOE"/>
                                                                             </constraints>
@@ -354,10 +354,10 @@
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="x3n-7z-vVp" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" constant="8" id="6rh-xw-d8K"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="l1M-xf-bsH" secondAttribute="trailing" constant="14" id="NEZ-Zi-Uwh"/>
+                                                                        <constraint firstItem="x3n-7z-vVp" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" id="6rh-xw-d8K"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="l1M-xf-bsH" secondAttribute="trailing" constant="20" id="NEZ-Zi-Uwh"/>
                                                                         <constraint firstItem="l1M-xf-bsH" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" constant="8" id="YS5-LP-sGf"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="x3n-7z-vVp" secondAttribute="trailing" constant="8" id="f7j-EA-x1D"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="x3n-7z-vVp" secondAttribute="trailing" id="f7j-EA-x1D"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
@@ -370,10 +370,10 @@
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="hMG-3t-nr6" secondAttribute="trailing" constant="8" id="1Sb-10-bCM"/>
+                                                                <constraint firstAttribute="trailing" secondItem="hMG-3t-nr6" secondAttribute="trailing" constant="12" id="1Sb-10-bCM"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hMG-3t-nr6" secondAttribute="bottom" constant="12" id="2Xf-AX-k7l"/>
                                                                 <constraint firstItem="hMG-3t-nr6" firstAttribute="top" secondItem="Wws-CG-PNa" secondAttribute="top" constant="12" id="P6M-Un-48b"/>
-                                                                <constraint firstItem="hMG-3t-nr6" firstAttribute="leading" secondItem="Wws-CG-PNa" secondAttribute="leading" constant="8" id="jWL-IA-7in"/>
+                                                                <constraint firstItem="hMG-3t-nr6" firstAttribute="leading" secondItem="Wws-CG-PNa" secondAttribute="leading" constant="12" id="jWL-IA-7in"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="authorField" destination="l1M-xf-bsH" id="3wL-ud-Iy4"/>
