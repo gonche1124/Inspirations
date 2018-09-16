@@ -13,16 +13,13 @@ class LeftController: NSViewController {
     //Properties
     @IBOutlet weak var listView: NSOutlineView!
     
-    let startPredicate=NSPredicate(format: "isRootItem == YES")
- 
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
-        //let fr = (NSApp.delegate as? AppDelegate)?.managedObjectModel.fetchRequestTemplate(forName: "fetchForLeftView")
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
         fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)] //""name
-        fr.predicate=self.startPredicate
+        fr.predicate=NSPredicate.leftPredicate(withText: "")
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
-        try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
+        try! frc.performFetch()
         return frc
     }()
     
@@ -43,15 +40,15 @@ extension LeftController: NSTextFieldDelegate {
     //Update search field when user enters text.
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
-            //let searchPredicate=NSPredicate.leftPredicate(withText: searchF.stringValue)
-            let searchPredicate = NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", searchF.stringValue)
-            //listFRC.fetchRequest.predicate=searchPredicate
-            listFRC.fetchRequest.predicate=(searchF.stringValue=="") ? self.startPredicate:searchPredicate
+            listFRC.fetchRequest.predicate=NSPredicate.leftPredicate(withText: searchF.stringValue)
             try! listFRC.performFetch()
+            listView.beginUpdates()
             listView.reloadData()
             listView.expandItem(nil, expandChildren: true)
+            listView.endUpdates()
         }
     }
+    
 }
 
 //MARK: - NSOutlineViewDelegate
@@ -75,7 +72,6 @@ extension LeftController: NSOutlineViewDelegate{
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
         let libItem=item as? LibraryItem
         return (libItem?.isRootItem)!
-        //return !(libItem?.isRootItem)! && (libItem?.hasLibraryItems?.count)!>0
     }
     
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
@@ -121,10 +117,6 @@ extension LeftController: NSOutlineViewDataSource {
             return libItem.hasLibraryItems![index]
     }
     
-    //TODO: Look what this method is used for
-    func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-        return item //listFRC.fetchedObjects
-    }
     
     //Required for editing.
     func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {

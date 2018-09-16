@@ -84,8 +84,12 @@ class TablesController: NSViewController {
         if result == .alertFirstButtonReturn{
             self.table?.beginUpdates()
             self.tableFRC.selectedObjects?.forEach({moc.delete($0)})
-            //table?.selectedRowIndexes.forEach({moc.delete(tableFRC.fetchedObjects![$0])})
             self.table?.endUpdates()
+        }
+        do{
+            try self.moc.save()
+        }catch{
+            print(error)
         }
         //TODO: Should save the deletions?
     }
@@ -124,16 +128,10 @@ extension TablesController: NSFetchedResultsControllerDelegate {
 extension TablesController: NSSearchFieldDelegate {
     
     //Searchfield
-    //TODO: Include a comprehensive predicate by using templates.
-    //TODO: Simplify program flow
     override func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
-            if searchF.stringValue=="" {
-                self.updatesController(withPredicate: NSPredicate(value: true))
-            }else{
-                let searchPredicate = NSPredicate.mainFilter(withString: searchF.stringValue)
-                self.updatesController(withPredicate:searchPredicate)
-            }
+            let newPredicate=NSPredicate.mainFilter(withString: searchF.stringValue)
+            self.updatesController(withPredicate: newPredicate)
         }
     }
 }
@@ -194,7 +192,6 @@ extension TablesController: NSTableViewDelegate{
             default:
                 return nil
             }
-            
         }
         return myCell
     }

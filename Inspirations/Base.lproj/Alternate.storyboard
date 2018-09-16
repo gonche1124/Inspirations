@@ -741,7 +741,7 @@
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4cT-Um-C7F">
                                                                     <rect key="frame" x="20" y="3" width="150" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rF2-HG-niF">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="list name" id="rF2-HG-niF">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -767,6 +767,7 @@
                                             <connections>
                                                 <outlet property="dataSource" destination="CWl-5U-TPh" id="ck2-uX-c59"/>
                                                 <outlet property="delegate" destination="CWl-5U-TPh" id="pEC-jZ-kzA"/>
+                                                <outlet property="menu" destination="jkP-kp-Ips" id="e9z-x5-GCa"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -844,6 +845,16 @@
                     </connections>
                 </viewController>
                 <customObject id="5xx-fZ-I47" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu title="Actions:" id="jkP-kp-Ips">
+                    <items>
+                        <menuItem title="Edit" id="X6W-yQ-RYv">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <segue destination="BxZ-uW-2MU" kind="modal" id="ZJb-N4-6pE"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="835.5" y="49"/>
         </scene>
@@ -869,7 +880,7 @@
                 <controllerPlaceholder storyboardName="Smart List Editor" id="BxZ-uW-2MU" userLabel="Smart List Editor" sceneMemberID="viewController"/>
                 <customObject id="Ry8-bW-hcW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="107"/>
+            <point key="canvasLocation" x="1155" y="49"/>
         </scene>
         <!--Tabs-->
         <scene sceneID="cbS-Nu-jRo">
@@ -890,4 +901,7 @@
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZJb-N4-6pE"/>
+    </inferredMetricsTieBreakers>
 </document>

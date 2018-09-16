@@ -66,12 +66,15 @@ extension NSPredicate{
     
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
-        if withText == "" { return NSPredicate(format: pIsRoot)}
+        if withText == "" { print("isRoot");return NSPredicate(format: pIsRoot)}
+        let test=NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
+        print(test.predicateFormat)
         return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
     }
     
     //Predicate for main table
     static func mainFilter(withString:String)->NSPredicate {
+        if withString=="" {return NSPredicate(value: true)}
         return NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", withString, withString, withString)
     }
     
@@ -85,7 +88,7 @@ extension NSPredicate{
         case LibraryType.list.rawValue:
             return NSPredicate(format: pInList,  libraryItem.name!)
         case LibraryType.smartList.rawValue:
-            return ((libraryItem as? QuoteList)?.smartPredicate as? NSPredicate)!
+            return (libraryItem as? QuoteList)?.smartPredicate!
         case LibraryType.tag.rawValue:
             return NSPredicate(format: pIsTagged, libraryItem.name!)
         case LibraryType.mainLibrary.rawValue:
