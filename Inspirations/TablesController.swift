@@ -170,7 +170,7 @@ extension TablesController: NSTableViewDelegate{
         let currQuote = self.tableFRC.fetchedObjects![row]
         if tableView.numberOfColumns==1 {
             let myCell = tableView.makeView(withIdentifier: .init("exploreCell"), owner: nil) as! ExploreCell
-            myCell.authorField.stringValue=(currQuote.from?.name)!
+            myCell.authorField.stringValue="~ "+(currQuote.from?.name)!
             myCell.quoteField.stringValue=currQuote.quoteString!
             return myCell
         }
@@ -220,6 +220,18 @@ extension TablesController: NSTableViewDelegate{
 class ExploreCell: NSTableCellView{
     @IBOutlet weak var quoteField: NSTextField!
     @IBOutlet weak var authorField: NSTextField!
+    
+    override var backgroundStyle: NSView.BackgroundStyle {
+        willSet {
+            if newValue == .dark {
+                quoteField.textColor = NSColor.controlLightHighlightColor
+                authorField.textColor = NSColor.controlHighlightColor
+            } else {
+                quoteField.textColor = NSColor.labelColor
+                authorField.textColor = NSColor.controlShadowColor
+            }
+        }
+    }
 }
 
 

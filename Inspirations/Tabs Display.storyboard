@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kzV-eP-Aw2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -332,32 +333,28 @@
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-7z-vVp">
                                                                             <rect key="frame" x="-2" y="27" width="404" height="19"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="1VH-VP-8mh"/>
-                                                                            </constraints>
                                                                             <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="dZG-ff-4z2">
                                                                                 <font key="font" metaFont="system" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="l1M-xf-bsH">
-                                                                            <rect key="frame" x="6" y="0.0" width="376" height="19"/>
+                                                                            <rect key="frame" x="237" y="0.0" width="45" height="19"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="19" id="0Db-zy-cOE"/>
                                                                             </constraints>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Author" id="EdO-ws-H4G">
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Author" id="EdO-ws-H4G">
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="x3n-7z-vVp" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" id="6rh-xw-d8K"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="l1M-xf-bsH" secondAttribute="trailing" constant="20" id="NEZ-Zi-Uwh"/>
-                                                                        <constraint firstItem="l1M-xf-bsH" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" constant="8" id="YS5-LP-sGf"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="x3n-7z-vVp" secondAttribute="trailing" id="f7j-EA-x1D"/>
+                                                                        <constraint firstItem="x3n-7z-vVp" firstAttribute="leading" secondItem="hMG-3t-nr6" secondAttribute="leading" id="C4d-vw-ubi"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="x3n-7z-vVp" secondAttribute="trailing" id="DdX-RI-xqX"/>
+                                                                        <constraint firstItem="l1M-xf-bsH" firstAttribute="centerX" secondItem="hMG-3t-nr6" secondAttribute="centerX" multiplier="1.3" id="Wx6-sn-4Dy"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
