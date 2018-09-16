@@ -166,37 +166,31 @@ extension TablesController: NSTableViewDelegate{
     
     //Displaying the cell
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let myCell=NSTableCellView()
+        //Initial Setup
+        let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as! AGCCell
         let currQuote = self.tableFRC.fetchedObjects![row]
+        
+        //Explore view
         if tableView.numberOfColumns==1 {
-            let myCell = tableView.makeView(withIdentifier: .init("exploreCell"), owner: nil) as! ExploreCell
-            myCell.authorField.stringValue="~ "+(currQuote.from?.name)!
-            myCell.quoteField.stringValue=currQuote.quoteString!
-            return myCell
+            myCell.authorField?.stringValue="~ "+(currQuote.from?.name)!
+            myCell.quoteField?.stringValue=currQuote.quoteString!
         }
+        //Column View
         else {
             switch tableColumn?.identifier.rawValue {
             case "from.name", "quoteString", "isAbout.themeName":
-                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
-                myCell?.textField?.stringValue = "\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
-                myCell?.textField?.toolTip="\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
-                return myCell
+                myCell.textField?.stringValue = "\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
+                myCell.textField?.toolTip="\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
             case "isFavorite":
-                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
-                myCell?.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
-                return myCell
+                myCell.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
             case "isTaggedWith":
-                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
                 let tagArray = currQuote.isTaggedWith!
-                myCell?.textField?.stringValue = String(tagArray.count)
-                myCell?.textField?.toolTip = tagArray.compactMap({($0 as! Tag).name}).joined(separator: "\n")
-                return myCell
+                myCell.textField?.stringValue = String(tagArray.count)
+                myCell.textField?.toolTip = tagArray.compactMap({($0 as! Tag).name}).joined(separator: "\n")
             case "isIncludedIn":
-                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
                 let listArray = currQuote.isIncludedIn!
-                myCell?.textField?.stringValue = String(listArray.count)
-                myCell?.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
-                return myCell
+                myCell.textField?.stringValue = String(listArray.count)
+                myCell.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
             default:
                 return nil
             }
@@ -217,18 +211,21 @@ extension TablesController: NSTableViewDelegate{
 //TODO: Move into independent file
 
 
-class ExploreCell: NSTableCellView{
-    @IBOutlet weak var quoteField: NSTextField!
-    @IBOutlet weak var authorField: NSTextField!
+class AGCCell: NSTableCellView{
+
+    //Custom Outlets
+    @IBOutlet weak var quoteField: NSTextField?
+    @IBOutlet weak var authorField: NSTextField?
+
     
     override var backgroundStyle: NSView.BackgroundStyle {
         willSet {
             if newValue == .dark {
-                quoteField.textColor = NSColor.controlLightHighlightColor
-                authorField.textColor = NSColor.controlHighlightColor
+                quoteField?.textColor = NSColor.controlLightHighlightColor
+                authorField?.textColor = NSColor.controlHighlightColor
             } else {
-                quoteField.textColor = NSColor.labelColor
-                authorField.textColor = NSColor.controlShadowColor
+                quoteField?.textColor = NSColor.labelColor
+                authorField?.textColor = NSColor.controlShadowColor
             }
         }
     }
