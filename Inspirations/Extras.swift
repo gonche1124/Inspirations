@@ -42,7 +42,7 @@ enum Selection:Int{
     case folder = 3
 }
 
-//MARK: - Notifications
+//MARK: - Static Names
 
 //Notification extensions
 extension Notification.Name {
@@ -50,6 +50,7 @@ extension Notification.Name {
     static let leftSelectionChanged = Notification.Name("leftSelectionChanged")
     static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
 }
+
 
 //MARK:- NSPredicates
 

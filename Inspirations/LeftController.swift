@@ -148,10 +148,12 @@ extension LeftController: NSOutlineViewDataSource {
     
             if let destTag = item as? Tag{
                 destTag.addToHasQuotes(NSSet(array: quotesS))
+                try! self.moc.save()
                 return true
             }
             if let destList = item as? QuoteList {
                 destList.addToHasQuotes(NSSet(array: quotesS))
+                try! self.moc.save()
                 return true
             }
             return false

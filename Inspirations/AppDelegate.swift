@@ -275,8 +275,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             coreItem.belongsToLibraryItem=collRoot
         }
         
-        
-        try! self.managedObjectContext.save()
+        do{
+            try self.managedObjectContext.save()
+        }
+        catch{
+            print(error.localizedDescription)
+        }
     }
     
     //TODO

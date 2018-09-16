@@ -19,7 +19,6 @@ class TablesController: NSViewController {
         didSet{
             let newBool = (selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
             self.deletesFromDatabase=newBool
-           
         }
     }
     
@@ -167,6 +166,7 @@ extension TablesController: NSTableViewDelegate{
     
     //Displaying the cell
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let myCell=NSTableCellView()
         let currQuote = self.tableFRC.fetchedObjects![row]
         if tableView.numberOfColumns==1 {
             let myCell = tableView.makeView(withIdentifier: .init("exploreCell"), owner: nil) as! ExploreCell
@@ -175,11 +175,34 @@ extension TablesController: NSTableViewDelegate{
             return myCell
         }
         else {
-            let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
-            myCell?.textField?.stringValue = "\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
-            myCell?.textField?.toolTip="\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
-            return myCell
+            switch tableColumn?.identifier.rawValue {
+            case "from.name", "quoteString", "isAbout.themeName":
+                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
+                myCell?.textField?.stringValue = "\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
+                myCell?.textField?.toolTip="\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
+                return myCell
+            case "isFavorite":
+                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
+                myCell?.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
+                return myCell
+            case "isTaggedWith":
+                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
+                let tagArray = currQuote.isTaggedWith!
+                myCell?.textField?.stringValue = String(tagArray.count)
+                myCell?.textField?.toolTip = tagArray.compactMap({($0 as! Tag).name}).joined(separator: "\n")
+                return myCell
+            case "isIncludedIn":
+                let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as? NSTableCellView
+                let listArray = currQuote.isIncludedIn!
+                myCell?.textField?.stringValue = String(listArray.count)
+                myCell?.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
+                return myCell
+            default:
+                return nil
+            }
+            
         }
+        return myCell
     }
     
     //Changing the selection.
