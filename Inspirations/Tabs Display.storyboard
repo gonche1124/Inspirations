@@ -96,6 +96,7 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="from.name"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="from.name" id="BNE-62-ZNF" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
@@ -110,6 +111,10 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="BNE-62-ZNF" name="toolTip" keyPath="objectValue.from.name" id="c1Q-zn-Qpt"/>
+                                                                        <binding destination="BNE-62-ZNF" name="value" keyPath="objectValue.from.name" id="nTM-2R-mQQ"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -129,6 +134,7 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="quoteString"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="quoteString" id="hhC-oV-TzE" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
@@ -143,6 +149,10 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="hhC-oV-TzE" name="toolTip" keyPath="objectValue.quoteString" id="Zgp-yj-gpY"/>
+                                                                        <binding destination="hhC-oV-TzE" name="value" keyPath="objectValue.quoteString" id="SmO-ds-EE1"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -162,6 +172,7 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isAbout.themeName"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isAbout.themeName" id="MZA-cW-Voy" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
@@ -176,6 +187,10 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="MZA-cW-Voy" name="toolTip" keyPath="objectValue.isAbout.themeName" id="Tsl-Uz-KEV"/>
+                                                                        <binding destination="MZA-cW-Voy" name="value" keyPath="objectValue.isAbout.themeName" id="VUW-d4-ys0"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -338,6 +353,9 @@
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="Wws-CG-PNa" name="value" keyPath="objectValue.quoteString" id="QFc-uE-gPE"/>
+                                                                            </connections>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="l1M-xf-bsH">
                                                                             <rect key="frame" x="237" y="0.0" width="45" height="19"/>
@@ -349,6 +367,13 @@
                                                                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <binding destination="Wws-CG-PNa" name="displayPatternValue1" keyPath="objectValue.from.name" id="H1y-oK-y8h">
+                                                                                    <dictionary key="options">
+                                                                                        <string key="NSDisplayPattern">~ %{value1}@</string>
+                                                                                    </dictionary>
+                                                                                </binding>
+                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>

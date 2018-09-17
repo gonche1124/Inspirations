@@ -91,7 +91,6 @@ class TablesController: NSViewController {
         }catch{
             print(error)
         }
-        //TODO: Should save the deletions?
     }
     
     //Left selection changed
@@ -103,11 +102,18 @@ class TablesController: NSViewController {
         }
     }
     
-    //Sets predicate passed as parameter to frc
-    func updatesController(withPredicate predicate:NSPredicate){
-        tableFRC.fetchRequest.predicate=predicate//(searchF.stringValue=="") ? pred: searchPredicate
+    //refresh table
+    func refreshTable(){
+        table?.beginUpdates()
         try! tableFRC.performFetch()
         self.table?.reloadData()
+        table?.endUpdates()
+    }
+    
+    //Sets predicate passed as parameter to frc
+    func updatesController(withPredicate predicate:NSPredicate){
+        tableFRC.fetchRequest.predicate=predicate
+        self.refreshTable()
     }
     
 }
@@ -151,11 +157,17 @@ extension TablesController: NSTableViewDataSource{
     
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        
         let thisQuote = tableFRC.fetchedObjects?[row]
         let thisItem = NSPasteboardItem()
         thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
         return thisItem
+    }
+    
+    //Sorting was clicked on one of the columns.
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        guard let sortDescriptor = tableView.sortDescriptors.first else {return}
+        self.tableFRC.fetchRequest.sortDescriptors=[sortDescriptor]
+        self.refreshTable()
     }
 }
 
@@ -167,18 +179,14 @@ extension TablesController: NSTableViewDelegate{
         //Initial Setup
         let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as! AGCCell
         let currQuote = self.tableFRC.fetchedObjects![row]
+        myCell.objectValue=currQuote
         
         //Explore view
-        if tableView.numberOfColumns==1 {
-            myCell.authorField?.stringValue="~ "+(currQuote.from?.name)!
-            myCell.quoteField?.stringValue=currQuote.quoteString!
-        }
+        if tableView.numberOfColumns==1 {return myCell}
         //Column View
-        else {
-            switch tableColumn?.identifier.rawValue {
-            case "from.name", "quoteString", "isAbout.themeName":
-                myCell.textField?.stringValue = "\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
-                myCell.textField?.toolTip="\(currQuote.value(forKeyPath: (tableColumn?.identifier.rawValue)!) ?? "na")"
+        switch tableColumn?.identifier.rawValue {
+            //case "from.name", "quoteString", "isAbout.themeName":
+            //    myCell.objectValue=currQuote
             case "isFavorite":
                 myCell.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
             case "isTaggedWith":
@@ -190,10 +198,11 @@ extension TablesController: NSTableViewDelegate{
                 myCell.textField?.stringValue = String(listArray.count)
                 myCell.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
             default:
-                return nil
-            }
+                return myCell
         }
         return myCell
+        
+    
     }
     
     //Changing the selection.

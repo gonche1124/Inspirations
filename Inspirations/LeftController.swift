@@ -15,7 +15,7 @@ class LeftController: NSViewController {
     
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
-        fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)] //""name
+        fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)]
         fr.predicate=NSPredicate.leftPredicate(withText: "")
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
@@ -31,6 +31,15 @@ class LeftController: NSViewController {
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
         listView.expandItem(nil, expandChildren: true)
     
+    }
+    
+    //Deletes the selected item
+    @IBAction func deleteItem(_ sender: Any){
+        let itemToDelete:LibraryItem=listView.item(atRow: listView.selectedRow) as! LibraryItem
+        if [LibraryType.list.rawValue,LibraryType.smartList.rawValue, LibraryType.tag.rawValue ].contains(itemToDelete.libraryType){
+            self.moc.delete(itemToDelete)
+            try! moc.save()
+        }
     }
 }
 
@@ -75,9 +84,7 @@ extension LeftController: NSOutlineViewDelegate{
     }
     
     func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-        guard let libItem=item as? LibraryItem else {
-            return false
-        }
+        guard let libItem=item as? LibraryItem else {return false}
         return libItem.isRootItem
     }
     

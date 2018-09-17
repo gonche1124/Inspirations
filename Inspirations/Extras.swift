@@ -68,7 +68,6 @@ extension NSPredicate{
     static func leftPredicate(withText:String)->NSPredicate{
         if withText == "" { print("isRoot");return NSPredicate(format: pIsRoot)}
         let test=NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
-        print(test.predicateFormat)
         return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
     }
     
