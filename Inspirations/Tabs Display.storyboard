@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kzV-eP-Aw2">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kzV-eP-Aw2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Tab View Controller-->
@@ -49,7 +48,7 @@
                                     <rect key="frame" x="1" y="0.0" width="642" height="299"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l7V-eD-Y6W" viewBased="YES" id="eKh-zw-w3Y" userLabel="Plain Table">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l7V-eD-Y6W" viewBased="YES" id="eKh-zw-w3Y" userLabel="Column Table">
                                             <rect key="frame" x="0.0" y="0.0" width="642" height="276"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -123,7 +122,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="quoteString" width="293" minWidth="70" maxWidth="1000" id="4A0-7k-xAo">
+                                                <tableColumn identifier="quoteString" width="282.5" minWidth="70" maxWidth="1000" id="4A0-7k-xAo">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Quote">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -138,11 +137,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="quoteString" id="hhC-oV-TzE" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="158" y="1" width="293" height="17"/>
+                                                            <rect key="frame" x="158" y="1" width="283" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V83-gh-Abx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="293" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="283" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Live and let die" id="NQV-5z-xbo">
                                                                         <font key="font" metaFont="system"/>
@@ -150,8 +149,8 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="hhC-oV-TzE" name="toolTip" keyPath="objectValue.quoteString" id="Zgp-yj-gpY"/>
                                                                         <binding destination="hhC-oV-TzE" name="value" keyPath="objectValue.quoteString" id="SmO-ds-EE1"/>
+                                                                        <binding destination="hhC-oV-TzE" name="toolTip" keyPath="objectValue.quoteString" id="Zgp-yj-gpY"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -176,7 +175,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isAbout.themeName" id="MZA-cW-Voy" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="454" y="1" width="80" height="17"/>
+                                                            <rect key="frame" x="444" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hc2-td-lfA">
@@ -210,10 +209,11 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isTaggedWith.@count"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isTaggedWith" id="9B1-nG-IUW" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="537" y="1" width="50" height="17"/>
+                                                            <rect key="frame" x="527" y="1" width="50" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-Uk-oHr">
@@ -243,10 +243,11 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
+                                                    <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isIncludedIn.@count"/>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isIncludedIn" id="P8x-Ad-L5z" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="590" y="1" width="50" height="17"/>
+                                                            <rect key="frame" x="580" y="1" width="50" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-Ba-Ukw">
@@ -267,6 +268,9 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <binding destination="IER-7v-p5d" name="content" keyPath="arrangedObjects" id="Ypv-Bu-8Uu"/>
+                                                <binding destination="IER-7v-p5d" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="Ypv-Bu-8Uu" id="4Qa-gk-Ilw"/>
+                                                <binding destination="IER-7v-p5d" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="4Qa-gk-Ilw" id="Rbk-yG-7vH"/>
                                                 <outlet property="dataSource" destination="m8M-8y-p42" id="n0f-ua-SfN"/>
                                                 <outlet property="delegate" destination="m8M-8y-p42" id="QlV-y4-shs"/>
                                             </connections>
@@ -276,11 +280,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="8aa-or-BY2"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="vVN-Bp-pfu">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="vVN-Bp-pfu">
                                     <rect key="frame" x="-100" y="-100" width="448" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qfS-IW-k2U">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qfS-IW-k2U">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -298,10 +302,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="otherArrayController" destination="IER-7v-p5d" id="YKx-qS-GCZ"/>
                         <outlet property="table" destination="eKh-zw-w3Y" id="nD0-EX-uZg"/>
                     </connections>
                 </viewController>
                 <customObject id="ipj-Cp-v1s" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" id="IER-7v-p5d"/>
             </objects>
             <point key="canvasLocation" x="790" y="-86"/>
         </scene>
@@ -415,11 +421,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="OSf-Lp-m9v"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="rjW-AB-NEP">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="rjW-AB-NEP">
                                     <rect key="frame" x="1" y="283" width="423" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="WZY-uD-KiD">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="WZY-uD-KiD">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

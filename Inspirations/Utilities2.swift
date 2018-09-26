@@ -70,11 +70,11 @@ extension NSAlert {
 }
 
 //MARK: - NSViewController
-extension NSViewController {
-        
-    var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
-    
-}
+//extension NSViewController {
+//        
+//    var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
+//    
+//}
 
 
 
@@ -83,7 +83,7 @@ extension NSViewController {
 extension NSSplitViewController{
     override open var representedObject: Any?{
         didSet{
-            childViewControllers.forEach({$0.representedObject=self.representedObject})
+            children.forEach({$0.representedObject=self.representedObject})
         }
     }
 }
@@ -91,7 +91,7 @@ extension NSSplitViewController{
 extension NSTabViewController{
     override open var representedObject: Any?{
         didSet{
-            childViewControllers.forEach({$0.representedObject=self.representedObject})
+            children.forEach({$0.representedObject=self.representedObject})
         }
     }
 }

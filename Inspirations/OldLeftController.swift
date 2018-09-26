@@ -49,7 +49,7 @@ extension OldLeftController: NSSearchFieldDelegate, NSTextFieldDelegate{
         (self.sourceItemView as? NSOutlineView)?.reloadData()
     }
     
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         let searchBar=obj.object as? NSSearchField
         
         if searchBar?.stringValue=="" {

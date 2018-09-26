@@ -39,7 +39,7 @@ class RightController: NSViewController {
     //Changes the TAB View.
     @IBAction func changeSelectedTabView(_ sender: Any){
         if let segmentedControl = (sender as? NSNotification)?.object as? NSSegmentedControl{
-            if let tabViewController = self.childViewControllers[0] as? NSTabViewController{
+            if let tabViewController = self.children[0] as? NSTabViewController{
                 tabViewController.selectedTabViewItemIndex=segmentedControl.selectedSegment 
             }
         }

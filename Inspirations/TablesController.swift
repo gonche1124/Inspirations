@@ -23,23 +23,37 @@ class TablesController: NSViewController {
     }
     
     
+    @IBOutlet var otherArrayController: NSArrayController!
+    
     //let pred=NSPredicate(value: true)
     @IBOutlet weak var table: NSTableView?
     
     @IBOutlet var menuToCorrectBug: NSMenu!
     
-    lazy var tableFRC:GFetchResultsController<Quote> = {
-        let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
-        fr.sortDescriptors=[sortingO]
-        fr.predicate=NSPredicate(value: true)
-        let frc=GFetchResultsController(fetchRequest: fr, context: moc, Quote.self)
-        frc.delegate=self
-        frc.delegatedTable=self.table!
-        //frc.associatedTable=self.table
-        try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
-        return frc
-    }() //as NSFetchedResultsController
-
+//    lazy var tableFRC:GFetchResultsController<Quote> = {
+//        let sortingO=NSSortDescriptor(key: "quoteString", ascending: true)
+//        fr.sortDescriptors=[sortingO]
+//        fr.predicate=NSPredicate(value: true)
+//        let frc=GFetchResultsController(fetchRequest: fr, context: mocBackground, Quote.self)
+//        frc.delegate=self
+//        frc.delegatedTable=self.table!
+//        //frc.associatedTable=self.table
+//        try! frc.performFetch() //TODO: This is dangerous!!! But datasource methods get called before viewDidLoad
+//        return frc
+//    }() //as NSFetchedResultsController
+    
+    //@IBOutlet var quotesController:NSArrayController!
+    
+    lazy var quotesController:NSArrayController={
+        let tempArrayController = NSArrayController.init()
+        tempArrayController.managedObjectContext=mocBackground
+        tempArrayController.automaticallyPreparesContent=true
+        tempArrayController.usesLazyFetching=true
+        tempArrayController.entityName="Quote"
+        try! tempArrayController.fetch(with: nil, merge: false)
+        return tempArrayController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -47,16 +61,34 @@ class TablesController: NSViewController {
         //Setup Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
         
+        self.otherArrayController.managedObjectContext=moc
+        try! otherArrayController.fetch(with: nil, merge: false)
+        //otherArrayController.fetch(nil)
+        print("Wow")
+        
     }
     
     //USed to set as delegate the 
     override func viewDidAppear() {
         if let searchToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "mainSearchField"}){
             if let sField = searchToolbarItem.view as? NSSearchField {
-                sField.delegate=self
+                //sField.delegate=self
+                let bindingsDic:[NSBindingOption:Any] = [NSBindingOption.displayName:"predicateGonche", NSBindingOption.predicateFormat:"self.quoteString contains [CD] $value"]
+                sField.bind(NSBindingName.predicate, to: otherArrayController, withKeyPath: "filterPredicate", options: bindingsDic)
+                //quoteString contains [CD] $value OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@
+                    //- key : NSDisplayName
             }
         }
+        print("viewDidAppear:\(self.view.window?.toolbar?.items.filter({$0.itemIdentifier.rawValue=="mainSearchField"}))")
+    
+       
+        
     }
+    
+    override func awakeFromNib() {
+         //try! quotesController.fetch(with: nil, merge: false)
+    }
+    
     
     //Intercept keystrokes
     override func keyDown(with event: NSEvent) {
@@ -67,7 +99,7 @@ class TablesController: NSViewController {
     @IBAction func setFavorite(_ sender: Any){
 
         let newValue = (menu?.identifier!.rawValue == "favorite")
-        self.tableFRC.selectedObjects?.forEach({$0.isFavorite=newValue})
+//        self.tableFRC.selectedObjects?.forEach({$0.isFavorite=newValue})
         try! self.moc.save()
         
     }
@@ -83,7 +115,7 @@ class TablesController: NSViewController {
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             self.table?.beginUpdates()
-            self.tableFRC.selectedObjects?.forEach({moc.delete($0)})
+            //self.tableFRC.selectedObjects?.forEach({moc.delete($0)})
             self.table?.endUpdates()
         }
         do{
@@ -105,14 +137,17 @@ class TablesController: NSViewController {
     //refresh table
     func refreshTable(){
         table?.beginUpdates()
-        try! tableFRC.performFetch()
+        DispatchQueue.global(qos: .background).async {
+            //try! self.tableFRC.performFetch()
+            print("test")
+        }
         self.table?.reloadData()
         table?.endUpdates()
     }
     
     //Sets predicate passed as parameter to frc
     func updatesController(withPredicate predicate:NSPredicate){
-        tableFRC.fetchRequest.predicate=predicate
+        //tableFRC.fetchRequest.predicate=predicate
         self.refreshTable()
     }
     
@@ -134,40 +169,53 @@ extension TablesController: NSFetchedResultsControllerDelegate {
 extension TablesController: NSSearchFieldDelegate {
     
     //Searchfield
-    override func controlTextDidChange(_ obj: Notification) {
+     func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
             let newPredicate=NSPredicate.mainFilter(withString: searchF.stringValue)
             self.updatesController(withPredicate: newPredicate)
         }
     }
+//    func controlTextDidBeginEditing(_ obj: Notification) {
+//        print("Did begin \((obj.object as? NSSearchField)?.stringValue)")
+//    }
+//
+//    func controlTextDidEndEditing(_ obj: Notification) {
+//        //TODO: use this after user hits enter to search????
+//        print("Did end with \((obj.object as? NSSearchField)?.stringValue)")
+//    }
 }
 
 //MARK: - NSTableViewDataSource
 extension TablesController: NSTableViewDataSource{
     
     //Total rows
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return (tableFRC.fetchedObjects?.count)!
-    }
-    
-    //Object for row number
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return tableFRC.fetchedObjects?[row]
-    }
+//    func numberOfRows(in tableView: NSTableView) -> Int {
+//        print("NumberOfrows: \((otherArrayController.arrangedObjects as? NSArray)?.count)")
+//        //print("NumberOfrows: \(quotesController.arrangedQuotes!.count)")
+//        //return quotesController.arrangedQuotes?.count ?? 0
+//        return (otherArrayController.arrangedObjects as? Array<Any>)?.count ?? 0
+//        //return (tableFRC.fetchedObjects?.count)!
+//    }
+//
+//    //Object for row number
+//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+//        return (otherArrayController.arrangedObjects as? Array<Quote>)?[row]
+//        //return tableFRC.fetchedObjects?[row]
+//    }
     
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let thisQuote = tableFRC.fetchedObjects?[row]
+        let thisQuote = "dd"//tableFRC.fetchedObjects?[row]
         let thisItem = NSPasteboardItem()
-        thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
+        //thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
         return thisItem
     }
     
     //Sorting was clicked on one of the columns.
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        guard let sortDescriptor = tableView.sortDescriptors.first else {return}
-        self.tableFRC.fetchRequest.sortDescriptors=[sortDescriptor]
-        self.refreshTable()
+        //guard let sortDescriptor = tableView.sortDescriptors.first else {return}
+        //self.tableFRC.fetchRequest.sortDescriptors=[sortDescriptor]
+        //self.refreshTable()
     }
 }
 
@@ -178,7 +226,9 @@ extension TablesController: NSTableViewDelegate{
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         //Initial Setup
         let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as! AGCCell
-        let currQuote = self.tableFRC.fetchedObjects![row]
+        let currQuote = (otherArrayController.arrangedObjects as? Array<Quote>)![row]
+        //let currQuote = self.tableFRC.fetchedObjects![row]
+        //let currQuote = quotesController.arrangedQuotes![row]
         myCell.objectValue=currQuote
         
         //Explore view

@@ -150,15 +150,33 @@ extension Array {
     }
 }
 
-//TODO: Implement protocols to simplify code.
-//protocol MyProtocol {
-//    static var sortingKey:String{get}
-//}
-//
-//extension MyProtocol where Self:LibraryItem{
-//    static var sortingKey:String{
-//        return self.name
-//    }
-//}
+extension NSAlert{
+    static func deleteConfirmationAlert(withTotalItems: Int) -> NSAlert {
+        let confirmationD = NSAlert()
+        confirmationD.messageText = "Delete Records"
+        confirmationD.informativeText = "Are you sure you want to delete the \(withTotalItems) selected Quotes?"
+        confirmationD.addButton(withTitle: "Ok")
+        confirmationD.addButton(withTitle: "Cancel")
+        confirmationD.alertStyle = .warning
+        return confirmationD
+    }
+}
+
+extension NSViewController{
+    
+    var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
+    
+    var mocBackground: NSManagedObjectContext {
+        let tempMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        tempMoc.parent=self.moc
+        return tempMoc
+    }
+}
+
+extension NSArrayController {
+    var arrangedQuotes:[Quote]?{
+        return self.arrangedObjects as? [Quote]
+    }
+}
 
 

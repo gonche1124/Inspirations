@@ -120,10 +120,10 @@ class oldImportExport: NSObject {
     }
     
     //Returns an NSFont instance that fits the NSRect given with the text provided.
-    func calculateFont(toFit rect:NSRect, withString: NSString, minSize:Int, maxSize:Int, andAttributes: [NSAttributedStringKey:Any])->NSFont{
+    func calculateFont(toFit rect:NSRect, withString: NSString, minSize:Int, maxSize:Int, andAttributes: [NSAttributedString.Key:Any])->NSFont{
         let boundingSize = NSSize.init(width: rect.width, height: .greatestFiniteMagnitude)
         for i in minSize...maxSize{
-            var attrs : [NSAttributedStringKey:Any] = [:] as Dictionary
+            var attrs : [NSAttributedString.Key:Any] = [:] as Dictionary
             attrs[.font] = NSFont.init(name: "HelveticaNeue-Thin", size: CGFloat(i))
             let drawRect = withString.boundingRect(with: boundingSize, options: .usesLineFragmentOrigin, attributes: attrs)
             if drawRect.size.height >= rect.size.height {
@@ -135,16 +135,16 @@ class oldImportExport: NSObject {
     }
 
     //Returns a dictionary to draw the text.
-    func getDictionaryWithAttributes(for typeOftext: String)->[NSAttributedStringKey : NSObject]{
+    func getDictionaryWithAttributes(for typeOftext: String)->[NSAttributedString.Key : NSObject]{
     
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
         paragraphStyle.alignment = (typeOftext=="Quote" ? .justified:.right)
-        let attrs = [NSAttributedStringKey.font: NSFont(name: "HelveticaNeue-Thin",
+        let attrs = [NSAttributedString.Key.font: NSFont(name: "HelveticaNeue-Thin",
                                                         size: (typeOftext=="Quote" ? 500:200))!,
-                     NSAttributedStringKey.foregroundColor: NSColor.white,
-                     NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                     NSAttributedStringKey.backgroundColor: NSColor.gray.withAlphaComponent(0.3)]
+                     NSAttributedString.Key.foregroundColor: NSColor.white,
+                     NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                     NSAttributedString.Key.backgroundColor: NSColor.gray.withAlphaComponent(0.3)]
         
         return attrs
     }

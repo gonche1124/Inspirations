@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
         
-        createObjectsIfTheyDontExist()
+        //createObjectsIfTheyDontExist()
         //createRandomQuotes()
         
     }

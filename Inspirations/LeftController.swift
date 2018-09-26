@@ -47,7 +47,7 @@ class LeftController: NSViewController {
 extension LeftController: NSTextFieldDelegate {
     
     //Update search field when user enters text.
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
             listFRC.fetchRequest.predicate=NSPredicate.leftPredicate(withText: searchF.stringValue)
             try! listFRC.performFetch()
@@ -70,7 +70,7 @@ extension LeftController: NSOutlineViewDelegate{
         myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
         myCell?.textField?.stringValue=(libItem?.name!)!
         guard let itemImage = libItem?.libraryType as? String else {//NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {
-            myCell?.imageView?.image=NSImage.init(named: .folder) //TODO: make it right with an NSIMAGE extensions?
+            myCell?.imageView?.image=NSImage.init(named: NSImage.folderName) //TODO: make it right with an NSIMAGE extensions?
             return myCell
         }
         myCell?.imageView?.image=NSImage.init(named: NSImage.Name(itemImage))
@@ -141,7 +141,7 @@ extension LeftController: NSOutlineViewDataSource {
         func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
     
             //WWDC 2016 method
-            let sURL: [URL] = info.draggingPasteboard().pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
+            let sURL: [URL] = info.draggingPasteboard.pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
             let sOBID: [NSManagedObjectID] = sURL.map({(moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0))!})
             let quotesS = sOBID.map({moc.object(with: $0 )})
     
