@@ -448,14 +448,6 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
-                                        <connections>
-                                            <binding destination="wd7-WM-CTM" name="predicate" keyPath="filterPredicate" id="KyB-ce-xyW">
-                                                <dictionary key="options">
-                                                    <string key="NSDisplayName">predicateName</string>
-                                                    <string key="NSPredicateFormat">keyPath contains $value</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
                                     </searchField>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Zdu-vf-aOV"/>
@@ -570,7 +562,6 @@
                     </connections>
                 </windowController>
                 <customObject id="VGa-f0-ucZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="wd7-WM-CTM"/>
             </objects>
             <point key="canvasLocation" x="-234" y="255"/>
         </scene>

@@ -62,7 +62,7 @@ class TablesController: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
         
         self.otherArrayController.managedObjectContext=moc
-        try! otherArrayController.fetch(with: nil, merge: false)
+        //try! otherArrayController.fetch(with: nil, merge: false)
         //otherArrayController.fetch(nil)
         print("Wow")
         
@@ -129,79 +129,35 @@ class TablesController: NSViewController {
     @objc func leftTableChangedSelection(notification: Notification){
         if let selectedLib = notification.object as? LibraryItem,
             let newPredicate = NSPredicate.predicateFor(libraryItem: selectedLib){
+            //TODO: IMPLEMENT FOR ARRAY CONTROLLER
                 self.selectedLeftItem=selectedLib
-                self.updatesController(withPredicate: newPredicate)
+                //self.updatesController(withPredicate: newPredicate)
         }
     }
     
     //refresh table
-    func refreshTable(){
-        table?.beginUpdates()
-        DispatchQueue.global(qos: .background).async {
-            //try! self.tableFRC.performFetch()
-            print("test")
-        }
-        self.table?.reloadData()
-        table?.endUpdates()
-    }
+//    func refreshTable(){
+//        table?.beginUpdates()
+//        DispatchQueue.global(qos: .background).async {
+//            //try! self.tableFRC.performFetch()
+//            print("test")
+//        }
+//        self.table?.reloadData()
+//        table?.endUpdates()
+//    }
     
     //Sets predicate passed as parameter to frc
-    func updatesController(withPredicate predicate:NSPredicate){
-        //tableFRC.fetchRequest.predicate=predicate
-        self.refreshTable()
-    }
+//    func updatesController(withPredicate predicate:NSPredicate){
+//        //tableFRC.fetchRequest.predicate=predicate
+//        self.refreshTable()
+//    }
     
-}
-//MARK: - NSFetchedResultsControllerDelegate
-extension TablesController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.table?.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.table?.reloadData()
-        self.table?.endUpdates()
-    }
 }
 
-//MARK: - NSSearchFieldDelegate
-extension TablesController: NSSearchFieldDelegate {
-    
-    //Searchfield
-     func controlTextDidChange(_ obj: Notification) {
-        if let searchF = obj.object as? NSSearchField {
-            let newPredicate=NSPredicate.mainFilter(withString: searchF.stringValue)
-            self.updatesController(withPredicate: newPredicate)
-        }
-    }
-//    func controlTextDidBeginEditing(_ obj: Notification) {
-//        print("Did begin \((obj.object as? NSSearchField)?.stringValue)")
-//    }
-//
-//    func controlTextDidEndEditing(_ obj: Notification) {
-//        //TODO: use this after user hits enter to search????
-//        print("Did end with \((obj.object as? NSSearchField)?.stringValue)")
-//    }
-}
+
 
 //MARK: - NSTableViewDataSource
 extension TablesController: NSTableViewDataSource{
-    
-    //Total rows
-//    func numberOfRows(in tableView: NSTableView) -> Int {
-//        print("NumberOfrows: \((otherArrayController.arrangedObjects as? NSArray)?.count)")
-//        //print("NumberOfrows: \(quotesController.arrangedQuotes!.count)")
-//        //return quotesController.arrangedQuotes?.count ?? 0
-//        return (otherArrayController.arrangedObjects as? Array<Any>)?.count ?? 0
-//        //return (tableFRC.fetchedObjects?.count)!
-//    }
-//
-//    //Object for row number
-//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-//        return (otherArrayController.arrangedObjects as? Array<Quote>)?[row]
-//        //return tableFRC.fetchedObjects?[row]
-//    }
     
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -211,49 +167,44 @@ extension TablesController: NSTableViewDataSource{
         return thisItem
     }
     
-    //Sorting was clicked on one of the columns.
-    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        //guard let sortDescriptor = tableView.sortDescriptors.first else {return}
-        //self.tableFRC.fetchRequest.sortDescriptors=[sortDescriptor]
-        //self.refreshTable()
-    }
+
 }
 
 //MARK: - TableViewDelegate
 extension TablesController: NSTableViewDelegate{
     
     //Displaying the cell
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        //Initial Setup
-        let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as! AGCCell
-        let currQuote = (otherArrayController.arrangedObjects as? Array<Quote>)![row]
-        //let currQuote = self.tableFRC.fetchedObjects![row]
-        //let currQuote = quotesController.arrangedQuotes![row]
-        myCell.objectValue=currQuote
-        
-        //Explore view
-        if tableView.numberOfColumns==1 {return myCell}
-        //Column View
-        switch tableColumn?.identifier.rawValue {
-            //case "from.name", "quoteString", "isAbout.themeName":
-            //    myCell.objectValue=currQuote
-            case "isFavorite":
-                myCell.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
-            case "isTaggedWith":
-                let tagArray = currQuote.isTaggedWith!
-                myCell.textField?.stringValue = String(tagArray.count)
-                myCell.textField?.toolTip = tagArray.compactMap({($0 as! Tag).name}).joined(separator: "\n")
-            case "isIncludedIn":
-                let listArray = currQuote.isIncludedIn!
-                myCell.textField?.stringValue = String(listArray.count)
-                myCell.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
-            default:
-                return myCell
-        }
-        return myCell
-        
-    
-    }
+//    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+//        //Initial Setup
+//        let myCell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self) as! AGCCell
+//        let currQuote = (otherArrayController.arrangedObjects as? Array<Quote>)![row]
+//        //let currQuote = self.tableFRC.fetchedObjects![row]
+//        //let currQuote = quotesController.arrangedQuotes![row]
+//        myCell.objectValue=currQuote
+//
+//        //Explore view
+//        if tableView.numberOfColumns==1 {return myCell}
+//        //Column View
+//        switch tableColumn?.identifier.rawValue {
+//            //case "from.name", "quoteString", "isAbout.themeName":
+//            //    myCell.objectValue=currQuote
+//            case "isFavorite":
+//                myCell.imageView?.image=NSImage.init(imageLiteralResourceName: ((currQuote.isFavorite) ? "red heart":"grey heart"))
+//            case "isTaggedWith":
+//                let tagArray = currQuote.isTaggedWith!
+//                myCell.textField?.stringValue = String(tagArray.count)
+//                myCell.textField?.toolTip = tagArray.compactMap({($0 as! Tag).name}).joined(separator: "\n")
+//            case "isIncludedIn":
+//                let listArray = currQuote.isIncludedIn!
+//                myCell.textField?.stringValue = String(listArray.count)
+//                myCell.textField?.toolTip = listArray.compactMap({($0 as! QuoteList).name}).joined(separator: "\n")
+//            default:
+//                return myCell
+//        }
+//        return myCell
+//
+//
+//    }
     
     //Changing the selection.
     func tableViewSelectionDidChange(_ notification: Notification) {

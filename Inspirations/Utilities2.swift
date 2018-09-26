@@ -80,21 +80,21 @@ extension NSAlert {
 
 
 //Neccesary if I want to avoid making a class for it.
-extension NSSplitViewController{
-    override open var representedObject: Any?{
-        didSet{
-            children.forEach({$0.representedObject=self.representedObject})
-        }
-    }
-}
+//extension NSSplitViewController{
+//    override open var representedObject: Any?{
+//        didSet{
+//            children.forEach({$0.representedObject=self.representedObject})
+//        }
+//    }
+//}
 
-extension NSTabViewController{
-    override open var representedObject: Any?{
-        didSet{
-            children.forEach({$0.representedObject=self.representedObject})
-        }
-    }
-}
+//extension NSTabViewController{
+//    override open var representedObject: Any?{
+//        didSet{
+//            children.forEach({$0.representedObject=self.representedObject})
+//        }
+//    }
+//}
 
 //MARK: - NSTableCellView
 //My Table Cell used for enhance design.

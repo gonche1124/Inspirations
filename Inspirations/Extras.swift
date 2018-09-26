@@ -98,26 +98,7 @@ extension NSPredicate{
     }
 }
 
-//MARK: - Custom NSFetchedController
 
-//Used to simplify code in the NSTableviews: DELETE IF SUBCLASS USED
-protocol GoncheFRC {
-    //associatedtype ItemType
-    var associatedTable:NSTableView? {get set}
-    var selectedObjects:[NSManagedObject]?{get}
-}
-
-//extension NSFetchedResultsController:GoncheFRC{
-//    @objc var associatedTable: NSTableView? {
-//        get {return self.associatedTable}
-//        set {self.associatedTable=newValue}
-//    }
-//
-//    @objc var selectedObjects: [NSManagedObject]? {
-//        return self.fetchedObjects as! [NSManagedObject]
-//    }
-//
-//}
 
 //TODO: Figure out how to make this conform to NSManagedObvject instead of Quote
 class GFetchResultsController<T: Quote>:NSFetchedResultsController<Quote>{
@@ -164,19 +145,23 @@ extension NSAlert{
 
 extension NSViewController{
     
-    var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
+    @objc dynamic var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
     
-    var mocBackground: NSManagedObjectContext {
+    @objc dynamic var mocBackground: NSManagedObjectContext {
         let tempMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         tempMoc.parent=self.moc
         return tempMoc
     }
 }
 
-extension NSArrayController {
-    var arrangedQuotes:[Quote]?{
-        return self.arrangedObjects as? [Quote]
-    }
-}
+//extension NSTabViewController{
+//    override open func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+//        if let vc = segue.destinationController as? NSViewController{
+//            vc.representedObject=moc
+//        }
+//    }
+//}
+
+
 
 
