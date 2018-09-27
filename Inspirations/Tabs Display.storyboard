@@ -279,6 +279,7 @@
                                                 <binding destination="IER-7v-p5d" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="4Qa-gk-Ilw" id="Rbk-yG-7vH"/>
                                                 <outlet property="dataSource" destination="m8M-8y-p42" id="n0f-ua-SfN"/>
                                                 <outlet property="delegate" destination="m8M-8y-p42" id="QlV-y4-shs"/>
+                                                <outlet property="menu" destination="qLB-XN-Y78" id="ayc-iL-PBs"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -308,7 +309,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="otherArrayController" destination="IER-7v-p5d" id="YKx-qS-GCZ"/>
+                        <outlet property="quoteController" destination="IER-7v-p5d" id="YKx-qS-GCZ"/>
+                        <outlet property="rightMenu" destination="qLB-XN-Y78" id="hNS-fB-Qwb"/>
                         <outlet property="table" destination="eKh-zw-w3Y" id="nD0-EX-uZg"/>
                     </connections>
                 </viewController>
@@ -318,6 +320,44 @@
                         <binding destination="m8M-8y-p42" name="managedObjectContext" keyPath="self.moc" id="DkT-6e-GI3"/>
                     </connections>
                 </arrayController>
+                <menu id="qLB-XN-Y78">
+                    <items>
+                        <menuItem title="Set Favorite" keyEquivalent="f" id="zhL-3H-qaT"/>
+                        <menuItem title="Set Unfavorite" keyEquivalent="F" id="H8j-LU-uta"/>
+                        <menuItem title="Edit" keyEquivalent="e" id="F8f-y8-xyS"/>
+                        <menuItem isSeparatorItem="YES" id="ubC-qn-0ET"/>
+                        <menuItem title="Add to List" tag="1" id="QH3-2O-3tt">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Add to List" identifier="listMenu" id="PFX-DE-QRg">
+                                <items>
+                                    <menuItem title="Item" id="2xG-UV-Mtw">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="m8M-8y-p42" id="bWl-46-RhC"/>
+                                </connections>
+                            </menu>
+                        </menuItem>
+                        <menuItem title="Assign Tag" tag="2" id="iZh-Ve-aAI">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Assign Tag" identifier="tagMenu" id="DNY-ph-Qsm">
+                                <items>
+                                    <menuItem title="Item" id="u3i-gb-2Nr">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="m8M-8y-p42" id="Bfe-Hn-UCm"/>
+                                </connections>
+                            </menu>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Rkj-95-wXt"/>
+                        <menuItem title="Delete" id="pER-Br-8Hs">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="790" y="-86"/>
         </scene>
@@ -450,7 +490,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="otherArrayController" destination="yV3-Et-nkz" id="bF3-pF-Oox"/>
+                        <outlet property="quoteController" destination="yV3-Et-nkz" id="bF3-pF-Oox"/>
                         <outlet property="table" destination="Gzd-Jw-Ak7" id="lDL-Hc-iQm"/>
                     </connections>
                 </viewController>

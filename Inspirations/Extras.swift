@@ -43,6 +43,10 @@ enum Selection:Int{
 }
 
 //MARK: - Static Names
+let pQuote = "self.quoteString contains [CD] $value"
+let pAuthor = "self.from.name contains [CD] $value"
+let pTheme = "self.isAbout.themeName contains [CD] $value"
+let pAll = pQuote + " OR " + pAuthor + " OR " + pTheme
 
 //Notification extensions
 extension Notification.Name {
@@ -63,12 +67,19 @@ extension NSPredicate{
     static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
     static var pIsRoot:String = "isRootItem == YES"
     static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
+
+
     
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
         if withText == "" { print("isRoot");return NSPredicate(format: pIsRoot)}
         let test=NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
         return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
+    }
+    
+    //Array Controller String
+    static func mainPredicateString()->String{
+        return  pQuote + " OR " + pAuthor + " OR " + pTheme
     }
     
     //Predicate for main table
