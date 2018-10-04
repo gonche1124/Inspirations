@@ -12,32 +12,32 @@ import Cocoa
 // MARK: - Value Transformers
 
 //String to Upper case for Left Controller.
-class StringToUpperCase: ValueTransformer{
-    
-    override func transformedValue(_ value: Any?) -> Any? {
-        guard let stringValue = value as? String else {return value}
-        return stringValue.uppercased()
-    }
-}
+//class StringToUpperCase: ValueTransformer{
+//
+//    override func transformedValue(_ value: Any?) -> Any? {
+//        guard let stringValue = value as? String else {return value}
+//        return stringValue.uppercased()
+//    }
+//}
 
 
 //Tooltip for CocoaBindings table.
 class SetToCompoundString: ValueTransformer {
     
-//    override func transformedValue(_ value: Any?) -> Any? {
-//        guard let valueSet = value as? Set<Tags> else {return nil}
-//        return valueSet.map({$0.tagName!}).joined(separator: "\n")
-//    }
+    override func transformedValue(_ value: Any?) -> Any? {
+        guard let valueSet = value as? Set<LibraryItem> else {return nil}
+        return valueSet.map({$0.name!}).joined(separator: "\n")
+    }
 }
 
 //Collection count because bindings is not working. /Playist View
-class SetToCount: ValueTransformer {
-    
-    override func transformedValue(_ value: Any?) -> Any? {
-        guard let valueSet = value as? NSSet else {return nil}
-        return "\(valueSet.count)"
-    }
-}
+//class SetToCount: ValueTransformer {
+//
+//    override func transformedValue(_ value: Any?) -> Any? {
+//        guard let valueSet = value as? NSSet else {return nil}
+//        return "\(valueSet.count)"
+//    }
+//}
 
 //Heart transformer to image.
 class BooleanToImage: ValueTransformer {
@@ -59,11 +59,11 @@ class BooleanToImage: ValueTransformer {
 }
 
 //NSAttributed String to normal string.
-class AttributedStringToString: ValueTransformer{
-    
-    override func reverseTransformedValue(_ value: Any?) -> Any? {
-        guard let simpleString = value as? NSAttributedString else {return nil}
-        return simpleString.string
-    }
-}
+//class AttributedStringToString: ValueTransformer{
+//
+//    override func reverseTransformedValue(_ value: Any?) -> Any? {
+//        guard let simpleString = value as? NSAttributedString else {return nil}
+//        return simpleString.string
+//    }
+//}
 

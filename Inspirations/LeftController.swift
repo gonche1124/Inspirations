@@ -29,7 +29,7 @@ class LeftController: NSViewController {
         // Do view setup here.
         //Regoster for dragging.
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
-        listView.expandItem(nil, expandChildren: true)
+        //listView.expandItem(nil, expandChildren: true)
     
     }
     
@@ -67,6 +67,7 @@ extension LeftController: NSOutlineViewDelegate{
         var myCell: NSTableCellView?
         let libItem=(item as? LibraryItem)
         let typeOfCell:String=(libItem?.isRootItem)! ? "HeaderCell":"DataCell"
+        print(typeOfCell)
         myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
         myCell?.textField?.stringValue=(libItem?.name!)!
         guard let itemImage = libItem?.libraryType as? String else {//NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {

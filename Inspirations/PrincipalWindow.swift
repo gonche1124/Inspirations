@@ -19,6 +19,13 @@ class PrincipalWindow: NSWindowController {
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
+    override func windowWillLoad() {
+        super.windowWillLoad()
+        
+        //Register NSValueTransformers
+        ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
+    }
+    
     //Actions
     @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
@@ -56,9 +63,9 @@ class PrincipalWindow: NSWindowController {
 extension PrincipalWindow:NSWindowDelegate{
     
     //TODO: Think of seomthing useful for this notification.
-    func windowDidResize(_ notification: Notification) {
-        print("Rezising to: \((notification.object as? NSWindow)?.frame.size.width)")
-    }
+//    func windowDidResize(_ notification: Notification) {
+//        print("Rezising to: \((notification.object as? NSWindow)?.frame.size.width)")
+//    }
     
     
     

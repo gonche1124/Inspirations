@@ -26,7 +26,8 @@ extension LibraryItem{
         }
         
         //Creat Library Item because it did not existed.
-        let newItem = LibraryItem(context: inContext)
+        let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entity().name!, into: inContext) as! LibraryItem
+        //let newItem = LibraryItem(context: inContext)
         newItem.isRootItem=true
         newItem.isShown=true
         newItem.name=itemName
@@ -45,6 +46,29 @@ extension NSManagedObject {
         
         guard let results = try! inContext.fetch(request).first as? NSManagedObject else {return nil}
         return results
+    }
+    
+    //Return an array with all the elements for the specefied type
+//    class func arrayWithObjects()->Array<NSManagedObject>{
+//        return
+//    }
+}
+
+extension NSFetchRequestResult where Self: NSManagedObject {
+    
+    //fetches all the records.
+    static public func allInContext(_ context: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) throws -> [Self] {
+        let fetchRequest = fetchRequestForEntity(inContext: context)
+        fetchRequest.sortDescriptors = sortDescriptors
+        fetchRequest.predicate = predicate
+        return try context.fetch(fetchRequest)
+    }
+    
+    //USed in the baove method.
+    static public func fetchRequestForEntity(inContext context: NSManagedObjectContext) -> NSFetchRequest<Self> {
+        let fetchRequest = NSFetchRequest<NSManagedObject>()
+        fetchRequest.entity = entity()
+        return fetchRequest as! NSFetchRequest<Self>
     }
 }
 

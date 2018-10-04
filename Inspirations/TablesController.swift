@@ -62,9 +62,9 @@ class TablesController: NSViewController {
     
     //Action upadte favorites.
     @IBAction func setFavorite(_ sender: Any){
-
+        
         let newValue = (menu?.identifier!.rawValue == "favorite")
-//        self.tableFRC.selectedObjects?.forEach({$0.isFavorite=newValue})
+        self.quoteController.selectedObjects.forEach({($0 as! Quote).isFavorite=newValue})
         try! self.moc.save()
         
     }
@@ -94,9 +94,9 @@ class TablesController: NSViewController {
     @objc func leftTableChangedSelection(notification: Notification){
         if let selectedLib = notification.object as? LibraryItem,
             let newPredicate = NSPredicate.predicateFor(libraryItem: selectedLib){
-            //TODO: IMPLEMENT FOR ARRAY CONTROLLER
                 self.selectedLeftItem=selectedLib
-                //self.updatesController(withPredicate: newPredicate)
+                self.quoteController.fetchPredicate=newPredicate
+                self.quoteController.fetch(nil)
         }
     }
 }
@@ -108,13 +108,15 @@ extension TablesController: NSTableViewDataSource{
     
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let thisQuote = "dd"//tableFRC.fetchedObjects?[row]
+       //let test =
+        let thisQuote = (quoteController.arrangedObjects as! [Quote])[row]
         let thisItem = NSPasteboardItem()
-        //thisItem.setString((thisQuote?.objectID.uriRepresentation().absoluteString)!, forType: .string)
+        //thisItem.setString(thisQuote, forType: .string)
+        thisItem.setString(thisQuote.objectID.uriRepresentation().absoluteString, forType: .string)
         return thisItem
     }
     
-
+   
 }
 
 //MARK: - TableViewDelegate
@@ -131,17 +133,17 @@ extension TablesController: NSTableViewDelegate{
 
 //MARK: - NSMenuDelegate
 extension TablesController: NSMenuDelegate{
+    
+    //Called before being shown
     func menuNeedsUpdate(_ menu: NSMenu) {
         if menu.identifier?.rawValue=="tagMenu"{
-            ["One", "Two", "Three"].forEach({menu.addItem(withTitle: $0, action: nil, keyEquivalent: "")})
+            menu.removeAllItems() //TODO: BUilt convinience initializers
+            try! Tag.allInContext(moc).forEach({menu.addItem(withTitle: $0.name!, action: nil, keyEquivalent: "")})
         }else if menu.identifier?.rawValue=="listMenu"{
-            ["One", "Two", "Three"].forEach({menu.addItem(withTitle: $0, action: nil, keyEquivalent: "")})
+            menu.removeAllItems()
+            try! QuoteList.allInContext(moc).forEach({menu.addItem(withTitle: $0.name!, action: nil, keyEquivalent: "")})
         }
-       
-            
-            //menu.item(withTag: 2)?.submenu?.addItem(menuItem)
-            
-        }
+    }
     
 }
 

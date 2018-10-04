@@ -139,6 +139,7 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
 				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A2C312A213C9D6A00B8F3E1 /* Importer */,
@@ -295,7 +296,6 @@
 		8ACADE831F64B77500919332 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
 				8A17C2051F58FB0900814107 /* ImportExport.swift */,
 				8ADBCF631FBBEFA5007523FF /* Utilities2.swift */,
 			);

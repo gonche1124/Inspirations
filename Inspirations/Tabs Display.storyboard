@@ -226,6 +226,11 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <binding destination="9B1-nG-IUW" name="value" keyPath="objectValue.isTaggedWith.@count" id="YTz-Wa-nuS"/>
+                                                                        <binding destination="9B1-nG-IUW" name="toolTip" keyPath="objectValue.isTaggedWith" id="9rl-av-kgO">
+                                                                            <dictionary key="options">
+                                                                                <string key="NSValueTransformerName">SetToCompoundString</string>
+                                                                            </dictionary>
+                                                                        </binding>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -263,6 +268,11 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <binding destination="P8x-Ad-L5z" name="value" keyPath="objectValue.isIncludedIn.@count" id="nFF-hQ-BSK"/>
+                                                                        <binding destination="P8x-Ad-L5z" name="toolTip" keyPath="objectValue.isIncludedIn" id="Tzc-rl-feu">
+                                                                            <dictionary key="options">
+                                                                                <string key="NSValueTransformerName">SetToCompoundString</string>
+                                                                            </dictionary>
+                                                                        </binding>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -320,7 +330,7 @@
                         <binding destination="m8M-8y-p42" name="managedObjectContext" keyPath="self.moc" id="DkT-6e-GI3"/>
                     </connections>
                 </arrayController>
-                <menu id="qLB-XN-Y78">
+                <menu autoenablesItems="NO" id="qLB-XN-Y78">
                     <items>
                         <menuItem title="Set Favorite" keyEquivalent="f" id="zhL-3H-qaT"/>
                         <menuItem title="Set Unfavorite" keyEquivalent="F" id="H8j-LU-uta"/>
@@ -328,7 +338,7 @@
                         <menuItem isSeparatorItem="YES" id="ubC-qn-0ET"/>
                         <menuItem title="Add to List" tag="1" id="QH3-2O-3tt">
                             <modifierMask key="keyEquivalentModifierMask"/>
-                            <menu key="submenu" title="Add to List" identifier="listMenu" id="PFX-DE-QRg">
+                            <menu key="submenu" title="Add to List" autoenablesItems="NO" identifier="listMenu" id="PFX-DE-QRg">
                                 <items>
                                     <menuItem title="Item" id="2xG-UV-Mtw">
                                         <modifierMask key="keyEquivalentModifierMask"/>
@@ -341,7 +351,7 @@
                         </menuItem>
                         <menuItem title="Assign Tag" tag="2" id="iZh-Ve-aAI">
                             <modifierMask key="keyEquivalentModifierMask"/>
-                            <menu key="submenu" title="Assign Tag" identifier="tagMenu" id="DNY-ph-Qsm">
+                            <menu key="submenu" title="Assign Tag" autoenablesItems="NO" identifier="tagMenu" id="DNY-ph-Qsm">
                                 <items>
                                     <menuItem title="Item" id="u3i-gb-2Nr">
                                         <modifierMask key="keyEquivalentModifierMask"/>
