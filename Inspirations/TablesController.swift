@@ -7,13 +7,11 @@
 //
 
 
-//TODO: Display right click menu to show delete, favorites, add to list, etc
 import Cocoa
 
 class TablesController: NSViewController {
     
     //Variables
-    //let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
     var deletesFromDatabase=false  //TODO: Implement
     var selectedLeftItem:LibraryItem? {
         didSet{
@@ -40,14 +38,15 @@ class TablesController: NSViewController {
     override func viewDidAppear() {
         if let searchToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "mainSearchField"}){
             if let sField = searchToolbarItem.view as? NSSearchField {
-                //sField.delegate=self
-                let bindingsDic:[NSBindingOption:Any] = [NSBindingOption.displayName:"predicateGonche",                 NSBindingOption.predicateFormat:pAll]
                 
+                //All
+                sField.bind(NSBindingName.predicate, to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"All",NSBindingOption.predicateFormat:pAll])
                 
-                sField.bind(NSBindingName.predicate, to: quoteController, withKeyPath: "filterPredicate", options: bindingsDic)
+                //Author
+                sField.bind(NSBindingName(rawValue: "predicate2"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Author",NSBindingOption.predicateFormat:pAuthor])
                 
-                sField.bind(NSBindingName(rawValue: "predicate2"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Author",                 NSBindingOption.predicateFormat:pAuthor])
- 
+                //Theme
+                sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
             }
         }
     

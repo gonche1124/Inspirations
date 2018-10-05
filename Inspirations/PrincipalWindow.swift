@@ -24,6 +24,7 @@ class PrincipalWindow: NSWindowController {
         
         //Register NSValueTransformers
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
+        ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
     }
     
     //Actions
@@ -52,10 +53,7 @@ class PrincipalWindow: NSWindowController {
 //
 //        return menu
 //    }()
-    
-    
-    
-    
+   
 }
 
 

@@ -76,6 +76,13 @@
                                                                     <rect key="frame" x="17" y="0.0" width="17" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="w8V-ru-fym"/>
+                                                                    <connections>
+                                                                        <binding destination="V3W-qh-aP5" name="value" keyPath="objectValue.isFavorite" id="vvn-WS-vuQ">
+                                                                            <dictionary key="options">
+                                                                                <string key="NSValueTransformerName">BooleanToImage</string>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                    </connections>
                                                                 </imageView>
                                                             </subviews>
                                                             <connections>
@@ -225,12 +232,12 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="9B1-nG-IUW" name="value" keyPath="objectValue.isTaggedWith.@count" id="YTz-Wa-nuS"/>
                                                                         <binding destination="9B1-nG-IUW" name="toolTip" keyPath="objectValue.isTaggedWith" id="9rl-av-kgO">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCompoundString</string>
                                                                             </dictionary>
                                                                         </binding>
+                                                                        <binding destination="9B1-nG-IUW" name="value" keyPath="objectValue.isTaggedWith.@count" id="YTz-Wa-nuS"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -267,12 +274,12 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="P8x-Ad-L5z" name="value" keyPath="objectValue.isIncludedIn.@count" id="nFF-hQ-BSK"/>
                                                                         <binding destination="P8x-Ad-L5z" name="toolTip" keyPath="objectValue.isIncludedIn" id="Tzc-rl-feu">
                                                                             <dictionary key="options">
                                                                                 <string key="NSValueTransformerName">SetToCompoundString</string>
                                                                             </dictionary>
                                                                         </binding>
+                                                                        <binding destination="P8x-Ad-L5z" name="value" keyPath="objectValue.isIncludedIn.@count" id="nFF-hQ-BSK"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
