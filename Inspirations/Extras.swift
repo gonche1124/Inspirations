@@ -165,13 +165,15 @@ extension NSViewController{
     }
 }
 
-//extension NSTabViewController{
-//    override open func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-//        if let vc = segue.destinationController as? NSViewController{
-//            vc.representedObject=moc
-//        }
-//    }
-//}
+extension NSMenu{
+    
+    //Less verbose to create nsmenuItem with a specified identifier
+    func addMenuItem(title:String, action: Selector?, keyEquivalent:String, identifier:String ){
+        let newItem = NSMenuItem.init(title: title, action: action, keyEquivalent:keyEquivalent)
+        newItem.identifier=NSUserInterfaceItemIdentifier(rawValue: identifier)
+        self.addItem(newItem)
+    }
+}
 
 
 

@@ -48,6 +48,10 @@ extension NSManagedObject {
         return results
     }
     
+    func getID()->String{
+        return self.objectID.uriRepresentation().absoluteString
+    }
+    
     //Return an array with all the elements for the specefied type
 //    class func arrayWithObjects()->Array<NSManagedObject>{
 //        return

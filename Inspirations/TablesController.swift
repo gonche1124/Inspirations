@@ -89,6 +89,20 @@ class TablesController: NSViewController {
         }
     }
     
+    //Add the tag or
+    @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
+        if let urlRep=URL(string: ((sender?.identifier?.rawValue)!)),
+            let objectId=moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: urlRep),
+            let coreItem=try? moc.existingObject(with: objectId){
+            if let tag=coreItem as? Tag {
+                tag.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
+            }else if let playlist=coreItem as? QuoteList{
+                playlist.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
+            }
+            try! self.moc.save()
+        }
+    }
+    
     //Delete selected Records.
     override func deleteBackward(_ sender: Any?) {
         let confirmationD = NSAlert()
@@ -158,18 +172,16 @@ extension TablesController: NSMenuDelegate{
     func menuNeedsUpdate(_ menu: NSMenu) {
         if menu.identifier?.rawValue=="tagMenu"{
             menu.removeAllItems() //TODO: BUilt convinience initializers
-            try! Tag.allInContext(moc).forEach({menu.addItem(withTitle: $0.name!, action: nil, keyEquivalent: "")})
+            try! Tag.allInContext(moc).forEach({
+                menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
+            })
         }else if menu.identifier?.rawValue=="listMenu"{
             menu.removeAllItems()
-            try! QuoteList.allInContext(moc).forEach({menu.addItem(withTitle: $0.name!, action: nil, keyEquivalent: "")})
-//        }else if menu.identifier?.rawValue=="rightMenu"{
-//            menu.item(withTag: 1)?.action=#selector(self.setFavorite(_:))
-//            menu.item(withTag: 1)?.target=self
-//            menu.performActionForItem(at: 1)
-//        }
+            try! QuoteList.allInContext(moc).forEach({
+                menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
+          })
         }
     }
-    
 }
 
 //TODO: Move into independent file
