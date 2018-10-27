@@ -13,7 +13,6 @@ class RightController: NSViewController {
     
     //Properties
     @IBOutlet weak var tabContainer: NSView!
-    
     @IBOutlet weak var statusTextField: NSTextField!
     
     

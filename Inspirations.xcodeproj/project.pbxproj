@@ -18,7 +18,6 @@
 		8A11672E2134E32A00AC2E08 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672D2134E32A00AC2E08 /* Extras.swift */; };
 		8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */; };
 		8A11673421363BA200AC2E08 /* ImporterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11673321363BA200AC2E08 /* ImporterController.swift */; };
-		8A1167772138980500AC2E08 /* JSONTODELETE.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A1167762138980500AC2E08 /* JSONTODELETE.json */; };
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A2C311B213A008E00B8F3E1 /* Author+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */; };
@@ -75,7 +74,6 @@
 		8A11672D2134E32A00AC2E08 /* Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
 		8A1167312134F34700AC2E08 /* ImportMultiple.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImportMultiple.storyboard; sourceTree = "<group>"; };
 		8A11673321363BA200AC2E08 /* ImporterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImporterController.swift; sourceTree = "<group>"; };
-		8A1167762138980500AC2E08 /* JSONTODELETE.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JSONTODELETE.json; sourceTree = "<group>"; };
 		8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
@@ -259,7 +257,6 @@
 			isa = PBXGroup;
 			children = (
 				8AE5FD3A2144BB5A0085FAC2 /* Old Files */,
-				8A1167762138980500AC2E08 /* JSONTODELETE.json */,
 				8A01F868210924BA007D1E3F /* Alternate */,
 				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
@@ -430,7 +427,6 @@
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */,
 				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
-				8A1167772138980500AC2E08 /* JSONTODELETE.json in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
 			);

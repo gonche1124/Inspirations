@@ -290,6 +290,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         return coreEntity
     }
     
+    //For testing
+    @IBAction func test(sender: Any)
+    {
+        print("Worked")
+    }
     //For Testing only
     func createRandomQuotes(){
         let quoteA: [String]=["Love is in the Air"

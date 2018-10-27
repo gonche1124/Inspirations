@@ -337,10 +337,18 @@
                         <binding destination="m8M-8y-p42" name="managedObjectContext" keyPath="self.moc" id="DkT-6e-GI3"/>
                     </connections>
                 </arrayController>
-                <menu autoenablesItems="NO" id="qLB-XN-Y78">
+                <menu identifier="rightMenu" id="qLB-XN-Y78">
                     <items>
-                        <menuItem title="Set Favorite" keyEquivalent="f" id="zhL-3H-qaT"/>
-                        <menuItem title="Set Unfavorite" keyEquivalent="F" id="H8j-LU-uta"/>
+                        <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="zhL-3H-qaT">
+                            <connections>
+                                <action selector="setFavoriteAttribute:" target="m8M-8y-p42" id="M74-Eb-3dY"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Set Unfavorite" tag="2" keyEquivalent="F" id="H8j-LU-uta">
+                            <connections>
+                                <action selector="setFavoriteAttribute:" target="m8M-8y-p42" id="fEu-I5-1G8"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="Edit" keyEquivalent="e" id="F8f-y8-xyS"/>
                         <menuItem isSeparatorItem="YES" id="ubC-qn-0ET"/>
                         <menuItem title="Add to List" tag="1" id="QH3-2O-3tt">
@@ -374,6 +382,9 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
+                    <connections>
+                        <outlet property="delegate" destination="m8M-8y-p42" id="SkN-A0-uaU"/>
+                    </connections>
                 </menu>
             </objects>
             <point key="canvasLocation" x="790" y="-86"/>

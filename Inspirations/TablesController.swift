@@ -24,6 +24,7 @@ class TablesController: NSViewController {
     @IBOutlet var quoteController: NSArrayController!
     @IBOutlet weak var table: NSTableView?
     @IBOutlet var rightMenu: NSMenu!
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +58,35 @@ class TablesController: NSViewController {
     //Intercept keystrokes
     override func keyDown(with event: NSEvent) {
         interpretKeyEvents([event])
+        //fn makes this flow happen.
+        let modFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if modFlags.contains(.command) {
+            switch event.characters{
+            case "i":
+                print("Nothing")
+                //self.performSegue(withIdentifier:.init("editSegue"), sender: self)
+            case "f":
+                self.updateFavoriteValue(newValue:!modFlags.contains(.shift))
+            default:
+                break
+            }
+        }
     }
     
-    //Action upadte favorites.
-    @IBAction func setFavorite(_ sender: Any){
-        
-        let newValue = (menu?.identifier!.rawValue == "favorite")
+    //Update favorite attribute
+    func updateFavoriteValue(newValue:Bool){
         self.quoteController.selectedObjects.forEach({($0 as! Quote).isFavorite=newValue})
         try! self.moc.save()
-        
+    }
+    
+    //Action to set favorite attribute
+    @IBAction func setFavoriteAttribute(_ sender: Any?){
+        guard let menuItem = sender as? NSMenuItem else {return}
+        if menuItem.tag==1 {
+            self.updateFavoriteValue(newValue: true)
+        }else if menuItem.tag==2{
+            self.updateFavoriteValue(newValue: false)
+        }
     }
     
     //Delete selected Records.
@@ -141,6 +162,11 @@ extension TablesController: NSMenuDelegate{
         }else if menu.identifier?.rawValue=="listMenu"{
             menu.removeAllItems()
             try! QuoteList.allInContext(moc).forEach({menu.addItem(withTitle: $0.name!, action: nil, keyEquivalent: "")})
+//        }else if menu.identifier?.rawValue=="rightMenu"{
+//            menu.item(withTag: 1)?.action=#selector(self.setFavorite(_:))
+//            menu.item(withTag: 1)?.target=self
+//            menu.performActionForItem(at: 1)
+//        }
         }
     }
     
