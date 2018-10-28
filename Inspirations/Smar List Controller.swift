@@ -10,13 +10,21 @@ import Cocoa
 
 
 //TODO: Change size to ask first what type of item you want ot add through combobox and remove checkbox.
-class Smar_List_Controller: NSViewController {
+class SmartListController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         predicateView.addRow(nil)
         bottomView.isHidden=true
+        
+        //Reconfigure view if it was called as an edit window.
+        if (selectedObject != nil){
+            self.nameTextField.stringValue=(selectedObject?.name)!
+            self.createButton.title="Update"
+            self.createButton.action=#selector(updateItemName(_:))
+            self.typeOfItem.isHidden=true
+        }
     }
     
     //Properties
@@ -27,6 +35,9 @@ class Smar_List_Controller: NSViewController {
     @IBOutlet weak var createButton: NSButton!
     @IBOutlet weak var predicateScrollView: NSScrollView!
     @IBOutlet weak var predicateView: NSPredicateEditor!
+    
+    //Properties set from parent view Controller
+    var selectedObject:LibraryItem?
     
    @IBAction func showPredicateEditor(_ sender: NSPopUpButton) {
     if sender.selectedTag() == Selection.smartList.rawValue {
@@ -70,6 +81,24 @@ class Smar_List_Controller: NSViewController {
         
         try! moc.save() //save
         self.dismiss(self)
+    }
+    
+    //Updates list name (and predicate if neccesary)
+    @IBAction func updateItemName(_ sender:NSButton){
+        if !nameTextField.stringValue.trimmingCharacters(in: .whitespaces).isEmpty{
+            self.selectedObject?.name=nameTextField.stringValue
+            try! moc.save()
+            self.dismiss(self)
+        }else{
+            let alert = NSAlert()
+            alert.messageText = "Empty Name"
+            alert.informativeText = "Name can not be empty"
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            alert.alertStyle = .warning
+            alert.runModal()
+        }
+        
     }
 }
 

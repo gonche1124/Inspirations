@@ -73,7 +73,6 @@ extension NSPredicate{
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
         if withText == "" { return NSPredicate(format: pIsRoot)}
-        let test=NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
         return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
     }
     

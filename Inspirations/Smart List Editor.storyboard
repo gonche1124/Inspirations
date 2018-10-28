@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9a5-nc-lBX">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9a5-nc-lBX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Smar List Controller-->
+        <!--Smart List Controller-->
         <scene sceneID="eVH-c5-Xz6">
             <objects>
-                <viewController id="9a5-nc-lBX" customClass="Smar_List_Controller" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9a5-nc-lBX" customClass="SmartListController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="1BK-2E-8HU">
                         <rect key="frame" x="0.0" y="0.0" width="441" height="147"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Jla-cE-pIV">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
@@ -50,7 +50,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MzL-k0-JUu">
-                                                <rect key="frame" x="18" y="9" width="175" height="26"/>
+                                                <rect key="frame" x="18" y="9" width="175" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="List" bezelStyle="rounded" imagePosition="leading" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="O11-K1-wcG" id="Snu-cx-YAe">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -107,7 +107,7 @@ Gw
                                                 <rect key="frame" x="0.0" y="0.0" width="417" height="50"/>
                                                 <clipView key="contentView" id="Mcb-l1-pgT">
                                                     <rect key="frame" x="1" y="1" width="415" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <predicateEditor verticalHuggingPriority="750" nestingMode="compound" canRemoveAllRows="YES" rowHeight="25" id="kyt-83-f2g">
                                                             <rect key="frame" x="0.0" y="0.0" width="415" height="100"/>
@@ -321,11 +321,11 @@ Gw
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Yo3-cf-xvX"/>
                                                 </constraints>
-                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Zrg-7X-Amd">
+                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Zrg-7X-Amd">
                                                     <rect key="frame" x="-100" y="-100" width="360" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
-                                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="QKh-HG-azW">
+                                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QKh-HG-azW">
                                                     <rect key="frame" x="400" y="1" width="16" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>

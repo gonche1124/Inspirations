@@ -107,7 +107,7 @@ class TablesController: NSViewController {
     override func deleteBackward(_ sender: Any?) {
         let confirmationD = NSAlert()
         confirmationD.messageText = "Delete Records"
-        confirmationD.informativeText = "Are you sure you want to delete the \(table?.numberOfSelectedRows) selected Quotes?"
+        confirmationD.informativeText = "Are you sure you want to delete the \(table?.numberOfSelectedRows ?? 0) selected Quotes?"
         confirmationD.addButton(withTitle: "Ok")
         confirmationD.addButton(withTitle: "Cancel")
         confirmationD.alertStyle = .warning
@@ -171,7 +171,7 @@ extension TablesController: NSMenuDelegate{
     //Called before being shown
     func menuNeedsUpdate(_ menu: NSMenu) {
         if menu.identifier?.rawValue=="tagMenu"{
-            menu.removeAllItems() //TODO: BUilt convinience initializers
+            menu.removeAllItems()
             try! Tag.allInContext(moc).forEach({
                 menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })

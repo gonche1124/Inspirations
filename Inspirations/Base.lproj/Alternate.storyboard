@@ -676,9 +676,9 @@
                 <viewController showSeguePresentationStyle="single" id="CWl-5U-TPh" customClass="LeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="39X-Tg-9tL">
                         <rect key="frame" x="0.0" y="0.0" width="175" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5d9-lo-PYf" userLabel="List">
+                            <scrollView horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="5d9-lo-PYf" userLabel="List">
                                 <rect key="frame" x="0.0" y="22" width="175" height="278"/>
                                 <clipView key="contentView" drawsBackground="NO" id="HDR-YJ-edE">
                                     <rect key="frame" x="1" y="1" width="173" height="276"/>
@@ -702,9 +702,9 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="HeaderCell" id="A9N-pM-lNe" userLabel="HeaderCell">
+                                                        <tableCellView identifier="HeaderCell" wantsLayer="YES" id="A9N-pM-lNe" userLabel="HeaderCell">
                                                             <rect key="frame" x="1" y="0.0" width="170" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -738,7 +738,7 @@
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSActionTemplate" id="fa4-9a-Ea7"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4cT-Um-C7F">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4cT-Um-C7F">
                                                                     <rect key="frame" x="20" y="3" width="150" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="list name" id="rF2-HG-niF">
                                                                         <font key="font" metaFont="system"/>
@@ -770,7 +770,6 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
-                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="VfJ-e3-ZL5">
                                     <rect key="frame" x="1" y="261" width="173" height="16"/>
@@ -793,6 +792,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="deleteItem:" target="CWl-5U-TPh" id="CUe-wq-cdS"/>
+                                    <binding destination="CWl-5U-TPh" name="enabled" keyPath="self.canDeleteItem" id="Rx5-sl-qqS"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mqt-II-czk" userLabel="Add">
@@ -807,6 +807,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <binding destination="CWl-5U-TPh" name="enabled" keyPath="self.canAddNewItem" id="lu7-wL-qN5"/>
                                     <outlet property="menu" destination="Gaz-Sn-zex" id="M9k-gy-59m"/>
                                     <segue destination="BxZ-uW-2MU" kind="popover" popoverAnchorView="mqt-II-czk" popoverBehavior="t" preferredEdge="maxX" id="AFD-yr-noe"/>
                                 </connections>
@@ -849,8 +850,7 @@
                 <customObject id="5xx-fZ-I47" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu title="Actions:" id="jkP-kp-Ips">
                     <items>
-                        <menuItem title="Edit" id="X6W-yQ-RYv">
-                            <modifierMask key="keyEquivalentModifierMask"/>
+                        <menuItem title="Edit" keyEquivalent="i" id="X6W-yQ-RYv">
                             <connections>
                                 <segue destination="BxZ-uW-2MU" kind="modal" id="ZJb-N4-6pE"/>
                             </connections>
