@@ -172,8 +172,19 @@ extension NSMenu{
         newItem.identifier=NSUserInterfaceItemIdentifier(rawValue: identifier)
         self.addItem(newItem)
     }
+    
+    //Easy way to fecth item with identifier
+    func item(withIdentifier:String)->NSMenuItem?{
+        return self.items.first(where: {$0.identifier!.rawValue==withIdentifier})
+    }
 }
 
+//Class used in NSMenuItems that need to store custom bool value.
+class AGC_NSMenuItem: NSMenuItem {
+    
+    @IBInspectable var agcBool:Bool=false
+    
+}
 
 
 

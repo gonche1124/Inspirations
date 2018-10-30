@@ -45,7 +45,7 @@ class MasterViewController: NSViewController, NSTableViewDataSource, NSTableView
     //MARK: - Overrides.
     //Sets the information for the edit controller.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier=="editSegue", let destC = segue.destinationController as? AddQuote{
+        if segue.identifier=="editSegue", let destC = segue.destinationController as? AddQuoteOld{
             try! self.moc.save()
             destC.title="Edit Quote"
             destC.representedObject=self.representedObject

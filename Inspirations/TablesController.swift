@@ -12,14 +12,13 @@ import Cocoa
 class TablesController: NSViewController {
     
     //Variables
-    var deletesFromDatabase=false  //TODO: Implement
+    var deletesFromDatabase=false
     var selectedLeftItem:LibraryItem? {
         didSet{
             let newBool = (selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
-            self.deletesFromDatabase=newBool
+            self.deletesFromDatabase = !newBool
         }
     }
-    
     
     @IBOutlet var quoteController: NSArrayController!
     @IBOutlet weak var table: NSTableView?
@@ -50,9 +49,6 @@ class TablesController: NSViewController {
                 sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
             }
         }
-    
-    
-    
     }
     
     //Intercept keystrokes
@@ -75,18 +71,16 @@ class TablesController: NSViewController {
     
     //Update favorite attribute
     func updateFavoriteValue(newValue:Bool){
-        self.quoteController.selectedObjects.forEach({($0 as! Quote).isFavorite=newValue})
-        try! self.moc.save()
+        guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
+        selectedQuotes.forEach({$0.isFavorite=newValue})
+        
+        try! self.moc.save() //NO need since it is reading from an NSArraycontroller??
     }
     
     //Action to set favorite attribute
     @IBAction func setFavoriteAttribute(_ sender: Any?){
-        guard let menuItem = sender as? NSMenuItem else {return}
-        if menuItem.tag==1 {
-            self.updateFavoriteValue(newValue: true)
-        }else if menuItem.tag==2{
-            self.updateFavoriteValue(newValue: false)
-        }
+        guard let menuItem = sender as? AGC_NSMenuItem else {return}
+        self.updateFavoriteValue(newValue: menuItem.agcBool)
     }
     
     //Add the tag or
@@ -105,6 +99,11 @@ class TablesController: NSViewController {
     
     //Delete selected Records.
     override func deleteBackward(_ sender: Any?) {
+        self.deleteSelectedRecord(nil)
+    }
+    
+    //Deletes selected record or records.
+    @IBAction func deleteSelectedRecord(_ sender: Any?){
         let confirmationD = NSAlert()
         confirmationD.messageText = "Delete Records"
         confirmationD.informativeText = "Are you sure you want to delete the \(table?.numberOfSelectedRows ?? 0) selected Quotes?"
@@ -142,7 +141,6 @@ extension TablesController: NSTableViewDataSource{
     
     //Copy Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-       //let test =
         let thisQuote = (quoteController.arrangedObjects as! [Quote])[row]
         let thisItem = NSPasteboardItem()
         //thisItem.setString(thisQuote, forType: .string)
@@ -170,17 +168,26 @@ extension TablesController: NSMenuDelegate{
     
     //Called before being shown
     func menuNeedsUpdate(_ menu: NSMenu) {
-        if menu.identifier?.rawValue=="tagMenu"{
+        
+        switch menu.identifier?.rawValue {
+        case "rightMenu":
+            if let deleteItem=menu.item(withIdentifier: "deleteMenuItem"){
+                deleteItem.title=self.deletesFromDatabase ? "Delete":"Remove from \(self.selectedLeftItem?.name ?? "")"
+            }
+        case "tagMenu":
             menu.removeAllItems()
             try! Tag.allInContext(moc).forEach({
                 menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
-        }else if menu.identifier?.rawValue=="listMenu"{
+        case "listMenu":
             menu.removeAllItems()
             try! QuoteList.allInContext(moc).forEach({
                 menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
-          })
+            })
+        default:
+            break
         }
+        
     }
 }
 

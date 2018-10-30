@@ -537,6 +537,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="ddd_test:" target="VGa-f0-ucZ" id="wUt-ke-dgZ"/>
+                                            <segue destination="ZCV-TV-5N3" kind="popover" popoverAnchorView="hFN-HS-Ix4" popoverBehavior="t" preferredEdge="maxY" id="uHa-JK-rRN"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -564,6 +565,14 @@
                 <customObject id="VGa-f0-ucZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-234" y="255"/>
+        </scene>
+        <!--Add Value-->
+        <scene sceneID="qKr-oS-34W">
+            <objects>
+                <controllerPlaceholder storyboardName="Add Value" id="ZCV-TV-5N3" sceneMemberID="viewController"/>
+                <customObject id="a1b-L4-APQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5" y="520"/>
         </scene>
         <!--Right Controller-->
         <scene sceneID="gib-Oy-lX9">
@@ -770,6 +779,7 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="VfJ-e3-ZL5">
                                     <rect key="frame" x="1" y="261" width="173" height="16"/>

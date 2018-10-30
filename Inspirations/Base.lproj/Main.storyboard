@@ -1494,7 +1494,7 @@
         <!--Add Quote-->
         <scene sceneID="R4t-YF-8aM">
             <objects>
-                <viewController title="Add Quote" showSeguePresentationStyle="single" id="Tbm-IE-Mmr" customClass="AddQuote" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Quote" showSeguePresentationStyle="single" id="Tbm-IE-Mmr" customClass="AddQuoteOld" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="mJo-el-PUf">
                         <rect key="frame" x="0.0" y="0.0" width="381" height="271"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

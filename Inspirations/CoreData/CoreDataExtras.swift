@@ -78,7 +78,6 @@ extension NSFetchRequestResult where Self: NSManagedObject {
 
 
 
-
 //TODO: Check if this is useful
 /*
  extension KeyedDecodingContainer {

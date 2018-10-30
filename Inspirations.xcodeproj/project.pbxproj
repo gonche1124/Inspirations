@@ -31,11 +31,13 @@
 		8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A546152210D240F00B6E588 /* Smart List Editor.storyboard */; };
 		8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A546154210D2A7400B6E588 /* Smar List Controller.swift */; };
 		8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63182220956CF000091FA6 /* EntitiesExtensions.swift */; };
+		8A7500B52187FB0200C856FE /* Add Value.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7500B42187FB0200C856FE /* Add Value.storyboard */; };
+		8A7500B82187FB4800C856FE /* AddQuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7500B62187FB4800C856FE /* AddQuoteController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A89E8651E842E04001F7F71 /* Main.storyboard */; };
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
-		8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuote.swift */; };
+		8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */; };
 		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities2.swift */; };
 		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
@@ -89,6 +91,8 @@
 		8A546152210D240F00B6E588 /* Smart List Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Smart List Editor.storyboard"; sourceTree = "<group>"; };
 		8A546154210D2A7400B6E588 /* Smar List Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Smar List Controller.swift"; sourceTree = "<group>"; };
 		8A63182220956CF000091FA6 /* EntitiesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesExtensions.swift; sourceTree = "<group>"; };
+		8A7500B42187FB0200C856FE /* Add Value.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Add Value.storyboard"; sourceTree = "<group>"; };
+		8A7500B62187FB4800C856FE /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +103,7 @@
 		8A89E8731E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E8781E842E04001F7F71 /* InspirationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspirationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A89E88C1E843302001F7F71 /* AddQuote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuote.swift; sourceTree = "<group>"; };
+		8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteOld.swift; sourceTree = "<group>"; };
 		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		8A01F868210924BA007D1E3F /* Alternate */ = {
 			isa = PBXGroup;
 			children = (
+				8A7500B32187FA5E00C856FE /* Add View */,
 				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
 				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
 				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
@@ -208,7 +213,7 @@
 				8AE614C02072F134003CB950 /* OldLeftController.swift */,
 				8AE9B35F1FECA94D008A361F /* OldImportController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController.swift */,
-				8A89E88C1E843302001F7F71 /* AddQuote.swift */,
+				8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
 				8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */,
 			);
@@ -230,6 +235,15 @@
 				8A63182220956CF000091FA6 /* EntitiesExtensions.swift */,
 			);
 			name = NSManagedObjects;
+			sourceTree = "<group>";
+		};
+		8A7500B32187FA5E00C856FE /* Add View */ = {
+			isa = PBXGroup;
+			children = (
+				8A7500B42187FB0200C856FE /* Add Value.storyboard */,
+				8A7500B62187FB4800C856FE /* AddQuoteController.swift */,
+			);
+			name = "Add View";
 			sourceTree = "<group>";
 		};
 		8A89E8501E842E03001F7F71 = {
@@ -427,6 +441,7 @@
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */,
 				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
+				8A7500B52187FB0200C856FE /* Add Value.storyboard in Resources */,
 				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
 			);
@@ -478,8 +493,9 @@
 				8A116724212A260000AC2E08 /* TablesController.swift in Sources */,
 				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */,
-				8A89E88D1E843302001F7F71 /* AddQuote.swift in Sources */,
+				8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */,
 				8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */,
+				8A7500B82187FB4800C856FE /* AddQuoteController.swift in Sources */,
 				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
 				8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */,

@@ -34,6 +34,14 @@
             </objects>
             <point key="canvasLocation" x="-38" y="112"/>
         </scene>
+        <!--Add Value-->
+        <scene sceneID="rdx-TP-GHN">
+            <objects>
+                <controllerPlaceholder storyboardName="Add Value" id="gy1-M7-T6S" sceneMemberID="viewController"/>
+                <customObject id="ybh-zY-y0b" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1308" y="-235"/>
+        </scene>
         <!--Plain-->
         <scene sceneID="Dwc-7k-PUx">
             <objects>
@@ -77,8 +85,9 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="w8V-ru-fym"/>
                                                                     <connections>
-                                                                        <binding destination="V3W-qh-aP5" name="value" keyPath="objectValue.isFavorite" id="vvn-WS-vuQ">
+                                                                        <binding destination="V3W-qh-aP5" name="value" keyPath="objectValue.isFavorite" id="dFw-he-XFA">
                                                                             <dictionary key="options">
+                                                                                <bool key="NSValidatesImmediately" value="YES"/>
                                                                                 <string key="NSValueTransformerName">BooleanToImage</string>
                                                                             </dictionary>
                                                                         </binding>
@@ -339,17 +348,27 @@
                 </arrayController>
                 <menu identifier="rightMenu" id="qLB-XN-Y78">
                     <items>
-                        <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="zhL-3H-qaT">
+                        <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="zhL-3H-qaT" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="agcBool" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="setFavoriteAttribute:" target="m8M-8y-p42" id="M74-Eb-3dY"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Set Unfavorite" tag="2" keyEquivalent="F" id="H8j-LU-uta">
+                        <menuItem title="Set Unfavorite" tag="2" keyEquivalent="F" id="H8j-LU-uta" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="agcBool" value="NO"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="setFavoriteAttribute:" target="m8M-8y-p42" id="fEu-I5-1G8"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Edit" keyEquivalent="e" id="F8f-y8-xyS"/>
+                        <menuItem title="Edit" keyEquivalent="e" id="F8f-y8-xyS">
+                            <connections>
+                                <segue destination="gy1-M7-T6S" kind="modal" id="ADf-5e-bJK"/>
+                            </connections>
+                        </menuItem>
                         <menuItem isSeparatorItem="YES" id="ubC-qn-0ET"/>
                         <menuItem title="Add to List" tag="1" id="QH3-2O-3tt">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -378,8 +397,13 @@
                             </menu>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Rkj-95-wXt"/>
-                        <menuItem title="Delete" id="pER-Br-8Hs">
-                            <modifierMask key="keyEquivalentModifierMask"/>
+                        <menuItem title="Delete" identifier="deleteMenuItem" id="pER-Br-8Hs">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                            <connections>
+                                <action selector="deleteSelectedRecord:" target="m8M-8y-p42" id="ThK-yB-Ajg"/>
+                            </connections>
                         </menuItem>
                     </items>
                     <connections>

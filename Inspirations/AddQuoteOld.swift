@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class AddQuote: NSViewController, NSComboBoxDelegate {
+class AddQuoteOld: NSViewController, NSComboBoxDelegate {
 
     
     override func viewDidLoad() {
@@ -70,7 +70,7 @@ class AddQuote: NSViewController, NSComboBoxDelegate {
 }
 
 //MARK: - Extensions
-extension AddQuote: NSTokenFieldDelegate{
+extension AddQuoteOld: NSTokenFieldDelegate{
     
 //    //Return the list of possible tags to fill
 //    func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
