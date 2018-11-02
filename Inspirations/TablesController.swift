@@ -58,9 +58,9 @@ class TablesController: NSViewController {
         let modFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
         if modFlags.contains(.command) {
             switch event.characters{
-            case "i":
+            case "e":
                 print("Nothing")
-                //self.performSegue(withIdentifier:.init("editSegue"), sender: self)
+                self.performSegue(withIdentifier:.init("editSegue"), sender: self)
             case "f":
                 self.updateFavoriteValue(newValue:!modFlags.contains(.shift))
             default:
@@ -130,6 +130,15 @@ class TablesController: NSViewController {
                 self.selectedLeftItem=selectedLib
                 self.quoteController.fetchPredicate=newPredicate
                 self.quoteController.fetch(nil)
+        }
+    }
+    
+    //Called before preparing for a segue.
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let destinationSegue = segue.destinationController as? AddQuoteController{
+            destinationSegue.isInfoWindow=true
+            destinationSegue.selectionController!.content=self.quoteController.selectedObjects
+            destinationSegue.selectionController!.setSelectedObjects(quoteController.selectedObjects)
         }
     }
 }

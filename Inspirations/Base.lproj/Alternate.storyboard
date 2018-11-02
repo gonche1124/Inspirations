@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0T4-WD-gnI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0T4-WD-gnI">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -537,7 +537,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="ddd_test:" target="VGa-f0-ucZ" id="wUt-ke-dgZ"/>
-                                            <segue destination="ZCV-TV-5N3" kind="popover" popoverAnchorView="hFN-HS-Ix4" popoverBehavior="t" preferredEdge="maxY" id="uHa-JK-rRN"/>
+                                            <segue destination="ZCV-TV-5N3" kind="popover" identifier="addQuote" popoverAnchorView="hFN-HS-Ix4" popoverBehavior="t" preferredEdge="maxY" id="uHa-JK-rRN"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -572,7 +572,7 @@
                 <controllerPlaceholder storyboardName="Add Value" id="ZCV-TV-5N3" sceneMemberID="viewController"/>
                 <customObject id="a1b-L4-APQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5" y="520"/>
+            <point key="canvasLocation" x="-104" y="586"/>
         </scene>
         <!--Right Controller-->
         <scene sceneID="gib-Oy-lX9">

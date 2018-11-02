@@ -54,6 +54,14 @@ class PrincipalWindow: NSWindowController {
 //        return menu
 //    }()
    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let addQ = segue.destinationController as? AddQuoteController{
+            addQ.isInfoWindow=false
+            //addQ.selectionController?.add(nil)
+        }
+        
+    }
+    
 }
 
 

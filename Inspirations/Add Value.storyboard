@@ -1,23 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="sTJ-R3-Pai">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="sTJ-R3-Pai">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add Quote Controller-->
+        <!--Information-->
         <scene sceneID="ALY-th-Buj">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="sTJ-R3-Pai" customClass="AddQuoteController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Information" showSeguePresentationStyle="single" id="sTJ-R3-Pai" customClass="AddQuoteController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="2RQ-1g-1WM">
-                        <rect key="frame" x="0.0" y="0.0" width="359" height="303"/>
+                        <rect key="frame" x="0.0" y="0.0" width="344" height="213"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97X-vN-Oga">
+                                <rect key="frame" x="20" y="20" width="304" height="173"/>
+                                <subviews>
+                                    <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZdA-HE-2xE">
+                                        <rect key="frame" x="0.0" y="29" width="304" height="144"/>
+                                        <rows>
+                                            <gridRow yPlacement="top" rowAlignment="firstBaseline" id="mDa-Yn-n2i"/>
+                                            <gridRow yPlacement="center" id="n2y-O3-bgb"/>
+                                            <gridRow yPlacement="center" id="KEK-4M-wvO"/>
+                                            <gridRow yPlacement="center" id="pzp-8c-gLa"/>
+                                            <gridRow id="AC2-uF-Py7"/>
+                                        </rows>
+                                        <columns>
+                                            <gridColumn xPlacement="trailing" trailingPadding="3" id="uvi-T2-Cfz"/>
+                                            <gridColumn xPlacement="fill" id="ds1-XK-9Hj"/>
+                                        </columns>
+                                        <gridCells>
+                                            <gridCell row="mDa-Yn-n2i" column="uvi-T2-Cfz" xPlacement="trailing" yPlacement="top" id="y8f-XH-xul">
+                                                <textField key="contentView" horizontalHuggingPriority="1000" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihh-gj-Oqv">
+                                                    <rect key="frame" x="2" y="125" width="45" height="17"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Quote:" id="hRE-qz-ede">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="mDa-Yn-n2i" column="ds1-XK-9Hj" xPlacement="fill" id="MHz-u5-71P">
+                                                <textField key="contentView" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ejJ-wt-GIl">
+                                                    <rect key="frame" x="54" y="100" width="250" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="3g8-2m-c2b"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="Nuf-cy-Jny">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="Uhi-JJ-brf">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                <bool key="NSConditionallySetsEnabled" value="YES"/>
+                                                                <string key="NSMultipleValuesPlaceholder">Multiple quotes selected</string>
+                                                                <string key="NSNoSelectionPlaceholder">Type Quote</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="n2y-O3-bgb" column="uvi-T2-Cfz" id="1GU-1N-ZcW">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRx-Of-Ntp">
+                                                    <rect key="frame" x="-2" y="74" width="49" height="20"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Author:" id="h0W-rR-hyx">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="n2y-O3-bgb" column="ds1-XK-9Hj" id="6fI-ht-LXs">
+                                                <comboBox key="contentView" identifier="authorComboBox" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9j1-Aj-BRc">
+                                                    <rect key="frame" x="54" y="70" width="253" height="26"/>
+                                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Author Name" drawsBackground="YES" numberOfVisibleItems="5" id="tZ5-Wu-TYp">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </comboBoxCell>
+                                                    <connections>
+                                                        <binding destination="wX5-cF-xen" name="content" keyPath="arrangedObjects" id="Qrp-sC-XNe"/>
+                                                        <binding destination="wX5-cF-xen" name="contentValues" keyPath="arrangedObjects.name" previousBinding="Qrp-sC-XNe" id="uEo-nO-cXt"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.from.name" previousBinding="uEo-nO-cXt" id="Y4C-X7-JKR">
+                                                            <dictionary key="options">
+                                                                <string key="NSNoSelectionPlaceholder">Type Author name</string>
+                                                                <string key="NSNullPlaceholder">Type Author name</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </comboBox>
+                                            </gridCell>
+                                            <gridCell row="KEK-4M-wvO" column="uvi-T2-Cfz" id="vdw-Kf-Ih7">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-Iw-SUv">
+                                                    <rect key="frame" x="-2" y="48" width="49" height="20"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Theme:" id="WjZ-HP-Mjl">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="KEK-4M-wvO" column="ds1-XK-9Hj" id="qpM-DX-39v">
+                                                <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8h3-Fd-CFo">
+                                                    <rect key="frame" x="54" y="44" width="253" height="26"/>
+                                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Topic name" drawsBackground="YES" numberOfVisibleItems="5" id="k46-7P-FKs">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <objectValues>
+                                                            <string>Item 1</string>
+                                                            <string>Item 2</string>
+                                                            <string>Item 3</string>
+                                                        </objectValues>
+                                                    </comboBoxCell>
+                                                    <connections>
+                                                        <binding destination="U3Q-qs-zJA" name="content" keyPath="arrangedObjects" id="HIQ-ev-IiK"/>
+                                                        <binding destination="U3Q-qs-zJA" name="contentValues" keyPath="arrangedObjects.themeName" previousBinding="HIQ-ev-IiK" id="dCH-Ua-7hf"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isAbout.themeName" previousBinding="dCH-Ua-7hf" id="7Hx-EE-qnA">
+                                                            <dictionary key="options">
+                                                                <string key="NSNullPlaceholder">Type topic name</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </comboBox>
+                                            </gridCell>
+                                            <gridCell row="pzp-8c-gLa" column="uvi-T2-Cfz" id="1ZE-qM-jna">
+                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-TH-pKR">
+                                                    <rect key="frame" x="-2" y="23" width="49" height="17"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Tags:" id="f5J-MA-gtu">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </gridCell>
+                                            <gridCell row="pzp-8c-gLa" column="ds1-XK-9Hj" xPlacement="fill" id="4Kz-bm-vzr">
+                                                <tokenField key="contentView" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-wS-Z3h">
+                                                    <rect key="frame" x="54" y="20" width="250" height="22"/>
+                                                    <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Type Tags" drawsBackground="YES" allowsEditingTextAttributes="YES" tokenStyle="rounded" id="yOv-RQ-mLP">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </tokenFieldCell>
+                                                </tokenField>
+                                            </gridCell>
+                                            <gridCell row="AC2-uF-Py7" column="uvi-T2-Cfz" id="Jjx-4U-DtL"/>
+                                            <gridCell row="AC2-uF-Py7" column="ds1-XK-9Hj" xPlacement="leading" id="qpk-NI-0ZN">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FbF-Gt-Rbh">
+                                                    <rect key="frame" x="52" y="-2" width="254" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Favorite" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9ov-XD-Xsx">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </gridCell>
+                                        </gridCells>
+                                    </gridView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bb0-tr-aKe">
+                                        <rect key="frame" x="-6" y="-7" width="316" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dFg-mE-kEo">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="addAndSaveNewQuote:" target="sTJ-R3-Pai" id="fqf-cj-FdD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="97X-vN-Oga" secondAttribute="trailing" constant="20" id="2Qr-Lz-7CC"/>
+                            <constraint firstAttribute="bottom" secondItem="97X-vN-Oga" secondAttribute="bottom" constant="20" id="Lj0-LG-lRJ"/>
+                            <constraint firstItem="97X-vN-Oga" firstAttribute="leading" secondItem="2RQ-1g-1WM" secondAttribute="leading" constant="20" id="MhD-Ja-0CV"/>
+                            <constraint firstItem="97X-vN-Oga" firstAttribute="top" secondItem="2RQ-1g-1WM" secondAttribute="top" constant="20" id="jQV-qc-XSs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="selectionController" destination="6Ew-6K-Pu4" id="TbU-gt-efV"/>
+                    </connections>
                 </viewController>
                 <customObject id="W2e-s9-lkK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController mode="entity" entityName="Quote" id="6Ew-6K-Pu4">
+                    <connections>
+                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="Z81-t2-CHP"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="wX5-cF-xen" userLabel="Author Controller">
+                    <connections>
+                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="zZp-e6-iH6"/>
+                        <binding destination="sTJ-R3-Pai" name="sortDescriptors" keyPath="self.authorSort" id="GfS-JY-JJw"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="U3Q-qs-zJA" userLabel="Theme Controller">
+                    <connections>
+                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="idL-QH-MCA"/>
+                        <binding destination="sTJ-R3-Pai" name="sortDescriptors" keyPath="self.themeSort" id="fqc-Lt-DFx"/>
+                    </connections>
+                </arrayController>
+                <arrayController mode="entity" entityName="Tag" automaticallyPreparesContent="YES" id="QuI-Bi-4WG">
+                    <connections>
+                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="Lf1-rl-BNE"/>
+                    </connections>
+                </arrayController>
             </objects>
-            <point key="canvasLocation" x="30.5" y="126.5"/>
+            <point key="canvasLocation" x="106" y="126.5"/>
         </scene>
     </scenes>
 </document>
