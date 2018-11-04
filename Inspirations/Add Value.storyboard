@@ -53,9 +53,10 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="Uhi-JJ-brf">
+                                                        <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="dVs-sf-TXb"/>
+                                                        <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="dVs-sf-TXb" id="stI-0L-ORg"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="rHS-FX-atR">
                                                             <dictionary key="options">
-                                                                <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                 <bool key="NSConditionallySetsEnabled" value="YES"/>
                                                                 <string key="NSMultipleValuesPlaceholder">Multiple quotes selected</string>
                                                                 <string key="NSNoSelectionPlaceholder">Type Quote</string>
@@ -85,10 +86,15 @@
                                                     <connections>
                                                         <binding destination="wX5-cF-xen" name="content" keyPath="arrangedObjects" id="Qrp-sC-XNe"/>
                                                         <binding destination="wX5-cF-xen" name="contentValues" keyPath="arrangedObjects.name" previousBinding="Qrp-sC-XNe" id="uEo-nO-cXt"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.from.name" previousBinding="uEo-nO-cXt" id="Y4C-X7-JKR">
+                                                        <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="J1c-bE-wem"/>
+                                                        <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="J1c-bE-wem" id="lWX-9w-taJ"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.from.name" previousBinding="uEo-nO-cXt" id="YnE-jK-hfC">
                                                             <dictionary key="options">
-                                                                <string key="NSNoSelectionPlaceholder">Type Author name</string>
-                                                                <string key="NSNullPlaceholder">Type Author name</string>
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <string key="NSMultipleValuesPlaceholder">Multiple</string>
+                                                                <string key="NSNoSelectionPlaceholder">Type Author name - No Sel</string>
+                                                                <string key="NSNotApplicablePlaceholder">Not Applicable</string>
+                                                                <string key="NSNullPlaceholder">Type Author name - Null</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -96,7 +102,7 @@
                                             </gridCell>
                                             <gridCell row="KEK-4M-wvO" column="uvi-T2-Cfz" id="vdw-Kf-Ih7">
                                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4k-Iw-SUv">
-                                                    <rect key="frame" x="-2" y="48" width="49" height="20"/>
+                                                    <rect key="frame" x="-2" y="50" width="49" height="17"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Theme:" id="WjZ-HP-Mjl">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -120,8 +126,11 @@
                                                     <connections>
                                                         <binding destination="U3Q-qs-zJA" name="content" keyPath="arrangedObjects" id="HIQ-ev-IiK"/>
                                                         <binding destination="U3Q-qs-zJA" name="contentValues" keyPath="arrangedObjects.themeName" previousBinding="HIQ-ev-IiK" id="dCH-Ua-7hf"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isAbout.themeName" previousBinding="dCH-Ua-7hf" id="7Hx-EE-qnA">
+                                                        <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="G1K-MU-FTB"/>
+                                                        <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="G1K-MU-FTB" id="37u-HM-QCJ"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isAbout.themeName" previousBinding="dCH-Ua-7hf" id="ind-Lg-bVd">
                                                             <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
                                                                 <string key="NSNullPlaceholder">Type topic name</string>
                                                             </dictionary>
                                                         </binding>
@@ -130,7 +139,7 @@
                                             </gridCell>
                                             <gridCell row="pzp-8c-gLa" column="uvi-T2-Cfz" id="1ZE-qM-jna">
                                                 <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-TH-pKR">
-                                                    <rect key="frame" x="-2" y="20" width="49" height="22"/>
+                                                    <rect key="frame" x="-2" y="23" width="49" height="17"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Tags:" id="f5J-MA-gtu">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -150,6 +159,8 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </tokenFieldCell>
                                                     <connections>
+                                                        <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="89W-Le-KII"/>
+                                                        <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="89W-Le-KII" id="HBM-wf-FZo"/>
                                                         <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isTaggedWith" id="7dx-XH-1PR">
                                                             <dictionary key="options">
                                                                 <string key="NSValueTransformerName">EntityToToken</string>
@@ -167,6 +178,10 @@
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" id="eDd-jD-nLJ"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isFavorite" id="8ph-sI-dni"/>
+                                                    </connections>
                                                 </button>
                                             </gridCell>
                                         </gridCells>
@@ -200,21 +215,22 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="saveButton" destination="bb0-tr-aKe" id="rwv-37-8Hb"/>
                         <outlet property="selectionController" destination="6Ew-6K-Pu4" id="TbU-gt-efV"/>
                         <outlet property="tagsController" destination="QuI-Bi-4WG" id="qCe-z0-GAj"/>
                         <outlet property="tokenField" destination="wxQ-wS-Z3h" id="Xts-1Z-IbC"/>
                     </connections>
                 </viewController>
                 <customObject id="W2e-s9-lkK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" id="6Ew-6K-Pu4">
+                <arrayController mode="entity" entityName="Quote" editable="NO" id="6Ew-6K-Pu4">
                     <connections>
                         <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="Z81-t2-CHP"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Author" automaticallyPreparesContent="YES" id="wX5-cF-xen" userLabel="Author Controller">
                     <connections>
-                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="zZp-e6-iH6"/>
                         <binding destination="sTJ-R3-Pai" name="sortDescriptors" keyPath="self.authorSort" id="GfS-JY-JJw"/>
+                        <binding destination="sTJ-R3-Pai" name="managedObjectContext" keyPath="self.moc" id="zZp-e6-iH6"/>
                     </connections>
                 </arrayController>
                 <arrayController mode="entity" entityName="Theme" automaticallyPreparesContent="YES" id="U3Q-qs-zJA" userLabel="Theme Controller">

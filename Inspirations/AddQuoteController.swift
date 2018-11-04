@@ -15,8 +15,8 @@ class AddQuoteController: NSViewController {
         // Do view setup here.
         if !isInfoWindow {
            self.selectionController?.add(nil)
-        
         }
+        self.saveButton.title = isInfoWindow ? "Edit":"Add"
     }
    
     
@@ -26,6 +26,7 @@ class AddQuoteController: NSViewController {
     @IBOutlet var selectionController: NSArrayController?=nil
     @IBOutlet var tagsController:NSArrayController!
     @IBOutlet var tokenField:NSTokenField!
+    @IBOutlet var saveButton:NSButton!
     
     //Sort descriptors
     @objc dynamic var authorSort:[NSSortDescriptor]=[NSSortDescriptor(key: "name", ascending: true)]
@@ -34,9 +35,13 @@ class AddQuoteController: NSViewController {
     
     //Actions
     @IBAction func addAndSaveNewQuote(_ sender:NSButton){
-        print("To DO")
+        if isInfoWindow {
+            if isEditing {try! moc.save()}
+            sender.title = isEditing ? "Edit":"Save"
+            isEditing = !isEditing
+            return
+        }
         try! moc.save()
-        //TODO: Make sure that the relationships hold for the 3 array controllers and thenew object.
         self.dismiss(self)
     }
     
@@ -57,11 +62,10 @@ extension AddQuoteController: NSTokenFieldDelegate{
         return newTag
     }
     
+    //Shows completions list under.
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
-        if let tagArray=tagsController.arrangedObjects as? Array<Tag>{
-            return tagArray.map({$0.name!}).filter({$0.hasPrefix(substring)})
-        }
-        return nil
+        guard let tagArray=tagsController.arrangedObjects as? Array<Tag>else {return nil}
+        return tagArray.map({$0.name!}).filter({$0.hasPrefix(substring)}).sorted()
     }
     
 //    func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {
