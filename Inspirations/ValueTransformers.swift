@@ -58,6 +58,21 @@ class BooleanToImage: ValueTransformer {
 
 }
 
+//NStokenField Transformer
+class EntityToToken:ValueTransformer{
+    //Transform value
+    override  func transformedValue(_ value: Any?) -> Any? {
+        guard let theTags = value as? Set<Tag> else {return nil}
+        return Array(theTags)
+        //return theTags.map({$0.name!}).joined(separator: ",")
+    }
+    
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let tagArray=value as? Array<Tag> else {return nil}
+        return NSSet(array: tagArray)
+    }
+}
+
 //NSAttributed String to normal string.
 //class AttributedStringToString: ValueTransformer{
 //

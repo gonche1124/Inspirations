@@ -15,13 +15,17 @@ class AddQuoteController: NSViewController {
         // Do view setup here.
         if !isInfoWindow {
            self.selectionController?.add(nil)
+        
         }
     }
+   
     
     //Properties
     var isInfoWindow:Bool=false
     @objc dynamic var isEditing:Bool=false
     @IBOutlet var selectionController: NSArrayController?=nil
+    @IBOutlet var tagsController:NSArrayController!
+    @IBOutlet var tokenField:NSTokenField!
     
     //Sort descriptors
     @objc dynamic var authorSort:[NSSortDescriptor]=[NSSortDescriptor(key: "name", ascending: true)]
@@ -31,6 +35,7 @@ class AddQuoteController: NSViewController {
     //Actions
     @IBAction func addAndSaveNewQuote(_ sender:NSButton){
         print("To DO")
+        try! moc.save()
         //TODO: Make sure that the relationships hold for the 3 array controllers and thenew object.
         self.dismiss(self)
     }
@@ -38,9 +43,30 @@ class AddQuoteController: NSViewController {
 }
 
 //Mehotds for being a delegate and datasource for combo box.
-extension AddQuoteController: NSComboBoxDelegate{
+extension AddQuoteController: NSTokenFieldDelegate{
     
+    func tokenField(_ tokenField: NSTokenField, displayStringForRepresentedObject representedObject: Any) -> String? {
+        guard let tagInstance=representedObject as? Tag else {return nil}
+        return tagInstance.name
+    }
     
+    func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
+        let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",editingString)
+        if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){return existingTag}
+        let newTag = Tag(inMOC: moc, andName: editingString)
+        return newTag
+    }
+    
+    func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
+        if let tagArray=tagsController.arrangedObjects as? Array<Tag>{
+            return tagArray.map({$0.name!}).filter({$0.hasPrefix(substring)})
+        }
+        return nil
+    }
+    
+//    func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {
+//        return tokens
+//    }
     
 }
 

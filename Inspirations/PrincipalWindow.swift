@@ -25,6 +25,7 @@ class PrincipalWindow: NSWindowController {
         //Register NSValueTransformers
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
+        ValueTransformer.setValueTransformer(EntityToToken(), forName: NSValueTransformerName(rawValue: "EntityToToken"))
     }
     
     //Actions

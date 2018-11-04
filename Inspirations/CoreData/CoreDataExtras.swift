@@ -48,9 +48,34 @@ extension NSManagedObject {
         return results
     }
     
+    //Retursn uriRepresentation as a string.
     func getID()->String{
         return self.objectID.uriRepresentation().absoluteString
     }
+    
+    //First or create
+    class func firstOrCreate(inContext:NSManagedObjectContext, withAttributes:[String:Any])->NSManagedObject{
+        
+        //Create Predciate
+        //TODO: Create compound predicate (Check it works)
+        let predicateArray=withAttributes.map({NSPredicate(format:"%K == %@", $0,$1 as! CVarArg)})
+        let finalPredicate=NSCompoundPredicate(orPredicateWithSubpredicates: predicateArray)
+        
+        //Fetch or create
+        if let existingNSManagedObject=firstWith(predicate: finalPredicate, inContext: inContext){
+            return existingNSManagedObject
+        }
+        
+        //Create it
+        //TODO: Should there be custom initialization????
+        let newObject=NSEntityDescription.insertNewObject(forEntityName: self.className(), into: inContext)
+        withAttributes.keys.forEach({newObject.setValue(withAttributes[$0], forKey: $0)})
+        return newObject
+        
+    }
+    
+    
+    
     
     //Return an array with all the elements for the specefied type
 //    class func arrayWithObjects()->Array<NSManagedObject>{
@@ -68,7 +93,7 @@ extension NSFetchRequestResult where Self: NSManagedObject {
         return try context.fetch(fetchRequest)
     }
     
-    //USed in the baove method.
+    //USed in the above method.
     static public func fetchRequestForEntity(inContext context: NSManagedObjectContext) -> NSFetchRequest<Self> {
         let fetchRequest = NSFetchRequest<NSManagedObject>()
         fetchRequest.entity = entity()

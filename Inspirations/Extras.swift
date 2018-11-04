@@ -67,8 +67,6 @@ extension NSPredicate{
     static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
     static var pIsRoot:String = "isRootItem == YES"
     static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
-
-
     
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
@@ -184,6 +182,31 @@ class AGC_NSMenuItem: NSMenuItem {
     
     @IBInspectable var agcBool:Bool=false
     
+}
+
+//Autogrowing NSTextField
+class AGC_GrowingTextField:NSTextField{
+    
+    override var intrinsicContentSize: NSSize {
+        // Guard the cell exists and wraps
+        guard let cell = self.cell, cell.wraps else {return super.intrinsicContentSize}
+        
+        // Use intrinsic width to jive with autolayout
+        let width = super.intrinsicContentSize.width
+        
+        // Set the frame height to a reasonable number
+        self.frame.size.height = 750.0
+        
+        // Calcuate height
+        let height = cell.cellSize(forBounds: self.frame).height
+        
+        return NSMakeSize(width, height);
+    }
+    
+    override func textDidChange(_ notification: Notification) {
+        super.textDidChange(notification)
+        super.invalidateIntrinsicContentSize()
+    }
 }
 
 
