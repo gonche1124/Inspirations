@@ -21,45 +21,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
-        
-        //createObjectsIfTheyDontExist()
+
+        //Create Main Items.
         //createRandomQuotes()
+        createMainObjectsIfNotPresent()
+
         
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         print(self.applicationDocumentsDirectory.path)
-        
 
-        //Sets color of main Window
-        //NSApp.mainWindow?.backgroundColor=NSColor(calibratedWhite: 0.99, alpha: 1)
-        //NSApp.mainWindow?.backgroundColor=NSColor.white
-        
-        //TO Erase after is working.
-//        let fetchR = NSFetchRequest<Tags>(entityName: "Tags")
-//        let tagsArray = try! self.managedObjectContext.fetch(fetchR)
-//        tagsArray.forEach({
-//
-//
-//            if ($0.isInTag?.tagName) != nil {
-//                  print ("Not to Delete:")
-//            }
-//            else {
-//                if $0.isLeaf {
-//                    print ("To Delete:")
-//                    self.managedObjectContext.delete($0)
-//                }
-//                else {
-//                print ("Not To Delete:")
-//                }
-//            }
-//            print("\($0.tagName), isLeaf=\($0.isLeaf) inside \($0.isInTag?.tagName)")
-//
-//        })
-//        try! self.managedObjectContext.save()
-//        print("Finished")
-    
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -221,30 +194,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         
-        //let moc=self.managedObjectContext
+        //Updates Notification.
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
-
-            
-            //Update Favorites playlist.
-//            if let qList = updated.filter({$0.className=="Quote" && $0.changedValuesForCurrentEvent()["isFavorite"] != nil}) as? Set<Quote>,let favTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Favorites"), inContext: moc) as? Tags {
-//
-//                _=qList.filter({$0.isFavorite==true}).map({$0.addToHasTags(favTag)})
-//                _=qList.filter({$0.isFavorite==false}).map({$0.removeFromHasTags(favTag)})
+            print("++++Changed++++:")
+            print("Total items changed: \(updated.count)")
+            for itemChanged in updated{
+                print("itemChanged: \(itemChanged)")
+                for (_,item) in itemChanged.changedValues().enumerated(){
+                    if let total=item.value as? Set<NSManagedObject> {
+                        print("\(item.key): (\(total.count))" )
+                    }else{
+                        print("\(item.key): (\(item.value))" )
+                    }
+                }
             }
-            
-       // }
+            print("+++++++++++++++")
+        }
         
-//        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0, let qList = inserted.filter({$0.className=="Quote"}) as? Set<Quote> {
-//
-//            //Using extensions to add default "Main" playlist. Should move this to account if user deletes playlist by error?.
-//            if let mainTag=Tags.firstWith(predicate: NSPredicate(format: "tagName == %@", "Quotes"), inContext: moc) as? Tags{
-//                _=qList.map({$0.addToHasTags(mainTag)})
-//            }
-//        }
+        //Inserts Notification.
+       if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0 {
+        print("--- INSERTS ---")
+        print(inserted)
+        print("+++++++++++++++")
+        }
+        
+        //Deletes Notification.
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
+            print("--- DELETES ---")
+            print(deletes)
+            print("+++++++++++++++")
+        }
+
     }
     
     //TODO
-    func createObjectsIfTheyDontExist() {
+    func createMainObjectsIfNotPresent() {
         
         //Create root items.
         let libRoot = LibraryItem.getRootItem(withName: "Library", inContext: managedObjectContext)
@@ -253,27 +237,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let collRoot = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
         
         //Only for testing:
-        let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":"Favoritos", "libraryType":LibraryType.favorites.rawValue]) as! LibraryItem
-        coreItem.belongsToLibraryItem=libRoot
-        let coreItem2=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":"Library", "libraryType":LibraryType.mainLibrary.rawValue]) as! LibraryItem
-        coreItem2.belongsToLibraryItem=libRoot
+        let mainItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Library", isRoot: false)
+        mainItem?.libraryType=LibraryType.mainLibrary.rawValue
+        mainItem?.sortingOrder="0"
         
-//        for item in ["Library", "Favoritos"]{
-//            let coreItem=create(object: "LibraryItem", withAttributes: ["isRootItem":false, "isShown":true, "name":item, "libraryType":LibraryType.favorites.rawValue]) as! LibraryItem
-//            coreItem.belongsToLibraryItem=libRoot
-//        }
-        for tag in ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"]{
-            let coreItem=create(object: "Tag", withAttributes: ["isRootItem":false, "isShown":true, "name":tag, "libraryType":LibraryType.tag.rawValue]) as! Tag
-            coreItem.belongsToLibraryItem=tagRoot
-        }
-        for language in ["Spanish", "English", "French", "German", "Mandarin"]{
-            let coreItem=create(object: "Language", withAttributes: ["isRootItem":false, "isShown":true, "name":language, "libraryType":LibraryType.language.rawValue]) as! Language
-            coreItem.belongsToLibraryItem=lanRoot
-        }
-        for lista in ["Top 25", "For Work", "From Movies", "In songs", "Crazy"]{
-            let coreItem=create(object: "QuoteList", withAttributes: ["isRootItem":false, "isShown":true, "name":lista, "libraryType":LibraryType.list.rawValue]) as! QuoteList
-            coreItem.belongsToLibraryItem=collRoot
-        }
+        let favItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Favorites", isRoot: false)
+        favItem?.libraryType=LibraryType.favorites.rawValue
+        favItem?.sortingOrder="1"
+
+        
+        //Create Tags
+        _=["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].map({Tag.init(inMOC: managedObjectContext, andName: $0)})
+        
+        //Create Languages:
+        _=["Spanish", "English", "French", "German", "Mandarin"].map({Language.init(inMOC: managedObjectContext, andName: $0)})
+        
+        //create Lists:
+        _=["Top 25", "For Work", "From Movies", "In songs", "Crazy"].map({QuoteList.init(inMOC: managedObjectContext, andName: $0)})
+     
         
         do{
             try self.managedObjectContext.save()

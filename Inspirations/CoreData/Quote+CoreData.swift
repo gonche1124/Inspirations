@@ -93,6 +93,7 @@ public class Quote: NSManagedObject, Codable{
     }
     
     //Others
+    //Updates when the user changes the length of the quote.
     override public func didChangeValue(forKey key: String) {
         if key == "quoteString" {
             let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)

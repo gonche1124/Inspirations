@@ -93,7 +93,12 @@ class TablesController: NSViewController {
             }else if let playlist=coreItem as? QuoteList{
                 playlist.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
             }
-            try! self.moc.save()
+            do {
+                try self.moc.save()
+            }catch{
+                print("Could not save, error: \(error)")
+            }
+            
         }
     }
     
@@ -152,7 +157,6 @@ extension TablesController: NSTableViewDataSource{
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let thisQuote = (quoteController.arrangedObjects as! [Quote])[row]
         let thisItem = NSPasteboardItem()
-        //thisItem.setString(thisQuote, forType: .string)
         thisItem.setString(thisQuote.objectID.uriRepresentation().absoluteString, forType: .string)
         return thisItem
     }

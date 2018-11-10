@@ -48,7 +48,6 @@ class BooleanToImage: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {
         guard let bValue = value as? Bool else {return nil}
         return NSImage.init(imageLiteralResourceName: bValue ? "red heart":"grey heart")
-
     }
     
     //No Reverse.
@@ -67,10 +66,14 @@ class EntityToToken:ValueTransformer{
         //return theTags.map({$0.name!}).joined(separator: ",")
     }
     
-    override func reverseTransformedValue(_ value: Any?) -> Any? {
-        guard let tagArray=value as? Array<Tag> else {return nil}
-        return NSSet(array: tagArray)
-    }
+    override class func allowsReverseTransformation()->Bool{return false}
+    
+//    override func reverseTransformedValue(_ value: Any?) -> Any? {
+//        guard let tagArray=value as? Array<Tag> else {return nil}
+//        //TODO: Add the reverse relationship in teh NSTokeFieldDelegate becasue here there is no access to the selected item.
+//        print("reveresed")
+//        return NSSet(array: tagArray)
+   // }
 }
 
 //NSAttributed String to normal string.

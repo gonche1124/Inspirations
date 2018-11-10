@@ -32,6 +32,19 @@ extension LibraryItem{
         newItem.isShown=true
         newItem.name=itemName
         newItem.libraryType=LibraryType.rootItem.rawValue
+        switch itemName {
+        case "Library":
+            newItem.sortingOrder="0"
+        case "Tags":
+            newItem.sortingOrder="2"
+        case "Lists":
+            newItem.sortingOrder="3"
+        case "Languages":
+            newItem.sortingOrder="4"
+        default:
+            newItem.sortingOrder="5"
+        }
+        
         return newItem
     }
 }

@@ -22,7 +22,7 @@ class LeftController: NSViewController {
     
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
-        fr.sortDescriptors=[NSSortDescriptor(key: "name", ascending: true)]
+        fr.sortDescriptors=[NSSortDescriptor(key: "sortingOrder", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         fr.predicate=NSPredicate.leftPredicate(withText: "")
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self

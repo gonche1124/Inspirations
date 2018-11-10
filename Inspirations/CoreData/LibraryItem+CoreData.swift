@@ -33,6 +33,7 @@ public class LibraryItem: NSManagedObject {
     @NSManaged public var name: String?
     @NSManaged public var belongsToLibraryItem: LibraryItem?
     @NSManaged public var hasLibraryItems: NSOrderedSet? //Set<LibraryItem>//NSOrderedSet?
+    @NSManaged public var sortingOrder:String?
     
 
     //Decodable
@@ -64,6 +65,22 @@ public class LibraryItem: NSManagedObject {
 //        try container.encode(name, forKey: .name)
 //        //TODO: Add other encoders.
 //    }
+    
+    //Convinience init
+    public convenience init?(inMOC:NSManagedObjectContext, andName:String, isRoot:Bool){
+        guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMOC),
+            andName != "" else {
+                fatalError("Failed to create LibraryItem")}
+        
+        self.init(entity: entity, insertInto: inMOC)
+        self.libraryType = LibraryType.rootItem.rawValue
+        self.name=andName
+        self.isShown=true
+        self.isRootItem=isRoot
+        if !isRoot{
+        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Library", inContext: inMOC)
+        }
+    }
     
 }
 

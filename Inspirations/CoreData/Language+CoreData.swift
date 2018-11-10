@@ -19,4 +19,19 @@ public class Language: LibraryItem {
     @NSManaged public var localizedName: String?
     @NSManaged public var hasQuotes: NSSet?
     
+    //Convinience init
+    public convenience init?(inMOC:NSManagedObjectContext, andName:String){
+        guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: inMOC),
+            andName != "" else {
+                fatalError("Failed to create Tag")}
+        
+        self.init(entity: entity, insertInto: inMOC)
+        self.libraryType = LibraryType.language.rawValue
+        self.name=andName
+        self.isShown=true
+        self.isRootItem=false
+        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Languages", inContext: inMOC)
+        
+    }
+    
 }

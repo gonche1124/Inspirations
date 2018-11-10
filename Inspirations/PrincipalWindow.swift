@@ -69,11 +69,4 @@ class PrincipalWindow: NSWindowController {
 
 extension PrincipalWindow:NSWindowDelegate{
     
-    //TODO: Think of seomthing useful for this notification.
-//    func windowDidResize(_ notification: Notification) {
-//        print("Rezising to: \((notification.object as? NSWindow)?.frame.size.width)")
-//    }
-    
-    
-    
 }
