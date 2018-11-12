@@ -65,7 +65,7 @@ public class QuoteList: LibraryItem, Codable {
         guard let entity = NSEntityDescription.entity(forEntityName: "QuoteList", in: inMOC),
             andName != "" else {
                 fatalError("Failed to create Quote List")}
-        
+        //TODO: Handle case when it is a folder instead of a list.
         self.init(entity: entity, insertInto: inMOC)
         self.libraryType = LibraryType.list.rawValue
         self.name=andName
@@ -76,9 +76,15 @@ public class QuoteList: LibraryItem, Codable {
             self.smartPredicate=withSmartList
             self.libraryType=LibraryType.smartList.rawValue
         }
-        print("For testing to delete")
-        
     }
+    
+    //Convinience Init.
+    public convenience init?(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+        guard let listName = dictionary["name"] as? String else {
+            fatalError("Failed to create Quote List")}
+        self.init(inMOC: moc, andName: listName)
+    }
+
 }
 
 // MARK: Generated accessors for hasQuotes

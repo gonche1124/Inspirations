@@ -136,3 +136,10 @@ extension AddQuoteController: NSTokenFieldDelegate{
     
 }
 
+extension AddQuoteController:NSComboBoxDelegate{
+    
+//    func comboBoxWillDismiss(_ notification: Notification) {
+//        <#code#>
+//    }
+}
+

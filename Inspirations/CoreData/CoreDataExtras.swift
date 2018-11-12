@@ -27,7 +27,7 @@ extension LibraryItem{
         
         //Creat Library Item because it did not existed.
         let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entity().name!, into: inContext) as! LibraryItem
-        //let newItem = LibraryItem(context: inContext)
+       
         newItem.isRootItem=true
         newItem.isShown=true
         newItem.name=itemName
@@ -52,13 +52,30 @@ extension LibraryItem{
 extension NSManagedObject {
     
     //Get first item with predicate
-    class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
+    class func firstWith<T: NSManagedObject>(predicate:NSPredicate, inContext:NSManagedObjectContext)->T?{
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
         request.predicate=predicate
         request.fetchLimit=1
         
-        guard let results = try! inContext.fetch(request).first as? NSManagedObject else {return nil}
-        return results
+        do{
+            let result=try inContext.fetch(request)
+            guard let item = result.first as? T else {return nil}
+            return item
+        }catch{
+            print(error)
+            print("There was an error")
+            return nil
+        }
+       
+        
+//        guard let results = try? inContext.fetch(request).first as? T else {return nil}
+//        return results
+    }
+    
+    //returns first object with a given attribute. Convinience for not constructing NSPredciate.
+    class func firstWith<T: NSManagedObject>(attribute:String, value:Any, inContext:NSManagedObjectContext)->T?{
+        let predicate=NSPredicate(format:"%K == %@", attribute,value as! CVarArg)
+        return self.firstWith(predicate: predicate, inContext: inContext)
     }
     
     //Retursn uriRepresentation as a string.
@@ -67,34 +84,49 @@ extension NSManagedObject {
     }
     
     //First or create
-    class func firstOrCreate(inContext:NSManagedObjectContext, withAttributes:[String:Any])->NSManagedObject{
+    class func firstOrCreate<T: NSManagedObject>(inContext moc:NSManagedObjectContext, withAttributes:[String:Any], and keys:[String]?=nil)->T{
         
         //Create Predciate
-        //TODO: Create compound predicate (Check it works)
-        let predicateArray=withAttributes.map({NSPredicate(format:"%K == %@", $0,$1 as! CVarArg)})
-        let finalPredicate=NSCompoundPredicate(orPredicateWithSubpredicates: predicateArray)
+        var newDict=withAttributes
+        if let keysArray=keys{
+            newDict = withAttributes.filter({keysArray.contains($0.key)})
+        }
+        let predicateArray=newDict.map({NSPredicate(format:"%K == %@", $0.key, $0.value as! CVarArg)})
+        let finalPred=NSCompoundPredicate(andPredicateWithSubpredicates: predicateArray)
         
         //Fetch or create
-        if let existingNSManagedObject=firstWith(predicate: finalPredicate, inContext: inContext){
+        if let existingNSManagedObject=firstWith(predicate: finalPred, inContext:moc) as? T{
             return existingNSManagedObject
         }
         
         //Create it
-        //TODO: Should there be custom initialization????
-        let newObject=NSEntityDescription.insertNewObject(forEntityName: self.className(), into: inContext)
-        withAttributes.keys.forEach({newObject.setValue(withAttributes[$0], forKey: $0)})
-        return newObject
-        
+        let newObj=try! createEntity(withDictionary: withAttributes, in: moc)
+        return newObj as! T
     }
     
-    
-    
-    
-    //Return an array with all the elements for the specefied type
-//    class func arrayWithObjects()->Array<NSManagedObject>{
-//        return
-//    }
+    //Evaluates type of core data entity and performs init.
+   class func createEntity<T:NSManagedObject>(withDictionary:[String:Any], in moc:NSManagedObjectContext) throws ->T?{
+        switch String(describing: self) {
+        case Entities.quote.rawValue:
+            return try Quote.init(from: withDictionary, in: moc) as? T
+        case Entities.author.rawValue:
+            return try Author.init(from: withDictionary, in: moc) as? T
+        case Entities.theme.rawValue:
+            return try Theme.init(from: withDictionary, in: moc) as? T
+        case Entities.tag.rawValue:
+            return try Tag.init(from: withDictionary, in: moc) as? T
+        case Entities.language.rawValue:
+            return try Language.init(from: withDictionary, in: moc) as? T
+        case Entities.collection.rawValue:
+            return try QuoteList.init(from: withDictionary, in: moc) as? T
+        //case Entities.library.rawValue:
+        //    return LibraryItem.init(inMOC: <#T##NSManagedObjectContext#>, andName: <#T##String#>, isRoot: <#T##Bool#>)
+        default:
+            return nil
+        }
+    }
 }
+
 
 extension NSFetchRequestResult where Self: NSManagedObject {
     
@@ -106,15 +138,84 @@ extension NSFetchRequestResult where Self: NSManagedObject {
         return try context.fetch(fetchRequest)
     }
     
-    //USed in the above method.
+    //Used in the above method.
     static public func fetchRequestForEntity(inContext context: NSManagedObjectContext) -> NSFetchRequest<Self> {
         let fetchRequest = NSFetchRequest<NSManagedObject>()
         fetchRequest.entity = entity()
         return fetchRequest as! NSFetchRequest<Self>
     }
+    
+    //Create a simple request for fecthing
+    static public func singleRequest()->NSFetchRequest<Self>{
+        let request = NSFetchRequest<Self>(entityName: self.className())
+        request.fetchLimit=1
+        return request
+    }
 }
 
+struct gonche:CodingKey{
+    var intValue: Int?
+    var stringValue: String
+    init?(intValue: Int) {
+        self.init(stringValue: "\(intValue)")
+        self.intValue = intValue
+    }
+    init?(stringValue: String) {
+        self.stringValue = stringValue
+    }
+}
 
+extension KeyedDecodingContainer{
+    private enum authorEnconding:String, CodingKey{
+        case name = "name"
+    }
+    
+    //TODO: Implement. Important!
+    //https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-4-decodable-proto
+    func decodeAuthor(forKey key:K, inMOC moc:NSManagedObjectContext) throws ->Author?{
+      //  let authorDict=try self.decode([String: Any].self, forKey: key)
+//        if let exists = Author.firtsWith(attribute: "name", value: authorDict.name, inContext: moc) as? Author{
+//            return exists
+//        }
+
+        return try decode(Author.self, forKey: key)
+    }
+    
+    func decode(_ type: Dictionary<String, Any>.Type, forKey key: K) throws -> Dictionary<String, Any> {
+        let container = try self.nestedContainer(keyedBy: gonche.self, forKey: key)
+        return try container.decode(type)
+    }
+    
+    func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+        var dictionary = Dictionary<String, Any>()
+        
+        for key in allKeys {
+            if let boolValue = try? decode(Bool.self, forKey: key) {
+                dictionary[key.stringValue] = boolValue
+            } else if let stringValue = try? decode(String.self, forKey: key) {
+                dictionary[key.stringValue] = stringValue
+            } else if let intValue = try? decode(Int.self, forKey: key) {
+                dictionary[key.stringValue] = intValue
+            } else if let doubleValue = try? decode(Double.self, forKey: key) {
+                dictionary[key.stringValue] = doubleValue
+//            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self, forKey: key) {
+//                dictionary[key.stringValue] = nestedDictionary
+//            } else if let nestedArray = try? decode(Array<Any>.self, forKey: key) {
+//                dictionary[key.stringValue] = nestedArray
+            }
+        }
+        return dictionary
+    }
+}
+
+extension UnkeyedDecodingContainer{
+    
+    mutating func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+        
+        let nestedContainer = try self.nestedContainer(keyedBy: gonche.self)
+        return try nestedContainer.decode(type)
+    }
+}
 
 //TODO: Check if this is useful
 /*

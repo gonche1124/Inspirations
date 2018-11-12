@@ -191,7 +191,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isAbout.themeName" id="MZA-cW-Voy" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="444" y="1" width="80" height="17"/>
+                                                            <rect key="frame" x="443.5" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hc2-td-lfA">
@@ -229,7 +229,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isTaggedWith" id="9B1-nG-IUW" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="527" y="1" width="50" height="17"/>
+                                                            <rect key="frame" x="526.5" y="1" width="50" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-Uk-oHr">
@@ -271,7 +271,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="isIncludedIn" id="P8x-Ad-L5z" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
-                                                            <rect key="frame" x="580" y="1" width="50" height="17"/>
+                                                            <rect key="frame" x="579.5" y="1" width="50" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-Ba-Ukw">

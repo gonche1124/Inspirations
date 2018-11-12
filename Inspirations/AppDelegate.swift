@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
+        //TODO: Uncomment!!!
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
 
         //Create Main Items.
@@ -122,7 +123,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-        managedObjectContext.mergePolicy=NSMergePolicy.mergeByPropertyStoreTrump //Custom Line of code to avoid duplicates.
+        //managedObjectContext.mergePolicy=NSMergePolicy.mergeByPropertyObjectTrump //Custom Line of code to avoid  duplicates. NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
     }()
     
@@ -199,6 +200,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             print("++++Changed++++:")
             print("Total items changed: \(updated.count)")
             for itemChanged in updated{
+                
                 print("itemChanged: \(itemChanged)")
                 for (_,item) in itemChanged.changedValues().enumerated(){
                     if let total=item.value as? Set<NSManagedObject> {
@@ -236,25 +238,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let lanRoot = LibraryItem.getRootItem(withName: "Languages", inContext: managedObjectContext)
         let collRoot = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
         
-        //Only for testing:
-        let mainItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Library", isRoot: false)
-        mainItem?.libraryType=LibraryType.mainLibrary.rawValue
-        mainItem?.sortingOrder="0"
+        //Create Main Library.
+        let libPredicate=NSPredicate(format:"name == 'Library' AND isRootItem == FALSE")
+        if (LibraryItem.firstWith(predicate: libPredicate, inContext: managedObjectContext)) == nil  {
+            let mainItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Library", isRoot: false)
+            mainItem?.libraryType=LibraryType.mainLibrary.rawValue
+            mainItem?.sortingOrder="0"
+        }
         
-        let favItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Favorites", isRoot: false)
-        favItem?.libraryType=LibraryType.favorites.rawValue
-        favItem?.sortingOrder="1"
+        //Create Fav item.
+        let favPredicate=NSPredicate(format: "name == 'Favorites' AND isRootItem == FALSE")
+        if (LibraryItem.firstWith(predicate: favPredicate, inContext: managedObjectContext)) == nil {
+            let favItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Favorites", isRoot: false)
+            favItem?.libraryType=LibraryType.favorites.rawValue
+            favItem?.sortingOrder="1"
+        }
+        
 
-        
         //Create Tags
-        _=["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].map({Tag.init(inMOC: managedObjectContext, andName: $0)})
-        
+        ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].forEach({
+            _=Tag.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+        })
+        print("Tags created")
+       
         //Create Languages:
-        _=["Spanish", "English", "French", "German", "Mandarin"].map({Language.init(inMOC: managedObjectContext, andName: $0)})
+        ["Spanish", "English", "French", "German", "Mandarin"].forEach({
+            _=Language.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+        })
+        print("Languauges created")
+       
         
         //create Lists:
-        _=["Top 25", "For Work", "From Movies", "In songs", "Crazy"].map({QuoteList.init(inMOC: managedObjectContext, andName: $0)})
-     
+        ["Top 25", "For Work", "From Movies", "In songs", "Crazy"].forEach({
+            _=QuoteList.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+        })
+        print("Lists created")
         
         do{
             try self.managedObjectContext.save()

@@ -82,6 +82,12 @@ public class LibraryItem: NSManagedObject {
         }
     }
     
+    //Prints the description
+//    override open var description: String{
+//        let dict = self.entity.rel
+//        return "AA\nBB"
+//    }
+    
 }
 
 // MARK: - Generated accessors for hasLibraryItems

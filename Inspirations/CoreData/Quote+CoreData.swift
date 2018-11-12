@@ -46,6 +46,25 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var isTaggedWith: NSSet?
     @NSManaged public var spelledIn: Language?
     
+    //Convinience Init.
+    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
+            fatalError("Failed to decode Quote")}
+        
+        self.init(entity: entity, insertInto: moc)
+        if let quoteS = dictionary["quote"] as? String{
+            self.quoteString=quoteS
+        }
+        if let authorDict=dictionary["fromAuthor"] as? [String: Any]{
+            self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, and: ["name"])
+        }
+        if let themeDict=dictionary["isAbout"] as? [String: Any]{
+            self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, and: ["themeName"])
+        }
+        //TODO: Implement favorites and lists.
+        
+    }
+    
     //Decodable
     public required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyMOC = CodingUserInfoKey.managedContext,
@@ -60,8 +79,15 @@ public class Quote: NSManagedObject, Codable{
         let container = try decoder.container(keyedBy: CodingKeys.self)
         //self.isFavorite = (try container.decodeIfPresent(Bool.self, forKey: .isFavorite))! //What happens if is string/int?
         self.quoteString = try container.decode(String.self, forKey: .quoteString)
-        self.from = try container.decode(Author.self, forKey: .from) //TODO: Make case for multiple keys.
-        self.isAbout = try container.decode(Theme.self, forKey: .isAbout)
+        //TODO: try to remove uniquenes constaints and decode Author into dictionary first
+        //let author = try container.decode(Dictionary<String:Any>, forKey: .from)
+        let auth = try container.decodeAuthor(forKey: .from, inMOC: moc)
+        let theAuthor=try container.decode(Author.self, forKey: .from)
+        theAuthor.addToHasSaid(self)
+        self.from=theAuthor
+        let theTheme=try container.decode(Theme.self, forKey: .isAbout)
+        theTheme.addToHasQuotes(self)
+        self.isAbout=theTheme
         if let inLists = try container.decodeIfPresent([QuoteList].self, forKey: .isIncludedIn){
             self.addToIsIncludedIn(NSSet(array: inLists))
         }
@@ -103,7 +129,16 @@ public class Quote: NSManagedObject, Codable{
             }
         }
     }
+    
+    //Prints the description
+//    override open var description: String{
+//
+//        return "AA\nBB"
+//    }
+    
+   
 }
+
 
 // MARK: - Generated accessors for isTaggedWith
 extension Quote {

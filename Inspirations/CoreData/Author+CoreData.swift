@@ -32,8 +32,8 @@ public class Author: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Author", in: moc) else {
                 fatalError("Failed to decode Author")}
         
-        self.init(entity:  entity, insertInto: moc)
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(entity:  entity, insertInto: moc)
         self.name = try container.decode(String.self, forKey: .name)
     }
     
@@ -41,6 +41,17 @@ public class Author: NSManagedObject, Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
+    }
+    
+    //Convinience Init.
+    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Author", in: moc) else {
+            fatalError("Failed to decode Author")}
+        
+        self.init(entity: entity, insertInto: moc)
+        if let authorName = dictionary["name"] as? String{
+            self.name=authorName
+        }
     }
 }
 

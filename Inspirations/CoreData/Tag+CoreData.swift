@@ -57,6 +57,7 @@ public class Tag: LibraryItem, Codable {
         try container.encode(name, forKey: .name)
     }
     
+    //Convinience init.
     public convenience init?(inMOC:NSManagedObjectContext, andName:String){
         guard let entity = NSEntityDescription.entity(forEntityName: "Tag", in: inMOC),
         andName != "" else {
@@ -68,6 +69,14 @@ public class Tag: LibraryItem, Codable {
         self.isShown=true
         self.isRootItem=false
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: inMOC)
+    }
+    
+    //Convinience Init.
+    public convenience init?(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+        guard let name = dictionary["name"] as? String else {
+            fatalError("Failed to decode Tag")}
+        self.init(inMOC: moc, andName: name)
+        print(self)
     }
     
 }

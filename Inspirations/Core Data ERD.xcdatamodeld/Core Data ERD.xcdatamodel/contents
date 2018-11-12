@@ -2,12 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C31g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Author" representedClassName="Author" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hasSaid" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="name"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
+        <relationship name="hasSaid" toMany="YES" deletionRule="Cascade" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Language" representedClassName="Language" parentEntity="LibraryItem" syncable="YES">
         <attribute name="localizedName" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,11 +28,16 @@
         <attribute name="quoteString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalLetters" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="from" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
-        <relationship name="isAbout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
+        <relationship name="from" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
+        <relationship name="isAbout" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
         <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
         <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="quoteString"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="QuoteList" representedClassName="QuoteList" parentEntity="LibraryItem" syncable="YES">
         <attribute name="smartPredicate" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -49,11 +49,6 @@
     <entity name="Theme" representedClassName="Theme" syncable="YES">
         <attribute name="themeName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasQuotes" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="themeName"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <fetchRequest name="fetchForLeftView" entity="LibraryItem" predicateString="isRootItem == 0" includeSubentities="YES"/>
     <elements>

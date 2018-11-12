@@ -42,6 +42,20 @@ public class Theme: NSManagedObject, Codable{
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(themeName, forKey: .themeName)
     }
+    
+    //Convinience Init.
+    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Theme", in: moc) else {
+            fatalError("Failed to decode Author")}
+        
+        self.init(entity: entity, insertInto: moc)
+        if let topicName = dictionary["topic"] as? String{
+            self.themeName=topicName
+        }
+    }
+    
+    
+    
 }
 
 // MARK: - Generated accessors for hasQuotes
