@@ -38,6 +38,12 @@ class LeftController: NSViewController {
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
         //listView.expandItem(nil, expandChildren: true)
     }
+    
+    override func viewWillAppear() {
+        listView.beginUpdates()
+        listView.expandItem(nil, expandChildren: true)
+        listView.endUpdates()
+    }
  
     
     //Configure Smart List Controller in case the list already exists.
@@ -217,9 +223,9 @@ class LeftNSTableViewRow:NSTableRowView{
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         //Customize if it is a group row.
-        if self.isGroupRowStyle{
-            print("groupedRow")
-            //self.backgroundColor=NSColor.gray
-        }
+//        if self.isGroupRowStyle{
+//            print("groupedRow")
+//            //self.backgroundColor=NSColor.gray
+//        }
     }
 }

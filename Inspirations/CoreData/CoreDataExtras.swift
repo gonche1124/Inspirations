@@ -84,7 +84,7 @@ extension NSManagedObject {
     }
     
     //First or create
-    class func firstOrCreate<T: NSManagedObject>(inContext moc:NSManagedObjectContext, withAttributes:[String:Any], and keys:[String]?=nil)->T{
+    class func firstOrCreate<T: NSManagedObject>(inContext moc:NSManagedObjectContext, withAttributes:[String:Any], andKeys keys:[String]?=nil)->T{
         
         //Create Predciate
         var newDict=withAttributes

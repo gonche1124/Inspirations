@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
         //TODO: Uncomment!!!
-        notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
+        //notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
 
         //Create Main Items.
         //createRandomQuotes()
@@ -254,25 +254,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             favItem?.sortingOrder="1"
         }
         
-
         //Create Tags
         ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].forEach({
             _=Tag.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
         })
-        print("Tags created")
        
         //Create Languages:
         ["Spanish", "English", "French", "German", "Mandarin"].forEach({
             _=Language.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
         })
-        print("Languauges created")
-       
         
         //create Lists:
         ["Top 25", "For Work", "From Movies", "In songs", "Crazy"].forEach({
             _=QuoteList.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
         })
-        print("Lists created")
         
         do{
             try self.managedObjectContext.save()

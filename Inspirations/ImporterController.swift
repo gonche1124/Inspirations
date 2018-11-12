@@ -56,7 +56,7 @@ class ImporterController: NSViewController {
             self.importProgressIndicator.usesThreadedAnimation=true
             self.importProgressIndicator.startAnimation(nil)
             self.fieldName.isHidden=false
-            self.fieldName.stringValue="Mapping quotes..."
+            self.fieldName.stringValue="Loading quotes..."
             
             //Create JSON array object.
             guard let testData = try? Data.init(contentsOf: jsonURL!) else {return} //TODO: print proper information.
@@ -64,38 +64,47 @@ class ImporterController: NSViewController {
             guard let dictArrayDirty = tempDictArray as? [[String:Any]] else {return}
             
             //Clean dictionary with right keys:
-            //TODO: Better implementation and method of its own.
-            let lookUP=["quote":"quoteString"]
-            let dictArray=dictArrayDirty.map({ (currenDict)->[String:Any] in
-                var mappedDict = [String: Any]()
-                for (key, value) in currenDict{
-                    mappedDict[lookUP[key] ?? key]=value
-                }
-                return mappedDict
-            })
+            //TODO: Check for possible keys before passing.
+            self.fieldName.stringValue="Cleaninig quotes..."
+            let lookUP=["quote":"quoteString", "topic":"themeName"]
+            let dictArray=dictArrayDirty.map({cleanUp(dictionary: $0, mappingTo: lookUP)})
             
-            //TODO: Check for possible keys.
-            //Imports quotes.
-            print(dictArray.count)
+            
+            //UI
+            let totItems=Double(dictArray.count)
+            self.importProgressIndicator.stopAnimation(nil)
+            self.importProgressIndicator.isIndeterminate=false
+            self.importProgressIndicator.minValue=1
+            self.importProgressIndicator.maxValue=totItems
+            let formatter = NumberFormatter()
+            formatter.numberStyle = NumberFormatter.Style.decimal
+            
+            //Import
+            print(privateMOC.automaticallyMergesChangesFromParent)
             privateMOC.perform{
                 for (i, quoteDict) in dictArray.enumerated(){
                     //Create Entity
-                    let newQuote:Quote=Quote.firstOrCreate(inContext: privateMOC, withAttributes: quoteDict, and: ["quote"])
-    
+                    _=Quote.firstOrCreate(inContext: privateMOC, withAttributes: quoteDict, andKeys: ["quoteString"])
                     //Update UI:
                     DispatchQueue.main.async {
-                        self.fieldName.stringValue="Importing \(i) quote out of \(dictArray.count)"
+                        self.fieldName.stringValue="Importing \(formatter.string(for: i+1)!) quote out of \(formatter.string(for:totItems)!)"
+                        self.importProgressIndicator.increment(by: 1)
                     }
                 }
                 
                 //Save private moc:
+                DispatchQueue.main.async {
+                    self.fieldName.stringValue="Saving \(formatter.string(for:totItems)!) quotes..."
+                    self.importProgressIndicator.isIndeterminate=true
+                    self.importProgressIndicator.startAnimation(nil)
+                }
                 try! privateMOC.save()
                 
                 //Save main moc:
                 DispatchQueue.main.async {try! self.moc.save()}
                 
                 //Dismiss
-                //DispatchQueue.main.async {self.dismiss(nil)}
+                DispatchQueue.main.async {self.dismiss(nil)}
             }
             
             
@@ -141,6 +150,27 @@ class ImporterController: NSViewController {
 //            }
             
         }
+    }
+    
+    //Recursively cleans a Dictionary
+    func cleanUp(dictionary inDict:[String:Any], mappingTo lookUP:[String:String])->[String:Any]{
+        
+        var outDictionary=[String:Any]()
+        for (key, value) in inDict{
+            //value is a dictionary.
+            if let valueDict=value as? [String:Any]{
+                let newValue=cleanUp(dictionary: valueDict, mappingTo: lookUP)
+                outDictionary[lookUP[key] ?? key]=newValue
+            }else if let valueArr=value as? [[String:Any]]{
+                let newValue=valueArr.map({cleanUp(dictionary: $0, mappingTo: lookUP)})
+                outDictionary[lookUP[key] ?? key]=newValue
+            }
+            else{
+                outDictionary[lookUP[key] ?? key]=value
+            }
+        }
+        return outDictionary
+        
     }
     
 }

@@ -46,21 +46,27 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var isTaggedWith: NSSet?
     @NSManaged public var spelledIn: Language?
     
-    //Convinience Init.
+    //Convinience Init form dictionary.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+          //Safeguards.
         guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
-            fatalError("Failed to decode Quote")}
+            fatalError("Failed to create Entity Quote")}
+        guard let quoteS = dictionary["quoteString"] as? String, quoteS != "" else{
+            fatalError("Failed to find a valuable string for the quote.")
+        }
+        guard let authorDict=dictionary["fromAuthor"] as? [String: Any] else{
+            fatalError("Failed to find an Author for the quote.")
+        }
+        guard let themeDict=dictionary["isAbout"] as? [String: Any] else{
+            fatalError("Failed to find an Theme for the quote.")
+        }
         
+        //Create Item.
         self.init(entity: entity, insertInto: moc)
-        if let quoteS = dictionary["quote"] as? String{
-            self.quoteString=quoteS
-        }
-        if let authorDict=dictionary["fromAuthor"] as? [String: Any]{
-            self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, and: ["name"])
-        }
-        if let themeDict=dictionary["isAbout"] as? [String: Any]{
-            self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, and: ["themeName"])
-        }
+        self.quoteString=quoteS
+        self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
+        self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
+
         //TODO: Implement favorites and lists.
         
     }

@@ -49,7 +49,7 @@ public class Theme: NSManagedObject, Codable{
             fatalError("Failed to decode Author")}
         
         self.init(entity: entity, insertInto: moc)
-        if let topicName = dictionary["topic"] as? String{
+        if let topicName = dictionary["themeName"] as? String{
             self.themeName=topicName
         }
     }
