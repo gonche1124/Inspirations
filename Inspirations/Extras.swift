@@ -209,5 +209,16 @@ class AGC_GrowingTextField:NSTextField{
     }
 }
 
+//NSTextField Extension
+extension NSTextField{
+    var hasValue:Bool{
+        get {
+            let myCharacters=CharacterSet.letters.inverted
+            return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
+        }
+    }
+}
+
+
 
 

@@ -42,7 +42,7 @@
                                                 </textField>
                                             </gridCell>
                                             <gridCell row="mDa-Yn-n2i" column="ds1-XK-9Hj" xPlacement="fill" id="MHz-u5-71P">
-                                                <textField key="contentView" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vqX-h6-tRf">
+                                                <textField key="contentView" identifier="quoteField" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vqX-h6-tRf">
                                                     <rect key="frame" x="54" y="120" width="222" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="3pi-pm-Zuc"/>
@@ -55,15 +55,16 @@
                                                     <connections>
                                                         <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="0nf-nj-WHj"/>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="0nf-nj-WHj" id="qwC-CS-b2v"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="3Ol-MO-zor">
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="7vB-da-2GM">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                 <string key="NSMultipleValuesPlaceholder">Multiple Quotes</string>
-                                                                <string key="NSNoSelectionPlaceholder">No Selection</string>
+                                                                <string key="NSNoSelectionPlaceholder">Type Quote</string>
                                                                 <string key="NSNotApplicablePlaceholder">Not Applicable</string>
                                                                 <string key="NSNullPlaceholder">Null placeholder</string>
                                                             </dictionary>
                                                         </binding>
+                                                        <outlet property="delegate" destination="sTJ-R3-Pai" id="vzu-fK-WMX"/>
                                                     </connections>
                                                 </textField>
                                             </gridCell>
@@ -90,15 +91,16 @@
                                                         <binding destination="wX5-cF-xen" name="contentValues" keyPath="arrangedObjects.name" previousBinding="Qrp-sC-XNe" id="uEo-nO-cXt"/>
                                                         <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="J1c-bE-wem"/>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="J1c-bE-wem" id="lWX-9w-taJ"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.from.name" previousBinding="uEo-nO-cXt" id="Mn9-eK-BNO">
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.from.name" previousBinding="uEo-nO-cXt" id="BIF-cm-scP">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEnabled" value="NO"/>
-                                                                <string key="NSMultipleValuesPlaceholder">Multiple</string>
-                                                                <string key="NSNoSelectionPlaceholder">No Sel</string>
+                                                                <string key="NSMultipleValuesPlaceholder">Multiple Authors</string>
+                                                                <string key="NSNoSelectionPlaceholder">author name</string>
                                                                 <string key="NSNotApplicablePlaceholder">Not Applicable</string>
                                                                 <string key="NSNullPlaceholder">Null</string>
                                                             </dictionary>
                                                         </binding>
+                                                        <outlet property="delegate" destination="sTJ-R3-Pai" id="5th-eo-SBw"/>
                                                     </connections>
                                                 </comboBox>
                                             </gridCell>
@@ -113,7 +115,7 @@
                                                 </textField>
                                             </gridCell>
                                             <gridCell row="KEK-4M-wvO" column="ds1-XK-9Hj" id="qpM-DX-39v">
-                                                <comboBox key="contentView" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="8h3-Fd-CFo">
+                                                <comboBox key="contentView" identifier="themeComboBox" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="8h3-Fd-CFo">
                                                     <rect key="frame" x="54" y="68" width="225" height="26"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Topic name" drawsBackground="YES" numberOfVisibleItems="5" id="k46-7P-FKs">
                                                         <font key="font" metaFont="system"/>
@@ -130,12 +132,15 @@
                                                         <binding destination="U3Q-qs-zJA" name="contentValues" keyPath="arrangedObjects.themeName" previousBinding="HIQ-ev-IiK" id="dCH-Ua-7hf"/>
                                                         <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="G1K-MU-FTB"/>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="G1K-MU-FTB" id="37u-HM-QCJ"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isAbout.themeName" previousBinding="dCH-Ua-7hf" id="ind-Lg-bVd">
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isAbout.themeName" previousBinding="dCH-Ua-7hf" id="kcp-sQ-fuF">
                                                             <dictionary key="options">
-                                                                <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                                <string key="NSMultipleValuesPlaceholder">Multiple themes</string>
+                                                                <string key="NSNoSelectionPlaceholder">Theme name</string>
                                                                 <string key="NSNullPlaceholder">Type topic name</string>
                                                             </dictionary>
                                                         </binding>
+                                                        <outlet property="delegate" destination="sTJ-R3-Pai" id="UQ5-pr-zYs"/>
                                                     </connections>
                                                 </comboBox>
                                             </gridCell>
@@ -150,7 +155,7 @@
                                                 </textField>
                                             </gridCell>
                                             <gridCell row="pzp-8c-gLa" column="ds1-XK-9Hj" xPlacement="fill" id="4Kz-bm-vzr">
-                                                <tokenField key="contentView" verticalHuggingPriority="248" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-wS-Z3h">
+                                                <tokenField key="contentView" identifier="tagsTokenField" verticalHuggingPriority="248" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-wS-Z3h">
                                                     <rect key="frame" x="54" y="18" width="222" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="Yzs-K4-Hnl"/>
@@ -164,8 +169,11 @@
                                                     <connections>
                                                         <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="89W-Le-KII"/>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="89W-Le-KII" id="HBM-wf-FZo"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isTaggedWith" id="QG2-7L-gc8">
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isTaggedWith" id="rbC-JX-peV">
                                                             <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                <string key="NSMultipleValuesPlaceholder">Type Tags</string>
+                                                                <string key="NSNoSelectionPlaceholder">Type Tags</string>
                                                                 <string key="NSValueTransformerName">EntityToToken</string>
                                                             </dictionary>
                                                         </binding>
@@ -183,7 +191,11 @@
                                                     </buttonCell>
                                                     <connections>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" id="eDd-jD-nLJ"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isFavorite" id="8ph-sI-dni"/>
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.isFavorite" id="kby-EY-THA">
+                                                            <dictionary key="options">
+                                                                <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </button>
                                             </gridCell>

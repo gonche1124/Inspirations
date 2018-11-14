@@ -24,7 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
 
         //Create Main Items.
-        //createRandomQuotes()
         createMainObjectsIfNotPresent()
 
         
@@ -123,7 +122,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-        //managedObjectContext.mergePolicy=NSMergePolicy.mergeByPropertyObjectTrump //Custom Line of code to avoid  duplicates. NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
     }()
     

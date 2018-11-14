@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+//TODO: Transofmr Codable to Encodable and cleanup code.
 @objc(Theme)
 public class Theme: NSManagedObject, Codable{
     

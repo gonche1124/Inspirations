@@ -66,14 +66,8 @@ class EntityToToken:ValueTransformer{
         //return theTags.map({$0.name!}).joined(separator: ",")
     }
     
-    override class func allowsReverseTransformation()->Bool{return false}
-    
-//    override func reverseTransformedValue(_ value: Any?) -> Any? {
-//        guard let tagArray=value as? Array<Tag> else {return nil}
-//        //TODO: Add the reverse relationship in teh NSTokeFieldDelegate becasue here there is no access to the selected item.
-//        print("reveresed")
-//        return NSSet(array: tagArray)
-   // }
+    override class func allowsReverseTransformation()->Bool{return true}
+
 }
 
 //NSAttributed String to normal string.
