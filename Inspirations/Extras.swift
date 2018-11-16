@@ -108,17 +108,17 @@ extension NSPredicate{
 
 
 
-//TODO: Figure out how to make this conform to NSManagedObvject instead of Quote
-class GFetchResultsController<T: Quote>:NSFetchedResultsController<Quote>{
-    var delegatedTable:NSTableView?
-    var selectedObjects:[Quote]?{
-        guard let idx = delegatedTable?.selectedRowIndexes else {return nil}
-        return self.fetchedObjects!.objects(atIndexes: idx)
-    }
-    public convenience init(fetchRequest: NSFetchRequest<Quote>, context: NSManagedObjectContext, _: T.Type) {
-        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-    }
-}
+
+//class GFetchResultsController<T: Quote>:NSFetchedResultsController<Quote>{
+//    var delegatedTable:NSTableView?
+//    var selectedObjects:[Quote]?{
+//        guard let idx = delegatedTable?.selectedRowIndexes else {return nil}
+//        return self.fetchedObjects!.objects(atIndexes: idx)
+//    }
+//    public convenience init(fetchRequest: NSFetchRequest<Quote>, context: NSManagedObjectContext, _: T.Type) {
+//        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//    }
+//}
 
 
 
@@ -150,6 +150,7 @@ extension NSAlert{
         return confirmationD
     }
 }
+
 
 extension NSViewController{
     
@@ -209,7 +210,7 @@ class AGC_GrowingTextField:NSTextField{
     }
 }
 
-//NSTextField Extension
+//NSTextField Extension to check if there is a value.
 extension NSTextField{
     var hasValue:Bool{
         get {

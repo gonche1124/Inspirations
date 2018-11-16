@@ -431,7 +431,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="355" y="265" width="553" height="260"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="Fp4-eG-h8C">
+                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Fp4-eG-h8C">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="e6b-nv-9hy"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="5Mz-36-bxw"/>
@@ -512,7 +512,7 @@
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="25"/>
                                     <size key="maxSize" width="45" height="25"/>
-                                    <button key="view" verticalHuggingPriority="750" id="m1q-oA-5JL">
+                                    <button key="view" identifier="shareButton" verticalHuggingPriority="750" id="m1q-oA-5JL">
                                         <rect key="frame" x="0.0" y="14" width="45" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sdc-qL-vlv">
@@ -520,7 +520,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <segue destination="AxN-ZL-JAM" kind="popover" popoverAnchorView="m1q-oA-5JL" popoverBehavior="t" preferredEdge="maxY" id="K1z-4Z-Iua"/>
+                                            <action selector="shareSheet:" target="0T4-WD-gnI" id="JoM-XO-qj8"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -559,6 +559,7 @@
                     </window>
                     <connections>
                         <outlet property="mainSearchField" destination="0Xx-UZ-MRd" id="hp0-bF-yyK"/>
+                        <outlet property="shareButton" destination="m1q-oA-5JL" id="S5u-d6-6lm"/>
                         <segue destination="KAN-2L-YNM" kind="relationship" relationship="window.shadowedContentViewController" id="yUg-Ha-RNT"/>
                     </connections>
                 </windowController>
@@ -870,21 +871,13 @@
             </objects>
             <point key="canvasLocation" x="835.5" y="49"/>
         </scene>
-        <!--Export-->
-        <scene sceneID="ylJ-PT-Cy5">
-            <objects>
-                <controllerPlaceholder id="AxN-ZL-JAM" userLabel="Export" sceneMemberID="viewController"/>
-                <customObject id="5He-et-PVv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="222" y="7"/>
-        </scene>
         <!--Import Multiple-->
         <scene sceneID="eWo-9c-sen">
             <objects>
                 <controllerPlaceholder storyboardName="ImportMultiple" id="UfG-VC-tKj" userLabel="Import Multiple" sceneMemberID="viewController"/>
                 <customObject id="T4z-5G-5bG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="-19"/>
+            <point key="canvasLocation" x="155" y="-28"/>
         </scene>
         <!--Smart List Editor-->
         <scene sceneID="31j-SP-Ov7">
@@ -914,6 +907,6 @@
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZJb-N4-6pE"/>
+        <segue reference="AFD-yr-noe"/>
     </inferredMetricsTieBreakers>
 </document>

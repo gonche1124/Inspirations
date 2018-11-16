@@ -7,12 +7,15 @@
 //
 
 import Cocoa
+import WebKit
 
 class ImporterController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
+        webDisplay.load(URLRequest(url: webPage!))
     }
     
     //Properties
@@ -20,6 +23,7 @@ class ImporterController: NSViewController {
     @IBOutlet weak var pathToFile: NSTextField!
     @IBOutlet weak var importProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var fieldName: NSTextField!
+    @IBOutlet weak var webDisplay: WKWebView!
     
     //MARK: - Actions
     //Chooses a file.
@@ -106,50 +110,16 @@ class ImporterController: NSViewController {
                 //Dismiss
                 DispatchQueue.main.async {self.dismiss(nil)}
             }
-            
-            
-//            let decoder = JSONDecoder()
-//            decoder.userInfo[CodingUserInfoKey.managedContext!]=privateMOC
-//            decoder.userInfo[CodingUserInfoKey.progressText!]=self.fieldName
-            
-            //Parse data
-//            self.importProgressIndicator.isHidden=false
-//            self.importProgressIndicator.usesThreadedAnimation=true
-//            self.importProgressIndicator.startAnimation(nil)
-//            self.fieldName.isHidden=false
-            
-//            privateMOC.perform {
-//                do {
-//                    let quotesImported = try decoder.decode([Quote].self, from: testData)
-//                    DispatchQueue.main.async {
-//                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes to child moc"
-//                    }
-//                    //Save
-//                    try privateMOC.save()
-//                    DispatchQueue.main.async {
-//                        self.fieldName.stringValue="Saving \(quotesImported.count) quotes"
-//                    }
-//                    //Saves to moc in main thread.
-//                    self.moc.perform {
-//                        do{
-//                            try self.moc.save()
-//                        }catch{
-//                            print("caught MOC: \(error)")
-//                        }
-//                    }
-//
-//                    //TODO: Send notification that XXX number of quotes have been imoprted.
-//
-//                    //Dismiss
-//                    DispatchQueue.main.async {
-//                        self.dismiss(nil)
-//                    }
-//                }catch  {
-//                    print("caught: \(error)")
-//                }
-//            }
-            
         }
+    }
+    
+    //Import from web page
+    @IBAction func importFromWebPage(_ sender:NSButton){
+        print("Importing from web page")
+        let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
+        let testString=try? String.init(contentsOf:webPage! )
+        
+        //TODO: Parse string of HTML.
     }
     
     //Recursively cleans a Dictionary

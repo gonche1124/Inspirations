@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
         //TODO: Uncomment!!!
-        //notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
+        notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
 
         //Create Main Items.
         createMainObjectsIfNotPresent()
@@ -227,14 +227,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     }
     
-    //TODO
+    //create teh default objects.
     func createMainObjectsIfNotPresent() {
         
         //Create root items.
-        let libRoot = LibraryItem.getRootItem(withName: "Library", inContext: managedObjectContext)
-        let tagRoot = LibraryItem.getRootItem(withName: "Tags", inContext: managedObjectContext)
-        let lanRoot = LibraryItem.getRootItem(withName: "Languages", inContext: managedObjectContext)
-        let collRoot = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
+        _ = LibraryItem.getRootItem(withName: "Library", inContext: managedObjectContext)
+        _ = LibraryItem.getRootItem(withName: "Tags", inContext: managedObjectContext)
+        _ = LibraryItem.getRootItem(withName: "Languages", inContext: managedObjectContext)
+        _ = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
         
         //Create Main Library.
         let libPredicate=NSPredicate(format:"name == 'Library' AND isRootItem == FALSE")
@@ -275,40 +275,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
     
-    //TODO
-    func create(object: String, withAttributes:Dictionary<String, Any>)->NSManagedObject{
-        let coreEntity: NSManagedObject = NSEntityDescription.insertNewObject(forEntityName: object, into: self.managedObjectContext)
-        coreEntity.setValuesForKeys(withAttributes)
-        return coreEntity
-    }
     
-    //For Testing only
-    func createRandomQuotes(){
-        let quoteA: [String]=["Love is in the Air"
-            ,"Reach for the moon, even if  you miss you will land among the starts"
-            , "What a wonderful world it was"
-            , "Wierd is just a point of view"
-            , "Random is life"
-            , "Travel lightly"]
-        let authorA=["John", "Mike", "Andres", "Felipe", "Geoff"]
-        let themeN = ["Love", "Faith", "Courage"]
-        let isF = [true, false]
-        for _ in 1...20{
-            
-            //TODO: create NSMANAgedObject(context:moc) convinience init.
-            let thisQuote = NSEntityDescription.insertNewObject(forEntityName: "Quote", into: managedObjectContext) as? Quote//Quote(context: managedObjectContext)
-            thisQuote?.quoteString = quoteA[Int(arc4random_uniform(UInt32(quoteA.count)))]
-            let currAuthor = NSEntityDescription.insertNewObject(forEntityName: "Author", into: managedObjectContext) as? Author//Author(context: managedObjectContext)
-            currAuthor?.name = authorA[Int(arc4random_uniform(UInt32(authorA.count)))]
-            thisQuote?.from=currAuthor
-            thisQuote?.isFavorite=isF[Int(arc4random_uniform(UInt32(isF.count)))]
-            let currTheme = NSEntityDescription.insertNewObject(forEntityName: "Theme", into: managedObjectContext) as? Theme//Theme(context: managedObjectContext)
-            currTheme?.themeName = themeN[Int(arc4random_uniform(UInt32(themeN.count)))]
-            thisQuote?.isAbout=currTheme
-        }
-        try! self.managedObjectContext.save()
-    }
-
+//    func create(object: String, withAttributes:Dictionary<String, Any>)->NSManagedObject{
+//        let coreEntity: NSManagedObject = NSEntityDescription.insertNewObject(forEntityName: object, into: self.managedObjectContext)
+//        coreEntity.setValuesForKeys(withAttributes)
+//        return coreEntity
+//    }
 }
 
 

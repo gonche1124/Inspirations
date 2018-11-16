@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Va1-kv-oLX">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Va1-kv-oLX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,11 +12,11 @@
             <objects>
                 <viewController title="Import" showSeguePresentationStyle="single" id="Va1-kv-oLX" customClass="ImporterController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="awf-Af-hqY">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="164"/>
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="213"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView initialItem="8bb-ff-oH2" translatesAutoresizingMaskIntoConstraints="NO" id="xtX-2g-Twq">
-                                <rect key="frame" x="-7" y="-10" width="394" height="180"/>
+                                <rect key="frame" x="-7" y="-10" width="394" height="229"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="JSON" identifier="" id="8bb-ff-oH2">
@@ -39,7 +41,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Zxr-pr-7FN">
                                                         <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -81,8 +83,29 @@
                                     </tabViewItem>
                                     <tabViewItem label="Other" identifier="" id="9FX-jc-vvo">
                                         <view key="view" id="Z9H-EQ-pZr">
-                                            <rect key="frame" x="10" y="33" width="374" height="171"/>
+                                            <rect key="frame" x="10" y="33" width="374" height="183"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <wkWebView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzu-bf-cnz">
+                                                    <rect key="frame" x="10" y="58" width="354" height="114"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JpB-6N-d2z">
+                                                    <rect key="frame" x="148" y="10" width="80" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NiW-1F-bph">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="importFromWebPage:" target="Va1-kv-oLX" id="zZh-Fl-GMj"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
@@ -99,11 +122,12 @@
                         <outlet property="fieldName" destination="DuH-B2-lyh" id="bkt-63-jo9"/>
                         <outlet property="importProgressIndicator" destination="nQE-io-amA" id="ips-Dx-Mwi"/>
                         <outlet property="pathToFile" destination="qoU-5k-cz1" id="yK9-TE-7As"/>
+                        <outlet property="webDisplay" destination="xzu-bf-cnz" id="Ahy-jP-0H4"/>
                     </connections>
                 </viewController>
                 <customObject id="80D-5h-sfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="57"/>
+            <point key="canvasLocation" x="-48" y="81.5"/>
         </scene>
     </scenes>
 </document>

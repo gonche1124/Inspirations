@@ -99,6 +99,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.isFavorite" id="ez3-br-ynC"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="from.name" width="101" minWidth="60" maxWidth="1000" id="he1-Sb-3n3">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Author">
@@ -137,6 +140,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.from.name" id="NeN-hO-6eG"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="quoteString" width="282.5" minWidth="70" maxWidth="1000" id="4A0-7k-xAo">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Quote">
@@ -165,7 +171,7 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <binding destination="hhC-oV-TzE" name="value" keyPath="objectValue.quoteString" id="SmO-ds-EE1"/>
+                                                                        <binding destination="hhC-oV-TzE" name="value" keyPath="objectValue.quoteString" id="5A2-XX-ojX"/>
                                                                         <binding destination="hhC-oV-TzE" name="toolTip" keyPath="objectValue.quoteString" id="Zgp-yj-gpY"/>
                                                                     </connections>
                                                                 </textField>
@@ -175,6 +181,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.quoteString" id="3t9-6U-A28"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="isAbout.themeName" width="80" minWidth="65" maxWidth="80" id="PCD-tF-Vlk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Theme">
@@ -213,6 +222,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.isAbout.themeName" id="Qep-2R-u0s"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="isTaggedWith" width="50" minWidth="35" maxWidth="50" id="zTa-91-gER">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Tags">
@@ -255,6 +267,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.sTaggedWith.@count" id="uYv-bX-B54"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="isIncludedIn" width="50" minWidth="35" maxWidth="50" id="Wgo-fi-aC0">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Lists">
@@ -297,6 +312,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="IER-7v-p5d" name="value" keyPath="arrangedObjects.isIncludedIn.@count" id="PJR-Kh-IjF"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
@@ -341,9 +359,9 @@
                     </connections>
                 </viewController>
                 <customObject id="ipj-Cp-v1s" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" id="IER-7v-p5d">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="IER-7v-p5d">
                     <connections>
-                        <binding destination="m8M-8y-p42" name="managedObjectContext" keyPath="self.moc" id="DkT-6e-GI3"/>
+                        <binding destination="m8M-8y-p42" name="managedObjectContext" keyPath="moc" id="VjR-dc-HdO"/>
                     </connections>
                 </arrayController>
                 <menu identifier="rightMenu" id="qLB-XN-Y78">

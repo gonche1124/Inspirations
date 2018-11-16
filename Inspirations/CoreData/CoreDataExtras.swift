@@ -105,6 +105,7 @@ extension NSManagedObject {
     }
     
     //Evaluates type of core data entity and performs init.
+    //TODO: Potential to be recycled.
    class func createEntity<T:NSManagedObject>(withDictionary:[String:Any], in moc:NSManagedObjectContext) throws ->T?{
         switch String(describing: self) {
         case Entities.quote.rawValue:
@@ -152,6 +153,7 @@ extension NSFetchRequestResult where Self: NSManagedObject {
         return request
     }
 }
+
 
 struct gonche:CodingKey{
     var intValue: Int?

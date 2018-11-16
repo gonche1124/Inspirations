@@ -11,14 +11,14 @@
             <objects>
                 <viewController title="Information" showSeguePresentationStyle="single" id="sTJ-R3-Pai" customClass="AddQuoteController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="2RQ-1g-1WM">
-                        <rect key="frame" x="0.0" y="0.0" width="316" height="234"/>
+                        <rect key="frame" x="0.0" y="0.0" width="329" height="252"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97X-vN-Oga">
-                                <rect key="frame" x="20" y="20" width="276" height="194"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" verticalHuggingPriority="248" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97X-vN-Oga">
+                                <rect key="frame" x="20" y="20" width="289" height="212"/>
                                 <subviews>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" xPlacement="leading" yPlacement="center" rowAlignment="none" rowSpacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZdA-HE-2xE">
-                                        <rect key="frame" x="0.0" y="29" width="276" height="165"/>
+                                        <rect key="frame" x="0.0" y="29" width="289" height="183"/>
                                         <rows>
                                             <gridRow yPlacement="top" rowAlignment="firstBaseline" id="mDa-Yn-n2i"/>
                                             <gridRow yPlacement="center" id="n2y-O3-bgb"/>
@@ -33,7 +33,7 @@
                                         <gridCells>
                                             <gridCell row="mDa-Yn-n2i" column="uvi-T2-Cfz" xPlacement="trailing" yPlacement="top" id="y8f-XH-xul">
                                                 <textField key="contentView" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Ihh-gj-Oqv">
-                                                    <rect key="frame" x="2" y="120" width="45" height="43"/>
+                                                    <rect key="frame" x="2" y="120" width="45" height="61"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Quote:" id="hRE-qz-ede">
                                                         <font key="font" usesAppearanceFont="YES"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,8 +42,8 @@
                                                 </textField>
                                             </gridCell>
                                             <gridCell row="mDa-Yn-n2i" column="ds1-XK-9Hj" xPlacement="fill" id="MHz-u5-71P">
-                                                <textField key="contentView" identifier="quoteField" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vqX-h6-tRf">
-                                                    <rect key="frame" x="54" y="120" width="222" height="45"/>
+                                                <textField key="contentView" identifier="quoteField" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="vqX-h6-tRf">
+                                                    <rect key="frame" x="54" y="120" width="235" height="63"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="3pi-pm-Zuc"/>
                                                     </constraints>
@@ -55,13 +55,14 @@
                                                     <connections>
                                                         <binding destination="sTJ-R3-Pai" name="editable" keyPath="self.isEditing" id="0nf-nj-WHj"/>
                                                         <binding destination="sTJ-R3-Pai" name="enabled" keyPath="self.isEditing" previousBinding="0nf-nj-WHj" id="qwC-CS-b2v"/>
-                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="7vB-da-2GM">
+                                                        <binding destination="6Ew-6K-Pu4" name="value" keyPath="selection.quoteString" id="b6R-ry-YsN">
                                                             <dictionary key="options">
                                                                 <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                 <string key="NSMultipleValuesPlaceholder">Multiple Quotes</string>
                                                                 <string key="NSNoSelectionPlaceholder">Type Quote</string>
                                                                 <string key="NSNotApplicablePlaceholder">Not Applicable</string>
                                                                 <string key="NSNullPlaceholder">Null placeholder</string>
+                                                                <bool key="NSValidatesImmediately" value="YES"/>
                                                             </dictionary>
                                                         </binding>
                                                         <outlet property="delegate" destination="sTJ-R3-Pai" id="vzu-fK-WMX"/>
@@ -80,7 +81,7 @@
                                             </gridCell>
                                             <gridCell row="n2y-O3-bgb" column="ds1-XK-9Hj" id="6fI-ht-LXs">
                                                 <comboBox key="contentView" identifier="authorComboBox" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="9j1-Aj-BRc">
-                                                    <rect key="frame" x="54" y="92" width="225" height="26"/>
+                                                    <rect key="frame" x="54" y="92" width="238" height="26"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Author Name" drawsBackground="YES" numberOfVisibleItems="5" id="tZ5-Wu-TYp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -116,7 +117,7 @@
                                             </gridCell>
                                             <gridCell row="KEK-4M-wvO" column="ds1-XK-9Hj" id="qpM-DX-39v">
                                                 <comboBox key="contentView" identifier="themeComboBox" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="8h3-Fd-CFo">
-                                                    <rect key="frame" x="54" y="68" width="225" height="26"/>
+                                                    <rect key="frame" x="54" y="68" width="238" height="26"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Topic name" drawsBackground="YES" numberOfVisibleItems="5" id="k46-7P-FKs">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -156,7 +157,7 @@
                                             </gridCell>
                                             <gridCell row="pzp-8c-gLa" column="ds1-XK-9Hj" xPlacement="fill" id="4Kz-bm-vzr">
                                                 <tokenField key="contentView" identifier="tagsTokenField" verticalHuggingPriority="248" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-wS-Z3h">
-                                                    <rect key="frame" x="54" y="18" width="222" height="50"/>
+                                                    <rect key="frame" x="54" y="18" width="235" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="Yzs-K4-Hnl"/>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="bng-6g-WtS"/>
@@ -184,7 +185,7 @@
                                             <gridCell row="AC2-uF-Py7" column="uvi-T2-Cfz" id="Jjx-4U-DtL"/>
                                             <gridCell row="AC2-uF-Py7" column="ds1-XK-9Hj" xPlacement="leading" id="qpk-NI-0ZN">
                                                 <button key="contentView" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FbF-Gt-Rbh">
-                                                    <rect key="frame" x="52" y="-2" width="226" height="18"/>
+                                                    <rect key="frame" x="52" y="-2" width="239" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Favorite" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9ov-XD-Xsx">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -202,7 +203,7 @@
                                         </gridCells>
                                     </gridView>
                                     <button verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="bb0-tr-aKe">
-                                        <rect key="frame" x="-6" y="-7" width="288" height="32"/>
+                                        <rect key="frame" x="-6" y="-7" width="301" height="32"/>
                                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dFg-mE-kEo">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -268,7 +269,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="118" y="134.5"/>
+            <point key="canvasLocation" x="124.5" y="143"/>
         </scene>
     </scenes>
 </document>

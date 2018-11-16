@@ -9,7 +9,20 @@
 import Cocoa
 
 class PrincipalWindow: NSWindowController {
-
+    
+    //Outlets
+    @IBOutlet var shareButton:NSButton!
+    @IBOutlet weak var mainSearchField: NSSearchField!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.contentViewController?.representedObject=(NSApp.delegate as? AppDelegate)?.managedObjectContext
+        
+        //Fixes bug:
+       shareButton.sendAction(on: .leftMouseDown)
+        
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         //TODO: Finish implementing recent searches.
@@ -17,6 +30,8 @@ class PrincipalWindow: NSWindowController {
         //mainSearchField.recentSearches=recentSearches
         //mainSearchField.searchMenuTemplate=searchMenu
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        
+
     }
     
     override func windowWillLoad() {
@@ -33,10 +48,6 @@ class PrincipalWindow: NSWindowController {
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
         
     }
-    
-    //Outlets
-
-    @IBOutlet weak var mainSearchField: NSSearchField!
     
     
     //Variables
@@ -63,6 +74,38 @@ class PrincipalWindow: NSWindowController {
         
     }
     
+    //Sharing sheet
+    @IBAction func shareSheet(_ sender:NSButton){
+        let textToDelete="sdjbf sjdb sbd m"
+        //TODO: How to pass selectedQuotes
+        let sharingPicker = NSSharingServicePicker(items: [textToDelete])
+        
+        //Present
+        sharingPicker.delegate=self
+        sharingPicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
+    }
+}
+
+//MARK: - NSSharingServicePickerDeleate
+extension PrincipalWindow:NSSharingServicePickerDelegate{
+   
+    //Cusotmizaion before appearance.
+    func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
+        guard let image = NSImage(named: NSImage.Name("copy")) else {
+            return proposedServices
+        }
+        
+        var share = proposedServices
+        let customService = NSSharingService(title: "Copy Text", image: image, alternateImage: image, handler: {
+            if let text = items.first as? String {
+                print("Clipboard\(text)")
+                //self.setClipboard(text: text)
+            }
+        })
+        share.insert(customService, at: 0)
+        
+        return share
+    }
 }
 
 

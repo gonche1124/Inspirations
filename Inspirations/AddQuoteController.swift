@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-//TODO: Figure out how to handle saving when a new author/topic is added.
+
 class AddQuoteController: NSViewController {
 
     override func viewDidLoad() {
@@ -115,11 +115,19 @@ extension AddQuoteController:NSTextFieldDelegate{
     
     //TODO: Look below.
     //Handle logic to add Tags and enable button.
+    //Add theme or Auhtor if is new when editing.
     func controlTextDidEndEditing(_ obj: Notification) {
-        if let UIItem = obj.object as? NSUserInterfaceItemIdentification,
-            isEditing {
+        if let UIItem = obj.object as? NSUserInterfaceItemIdentification{
             self.saveButton.isEnabled=[quoteTextField, authorComboBox, themeComboBox].reduce(true, {$0 && $1?.hasValue ?? true})
+            if UIItem.identifier?.rawValue=="quoteField"{
+                //Useless:
+                self.quoteTextField.needsLayout=true
+                
+                self.quoteTextField.setNeedsDisplay()
+                self.view.displayIfNeeded()
+            }
         }
+        
       
     }
 }

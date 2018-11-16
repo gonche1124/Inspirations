@@ -33,11 +33,6 @@
         <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
         <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="quoteString"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="QuoteList" representedClassName="QuoteList" parentEntity="LibraryItem" syncable="YES">
         <attribute name="smartPredicate" optional="YES" attributeType="Transformable" syncable="YES"/>

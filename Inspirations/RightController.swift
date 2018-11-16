@@ -27,6 +27,7 @@ class RightController: NSViewController {
        
     }
     
+    
     //Selected rows changed
     @objc func selectedRowsOfTableChanged(_ notification:Notification){
         if let myTable = notification.object as? NSTableView {

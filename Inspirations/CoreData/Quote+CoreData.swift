@@ -47,6 +47,9 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var spelledIn: Language?
     
     //Convinience Init form dictionary.
+    
+    
+    
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
           //Safeguards.
         guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
@@ -85,9 +88,8 @@ public class Quote: NSManagedObject, Codable{
         let container = try decoder.container(keyedBy: CodingKeys.self)
         //self.isFavorite = (try container.decodeIfPresent(Bool.self, forKey: .isFavorite))! //What happens if is string/int?
         self.quoteString = try container.decode(String.self, forKey: .quoteString)
-        //TODO: try to remove uniquenes constaints and decode Author into dictionary first
+       
         //let author = try container.decode(Dictionary<String:Any>, forKey: .from)
-        let auth = try container.decodeAuthor(forKey: .from, inMOC: moc)
         let theAuthor=try container.decode(Author.self, forKey: .from)
         theAuthor.addToHasSaid(self)
         self.from=theAuthor

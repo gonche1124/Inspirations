@@ -100,16 +100,15 @@ extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         var myCell: NSTableCellView?
-        let libItem=(item as? LibraryItem)
-        let typeOfCell:String=(libItem?.isRootItem)! ? "HeaderCell":"DataCell"
+        guard let libItem=item as? LibraryItem else {return nil}
+        let typeOfCell:String=(libItem.isRootItem) ? "HeaderCell":"DataCell"
         myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
-        myCell?.textField?.stringValue=(libItem?.name!)!
-        guard let itemImage = libItem?.libraryType as? String else {//NSImage(named: NSImage.Name((libItem?.libraryType)!)) else {
-            myCell?.imageView?.image=NSImage.init(named: NSImage.folderName) //TODO: make it right with an NSIMAGE extensions?
-            return myCell
-        }
-        myCell?.imageView?.image=NSImage.init(named: NSImage.Name(itemImage))
+        myCell?.textField?.stringValue=libItem.name!
+        if libItem.isRootItem {return myCell}
+        
+        myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
         return myCell
+        
     }
     
     //Determines if triangle should be shown.

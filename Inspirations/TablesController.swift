@@ -25,6 +25,8 @@ class TablesController: NSViewController {
     @IBOutlet var rightMenu: NSMenu!
   
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -71,10 +73,12 @@ class TablesController: NSViewController {
     
     //Update favorite attribute
     func updateFavoriteValue(newValue:Bool){
+        //quoteController.selectedObjects.forEach({($0 as? Quote)?.isFavorite=newValue})
         guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
-        selectedQuotes.forEach({$0.isFavorite=newValue})
-        
-        try! self.moc.save() //NO need since it is reading from an NSArraycontroller??
+        selectedQuotes.forEach({
+            $0.isFavorite=newValue})
+        //self.table?.reloadData()
+        //TODO: Fix non refreshing issue.
     }
     
     //Action to set favorite attribute
