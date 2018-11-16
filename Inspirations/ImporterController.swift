@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+import SwiftSoup
 
 class ImporterController: NSViewController {
 
@@ -117,10 +118,31 @@ class ImporterController: NSViewController {
     @IBAction func importFromWebPage(_ sender:NSButton){
         print("Importing from web page")
         let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
-        let testString=try? String.init(contentsOf:webPage! )
+        if let newQute=importWiki(quoteOfTheDay: webPage!){
+            print(newQute)
+        }
+
+        //let qotd=try! doc.select("id=\"mf-qotd\"").first()!
+        print(" eee")
         
         //TODO: Parse string of HTML.
         
+    }
+    
+    //Parses the web page and extracts the quote of the day.
+    func importWiki(quoteOfTheDay:URL)->[String:String]? {
+        
+        let html=try? String.init(contentsOf:quoteOfTheDay)
+        let doc: Document = try! SwiftSoup.parse(html!)
+        let ele = try! doc.select("#mf-qotd")
+        
+        //tbody
+        //first tr
+
+        
+        
+        
+        return nil
     }
     
     //Recursively cleans a Dictionary
