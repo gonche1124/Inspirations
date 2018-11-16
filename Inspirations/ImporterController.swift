@@ -120,6 +120,7 @@ class ImporterController: NSViewController {
         let testString=try? String.init(contentsOf:webPage! )
         
         //TODO: Parse string of HTML.
+        
     }
     
     //Recursively cleans a Dictionary
