@@ -182,6 +182,7 @@ extension NSMenu{
 class AGC_NSMenuItem: NSMenuItem {
     
     @IBInspectable var agcBool:Bool=false
+    @IBInspectable var customURLString:String=""
     
 }
 

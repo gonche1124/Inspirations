@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Inspirations/ImporterController.swift"
-            timestampString = "564024168.856531"
+            timestampString = "564195758.1171089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "importFromWebPage(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -100,12 +100,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Inspirations/ImporterController.swift"
-            timestampString = "564024575.921138"
+            timestampString = "564195758.117908"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "importWiki(quoteOfTheDay:)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "importQuote(fromForbes:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inspirations/ImporterController.swift"
+            timestampString = "564195758.118548"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "importQuote(fromForbes:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

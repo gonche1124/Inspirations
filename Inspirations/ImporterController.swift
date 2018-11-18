@@ -25,6 +25,8 @@ class ImporterController: NSViewController {
     @IBOutlet weak var importProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var fieldName: NSTextField!
     @IBOutlet weak var webDisplay: WKWebView!
+    @IBOutlet weak var webPopUpButton:NSPopUpButton!
+
     
     //MARK: - Actions
     //Chooses a file.
@@ -117,33 +119,80 @@ class ImporterController: NSViewController {
     //Import from web page
     @IBAction func importFromWebPage(_ sender:NSButton){
         print("Importing from web page")
-        let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
-        if let newQute=importWiki(quoteOfTheDay: webPage!){
-            print(newQute)
+        //let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
+        guard let selectedItem=webPopUpButton.menu?.highlightedItem as? AGC_NSMenuItem else{return}
+        let webPage = URL.init(string: selectedItem.customURLString)
+        switch selectedItem.identifier?.rawValue {
+        case "forbesQuote":
+            //TODO: Figure out how to handle the JAVASCRIPT CODE.
+            if let newQuote=importQuote(fromForbes: webPage!){
+                print(newQuote)
+            }
+        case "wikiQuote":
+            if let newQute=importQuote(fromWikiQuote: webPage!){
+                print(newQute)
+            }
+        default:
+            print("To Implement")
         }
+        
+        
+   
 
-        //let qotd=try! doc.select("id=\"mf-qotd\"").first()!
         print(" eee")
         
         //TODO: Parse string of HTML.
         
     }
     
-    //Parses the web page and extracts the quote of the day.
-    func importWiki(quoteOfTheDay:URL)->[String:String]? {
+    //Parses web page to returns quote fo the day.
+    //TODO: Refactor code.
+    func importQuote(fromForbes urlToParse:URL)->[String:String]?{
         
-        let html=try? String.init(contentsOf:quoteOfTheDay)
-        let doc: Document = try! SwiftSoup.parse(html!)
-        let ele = try! doc.select("#mf-qotd")
+        //Make sure it can load and parse the data into SwiftSoup element.
+        let myReq=URLRequest(url: urlToParse)
+        var response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
+        let data = try? NSURLConnection.sendSynchronousRequest(myReq, returning: response)
+        let myHTML = String(data: data!, encoding: .ascii)
         
-        //tbody
-        //first tr
-
+    
+        guard let html=try? String.init(contentsOf:urlToParse, encoding:.utf8), let doc: Document = try? SwiftSoup.parse(html) else {
+            print("Could not load and parse web page")
+            return nil
+        }
         
-        
+        let quote = try? doc.select("p.p.p2.ng-binding")
+        let author = try? doc.select("cite.ng-binding")
         
         return nil
     }
+    
+    //Parses the web page and extracts the quote of the day.
+    func importQuote(fromWikiQuote urlToParse:URL)->[String:String]? {
+        
+        //Make sure it can load and parse the data into SwiftSoup element.
+        guard let html=try? String.init(contentsOf:urlToParse, encoding:.utf8), let doc: Document = try? SwiftSoup.parse(html) else {
+            print("Could not load and parse web page")
+            return nil
+        }
+        //Make sure it can find and separate the quote of the day node.
+        guard let firstNode = try? doc.select("#mf-qotd tbody tr").first(),let elementArray = try? firstNode!.text().components(separatedBy: CharacterSet.init(charactersIn: "~")) else{
+            print("Could not find the div and separate the node.")
+            return nil
+        }
+        
+        //Decompose the array into dictoinary.
+        //TODO: figure out how to handle utf8 encodings.
+        if elementArray.count>1,
+            let quoteString=String(utf8String: elementArray[0].cString(using: .utf8)!),
+            let name=String(utf8String: elementArray[1].cString(using: .utf8)!){
+            return ["quoteString":quoteString, "name":name]
+        }
+        return nil
+    }
+    
+
+    
     
     //Recursively cleans a Dictionary
     func cleanUp(dictionary inDict:[String:Any], mappingTo lookUP:[String:String])->[String:Any]{
@@ -163,7 +212,16 @@ class ImporterController: NSViewController {
             }
         }
         return outDictionary
-        
     }
-    
+}
+
+//Delegate for the POPUP button
+extension ImporterController: NSMenuDelegate{
+    func menuDidClose(_ menu: NSMenu) {
+        //Update WebView
+        guard let agcMenu=menu.highlightedItem as? AGC_NSMenuItem else {return}
+        let selectedURL=URL.init(string:agcMenu.customURLString)
+        webDisplay.load(URLRequest.init(url: selectedURL!))
+        print("Menu closed with selection: \(menu.highlightedItem?.title)")
+    }
 }

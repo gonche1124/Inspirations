@@ -21,11 +21,11 @@
                                 <tabViewItems>
                                     <tabViewItem label="JSON" identifier="" id="8bb-ff-oH2">
                                         <view key="view" id="Zxl-jm-btU">
-                                            <rect key="frame" x="10" y="33" width="374" height="134"/>
+                                            <rect key="frame" x="10" y="33" width="374" height="183"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rIi-1u-Uqn">
-                                                    <rect key="frame" x="136" y="65" width="80" height="32"/>
+                                                    <rect key="frame" x="136" y="114" width="80" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HHg-q5-FnJ">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -37,7 +37,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoU-5k-cz1">
-                                                    <rect key="frame" x="47" y="107" width="271" height="19"/>
+                                                    <rect key="frame" x="47" y="156" width="271" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Zxr-pr-7FN">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -46,7 +46,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljY-tc-uKb">
-                                                    <rect key="frame" x="321" y="101" width="41" height="28"/>
+                                                    <rect key="frame" x="321" y="150" width="41" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mqm-ge-WBn">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -57,7 +57,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DuH-B2-lyh">
-                                                    <rect key="frame" x="68" y="41" width="291" height="17"/>
+                                                    <rect key="frame" x="68" y="90" width="291" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="Qi3-QE-CCf">
                                                         <font key="font" metaFont="system"/>
@@ -66,7 +66,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aa5-Da-cod">
-                                                    <rect key="frame" x="12" y="109" width="29" height="14"/>
+                                                    <rect key="frame" x="12" y="158" width="29" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="eo3-nL-pwm">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -75,7 +75,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <progressIndicator hidden="YES" wantsLayer="YES" fixedFrame="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-io-amA">
-                                                    <rect key="frame" x="17" y="34" width="32" height="32"/>
+                                                    <rect key="frame" x="17" y="83" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                             </subviews>
@@ -87,15 +87,57 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <wkWebView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzu-bf-cnz">
-                                                    <rect key="frame" x="10" y="58" width="354" height="114"/>
+                                                    <rect key="frame" x="10" y="9" width="354" height="144"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <wkWebViewConfiguration key="configuration">
                                                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                         <wkPreferences key="preferences"/>
                                                     </wkWebViewConfiguration>
                                                 </wkWebView>
+                                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDm-9a-o1R">
+                                                    <rect key="frame" x="15" y="158" width="236" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <popUpButtonCell key="cell" type="push" title="Forbes - Quote of the day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="01d-wv-3A8" id="BqR-PX-IYG">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="9ts-Db-FcH">
+                                                            <items>
+                                                                <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="jFR-MI-cg3" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </menuItem>
+                                                                <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="i3a-TX-uF5" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </menuItem>
+                                                                <menuItem title="Eduro" id="l2b-Lj-kkg" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </menuItem>
+                                                                <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="r0I-LN-ptp" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.wow4u.com/quote-of-the-day/"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </menuItem>
+                                                                <menuItem title="Forbes - Quote of the day" identifier="forbesQuote" id="01d-wv-3A8" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.forbes.com/quotes/"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </menuItem>
+                                                            </items>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="Va1-kv-oLX" id="f9V-4X-ehm"/>
+                                                            </connections>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JpB-6N-d2z">
-                                                    <rect key="frame" x="148" y="10" width="80" height="32"/>
+                                                    <rect key="frame" x="290" y="154" width="80" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NiW-1F-bph">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -123,6 +165,7 @@
                         <outlet property="importProgressIndicator" destination="nQE-io-amA" id="ips-Dx-Mwi"/>
                         <outlet property="pathToFile" destination="qoU-5k-cz1" id="yK9-TE-7As"/>
                         <outlet property="webDisplay" destination="xzu-bf-cnz" id="Ahy-jP-0H4"/>
+                        <outlet property="webPopUpButton" destination="fDm-9a-o1R" id="ECl-LK-LPj"/>
                     </connections>
                 </viewController>
                 <customObject id="80D-5h-sfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
