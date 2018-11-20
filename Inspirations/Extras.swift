@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import Cocoa
+import WebKit
 
 //MARK: - ENUMS
 //CoreData Entities
@@ -109,21 +110,8 @@ extension NSPredicate{
 
 
 
-//class GFetchResultsController<T: Quote>:NSFetchedResultsController<Quote>{
-//    var delegatedTable:NSTableView?
-//    var selectedObjects:[Quote]?{
-//        guard let idx = delegatedTable?.selectedRowIndexes else {return nil}
-//        return self.fetchedObjects!.objects(atIndexes: idx)
-//    }
-//    public convenience init(fetchRequest: NSFetchRequest<Quote>, context: NSManagedObjectContext, _: T.Type) {
-//        self.init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-//    }
-//}
-
-
-
 //MARK: - Native Swift Extensions
-
+//TODO: Figure oit where this is used.
 //Used to be able to pass an IndexSet as a subscript
 extension Array {
     subscript<Indices: Sequence>(indices: Indices) -> [Element]
@@ -181,8 +169,8 @@ extension NSMenu{
 //Class used in NSMenuItems that need to store custom bool value.
 class AGC_NSMenuItem: NSMenuItem {
     
-    @IBInspectable var agcBool:Bool=false
-    @IBInspectable var customURLString:String=""
+    @IBInspectable var agcBool:Bool=false        //Used to??
+    @IBInspectable var customURLString:String="" //used for import controller popup item.
     
 }
 
@@ -213,6 +201,7 @@ class AGC_GrowingTextField:NSTextField{
 
 //NSTextField Extension to check if there is a value.
 extension NSTextField{
+    //Used fo rvalidation in the UI to make sure it has a value.
     var hasValue:Bool{
         get {
             let myCharacters=CharacterSet.letters.inverted
@@ -220,6 +209,8 @@ extension NSTextField{
         }
     }
 }
+
+
 
 
 

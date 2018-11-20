@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //print("Resized")
     }
     
+   
+    
      func applicationWillFinishLaunching(_ notification: Notification) {
         
         //Register for NSManagedObject Notifications

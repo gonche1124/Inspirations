@@ -69,9 +69,11 @@ class PrincipalWindow: NSWindowController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let addQ = segue.destinationController as? AddQuoteController{
             addQ.isInfoWindow=false
-            //addQ.selectionController?.add(nil)
         }
-        
+    }
+    
+    @IBAction func importFromMenu(_ sender:Any){
+        self.performSegue(withIdentifier: "importSheet", sender: self)
     }
     
     //Sharing sheet
@@ -109,7 +111,15 @@ extension PrincipalWindow:NSSharingServicePickerDelegate{
 }
 
 
-
+//MARK: - NSWidnowDelegate.
 extension PrincipalWindow:NSWindowDelegate{
     
+    //Called to reposition the window on top of toolbar and not below.
+    func window(_ window: NSWindow, willPositionSheet sheet: NSWindow, using rect: NSRect) -> NSRect {
+        guard let contentView = window.contentView  else { return rect}
+        let toolBarHeight=NSHeight(window.frame) - NSHeight(contentView.frame)
+        var myRect=rect
+        myRect.origin.y=myRect.origin.y+toolBarHeight
+        return myRect
+    }
 }

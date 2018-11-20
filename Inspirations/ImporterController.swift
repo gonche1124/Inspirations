@@ -14,18 +14,23 @@ class ImporterController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         // Do view setup here.
         let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
-        webDisplay.load(URLRequest(url: webPage!))
+        webDisplay?.load(URLRequest(url: webPage!))
+        self.fieldName.isHidden=true
+        self.importProgressIndicator.isHidden=true
     }
+    
     
     //Properties
     var jsonURL: URL?
-    @IBOutlet weak var pathToFile: NSTextField!
+    @IBOutlet weak var pathToFile: NSTextField?
     @IBOutlet weak var importProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var fieldName: NSTextField!
-    @IBOutlet weak var webDisplay: WKWebView!
-    @IBOutlet weak var webPopUpButton:NSPopUpButton!
+    @IBOutlet weak var webDisplay: WKWebView?
+    @IBOutlet weak var webPopUpButton:NSPopUpButton?
+    @IBOutlet weak var importTabView:NSTabView!
 
     
     //MARK: - Actions
@@ -41,9 +46,22 @@ class ImporterController: NSViewController {
         dialog.allowedFileTypes        = ["txt", "json"];
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             if let result = dialog.url {
-                pathToFile.stringValue=result.path
+                pathToFile?.stringValue=result.path
                 self.jsonURL = result
             }
+        }
+    }
+    
+    //Import button pressed. Decides which type of importation should perform.
+    @IBAction func importButtonPressed(_ sender:Any){
+        guard let selectedItem=importTabView.selectedTabViewItem?.identifier as? String else {return}
+        switch selectedItem {
+        case "jsonTabItem":
+            print("JSON")
+        case "webTabItem":
+            print("WEB")
+        default:
+            print("error")
         }
     }
     
@@ -51,7 +69,7 @@ class ImporterController: NSViewController {
     @IBAction func importSelectedFile(_ sender: Any){
         
         //self.jsonURL = URL(fileURLWithPath: pathToFile.stringValue)
-        if pathToFile.stringValue.count > 0{
+        if (pathToFile?.stringValue.count)! > 0{
             
             //create private moc to avoid potential thread errors.
             let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -120,7 +138,7 @@ class ImporterController: NSViewController {
     @IBAction func importFromWebPage(_ sender:NSButton){
         print("Importing from web page")
         //let webPage = URL.init(string:"https://en.wikiquote.org/wiki/Main_Page")
-        guard let selectedItem=webPopUpButton.menu?.highlightedItem as? AGC_NSMenuItem else{return}
+        guard let selectedItem=webPopUpButton?.menu?.highlightedItem as? AGC_NSMenuItem else{return}
         let webPage = URL.init(string: selectedItem.customURLString)
         switch selectedItem.identifier?.rawValue {
         case "forbesQuote":
@@ -135,19 +153,26 @@ class ImporterController: NSViewController {
         default:
             print("To Implement")
         }
-        
-        
-   
 
         print(" eee")
-        
-        //TODO: Parse string of HTML.
-        
     }
     
     //Parses web page to returns quote fo the day.
     //TODO: Refactor code.
     func importQuote(fromForbes urlToParse:URL)->[String:String]?{
+        print(#function)
+        //Get html form javascript code.
+        let test1 = "document.documentElement.outerHTML.toString()"
+        let myDict = webDisplay?.evaluateJavaScript(test1, completionHandler: {(rightHTML:Any?, error:Error?) in
+            
+            let doc: Document = try! SwiftSoup.parse(rightHTML as! String)
+            let quote = try? doc.select("p.p.p2.ng-binding").text()
+            let author = try? doc.select("cite.ng-binding")//.array().first
+            print(author)
+            
+        })
+     
+        
         
         //Make sure it can load and parse the data into SwiftSoup element.
         let myReq=URLRequest(url: urlToParse)
@@ -160,9 +185,6 @@ class ImporterController: NSViewController {
             print("Could not load and parse web page")
             return nil
         }
-        
-        let quote = try? doc.select("p.p.p2.ng-binding")
-        let author = try? doc.select("cite.ng-binding")
         
         return nil
     }
@@ -221,7 +243,64 @@ extension ImporterController: NSMenuDelegate{
         //Update WebView
         guard let agcMenu=menu.highlightedItem as? AGC_NSMenuItem else {return}
         let selectedURL=URL.init(string:agcMenu.customURLString)
-        webDisplay.load(URLRequest.init(url: selectedURL!))
+        webDisplay?.load(URLRequest.init(url: selectedURL!))
         print("Menu closed with selection: \(menu.highlightedItem?.title)")
     }
+}
+
+
+
+//MARK: - NSTabViewController
+class TabViewImportController:NSTabViewController{
+    
+    //private lazy var tabViewSizes: [String : NSSize] = [:]
+    
+    //View did Load.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    //Used to center the toolbarItems.
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        if let toolBar = view.window?.toolbar {
+            toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 0)
+            toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 3)
+        }
+    }
+    
+//    override func transition(from fromViewController: NSViewController, to toViewController: NSViewController, options: NSViewController.TransitionOptions = [], completionHandler completion: (() -> Void)? = nil) {
+//        NSAnimationContext.runAnimationGroup({ context in
+//            context.duration = 1//0.5
+//            self.updateWindowFrameAnimated(viewController: toViewController)
+//            super.transition(from: fromViewController, to: toViewController, options: [.crossfade, .allowUserInteraction], completionHandler: completion)
+//        }, completionHandler: nil)
+//    }
+//
+//    func updateWindowFrameAnimated(viewController: NSViewController) {
+//
+//        guard let title = viewController.title, let window = view.window else {
+//            return
+//        }
+//
+//        let contentSize: NSSize
+//
+//        if tabViewSizes.keys.contains(title) {
+//            contentSize = tabViewSizes[title]!
+//        }
+//        else {
+//            contentSize = viewController.view.frame.size
+//            tabViewSizes[title] = contentSize
+//        }
+//
+//        let newWindowSize = window.frameRect(forContentRect: NSRect(origin: NSPoint.zero, size: contentSize)).size
+//
+//        var frame = window.frame
+//        frame.origin.y += frame.height
+//        frame.origin.y -= newWindowSize.height
+//        frame.size = newWindowSize
+//        window.animator().setFrame(frame, display: false)
+//    }
+    
+    
 }

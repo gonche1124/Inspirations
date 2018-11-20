@@ -86,7 +86,7 @@
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Import..." keyEquivalent="I" id="2Am-XL-aGa">
                                             <connections>
-                                                <segue destination="UfG-VC-tKj" kind="modal" id="hQN-6Z-c9H"/>
+                                                <action selector="importFromMenu:" target="Ady-hI-5gd" id="4XA-hH-Cnv"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="NgL-qr-jOa"/>
@@ -435,6 +435,20 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="e6b-nv-9hy"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="5Mz-36-bxw"/>
+                                <toolbarItem implicitItemIdentifier="05D3CFD0-8E4E-4E81-A82E-B17FB20011AE" label="Import" paletteLabel="Import" sizingBehavior="auto" id="kk1-gl-NWk">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="Z1e-qZ-qGu">
+                                        <rect key="frame" x="0.0" y="14" width="56" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="Import" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Xf-ID-uLf">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <segue destination="UfG-VC-tKj" kind="sheet" identifier="importSheet" id="68u-ad-XKY"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="51H-Z8-9zY"/>
                                 <toolbarItem implicitItemIdentifier="E6962184-A3B1-4D6D-BA25-D18B8732354B" explicitItemIdentifier="mainSearchField" label="Search" paletteLabel="Search Field" id="Cue-ch-q3L">
                                     <nil key="toolTip"/>
