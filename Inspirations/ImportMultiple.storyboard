@@ -7,177 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Import-->
-        <scene sceneID="h9m-3a-hzi">
-            <objects>
-                <viewController title="Import" showSeguePresentationStyle="single" id="Va1-kv-oLX" customClass="ImporterController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="awf-Af-hqY">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="281"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <tabView initialItem="8bb-ff-oH2" translatesAutoresizingMaskIntoConstraints="NO" id="xtX-2g-Twq">
-                                <rect key="frame" x="-7" y="32" width="394" height="255"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="JSON" identifier="jsonTabItem" id="8bb-ff-oH2">
-                                        <view key="view" id="Zxl-jm-btU">
-                                            <rect key="frame" x="10" y="33" width="374" height="209"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoU-5k-cz1">
-                                                    <rect key="frame" x="47" y="182" width="271" height="19"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Zxr-pr-7FN">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljY-tc-uKb">
-                                                    <rect key="frame" x="321" y="176" width="41" height="28"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="push" title="..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mqm-ge-WBn">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="chooseFile:" target="Va1-kv-oLX" id="9lC-NA-1eM"/>
-                                                    </connections>
-                                                </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aa5-Da-cod">
-                                                    <rect key="frame" x="12" y="184" width="29" height="14"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="eo3-nL-pwm">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Other" identifier="webTabItem" id="9FX-jc-vvo">
-                                        <view key="view" id="Z9H-EQ-pZr">
-                                            <rect key="frame" x="10" y="33" width="374" height="209"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <wkWebView wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzu-bf-cnz">
-                                                    <rect key="frame" x="10" y="9" width="354" height="170"/>
-                                                    <wkWebViewConfiguration key="configuration">
-                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                        <wkPreferences key="preferences"/>
-                                                    </wkWebViewConfiguration>
-                                                </wkWebView>
-                                                <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDm-9a-o1R">
-                                                    <rect key="frame" x="8" y="184" width="359" height="25"/>
-                                                    <popUpButtonCell key="cell" type="push" title="Forbes - Quote of the day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="01d-wv-3A8" id="BqR-PX-IYG">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
-                                                        <menu key="menu" id="9ts-Db-FcH">
-                                                            <items>
-                                                                <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="jFR-MI-cg3" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </menuItem>
-                                                                <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="i3a-TX-uF5" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </menuItem>
-                                                                <menuItem title="Eduro" id="l2b-Lj-kkg" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </menuItem>
-                                                                <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="r0I-LN-ptp" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.wow4u.com/quote-of-the-day/"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </menuItem>
-                                                                <menuItem title="Forbes - Quote of the day" state="on" identifier="forbesQuote" id="01d-wv-3A8" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.forbes.com/quotes/"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </menuItem>
-                                                            </items>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="Va1-kv-oLX" id="f9V-4X-ehm"/>
-                                                            </connections>
-                                                        </menu>
-                                                    </popUpButtonCell>
-                                                </popUpButton>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="xzu-bf-cnz" firstAttribute="top" secondItem="fDm-9a-o1R" secondAttribute="bottom" constant="33" id="4Iq-yr-4PW"/>
-                                                <constraint firstItem="fDm-9a-o1R" firstAttribute="top" secondItem="Z9H-EQ-pZr" secondAttribute="top" constant="1" id="6xa-PT-xWO"/>
-                                                <constraint firstItem="fDm-9a-o1R" firstAttribute="leading" secondItem="Z9H-EQ-pZr" secondAttribute="leading" constant="17" id="c79-oW-cHD"/>
-                                                <constraint firstAttribute="bottom" secondItem="xzu-bf-cnz" secondAttribute="bottom" constant="9" id="nAS-W6-EAQ"/>
-                                                <constraint firstItem="xzu-bf-cnz" firstAttribute="leading" secondItem="Z9H-EQ-pZr" secondAttribute="leading" constant="10" id="p7c-8D-Yna"/>
-                                                <constraint firstItem="xzu-bf-cnz" firstAttribute="centerX" secondItem="Z9H-EQ-pZr" secondAttribute="centerX" id="zgL-Wy-x6S"/>
-                                            </constraints>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
-                            <progressIndicator hidden="YES" wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-io-amA">
-                                <rect key="frame" x="14" y="2" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="1fG-Kf-ijF"/>
-                                    <constraint firstAttribute="width" constant="32" id="ODf-8Q-dPR"/>
-                                </constraints>
-                            </progressIndicator>
-                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DuH-B2-lyh">
-                                <rect key="frame" x="52" y="10" width="217" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="Qi3-QE-CCf">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rIi-1u-Uqn">
-                                <rect key="frame" x="299" y="1" width="80" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="68" id="YFZ-H0-waf"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HHg-q5-FnJ">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="importSelectedFile:" target="Va1-kv-oLX" id="kYS-nt-qvt"/>
-                                    <binding destination="Va1-kv-oLX" name="enabled" keyPath="pathToFile.stringValue.length" id="XqM-88-dQO"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="nQE-io-amA" firstAttribute="leading" secondItem="awf-Af-hqY" secondAttribute="leading" constant="14" id="3Cn-06-cI7"/>
-                            <constraint firstItem="DuH-B2-lyh" firstAttribute="leading" secondItem="nQE-io-amA" secondAttribute="trailing" constant="8" symbolic="YES" id="8kR-mG-Dwe"/>
-                            <constraint firstItem="xtX-2g-Twq" firstAttribute="leading" secondItem="awf-Af-hqY" secondAttribute="leading" id="JrT-XB-ao5"/>
-                            <constraint firstItem="rIi-1u-Uqn" firstAttribute="top" secondItem="xtX-2g-Twq" secondAttribute="bottom" constant="14" id="NbK-SP-YJc"/>
-                            <constraint firstAttribute="bottom" secondItem="rIi-1u-Uqn" secondAttribute="bottom" constant="8" id="WnL-ZH-TNP"/>
-                            <constraint firstItem="rIi-1u-Uqn" firstAttribute="centerY" secondItem="DuH-B2-lyh" secondAttribute="centerY" id="XCi-X7-6xy"/>
-                            <constraint firstItem="xtX-2g-Twq" firstAttribute="top" secondItem="awf-Af-hqY" secondAttribute="top" id="bhm-T5-lHm"/>
-                            <constraint firstAttribute="trailing" secondItem="xtX-2g-Twq" secondAttribute="trailing" id="f9s-6I-wr0"/>
-                            <constraint firstAttribute="trailing" secondItem="rIi-1u-Uqn" secondAttribute="trailing" constant="7" id="fbZ-VF-ydB"/>
-                            <constraint firstItem="rIi-1u-Uqn" firstAttribute="centerY" secondItem="nQE-io-amA" secondAttribute="centerY" id="sUe-e9-OLa"/>
-                            <constraint firstItem="nQE-io-amA" firstAttribute="top" secondItem="xtX-2g-Twq" secondAttribute="bottom" constant="8" symbolic="YES" id="v54-mU-Bae"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="fieldName" destination="DuH-B2-lyh" id="bkt-63-jo9"/>
-                        <outlet property="importProgressIndicator" destination="nQE-io-amA" id="ips-Dx-Mwi"/>
-                        <outlet property="pathToFile" destination="qoU-5k-cz1" id="yK9-TE-7As"/>
-                        <outlet property="webDisplay" destination="xzu-bf-cnz" id="Ahy-jP-0H4"/>
-                        <outlet property="webPopUpButton" destination="fDm-9a-o1R" id="ECl-LK-LPj"/>
-                    </connections>
-                </viewController>
-                <customObject id="80D-5h-sfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-55" y="78.5"/>
-        </scene>
         <!--Tab View Import Controller-->
         <scene sceneID="uia-JB-U1L">
             <objects>
@@ -208,68 +37,24 @@
         <!--JSON-->
         <scene sceneID="bQh-tB-YiM">
             <objects>
-                <viewController title="JSON" showSeguePresentationStyle="single" id="faY-da-gFi" customClass="ImporterController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="JSON" showSeguePresentationStyle="single" id="faY-da-gFi" customClass="FileImporter" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kji-39-qOV">
-                        <rect key="frame" x="0.0" y="0.0" width="451" height="98"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="0.0" y="0.0" width="581" height="111"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                         <subviews>
-                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="143" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8x-zv-niK" userLabel="Bottom Stack View">
-                                <rect key="frame" x="20" y="20" width="411" height="32"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="749" verticalClippingResistancePriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xy-2n-I7f" userLabel="Top Stack View">
+                                <rect key="frame" x="20" y="72" width="541" height="19"/>
                                 <subviews>
-                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="8wG-Jl-FMf">
-                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="c3q-ss-WGo"/>
-                                            <constraint firstAttribute="height" constant="32" id="r2H-8Y-VD1"/>
-                                        </constraints>
-                                    </progressIndicator>
-                                    <textField verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gbq-9J-gaV">
-                                        <rect key="frame" x="173" y="0.0" width="29" height="32"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="7jj-za-woi">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sX3-jS-7Jb">
-                                        <rect key="frame" x="337" y="-7" width="80" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="68" id="7wC-fZ-Dtx"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CAe-F7-gnZ">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="importSelectedFile:" target="Va1-kv-oLX" id="kOk-Ju-mTO"/>
-                                            <binding destination="Va1-kv-oLX" name="enabled" keyPath="pathToFile.stringValue.length" id="TX1-dE-dau"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
-                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xy-2n-I7f" userLabel="Top Stack View">
-                                <rect key="frame" x="20" y="60" width="411" height="18"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eJ6-fj-CqB">
-                                        <rect key="frame" x="-2" y="0.0" width="26" height="18"/>
+                                    <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eJ6-fj-CqB">
+                                        <rect key="frame" x="-2" y="3" width="26" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="f1P-UG-awf">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GeQ-3a-8YP">
-                                        <rect key="frame" x="27" y="0.0" width="353" height="18"/>
+                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GeQ-3a-8YP">
+                                        <rect key="frame" x="27" y="0.0" width="483" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="271" id="1Kp-mx-jwk"/>
                                         </constraints>
@@ -280,13 +65,13 @@
                                         </textFieldCell>
                                     </textField>
                                     <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l47-41-3In">
-                                        <rect key="frame" x="380" y="-6" width="36" height="27"/>
+                                        <rect key="frame" x="510" y="-5" width="36" height="27"/>
                                         <buttonCell key="cell" type="push" title="..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="43a-8g-kqF">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="chooseFile:" target="Va1-kv-oLX" id="CfZ-uo-7MM"/>
+                                            <action selector="chooseFile:" target="faY-da-gFi" id="WlE-QA-Lsk"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -301,79 +86,217 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="d8x-zv-niK" firstAttribute="centerX" secondItem="kji-39-qOV" secondAttribute="centerX" id="4z3-gM-f0H"/>
-                            <constraint firstItem="8xy-2n-I7f" firstAttribute="leading" secondItem="kji-39-qOV" secondAttribute="leading" constant="20" id="FjY-Cg-kRg"/>
-                            <constraint firstItem="d8x-zv-niK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kji-39-qOV" secondAttribute="leading" priority="750" constant="20" id="GLI-r5-1Bt"/>
-                            <constraint firstAttribute="trailing" secondItem="8xy-2n-I7f" secondAttribute="trailing" constant="20" id="al4-qw-Rvi"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d8x-zv-niK" secondAttribute="trailing" priority="750" constant="20" id="hrq-Qe-tdr"/>
-                            <constraint firstItem="d8x-zv-niK" firstAttribute="top" secondItem="8xy-2n-I7f" secondAttribute="bottom" constant="8" id="kFs-lY-0KH"/>
-                            <constraint firstAttribute="bottom" secondItem="d8x-zv-niK" secondAttribute="bottom" constant="20" id="rq0-9d-vN1"/>
-                            <constraint firstItem="8xy-2n-I7f" firstAttribute="top" secondItem="kji-39-qOV" secondAttribute="top" constant="20" id="ywb-iX-H82"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="fieldName" destination="gbq-9J-gaV" id="SJf-LH-M8v"/>
-                        <outlet property="importProgressIndicator" destination="8wG-Jl-FMf" id="Bfd-23-iHl"/>
-                    </connections>
-                </viewController>
-                <customObject id="O9Q-df-yxa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="634" y="143"/>
-        </scene>
-        <!--Web Import-->
-        <scene sceneID="UlA-yH-yr8">
-            <objects>
-                <viewController title="Web Import" showSeguePresentationStyle="single" id="vc7-B7-109" customClass="ImporterController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="wbG-2w-xsr">
-                        <rect key="frame" x="0.0" y="0.0" width="451" height="279"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <wkWebView wantsLayer="YES" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7Iv-8o-r9G">
-                                <rect key="frame" x="20" y="60" width="411" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="eAh-CZ-Tos"/>
-                                    <constraint firstAttribute="width" constant="411" id="rBx-Kz-18u"/>
-                                </constraints>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="143" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCA-Dg-333">
-                                <rect key="frame" x="20" y="20" width="411" height="32"/>
+                            <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" horizontalClippingResistancePriority="250" verticalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d8x-zv-niK" userLabel="Bottom Stack View">
+                                <rect key="frame" x="21" y="20" width="540" height="32"/>
                                 <subviews>
-                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uyO-eR-UUZ">
+                                    <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="8wG-Jl-FMf">
                                         <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="W0X-hw-EhA"/>
-                                            <constraint firstAttribute="width" constant="32" id="bgg-bL-CHd"/>
+                                            <constraint firstAttribute="width" constant="32" id="c3q-ss-WGo"/>
+                                            <constraint firstAttribute="height" constant="32" id="r2H-8Y-VD1"/>
                                         </constraints>
                                     </progressIndicator>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5bk-HP-Llk">
-                                        <rect key="frame" x="173" y="8" width="29" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="M18-f7-CmB">
+                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gbq-9J-gaV">
+                                        <rect key="frame" x="145" y="0.0" width="29" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="Wdy-Ec-b1u"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="7jj-za-woi">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fex-Nm-rgs">
-                                        <rect key="frame" x="337" y="-1" width="80" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="68" id="icC-KQ-TGg"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wbj-DY-sVe">
+                                    <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="sX3-jS-7Jb">
+                                        <rect key="frame" x="281" y="-7" width="80" height="43"/>
+                                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CAe-F7-gnZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="importSelectedFile:" target="Va1-kv-oLX" id="t6q-KU-q7q"/>
-                                            <binding destination="Va1-kv-oLX" name="enabled" keyPath="pathToFile.stringValue.length" id="8Ln-JT-9I1"/>
+                                            <action selector="importQuotesFromJSON:" target="faY-da-gFi" id="Na7-0l-hUl"/>
+                                        </connections>
+                                    </button>
+                                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Qic-ND-puV" userLabel="Cancel Button">
+                                        <rect key="frame" x="464" y="-7" width="82" height="43"/>
+                                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TFT-jT-Ywv">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="saveAndClose:" target="faY-da-gFi" id="Z4R-Da-ZbS"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sX3-jS-7Jb" secondAttribute="trailing" constant="185" id="38h-RV-5Iv"/>
+                                    <constraint firstItem="gbq-9J-gaV" firstAttribute="centerY" secondItem="8wG-Jl-FMf" secondAttribute="centerY" id="9XE-xz-b5d"/>
+                                    <constraint firstItem="Qic-ND-puV" firstAttribute="centerY" secondItem="8wG-Jl-FMf" secondAttribute="centerY" id="Ent-L6-ZAl"/>
+                                    <constraint firstItem="gbq-9J-gaV" firstAttribute="leading" secondItem="d8x-zv-niK" secondAttribute="leading" constant="147" id="Smm-mx-XoL"/>
+                                    <constraint firstItem="sX3-jS-7Jb" firstAttribute="centerY" secondItem="8wG-Jl-FMf" secondAttribute="centerY" id="Zzy-x2-HSZ"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8xy-2n-I7f" firstAttribute="leading" secondItem="kji-39-qOV" secondAttribute="leading" constant="20" id="1te-gf-d22"/>
+                            <constraint firstItem="d8x-zv-niK" firstAttribute="top" secondItem="8xy-2n-I7f" secondAttribute="bottom" constant="20" id="7pI-Oq-nPd"/>
+                            <constraint firstItem="d8x-zv-niK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kji-39-qOV" secondAttribute="leading" constant="20" id="86V-Bw-tRP"/>
+                            <constraint firstItem="d8x-zv-niK" firstAttribute="centerX" secondItem="kji-39-qOV" secondAttribute="centerX" id="Ayb-Vh-EDY"/>
+                            <constraint firstItem="8xy-2n-I7f" firstAttribute="top" secondItem="kji-39-qOV" secondAttribute="top" constant="20" id="Plr-md-wOS"/>
+                            <constraint firstAttribute="bottom" secondItem="d8x-zv-niK" secondAttribute="bottom" constant="20" id="WmM-F5-Exe"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d8x-zv-niK" secondAttribute="trailing" constant="20" id="aN2-cB-Dvh"/>
+                            <constraint firstAttribute="trailing" secondItem="8xy-2n-I7f" secondAttribute="trailing" constant="20" id="v4T-a3-o05"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="importQuotes" destination="sX3-jS-7Jb" id="6ps-j8-BwY"/>
+                        <outlet property="pathField" destination="GeQ-3a-8YP" id="Xes-Rx-ybu"/>
+                        <outlet property="progressIndicator" destination="8wG-Jl-FMf" id="u3t-R1-Dq2"/>
+                        <outlet property="progressLabel" destination="gbq-9J-gaV" id="NZf-NW-3gn"/>
+                    </connections>
+                </viewController>
+                <customObject id="O9Q-df-yxa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="579.5" y="142.5"/>
+        </scene>
+        <!--Web Import-->
+        <scene sceneID="UlA-yH-yr8">
+            <objects>
+                <viewController title="Web Import" showSeguePresentationStyle="single" id="vc7-B7-109" customClass="WebImporter" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="wbG-2w-xsr">
+                        <rect key="frame" x="0.0" y="0.0" width="451" height="279"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aA-Cr-wjb" userLabel="Three Row Stack View">
+                                <rect key="frame" x="20" y="20" width="411" height="239"/>
+                                <subviews>
+                                    <popUpButton verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-yR-PaF">
+                                        <rect key="frame" x="-2" y="215" width="416" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Forbes - Quote of the day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="325-HX-eFZ" id="zBa-oD-YBQ">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="whB-dL-075">
+                                                <items>
+                                                    <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="FeR-Sa-Lzk" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </menuItem>
+                                                    <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="9nc-6P-K0j" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </menuItem>
+                                                    <menuItem title="Eduro" identifier="enduroQuote" id="icR-qS-9BM" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </menuItem>
+                                                    <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="gGh-IU-Gjh" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.wow4u.com/quote-of-the-day/"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </menuItem>
+                                                    <menuItem title="Forbes - Quote of the day" state="on" identifier="forbesQuote" id="325-HX-eFZ" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.forbes.com/quotes/"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </menuItem>
+                                                </items>
+                                                <connections>
+                                                    <outlet property="delegate" destination="vc7-B7-109" id="22h-TS-j9r"/>
+                                                </connections>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                    <wkWebView wantsLayer="YES" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7Iv-8o-r9G">
+                                        <rect key="frame" x="0.0" y="40" width="411" height="170"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="eAh-CZ-Tos"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="411" id="rBx-Kz-18u"/>
+                                        </constraints>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="40" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCA-Dg-333" userLabel="Botom Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="411" height="32"/>
+                                        <subviews>
+                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uyO-eR-UUZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="W0X-hw-EhA"/>
+                                                    <constraint firstAttribute="width" constant="32" id="bgg-bL-CHd"/>
+                                                </constraints>
+                                            </progressIndicator>
+                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5bk-HP-Llk">
+                                                <rect key="frame" x="70" y="8" width="125" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="M18-f7-CmB">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Fex-Nm-rgs">
+                                                <rect key="frame" x="227" y="-1" width="80" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wbj-DY-sVe">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="importQuoteFromWeb:" target="vc7-B7-109" id="ohl-BF-nXo"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZfB-Q2-HhX">
+                                                <rect key="frame" x="335" y="-1" width="82" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fzv-mJ-0ey">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="saveAndClose:" target="vc7-B7-109" id="OHK-Hi-wkl"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="eR2-yR-PaF" secondAttribute="trailing" id="7bk-G0-RnJ"/>
+                                    <constraint firstItem="eR2-yR-PaF" firstAttribute="leading" secondItem="2aA-Cr-wjb" secondAttribute="leading" id="ghU-ki-S2O"/>
+                                </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -385,67 +308,19 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <popUpButton verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-yR-PaF">
-                                <rect key="frame" x="18" y="235" width="416" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Forbes - Quote of the day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="325-HX-eFZ" id="zBa-oD-YBQ">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="whB-dL-075">
-                                        <items>
-                                            <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="FeR-Sa-Lzk" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </menuItem>
-                                            <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="9nc-6P-K0j" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </menuItem>
-                                            <menuItem title="Eduro" id="icR-qS-9BM" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </menuItem>
-                                            <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="gGh-IU-Gjh" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.wow4u.com/quote-of-the-day/"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </menuItem>
-                                            <menuItem title="Forbes - Quote of the day" state="on" identifier="forbesQuote" id="325-HX-eFZ" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.forbes.com/quotes/"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </menuItem>
-                                        </items>
-                                        <connections>
-                                            <outlet property="delegate" destination="Va1-kv-oLX" id="es0-Hx-dJd"/>
-                                        </connections>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="oCA-Dg-333" secondAttribute="bottom" constant="20" id="2yf-Rs-Jio"/>
-                            <constraint firstItem="oCA-Dg-333" firstAttribute="top" secondItem="7Iv-8o-r9G" secondAttribute="bottom" constant="8" id="CaZ-ai-A0S"/>
-                            <constraint firstItem="eR2-yR-PaF" firstAttribute="leading" secondItem="wbG-2w-xsr" secondAttribute="leading" constant="20" id="JcP-2q-JQD"/>
-                            <constraint firstItem="7Iv-8o-r9G" firstAttribute="top" secondItem="eR2-yR-PaF" secondAttribute="bottom" constant="8" id="OKA-0t-Ph5"/>
-                            <constraint firstItem="7Iv-8o-r9G" firstAttribute="leading" secondItem="wbG-2w-xsr" secondAttribute="leading" constant="20" id="Vr7-K7-Hvu"/>
-                            <constraint firstItem="oCA-Dg-333" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wbG-2w-xsr" secondAttribute="leading" priority="750" constant="20" id="cC8-RC-zub"/>
-                            <constraint firstAttribute="trailing" secondItem="7Iv-8o-r9G" secondAttribute="trailing" constant="20" id="iV2-6w-fLx"/>
-                            <constraint firstItem="7Iv-8o-r9G" firstAttribute="top" secondItem="eR2-yR-PaF" secondAttribute="bottom" constant="8" id="sxH-T8-fnU"/>
-                            <constraint firstItem="eR2-yR-PaF" firstAttribute="top" secondItem="wbG-2w-xsr" secondAttribute="top" constant="20" id="tEe-xe-0Ia"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oCA-Dg-333" secondAttribute="trailing" priority="750" constant="20" id="vad-Zo-wd1"/>
-                            <constraint firstAttribute="trailing" secondItem="eR2-yR-PaF" secondAttribute="trailing" constant="20" id="zCV-7r-Ogy"/>
+                            <constraint firstItem="2aA-Cr-wjb" firstAttribute="top" secondItem="wbG-2w-xsr" secondAttribute="top" constant="20" id="2rh-Fx-RbJ"/>
+                            <constraint firstAttribute="trailing" secondItem="2aA-Cr-wjb" secondAttribute="trailing" constant="20" id="Cvv-wF-h92"/>
+                            <constraint firstItem="2aA-Cr-wjb" firstAttribute="leading" secondItem="wbG-2w-xsr" secondAttribute="leading" constant="20" id="b5n-Zz-nA0"/>
+                            <constraint firstAttribute="bottom" secondItem="2aA-Cr-wjb" secondAttribute="bottom" constant="20" id="bVo-aV-rJZ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fieldName" destination="5bk-HP-Llk" id="mzk-0m-PP1"/>
-                        <outlet property="importProgressIndicator" destination="uyO-eR-UUZ" id="I3M-y7-r8O"/>
-                        <outlet property="webDisplay" destination="7Iv-8o-r9G" id="Vq7-xZ-C4S"/>
-                        <outlet property="webPopUpButton" destination="eR2-yR-PaF" id="f1F-Me-2wN"/>
+                        <outlet property="progressIndicator" destination="uyO-eR-UUZ" id="7Mz-D6-GTh"/>
+                        <outlet property="progressLabel" destination="5bk-HP-Llk" id="1bP-fE-hQn"/>
+                        <outlet property="webDisplay" destination="7Iv-8o-r9G" id="POa-F1-5qO"/>
+                        <outlet property="webPopUpButton" destination="eR2-yR-PaF" id="HJi-qm-WH8"/>
                     </connections>
                 </viewController>
                 <customObject id="1eC-xE-3Sk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

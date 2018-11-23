@@ -47,9 +47,6 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var spelledIn: Language?
     
     //Convinience Init form dictionary.
-    
-    
-    
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
           //Safeguards.
         guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
