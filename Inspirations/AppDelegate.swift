@@ -11,13 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
-    //Window Delegate methods
-    func windowDidResize(_ notification: Notification) {
-        //print("Resized")
-    }
-    
-   
-    
      func applicationWillFinishLaunching(_ notification: Notification) {
         
         //Register for NSManagedObject Notifications
@@ -34,6 +27,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         print(self.applicationDocumentsDirectory.path)
+        
+        //Creates .json for ML:
+//        let quoteArray:[Quote]=try! Quote.allInContext(self.managedObjectContext)
+//        let dictArray=quoteArray.map({$0.textForML()})
+//
+//        let documentDirectoryUrl = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!
+//        let fileUrl = documentDirectoryUrl.appendingPathComponent("ML.json")
+//        print(fileUrl)
+//
+//        do {
+//            let data = try JSONSerialization.data(withJSONObject: dictArray, options: [])
+//            try data.write(to: fileUrl, options: [])
+//        } catch {
+//            print(error)
+//        }
 
     }
 

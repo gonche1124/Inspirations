@@ -187,6 +187,7 @@ class WebImporter: MainImportController {
         super.viewDidLoad()
         
         if let selectedMenu = webPopUpButton.selectedItem as? AGC_NSMenuItem, let selectedURL=URL.init(string:selectedMenu.customURLString){
+            webDisplay.customUserAgent="Mozilla/5.0 (iPhone)"
             webDisplay.load(URLRequest(url:selectedURL))
         }
     }
@@ -253,7 +254,6 @@ class WebImporter: MainImportController {
     //Extracts the data from Wikipedia and ads the quote.
     func importQuoteFrom(wikipedia:Document){
         
-        //Get Array of info.
         guard let quoteArray=try? wikipedia.select("#mf-qotd div table tbody tr td table tbody tr td table tbody tr td").array(), quoteArray.count==2, let quoteString = try! quoteArray.first?.text(), let name=try! quoteArray.last?.select("a").text() else {return}
         
         createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Wikipedia", andTaggedName: "Wikipedia")
@@ -266,8 +266,6 @@ class WebImporter: MainImportController {
         guard let name = try? forbes.select("cite.ng-binding").text() else {return}
 
         createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Forbes", andTaggedName: "Forbes")
-        
-
     }
     
     //Extracts Quote from BrainyQuote
@@ -278,8 +276,8 @@ class WebImporter: MainImportController {
             return
         }
         
-        let name = stringArray.last!.trimmingCharacters(in: .whitespaces)
-        let quoteString = stringArray.first!.trimmingCharacters(in: .whitespaces)
+        let name = stringArray.last!.trimWhites()
+        let quoteString = stringArray.first!.trimWhites()
         createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Brainy Quote", andTaggedName: "Brainy Quote")
         
     }

@@ -172,8 +172,11 @@ extension TablesController: NSTableViewDelegate{
     
     //Changing the selection.
     func tableViewSelectionDidChange(_ notification: Notification) {
-        if let myTable = notification.object as? NSTableView {
-            NotificationCenter.default.post(Notification(name: .selectedRowsChaged, object: myTable, userInfo: nil))
+        if let _ = notification.object as? NSTableView,
+            let selectedArray = self.quoteController.selectedObjects as? [Quote] {
+            NotificationCenter.default.post(Notification(name: .selectedRowsChaged,
+                                                         object: selectedArray.map({$0.getID()}),
+                                                         userInfo: nil)) //Used for displaying text and for sharing selected Objects
         }
     }
 }

@@ -59,11 +59,11 @@ public class Quote: NSManagedObject, Codable{
         self.quoteString=quoteS
         self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
         self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
+        self.spelledIn=Language.firstOrCreate(inContext: moc, withAttributes: ["name":NSLinguisticTagger.dominantLanguage(for: quoteS)! as Any], andKeys: ["name"])
 
         //Check if Favorite Tag exists.
         if let isFavorite = dictionary["isFavorite"] as? Bool{
-            //TODO: Handle different cases of BOOL/NSNUMBER/STRING
-            self.isFavorite=isFavorite
+            self.isFavorite=isFavorite //TODO: Handle different cases of BOOL/NSNUMBER/STRING
         }
         
         //Check if there are any Tags.
@@ -140,6 +140,18 @@ public class Quote: NSManagedObject, Codable{
                 self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
             }
         }
+    }
+    
+    ///Create text verison for sharing services
+    func textForSharing()->String{
+        let qt = self.quoteString!
+        let au = self.from!.name!
+        return qt+"\n   ~"+au
+    }
+    
+    //Creates version to test model.
+    func textForML()->Dictionary<String, String>{
+        return ["text": self.quoteString!, "topic":self.isAbout!.themeName!]
     }
     
 }

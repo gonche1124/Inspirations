@@ -154,6 +154,19 @@ extension NSFetchRequestResult where Self: NSManagedObject {
     }
 }
 
+extension NSManagedObjectContext{
+    
+    ///Fetches objects from IDS represented as strings.
+    func getObjectsWithIDS(asStrings: [String])->[NSManagedObject]?{
+        guard let urlArray = asStrings.map({URL.init(string: $0)}) as? [URL],
+            let objectIDArray = urlArray.map({self.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0)}) as? [NSManagedObjectID] else {
+            return nil
+        }
+       
+        return objectIDArray.map({self.object(with: $0 )})
+    }
+}
+
 
 struct gonche:CodingKey{
     var intValue: Int?

@@ -182,9 +182,13 @@ extension LeftController: NSOutlineViewDataSource {
         func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
     
             //WWDC 2016 method
-            let sURL: [URL] = info.draggingPasteboard.pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
-            let sOBID: [NSManagedObjectID] = sURL.map({(moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0))!})
-            let quotesS = sOBID.map({moc.object(with: $0 )})
+            guard let stringArray = info.draggingPasteboard.pasteboardItems!.map({$0.string(forType:.string)}) as? [String],
+                let quotesS = moc.getObjectsWithIDS(asStrings: stringArray) as? [Quote] else {
+                    return false
+            }
+//            let sURL: [URL] = info.draggingPasteboard.pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
+//            let sOBID: [NSManagedObjectID] = sURL.map({(moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0))!})
+//            let quotesS = sOBID.map({moc.object(with: $0 )})
     
             if let destTag = item as? Tag{
                 destTag.addToHasQuotes(NSSet(array: quotesS))

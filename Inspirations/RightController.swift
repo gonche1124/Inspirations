@@ -30,8 +30,8 @@ class RightController: NSViewController {
     
     //Selected rows changed
     @objc func selectedRowsOfTableChanged(_ notification:Notification){
-        if let myTable = notification.object as? NSTableView {
-            self.statusTextField.stringValue="\(myTable.numberOfSelectedRows) quotes selected out of \(myTable.numberOfRows)"
+        if let myTable = notification.object as? [String] {
+            self.statusTextField.stringValue="\(myTable.count) quotes selected"
         }
     }
     

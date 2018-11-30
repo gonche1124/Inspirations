@@ -14,24 +14,20 @@ class PrincipalWindow: NSWindowController {
     @IBOutlet var shareButton:NSButton!
     @IBOutlet weak var mainSearchField: NSSearchField!
     
+    //Vars
+    var selectedQuotesIDS:[String]?{
+        didSet{
+            shareButton.isEnabled=true
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentViewController?.representedObject=(NSApp.delegate as? AppDelegate)?.managedObjectContext
+        //self.contentViewController?.representedObject=(NSApp.delegate as? AppDelegate)?.managedObjectContext
         
         //Fixes bug:
        shareButton.sendAction(on: .leftMouseDown)
         
-    }
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        //TODO: Finish implementing recent searches.
-        //recentSearches=["Toto","Titi","Tata"]
-        //mainSearchField.recentSearches=recentSearches
-        //mainSearchField.searchMenuTemplate=searchMenu
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-        
-
     }
     
     override func windowWillLoad() {
@@ -41,6 +37,17 @@ class PrincipalWindow: NSWindowController {
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(EntityToToken(), forName: NSValueTransformerName(rawValue: "EntityToToken"))
+    
+    
+        //Register for table updates.
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .selectedRowsChaged, object: nil)
+    }
+    
+    //Selected rows changed
+    @objc func selectedRowsOfDisplayedTableChanged(_ notification:Notification){
+        if let selQuotes = notification.object as? [String] {
+            selectedQuotesIDS=selQuotes
+        }
     }
     
     //Actions
@@ -49,6 +56,7 @@ class PrincipalWindow: NSWindowController {
         
     }
    
+    //Called before preparing for a specific segue.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let addQ = segue.destinationController as? AddQuoteController{
             addQ.isInfoWindow=false
@@ -61,13 +69,16 @@ class PrincipalWindow: NSWindowController {
     
     //Sharing sheet
     @IBAction func shareSheet(_ sender:NSButton){
-        let textToDelete="sdjbf sjdb sbd m"
         //TODO: How to pass selectedQuotes
-        let sharingPicker = NSSharingServicePicker(items: [textToDelete])
-        
-        //Present
-        sharingPicker.delegate=self
-        sharingPicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
+        let moc = (NSApp.delegate as? AppDelegate)?.managedObjectContext
+        if let quoteArray=moc?.getObjectsWithIDS(asStrings: selectedQuotesIDS!) as? [Quote]{
+            
+            let sharingPicker = NSSharingServicePicker(items: quoteArray.map({$0.textForSharing()}))
+            
+            //Present used in async to avoid warning
+            sharingPicker.delegate=self
+            sharingPicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
+        }
     }
 }
 
@@ -76,19 +87,18 @@ extension PrincipalWindow:NSSharingServicePickerDelegate{
    
     //Customization before appearance.
     func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
-        guard let image = NSImage(named: NSImage.Name("copy")) else {
+        guard let image = NSImage(named: "Copy") else {
             return proposedServices
         }
         
         var share = proposedServices
         let customService = NSSharingService(title: "Copy Text", image: image, alternateImage: image, handler: {
             if let text = items.first as? String {
-                print("Clipboard\(text)")
+                print("Clipboard: \(text)")
                 //self.setClipboard(text: text)
             }
         })
         share.insert(customService, at: 0)
-        
         return share
     }
 }

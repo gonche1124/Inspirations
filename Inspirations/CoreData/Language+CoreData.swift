@@ -39,9 +39,16 @@ public class Language: LibraryItem {
         guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: moc) else {
             fatalError("Failed to decode Language")}
         
+//        guard let path = Bundle.main.path(forResource: "BCP47", ofType: "plist") else{
+//            fatalError("No dictionary for lookup codes")
+//        }
+//        let codeDictionary = NSDictionary(contentsOfFile: path)
+        let langCode=dictionary["name"] as? String
+        
         self.init(entity: entity, insertInto: moc)
         self.libraryType = LibraryType.language.rawValue
-        self.name=dictionary["name"] as? String
+        self.name=langCode
+        self.localizedName=langCode
         self.isShown=true
         self.isRootItem=false
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Languages", inContext: moc)

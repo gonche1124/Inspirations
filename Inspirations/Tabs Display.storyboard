@@ -565,7 +565,7 @@ CA
                     </connections>
                 </viewController>
                 <customObject id="qdT-pd-5wV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" avoidsEmptySelection="NO" id="yV3-Et-nkz">
+                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="yV3-Et-nkz">
                     <connections>
                         <binding destination="N8L-5l-A6x" name="managedObjectContext" keyPath="self.moc" id="bAu-Ar-nS7"/>
                     </connections>
