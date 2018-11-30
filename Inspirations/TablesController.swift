@@ -15,7 +15,8 @@ class TablesController: NSViewController {
     var deletesFromDatabase=false
     var selectedLeftItem:LibraryItem? {
         didSet{
-            let newBool = (selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
+            let newBool = [LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+            //let newBool = LibraryType.deleteFromTables(nil).contains//(selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
             self.deletesFromDatabase = !newBool
         }
     }
@@ -61,7 +62,6 @@ class TablesController: NSViewController {
         if modFlags.contains(.command) {
             switch event.characters{
             case "e":
-                print("Nothing")
                 self.performSegue(withIdentifier:.init("editSegue"), sender: self)
             case "f":
                 self.updateFavoriteValue(newValue:!modFlags.contains(.shift))
@@ -73,11 +73,11 @@ class TablesController: NSViewController {
     
     //Update favorite attribute
     func updateFavoriteValue(newValue:Bool){
-        //quoteController.selectedObjects.forEach({($0 as? Quote)?.isFavorite=newValue})
         guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
+        table?.beginUpdates()
         selectedQuotes.forEach({
             $0.isFavorite=newValue})
-        //self.table?.reloadData()
+        table?.endUpdates()
         //TODO: Fix non refreshing issue.
     }
     
@@ -89,6 +89,7 @@ class TablesController: NSViewController {
     
     //Add the tag or
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
+        //TODO: Simplify by adding varibale to store ID in AGC_MENU_ITem
         if let urlRep=URL(string: ((sender?.identifier?.rawValue)!)),
             let objectId=moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: urlRep),
             let coreItem=try? moc.existingObject(with: objectId){
@@ -102,7 +103,6 @@ class TablesController: NSViewController {
             }catch{
                 print("Could not save, error: \(error)")
             }
-            
         }
     }
     
@@ -113,22 +113,23 @@ class TablesController: NSViewController {
     
     //Deletes selected record or records.
     @IBAction func deleteSelectedRecord(_ sender: Any?){
-        let confirmationD = NSAlert()
-        confirmationD.messageText = "Delete Records"
-        confirmationD.informativeText = "Are you sure you want to delete the \(table?.numberOfSelectedRows ?? 0) selected Quotes?"
-        confirmationD.addButton(withTitle: "Ok")
-        confirmationD.addButton(withTitle: "Cancel")
-        confirmationD.alertStyle = .warning
+        let confirmationD = NSAlert.init(totalItems: table?.numberOfSelectedRows ?? 0, isDeleting: self.deletesFromDatabase)
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             self.table?.beginUpdates()
-            //self.tableFRC.selectedObjects?.forEach({moc.delete($0)})
+            if deletesFromDatabase {
+                self.quoteController.selectedObjects.forEach({moc.delete($0 as! NSManagedObject)})
+            }else{
+                //Case for Tags.
+                if let isTag=selectedLeftItem as? Tag {
+                    quoteController.selectedObjects.forEach({isTag.removeFromHasQuotes($0 as! Quote)})
+                }
+                if let isList=selectedLeftItem as? QuoteList{
+                    quoteController.selectedObjects.forEach({isList.removeFromHasQuotes($0 as! Quote)})
+                }
+            }
             self.table?.endUpdates()
-        }
-        do{
-            try self.moc.save()
-        }catch{
-            print(error)
+            self.saveMainContext()
         }
     }
     
@@ -164,8 +165,6 @@ extension TablesController: NSTableViewDataSource{
         thisItem.setString(thisQuote.objectID.uriRepresentation().absoluteString, forType: .string)
         return thisItem
     }
-    
-   
 }
 
 //MARK: - TableViewDelegate
@@ -177,7 +176,6 @@ extension TablesController: NSTableViewDelegate{
             NotificationCenter.default.post(Notification(name: .selectedRowsChaged, object: myTable, userInfo: nil))
         }
     }
-
 }
 
 //MARK: - NSMenuDelegate

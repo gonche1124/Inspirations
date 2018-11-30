@@ -202,7 +202,7 @@ Gw
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </menuItem>
-                                                    <menuItem title="Eduro" identifier="enduroQuote" id="icR-qS-9BM" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                    <menuItem title="Eduro" identifier="eduroQuote" id="icR-qS-9BM" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
                                                         </userDefinedRuntimeAttributes>

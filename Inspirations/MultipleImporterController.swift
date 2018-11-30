@@ -175,7 +175,7 @@ class WebImporter: MainImportController {
         case forbes = "forbesQuote"
         case BrainyQuote = "brainyQuote"
         case wordOfWisdom = "InspirationalWordsOfWisdom"
-        case enduro = "enduroQuote"
+        case eduro = "eduroQuote"
     }
     
     //Outlets
@@ -197,10 +197,7 @@ class WebImporter: MainImportController {
         //Make sure it can pull the link
         guard let selMenuItem = webPopUpButton?.menu?.highlightedItem as? AGC_NSMenuItem,
             let selIdentifier = selMenuItem.identifier?.rawValue,
-            let rawIdentifier = selectedWP(rawValue: selIdentifier) else {
-                print("Could not create identifier")
-                return
-        }
+            let rawIdentifier = selectedWP(rawValue: selIdentifier) else {return}
         
         showProgress(withLabel: "Parsing Html code...", andStarting: true)
         processWebPage(forWebPage: rawIdentifier)
@@ -212,6 +209,7 @@ class WebImporter: MainImportController {
             
             guard let htmlString = response as? String else {
                 //TODO: Restore UI and infrom user.
+                print("Could extract HTML")
                 return
             }
             guard let myHTML=try? SwiftSoup.parse(htmlString) else {
@@ -227,67 +225,76 @@ class WebImporter: MainImportController {
         progressLabel.stringValue="Parsing quote..."
         switch forWebPage {
         case .forbes:
-            if let newQuote=importQuoteFrom(forbes:andHTML){
-                self.saveAndClose("nil")
-            }
+            importQuoteFrom(forbes:andHTML)
         case .wikipedia:
-            if let newQuote=importQuoteFrom(wikipedia:andHTML){
-                self.saveAndClose("nil")
-            }
+            importQuoteFrom(wikipedia:andHTML)
         case .BrainyQuote:
-            if let newQuote=importQuoteFrom(brainyQuote: andHTML){
-                self.saveAndClose("nil")
-            }
+            importQuoteFrom(brainyQuote: andHTML)
+        case .eduro:
+            importQuoteFrom(eduro:andHTML)
+            
+        
         default:
             print("To Implement")
         }
+        self.saveAndClose("nil")
+    }
+    
+    //Extracts the data from Enduro
+    func importQuoteFrom(eduro:Document){
+        guard let quoteArray = try? eduro.select("dailyquote p").array() else {return}
+        guard let quoteString = try! quoteArray.first?.text().trimWhites() else {return}
+        guard let name = try? quoteArray[1].text().replacingOccurrences(of: "–", with: "").trimWhites() else {return}
+        
+        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Eduro", andTaggedName: "Eduro")
+ 
     }
     
     //Extracts the data from Wikipedia and ads the quote.
-    func importQuoteFrom(wikipedia:Document)->Quote?{
+    func importQuoteFrom(wikipedia:Document){
         
         //Get Array of info.
-        guard let quoteArray=try? wikipedia.select("#mf-qotd div table tbody tr td table tbody tr td table tbody tr td").array(), quoteArray.count==2, let quoteString = try! quoteArray.first?.text(), let name=try! quoteArray.last?.select("a").text() else {
-            return nil
-        }
+        guard let quoteArray=try? wikipedia.select("#mf-qotd div table tbody tr td table tbody tr td table tbody tr td").array(), quoteArray.count==2, let quoteString = try! quoteArray.first?.text(), let name=try! quoteArray.last?.select("a").text() else {return}
         
-        //Create quote
-        let quoteDict:[String : Any] = ["quoteString":quoteString, "fromAuthor":["name":name], "isAbout":["themeName":"Wikipedia"]]
-        if let newQuote = Quote.firstOrCreate(inContext:moc, withAttributes:quoteDict, andKeys:["quoteString"]) as? Quote{
-            return newQuote
-        }
-        return nil
+        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Wikipedia", andTaggedName: "Wikipedia")
     }
     
     //extracts the data from Forbes quote of the day.
-    func importQuoteFrom(forbes:Document)->Quote?{
+    func importQuoteFrom(forbes:Document){
         //TODO: Finish implementing. Add tag to indicate donwlaoded from Web.
-        guard let quoteString = try? forbes.select("p.p.p2.ng-binding").text() else {
-            return nil
-        }
-        let name = try? forbes.select("cite.ng-binding")//.array().first
-        let quoteDict:[String : Any] = ["quoteString":quoteString, "fromAuthor":["name":name], "isAbout":["themeName":"Forbes"]]
-        if let newQuote = Quote.firstOrCreate(inContext:moc, withAttributes:quoteDict, andKeys:["quoteString"]) as? Quote{
-            return newQuote
-        }
-        return nil
+        guard let quoteString = try? forbes.select("p.p.p2.ng-binding").text() else {return}
+        guard let name = try? forbes.select("cite.ng-binding").text() else {return}
+
+        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Forbes", andTaggedName: "Forbes")
+        
+
     }
     
     //Extracts Quote from BrainyQuote
-    func importQuoteFrom(brainyQuote brainy:Document)->Quote?{
+    func importQuoteFrom(brainyQuote brainy:Document){
         guard let allString = try? brainy.select("a.oncl_q").first()?.getElementsByTag("img").attr("alt"),
         let stringArray=allString?.components(separatedBy: CharacterSet.init(charactersIn: "-")),
             stringArray.count==2 else {
-            return nil
+            return
         }
         
         let name = stringArray.last!.trimmingCharacters(in: .whitespaces)
         let quoteString = stringArray.first!.trimmingCharacters(in: .whitespaces)
-        let quoteDict:[String : Any] = ["quoteString":quoteString, "fromAuthor":["name":name], "isAbout":["themeName":"Brainy Quote"]]
-        if let newQuote = Quote.firstOrCreate(inContext:moc, withAttributes:quoteDict, andKeys:["quoteString"]) as? Quote{
-            return newQuote
-        }
-        return nil
+        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Brainy Quote", andTaggedName: "Brainy Quote")
+        
+    }
+    
+    //Creates a Quotes with the given parameters
+    func createQuote(withString:String, andAuthorName:String, andTopicName:String, andTaggedName:String){
+        //Create quote
+        var quoteDict:[String : Any]=[String : Any]()
+        let quoteTag:[String:Any] = ["name":andTaggedName]
+        quoteDict["quoteString"]=withString as Any?
+        quoteDict["fromAuthor"]=["name":andAuthorName] as Any?
+        quoteDict["isAbout"]=["themeName":andTopicName] as Any?
+        quoteDict["isTaggedWith"]=[quoteTag] as Any?
+        _ = Quote.firstOrCreate(inContext:moc, withAttributes:quoteDict, andKeys:["quoteString"])
+        
     }
     
 }
@@ -302,61 +309,17 @@ extension WebImporter:NSMenuDelegate{
 }
 
 
-
-
-
 //MARK: - NSTabViewController
 class TabViewImportController:NSTabViewController{
-    
-    //private lazy var tabViewSizes: [String : NSSize] = [:]
-    
-    //View did Load.
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     //Used to center the toolbarItems.
     override func viewWillAppear() {
         super.viewWillAppear()
         if let toolBar = view.window?.toolbar {
             toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 0)
             toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 3)
+            toolBar.displayMode = .labelOnly
         }
     }
-    
-    //    override func transition(from fromViewController: NSViewController, to toViewController: NSViewController, options: NSViewController.TransitionOptions = [], completionHandler completion: (() -> Void)? = nil) {
-    //        NSAnimationContext.runAnimationGroup({ context in
-    //            context.duration = 1//0.5
-    //            self.updateWindowFrameAnimated(viewController: toViewController)
-    //            super.transition(from: fromViewController, to: toViewController, options: [.crossfade, .allowUserInteraction], completionHandler: completion)
-    //        }, completionHandler: nil)
-    //    }
-    //
-    //    func updateWindowFrameAnimated(viewController: NSViewController) {
-    //
-    //        guard let title = viewController.title, let window = view.window else {
-    //            return
-    //        }
-    //
-    //        let contentSize: NSSize
-    //
-    //        if tabViewSizes.keys.contains(title) {
-    //            contentSize = tabViewSizes[title]!
-    //        }
-    //        else {
-    //            contentSize = viewController.view.frame.size
-    //            tabViewSizes[title] = contentSize
-    //        }
-    //
-    //        let newWindowSize = window.frameRect(forContentRect: NSRect(origin: NSPoint.zero, size: contentSize)).size
-    //
-    //        var frame = window.frame
-    //        frame.origin.y += frame.height
-    //        frame.origin.y -= newWindowSize.height
-    //        frame.size = newWindowSize
-    //        window.animator().setFrame(frame, display: false)
-    //    }
-    
-    
 }
 

@@ -48,23 +48,6 @@ class PrincipalWindow: NSWindowController {
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
         
     }
-    
-    
-    //Variables
-    var recentSearches = [String]()
-//    lazy var searchMenu :NSMenu = {
-//        let menu = NSMenu(title: "Recents")
-//        let i1 = menu.addItem(withTitle: "Recents Search", action: nil, keyEquivalent: "")
-//        i1.tag = Int(NSSearchField.recentsTitleMenuItemTag)
-//        let i2 = menu.addItem(withTitle: "Item", action: nil, keyEquivalent: "")
-//        i2.tag = Int(NSSearchField.recentsMenuItemTag)
-//        let i3 = menu.addItem(withTitle: "Clear", action: nil, keyEquivalent: "")
-//        i3.tag = Int(NSSearchField.clearRecentsMenuItemTag)
-//        let i4 = menu.addItem(withTitle: "No Recent Search", action: nil, keyEquivalent: "")
-//        i4.tag = Int(NSSearchField.noRecentsMenuItemTag)
-//
-//        return menu
-//    }()
    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let addQ = segue.destinationController as? AddQuoteController{
@@ -91,7 +74,7 @@ class PrincipalWindow: NSWindowController {
 //MARK: - NSSharingServicePickerDeleate
 extension PrincipalWindow:NSSharingServicePickerDelegate{
    
-    //Cusotmizaion before appearance.
+    //Customization before appearance.
     func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, sharingServicesForItems items: [Any], proposedSharingServices proposedServices: [NSSharingService]) -> [NSSharingService] {
         guard let image = NSImage(named: NSImage.Name("copy")) else {
             return proposedServices

@@ -128,14 +128,13 @@ extension Array {
 }
 
 extension NSAlert{
-    static func deleteConfirmationAlert(withTotalItems: Int) -> NSAlert {
-        let confirmationD = NSAlert()
-        confirmationD.messageText = "Delete Records"
-        confirmationD.informativeText = "Are you sure you want to delete the \(withTotalItems) selected Quotes?"
-        confirmationD.addButton(withTitle: "Ok")
-        confirmationD.addButton(withTitle: "Cancel")
-        confirmationD.alertStyle = .warning
-        return confirmationD
+    convenience init(totalItems:Int, isDeleting:Bool) {
+        self.init()
+        self.messageText = isDeleting ? "Deletes Records":"Removes Records"
+        self.addButton(withTitle: "OK")
+        self.addButton(withTitle: "Cancel")
+        self.informativeText = "Are you sure you want to " + (isDeleting ? "delete":"remove") + " the \(totalItems) selected Quotes?"
+        self.alertStyle = .warning
     }
 }
 
@@ -148,6 +147,18 @@ extension NSViewController{
         let tempMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         tempMoc.parent=self.moc
         return tempMoc
+    }
+    
+    //Simplifications of do-try-save block.
+    func saveMainContext(){
+        do { try self.moc.save()} catch  {
+            print(error)
+        }
+    }
+    func saveBackgroundContext(){
+        do { try self.mocBackground.save()} catch  {
+            print(error)
+        }
     }
 }
 
@@ -169,44 +180,26 @@ extension NSMenu{
 //Class used in NSMenuItems that need to store custom bool value.
 class AGC_NSMenuItem: NSMenuItem {
     
-    @IBInspectable var agcBool:Bool=false        //Used to??
+    @IBInspectable var agcBool:Bool=false        //Used to define Favorites/Unfavorites in menu call
     @IBInspectable var customURLString:String="" //used for import controller popup item.
     
 }
 
-//Autogrowing NSTextField
-class AGC_GrowingTextField:NSTextField{
-    
-    override var intrinsicContentSize: NSSize {
-        // Guard the cell exists and wraps
-        guard let cell = self.cell, cell.wraps else {return super.intrinsicContentSize}
-        
-        // Use intrinsic width to jive with autolayout
-        let width = super.intrinsicContentSize.width
-        
-        // Set the frame height to a reasonable number
-        self.frame.size.height = 750.0
-        
-        // Calcuate height
-        let height = cell.cellSize(forBounds: self.frame).height
-        
-        return NSMakeSize(width, height);
-    }
-    
-    override func textDidChange(_ notification: Notification) {
-        super.textDidChange(notification)
-        super.invalidateIntrinsicContentSize()
-    }
-}
 
 //NSTextField Extension to check if there is a value.
 extension NSTextField{
-    //Used fo rvalidation in the UI to make sure it has a value.
+    //Used fo validation in the UI/ADD to make sure it has a value.
     var hasValue:Bool{
         get {
             let myCharacters=CharacterSet.letters.inverted
             return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
         }
+    }
+}
+
+extension String{
+    func trimWhites()->String{
+        return self.trimmingCharacters(in: .whitespaces)
     }
 }
 

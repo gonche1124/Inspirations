@@ -21,18 +21,11 @@ public class Quote: NSManagedObject, Codable{
     private enum CodingKeys: String, CodingKey {
         case isFavorite = "isFavorite"
         case quoteString = "quote"
-        case totalLetters = "totalLetters"
-        case totalWords = "totalWords"
         case from = "fromAuthor"
         case isAbout = "isAbout"
         case isIncludedIn = "inPlaylist"
         case isTaggedWith = "isTaggedWith"
         case spelledIn = "spelledIn"
-    }
-    
-    //Check for custom initialization for dynamic keys.
-    private enum myAlt:String, CodingKey{
-        case quoting = "quote"
     }
     
     //Properties
@@ -67,8 +60,25 @@ public class Quote: NSManagedObject, Codable{
         self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
         self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
 
-        //TODO: Implement favorites and lists.
+        //Check if Favorite Tag exists.
+        if let isFavorite = dictionary["isFavorite"] as? Bool{
+            //TODO: Handle different cases of BOOL/NSNUMBER/STRING
+            self.isFavorite=isFavorite
+        }
         
+        //Check if there are any Tags.
+        if let tags = dictionary["isTaggedWith"] as? [[String:Any]]{
+            tags.forEach({
+                self.addToIsTaggedWith(Tag.firstOrCreate(inContext: moc, withAttributes: $0, andKeys: ["name"]))
+            })
+        }
+        
+        //Check if there are any Lists.
+        if let lists = dictionary["isIncludedIn"] as? [[String:Any]]{
+            lists.forEach({
+                self.addToIsTaggedWith(QuoteList.firstOrCreate(inContext: moc, withAttributes: $0, andKeys: ["name"]))
+            })
+        }
     }
     
     //Decodable
@@ -114,8 +124,6 @@ public class Quote: NSManagedObject, Codable{
         var containter = encoder.container(keyedBy: CodingKeys.self)
         try containter.encode(isFavorite, forKey: .isFavorite)
         try containter.encode(quoteString, forKey: .quoteString)
-        try containter.encode(totalLetters, forKey: .totalLetters)
-        try containter.encode(totalWords, forKey: .totalWords)
         try containter.encode(from, forKey: .from)
         try containter.encode(isAbout, forKey: .isAbout)
         //try containter.encode(isIncludedIn, forKey: .isIncludedIn)
@@ -123,7 +131,6 @@ public class Quote: NSManagedObject, Codable{
         //try containter.encode(spelledIn, forKey: .spelledIn)
     }
     
-    //Others
     //Updates when the user changes the length of the quote.
     override public func didChangeValue(forKey key: String) {
         if key == "quoteString" {
@@ -135,13 +142,6 @@ public class Quote: NSManagedObject, Codable{
         }
     }
     
-    //Prints the description
-//    override open var description: String{
-//
-//        return "AA\nBB"
-//    }
-    
-   
 }
 
 
@@ -162,8 +162,7 @@ extension Quote {
     
 }
 
-
-// MARK: Generated accessors for isIncludedIn
+// MARK: - Generated accessors for isIncludedIn
 extension Quote {
     
     @objc(addIsIncludedInObject:)
