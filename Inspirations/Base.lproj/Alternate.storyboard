@@ -750,11 +750,11 @@
                                                                 <outlet property="textField" destination="NYN-XJ-v3O" id="dQu-fm-Wsz"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" id="L7m-2A-EHj" userLabel="DataCell">
+                                                        <tableCellView identifier="DataCell" id="L7m-2A-EHj" userLabel="DataCell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="17" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView translatesAutoresizingMaskIntoConstraints="NO" id="HKf-Mo-qwk">
+                                                                <imageView horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HKf-Mo-qwk">
                                                                     <rect key="frame" x="3" y="5" width="14" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="14" id="RDD-OC-rlr"/>
@@ -762,19 +762,29 @@
                                                                     </constraints>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSActionTemplate" id="fa4-9a-Ea7"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4cT-Um-C7F">
-                                                                    <rect key="frame" x="20" y="3" width="150" height="17"/>
+                                                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="4cT-Um-C7F">
+                                                                    <rect key="frame" x="20" y="3" width="108" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="list name" id="rF2-HG-niF">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <button identifier="totalButton" hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S5a-Jz-OGH">
+                                                                    <rect key="frame" x="129" y="3" width="38" height="17"/>
+                                                                    <buttonCell key="cell" type="inline" title="total" bezelStyle="inline" alignment="center" controlSize="small" borderStyle="border" inset="2" id="VjL-EN-5J7">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                        <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="#,###" numberStyle="decimal" minimumIntegerDigits="-1" maximumIntegerDigits="2000000000" id="ROu-yM-OTY"/>
+                                                                    </buttonCell>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="HKf-Mo-qwk" firstAttribute="centerY" secondItem="4cT-Um-C7F" secondAttribute="centerY" id="Gj3-KQ-rLm"/>
-                                                                <constraint firstAttribute="trailing" secondItem="4cT-Um-C7F" secondAttribute="trailing" constant="2" id="Kue-ap-GAQ"/>
                                                                 <constraint firstItem="4cT-Um-C7F" firstAttribute="top" secondItem="L7m-2A-EHj" secondAttribute="top" constant="3" id="M26-7b-ElD"/>
+                                                                <constraint firstItem="S5a-Jz-OGH" firstAttribute="leading" secondItem="4cT-Um-C7F" secondAttribute="trailing" constant="3" id="Mip-84-sDz"/>
+                                                                <constraint firstAttribute="trailing" secondItem="S5a-Jz-OGH" secondAttribute="trailing" constant="3" id="c75-Li-UFm"/>
+                                                                <constraint firstItem="S5a-Jz-OGH" firstAttribute="centerY" secondItem="L7m-2A-EHj" secondAttribute="centerY" id="szl-Xq-f8n"/>
                                                                 <constraint firstAttribute="bottom" secondItem="4cT-Um-C7F" secondAttribute="bottom" constant="3" id="tWb-tf-Yfj"/>
                                                                 <constraint firstItem="HKf-Mo-qwk" firstAttribute="leading" secondItem="L7m-2A-EHj" secondAttribute="leading" constant="3" id="wri-e4-y4P"/>
                                                                 <constraint firstItem="4cT-Um-C7F" firstAttribute="leading" secondItem="HKf-Mo-qwk" secondAttribute="trailing" constant="5" id="wxh-b0-NaN"/>
@@ -782,6 +792,7 @@
                                                             <connections>
                                                                 <outlet property="imageView" destination="HKf-Mo-qwk" id="Ujs-9u-ioJ"/>
                                                                 <outlet property="textField" destination="4cT-Um-C7F" id="Ix2-Iq-I5I"/>
+                                                                <outlet property="totalButton" destination="S5a-Jz-OGH" id="Akb-yG-6kX"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>

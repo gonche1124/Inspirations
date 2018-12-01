@@ -35,6 +35,15 @@ public class LibraryItem: NSManagedObject {
     @NSManaged public var hasLibraryItems: NSOrderedSet? //Set<LibraryItem>//NSOrderedSet?
     @NSManaged public var sortingOrder:String?
     
+    //Computed properties
+    var totalQuotes:Int?{
+        if self.libraryType==LibraryType.mainLibrary.rawValue{
+            return self.arrayOfQuotes?.count
+        }else if self.libraryType==LibraryType.favorites.rawValue{
+            return self.arrayOfFavorites?.count
+        }
+        return nil
+    }
 
     //Decodable
 //    public required convenience init(from decoder: Decoder) throws {

@@ -19,6 +19,12 @@ public class Language: LibraryItem {
     @NSManaged public var localizedName: String?
     @NSManaged public var hasQuotes: NSSet?
     
+    //Computed properties
+    override var totalQuotes:Int?{
+        print("\(self.name): \(hasQuotes?.count)")
+        return hasQuotes?.count
+    }
+    
     //Convinience init
     public convenience init?(inMOC:NSManagedObjectContext, andName:String){
         guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: inMOC),
@@ -53,5 +59,22 @@ public class Language: LibraryItem {
         self.isRootItem=false
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Languages", inContext: moc)
     }
+    
+}
+
+// MARK: - Generated accessors for hasQuotes
+extension Language {
+    
+    @objc(addHasQuotesObject:)
+    @NSManaged public func addToHasQuotes(_ value: Quote)
+    
+    @objc(removeHasQuotesObject:)
+    @NSManaged public func removeFromHasQuotes(_ value: Quote)
+    
+    @objc(addHasQuotes:)
+    @NSManaged public func addToHasQuotes(_ values: NSSet)
+    
+    @objc(removeHasQuotes:)
+    @NSManaged public func removeFromHasQuotes(_ values: NSSet)
     
 }

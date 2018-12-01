@@ -41,25 +41,23 @@ public class Quote: NSManagedObject, Codable{
     
     //Convinience Init form dictionary.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
-          //Safeguards.
-        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
+        //Safeguards.
+        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc),
+                let quoteS = dictionary["quoteString"] as? String, quoteS != "",
+                let authorDict=dictionary["fromAuthor"] as? [String: Any],
+                let themeDict=dictionary["isAbout"] as? [String: Any] else {
             fatalError("Failed to create Entity Quote")}
-        guard let quoteS = dictionary["quoteString"] as? String, quoteS != "" else{
-            fatalError("Failed to find a valuable string for the quote.")
-        }
-        guard let authorDict=dictionary["fromAuthor"] as? [String: Any] else{
-            fatalError("Failed to find an Author for the quote.")
-        }
-        guard let themeDict=dictionary["isAbout"] as? [String: Any] else{
-            fatalError("Failed to find an Theme for the quote.")
-        }
         
         //Create Item.
         self.init(entity: entity, insertInto: moc)
         self.quoteString=quoteS
         self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
         self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
-        self.spelledIn=Language.firstOrCreate(inContext: moc, withAttributes: ["name":NSLinguisticTagger.dominantLanguage(for: quoteS)! as Any], andKeys: ["name"])
+        if let lang = Language.firstOrCreate(inContext: moc, withAttributes: ["name":NSLinguisticTagger.dominantLanguage(for: quoteS)! as Any], andKeys: ["name"]) as? Language{
+            lang.addToHasQuotes(self)
+            print("Went in!!!!")
+        }
+        
 
         //Check if Favorite Tag exists.
         if let isFavorite = dictionary["isFavorite"] as? Bool{
@@ -144,9 +142,7 @@ public class Quote: NSManagedObject, Codable{
     
     ///Create text verison for sharing services
     func textForSharing()->String{
-        let qt = self.quoteString!
-        let au = self.from!.name!
-        return qt+"\n   ~"+au
+        return self.quoteString!+"\n   ~"+self.from!.name!
     }
     
     //Creates version to test model.

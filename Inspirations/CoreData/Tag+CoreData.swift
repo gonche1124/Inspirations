@@ -30,6 +30,11 @@ public class Tag: LibraryItem, Codable {
     //Properties
     @NSManaged public var hasQuotes: NSSet?
     
+    //Computed properties
+    override var totalQuotes:Int?{
+        return hasQuotes?.count
+    }
+    
     //Decodable
     public required convenience init(from decoder: Decoder) throws {
         
@@ -76,7 +81,6 @@ public class Tag: LibraryItem, Codable {
         guard let name = dictionary["name"] as? String else {
             fatalError("Failed to decode Tag")}
         self.init(inMOC: moc, andName: name)
-        print(self)
     }
     
 }

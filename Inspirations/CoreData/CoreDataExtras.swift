@@ -44,12 +44,21 @@ extension LibraryItem{
         default:
             newItem.sortingOrder="5"
         }
-        
         return newItem
     }
 }
 
 extension NSManagedObject {
+    
+    //Returns a count of all Quotes
+    var arrayOfQuotes:[Quote]?{
+        return try? Quote.allInContext(self.managedObjectContext!)
+    }
+    
+    //Returns all favorites.
+    var arrayOfFavorites:[Quote]?{
+        return try? Quote.allInContext(self.managedObjectContext!, predicate: NSPredicate(format: NSPredicate.pIsFavorite))
+    }
     
     //Get first item with predicate
     class func firstWith<T: NSManagedObject>(predicate:NSPredicate, inContext:NSManagedObjectContext)->T?{
@@ -104,10 +113,17 @@ extension NSManagedObject {
         return newObj as! T
     }
     
+    //Convinience init.
+//    public convenience init(from dictionary:[String: Any], in moc: NSManagedObjectContext) throws {
+//        guard let entity = NSEntityDescription.entity(forEntityName: self.className, in: moc) else {
+//            fatalError("Failed to create Entity Generic")}
+//        self.init(entity: entity, insertInto: moc)
+//    }
+    
     //Evaluates type of core data entity and performs init.
     //TODO: Potential to be recycled.
    class func createEntity<T:NSManagedObject>(withDictionary:[String:Any], in moc:NSManagedObjectContext) throws ->T?{
-        switch String(describing: self) {
+    switch String(describing: self) {
         case Entities.quote.rawValue:
             return try Quote.init(from: withDictionary, in: moc) as? T
         case Entities.author.rawValue:
@@ -167,70 +183,70 @@ extension NSManagedObjectContext{
     }
 }
 
+//
+//struct gonche:CodingKey{
+//    var intValue: Int?
+//    var stringValue: String
+//    init?(intValue: Int) {
+//        self.init(stringValue: "\(intValue)")
+//        self.intValue = intValue
+//    }
+//    init?(stringValue: String) {
+//        self.stringValue = stringValue
+//    }
+//}
 
-struct gonche:CodingKey{
-    var intValue: Int?
-    var stringValue: String
-    init?(intValue: Int) {
-        self.init(stringValue: "\(intValue)")
-        self.intValue = intValue
-    }
-    init?(stringValue: String) {
-        self.stringValue = stringValue
-    }
-}
-
-extension KeyedDecodingContainer{
-    private enum authorEnconding:String, CodingKey{
-        case name = "name"
-    }
-    
-    //TODO: Implement. Important!
-    //https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-4-decodable-proto
-    func decodeAuthor(forKey key:K, inMOC moc:NSManagedObjectContext) throws ->Author?{
-      //  let authorDict=try self.decode([String: Any].self, forKey: key)
-//        if let exists = Author.firtsWith(attribute: "name", value: authorDict.name, inContext: moc) as? Author{
-//            return exists
+//extension KeyedDecodingContainer{
+//    private enum authorEnconding:String, CodingKey{
+//        case name = "name"
+//    }
+//
+//    //TODO: Implement. Important!
+//    //https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-4-decodable-proto
+//    func decodeAuthor(forKey key:K, inMOC moc:NSManagedObjectContext) throws ->Author?{
+//      //  let authorDict=try self.decode([String: Any].self, forKey: key)
+////        if let exists = Author.firtsWith(attribute: "name", value: authorDict.name, inContext: moc) as? Author{
+////            return exists
+////        }
+//
+//        return try decode(Author.self, forKey: key)
+//    }
+//
+//    func decode(_ type: Dictionary<String, Any>.Type, forKey key: K) throws -> Dictionary<String, Any> {
+//        let container = try self.nestedContainer(keyedBy: gonche.self, forKey: key)
+//        return try container.decode(type)
+//    }
+//
+//    func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+//        var dictionary = Dictionary<String, Any>()
+//
+//        for key in allKeys {
+//            if let boolValue = try? decode(Bool.self, forKey: key) {
+//                dictionary[key.stringValue] = boolValue
+//            } else if let stringValue = try? decode(String.self, forKey: key) {
+//                dictionary[key.stringValue] = stringValue
+//            } else if let intValue = try? decode(Int.self, forKey: key) {
+//                dictionary[key.stringValue] = intValue
+//            } else if let doubleValue = try? decode(Double.self, forKey: key) {
+//                dictionary[key.stringValue] = doubleValue
+////            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self, forKey: key) {
+////                dictionary[key.stringValue] = nestedDictionary
+////            } else if let nestedArray = try? decode(Array<Any>.self, forKey: key) {
+////                dictionary[key.stringValue] = nestedArray
+//            }
 //        }
-
-        return try decode(Author.self, forKey: key)
-    }
-    
-    func decode(_ type: Dictionary<String, Any>.Type, forKey key: K) throws -> Dictionary<String, Any> {
-        let container = try self.nestedContainer(keyedBy: gonche.self, forKey: key)
-        return try container.decode(type)
-    }
-    
-    func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
-        var dictionary = Dictionary<String, Any>()
-        
-        for key in allKeys {
-            if let boolValue = try? decode(Bool.self, forKey: key) {
-                dictionary[key.stringValue] = boolValue
-            } else if let stringValue = try? decode(String.self, forKey: key) {
-                dictionary[key.stringValue] = stringValue
-            } else if let intValue = try? decode(Int.self, forKey: key) {
-                dictionary[key.stringValue] = intValue
-            } else if let doubleValue = try? decode(Double.self, forKey: key) {
-                dictionary[key.stringValue] = doubleValue
-//            } else if let nestedDictionary = try? decode(Dictionary<String, Any>.self, forKey: key) {
-//                dictionary[key.stringValue] = nestedDictionary
-//            } else if let nestedArray = try? decode(Array<Any>.self, forKey: key) {
-//                dictionary[key.stringValue] = nestedArray
-            }
-        }
-        return dictionary
-    }
-}
-
-extension UnkeyedDecodingContainer{
-    
-    mutating func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
-        
-        let nestedContainer = try self.nestedContainer(keyedBy: gonche.self)
-        return try nestedContainer.decode(type)
-    }
-}
+//        return dictionary
+//    }
+//}
+//
+//extension UnkeyedDecodingContainer{
+//
+//    mutating func decode(_ type: Dictionary<String, Any>.Type) throws -> Dictionary<String, Any> {
+//
+//        let nestedContainer = try self.nestedContainer(keyedBy: gonche.self)
+//        return try nestedContainer.decode(type)
+//    }
+//}
 
 //TODO: Check if this is useful
 /*

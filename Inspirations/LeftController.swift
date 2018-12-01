@@ -99,16 +99,23 @@ extension LeftController: NSTextFieldDelegate {
 extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        var myCell: NSTableCellView?
         guard let libItem=item as? LibraryItem else {return nil}
-        let typeOfCell:String=(libItem.isRootItem) ? "HeaderCell":"DataCell"
-        myCell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(rawValue: typeOfCell), owner: self) as? NSTableCellView
-        myCell?.textField?.stringValue=libItem.name!
-        if libItem.isRootItem {return myCell}
-        
-        myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
-        return myCell
-        
+        if libItem.isRootItem {
+            let myCell = outlineView.makeView(withIdentifier:.headerCell, owner: self) as? NSTableCellView
+            myCell?.textField?.stringValue=libItem.name!
+            return myCell
+        }else{
+            let myCell = outlineView.makeView(withIdentifier: .dataCell, owner: self) as? AGC_DataCell
+            myCell?.textField?.stringValue=libItem.name!
+            myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
+            myCell?.totalButton?.isHidden=true
+            //TODO: Fix me.
+            if let totItems=libItem.totalQuotes, totItems>0{
+                myCell?.totalButton?.isHidden=false
+                myCell?.totalButton?.title="\(totItems)"
+            }
+            return myCell
+        }
     }
     
     //Determines if triangle should be shown.
@@ -186,9 +193,6 @@ extension LeftController: NSOutlineViewDataSource {
                 let quotesS = moc.getObjectsWithIDS(asStrings: stringArray) as? [Quote] else {
                     return false
             }
-//            let sURL: [URL] = info.draggingPasteboard.pasteboardItems!.map({URL.init(string: $0.string(forType: .string)!)!})
-//            let sOBID: [NSManagedObjectID] = sURL.map({(moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0))!})
-//            let quotesS = sOBID.map({moc.object(with: $0 )})
     
             if let destTag = item as? Tag{
                 destTag.addToHasQuotes(NSSet(array: quotesS))
@@ -232,3 +236,9 @@ class LeftNSTableViewRow:NSTableRowView{
 //        }
     }
 }
+
+//used to include the button with the totals
+class AGC_DataCell:NSTableCellView{
+    @IBOutlet weak var totalButton:NSButton?
+}
+

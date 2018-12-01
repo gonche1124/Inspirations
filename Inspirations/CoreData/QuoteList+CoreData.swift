@@ -32,6 +32,11 @@ public class QuoteList: LibraryItem, Codable {
     @NSManaged public var smartPredicate: NSPredicate?
     @NSManaged public var hasQuotes: NSSet?
     
+    //Computed properties
+    override var totalQuotes:Int?{
+        return hasQuotes?.count
+    }
+    
     //Decodable
     public required convenience init(from decoder: Decoder) throws {
         

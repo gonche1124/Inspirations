@@ -56,6 +56,11 @@ extension Notification.Name {
     static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
 }
 
+extension NSUserInterfaceItemIdentifier {
+    static let dataCell = NSUserInterfaceItemIdentifier.init("DataCell")
+    static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
+}
+
 
 //MARK:- NSPredicates
 

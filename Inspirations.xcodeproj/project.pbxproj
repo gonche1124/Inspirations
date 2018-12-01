@@ -40,7 +40,6 @@
 		8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A89E8651E842E04001F7F71 /* Main.storyboard */; };
 		8A89E8721E842E04001F7F71 /* InspirationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E8711E842E04001F7F71 /* InspirationsTests.swift */; };
 		8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */; };
-		8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC4F79F1E8869E500DC8784 /* ToDo.rtf */; };
 		8AD2CD2C219E4C890096BFC7 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD2CD2B219E4C890096BFC7 /* SwiftSoup.framework */; };
 		8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities2.swift */; };
 		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
@@ -110,7 +109,6 @@
 		8A89E8781E842E04001F7F71 /* InspirationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspirationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E87E1E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteOld.swift; sourceTree = "<group>"; };
-		8AC4F79F1E8869E500DC8784 /* ToDo.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		8AD2CD2B219E4C890096BFC7 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/Mac/SwiftSoup.framework; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
@@ -292,7 +290,6 @@
 				8A2FF33921B1E4CC0035CC08 /* Resources */,
 				8AE5FD3A2144BB5A0085FAC2 /* Old Files */,
 				8A01F868210924BA007D1E3F /* Alternate */,
-				8AC4F79F1E8869E500DC8784 /* ToDo.rtf */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8A03C0B01FBEA390008D74BA /* Assets.xcassets */,
 			);
@@ -464,7 +461,6 @@
 				8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */,
 				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
 				8A7500B52187FB0200C856FE /* Add Value.storyboard in Resources */,
-				8AC4F7A01E8869E500DC8784 /* ToDo.rtf in Resources */,
 				8A2FF33821B1B72C0035CC08 /* BCP47.plist in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
 			);
