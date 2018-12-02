@@ -11,6 +11,7 @@ import Cocoa
 class LeftController: NSViewController {
 
     //Properties
+    @IBOutlet weak var treeController:NSTreeController! //TO DELETE.
     @IBOutlet weak var listView: NSOutlineView!
     @objc dynamic var canAddNewItem:Bool=false //Objc is neeed for key value
     @objc dynamic var canDeleteItem:Bool=false
@@ -74,7 +75,6 @@ class LeftController: NSViewController {
         if isRoot && !isPrincipal {canAddNewItem=true; canDeleteItem=false}
         if !isRoot && !isMainFav && !isFolder{canAddNewItem=false; canDeleteItem=true}
         if isMainFav || isPrincipal {canDeleteItem=false; canAddNewItem=false}
-        
     }
 }
 
@@ -92,7 +92,6 @@ extension LeftController: NSTextFieldDelegate {
             listView.endUpdates()
         }
     }
-    
 }
 
 //MARK: - NSOutlineViewDelegate
@@ -109,7 +108,6 @@ extension LeftController: NSOutlineViewDelegate{
             myCell?.textField?.stringValue=libItem.name!
             myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
             myCell?.totalButton?.isHidden=true
-            //TODO: Fix me.
             if let totItems=libItem.totalQuotes, totItems>0{
                 myCell?.totalButton?.isHidden=false
                 myCell?.totalButton?.title="\(totItems)"
@@ -213,9 +211,12 @@ extension LeftController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         listView.beginUpdates()
+        print("controllerWillChangeContent")
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print(#function)
+        print("controllerDidChangeContent")
         listView.reloadData()
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()

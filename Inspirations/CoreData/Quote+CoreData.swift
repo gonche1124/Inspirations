@@ -55,7 +55,6 @@ public class Quote: NSManagedObject, Codable{
         self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
         if let lang = Language.firstOrCreate(inContext: moc, withAttributes: ["name":NSLinguisticTagger.dominantLanguage(for: quoteS)! as Any], andKeys: ["name"]) as? Language{
             lang.addToHasQuotes(self)
-            print("Went in!!!!")
         }
         
 

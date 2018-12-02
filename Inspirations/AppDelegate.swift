@@ -207,17 +207,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
             print("++++Changed++++:")
             print("Total items changed: \(updated.count)")
-            for itemChanged in updated{
-                
-                print("itemChanged: \(itemChanged)")
-                for (_,item) in itemChanged.changedValues().enumerated(){
-                    if let total=item.value as? Set<NSManagedObject> {
-                        print("\(item.key): (\(total.count))" )
-                    }else{
-                        print("\(item.key): (\(item.value))" )
-                    }
-                }
-            }
+//            for itemChanged in updated{
+//                
+//                print("itemChanged: \(itemChanged)")
+//                for (_,item) in itemChanged.changedValues().enumerated(){
+//                    if let total=item.value as? Set<NSManagedObject> {
+//                        print("\(item.key): (\(total.count))" )
+//                    }else{
+//                        print("\(item.key): (\(item.value))" )
+//                    }
+//                }
+//            }
             print("+++++++++++++++")
         }
         

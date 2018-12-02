@@ -881,6 +881,7 @@
                     </view>
                     <connections>
                         <outlet property="listView" destination="MHG-gB-lbk" id="ZVw-gt-boT"/>
+                        <outlet property="treeController" destination="V6q-G4-YWA" id="9c7-S1-ajE"/>
                     </connections>
                 </viewController>
                 <customObject id="5xx-fZ-I47" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -893,6 +894,11 @@
                         </menuItem>
                     </items>
                 </menu>
+                <treeController mode="entity" entityName="LibraryItem" fetchPredicateFormat="isRootItem==True" automaticallyPreparesContent="YES" childrenKeyPath="hasLibraryItems" countKeyPath="hasLibraryItems.@count" id="V6q-G4-YWA">
+                    <connections>
+                        <binding destination="CWl-5U-TPh" name="managedObjectContext" keyPath="self.moc" id="nSn-jT-vgU"/>
+                    </connections>
+                </treeController>
             </objects>
             <point key="canvasLocation" x="835.5" y="49"/>
         </scene>
