@@ -502,7 +502,7 @@
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="segmentedAction:" target="0T4-WD-gnI" id="NkU-Ja-6hW"/>
+                                            <action selector="segmentedAction:" target="0T4-WD-gnI" id="nLf-Bb-808"/>
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>

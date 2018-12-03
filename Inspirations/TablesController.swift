@@ -21,9 +21,11 @@ class TablesController: NSViewController {
         }
     }
     
+    //Outlets
     @IBOutlet var quoteController: NSArrayController!
     @IBOutlet weak var table: NSTableView?
     @IBOutlet var rightMenu: NSMenu!
+    @IBOutlet var tabView:NSTabView!
   
     
 
@@ -34,6 +36,7 @@ class TablesController: NSViewController {
         
         //Setup Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedViewChanged(notification:)), name: .selectedViewChanged, object: nil)
         
     }
     
@@ -51,6 +54,20 @@ class TablesController: NSViewController {
                 //Theme
                 sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
             }
+        }
+        
+        //Bind segmentedView
+        if let segmentedToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "segmentedButtonString"}){
+            if let segmentedButton = segmentedToolbarItem.view as? NSSegmentedControl{
+                print("Did fin the segment.")
+                //TODO: See if it is easier.
+                //segmentedButton.action=Selector(tabView.takeSelectedTabViewItemFromSender(segmentedButton))
+                //segmentedButton.action=Selector(tabView.takeSelectedTabViewItemFromSender)
+                //tabView.takeSelectedTabViewItemFromSender(<#T##sender: Any?##Any?#>)
+                //tabView.bind(.selectedIndex, to: segmentedButton, withKeyPath: "selectedIndex", options: nil)
+                //segmentedButton.bind(NSBindingName.selectedIndex, to: self.tabView, withKeyPath: "indexOfSelectedItem", options: nil)
+            }
+            
         }
     }
     
@@ -89,20 +106,13 @@ class TablesController: NSViewController {
     
     //Add the tag or
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
-        //TODO: Simplify by adding varibale to store ID in AGC_MENU_ITem
-        if let urlRep=URL(string: ((sender?.identifier?.rawValue)!)),
-            let objectId=moc.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: urlRep),
-            let coreItem=try? moc.existingObject(with: objectId){
+        if let coreItem=moc.get(objectWithStringID: sender!.identifier!.rawValue){
             if let tag=coreItem as? Tag {
                 tag.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
             }else if let playlist=coreItem as? QuoteList{
                 playlist.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
             }
-            do {
-                try self.moc.save()
-            }catch{
-                print("Could not save, error: \(error)")
-            }
+            self.saveMainContext()
         }
     }
     
@@ -140,6 +150,13 @@ class TablesController: NSViewController {
                 self.selectedLeftItem=selectedLib
                 self.quoteController.fetchPredicate=newPredicate
                 self.quoteController.fetch(nil)
+        }
+    }
+    
+    //Segmented view changed
+    @objc func selectedViewChanged(notification:Notification){
+        if let segControl=notification.object as? NSSegmentedControl{
+            tabView.selectTabViewItem(at: segControl.selectedSegment)
         }
     }
     

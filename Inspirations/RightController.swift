@@ -19,11 +19,8 @@ class RightController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
+       // NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfTableChanged(_:)), name: .selectedRowsChaged, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(ccc_test(_:)), name: Notification.Name.Tab, object: <#T##Any?#>)
-        //NSUserNotificationCenter.default.addObserver(self, forKeyPath:#keyPath(), options: .new, context: nil)
-        //NSUserNotificationCenter.default.addObserver(self, forKeyPath: #keyPath(LeftController.listView.it), options: <#T##NSKeyValueObservingOptions#>, context: <#T##UnsafeMutableRawPointer?#>)
        
     }
     

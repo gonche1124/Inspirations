@@ -132,6 +132,14 @@ extension Array {
     }
 }
 
+//Extension to array of items where elements conform to protocol identifier.
+extension Array where Element:NSUserInterfaceItemIdentification{
+    func firstWith(identifier:String)->Element?{
+        guard let item=self.first(where:{$0.identifier!.rawValue==identifier}) else {return nil}
+        return item
+    }
+}
+
 extension NSAlert{
     convenience init(totalItems:Int, isDeleting:Bool) {
         self.init()
@@ -143,7 +151,7 @@ extension NSAlert{
     }
 }
 
-
+//MARK: -
 extension NSViewController{
     
     @objc dynamic var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
@@ -154,12 +162,13 @@ extension NSViewController{
         return tempMoc
     }
     
-    //Simplifications of do-try-save block.
+    ///Simplifications of do-try-save block.
     func saveMainContext(){
         do { try self.moc.save()} catch  {
             print(error)
         }
     }
+    ///Simplifications of do-try-save block (for background thread)
     func saveBackgroundContext(){
         do { try self.mocBackground.save()} catch  {
             print(error)
@@ -167,18 +176,20 @@ extension NSViewController{
     }
 }
 
+//MARK: -
 extension NSMenu{
     
-    //Less verbose to create nsmenuItem with a specified identifier
+    ///Less verbose to create nsmenuItem with a specified identifier
     func addMenuItem(title:String, action: Selector?, keyEquivalent:String, identifier:String ){
         let newItem = NSMenuItem.init(title: title, action: action, keyEquivalent:keyEquivalent)
         newItem.identifier=NSUserInterfaceItemIdentifier(rawValue: identifier)
         self.addItem(newItem)
     }
     
-    //Easy way to fecth item with identifier
+    ///Easy way to fecth item with identifier
     func item(withIdentifier:String)->NSMenuItem?{
-        return self.items.first(where: {$0.identifier!.rawValue==withIdentifier})
+        return self.items.firstWith(identifier: withIdentifier)
+        //return self.items.first(where: {$0.identifier!.rawValue==withIdentifier})
     }
 }
 

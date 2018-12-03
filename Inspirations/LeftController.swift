@@ -38,19 +38,25 @@ class LeftController: NSViewController {
         //Regoster for dragging.
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
         //listView.expandItem(nil, expandChildren: true)
+        
+        //Register for changes in NSManagedObject relationsihp becasue listFRC only monitors one entity.
+        
     }
     
     override func viewWillAppear() {
         listView.beginUpdates()
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()
+        
+        //Register
+        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
  
     
     //Configure Smart List Controller in case the list already exists.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let editController=segue.destinationController as? SmartListController,
-            let menuItem = sender as? NSMenuItem{
+            sender is NSMenuItem{
             editController.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
         }
     }
@@ -75,6 +81,17 @@ class LeftController: NSViewController {
         if isRoot && !isPrincipal {canAddNewItem=true; canDeleteItem=false}
         if !isRoot && !isMainFav && !isFolder{canAddNewItem=false; canDeleteItem=true}
         if isMainFav || isPrincipal {canDeleteItem=false; canAddNewItem=false}
+    }
+    
+    ///Checks which items have had CRUD to determine if neccesary to update view.
+    @objc func managedObjectDidChange(notification: NSNotification){
+        guard let userInfo = notification.userInfo else { return }
+        print(userInfo.keys)
+        listView.beginUpdates()
+        listView.reloadData()
+        listView.endUpdates()
+        //TODO: Review performance and do case-by-case evaluation of updates.
+        
     }
 }
 

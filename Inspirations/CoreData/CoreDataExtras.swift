@@ -172,7 +172,8 @@ extension NSFetchRequestResult where Self: NSManagedObject {
 
 extension NSManagedObjectContext{
     
-    ///Fetches objects from IDS represented as strings.
+    /// Fetches objects from core data IDS represented as array of strings.
+    /// - parameter asStrings: Array of string that represent core data objetc IDs.
     func getObjectsWithIDS(asStrings: [String])->[NSManagedObject]?{
         guard let urlArray = asStrings.map({URL.init(string: $0)}) as? [URL],
             let objectIDArray = urlArray.map({self.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0)}) as? [NSManagedObjectID] else {
@@ -180,6 +181,13 @@ extension NSManagedObjectContext{
         }
        
         return objectIDArray.map({self.object(with: $0 )})
+    }
+    
+    /// Fetches the core data object with the given string ID
+    /// - parameter objectWithStringID: representation of the core data objects as a string.
+    func get(objectWithStringID:String)->NSManagedObject?{
+        guard let object=self.getObjectsWithIDS(asStrings: [objectWithStringID])?.first else {return nil}
+        return object
     }
 }
 
