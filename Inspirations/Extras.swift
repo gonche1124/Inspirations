@@ -135,7 +135,7 @@ extension Array {
 //Extension to array of items where elements conform to protocol identifier.
 extension Array where Element:NSUserInterfaceItemIdentification{
     func firstWith(identifier:String)->Element?{
-        guard let item=self.first(where:{$0.identifier!.rawValue==identifier}) else {return nil}
+        guard let item=self.first(where:{$0.identifier?.rawValue==identifier}) else {return nil}
         return item
     }
 }
@@ -148,6 +148,21 @@ extension NSAlert{
         self.addButton(withTitle: "Cancel")
         self.informativeText = "Are you sure you want to " + (isDeleting ? "delete":"remove") + " the \(totalItems) selected Quotes?"
         self.alertStyle = .warning
+    }
+}
+
+//MARK: -
+extension NSView{
+    ///Recursevely get all views
+    func getAllSubViews<T:NSView>()->[T]{
+        var subviews=[T]()
+        self.subviews.forEach { subview in
+            subviews += subview.getAllSubViews() as [T]
+            if let subview = subview as? T {
+                subviews.append(subview)
+            }
+        }
+        return subviews
     }
 }
 

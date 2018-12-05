@@ -16,7 +16,6 @@ class TablesController: NSViewController {
     var selectedLeftItem:LibraryItem? {
         didSet{
             let newBool = [LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
-            //let newBool = LibraryType.deleteFromTables(nil).contains//(selectedLeftItem?.libraryType == LibraryType.tag.rawValue || selectedLeftItem?.libraryType == LibraryType.list.rawValue)
             self.deletesFromDatabase = !newBool
         }
     }
@@ -56,19 +55,6 @@ class TablesController: NSViewController {
             }
         }
         
-        //Bind segmentedView
-        if let segmentedToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "segmentedButtonString"}){
-            if let segmentedButton = segmentedToolbarItem.view as? NSSegmentedControl{
-                print("Did fin the segment.")
-                //TODO: See if it is easier.
-                //segmentedButton.action=Selector(tabView.takeSelectedTabViewItemFromSender(segmentedButton))
-                //segmentedButton.action=Selector(tabView.takeSelectedTabViewItemFromSender)
-                //tabView.takeSelectedTabViewItemFromSender(<#T##sender: Any?##Any?#>)
-                //tabView.bind(.selectedIndex, to: segmentedButton, withKeyPath: "selectedIndex", options: nil)
-                //segmentedButton.bind(NSBindingName.selectedIndex, to: self.tabView, withKeyPath: "indexOfSelectedItem", options: nil)
-            }
-            
-        }
     }
     
     //Intercept keystrokes
@@ -222,7 +208,6 @@ extension TablesController: NSMenuDelegate{
         default:
             break
         }
-        
     }
 }
 

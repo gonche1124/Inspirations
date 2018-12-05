@@ -87,7 +87,7 @@ extension NSManagedObject {
         return self.firstWith(predicate: predicate, inContext: inContext)
     }
     
-    //Retursn uriRepresentation as a string.
+    ///Returns uriRepresentation as a string.
     func getID()->String{
         return self.objectID.uriRepresentation().absoluteString
     }
