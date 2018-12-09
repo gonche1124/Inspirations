@@ -1048,11 +1048,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="250" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pS-lP-hgA">
-                                                            <rect key="frame" x="21" y="187" width="49" height="103"/>
+                                                        <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="250" horizontalHuggingPriority="750" verticalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pS-lP-hgA">
+                                                            <rect key="frame" x="280" y="206" width="85" height="65"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f18-wt-LEd">
-                                                                    <rect key="frame" x="-2" y="27" width="53" height="76"/>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="f18-wt-LEd">
+                                                                    <rect key="frame" x="-2" y="27" width="89" height="38"/>
                                                                     <textFieldCell key="cell" selectable="YES" alignment="center" title="Quote" id="etI-6R-dIT">
                                                                         <font key="font" metaFont="system" size="31"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1067,8 +1067,8 @@
                                                                         </binding>
                                                                     </connections>
                                                                 </textField>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qwI-25-jQZ">
-                                                                    <rect key="frame" x="-2" y="0.0" width="53" height="19"/>
+                                                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qwI-25-jQZ">
+                                                                    <rect key="frame" x="-2" y="0.0" width="89" height="19"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Author" id="eF0-NP-q9u">
                                                                         <font key="font" metaFont="system" size="16"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1080,6 +1080,7 @@
                                                                                 <string key="NSDisplayPattern">- %{value1}@</string>
                                                                             </dictionary>
                                                                         </binding>
+                                                                        <binding destination="ffh-xi-q60" name="toolTip" keyPath="selection.from.hasSaid.@count" id="Qgt-DZ-3B4"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -1148,10 +1149,16 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selectedObjects.@count" id="EwL-gx-Tye">
+                                                    <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selectedObjects.@count" id="PGb-Ru-LjY">
                                                         <dictionary key="options">
-                                                            <string key="NSDisplayPattern">%{value1}@ quotes selected</string>
-                                                            <string key="NSNoSelectionPlaceholder">No quote selected</string>
+                                                            <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
+                                                            <string key="NSNoSelectionPlaceholder">No quotes selected</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <binding destination="ffh-xi-q60" name="displayPatternValue2" keyPath="arrangedObjects.@count" previousBinding="PGb-Ru-LjY" id="Ax9-S5-i8o">
+                                                        <dictionary key="options">
+                                                            <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
+                                                            <string key="NSNoSelectionPlaceholder">No quotes selected</string>
                                                         </dictionary>
                                                     </binding>
                                                 </connections>
@@ -1227,7 +1234,7 @@
                                 <action selector="modifyFavoriteAttribute:" target="gvZ-1i-Bh3" id="EZj-CB-TwH"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Edit" keyEquivalent="e" id="8HA-4u-Dc4">
+                        <menuItem title="Edit" keyEquivalent="i" id="8HA-4u-Dc4">
                             <connections>
                                 <segue destination="ZCV-TV-5N3" kind="modal" identifier="editSegue" id="btS-AB-Wjm"/>
                             </connections>
@@ -1264,6 +1271,9 @@
                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
+                            <connections>
+                                <action selector="deleteSelectedRecord:" target="gvZ-1i-Bh3" id="Sbk-pw-yZq"/>
+                            </connections>
                         </menuItem>
                     </items>
                     <connections>
@@ -1420,7 +1430,7 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uNt-ye-U4X" userLabel="Delete">
+                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="uNt-ye-U4X" userLabel="Delete">
                                 <rect key="frame" x="20" y="-1" width="22" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uNt-ye-U4X" secondAttribute="height" multiplier="1:1" id="0wm-1i-Cvu"/>
@@ -1435,12 +1445,11 @@ CA
                                     <binding destination="CWl-5U-TPh" name="enabled" keyPath="self.canDeleteItem" id="Rx5-sl-qqS"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mqt-II-czk" userLabel="Add">
+                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mqt-II-czk" userLabel="Add">
                                 <rect key="frame" x="0.0" y="-1" width="22" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="2ch-M1-TPC"/>
                                     <constraint firstAttribute="width" secondItem="mqt-II-czk" secondAttribute="height" multiplier="1:1" id="Zb4-Mp-9CA"/>
-                                    <constraint firstAttribute="width" constant="22" id="hun-CG-46K"/>
+                                    <constraint firstAttribute="height" constant="22" id="b3H-8p-4m6"/>
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qFs-hS-KF5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1521,15 +1530,6 @@ CA
                 <customObject id="Ry8-bW-hcW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1155" y="49"/>
-        </scene>
-        <!--Tabs-->
-        <scene sceneID="cbS-Nu-jRo">
-            <objects>
-                <controllerPlaceholder storyboardName="Tabs Display" id="34z-Ir-26p" userLabel="Tabs" sceneMemberID="viewController"/>
-                <customObject id="JyY-M8-1v5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <splitViewItem id="ZNT-NM-7Yg"/>
-            </objects>
-            <point key="canvasLocation" x="1048" y="781"/>
         </scene>
     </scenes>
     <resources>

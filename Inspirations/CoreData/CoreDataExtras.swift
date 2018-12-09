@@ -75,10 +75,6 @@ extension NSManagedObject {
             print("There was an error")
             return nil
         }
-       
-        
-//        guard let results = try? inContext.fetch(request).first as? T else {return nil}
-//        return results
     }
     
     //returns first object with a given attribute. Convinience for not constructing NSPredciate.
@@ -189,20 +185,31 @@ extension NSManagedObjectContext{
         guard let object=self.getObjectsWithIDS(asStrings: [objectWithStringID])?.first else {return nil}
         return object
     }
+    
+    /// Gets the number of entities returned for the given predicate in the given entity.
+    /// - parameter ofEntity: Entity to perform the fetch on.
+    /// - parameter predicate: NSPredicate used to filter the results.
+    func count(ofEntity:String, with predicate:NSPredicate)->Int?{
+        let fetchR=NSFetchRequest<NSFetchRequestResult>.init(entityName: ofEntity)
+        fetchR.predicate=predicate
+        return try? self.count(for: fetchR)
+    }
 }
-
-//
-//struct gonche:CodingKey{
-//    var intValue: Int?
-//    var stringValue: String
-//    init?(intValue: Int) {
-//        self.init(stringValue: "\(intValue)")
-//        self.intValue = intValue
-//    }
-//    init?(stringValue: String) {
-//        self.stringValue = stringValue
-//    }
-//}
+//MARK: -
+/// Protocol used to simplify read and write of quotes that are managed by another entity.
+protocol ManagesQuotes {
+    ///Return the list of quotes associated with the entity.
+    func containsQuotes()->[Quote]
+    /// Adds a quote to the relationship of the current object.
+    func addQuote(quote:Quote)
+    /// Adds an array of Quotes to the relationship of the current object.
+    func addQuotes(quotes:[Quote])
+    /// Removes the given quotes from the relationship of the given entity.
+    func removeQuote(quote:Quote)
+    /// Removes the given quotes from the relationship of the given entity.
+    func removeQuotes(quote:[Quote])
+    
+}
 
 //extension KeyedDecodingContainer{
 //    private enum authorEnconding:String, CodingKey{

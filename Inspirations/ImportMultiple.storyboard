@@ -96,11 +96,8 @@
                                             <constraint firstAttribute="height" constant="32" id="r2H-8Y-VD1"/>
                                         </constraints>
                                     </progressIndicator>
-                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gbq-9J-gaV">
+                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gbq-9J-gaV">
                                         <rect key="frame" x="145" y="0.0" width="29" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="Wdy-Ec-b1u"/>
-                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="7jj-za-woi">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

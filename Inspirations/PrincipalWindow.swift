@@ -69,7 +69,6 @@ class PrincipalWindow: NSWindowController {
     
     //Sharing sheet
     @IBAction func shareSheet(_ sender:NSButton){
-        //TODO: How to pass selectedQuotes
         let moc = (NSApp.delegate as? AppDelegate)?.managedObjectContext
         if let quoteArray=moc?.getObjectsWithIDS(asStrings: selectedQuotesIDS!) as? [Quote]{
             

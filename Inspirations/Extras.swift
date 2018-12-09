@@ -56,6 +56,7 @@ extension Notification.Name {
     static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
 }
 
+//MARK: - 
 extension NSUserInterfaceItemIdentifier {
     static let dataCell = NSUserInterfaceItemIdentifier.init("DataCell")
     static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
@@ -140,6 +141,7 @@ extension Array where Element:NSUserInterfaceItemIdentification{
     }
 }
 
+//MARK: -
 extension NSAlert{
     convenience init(totalItems:Int, isDeleting:Bool) {
         self.init()
@@ -148,6 +150,23 @@ extension NSAlert{
         self.addButton(withTitle: "Cancel")
         self.informativeText = "Are you sure you want to " + (isDeleting ? "delete":"remove") + " the \(totalItems) selected Quotes?"
         self.alertStyle = .warning
+    }
+    
+    convenience init(withPopUpFrom:Array<String>, forItem:String, at:Int, of:Int){
+        self.init()
+        self.messageText="Map the key \(at) of \(of)"
+        self.informativeText="Please select the key that should be used to assign the value of: \n\(forItem)"
+        self.alertStyle = .informational
+        self.addButton(withTitle: "OK")
+        self.addButton(withTitle: "Cancel")
+        self.showsSuppressionButton=true
+        self.suppressionButton?.title="Ignore future keys"
+        //Layout:
+        let keyPopUp=NSPopUpButton.init(title: "Ignore...", target: nil, action: nil)
+        keyPopUp.addItems(withTitles: withPopUpFrom)
+        keyPopUp.frame=NSRect(origin: keyPopUp.frame.origin, size: CGSize(width: 200, height: keyPopUp.frame.height))
+        keyPopUp.setNeedsDisplay()
+        self.accessoryView=keyPopUp
     }
 }
 
@@ -208,6 +227,7 @@ extension NSMenu{
     }
 }
 
+//MARK: -
 //Class used in NSMenuItems that need to store custom bool value.
 class AGC_NSMenuItem: NSMenuItem {
     
@@ -220,7 +240,7 @@ class AGC_NSMenuItem: NSMenuItem {
 //NSTextField Extension to check if there is a value.
 extension NSTextField{
     //Used fo validation in the UI/ADD to make sure it has a value.
-    var hasValue:Bool{
+    @objc var hasValue:Bool{
         get {
             let myCharacters=CharacterSet.letters.inverted
             return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
@@ -231,6 +251,27 @@ extension NSTextField{
 extension String{
     func trimWhites()->String{
         return self.trimmingCharacters(in: .whitespaces)
+    }
+}
+
+//MARK: - Custom Cell
+class AGCCell: NSTableCellView{
+    
+    //Custom Outlets
+    @IBOutlet weak var quoteField: NSTextField?
+    @IBOutlet weak var authorField: NSTextField?
+    
+    
+    override var backgroundStyle: NSView.BackgroundStyle {
+        willSet {
+            if newValue == .dark {
+                quoteField?.textColor = NSColor.controlLightHighlightColor
+                authorField?.textColor = NSColor.controlHighlightColor
+            } else {
+                quoteField?.textColor = NSColor.labelColor
+                authorField?.textColor = NSColor.controlShadowColor
+            }
+        }
     }
 }
 

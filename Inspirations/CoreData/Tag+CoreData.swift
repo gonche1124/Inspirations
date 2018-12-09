@@ -30,7 +30,7 @@ public class Tag: LibraryItem, Codable {
     //Properties
     @NSManaged public var hasQuotes: NSSet?
     
-    //Computed properties
+    ///Computed properties used in the left controller.
     override var totalQuotes:Int?{
         return hasQuotes?.count
     }
@@ -100,4 +100,25 @@ extension Tag {
     @objc(removeHasQuotes:)
     @NSManaged public func removeFromHasQuotes(_ values: NSSet)
     
+}
+
+//MARK: - Protocols:
+extension Tag:ManagesQuotes{
+    func containsQuotes() -> [Quote] {
+        return Array(self.hasQuotes!) as! [Quote]
+    }
+    
+    func addQuote(quote: Quote) {
+        self.addToHasQuotes(quote)
+    }
+    
+    func addQuotes(quotes: [Quote]) {
+        self.addToHasQuotes(NSSet.init(array: quotes))
+    }
+    func removeQuote(quote:Quote){
+        self.removeFromHasQuotes(quote)
+    }
+    func removeQuotes(quote:[Quote]){
+      self.removeFromHasQuotes(NSSet.init(array: quote))
+    }
 }

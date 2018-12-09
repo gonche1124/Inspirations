@@ -71,3 +71,22 @@ extension Author {
     @NSManaged public func removeFromHasSaid(_ values: NSSet)
     
 }
+
+//MARK: - Protocols:
+extension Author:ManagesQuotes{
+    func containsQuotes() -> [Quote] {
+        return Array(self.hasSaid!) 
+    }
+    func addQuote(quote: Quote) {
+        self.addToHasSaid(quote)
+    }
+    func addQuotes(quotes: [Quote]) {
+        self.addToHasSaid(NSSet.init(array: quotes))
+    }
+    func removeQuote(quote:Quote){
+        self.removeFromHasSaid(quote)
+    }
+    func removeQuotes(quote:[Quote]){
+        self.removeFromHasSaid(NSSet.init(array: quote))
+    }
+}

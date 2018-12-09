@@ -32,8 +32,11 @@ public class QuoteList: LibraryItem, Codable {
     @NSManaged public var smartPredicate: NSPredicate?
     @NSManaged public var hasQuotes: NSSet?
     
-    //Computed properties
+    ///Computed properties used in the left controller.
     override var totalQuotes:Int?{
+        if let predicate=smartPredicate{
+            return self.managedObjectContext?.count(ofEntity: Entities.quote.rawValue, with: predicate)
+        }
         return hasQuotes?.count
     }
     
@@ -92,7 +95,7 @@ public class QuoteList: LibraryItem, Codable {
 
 }
 
-// MARK: Generated accessors for hasQuotes
+// MARK: - Generated accessors for hasQuotes
 extension QuoteList {
     
     @objc(addHasQuotesObject:)
@@ -107,4 +110,25 @@ extension QuoteList {
     @objc(removeHasQuotes:)
     @NSManaged public func removeFromHasQuotes(_ values: NSSet)
     
+}
+
+//MARK: - Protocols:
+extension QuoteList:ManagesQuotes{
+    func containsQuotes() -> [Quote] {
+        return Array(self.hasQuotes!) as! [Quote]
+    }
+    
+    func addQuote(quote: Quote) {
+        self.addToHasQuotes(quote)
+    }
+    
+    func addQuotes(quotes: [Quote]) {
+        self.addToHasQuotes(NSSet.init(array: quotes))
+    }
+    func removeQuote(quote:Quote){
+        self.removeFromHasQuotes(quote)
+    }
+    func removeQuotes(quote:[Quote]){
+        self.removeFromHasQuotes(NSSet.init(array: quote))
+    }
 }

@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86521054CA1007D1E3F /* Alternate.storyboard */; };
-		8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */; };
 		8A01F870210A9A52007D1E3F /* Core Data ERD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */; };
 		8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A03C0B01FBEA390008D74BA /* Assets.xcassets */; };
-		8A116724212A260000AC2E08 /* TablesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A116723212A260000AC2E08 /* TablesController.swift */; };
 		8A11672621335BCF00AC2E08 /* LeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672521335BCF00AC2E08 /* LeftController.swift */; };
 		8A11672A213376AC00AC2E08 /* RightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A116729213376AC00AC2E08 /* RightController.swift */; };
 		8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */; };
@@ -68,10 +66,8 @@
 
 /* Begin PBXFileReference section */
 		8A01F86621054CA1007D1E3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Alternate.storyboard; sourceTree = "<group>"; };
-		8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Tabs Display.storyboard"; sourceTree = "<group>"; };
 		8A01F86F210A9A52007D1E3F /* Core Data ERD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD.xcdatamodel"; sourceTree = "<group>"; };
 		8A03C0B01FBEA390008D74BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8A116723212A260000AC2E08 /* TablesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesController.swift; sourceTree = "<group>"; };
 		8A11672521335BCF00AC2E08 /* LeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftController.swift; sourceTree = "<group>"; };
 		8A116729213376AC00AC2E08 /* RightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightController.swift; sourceTree = "<group>"; };
 		8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalWindow.swift; sourceTree = "<group>"; };
@@ -158,19 +154,9 @@
 				8A11672F2134F1C000AC2E08 /* Split Controller */,
 				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A11672D2134E32A00AC2E08 /* Extras.swift */,
-				8A01F869210947E6007D1E3F /* Tabs Views */,
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
 			);
 			name = Alternate;
-			sourceTree = "<group>";
-		};
-		8A01F869210947E6007D1E3F /* Tabs Views */ = {
-			isa = PBXGroup;
-			children = (
-				8A01F86A2109482B007D1E3F /* Tabs Display.storyboard */,
-				8A116723212A260000AC2E08 /* TablesController.swift */,
-			);
-			name = "Tabs Views";
 			sourceTree = "<group>";
 		};
 		8A11672F2134F1C000AC2E08 /* Split Controller */ = {
@@ -456,7 +442,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A89E8671E842E04001F7F71 /* Main.storyboard in Resources */,
-				8A01F86B2109482B007D1E3F /* Tabs Display.storyboard in Resources */,
 				8A03C0B11FBEA391008D74BA /* Assets.xcassets in Resources */,
 				8A1167322134F34700AC2E08 /* ImportMultiple.storyboard in Resources */,
 				8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */,
@@ -547,7 +532,6 @@
 				8A2C3127213A068100B8F3E1 /* CoreDataExtras.swift in Sources */,
 				8A11672621335BCF00AC2E08 /* LeftController.swift in Sources */,
 				8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */,
-				8A116724212A260000AC2E08 /* TablesController.swift in Sources */,
 				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */,
 				8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */,

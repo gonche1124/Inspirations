@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
-        //TODO: Uncomment!!!
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
 
         //Create Main Items.

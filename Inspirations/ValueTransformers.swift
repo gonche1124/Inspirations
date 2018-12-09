@@ -38,6 +38,7 @@ class BooleanToImage: ValueTransformer {
 }
 
 //NStokenField Transformer
+//TODO: Delete because not using bindings any more.
 class EntityToToken:ValueTransformer{
     //Transform value
     override  func transformedValue(_ value: Any?) -> Any? {

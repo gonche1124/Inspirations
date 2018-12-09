@@ -54,8 +54,26 @@ class RightController: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let destinationSegue = segue.destinationController as? AddQuoteController{
             destinationSegue.isInfoWindow=true
-            destinationSegue.selectionController!.content=self.quoteController.selectedObjects
-            destinationSegue.selectionController!.setSelectedObjects(quoteController.selectedObjects)
+            destinationSegue.currQuote=quoteController.selectedObjects.first as? Quote
+            //destinationSegue.selectionController!.content=self.quoteController.selectedObjects
+            //destinationSegue.selectionController!.setSelectedObjects(quoteController.selectedObjects)
+        }
+    }
+    
+    //Get keyboard keystrokes.
+    override func keyDown(with event: NSEvent) {
+        interpretKeyEvents([event])
+        //fn makes this flow happen.
+        let modFlags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if modFlags.contains(.command) {
+            switch event.characters{
+            case "i":
+                performSegue(withIdentifier:.init("editSegue"), sender: self)
+            case "f":
+                modifyFavoriteAttribute(!modFlags.contains(.shift)) //setFavorite(!modFlags.contains(.shift))
+            default:
+                break
+            }
         }
     }
     
@@ -98,12 +116,9 @@ extension RightController{
     
     ///Adds the selected quotes to the tags or playlists specified.
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
-        if let coreItem=moc.get(objectWithStringID: sender!.identifier!.rawValue){
-            if let tag=coreItem as? Tag {
-                tag.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
-            }else if let playlist=coreItem as? QuoteList{
-                playlist.addToHasQuotes(NSSet(array: self.quoteController.selectedObjects))
-            }
+        if let coreItem=moc.get(objectWithStringID: sender!.identifier!.rawValue),
+            let item=coreItem as? ManagesQuotes{
+            item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
             self.saveMainContext()
         }
     }
@@ -117,12 +132,8 @@ extension RightController{
             if deletesFromDatabase {
                 self.quoteController.selectedObjects.forEach({moc.delete($0 as! NSManagedObject)})
             }else{
-                //Case for Tags.
-                if let isTag=selectedLeftItem as? Tag {
-                    quoteController.selectedObjects.forEach({isTag.removeFromHasQuotes($0 as! Quote)})
-                }
-                if let isList=selectedLeftItem as? QuoteList{
-                    quoteController.selectedObjects.forEach({isList.removeFromHasQuotes($0 as! Quote)})
+                if let item=selectedLeftItem as? ManagesQuotes{
+                    item.removeQuotes(quote: quoteController.selectedObjects as! [Quote])
                 }
             }
             currentTable?.endUpdates()
@@ -201,7 +212,6 @@ extension RightController:NSTabViewDelegate{
             print("Nothing john snow")
             return
         }
-        
         currentTable=nil
         bottomStackView.isHidden=true
     }
