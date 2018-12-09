@@ -685,8 +685,12 @@
                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
                                                                                                 <connections>
-                                                                                                    <binding destination="qzv-A2-DUc" name="toolTip" keyPath="objectValue.from.name" id="34d-fi-y9q"/>
                                                                                                     <binding destination="qzv-A2-DUc" name="value" keyPath="objectValue.from.name" id="swg-bZ-eOW"/>
+                                                                                                    <binding destination="qzv-A2-DUc" name="toolTip" keyPath="objectValue.from" id="cN6-XD-VGi">
+                                                                                                        <dictionary key="options">
+                                                                                                            <string key="NSValueTransformerName">TooltipCoreData</string>
+                                                                                                        </dictionary>
+                                                                                                    </binding>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -769,8 +773,12 @@
                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
                                                                                                 <connections>
-                                                                                                    <binding destination="Fvc-nK-xqX" name="toolTip" keyPath="objectValue.isAbout.themeName" id="lru-PQ-bJN"/>
                                                                                                     <binding destination="Fvc-nK-xqX" name="value" keyPath="objectValue.isAbout.themeName" id="sM2-6A-Jj6"/>
+                                                                                                    <binding destination="Fvc-nK-xqX" name="toolTip" keyPath="objectValue.isAbout" id="dNO-dr-yrX">
+                                                                                                        <dictionary key="options">
+                                                                                                            <string key="NSValueTransformerName">TooltipCoreData</string>
+                                                                                                        </dictionary>
+                                                                                                    </binding>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -1075,12 +1083,12 @@
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
+                                                                        <binding destination="ffh-xi-q60" name="toolTip" keyPath="selection.from.hasSaid.@count" id="Qgt-DZ-3B4"/>
                                                                         <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selection.from.name" id="5gh-rX-VSk">
                                                                             <dictionary key="options">
                                                                                 <string key="NSDisplayPattern">- %{value1}@</string>
                                                                             </dictionary>
                                                                         </binding>
-                                                                        <binding destination="ffh-xi-q60" name="toolTip" keyPath="selection.from.hasSaid.@count" id="Qgt-DZ-3B4"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -1149,13 +1157,13 @@
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selectedObjects.@count" id="PGb-Ru-LjY">
+                                                    <binding destination="ffh-xi-q60" name="displayPatternValue2" keyPath="arrangedObjects.@count" previousBinding="PGb-Ru-LjY" id="Ax9-S5-i8o">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
                                                             <string key="NSNoSelectionPlaceholder">No quotes selected</string>
                                                         </dictionary>
                                                     </binding>
-                                                    <binding destination="ffh-xi-q60" name="displayPatternValue2" keyPath="arrangedObjects.@count" previousBinding="PGb-Ru-LjY" id="Ax9-S5-i8o">
+                                                    <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selectedObjects.@count" id="PGb-Ru-LjY">
                                                         <dictionary key="options">
                                                             <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
                                                             <string key="NSNoSelectionPlaceholder">No quotes selected</string>

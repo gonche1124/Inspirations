@@ -91,8 +91,8 @@ class AddQuoteController: NSViewController {
     func getValuesFromUIAndAssignTo(quote:Quote){
         quote.quoteString=quoteTextField.stringValue
         quote.isFavorite=Bool.init(favoriteCheck.state.rawValue != 0)
-        quote.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.objectValueOfSelectedItem!], andKeys: ["name"])
-        quote.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.objectValueOfSelectedItem!], andKeys: ["themeName"])
+        quote.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.stringValue], andKeys: ["name"])
+        quote.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.stringValue], andKeys: ["themeName"])
         if let currTags = self.tokenField.objectValue as? [Tag]{
             quote.addToIsTaggedWith(NSSet.init(array: currTags))
         }

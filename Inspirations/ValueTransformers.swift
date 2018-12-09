@@ -48,7 +48,24 @@ class EntityToToken:ValueTransformer{
     }
     
     override class func allowsReverseTransformation()->Bool{return true}
+}
 
+//Tooltip with count of object.
+class TooltipCoreData: ValueTransformer {
+    override func transformedValue(_ value: Any?) -> Any? {
+        if let author=value as? Author{
+            if let name=author.name, let total=author.hasSaid?.count {
+            return "\(name) \n \(total) quotes"
+            }
+        }
+        
+        if let theme=value as? Theme {
+            if let name = theme.themeName, let total=theme.hasQuotes?.count{
+                return "\(name) \n \(total) quotes"
+            }
+        }
+        return value
+    }
 }
 
 

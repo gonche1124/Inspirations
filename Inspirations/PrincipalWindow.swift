@@ -37,6 +37,8 @@ class PrincipalWindow: NSWindowController {
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(EntityToToken(), forName: NSValueTransformerName(rawValue: "EntityToToken"))
+        ValueTransformer.setValueTransformer(TooltipCoreData(), forName: NSValueTransformerName(rawValue: "TooltipCoreData"))
+        
     
     
         //Register for table updates.

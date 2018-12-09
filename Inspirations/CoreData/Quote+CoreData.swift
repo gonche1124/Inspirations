@@ -39,6 +39,7 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var isTaggedWith: NSSet?
     @NSManaged public var spelledIn: Language?
     
+    //MARK: -
     //Convinience Init form dictionary.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
         //Safeguards.
@@ -136,6 +137,14 @@ public class Quote: NSManagedObject, Codable{
                 self.totalWords = Int16(components.count)
                 self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
             }
+        }
+    }
+    
+    ///Used to check for any dangling refrences
+    override public func prepareForDeletion() {
+        //Check if it is the last quote of an author
+        if let existingQuotes=self.from?.hasSaid {
+            print(existingQuotes.count)
         }
     }
     
