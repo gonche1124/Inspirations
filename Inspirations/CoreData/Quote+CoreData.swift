@@ -130,23 +130,15 @@ public class Quote: NSManagedObject, Codable{
     }
     
     //Updates when the user changes the length of the quote.
-    override public func didChangeValue(forKey key: String) {
-        if key == "quoteString" {
-            let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
-            if let components = self.quoteString?.components(separatedBy: chararacterSet).filter({!$0.isEmpty}){
-                self.totalWords = Int16(components.count)
-                self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
-            }
-        }
-    }
-    
-    ///Used to check for any dangling refrences
-    override public func prepareForDeletion() {
-        //Check if it is the last quote of an author
-        if let existingQuotes=self.from?.hasSaid {
-            print(existingQuotes.count)
-        }
-    }
+//    override public func didChangeValue(forKey key: String) {
+//        if key == "quoteString" {
+//            let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
+//            if let components = self.quoteString?.components(separatedBy: chararacterSet).filter({!$0.isEmpty}){
+//                self.totalWords = Int16(components.count)
+//                self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
+//            }
+//        }
+//    }
     
     ///Create text verison for sharing services
     func textForSharing()->String{

@@ -39,6 +39,8 @@ class MainImportController:NSViewController{
         }
     }
     
+    //TODO: Implement isHidden through KVO for label, progress indicator and layoutconstraints.
+    
     //Turns indefinite progress to definite
     func convertIndicatorTodefinate(withItems:Double, andLabel:String?=nil){
         progressIndicator.stopAnimation(nil)

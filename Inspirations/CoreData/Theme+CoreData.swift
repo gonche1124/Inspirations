@@ -76,6 +76,15 @@ extension Theme {
     
 }
 
+//MARK: - Others
+extension Theme {
+    override public func validateForUpdate() throws {
+        if self.hasQuotes?.count==0 {
+            self.managedObjectContext?.delete(self)
+        }
+    }
+}
+
 //MARK: - Protocols:
 extension Theme:ManagesQuotes{
     func containsQuotes() -> [Quote] {

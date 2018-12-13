@@ -82,7 +82,7 @@ class AddQuoteController: NSViewController {
     }
     
     ///Cancels any edits that the user might have done.
-    @IBAction func cancelsEdits(_ sneder:NSButton){
+    @IBAction func cancelsEdits(_ sender:NSButton){
         self.dismiss(self)
     }
     
@@ -109,9 +109,6 @@ class AddQuoteController: NSViewController {
             tokenField.objectValue=Array(tagArray)
         }
     }
-    
-    
-
 }
 
 //MARK: - NSTokenFieldDelegate

@@ -55,6 +55,15 @@ public class Author: NSManagedObject, Codable {
     }
 }
 
+//MARK: - Others
+extension Author {
+    override public func validateForUpdate() throws {
+        if self.hasSaid?.count==0 {
+            self.managedObjectContext?.delete(self) //TODO: Potential bug.
+        }
+    }
+}
+
 // MARK: - Generated accessors for hasSaid
 extension Author {
     

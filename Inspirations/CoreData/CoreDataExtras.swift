@@ -140,7 +140,7 @@ extension NSManagedObject {
     }
 }
 
-
+//MARK: - 
 extension NSFetchRequestResult where Self: NSManagedObject {
     
     //fetches all the records.
@@ -166,6 +166,7 @@ extension NSFetchRequestResult where Self: NSManagedObject {
     }
 }
 
+//MARK: -
 extension NSManagedObjectContext{
     
     /// Fetches objects from core data IDS represented as array of strings.
@@ -175,7 +176,6 @@ extension NSManagedObjectContext{
             let objectIDArray = urlArray.map({self.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: $0)}) as? [NSManagedObjectID] else {
             return nil
         }
-       
         return objectIDArray.map({self.object(with: $0 )})
     }
     
@@ -189,6 +189,7 @@ extension NSManagedObjectContext{
     /// Gets the number of entities returned for the given predicate in the given entity.
     /// - parameter ofEntity: Entity to perform the fetch on.
     /// - parameter predicate: NSPredicate used to filter the results.
+    /// - Note: Used to determine how many quotes are associate to smart lists.
     func count(ofEntity:String, with predicate:NSPredicate)->Int?{
         let fetchR=NSFetchRequest<NSFetchRequestResult>.init(entityName: ofEntity)
         fetchR.predicate=predicate
@@ -208,7 +209,6 @@ protocol ManagesQuotes {
     func removeQuote(quote:Quote)
     /// Removes the given quotes from the relationship of the given entity.
     func removeQuotes(quote:[Quote])
-    
 }
 
 //extension KeyedDecodingContainer{

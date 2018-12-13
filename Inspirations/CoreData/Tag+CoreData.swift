@@ -102,6 +102,15 @@ extension Tag {
     
 }
 
+//MARK: - Others
+extension Tag {
+    override public func validateForUpdate() throws {
+        if self.hasQuotes?.count==0 {
+            self.managedObjectContext?.delete(self)
+        }
+    }
+}
+
 //MARK: - Protocols:
 extension Tag:ManagesQuotes{
     func containsQuotes() -> [Quote] {

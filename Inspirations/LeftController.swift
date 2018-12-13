@@ -86,7 +86,6 @@ class LeftController: NSViewController {
     ///Checks which items have had CRUD to determine if neccesary to update view.
     @objc func managedObjectDidChange(notification: NSNotification){
         guard let userInfo = notification.userInfo else { return }
-        print(userInfo.keys)
         listView.beginUpdates()
         listView.reloadData()
         listView.endUpdates()
