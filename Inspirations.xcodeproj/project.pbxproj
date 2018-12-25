@@ -84,7 +84,7 @@
 		8A2C3120213A04A600B8F3E1 /* LibraryItem+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LibraryItem+CoreData.swift"; path = "CoreData/LibraryItem+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C3122213A04E700B8F3E1 /* Tag+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Tag+CoreData.swift"; path = "CoreData/Tag+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C3124213A052000B8F3E1 /* Theme+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Theme+CoreData.swift"; path = "CoreData/Theme+CoreData.swift"; sourceTree = "<group>"; };
-		8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataExtras.swift; path = CoreData/CoreDataExtras.swift; sourceTree = "<group>"; };
+		8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtras.swift; sourceTree = "<group>"; };
 		8A2C3128213A06EF00B8F3E1 /* Language+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Language+CoreData.swift"; path = "CoreData/Language+CoreData.swift"; sourceTree = "<group>"; };
 		8A2FF33721B1B72C0035CC08 /* BCP47.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BCP47.plist; sourceTree = "<group>"; };
 		8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TopicModeling.mlmodel; sourceTree = "<group>"; };
@@ -187,7 +187,6 @@
 				8A2C3120213A04A600B8F3E1 /* LibraryItem+CoreData.swift */,
 				8A2C3124213A052000B8F3E1 /* Theme+CoreData.swift */,
 				8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */,
-				8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -273,6 +272,7 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8AEE1A6B21D1B9A60011CFA3 /* macOS Files */,
 				8A2FF33921B1E4CC0035CC08 /* Resources */,
 				8AE5FD3A2144BB5A0085FAC2 /* Old Files */,
 				8A01F868210924BA007D1E3F /* Alternate */,
@@ -326,6 +326,14 @@
 				8A63181F2095682400091FA6 /* NSManagedObjects */,
 			);
 			name = "Old Files";
+			sourceTree = "<group>";
+		};
+		8AEE1A6B21D1B9A60011CFA3 /* macOS Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */,
+			);
+			path = "macOS Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
