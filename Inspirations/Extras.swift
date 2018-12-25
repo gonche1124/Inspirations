@@ -11,107 +11,9 @@ import CoreData
 import Cocoa
 import WebKit
 
-//MARK: - ENUMS
-//CoreData Entities
-enum Entities:String{
-    case author="Author"
-    case language="Language"
-    case quote="Quote"
-    case tag="Tag"
-    case theme="Theme"
-    case library="LibraryItem"
-    case collection="QuoteList"
-}
-
-//CoreData list types
-enum LibraryType:String{
-    case tag="tagImage"
-    case folder="folderImage"
-    case language="languageImage"
-    case smartList="smartListImage"
-    case list="listImage"
-    case favorites="favoritesImage"
-    case mainLibrary="mainLibraryImage"
-    case rootItem="noImage"
-}
-
-//NSPopupbutton selection
-enum Selection:Int{
-    case tag = 0
-    case list = 1
-    case smartList = 2
-    case folder = 3
-}
-
-//MARK: - Static Names
-let pQuote = "self.quoteString contains [CD] $value"
-let pAuthor = "self.from.name contains [CD] $value"
-let pTheme = "self.isAbout.themeName contains [CD] $value"
-let pAll = pQuote + " OR " + pAuthor + " OR " + pTheme
-
-//Notification extensions
-extension Notification.Name {
-    static let selectedViewChanged = Notification.Name("selectedViewChanged")
-    static let leftSelectionChanged = Notification.Name("leftSelectionChanged")
-    static let selectedRowsChaged = Notification.Name("selectedRowsChaged")
-}
-
-//MARK: - 
-extension NSUserInterfaceItemIdentifier {
-    static let dataCell = NSUserInterfaceItemIdentifier.init("DataCell")
-    static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
-}
 
 
-//MARK:- NSPredicates
 
-//Extension of NSPredicate for easy building
-extension NSPredicate{
-    
-    //String searchs
-    static var pIsFavorite:String = "isFavorite == TRUE"
-    static var pSpelledIn:String = "spelledIn.name CONTAINS [CD] %@"
-    static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
-    static var pIsRoot:String = "isRootItem == YES"
-    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
-    
-    //Predciate for left searchfield
-    static func leftPredicate(withText:String)->NSPredicate{
-        if withText == "" { return NSPredicate(format: pIsRoot)}
-        return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
-    }
-    
-    //Array Controller String
-    static func mainPredicateString()->String{
-        return  pQuote + " OR " + pAuthor + " OR " + pTheme
-    }
-    
-    //Predicate for main table
-    static func mainFilter(withString:String)->NSPredicate {
-        if withString=="" {return NSPredicate(value: true)}
-        return NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", withString, withString, withString)
-    }
-    
-    //Predicate for selected left item
-    static func predicateFor(libraryItem:LibraryItem)->NSPredicate? {
-        switch libraryItem.libraryType {
-        case LibraryType.favorites.rawValue:
-            return NSPredicate(format: pIsFavorite)
-        case LibraryType.language.rawValue:
-            return NSPredicate(format: pSpelledIn, libraryItem.name!)
-        case LibraryType.list.rawValue:
-            return NSPredicate(format: pInList,  libraryItem.name!)
-        case LibraryType.smartList.rawValue:
-            return (libraryItem as? QuoteList)?.smartPredicate!
-        case LibraryType.tag.rawValue:
-            return NSPredicate(format: pIsTagged, libraryItem.name!)
-        case LibraryType.mainLibrary.rawValue:
-            return NSPredicate(value: true)
-        default:
-            return nil
-        }
-    }
-}
 
 
 
@@ -141,91 +43,7 @@ extension Array where Element:NSUserInterfaceItemIdentification{
     }
 }
 
-//MARK: -
-extension NSAlert{
-    convenience init(totalItems:Int, isDeleting:Bool) {
-        self.init()
-        self.messageText = isDeleting ? "Deletes Records":"Removes Records"
-        self.addButton(withTitle: "OK")
-        self.addButton(withTitle: "Cancel")
-        self.informativeText = "Are you sure you want to " + (isDeleting ? "delete":"remove") + " the \(totalItems) selected Quotes?"
-        self.alertStyle = .warning
-    }
-    
-    convenience init(withPopUpFrom:Array<String>, forItem:String, at:Int, of:Int){
-        self.init()
-        self.messageText="Map the key \(at) of \(of)"
-        self.informativeText="Please select the key that should be used to assign the value of: \n\(forItem)"
-        self.alertStyle = .informational
-        self.addButton(withTitle: "OK")
-        self.addButton(withTitle: "Cancel")
-        self.showsSuppressionButton=true
-        self.suppressionButton?.title="Ignore future keys"
-        //Layout:
-        let keyPopUp=NSPopUpButton.init(title: "Ignore...", target: nil, action: nil)
-        keyPopUp.addItems(withTitles: withPopUpFrom)
-        keyPopUp.frame=NSRect(origin: keyPopUp.frame.origin, size: CGSize(width: 200, height: keyPopUp.frame.height))
-        keyPopUp.setNeedsDisplay()
-        self.accessoryView=keyPopUp
-    }
-}
 
-//MARK: -
-extension NSView{
-    ///Recursevely get all views
-    func getAllSubViews<T:NSView>()->[T]{
-        var subviews=[T]()
-        self.subviews.forEach { subview in
-            subviews += subview.getAllSubViews() as [T]
-            if let subview = subview as? T {
-                subviews.append(subview)
-            }
-        }
-        return subviews
-    }
-}
-
-//MARK: -
-extension NSViewController{
-    
-    @objc dynamic var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext} //easy access to moc.
-    
-    @objc dynamic var mocBackground: NSManagedObjectContext {
-        let tempMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        tempMoc.parent=self.moc
-        return tempMoc
-    }
-    
-    ///Simplifications of do-try-save block.
-    func saveMainContext(){
-        do { try self.moc.save()} catch  {
-            print(error)
-        }
-    }
-    ///Simplifications of do-try-save block (for background thread)
-    func saveBackgroundContext(){
-        do { try self.mocBackground.save()} catch  {
-            print(error)
-        }
-    }
-}
-
-//MARK: -
-extension NSMenu{
-    
-    ///Less verbose to create nsmenuItem with a specified identifier
-    func addMenuItem(title:String, action: Selector?, keyEquivalent:String, identifier:String ){
-        let newItem = NSMenuItem.init(title: title, action: action, keyEquivalent:keyEquivalent)
-        newItem.identifier=NSUserInterfaceItemIdentifier(rawValue: identifier)
-        self.addItem(newItem)
-    }
-    
-    ///Easy way to fecth item with identifier
-    func item(withIdentifier:String)->NSMenuItem?{
-        return self.items.firstWith(identifier: withIdentifier)
-        //return self.items.first(where: {$0.identifier!.rawValue==withIdentifier})
-    }
-}
 
 //MARK: -
 //Class used in NSMenuItems that need to store custom bool value.
@@ -234,18 +52,6 @@ class AGC_NSMenuItem: NSMenuItem {
     @IBInspectable var agcBool:Bool=false        //Used to define Favorites/Unfavorites in menu call
     @IBInspectable var customURLString:String="" //used for import controller popup item.
     
-}
-
-
-//NSTextField Extension to check if there is a value.
-extension NSTextField{
-    //Used fo validation in the UI/ADD to make sure it has a value.
-    @objc var hasValue:Bool{
-        get {
-            let myCharacters=CharacterSet.letters.inverted
-            return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
-        }
-    }
 }
 
 extension String{
