@@ -145,13 +145,9 @@
 			children = (
 				8A2FF33721B1B72C0035CC08 /* BCP47.plist */,
 				8A7500B32187FA5E00C856FE /* Add View */,
-				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
-				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
-				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
 				8A2C312A213C9D6A00B8F3E1 /* Importer */,
 				8A1167302134F1DB00AC2E08 /* Smart Controller */,
 				8A11672F2134F1C000AC2E08 /* Split Controller */,
-				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8A11672D2134E32A00AC2E08 /* Extras.swift */,
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
 			);
@@ -174,14 +170,6 @@
 				8A546152210D240F00B6E588 /* Smart List Editor.storyboard */,
 			);
 			name = "Smart Controller";
-			sourceTree = "<group>";
-		};
-		8A1167552137903900AC2E08 /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Core Data";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		8A164B161F59186D004F0810 /* Frameworks */ = {
@@ -265,6 +253,8 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
+				8AEE1A6F21D1BCDE0011CFA3 /* watchOS Files */,
+				8AEE1A6E21D1BCD10011CFA3 /* iOS Files */,
 				8AEE1A6C21D1BA8C0011CFA3 /* Shared */,
 				8AEE1A6B21D1B9A60011CFA3 /* macOS Files */,
 				8A2FF33921B1E4CC0035CC08 /* Resources */,
@@ -325,6 +315,7 @@
 		8AEE1A6B21D1B9A60011CFA3 /* macOS Files */ = {
 			isa = PBXGroup;
 			children = (
+				8AEE1A7021D1BED10011CFA3 /* Main */,
 			);
 			path = "macOS Files";
 			sourceTree = "<group>";
@@ -332,8 +323,8 @@
 		8AEE1A6C21D1BA8C0011CFA3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
 				8AEE1A6D21D1BAEE0011CFA3 /* Core Data */,
-				8A1167552137903900AC2E08 /* Core Data */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -351,6 +342,30 @@
 				8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		8AEE1A6E21D1BCD10011CFA3 /* iOS Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "iOS Files";
+			sourceTree = "<group>";
+		};
+		8AEE1A6F21D1BCDE0011CFA3 /* watchOS Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "watchOS Files";
+			sourceTree = "<group>";
+		};
+		8AEE1A7021D1BED10011CFA3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */,
+				8A11672B2134D58800AC2E08 /* PrincipalWindow.swift */,
+				8A89E85C1E842E04001F7F71 /* AppDelegate.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
