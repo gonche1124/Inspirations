@@ -59,6 +59,9 @@ class LeftController: NSViewController {
             sender is NSMenuItem{
             editController.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
         }
+        if let editController=segue.destinationController as? SmartListController, sender is NSButton{
+            editController.leftVC=self
+        }
     }
     
     //Deletes the selected item
@@ -85,7 +88,6 @@ class LeftController: NSViewController {
     
     ///Checks which items have had CRUD to determine if neccesary to update view.
     @objc func managedObjectDidChange(notification: NSNotification){
-        guard let userInfo = notification.userInfo else { return }
         listView.beginUpdates()
         listView.reloadData()
         listView.endUpdates()
@@ -134,8 +136,12 @@ extension LeftController: NSOutlineViewDelegate{
     
     //Determines if triangle should be shown.
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-        let libItem=item as? LibraryItem
-        return (libItem?.isRootItem)!
+        guard let libItem=item as? LibraryItem else {return false}
+        if libItem.isRootItem || libItem.libraryType == LibraryType.folder.rawValue{
+            return true
+        }
+        return false
+        //return (libItem?.isRootItem)!
     }
     
     //Checks to see if it is a grouped item.

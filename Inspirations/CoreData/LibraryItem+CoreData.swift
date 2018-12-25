@@ -91,6 +91,24 @@ public class LibraryItem: NSManagedObject {
         }
     }
     
+    /// Convinience Init to create a folder with a given name, in the specified context and
+    /// assigning itself as child of underItem.
+    /// - parameter inMoc: NSManagedContext to create the Entity
+    /// - parameter folderNamed: name to assign the new entity created.
+    /// - parameter underItem: CoreData entity to use as it´s parent for the relationship.
+    public convenience init?(inMoc:NSManagedObjectContext, folderNamed:String, underItem:LibraryItem){
+        guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMoc),
+            folderNamed != "" else {
+                fatalError("Failed to create LibraryItem")}
+        
+        self.init(entity: entity, insertInto: inMoc)
+        self.libraryType=LibraryType.folder.rawValue
+        self.name=folderNamed
+        self.isShown=true
+        self.isRootItem=false
+        self.belongsToLibraryItem=underItem
+    }
+    
     //Prints the description
 //    override open var description: String{
 //        let dict = self.entity.rel

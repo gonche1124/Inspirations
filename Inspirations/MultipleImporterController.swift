@@ -84,6 +84,7 @@ class FileImporter: MainImportController {
         }
     }
     
+    //TODO: Disable import button when no file path selected.
     @IBAction func importQuotesFromJSON(_ sender:NSButton){
         
         //Create the JSON dictionary to Parse.
@@ -179,7 +180,7 @@ class FileImporter: MainImportController {
     }
     
     /// Gets an array of all the possible keys in the JSON file.
-    //TODO: Test to see if it is working
+    //TODO: use dot syntaxis for keys.
     func getAllPossibleKeys(dictionaryArray:[[String:Any]])->Set<String>{
         //var outArray=[String]()
         var outSet=Set<String>()

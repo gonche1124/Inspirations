@@ -597,7 +597,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="644" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-Af-5DR">
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="1" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="249" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-Af-5DR">
                                 <rect key="frame" x="0.0" y="0.0" width="644" height="500"/>
                                 <subviews>
                                     <tabView type="noTabsNoBorder" initialItem="6oA-nT-ftA" translatesAutoresizingMaskIntoConstraints="NO" id="2EJ-9n-8oK">
@@ -685,12 +685,12 @@
                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
                                                                                                 <connections>
-                                                                                                    <binding destination="qzv-A2-DUc" name="value" keyPath="objectValue.from.name" id="swg-bZ-eOW"/>
                                                                                                     <binding destination="qzv-A2-DUc" name="toolTip" keyPath="objectValue.from" id="cN6-XD-VGi">
                                                                                                         <dictionary key="options">
                                                                                                             <string key="NSValueTransformerName">TooltipCoreData</string>
                                                                                                         </dictionary>
                                                                                                     </binding>
+                                                                                                    <binding destination="qzv-A2-DUc" name="value" keyPath="objectValue.from.name" id="swg-bZ-eOW"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -773,12 +773,12 @@
                                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                 </textFieldCell>
                                                                                                 <connections>
-                                                                                                    <binding destination="Fvc-nK-xqX" name="value" keyPath="objectValue.isAbout.themeName" id="sM2-6A-Jj6"/>
                                                                                                     <binding destination="Fvc-nK-xqX" name="toolTip" keyPath="objectValue.isAbout" id="dNO-dr-yrX">
                                                                                                         <dictionary key="options">
                                                                                                             <string key="NSValueTransformerName">TooltipCoreData</string>
                                                                                                         </dictionary>
                                                                                                     </binding>
+                                                                                                    <binding destination="Fvc-nK-xqX" name="value" keyPath="objectValue.isAbout.themeName" id="sM2-6A-Jj6"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -931,7 +931,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                             <clipView key="contentView" id="33a-dW-DC1">
                                                                 <rect key="frame" x="1" y="1" width="642" height="475"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <tableView identifier="exploreTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Jd6-qF-irS" userLabel="Explore Table">
                                                                         <rect key="frame" x="0.0" y="0.0" width="642" height="475"/>
@@ -940,7 +940,7 @@
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                         <tableColumns>
-                                                                            <tableColumn identifier="exploreCell" editable="NO" width="639" minWidth="40" maxWidth="1000" id="RES-wj-YLQ">
+                                                                            <tableColumn identifier="exploreCell" editable="NO" width="639" minWidth="40" maxWidth="4000" id="RES-wj-YLQ">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1077,7 +1077,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qwI-25-jQZ">
                                                                     <rect key="frame" x="-2" y="0.0" width="89" height="19"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Author" id="eF0-NP-q9u">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Author" id="eF0-NP-q9u">
                                                                         <font key="font" metaFont="system" size="16"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1126,13 +1126,13 @@
                                                         <constraint firstItem="YYn-4D-hK4" firstAttribute="leading" secondItem="r5S-fw-WxW" secondAttribute="leading" id="EFb-7y-GKO"/>
                                                         <constraint firstItem="4pS-lP-hgA" firstAttribute="centerY" secondItem="r5S-fw-WxW" secondAttribute="centerY" id="FdQ-iH-6WL"/>
                                                         <constraint firstItem="4pS-lP-hgA" firstAttribute="centerX" secondItem="r5S-fw-WxW" secondAttribute="centerX" id="Kat-IO-5ec"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4pS-lP-hgA" secondAttribute="bottom" constant="21" id="MYm-DC-ZB7"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4pS-lP-hgA" secondAttribute="bottom" priority="250" constant="21" id="MYm-DC-ZB7"/>
                                                         <constraint firstAttribute="bottom" secondItem="YYn-4D-hK4" secondAttribute="bottom" id="Na1-ia-GAn"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZWs-tS-TQN" secondAttribute="bottom" id="UnY-CH-SWH"/>
                                                         <constraint firstItem="ZWs-tS-TQN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YYn-4D-hK4" secondAttribute="trailing" constant="12" symbolic="YES" id="Ztu-tA-ZoW"/>
-                                                        <constraint firstItem="4pS-lP-hgA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r5S-fw-WxW" secondAttribute="leading" constant="21" id="a87-Au-ZlJ"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4pS-lP-hgA" secondAttribute="trailing" constant="21" id="bH1-zb-5xn"/>
-                                                        <constraint firstItem="4pS-lP-hgA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="r5S-fw-WxW" secondAttribute="top" constant="21" id="cIR-JO-MDy"/>
+                                                        <constraint firstItem="4pS-lP-hgA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r5S-fw-WxW" secondAttribute="leading" priority="250" constant="21" id="a87-Au-ZlJ"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4pS-lP-hgA" secondAttribute="trailing" priority="250" constant="21" id="bH1-zb-5xn"/>
+                                                        <constraint firstItem="4pS-lP-hgA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="r5S-fw-WxW" secondAttribute="top" priority="250" constant="21" id="cIR-JO-MDy"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZWs-tS-TQN" secondAttribute="bottom" id="s9a-Qk-9RV"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZWs-tS-TQN" secondAttribute="trailing" id="wMD-iO-YAH"/>
                                                     </constraints>
@@ -1550,7 +1550,7 @@ CA
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AFD-yr-noe"/>
+        <segue reference="ZJb-N4-6pE"/>
         <segue reference="btS-AB-Wjm"/>
     </inferredMetricsTieBreakers>
 </document>

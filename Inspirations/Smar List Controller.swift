@@ -16,7 +16,8 @@ class SmartListController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         predicateView.addRow(nil)
-        bottomView.isHidden=true
+        predicateScrollView.isHidden=true
+        //bottomView.isHidden=true
         
         //Reconfigure view if it was called as an edit window.
         if (selectedObject != nil){
@@ -24,11 +25,15 @@ class SmartListController: NSViewController {
             self.createButton.title="Update"
             self.createButton.action=#selector(updateItemName(_:))
             self.typeOfItem.isHidden=true
+            if let listO=selectedObject as? QuoteList, let predc=listO.smartPredicate {
+                predicateScrollView.isHidden=false
+                self.predicateView.objectValue=predc
+            }
         }
     }
     
     //Properties
-    @IBOutlet weak var bottomView: NSView!
+    //@IBOutlet weak var bottomView: NSView!
     @IBOutlet weak var heightScrollViewPredicate: NSLayoutConstraint!
     @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var typeOfItem: NSPopUpButton!
@@ -36,29 +41,29 @@ class SmartListController: NSViewController {
     @IBOutlet weak var predicateScrollView: NSScrollView!
     @IBOutlet weak var predicateView: NSPredicateEditor!
     
+    @IBOutlet weak var predciateHeight: NSLayoutConstraint!
+    weak var leftVC: LeftController?
+    
     //Properties set from parent view Controller
     var selectedObject:LibraryItem?
     
-   @IBAction func showPredicateEditor(_ sender: NSPopUpButton) {
+   @IBAction func popUpButtonChanged(_ sender: NSPopUpButton) {
     if sender.selectedTag() == Selection.smartList.rawValue {
-            bottomView.isHidden=false
-            resizePredicateScrollView(predicateView)
+            predicateScrollView.isHidden=false
+            //bottomView.isHidden=false
+            //resizePredicateScrollView(predicateView)
         }else {
-            bottomView.isHidden=true
+            predicateScrollView.isHidden=true
+            //bottomView.isHidden=true
         }
     }
     
-    //Adjust constraints to show and hide predicate editor.
-    func resizePredicateScrollView(_ sender: NSPredicateEditor) {
-        let numR = Int(sender.numberOfRows)
-        let rowH = Int(sender.rowHeight)
-        heightScrollViewPredicate.constant=CGFloat(numR*rowH)
-    }
-    
-    //Anytime there is action on thepredicate.
+    //Anytime there is action on the predicate.
     @IBAction func predicatedChanged(_ sender: NSPredicateEditor) {
         if typeOfItem.selectedTag()==Selection.smartList.rawValue {//isSmartList.state==NSButton.StateValue.on {
-            resizePredicateScrollView(sender)
+            let newRowCount = sender.numberOfRows
+            let rowHeight = sender.rowHeight
+            predciateHeight.animator().constant=CGFloat(newRowCount)*rowHeight
         }
     }
     
@@ -66,28 +71,32 @@ class SmartListController: NSViewController {
     @IBAction func createList(_ sender: NSButton) {
         //Configure new list.
         let nameOfList = nameTextField.stringValue
-        switch typeOfItem.selectedTag() {
-        case Selection.smartList.rawValue:
-            _=QuoteList.init(inMOC: moc, andName: nameOfList, withSmartList: predicateView.predicate)
-        case Selection.tag.rawValue:
-            _=QuoteList.init(inMOC: moc, andName: nameOfList)
-        case Selection.list.rawValue:
-            _ = QuoteList.init(inMOC: moc, andName: nameOfList)
-        case Selection.folder.rawValue:
-            print("To implement")
-        default:
-            self.dismiss(self) //TODO: Show Error message
+        if let selectedType = Selection(rawValue: typeOfItem.selectedTag()){
+            switch selectedType{
+            case .smartList:
+                _ = QuoteList.init(inMOC: moc, andName: nameOfList, withSmartList: predicateView.predicate)
+            case .tag:
+                _=Tag.init(inMOC: moc, andName: nameOfList)
+            case .list:
+                _ = QuoteList.init(inMOC: moc, andName: nameOfList)
+            case .folder:
+                if let leftListView = leftVC?.listView,
+                    let selectedObject = leftListView.item(atRow: leftListView.selectedRow) as? LibraryItem{
+                    _ = LibraryItem.init(inMoc: moc, folderNamed: nameOfList, underItem: selectedObject)
+                    print("To implement")
+                }
         }
-        
-        try! moc.save() //save
+        self.saveMainContext()
         self.dismiss(self)
+        }
     }
     
-    //Updates list name (and predicate if neccesary)
+    ///Updates list name (and predicate if neccesary) for the selected Item.
+    /// - Note: this gets assigned in ViewDidLoad depending on the caller.
     @IBAction func updateItemName(_ sender:NSButton){
         if !nameTextField.stringValue.trimmingCharacters(in: .whitespaces).isEmpty{
             self.selectedObject?.name=nameTextField.stringValue
-            try! moc.save()
+            self.saveMainContext()
             self.dismiss(self)
         }else{
             let alert = NSAlert()

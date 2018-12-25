@@ -6,6 +6,20 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 166,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 120,
+          "top" : 119,
+          "right" : 40,
+          "left" : 34
+        }
+      },
       "idiom" : "mac",
       "filename" : "Blank Diagram - Page 1-3.png",
       "scale" : "2x"

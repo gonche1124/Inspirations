@@ -216,7 +216,7 @@ protocol ManagesQuotes {
 //        case name = "name"
 //    }
 //
-//    //TODO: Implement. Important!
+//    //NOTE: Implement. Important!
 //    //https://stackoverflow.com/questions/44603248/how-to-decode-a-property-with-type-of-json-dictionary-in-swift-4-decodable-proto
 //    func decodeAuthor(forKey key:K, inMOC moc:NSManagedObjectContext) throws ->Author?{
 //      //  let authorDict=try self.decode([String: Any].self, forKey: key)
@@ -263,7 +263,7 @@ protocol ManagesQuotes {
 //    }
 //}
 
-//TODO: Check if this is useful
+
 /*
  extension KeyedDecodingContainer {
  

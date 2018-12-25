@@ -21,8 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         createMainObjectsIfNotPresent()
         
         //Testing
-        let auth=try? Author.allInContext(managedObjectContext)
-        print(auth!.map({$0.hasSaid}))
+        //let auth=try? Author.allInContext(managedObjectContext)
+        //print(auth!.map({$0.hasSaid}))
 
         
     }
@@ -297,3 +297,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 }
 
 
+/// FELIPE:
+/// - Tildes ISO9000
+/// - Case insensitive
+/// - Random phrase while loading app.
+/// - DBPedia Sparqle
+/// - Resize and center rows.
+/// - ColorPocker for selections in Photo macOS to copy colors.
+/// - Expore and extract fav/info icon from photos.
+/// - Add Dates to entities: Modified, Created.
+/// - Organize files into folders.
+/// - NSImages for dark/white mode.
