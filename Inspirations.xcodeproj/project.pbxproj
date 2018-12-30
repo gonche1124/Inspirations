@@ -46,6 +46,7 @@
 		8AEE1A7921D1C9BB0011CFA3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7821D1C9BB0011CFA3 /* Enums.swift */; };
 		8AEE1A7B21D1CA250011CFA3 /* Shared Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7A21D1CA250011CFA3 /* Shared Extensions.swift */; };
 		8AEE1A7D21D1CBDE0011CFA3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7C21D1CBDE0011CFA3 /* Constants.swift */; };
+		8AEE1A7F21D2F9BB0011CFA3 /* AGC Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7E21D2F9BB0011CFA3 /* AGC Cells.swift */; };
 		8AFB528D1EDBADE50096B93F /* BigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB528C1EDBADE50096B93F /* BigViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		8AEE1A7821D1C9BB0011CFA3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		8AEE1A7A21D1CA250011CFA3 /* Shared Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared Extensions.swift"; sourceTree = "<group>"; };
 		8AEE1A7C21D1CBDE0011CFA3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8AEE1A7E21D2F9BB0011CFA3 /* AGC Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AGC Cells.swift"; sourceTree = "<group>"; };
 		8AFB528C1EDBADE50096B93F /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -360,6 +362,7 @@
 				8A01F86521054CA1007D1E3F /* Alternate.storyboard */,
 				8A116729213376AC00AC2E08 /* RightController.swift */,
 				8A11672521335BCF00AC2E08 /* LeftController.swift */,
+				8AEE1A7E21D2F9BB0011CFA3 /* AGC Cells.swift */,
 			);
 			path = "Main Split Screen";
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				8AE9B3601FECA94D008A361F /* OldImportController.swift in Sources */,
 				8AEE1A7B21D1CA250011CFA3 /* Shared Extensions.swift in Sources */,
 				8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */,
+				8AEE1A7F21D2F9BB0011CFA3 /* AGC Cells.swift in Sources */,
 				8A2C3121213A04A600B8F3E1 /* LibraryItem+CoreData.swift in Sources */,
 				8A11672E2134E32A00AC2E08 /* Extras.swift in Sources */,
 				8AEE1A7921D1C9BB0011CFA3 /* Enums.swift in Sources */,

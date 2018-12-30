@@ -16,6 +16,15 @@ extension NSUserInterfaceItemIdentifier {
     static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
 }
 
+//MARK: -
+//Extension to array of items where elements conform to protocol identifier.
+extension Array where Element:NSUserInterfaceItemIdentification{
+    func firstWith(identifier:String)->Element?{
+        guard let item=self.first(where:{$0.identifier?.rawValue==identifier}) else {return nil}
+        return item
+    }
+}
+
 
 //MARK: -
 extension NSMenu{

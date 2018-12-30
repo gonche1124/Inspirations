@@ -55,3 +55,29 @@ extension NSPredicate{
         }
     }
 }
+
+//MARK: - 
+extension String{
+    func trimWhites()->String{
+        return self.trimmingCharacters(in: .whitespaces)
+    }
+}
+
+//MARK: - Native Swift Extensions
+//TODO: Figure oit where this is used.
+//Used to be able to pass an IndexSet as a subscript
+extension Array {
+    subscript<Indices: Sequence>(indices: Indices) -> [Element]
+        where Indices.Iterator.Element == Int {
+            let result:[Element] = indices.map({return self[$0]})
+            return result
+    }
+    
+    func objects<T:Collection>(atIndexes:T)->[Element]
+        where T.Element==Int {
+            let result:[Element] = atIndexes.map({return self[$0]})
+            return result
+    }
+}
+
+

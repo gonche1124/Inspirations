@@ -37,7 +37,7 @@ class LeftController: NSViewController {
         // Do view setup here.
         //Regoster for dragging.
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
-        //listView.expandItem(nil, expandChildren: true)
+
         
         //Register for changes in NSManagedObject relationsihp becasue listFRC only monitors one entity.
         
@@ -48,7 +48,7 @@ class LeftController: NSViewController {
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()
         
-        //Register
+        //Register to update count.
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
  
@@ -116,22 +116,35 @@ extension LeftController: NSTextFieldDelegate {
 extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        guard let libItem=item as? LibraryItem else {return nil}
-        if libItem.isRootItem {
-            let myCell = outlineView.makeView(withIdentifier:.headerCell, owner: self) as? NSTableCellView
-            myCell?.textField?.stringValue=libItem.name!
-            return myCell
-        }else{
-            let myCell = outlineView.makeView(withIdentifier: .dataCell, owner: self) as? AGC_DataCell
-            myCell?.textField?.stringValue=libItem.name!
-            myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
-            myCell?.totalButton?.isHidden=true
-            if let totItems=libItem.totalQuotes, totItems>0{
-                myCell?.totalButton?.isHidden=false
-                myCell?.totalButton?.title="\(totItems)"
-            }
-            return myCell
+        guard let libItem=item as? LibraryItem, let type=libItem.libraryType
+             else {return nil}
+        let identifier=NSUserInterfaceItemIdentifier(type)
+        let myCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? AGC_DataCell
+        myCell?.textField?.stringValue=libItem.name!
+        if let totItems=libItem.totalQuotes, totItems>0{
+            myCell?.totalButton?.isHidden=false
+            myCell?.totalButton?.title="\(totItems)"
         }
+        if libItem.isRootItem {
+            myCell?.textField?.stringValue=libItem.name!.uppercased()
+        }
+        
+//        if libItem.isRootItem {
+//            let myCell = outlineView.makeView(withIdentifier:.headerCell, owner: self) as? NSTableCellView
+//            myCell?.textField?.stringValue=libItem.name!
+//            return myCell
+//        }else{
+//            let myCell = outlineView.makeView(withIdentifier: .dataCell, owner: self) as? AGC_DataCell
+//            myCell?.textField?.stringValue=libItem.name!
+//            myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
+//            myCell?.totalButton?.isHidden=true
+//            if let totItems=libItem.totalQuotes, totItems>0{
+//                myCell?.totalButton?.isHidden=false
+//                myCell?.totalButton?.title="\(totItems)"
+//            }
+//            return myCell
+//        }
+        return myCell
     }
     
     //Determines if triangle should be shown.
@@ -194,6 +207,7 @@ extension LeftController: NSOutlineViewDataSource {
     
     
     //Required for editing.
+    //TODO: Research if this is the best place to set the object of a cell for future the binding.
     func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {
     }
     

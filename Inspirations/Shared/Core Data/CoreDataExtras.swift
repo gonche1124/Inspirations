@@ -17,7 +17,9 @@ extension CodingUserInfoKey{
 }
 
 extension LibraryItem{
-    //gets root item with given name or creates one if does not exists.
+    ///Gets root item with given name or creates one if does not exists.
+    /// - parameter itemName: name property of the root item.
+    /// - parameter inContext: NSManagedContext of where the entity is to be looked for or created.
     class func getRootItem(withName itemName:String, inContext:NSManagedObjectContext)->LibraryItem{
         
         let pred = NSPredicate(format: "name == %@ AND isRootItem == YES", itemName)
