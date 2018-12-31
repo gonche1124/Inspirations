@@ -7,16 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab View Import Controller-->
+        <!--Importer-->
         <scene sceneID="uia-JB-U1L">
             <objects>
-                <tabViewController showSeguePresentationStyle="single" tabStyle="toolbar" id="0MY-Q2-j7b" customClass="TabViewImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController title="Importer" showSeguePresentationStyle="single" tabStyle="toolbar" id="0MY-Q2-j7b" customClass="TabViewImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem identifier="" id="u1S-aa-sV8"/>
-                        <tabViewItem identifier="" id="I92-38-4qO"/>
+                        <tabViewItem label="JSON" identifier="" image="JSON Import" id="u1S-aa-sV8"/>
+                        <tabViewItem label="Web Importer" identifier="" image="Web Download" id="I92-38-4qO"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" crossfade="YES"/>
-                    <tabView key="tabView" type="noTabsNoBorder" id="uV3-YM-Cfw">
+                    <tabView key="tabView" id="uV3-YM-Cfw">
                         <rect key="frame" x="0.0" y="0.0" width="444" height="286"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
@@ -335,4 +335,8 @@ Gw
             <point key="canvasLocation" x="633.5" y="602"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="JSON Import" width="512" height="512"/>
+        <image name="Web Download" width="512" height="512"/>
+    </resources>
 </document>

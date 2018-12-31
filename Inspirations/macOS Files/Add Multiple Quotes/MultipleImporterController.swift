@@ -382,7 +382,7 @@ class TabViewImportController:NSTabViewController{
         if let toolBar = view.window?.toolbar {
             toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 0)
             toolBar.insertItem(withItemIdentifier: .flexibleSpace, at: 3)
-            toolBar.displayMode = .labelOnly
+            //toolBar.displayMode = .labelOnly
         }
     }
 }
