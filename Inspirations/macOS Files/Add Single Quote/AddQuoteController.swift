@@ -109,6 +109,12 @@ class AddQuoteController: NSViewController {
             tokenField.objectValue=Array(tagArray)
         }
     }
+    
+    //TESTING:
+    override func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey inKey: String) throws {
+        Swift.print("\(#function)")
+        Swift.print("inKey \(inKey)")
+    }
 }
 
 //MARK: - NSTokenFieldDelegate

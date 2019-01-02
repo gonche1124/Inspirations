@@ -35,7 +35,7 @@ class SmartListController: NSViewController {
     //Properties
     //@IBOutlet weak var bottomView: NSView!
     @IBOutlet weak var heightScrollViewPredicate: NSLayoutConstraint!
-    @IBOutlet weak var nameTextField: NSTextField!
+    @objc @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var typeOfItem: NSPopUpButton!
     @IBOutlet weak var createButton: NSButton!
     @IBOutlet weak var predicateScrollView: NSScrollView!
@@ -46,6 +46,14 @@ class SmartListController: NSViewController {
     
     //Properties set from parent view Controller
     var selectedObject:LibraryItem?
+    
+    @objc dynamic var nameProxy:String?
+    
+    //MARK: - Class methods
+    /// TODO: FInish this method.
+    @IBAction func closeCurrentWindow(_ sender:NSButton){
+        self.dismiss(self)
+    }
     
    @IBAction func popUpButtonChanged(_ sender: NSPopUpButton) {
     if sender.selectedTag() == Selection.smartList.rawValue {
@@ -58,7 +66,7 @@ class SmartListController: NSViewController {
         }
     }
     
-    //Anytime there is action on the predicate.
+    /// Called anytime there is action on the predicate.
     @IBAction func predicatedChanged(_ sender: NSPredicateEditor) {
         if typeOfItem.selectedTag()==Selection.smartList.rawValue {//isSmartList.state==NSButton.StateValue.on {
             let newRowCount = sender.numberOfRows
@@ -67,7 +75,7 @@ class SmartListController: NSViewController {
         }
     }
     
-    //Creates the new list item.
+    /// Enabled and called only when theuser wants to create a new item with the name of the textfield.
     @IBAction func createList(_ sender: NSButton) {
         //Configure new list.
         let nameOfList = nameTextField.stringValue

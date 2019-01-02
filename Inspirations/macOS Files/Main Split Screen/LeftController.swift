@@ -58,9 +58,11 @@ class LeftController: NSViewController {
         if let editController=segue.destinationController as? SmartListController,
             sender is NSMenuItem{
             editController.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
+            editController.title="Edit Item"
         }
         if let editController=segue.destinationController as? SmartListController, sender is NSButton{
             editController.leftVC=self
+            editController.title="New Item"
         }
     }
     
@@ -163,10 +165,13 @@ extension LeftController: NSOutlineViewDelegate{
         return libItem.isRootItem
     }
     
-    //return custom NSTableviewRow
+    //Return custom NSTableviewRow
     func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
         return LeftNSTableViewRow()
     }
+    
+   
+    
     
     //Changes the selection
     func outlineViewSelectionDidChange(_ notification: Notification) {
@@ -260,22 +265,6 @@ extension LeftController: NSFetchedResultsControllerDelegate {
 }
 
 
-//Mark to move elswhere????
-//https://stackoverflow.com/questions/10595774/nstableview-custom-group-row
-class LeftNSTableViewRow:NSTableRowView{
-    
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        //Customize if it is a group row.
-//        if self.isGroupRowStyle{
-//            print("groupedRow")
-//            //self.backgroundColor=NSColor.gray
-//        }
-    }
-}
 
-//used to include the button with the totals
-class AGC_DataCell:NSTableCellView{
-    @IBOutlet weak var totalButton:NSButton?
-}
+
 

@@ -46,12 +46,15 @@ extension NSMenu{
 //MARK: -
 extension NSTextField{
     //Used fo validation in the UI/ADD to make sure it has a value.
-    @objc var hasValue:Bool{
+    @objc dynamic var hasValue:Bool{
         get {
+            print("Value: \(self.stringValue)")
             let myCharacters=CharacterSet.letters.inverted
             return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
         }
     }
+    
+    
 }
 
 //MARK: -

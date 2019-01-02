@@ -1,13 +1,18 @@
 //
-//  AGC Cells.swift
+//  AGC Cell Views.swift
 //  Inspirations
 //
-//  Created by Andres Gonzalez Casabianca on 12/25/18.
+//  Created by Andres Gonzalez Casabianca on 12/30/18.
 //  Copyright © 2018 Gonche. All rights reserved.
 //
 
 import Foundation
 import AppKit
+
+/// Used to include the button with the totals.
+class AGC_DataCell:NSTableCellView{
+    @IBOutlet weak var totalButton:NSButton?
+}
 
 //MARK: - Custom Cell
 class AGCCell: NSTableCellView{
