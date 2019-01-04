@@ -32,10 +32,16 @@ class SmartListController: NSViewController {
         }
     }
     
+    //Used to change the appeareance of the screen.
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.view.window?.appearance=NSAppearance(named: .vibrantDark)
+    }
+    
     //Properties
     //@IBOutlet weak var bottomView: NSView!
     @IBOutlet weak var heightScrollViewPredicate: NSLayoutConstraint!
-    @objc @IBOutlet weak var nameTextField: NSTextField!
+    @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var typeOfItem: NSPopUpButton!
     @IBOutlet weak var createButton: NSButton!
     @IBOutlet weak var predicateScrollView: NSScrollView!
@@ -47,6 +53,7 @@ class SmartListController: NSViewController {
     //Properties set from parent view Controller
     var selectedObject:LibraryItem?
     
+    //Used for bindings.
     @objc dynamic var nameProxy:String?
     
     //MARK: - Class methods

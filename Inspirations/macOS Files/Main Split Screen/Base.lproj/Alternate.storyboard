@@ -1330,7 +1330,7 @@ CA
                                     <rect key="frame" x="1" y="1" width="173" height="276"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="23" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="4" autoresizesOutlineColumn="YES" outlineTableColumn="kdl-Y5-6Iu" id="MHG-gB-lbk">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="23" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" outlineTableColumn="kdl-Y5-6Iu" id="MHG-gB-lbk">
                                             <rect key="frame" x="0.0" y="0.0" width="173" height="276"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
@@ -1760,7 +1760,7 @@ CA
                                             <connections>
                                                 <outlet property="dataSource" destination="CWl-5U-TPh" id="ck2-uX-c59"/>
                                                 <outlet property="delegate" destination="CWl-5U-TPh" id="pEC-jZ-kzA"/>
-                                                <outlet property="menu" destination="jkP-kp-Ips" id="e9z-x5-GCa"/>
+                                                <outlet property="menu" destination="jkP-kp-Ips" id="XCY-dc-14h"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -1775,23 +1775,7 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mqt-II-czk" userLabel="Add">
-                                <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="0My-E0-EmX"/>
-                                    <constraint firstAttribute="width" constant="22" id="5tu-vE-LC0"/>
-                                </constraints>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="qFs-hS-KF5">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="CWl-5U-TPh" name="enabled" keyPath="self.canAddNewItem" id="lu7-wL-qN5"/>
-                                    <outlet property="menu" destination="Gaz-Sn-zex" id="M9k-gy-59m"/>
-                                    <segue destination="BxZ-uW-2MU" kind="popover" popoverAnchorView="mqt-II-czk" popoverBehavior="t" preferredEdge="maxX" id="AFD-yr-noe"/>
-                                </connections>
-                            </button>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-ud-sXy">
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-ud-sXy" userLabel="Add list">
                                 <rect key="frame" x="44" y="0.0" width="131" height="22"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ADh-7h-8lK">
                                     <font key="font" metaFont="system"/>
@@ -1817,17 +1801,37 @@ CA
                                     <binding destination="CWl-5U-TPh" name="enabled" keyPath="self.canDeleteItem" id="Rx5-sl-qqS"/>
                                 </connections>
                             </button>
+                            <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="XZG-28-qmu">
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="1Ty-TI-fxF"/>
+                                    <constraint firstAttribute="width" constant="22" id="PO2-v9-xg3"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" pullsDown="YES" arrowPosition="noArrow" preferredEdge="maxY" selectedItem="Rym-pU-bjq" id="fQK-u2-mbF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Dqv-pe-BUf">
+                                        <items>
+                                            <menuItem state="on" image="NSAddTemplate" hidden="YES" id="Rym-pU-bjq"/>
+                                            <menuItem title="Add Tag" id="YKx-f6-tW6"/>
+                                            <menuItem title="Add List" id="Abk-eE-ghK"/>
+                                            <menuItem title="Add Smart List..." id="MvA-Nh-NkO"/>
+                                            <menuItem title="Add Folder" id="bMa-AX-TUZ"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="e2V-ud-sXy" firstAttribute="leading" secondItem="uNt-ye-U4X" secondAttribute="trailing" id="4Fs-24-3MZ"/>
                             <constraint firstAttribute="trailing" secondItem="5d9-lo-PYf" secondAttribute="trailing" id="8i6-9N-di1"/>
+                            <constraint firstItem="XZG-28-qmu" firstAttribute="leading" secondItem="39X-Tg-9tL" secondAttribute="leading" id="B0l-Rb-NVA"/>
                             <constraint firstAttribute="bottom" secondItem="uNt-ye-U4X" secondAttribute="bottom" id="CyQ-6P-7T2"/>
+                            <constraint firstItem="uNt-ye-U4X" firstAttribute="leading" secondItem="XZG-28-qmu" secondAttribute="trailing" id="Gjp-ar-jh8"/>
                             <constraint firstAttribute="trailing" secondItem="e2V-ud-sXy" secondAttribute="trailing" id="KdY-h2-32p"/>
-                            <constraint firstItem="uNt-ye-U4X" firstAttribute="leading" secondItem="mqt-II-czk" secondAttribute="trailing" id="OIs-Wa-cwm"/>
-                            <constraint firstItem="mqt-II-czk" firstAttribute="leading" secondItem="39X-Tg-9tL" secondAttribute="leading" id="Ruy-1g-55d"/>
-                            <constraint firstAttribute="bottom" secondItem="mqt-II-czk" secondAttribute="bottom" id="Sxm-5L-fBa"/>
                             <constraint firstAttribute="bottom" secondItem="5d9-lo-PYf" secondAttribute="bottom" constant="22" id="YR7-Wf-ajn"/>
                             <constraint firstItem="5d9-lo-PYf" firstAttribute="leading" secondItem="39X-Tg-9tL" secondAttribute="leading" id="fsa-bI-wdj"/>
-                            <constraint firstItem="e2V-ud-sXy" firstAttribute="leading" secondItem="uNt-ye-U4X" secondAttribute="trailing" id="kPI-gs-h7a"/>
+                            <constraint firstAttribute="bottom" secondItem="XZG-28-qmu" secondAttribute="bottom" id="mkj-ot-8Bd"/>
                             <constraint firstItem="5d9-lo-PYf" firstAttribute="top" secondItem="39X-Tg-9tL" secondAttribute="top" id="vVF-Ih-hVK"/>
                             <constraint firstAttribute="bottom" secondItem="e2V-ud-sXy" secondAttribute="bottom" id="xa8-fd-KcY"/>
                         </constraints>
@@ -1842,8 +1846,23 @@ CA
                     <items>
                         <menuItem title="Edit" keyEquivalent="i" id="X6W-yQ-RYv">
                             <connections>
-                                <segue destination="BxZ-uW-2MU" kind="modal" id="ZJb-N4-6pE"/>
+                                <segue destination="BxZ-uW-2MU" kind="custom" identifier="editLibraryItem" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="ZJb-N4-6pE"/>
                             </connections>
+                        </menuItem>
+                        <menuItem title="Add Tag..." identifier="addTagMenuItem" id="Kmh-W0-1fl">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <segue destination="BxZ-uW-2MU" kind="custom" identifier="newListFromRow" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="LVW-3s-UwF"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Add List..." identifier="addListMenuItem" id="09V-ZT-wXn">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Add Smart List..." identifier="addSmartListMenuItem" id="UDB-iy-OhR">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Add Folder" identifier="addFolderMenuItem" id="m0z-9B-vXX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                 </menu>

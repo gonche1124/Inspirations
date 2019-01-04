@@ -43,6 +43,7 @@
 		8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities2.swift */; };
 		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
 		8AE614C12072F134003CB950 /* OldLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE614C02072F134003CB950 /* OldLeftController.swift */; };
+		8AE8E90021DC54B1003A2955 /* AGC PopOverSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8E8FF21DC54B1003A2955 /* AGC PopOverSegue.swift */; };
 		8AE9B3601FECA94D008A361F /* OldImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9B35F1FECA94D008A361F /* OldImportController.swift */; };
 		8AEE1A7621D1C7380011CFA3 /* macOS Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7521D1C7380011CFA3 /* macOS Extensions.swift */; };
 		8AEE1A7921D1C9BB0011CFA3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE1A7821D1C9BB0011CFA3 /* Enums.swift */; };
@@ -114,6 +115,7 @@
 		8ADBCF631FBBEFA5007523FF /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
 		8AE614C02072F134003CB950 /* OldLeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldLeftController.swift; sourceTree = "<group>"; };
+		8AE8E8FF21DC54B1003A2955 /* AGC PopOverSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AGC PopOverSegue.swift"; sourceTree = "<group>"; };
 		8AE9B35F1FECA94D008A361F /* OldImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldImportController.swift; sourceTree = "<group>"; };
 		8AEE1A7521D1C7380011CFA3 /* macOS Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "macOS Extensions.swift"; sourceTree = "<group>"; };
 		8AEE1A7821D1C9BB0011CFA3 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				8A11672521335BCF00AC2E08 /* LeftController.swift */,
 				8A395B9021D99B1A00CCFF8B /* AGC TableRows.swift */,
 				8A395B9221D9AE7100CCFF8B /* AGC Cell Views.swift */,
+				8AE8E8FF21DC54B1003A2955 /* AGC PopOverSegue.swift */,
 			);
 			path = "Main Split Screen";
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				8A2C3129213A06EF00B8F3E1 /* Language+CoreData.swift in Sources */,
 				8A2C3127213A068100B8F3E1 /* CoreDataExtras.swift in Sources */,
 				8A11672621335BCF00AC2E08 /* LeftController.swift in Sources */,
+				8AE8E90021DC54B1003A2955 /* AGC PopOverSegue.swift in Sources */,
 				8A11672C2134D58800AC2E08 /* PrincipalWindow.swift in Sources */,
 				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */,

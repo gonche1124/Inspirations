@@ -53,18 +53,37 @@ class LeftController: NSViewController {
     }
  
     
+    @IBAction func showEditViewController(_ sender: Any?){
+        
+    }
+    
     //Configure Smart List Controller in case the list already exists.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if let editController=segue.destinationController as? SmartListController,
-            sender is NSMenuItem{
-            editController.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
-            editController.title="Edit Item"
+        if let vc=segue.destinationController as? SmartListController{
+            vc.leftVC=self
+            if let segue = segue as? AGC_PopOverSegue, segue.identifier=="newListFromRow"{
+                //segue.popOverBehavior = .semitransient
+                segue.presentingOutlineView = listView
+                //segue.preferredEdge = .maxX
+            }
+            if let segue = segue as? AGC_PopOverSegue, segue.identifier=="editLibraryItem"{
+                vc.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
+                vc.title="Edit Item"
+                
+                //segue.popOverBehavior = .semitransient
+                segue.presentingOutlineView = listView
+                //segue.preferredEdge = .maxY
+                
+            
+            }
+            if segue.identifier=="newLibraryItemButton"{
+                vc.title="New Item"
+            }
         }
-        if let editController=segue.destinationController as? SmartListController, sender is NSButton{
-            editController.leftVC=self
-            editController.title="New Item"
-        }
+
     }
+    
+    
     
     //Deletes the selected item
     @IBAction func deleteItem(_ sender: Any){
@@ -184,6 +203,12 @@ extension LeftController: NSOutlineViewDelegate{
                 NotificationCenter.default.post(Notification(name: .leftSelectionChanged, object:newItem))
         }
     }
+    
+    /// Used to determine if the user can select the group objects of the table.
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        guard let coreItem=item as? LibraryItem else {return false}
+        return !coreItem.isRootItem
+    }
 }
 
 //MARK: - NSOutlineViewDataSource Extension.
@@ -262,6 +287,16 @@ extension LeftController: NSFetchedResultsControllerDelegate {
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()
     }
+}
+
+//MARK: - NSMenuDelegate Extension
+extension LeftController: NSMenuDelegate{
+    
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        print("menuNeedsUpdate")
+    }
+    
+    
 }
 
 

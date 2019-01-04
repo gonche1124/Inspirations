@@ -32,25 +32,25 @@ class LeftNSTableViewRow:NSTableRowView{
 //    }
     
     //Used to avoid changing color of labels in cells.
-    override var interiorBackgroundStyle: NSView.BackgroundStyle{
-        set{}
-        get{
-            return .light
-        }
-    }
-    
+//    override var interiorBackgroundStyle: NSView.BackgroundStyle{
+//        set{}
+//        get{
+//            return .light
+//        }
+//    }
+//
     override var isEmphasized: Bool {
         set {}
         get {
             return false
         }
     }
-    
-    override var selectionHighlightStyle: NSTableView.SelectionHighlightStyle {
-        set {}
-        get {
-            return .regular
-        }
-    }
+//
+//    override var selectionHighlightStyle: NSTableView.SelectionHighlightStyle {
+//        set {}
+//        get {
+//            return .regular
+//        }
+//    }
 
 }
