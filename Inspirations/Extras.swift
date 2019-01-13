@@ -18,6 +18,7 @@ class AGC_NSMenuItem: NSMenuItem {
     
     @IBInspectable var agcBool:Bool=false        //Used to define Favorites/Unfavorites in menu call
     @IBInspectable var customURLString:String="" //used for import controller popup item.
+    @IBInspectable var representedType:String="" //Used for the rightclick menus of the left controller.
     
 }
 

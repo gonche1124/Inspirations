@@ -20,11 +20,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Create Main Items.
         createMainObjectsIfNotPresent()
         
-        //Testing
-        //let auth=try? Author.allInContext(managedObjectContext)
-        //print(auth!.map({$0.hasSaid}))
-
-        
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

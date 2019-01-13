@@ -1810,13 +1810,45 @@ CA
                                 <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" pullsDown="YES" arrowPosition="noArrow" preferredEdge="maxY" selectedItem="Rym-pU-bjq" id="fQK-u2-mbF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="Dqv-pe-BUf">
+                                    <menu key="menu" identifier="buttonMenu" id="Dqv-pe-BUf">
                                         <items>
-                                            <menuItem state="on" image="NSAddTemplate" hidden="YES" id="Rym-pU-bjq"/>
-                                            <menuItem title="Add Tag" id="YKx-f6-tW6"/>
-                                            <menuItem title="Add List" id="Abk-eE-ghK"/>
-                                            <menuItem title="Add Smart List..." id="MvA-Nh-NkO"/>
-                                            <menuItem title="Add Folder" id="bMa-AX-TUZ"/>
+                                            <menuItem state="on" image="NSAddTemplate" hidden="YES" id="Rym-pU-bjq">
+                                                <connections>
+                                                    <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="ocK-Dt-WlI"/>
+                                                </connections>
+                                            </menuItem>
+                                            <menuItem title="Add Tag" id="YKx-f6-tW6" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="tagImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="git-m2-yUh"/>
+                                                </connections>
+                                            </menuItem>
+                                            <menuItem title="Add List" id="Abk-eE-ghK" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="listImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="bZa-zi-lZj"/>
+                                                </connections>
+                                            </menuItem>
+                                            <menuItem title="Add Smart List..." id="MvA-Nh-NkO" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="smartListImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="xqZ-6U-zoG"/>
+                                                </connections>
+                                            </menuItem>
+                                            <menuItem title="Add Folder" id="bMa-AX-TUZ" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="folderImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="hGv-of-fX3"/>
+                                                </connections>
+                                            </menuItem>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
@@ -1837,34 +1869,60 @@ CA
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="XZG-28-qmu" id="avM-tk-sip"/>
                         <outlet property="listView" destination="MHG-gB-lbk" id="ZVw-gt-boT"/>
                         <outlet property="treeController" destination="V6q-G4-YWA" id="9c7-S1-ajE"/>
+                        <segue destination="BxZ-uW-2MU" kind="custom" identifier="genericIdentifier2" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="NSo-tf-Ce5"/>
                     </connections>
                 </viewController>
                 <customObject id="5xx-fZ-I47" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <menu title="Actions:" id="jkP-kp-Ips">
+                <menu title="Actions:" autoenablesItems="NO" identifier="rightClickMenu" id="jkP-kp-Ips">
                     <items>
-                        <menuItem title="Edit" keyEquivalent="i" id="X6W-yQ-RYv">
+                        <menuItem title="Edit" keyEquivalent="i" identifier="editLibraryItem" id="X6W-yQ-RYv" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                             <connections>
-                                <segue destination="BxZ-uW-2MU" kind="custom" identifier="editLibraryItem" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="ZJb-N4-6pE"/>
+                                <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="paM-p5-wyR"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add Tag..." identifier="addTagMenuItem" id="Kmh-W0-1fl">
+                        <menuItem title="Add Tag..." identifier="addTagMenuItem" id="Kmh-W0-1fl" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="tagImage"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="BxZ-uW-2MU" kind="custom" identifier="newListFromRow" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="LVW-3s-UwF"/>
+                                <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="wtY-sr-CjQ"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add List..." identifier="addListMenuItem" id="09V-ZT-wXn">
+                        <menuItem title="Add List..." identifier="addListMenuItem" id="09V-ZT-wXn" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="listImage"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="UNa-eu-bOn"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Add Smart List..." identifier="addSmartListMenuItem" id="UDB-iy-OhR">
+                        <menuItem title="Add Smart List..." identifier="addSmartListMenuItem" id="UDB-iy-OhR" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="smartListImage"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="B27-XB-EIA"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Add Folder" identifier="addFolderMenuItem" id="m0z-9B-vXX">
+                        <menuItem title="Add Folder" identifier="addFolderMenuItem" id="m0z-9B-vXX" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="folderImage"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="QxG-QO-hVe"/>
+                            </connections>
                         </menuItem>
                     </items>
+                    <connections>
+                        <outlet property="delegate" destination="CWl-5U-TPh" id="5io-M8-mVM"/>
+                    </connections>
                 </menu>
                 <treeController mode="entity" entityName="LibraryItem" fetchPredicateFormat="isRootItem==True" automaticallyPreparesContent="YES" childrenKeyPath="hasLibraryItems" countKeyPath="hasLibraryItems.@count" id="V6q-G4-YWA">
                     <connections>
@@ -1881,6 +1939,30 @@ CA
                 <customObject id="T4z-5G-5bG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="155" y="-28"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="V69-Mt-T7j">
+            <objects>
+                <viewController id="TSZ-cE-7Zc" sceneMemberID="viewController">
+                    <view key="view" id="70j-Y6-5OC">
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="163"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVX-Gz-fWW">
+                                <rect key="frame" x="137" y="89" width="37" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="6HB-lm-aSj">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="qeJ-zd-uhX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1173.5" y="-110.5"/>
         </scene>
         <!--Smart List Editor-->
         <scene sceneID="31j-SP-Ov7">
@@ -1908,7 +1990,6 @@ CA
         <image name="tagImage" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZJb-N4-6pE"/>
         <segue reference="btS-AB-Wjm"/>
     </inferredMetricsTieBreakers>
 </document>

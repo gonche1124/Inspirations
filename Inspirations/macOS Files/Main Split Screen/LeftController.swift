@@ -13,6 +13,8 @@ class LeftController: NSViewController {
     //Properties
     @IBOutlet weak var treeController:NSTreeController! //TO DELETE.
     @IBOutlet weak var listView: NSOutlineView!
+    @IBOutlet weak var addButton:NSPopUpButton!
+    
     @objc dynamic var canAddNewItem:Bool=false //Objc is neeed for key value
     @objc dynamic var canDeleteItem:Bool=false
     var selectedItem:LibraryItem?{
@@ -52,35 +54,31 @@ class LeftController: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
  
-    
-    @IBAction func showEditViewController(_ sender: Any?){
-        
+    @IBAction func identifySegueToPerform(_ sender:Any){
+        self.performSegue(withIdentifier: "genericIdentifier2", sender: sender)
     }
+   
     
-    //Configure Smart List Controller in case the list already exists.
+    /// Configure Smart List Controller and position caller.
+    /// - NOTE: there is two point of origins, the button or the clicked row.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if let vc=segue.destinationController as? SmartListController{
-            vc.leftVC=self
-            if let segue = segue as? AGC_PopOverSegue, segue.identifier=="newListFromRow"{
-                //segue.popOverBehavior = .semitransient
-                segue.presentingOutlineView = listView
-                //segue.preferredEdge = .maxX
-            }
-            if let segue = segue as? AGC_PopOverSegue, segue.identifier=="editLibraryItem"{
-                vc.selectedObject=listView.item(atRow: listView.selectedRow) as? LibraryItem
-                vc.title="Edit Item"
-                
-                //segue.popOverBehavior = .semitransient
-                segue.presentingOutlineView = listView
-                //segue.preferredEdge = .maxY
-                
-            
-            }
-            if segue.identifier=="newLibraryItemButton"{
-                vc.title="New Item"
-            }
+        guard let vc=segue.destinationController as? SmartListController,
+            let clickedmenu = sender as? AGC_NSMenuItem,
+            let segue=segue as? AGC_PopOverSegue else {
+                return
         }
+        
+        //Defines the presenting view
+        segue.presentingControl = clickedmenu.menu?.identifier?.rawValue=="rightClickMenu" ? listView : addButton
+        segue.preferredEdge = clickedmenu.menu?.identifier?.rawValue=="rightClickMenu" ? .maxX : .maxY
 
+        //Passes the selected library item if editing.
+        if clickedmenu.identifier!.rawValue=="editLibraryItem"{
+            vc.selectedObject=listView.item(atRow: listView.clickedRow) as? LibraryItem
+            vc.itemType=LibraryType(rawValue: (vc.selectedObject?.libraryType)!)
+        }else {
+            vc.itemType=LibraryType(rawValue: clickedmenu.representedType)
+        }
     }
     
     
@@ -95,6 +93,7 @@ class LeftController: NSViewController {
     }
     
     //Updates canDelete and canAdd depending on objectValue
+    //TODO: Check if this is worth it.
     func updateBindings(){
         let checkArray=[LibraryType.favorites.rawValue, LibraryType.mainLibrary.rawValue]
         let isRoot=(selectedItem?.isRootItem)!
@@ -107,7 +106,8 @@ class LeftController: NSViewController {
         if isMainFav || isPrincipal {canDeleteItem=false; canAddNewItem=false}
     }
     
-    ///Checks which items have had CRUD to determine if neccesary to update view.
+    /// Checks which items have had CRUD to determine if neccesary to update view.
+    /// - TODO: Review performance and do case-by-case evaluation of updates.
     @objc func managedObjectDidChange(notification: NSNotification){
         listView.beginUpdates()
         listView.reloadData()
@@ -216,12 +216,8 @@ extension LeftController: NSOutlineViewDataSource {
     
     //Has to be efficient, gets called multiple times. (nil means root).
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if item == nil {
-            return (listFRC.fetchedObjects?.count)!
-        }
-        else {
-            return ((item as? LibraryItem)?.hasLibraryItems!.count)!
-        }
+        guard let item=item as? LibraryItem else {return (listFRC.fetchedObjects?.count)!}
+        return (item.hasLibraryItems!.count)
     }
     
     //Check if it has children.
@@ -234,7 +230,6 @@ extension LeftController: NSOutlineViewDataSource {
             guard let  libItem = item as? LibraryItem else {return listFRC.fetchedObjects![index]}
             return libItem.hasLibraryItems![index]
     }
-    
     
     //Required for editing.
     //TODO: Research if this is the best place to set the object of a cell for future the binding.
@@ -249,8 +244,8 @@ extension LeftController: NSOutlineViewDataSource {
         return NSDragOperation.init(rawValue: canDragg ?  1 : 0)
         }
     
-        //Perform the Drop, validating the data.
-        func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+    //Perform the Drop, validating the data.
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
     
             //WWDC 2016 method
             guard let stringArray = info.draggingPasteboard.pasteboardItems!.map({$0.string(forType:.string)}) as? [String],
@@ -293,10 +288,19 @@ extension LeftController: NSFetchedResultsControllerDelegate {
 extension LeftController: NSMenuDelegate{
     
     func menuNeedsUpdate(_ menu: NSMenu) {
-        print("menuNeedsUpdate")
+        //Get clickedObject.
+        let selItem = listView.item(atRow: listView.clickedRow) as? LibraryItem
+        let isRoot = selItem?.isRootItem ?? true
+        let isFolder = (selItem?.libraryType == LibraryType.folder.rawValue)
+        let isFavOrMain = [LibraryType.favorites.rawValue,LibraryType.mainLibrary.rawValue, LibraryType.language.rawValue].contains(selItem?.libraryType)
+        
+        //Enable or diable items:
+        menu.items[0].isEnabled = !isRoot && !isFavOrMain
+        menu.items[1].isEnabled = (selItem?.name=="Tags")
+        menu.items[2].isEnabled = isFolder || (selItem?.name=="Lists")
+        menu.items[3].isEnabled = isFolder || (selItem?.name=="Lists")
+        menu.items[4].isEnabled = isFolder || (selItem?.name=="Lists")
     }
-    
-    
 }
 
 

@@ -13,7 +13,7 @@ import AppKit
 class AGC_PopOverSegue:NSStoryboardSegue{
     
     ///Variables
-    weak var  presentingOutlineView:NSControl?
+    weak var  presentingControl:NSControl?
     var preferredEdge:NSRectEdge = .maxX
     var popOverBehavior:NSPopover.Behavior = .semitransient
     var test:NSView?
@@ -21,14 +21,20 @@ class AGC_PopOverSegue:NSStoryboardSegue{
     
     //MARK: - Methods
     override func perform() {
-        
-        if let outlineView=self.presentingOutlineView as? NSOutlineView{
+        print(self.destinationController)
+        if let outlineView=self.presentingControl as? NSOutlineView{
             //Sets the anchor view or the selected Row if available.
             let anchorView=outlineView.view(atColumn: outlineView.clickedColumn,row: outlineView.clickedRow, makeIfNecessary: false) ?? outlineView
             
             //Presents popover
             let srcController = sourceController as! NSViewController
             srcController.present(destinationController as! NSViewController, asPopoverRelativeTo: anchorView.bounds, of: anchorView, preferredEdge: self.preferredEdge, behavior: self.popOverBehavior)
+        }else if let anchorView=self.presentingControl as? NSPopUpButton{
+            //Presents popover
+            let srcController = sourceController as! NSViewController
+            srcController.present(destinationController as! NSViewController, asPopoverRelativeTo: anchorView.bounds, of: anchorView, preferredEdge: self.preferredEdge, behavior: self.popOverBehavior)
+        }else{
+            print("No anchor point")
         }
     }
 }
