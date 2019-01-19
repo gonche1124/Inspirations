@@ -209,7 +209,8 @@ class FileImporter: MainImportController {
         var outDict=[String:String]()
         
         //Get valid values properties by name
-        let MOM=(NSApp.delegate as? AppDelegate)?.managedObjectModel
+        let MOM=(NSApp.delegate as? AppDelegate)?.persistentContainer.managedObjectModel
+        //let MOM=(NSApp.delegate as? AppDelegate)?.managedObjectModel
         var listOfEntities=MOM?.entities.flatMap({$0.propertiesByName.keys})
         listOfEntities?.insert("Ignore", at: 0)
         listOfEntities?.sort()
