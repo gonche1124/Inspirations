@@ -34,6 +34,8 @@ public class LibraryItem: NSManagedObject {
     @NSManaged public var belongsToLibraryItem: LibraryItem?
     @NSManaged public var hasLibraryItems: NSOrderedSet? //Set<LibraryItem>//NSOrderedSet?
     @NSManaged public var sortingOrder:String?
+    @NSManaged public var createdAt: NSDate
+    @NSManaged public var updatedAt:NSDate
     
     //Computed properties
     var totalQuotes:Int?{
@@ -44,7 +46,28 @@ public class LibraryItem: NSManagedObject {
         }
         return nil
     }
+    
+    //Overrides
+    override public func awakeFromInsert() {
+        setPrimitiveValue(NSDate(), forKey: "createdAt")
+        setPrimitiveValue(NSDate(), forKey: "updatedAt")
+    }
+    
+    override public func willSave() {
+        // TODO: make this more efficient.
+        if self.updatedAt.timeIntervalSinceNow>10.0 {
+            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        }
+       
+        
+//        if let updatedAt = self.updatedAt, updatedAt.timeIntervalSince(Date()) > 10.0 {
+//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+//        } else {
+//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+//        }
+    }
 
+    
     //Decodable
 //    public required convenience init(from decoder: Decoder) throws {
 //

@@ -24,6 +24,30 @@ public class Author: NSManagedObject, Codable {
     //properties
     @NSManaged public var name: String?
     @NSManaged public var hasSaid: Set<Quote>? //was a NSSet
+    @NSManaged public var createdAt: NSDate
+    @NSManaged public var updatedAt:NSDate
+    
+    //Overrides
+    override public func awakeFromInsert() {
+        setPrimitiveValue(NSDate(), forKey: "createdAt")
+         setPrimitiveValue(NSDate(), forKey: "updatedAt")
+    }
+    
+    override public func willSave() {
+        if self.updatedAt.timeIntervalSinceNow>10.0 {
+            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        }
+//        if let updatedAt = self.updatedAt {
+//            if updatedAt.timeIntervalSince(Date()) > 10.0 {
+//                setPrimitiveValue(NSDate(), forKey: "updatedAt")
+//                //self.updatedAt = NSDate()
+//            }
+//
+//        } else {
+//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+//            //self.updatedAt = NSDate()
+//        }
+    }
     
     //Decodable
     public required convenience init(from decoder: Decoder) throws {

@@ -51,7 +51,7 @@ class LeftController: NSViewController {
         listView.endUpdates()
         
         //Register to update count.
-        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
+        //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
  
     @IBAction func identifySegueToPerform(_ sender:Any){
@@ -62,6 +62,7 @@ class LeftController: NSViewController {
     /// Configure Smart List Controller and position caller.
     /// - NOTE: there is two point of origins, the button or the clicked row.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        //Makes sure the required info is in.
         guard let vc=segue.destinationController as? SmartListController,
             let clickedmenu = sender as? AGC_NSMenuItem,
             let segue=segue as? AGC_PopOverSegue else {
@@ -110,7 +111,7 @@ class LeftController: NSViewController {
     /// - TODO: Review performance and do case-by-case evaluation of updates.
     @objc func managedObjectDidChange(notification: NSNotification){
         listView.beginUpdates()
-        listView.reloadData()
+        //listView.reloadData()
         listView.endUpdates()
         //TODO: Review performance and do case-by-case evaluation of updates.
         
@@ -271,13 +272,12 @@ extension LeftController: NSOutlineViewDataSource {
 extension LeftController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print(#function)
         listView.beginUpdates()
-        print("controllerWillChangeContent")
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print(#function)
-        print("controllerDidChangeContent")
         listView.reloadData()
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()

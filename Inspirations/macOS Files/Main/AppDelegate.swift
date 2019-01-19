@@ -200,7 +200,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     //MARK: - Core Data Notifications
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        
+        return
         //Updates Notification.
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
             print("++++Changed++++:")
@@ -282,13 +282,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             print(error.localizedDescription)
         }
     }
-    
-    
-//    func create(object: String, withAttributes:Dictionary<String, Any>)->NSManagedObject{
-//        let coreEntity: NSManagedObject = NSEntityDescription.insertNewObject(forEntityName: object, into: self.managedObjectContext)
-//        coreEntity.setValuesForKeys(withAttributes)
-//        return coreEntity
-//    }
 }
 
 

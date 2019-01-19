@@ -79,6 +79,7 @@ public class QuoteList: LibraryItem, Codable {
         self.name=andName
         self.isShown=true
         self.isRootItem=false
+        self.sortingOrder=self.name
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: inMOC)
         if (withSmartList != nil)  {
             self.smartPredicate=withSmartList

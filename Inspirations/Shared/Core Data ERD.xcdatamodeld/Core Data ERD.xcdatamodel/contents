@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C31g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Author" representedClassName="Author" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="hasSaid" toMany="YES" deletionRule="Cascade" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Language" representedClassName="Language" parentEntity="LibraryItem" syncable="YES">
@@ -9,11 +11,13 @@
         <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="spelledIn" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="LibraryItem" representedClassName="LibraryItem" syncable="YES">
-        <attribute name="isRootItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isShown" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="libraryType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isRootItem" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isShown" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="libraryType" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="sortingOrder" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="belongsToLibraryItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="hasLibraryItems" inverseEntity="LibraryItem" syncable="YES"/>
         <relationship name="hasLibraryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LibraryItem" inverseName="belongsToLibraryItem" inverseEntity="LibraryItem" syncable="YES"/>
         <uniquenessConstraints>
@@ -24,10 +28,12 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quoteString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalLetters" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="totalWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalLetters" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="from" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
         <relationship name="isAbout" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
         <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
@@ -42,17 +48,19 @@
         <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isTaggedWith" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Theme" representedClassName="Theme" syncable="YES">
-        <attribute name="themeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="themeName" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="hasQuotes" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <fetchRequest name="fetchForLeftView" entity="LibraryItem" predicateString="isRootItem == 0" includeSubentities="YES"/>
     <elements>
-        <element name="Author" positionX="-146" positionY="195" width="128" height="73"/>
+        <element name="Author" positionX="-146" positionY="195" width="128" height="103"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="148"/>
-        <element name="Quote" positionX="-90" positionY="-81" width="128" height="178"/>
+        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="178"/>
+        <element name="Quote" positionX="-90" positionY="-81" width="128" height="208"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>
-        <element name="Theme" positionX="-279" positionY="-18" width="128" height="73"/>
+        <element name="Theme" positionX="-279" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

@@ -38,6 +38,21 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var isIncludedIn: NSSet?
     @NSManaged public var isTaggedWith: NSSet?
     @NSManaged public var spelledIn: Language?
+    @NSManaged public var createdAt:NSDate
+    @NSManaged public var updatedAt:NSDate
+    
+    
+    //Overrides
+    override public func awakeFromInsert() {
+        setPrimitiveValue(NSDate(), forKey: "createdAt")
+        setPrimitiveValue(NSDate(), forKey: "updatedAt")
+    }
+    
+    override public func willSave() {
+        if self.updatedAt.timeIntervalSinceNow>10.0 {
+            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        }
+    }
     
     //MARK: -
     //Convinience Init form dictionary.

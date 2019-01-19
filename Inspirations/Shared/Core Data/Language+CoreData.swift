@@ -36,6 +36,7 @@ public class Language: LibraryItem {
         self.isShown=true
         self.isRootItem=false
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Languages", inContext: inMOC)
+        self.sortingOrder=self.name
         
     }
     

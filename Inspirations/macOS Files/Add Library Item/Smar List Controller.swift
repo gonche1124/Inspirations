@@ -31,9 +31,6 @@ class SmartListController: NSViewController {
         }else if hasPredicate {
             self.predicateScrollView.isHidden=false
         }
-        
-        
-        
     }
     
     //Properties
@@ -47,52 +44,49 @@ class SmartListController: NSViewController {
     var selectedObject:LibraryItem?
     var itemType: LibraryType?
     var hasPredicate: Bool = false
+    var parentItem:LibraryItem?
     
     //Used for bindings to enable nsbutton.
     @objc dynamic var nameProxy:String?
     
     //MARK: - Class methods
-    /// TODO: FInish this method.
     @IBAction func closeCurrentWindow(_ sender:NSButton){
         self.dismiss(self)
     }
     
-    
-    /// Called anytime there is action on the predicate.
-//    @IBAction func predicatedChanged(_ sender: NSPredicateEditor) {
-//        if typeOfItem.selectedTag()==Selection.smartList.rawValue {//isSmartList.state==NSButton.StateValue.on {
-//            let newRowCount = sender.numberOfRows
-//            let rowHeight = sender.rowHeight
-//            predciateHeight.animator().constant=CGFloat(newRowCount)*rowHeight
-//        }
-//    }
-    
     /// Enabled and called only when theuser wants to create a new item with the name of the textfield.
+    //TODO: create default values in core data to simplify code and when neccesary overwrite.
     @IBAction func createList(_ sender: NSButton) {
         //Configure new list.
         let nameOfList = nameTextField.stringValue
-//        if let selectedType = Selection(rawValue: typeOfItem.selectedTag()){
-//            switch selectedType{
-//            case .smartList:
-//                _ = QuoteList.init(inMOC: moc, andName: nameOfList, withSmartList: predicateView.predicate)
-//            case .tag:
-//                _=Tag.init(inMOC: moc, andName: nameOfList)
-//            case .list:
-//                _ = QuoteList.init(inMOC: moc, andName: nameOfList)
-//            case .folder:
-//                if let leftListView = leftVC?.listView,
-//                    let selectedObject = leftListView.item(atRow: leftListView.selectedRow) as? LibraryItem{
-//                    _ = LibraryItem.init(inMoc: moc, folderNamed: nameOfList, underItem: selectedObject)
-//                    print("To implement")
-//                }
+            switch itemType!{
+            case .smartList:
+                _ = QuoteList.init(inMOC: moc, andName: nameOfList, withSmartList: predicateView.predicate)
+            case .tag:
+                _=Tag.init(inMOC: moc, andName: nameOfList)
+            case .list:
+                _ = QuoteList.init(inMOC: moc, andName: nameOfList)
+            case .folder:
+                if let leftListView = leftVC?.listView,
+                    let selectedObject = leftListView.item(atRow: leftListView.clickedRow) as? LibraryItem{
+                    _ = LibraryItem.init(inMoc: moc, folderNamed: nameOfList, underItem: selectedObject)
+                    print("To implement")
+                }
+            default:
+                let error2 = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "No assigned type"])
+                print(error2)
+                //TODO: proper handling of errors.
+        }
 //        }
         self.saveMainContext()
         self.dismiss(self)
+
         }
     
     
     ///Updates list name (and predicate if neccesary) for the selected Item.
     /// - Note: this gets assigned in ViewDidLoad depending on the caller.
+    /// - TODO: If using bindings only need to check not another entity with the same name exists.
     @IBAction func updateItemName(_ sender:NSButton){
         if !nameTextField.stringValue.trimmingCharacters(in: .whitespaces).isEmpty{
             self.selectedObject?.name=nameTextField.stringValue
@@ -101,13 +95,12 @@ class SmartListController: NSViewController {
         }else{
             let alert = NSAlert()
             alert.messageText = "Empty Name"
-            alert.informativeText = "Name can not be empty"
+            alert.informativeText = "Name can not be empty or same as other item."
             alert.addButton(withTitle: "OK")
             alert.addButton(withTitle: "Cancel")
             alert.alertStyle = .warning
             alert.runModal()
         }
-        
     }
 }
 

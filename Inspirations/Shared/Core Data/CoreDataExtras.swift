@@ -29,9 +29,7 @@ extension LibraryItem{
         
         //Creat Library Item because it did not existed.
         let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entity().name!, into: inContext) as! LibraryItem
-       
         newItem.isRootItem=true
-        newItem.isShown=true
         newItem.name=itemName
         newItem.libraryType=LibraryType.rootItem.rawValue
         switch itemName {
@@ -52,12 +50,12 @@ extension LibraryItem{
 
 extension NSManagedObject {
     
-    //Returns a count of all Quotes
+    /// Returns a count of all Quotes
     var arrayOfQuotes:[Quote]?{
         return try? Quote.allInContext(self.managedObjectContext!)
     }
     
-    //Returns all favorites.
+    /// Returns all favorites.
     var arrayOfFavorites:[Quote]?{
         return try? Quote.allInContext(self.managedObjectContext!, predicate: NSPredicate(format: NSPredicate.pIsFavorite))
     }
@@ -90,7 +88,10 @@ extension NSManagedObject {
         return self.objectID.uriRepresentation().absoluteString
     }
     
-    //First or create
+    /// Returns the first match of the entity with the given attributes or creates and returns one if none available
+    /// - parameter moc: NSManagedObjectContext.
+    /// - parameter withAttributes: Dictionary with strings and values of entity.
+    /// - parameter andkeys: keys used to sort or match the entity.
     class func firstOrCreate<T: NSManagedObject>(inContext moc:NSManagedObjectContext, withAttributes:[String:Any], andKeys keys:[String]?=nil)->T{
         
         //Create Predciate

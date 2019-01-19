@@ -50,6 +50,7 @@ public class Tag: LibraryItem, Codable {
         self.libraryType = LibraryType.tag.rawValue
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: moc)
+        self.sortingOrder=self.name
         
     }
     
@@ -73,6 +74,7 @@ public class Tag: LibraryItem, Codable {
         self.name=andName
         self.isShown=true
         self.isRootItem=false
+        self.sortingOrder=self.name
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: inMOC)
     }
     
