@@ -160,7 +160,7 @@ extension NSFetchRequestResult where Self: NSManagedObject {
 
 //MARK: -
 extension NSManagedObjectContext{
-    
+    //
     /// Fetches objects from core data IDS represented as array of strings.
     /// - parameter asStrings: Array of string that represent core data objetc IDs.
     func getObjectsWithIDS(asStrings: [String])->[NSManagedObject]?{

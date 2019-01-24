@@ -285,13 +285,6 @@
 		8AEE1A6D21D1BAEE0011CFA3 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				8A2C3128213A06EF00B8F3E1 /* Language+CoreData.swift */,
-				8A2C3122213A04E700B8F3E1 /* Tag+CoreData.swift */,
-				8A2C311C213A013400B8F3E1 /* Quote+CoreData.swift */,
-				8A2C311E213A042700B8F3E1 /* QuoteList+CoreData.swift */,
-				8A2C3120213A04A600B8F3E1 /* LibraryItem+CoreData.swift */,
-				8A2C3124213A052000B8F3E1 /* Theme+CoreData.swift */,
-				8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -396,6 +389,13 @@
 		8AFD589621F979D100A3D2A9 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				8A2C3128213A06EF00B8F3E1 /* Language+CoreData.swift */,
+				8A2C3122213A04E700B8F3E1 /* Tag+CoreData.swift */,
+				8A2C311C213A013400B8F3E1 /* Quote+CoreData.swift */,
+				8A2C311E213A042700B8F3E1 /* QuoteList+CoreData.swift */,
+				8A2C3120213A04A600B8F3E1 /* LibraryItem+CoreData.swift */,
+				8A2C3124213A052000B8F3E1 /* Theme+CoreData.swift */,
+				8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */,
 				8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */,
 			);
 			path = "Core Data";
