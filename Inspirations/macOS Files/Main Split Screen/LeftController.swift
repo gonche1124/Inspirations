@@ -24,6 +24,7 @@ class LeftController: NSViewController {
     }
     
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
+        //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
         fr.sortDescriptors=[NSSortDescriptor(key: "sortingOrder", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         fr.predicate=NSPredicate.leftPredicate(withText: "")
@@ -39,8 +40,6 @@ class LeftController: NSViewController {
         // Do view setup here.
         //Regoster for dragging.
         self.listView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kUTTypeItem as String as String)])
-
-        
         //Register for changes in NSManagedObject relationsihp becasue listFRC only monitors one entity.
         
     }
@@ -50,6 +49,9 @@ class LeftController: NSViewController {
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()
         
+        let mainItem = moc.getItem(ofType: .mainLibrary)
+        let itemIndex = listView.row(forItem: mainItem)
+        listView.selectRowIndexes(IndexSet.init(integer: itemIndex), byExtendingSelection: false)
         //Register to update count.
         //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
@@ -150,22 +152,6 @@ extension LeftController: NSOutlineViewDelegate{
         if libItem.isRootItem {
             myCell?.textField?.stringValue=libItem.name!.uppercased()
         }
-        
-//        if libItem.isRootItem {
-//            let myCell = outlineView.makeView(withIdentifier:.headerCell, owner: self) as? NSTableCellView
-//            myCell?.textField?.stringValue=libItem.name!
-//            return myCell
-//        }else{
-//            let myCell = outlineView.makeView(withIdentifier: .dataCell, owner: self) as? AGC_DataCell
-//            myCell?.textField?.stringValue=libItem.name!
-//            myCell?.imageView?.image=NSImage.init(named: NSImage.Name(libItem.libraryType!))
-//            myCell?.totalButton?.isHidden=true
-//            if let totItems=libItem.totalQuotes, totItems>0{
-//                myCell?.totalButton?.isHidden=false
-//                myCell?.totalButton?.title="\(totItems)"
-//            }
-//            return myCell
-//        }
         return myCell
     }
     
@@ -203,6 +189,7 @@ extension LeftController: NSOutlineViewDelegate{
         if !newItem.isRootItem {
                 NotificationCenter.default.post(Notification(name: .leftSelectionChanged, object:newItem))
         }
+
     }
     
     /// Used to determine if the user can select the group objects of the table.
@@ -217,7 +204,10 @@ extension LeftController: NSOutlineViewDataSource {
     
     //Has to be efficient, gets called multiple times. (nil means root).
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        guard let item=item as? LibraryItem else {return (listFRC.fetchedObjects?.count)!}
+        guard let item=item as? LibraryItem else {
+            return (listFRC.fetchedObjects?.count)!
+            
+        }
         return (item.hasLibraryItems!.count)
     }
     
@@ -270,6 +260,29 @@ extension LeftController: NSOutlineViewDataSource {
 
 //MARK: - NSFetchedResultsControllerDelegate
 extension LeftController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch(type){
+        case .delete:
+            //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Delete")
+            break
+        case .insert:
+            //[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Insert")
+            break
+        case .move:
+            //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+           // [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Move")
+            break
+        case .update:
+            // [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            print("Update")
+            break
+        }
+    }
+    
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print(#function)

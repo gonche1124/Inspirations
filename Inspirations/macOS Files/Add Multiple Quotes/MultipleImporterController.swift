@@ -90,10 +90,6 @@ class FileImporter: MainImportController {
         //Create the JSON dictionary to Parse.
         guard let dictArrayDirty=getDictionary(fromURL: fileURL!) else {return}
         
-        //Set up Prvate MOC for importing and not blocking interface.
-        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        privateMOC.parent = moc
-        
         //Set up UI
         showProgress(withLabel: "Loading quotes...", andStarting: true)
         
@@ -109,14 +105,19 @@ class FileImporter: MainImportController {
         self.convertIndicatorTodefinate(withItems: Double(totItems))
         
         //Import
-        privateMOC.perform{
+        self.pContainer.performBackgroundTask{ (context) in
+            context.undoManager=nil //Turn off undoManager for performance.
             //Create Quotes updating the UI
             for (i, quoteDict) in dictArray.enumerated(){
-                _=Quote.firstOrCreate(inContext: privateMOC, withAttributes: quoteDict, andKeys: ["quoteString"])
-                DispatchQueue.main.async {
-                    self.progressLabel.stringValue="Importing \(self.myFormat.string(for: i+1)!) quote out of \(self.myFormat.string(for:totItems)!)"
-                    self.progressIndicator.increment(by: 1)
+                _=Quote.firstOrCreate(inContext: context, withAttributes: quoteDict, andKeys: ["quoteString"])
+                //Does it run smoother?
+                if (i%5==0) {
+                    DispatchQueue.main.async {
+                        self.progressLabel.stringValue="Importing \(self.myFormat.string(for: i+1)!) quote out of \(self.myFormat.string(for:totItems)!)"
+                        self.progressIndicator.increment(by: 5)
+                    }
                 }
+      
             }
             
             //Save private moc:
@@ -125,10 +126,13 @@ class FileImporter: MainImportController {
                 self.progressIndicator.isIndeterminate=true
                 self.progressIndicator.startAnimation(nil)
             }
-            try! privateMOC.save()
             
-            //Save main moc:
-            DispatchQueue.main.async {try! self.moc.save()}
+            //Saves
+            do {
+                try context.save()
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
             
             //Dismiss
             DispatchQueue.main.async {self.view.window?.close()}

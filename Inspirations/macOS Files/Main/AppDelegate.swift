@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
+        notiCenter.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: self.managedObjectContext)
 
         //Create Main Items.
         createMainObjectsIfNotPresent()
@@ -83,7 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         
         do {
-            try context.save()
+            print("Will save in ApplicationShouldTerminate")
+            //try context.save()
         } catch {
             let nserror = error as NSError
             
@@ -153,22 +155,34 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     
     //MARK: - Core Data Notifications
+    @objc func managedObjectContextDidSave(notification:NSNotification){
+        print("Did Save")
+    }
+    
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        return
         //Updates Notification.
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
             print("++++Changed++++:")
             print("Total items changed: \(updated.count)")
             for itemChanged in updated{
-                
-                print("itemChanged: \(itemChanged)")
+                if let item=itemChanged as? LibraryItem{
+                    //Neccesary due to shortcomings of ArrayController.
+                    item.belongsToLibraryItem?.willChangeValue(forKey: "hasLibraryItems")
+                    item.belongsToLibraryItem?.didChangeValue(forKey: "hasLibraryItems")
+                }
+                print(itemChanged.className)
+                if let item=itemChanged as? Quote, item.changedValues().keys.contains("isfavorite"){
+                    print("favorite changed.")
+                }
+                //itemChanged.willAccessValue(forKey: nil) //Trying to get refreshed in the outlineView but not working.
+                //print("itemChanged: \(itemChanged)")
                 for (_,item) in itemChanged.changedValues().enumerated(){
-                    if let total=item.value as? Set<NSManagedObject> {
-                        print("\(item.key): (\(total.count))" )
-                    }else{
-                        print("\(item.key): (\(item.value))" )
-                    }
+//                    if let total=item.value as? Set<NSManagedObject> {
+//                        print("\(item.key): (\(total.count))" )
+//                    }else{
+//                        print("\(item.key): (\(item.value))" )
+//                    }
                 }
             }
             print("+++++++++++++++")
@@ -177,14 +191,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Inserts Notification.
        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0 {
         print("--- INSERTS ---")
-        print(inserted)
+        print(inserted.count)
+        //print(inserted)
         print("+++++++++++++++")
         }
         
         //Deletes Notification.
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
             print("--- DELETES ---")
-            print(deletes)
+            print(deletes.count)
+            //print(deletes)
             print("+++++++++++++++")
         }
 

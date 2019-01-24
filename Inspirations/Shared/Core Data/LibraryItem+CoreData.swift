@@ -58,13 +58,6 @@ public class LibraryItem: NSManagedObject {
         if self.updatedAt.timeIntervalSinceNow>10.0 {
             setPrimitiveValue(NSDate(), forKey: "updatedAt")
         }
-       
-        
-//        if let updatedAt = self.updatedAt, updatedAt.timeIntervalSince(Date()) > 10.0 {
-//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//        } else {
-//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//        }
     }
 
     

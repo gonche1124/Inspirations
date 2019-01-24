@@ -59,6 +59,11 @@ extension NSTextField{
 
 //MARK: -
 extension NSViewController{
+    ///easy access to persistentStore
+    var pContainer:NSPersistentContainer{
+        return (NSApp.delegate as! AppDelegate).persistentContainer
+    }
+    
     ///easy access to managed object context.
     @objc dynamic var moc: NSManagedObjectContext {return (NSApp.delegate as! AppDelegate).managedObjectContext}
     

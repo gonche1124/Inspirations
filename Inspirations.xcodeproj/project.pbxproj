@@ -82,7 +82,7 @@
 		8A164B171F59186D004F0810 /* Sync.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sync.framework; path = Carthage/Build/Mac/Sync.framework; sourceTree = "<group>"; };
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A1A702F21A735540061B6C9 /* MultipleImporterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleImporterController.swift; sourceTree = "<group>"; };
-		8A1A703121A790CD0061B6C9 /* Testing Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Testing Playground.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8A1A703121A790CD0061B6C9 /* Inspirations Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Inspirations Tests.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C311C213A013400B8F3E1 /* Quote+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C311E213A042700B8F3E1 /* QuoteList+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteList+CoreData.swift"; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		8A89E8501E842E03001F7F71 = {
 			isa = PBXGroup;
 			children = (
-				8A1A703121A790CD0061B6C9 /* Testing Playground.playground */,
+				8A1A703121A790CD0061B6C9 /* Inspirations Tests.playground */,
 				8A89E85B1E842E04001F7F71 /* Inspirations */,
 				8A89E8701E842E04001F7F71 /* InspirationsTests */,
 				8A89E87B1E842E04001F7F71 /* InspirationsUITests */,
@@ -709,7 +709,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -760,7 +760,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

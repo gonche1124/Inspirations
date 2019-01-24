@@ -46,6 +46,8 @@ extension LibraryItem{
         }
         return newItem
     }
+    
+
 }
 
 extension NSManagedObject {
@@ -62,19 +64,13 @@ extension NSManagedObject {
     
     //Get first item with predicate
     class func firstWith<T: NSManagedObject>(predicate:NSPredicate, inContext:NSManagedObjectContext)->T?{
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: self.className())
+        let request = NSFetchRequest<T>(entityName: self.className())
         request.predicate=predicate
         request.fetchLimit=1
-        
-        do{
-            let result=try inContext.fetch(request)
-            guard let item = result.first as? T else {return nil}
+        if let item=try? inContext.fetch(request).first{
             return item
-        }catch{
-            print(error)
-            print("There was an error")
-            return nil
         }
+        return nil
     }
     
     //returns first object with a given attribute. Convinience for not constructing NSPredciate.
@@ -111,13 +107,6 @@ extension NSManagedObject {
         let newObj=try! createEntity(withDictionary: withAttributes, in: moc)
         return newObj as! T
     }
-    
-    //Convinience init.
-//    public convenience init(from dictionary:[String: Any], in moc: NSManagedObjectContext) throws {
-//        guard let entity = NSEntityDescription.entity(forEntityName: self.className, in: moc) else {
-//            fatalError("Failed to create Entity Generic")}
-//        self.init(entity: entity, insertInto: moc)
-//    }
     
     //Evaluates type of core data entity and performs init.
     //TODO: Potential to be recycled.
@@ -193,10 +182,19 @@ extension NSManagedObjectContext{
     /// - parameter ofEntity: Entity to perform the fetch on.
     /// - parameter predicate: NSPredicate used to filter the results.
     /// - Note: Used to determine how many quotes are associate to smart lists.
+    /// - TODO: Change to return count.
     func count(ofEntity:String, with predicate:NSPredicate)->Int?{
         let fetchR=NSFetchRequest<NSFetchRequestResult>.init(entityName: ofEntity)
         fetchR.predicate=predicate
         return try? self.count(for: fetchR)
+    }
+    
+    /// Returns the main library object.
+    func getItem(ofType: LibraryType)->LibraryItem?{
+        let request = LibraryItem.singleRequest()
+        request.predicate = NSPredicate.getItem(ofType)
+        let item=try? self.fetch(request).first
+        return item ?? nil
     }
 }
 //MARK: -

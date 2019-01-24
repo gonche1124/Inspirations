@@ -42,7 +42,7 @@ public class Quote: NSManagedObject, Codable{
     @NSManaged public var updatedAt:NSDate
     
     
-    //Overrides
+    //MARK: - Overrides
     override public func awakeFromInsert() {
         setPrimitiveValue(NSDate(), forKey: "createdAt")
         setPrimitiveValue(NSDate(), forKey: "updatedAt")

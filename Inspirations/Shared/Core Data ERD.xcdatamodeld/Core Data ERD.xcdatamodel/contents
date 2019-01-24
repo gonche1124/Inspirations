@@ -4,7 +4,10 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="hasSaid" toMany="YES" deletionRule="Cascade" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasSaid" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
+        <fetchIndex name="byName">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Language" representedClassName="Language" parentEntity="LibraryItem" syncable="YES">
         <attribute name="localizedName" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +23,9 @@
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="belongsToLibraryItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="hasLibraryItems" inverseEntity="LibraryItem" syncable="YES"/>
         <relationship name="hasLibraryItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LibraryItem" inverseName="belongsToLibraryItem" inverseEntity="LibraryItem" syncable="YES"/>
+        <fetchIndex name="byName">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+        </fetchIndex>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
@@ -34,11 +40,14 @@
         <attribute name="totalLetters" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="from" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
-        <relationship name="isAbout" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
+        <relationship name="from" maxCount="1" deletionRule="Cascade" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
+        <relationship name="isAbout" maxCount="1" deletionRule="Cascade" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
         <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
         <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
+        <fetchIndex name="byQuote">
+            <fetchIndexElement property="quoteString" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="QuoteList" representedClassName="QuoteList" parentEntity="LibraryItem" syncable="YES">
         <attribute name="smartPredicate" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -51,7 +60,10 @@
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="themeName" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="hasQuotes" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="hasQuotes" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
+        <fetchIndex name="byTopic">
+            <fetchIndexElement property="themeName" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <fetchRequest name="fetchForLeftView" entity="LibraryItem" predicateString="isRootItem == 0" includeSubentities="YES"/>
     <elements>

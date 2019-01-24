@@ -18,6 +18,12 @@ extension NSPredicate{
     static var pIsRoot:String = "isRootItem == YES"
     static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
     
+    ///Predciate to search for main library
+    static func getItem(_ ofType: LibraryType)->NSPredicate?{
+        return NSPredicate(format: "libraryType == %@", ofType.rawValue)
+    }
+    
+    
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
         if withText == "" { return NSPredicate(format: pIsRoot)}

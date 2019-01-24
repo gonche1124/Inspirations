@@ -43,6 +43,8 @@ class PrincipalWindow: NSWindowController {
     
         //Register for table updates.
         NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .selectedRowsChaged, object: nil)
+        
+        
     }
     
     //Selected rows changed

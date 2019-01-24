@@ -16,15 +16,27 @@ class RightController: NSViewController {
     @IBOutlet weak var quoteTabView:NSTabView!
     @IBOutlet weak var bottomStackView:NSStackView!
     
+    //Tables
+    @IBOutlet weak var columnTable:NSTableView?
+    @IBOutlet weak var listTable:NSTableView?
+    
     //Variables:
-    var deletesFromDatabase=false
-    var selectedLeftItem:LibraryItem? {
+    var deletesFromDatabase:Bool{
+        return ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+    }
+    var selectedLeftItem:LibraryItem?{
         didSet{
-            //let newBool = [LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
-            self.deletesFromDatabase = ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+            //print(selectedLeftItem)
+            print("slectedleftItem-> updated")
         }
     }
-    var currentTable:NSTableView?=nil
+    //{
+//        didSet{
+//            //let newBool = [LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+//            //self.deletesFromDatabase = ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+//        }
+    //}
+    var currentTable:NSTableView?
     
     //MARK: -
     override func viewDidLoad() {
@@ -32,6 +44,8 @@ class RightController: NSViewController {
         // Do view setup here.
         NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
+        let xx = self.quoteTabView.selectedTabViewItem
+        quoteTabView.selectTabViewItem(xx)
     }
     
     override func viewDidAppear() {
@@ -81,7 +95,21 @@ class RightController: NSViewController {
     //Changes the TAB View.
     @IBAction func changeSelectedTabView(_ sender: Any){
         if let segmentedControl = (sender as? NSNotification)?.object as? NSSegmentedControl{
-            self.quoteTabView.selectTabViewItem(at: segmentedControl.selectedSegment)
+            quoteTabView.selectTabViewItem(at: segmentedControl.selectedSegment)
+            let tabViewItem = quoteTabView.selectedTabViewItem
+            if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "columnTable"), let table=tableView as? NSTableView{
+                currentTable=table
+                bottomStackView.isHidden=false
+                return
+            }
+            if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "exploreTable"), let table=tableView as? NSTableView{
+                currentTable=table
+                bottomStackView.isHidden=false
+                return
+            }
+            currentTable=nil
+            bottomStackView.isHidden=true
+            
         }
     }
     
@@ -105,20 +133,36 @@ extension RightController{
     ///Updates favorite attribute based on sender parameter.
     @IBAction func modifyFavoriteAttribute(_ sender:Any){
         guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
-        if let menu=sender as? AGC_NSMenuItem {
-            selectedQuotes.forEach({$0.isFavorite=menu.agcBool})
+        
+        //Using Batch Update to work efficiently.
+        let selectedObjectsIDs=selectedQuotes.map{$0.objectID}
+        let request=NSBatchUpdateRequest(entity: Quote.entity())
+        request.predicate=NSPredicate(format: "self IN %@", selectedObjectsIDs)
+        request.resultType = .updatedObjectIDsResultType
+        let newBool = (sender as? AGC_NSMenuItem)?.agcBool ?? false
+        request.propertiesToUpdate=["isFavorite": newBool]
+        //TODO: Change to fire KVO
+        
+        do {
+            let result = try moc.execute(request) as? NSBatchUpdateResult
+            let objectIDArray = result?.result as? [NSManagedObjectID]
+            let changes = [NSUpdatedObjectsKey : objectIDArray]
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
+            //TODO. Figure out how to get notifications.
+            let item=moc.getItem(ofType: .favorites)
+            item?.belongsToLibraryItem?.willAccessValue(forKey: "name")
+            item?.belongsToLibraryItem?.didAccessValue(forKey: "name")
+            
+        } catch {
+            fatalError("Failed to perform batch update: \(error)")
         }
-        if let boolV=sender as? Bool{
-            selectedQuotes.forEach({$0.isFavorite=boolV})
-        }
-        self.saveMainContext()
     }
     
     
     ///Adds the selected quotes to the tags or playlists specified.
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
-        if let coreItem=moc.get(objectWithStringID: sender!.identifier!.rawValue),
-            let item=coreItem as? ManagesQuotes{
+        if let item=moc.get(objectWithStringID: sender!.identifier!.rawValue) as? ManagesQuotes & LibraryItem
+        {
             item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
             self.saveMainContext()
         }
@@ -131,14 +175,15 @@ extension RightController{
         if result == .alertFirstButtonReturn{
             currentTable?.beginUpdates()
             if deletesFromDatabase {
-                self.quoteController.selectedObjects.forEach({moc.delete($0 as! NSManagedObject)})
+                let selectedObjects=quoteController.selectedObjects as! [Quote]
+                selectedObjects.forEach({moc.delete($0)})
             }else{
                 if let item=selectedLeftItem as? ManagesQuotes{
                     item.removeQuotes(quote: quoteController.selectedObjects as! [Quote])
                 }
             }
             currentTable?.endUpdates()
-            self.saveMainContext()
+            //self.saveMainContext()
         }
     }
 }
@@ -195,25 +240,5 @@ extension RightController: NSMenuDelegate{
         default:
             break
         }
-    }
-}
-
-//MARK: - NSTabViewDelegate
-extension RightController:NSTabViewDelegate{
-    func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-        //TODO: Find a way to get the current table view.
-        if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "columnTable"), let table=tableView as? NSTableView{
-            currentTable=table
-            bottomStackView.isHidden=false
-            return
-        }
-        if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "exploreTable"), let table=tableView as? NSTableView{
-            currentTable=table
-            bottomStackView.isHidden=false
-            print("Nothing john snow")
-            return
-        }
-        currentTable=nil
-        bottomStackView.isHidden=true
     }
 }
