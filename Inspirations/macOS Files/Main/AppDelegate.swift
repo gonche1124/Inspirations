@@ -85,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         do {
             print("Will save in ApplicationShouldTerminate")
-            //try context.save()
+            try context.save()
         } catch {
             let nserror = error as NSError
             
@@ -177,13 +177,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 }
                 //itemChanged.willAccessValue(forKey: nil) //Trying to get refreshed in the outlineView but not working.
                 //print("itemChanged: \(itemChanged)")
-                for (_,item) in itemChanged.changedValues().enumerated(){
-//                    if let total=item.value as? Set<NSManagedObject> {
-//                        print("\(item.key): (\(total.count))" )
-//                    }else{
-//                        print("\(item.key): (\(item.value))" )
-//                    }
-                }
+//                for (_,item) in itemChanged.changedValues().enumerated(){
+////                    if let total=item.value as? Set<NSManagedObject> {
+////                        print("\(item.key): (\(total.count))" )
+////                    }else{
+////                        print("\(item.key): (\(item.value))" )
+////                    }
+//                }
             }
             print("+++++++++++++++")
         }
@@ -219,7 +219,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let libPredicate=NSPredicate(format:"name == 'Library' AND isRootItem == FALSE")
         if (LibraryItem.firstWith(predicate: libPredicate, inContext: managedObjectContext)) == nil  {
             let mainItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Library", isRoot: false)
-            mainItem?.libraryType=LibraryType.mainLibrary.rawValue
+            mainItem?.libraryType = .mainLibrary
             mainItem?.sortingOrder="0"
         }
         
@@ -227,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let favPredicate=NSPredicate(format: "name == 'Favorites' AND isRootItem == FALSE")
         if (LibraryItem.firstWith(predicate: favPredicate, inContext: managedObjectContext)) == nil {
             let favItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Favorites", isRoot: false)
-            favItem?.libraryType=LibraryType.favorites.rawValue
+            favItem?.libraryType = .favorites
             favItem?.sortingOrder="1"
         }
         

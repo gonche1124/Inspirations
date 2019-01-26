@@ -96,7 +96,7 @@ class AddQuoteController: NSViewController {
         if let currTags = self.tokenField.objectValue as? [Tag]{
             quote.addToIsTaggedWith(NSSet.init(array: currTags))
         }
-        saveMainContext()
+        //saveMainContext()
     }
     
     /// Fills the UI based on the quote passed as parameter.
@@ -111,10 +111,11 @@ class AddQuoteController: NSViewController {
     }
     
     //TESTING:
-    override func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey inKey: String) throws {
-        Swift.print("\(#function)")
-        Swift.print("inKey \(inKey)")
-    }
+    //TODO: Uncomment.
+//    override func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>, forKey inKey: String) throws {
+//        Swift.print("\(#function)")
+//        Swift.print("inKey \(inKey)")
+//    }
 }
 
 //MARK: - NSTokenFieldDelegate

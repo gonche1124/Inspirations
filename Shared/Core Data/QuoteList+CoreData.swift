@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(QuoteList)
-public class QuoteList: LibraryItem, Codable {
+public class QuoteList: LibraryItem {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<QuoteList> {
         return NSFetchRequest<QuoteList>(entityName: "QuoteList")
@@ -20,7 +20,7 @@ public class QuoteList: LibraryItem, Codable {
     enum CodingKeys:String, CodingKey{
         case isRootItem = "isRootItem"
         case isShown = "isShown"
-        case libraryType = "libraryType"
+        case libraryTypeKey = "libraryType"
         case name = "pName"
         case belongsToLibraryItem = "belongsToLibraryItem"
         case hasLibraryItems = "hasLibraryItems"
@@ -35,7 +35,8 @@ public class QuoteList: LibraryItem, Codable {
     ///Computed properties used in the left controller.
     override var totalQuotes:Int?{
         if let predicate=smartPredicate{
-            return self.managedObjectContext?.count(ofEntity: Entities.quote.rawValue, with: predicate)
+            return self.managedObjectContext?.count(ofEntity: .quote, with: predicate)
+            //return self.managedObjectContext?.count(ofEntity: Entities.quote.rawValue, with: predicate)
         }
         return hasQuotes?.count
     }
@@ -52,7 +53,7 @@ public class QuoteList: LibraryItem, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.isRootItem = false
         self.isShown = true
-        self.libraryType = LibraryType.list.rawValue
+        self.libraryType = .list
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: moc)
 
@@ -60,13 +61,13 @@ public class QuoteList: LibraryItem, Codable {
     
     
     //Codable
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .isRootItem)
-        try container.encode(isShown, forKey: .isShown)
-        try container.encode(libraryType, forKey: .libraryType)
-        try container.encode(name, forKey: .name)
-    }
+//    public func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(name, forKey: .isRootItem)
+//        try container.encode(isShown, forKey: .isShown)
+//        try container.encode(libraryType, forKey: .libraryTypeKey)
+//        try container.encode(name, forKey: .name)
+//    }
     
     //Convinience init
     public convenience init?(inMOC:NSManagedObjectContext, andName:String, withSmartList:NSPredicate?=nil){
@@ -75,7 +76,7 @@ public class QuoteList: LibraryItem, Codable {
                 fatalError("Failed to create Quote List")}
         //TODO: Handle case when it is a folder instead of a list.
         self.init(entity: entity, insertInto: inMOC)
-        self.libraryType = LibraryType.list.rawValue
+        self.libraryType = .list
         self.name=andName
         self.isShown=true
         self.isRootItem=false
@@ -83,7 +84,7 @@ public class QuoteList: LibraryItem, Codable {
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: inMOC)
         if (withSmartList != nil)  {
             self.smartPredicate=withSmartList
-            self.libraryType=LibraryType.smartList.rawValue
+            self.libraryType = .smartList
         }
     }
     

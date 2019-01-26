@@ -1,5 +1,8 @@
 import Cocoa
 
+
+
+
 let alert = NSAlert.init()
 alert.informativeText="blabsda jbs dbas"
 alert.alertStyle = .informational

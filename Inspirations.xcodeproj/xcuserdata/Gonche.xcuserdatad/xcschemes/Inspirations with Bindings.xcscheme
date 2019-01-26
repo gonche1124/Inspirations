@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-               BuildableName = "Inspirations.app"
-               BlueprintName = "Inspirations"
+               BuildableName = "Inspirations-macOS.app"
+               BlueprintName = "Inspirations-macOS"
                ReferencedContainer = "container:Inspirations.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -106,8 +106,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

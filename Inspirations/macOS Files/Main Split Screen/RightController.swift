@@ -22,7 +22,8 @@ class RightController: NSViewController {
     
     //Variables:
     var deletesFromDatabase:Bool{
-        return ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
+        return !(selectedLeftItem?.libraryType == LibraryType.mainLibrary)
+        //return ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
     }
     var selectedLeftItem:LibraryItem?{
         didSet{
@@ -117,7 +118,7 @@ class RightController: NSViewController {
     @objc func leftTableChangedSelection(notification: Notification){
         //print("Called")
         if let selectedLib = notification.object as? LibraryItem,
-            let newPredicate = NSPredicate.predicateFor(libraryItem: selectedLib){
+            let newPredicate = NSPredicate.predicate(for: selectedLib){
             //print(selectedLib)
             self.selectedLeftItem=selectedLib
             self.quoteController.fetchPredicate=newPredicate
@@ -146,7 +147,7 @@ extension RightController{
         do {
             let result = try moc.execute(request) as? NSBatchUpdateResult
             let objectIDArray = result?.result as? [NSManagedObjectID]
-            let changes = [NSUpdatedObjectsKey : objectIDArray]
+            let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
             NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
             //TODO. Figure out how to get notifications.
             let item=moc.getItem(ofType: .favorites)

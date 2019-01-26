@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-               BuildableName = "Inspirations.app"
-               BlueprintName = "Inspirations"
+               BuildableName = "Inspirations-macOS.app"
+               BlueprintName = "Inspirations-macOS"
                ReferencedContainer = "container:Inspirations.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,33 +28,13 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8A89E86C1E842E04001F7F71"
-               BuildableName = "InspirationsTests.xctest"
-               BlueprintName = "InspirationsTests"
-               ReferencedContainer = "container:Inspirations.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8A89E8771E842E04001F7F71"
-               BuildableName = "InspirationsUITests.xctest"
-               BlueprintName = "InspirationsUITests"
-               ReferencedContainer = "container:Inspirations.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -92,7 +72,7 @@
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "/Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/Resources/templates/Zombies.tracetemplate"
+      savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
@@ -100,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A89E8581E842E03001F7F71"
-            BuildableName = "Inspirations.app"
-            BlueprintName = "Inspirations"
+            BuildableName = "Inspirations-macOS.app"
+            BlueprintName = "Inspirations-macOS"
             ReferencedContainer = "container:Inspirations.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

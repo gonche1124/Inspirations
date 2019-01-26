@@ -9,12 +9,6 @@
 import Foundation
 import CoreData
 
-//Custom keys for user dictionary
-extension CodingUserInfoKey{
-    static let managedContext = CodingUserInfoKey(rawValue: "managedContext")
-    static let customCodingKeys = CodingUserInfoKey(rawValue: "customCodingKeys")
-    static let progressText = CodingUserInfoKey(rawValue: "progressText")
-}
 
 extension LibraryItem{
     ///Gets root item with given name or creates one if does not exists.
@@ -31,7 +25,7 @@ extension LibraryItem{
         let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entity().name!, into: inContext) as! LibraryItem
         newItem.isRootItem=true
         newItem.name=itemName
-        newItem.libraryType=LibraryType.rootItem.rawValue
+        newItem.libraryType = .rootItem
         switch itemName {
         case "Library":
             newItem.sortingOrder="0"
@@ -51,6 +45,25 @@ extension LibraryItem{
 }
 
 extension NSManagedObject {
+    
+    /// Used to set enums in variables firing up KVO notifications.
+    /// - parameter value: Value to assign.
+    /// - parameter key: String refering a proeprty form the NSManagedObject.
+    func setRawValue<ValueType: RawRepresentable>(value: ValueType, forKey key: String){
+        self.willChangeValue(forKey: key)
+        self.setPrimitiveValue(value.rawValue, forKey: key)
+        self.didChangeValue(forKey: key)
+    }
+    
+    /// Used to get enums in variables firing up KVO notifications.
+    /// - parameter key: String refering a property from the NSManagedObject.
+    func rawValueForKey<ValueType: RawRepresentable>(key: String) -> ValueType?{
+        self.willAccessValue(forKey: key)
+        let result = self.primitiveValue(forKey: key) as! ValueType.RawValue
+        self.didAccessValue(forKey: key)
+        return ValueType(rawValue:result)
+    }
+    
     
     /// Returns a count of all Quotes
     var arrayOfQuotes:[Quote]?{
@@ -182,9 +195,8 @@ extension NSManagedObjectContext{
     /// - parameter ofEntity: Entity to perform the fetch on.
     /// - parameter predicate: NSPredicate used to filter the results.
     /// - Note: Used to determine how many quotes are associate to smart lists.
-    /// - TODO: Change to return count.
-    func count(ofEntity:String, with predicate:NSPredicate)->Int?{
-        let fetchR=NSFetchRequest<NSFetchRequestResult>.init(entityName: ofEntity)
+    func count(ofEntity:Entities, with predicate:NSPredicate?=nil)->Int?{
+        let fetchR=NSFetchRequest<NSFetchRequestResult>.init(entityName: ofEntity.rawValue)
         fetchR.predicate=predicate
         return try? self.count(for: fetchR)
     }
@@ -192,7 +204,7 @@ extension NSManagedObjectContext{
     /// Returns the main library object.
     func getItem(ofType: LibraryType)->LibraryItem?{
         let request = LibraryItem.singleRequest()
-        request.predicate = NSPredicate.getItem(ofType)
+        request.predicate = NSPredicate.getItem(ofType: ofType)
         let item=try? self.fetch(request).first
         return item ?? nil
     }

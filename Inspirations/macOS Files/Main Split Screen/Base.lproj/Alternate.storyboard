@@ -1052,7 +1052,7 @@
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="View" identifier="" id="1Zz-ry-Sk0" userLabel="Large">
-                                                <view key="view" id="r5S-fw-WxW">
+                                                <view key="view" wantsLayer="YES" id="r5S-fw-WxW">
                                                     <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -1136,6 +1136,11 @@
                                                         <constraint firstAttribute="bottom" secondItem="ZWs-tS-TQN" secondAttribute="bottom" id="s9a-Qk-9RV"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZWs-tS-TQN" secondAttribute="trailing" id="wMD-iO-YAH"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                            <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>

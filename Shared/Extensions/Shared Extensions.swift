@@ -18,9 +18,13 @@ extension NSPredicate{
     static var pIsRoot:String = "isRootItem == YES"
     static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
     
+    //Predifened Predicates
+    static var favoriteItems:NSPredicate = NSPredicate(format:NSPredicate.pIsFavorite)
+    static var rootItems:NSPredicate = NSPredicate(format:NSPredicate.pIsRoot)
+    
     ///Predciate to search for main library
-    static func getItem(_ ofType: LibraryType)->NSPredicate?{
-        return NSPredicate(format: "libraryType == %@", ofType.rawValue)
+    static func getItem(ofType: LibraryType)->NSPredicate?{
+        return NSPredicate(format: "libraryTypeValue == %@", ofType.rawValue)
     }
     
     
@@ -42,19 +46,19 @@ extension NSPredicate{
     }
     
     //Predicate for selected left item
-    static func predicateFor(libraryItem:LibraryItem)->NSPredicate? {
+    static func predicate(for libraryItem:LibraryItem)->NSPredicate? {
         switch libraryItem.libraryType {
-        case LibraryType.favorites.rawValue:
+        case .favorites:
             return NSPredicate(format: pIsFavorite)
-        case LibraryType.language.rawValue:
+        case .language:
             return NSPredicate(format: pSpelledIn, libraryItem.name!)
-        case LibraryType.list.rawValue:
+        case .list:
             return NSPredicate(format: pInList,  libraryItem.name!)
-        case LibraryType.smartList.rawValue:
+        case .smartList:
             return (libraryItem as? QuoteList)?.smartPredicate!
-        case LibraryType.tag.rawValue:
+        case .tag:
             return NSPredicate(format: pIsTagged, libraryItem.name!)
-        case LibraryType.mainLibrary.rawValue:
+        case .mainLibrary:
             return NSPredicate(value: true)
         default:
             return nil

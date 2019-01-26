@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(Tag)
-public class Tag: LibraryItem, Codable {
+public class Tag: LibraryItem {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Tag> {
         return NSFetchRequest<Tag>(entityName: "Tag")
@@ -20,7 +20,7 @@ public class Tag: LibraryItem, Codable {
     enum CodingKeys:String, CodingKey{
         case isRootItem = "isRootItem"
         case isShown = "isShown"
-        case libraryType = "libraryType"
+        case libraryTypeKey = "libraryType"
         case name = "name"
         case belongsToLibraryItem = "belongsToLibraryItem"
         case hasLibraryItems = "hasLibraryItems"
@@ -35,6 +35,11 @@ public class Tag: LibraryItem, Codable {
         return hasQuotes?.count
     }
     
+    override public func awakeFromInsert() {
+        super.awakeFromInsert()
+        self.setPrimitiveValue(<#T##value: Any?##Any?#>, forKey: <#T##String#>)
+    }
+    
     //Decodable
     public required convenience init(from decoder: Decoder) throws {
         
@@ -47,7 +52,7 @@ public class Tag: LibraryItem, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.isRootItem = false
         self.isShown = true
-        self.libraryType = LibraryType.tag.rawValue
+        self.libraryType = .tag
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: moc)
         self.sortingOrder=self.name
@@ -55,13 +60,13 @@ public class Tag: LibraryItem, Codable {
     }
     
     //Codable
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(isRootItem, forKey: .isRootItem)
-        try container.encode(isShown, forKey: .isShown)
-        try container.encode(libraryType, forKey: .libraryType)
-        try container.encode(name, forKey: .name)
-    }
+//    public func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(isRootItem, forKey: .isRootItem)
+//        try container.encode(isShown, forKey: .isShown)
+//        try container.encode(libraryType, forKey: .libraryType)
+//        try container.encode(name, forKey: .name)
+//    }
     
     //Convinience init.
     public convenience init?(inMOC:NSManagedObjectContext, andName:String){
@@ -70,7 +75,7 @@ public class Tag: LibraryItem, Codable {
             fatalError("Failed to create Tag")}
         
         self.init(entity: entity, insertInto: inMOC)
-        self.libraryType = LibraryType.tag.rawValue
+        self.libraryType = .tag
         self.name=andName
         self.isShown=true
         self.isRootItem=false

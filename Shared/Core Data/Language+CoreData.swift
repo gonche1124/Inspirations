@@ -31,7 +31,7 @@ public class Language: LibraryItem {
                 fatalError("Failed to create Tag")}
         
         self.init(entity: entity, insertInto: inMOC)
-        self.libraryType = LibraryType.language.rawValue
+        self.libraryType = .language
         self.name=andName
         self.isShown=true
         self.isRootItem=false
@@ -52,7 +52,7 @@ public class Language: LibraryItem {
         let langCode=dictionary["name"] as? String
         
         self.init(entity: entity, insertInto: moc)
-        self.libraryType = LibraryType.language.rawValue
+        self.libraryType = .language
         self.name=langCode
         self.localizedName=langCode
         self.isShown=true

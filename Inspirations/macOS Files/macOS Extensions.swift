@@ -112,7 +112,8 @@ extension NSAlert{
         let keyPopUp=NSPopUpButton.init(title: "Ignore...", target: nil, action: nil)
         keyPopUp.addItems(withTitles: withPopUpFrom)
         keyPopUp.frame=NSRect(origin: keyPopUp.frame.origin, size: CGSize(width: 200, height: keyPopUp.frame.height))
-        keyPopUp.setNeedsDisplay()
+        //keyPopUp.setNeedsDisplay()
+        keyPopUp.needsDisplay=true
         self.accessoryView=keyPopUp
     }
 }
@@ -130,4 +131,18 @@ extension NSView{
         }
         return subviews
     }
+    
+    //Set background color in interface without subclassing.
+    @IBInspectable
+    var backgroundColor: NSColor? {
+        get {
+            guard let color = layer?.backgroundColor else { return nil }
+            return NSColor(cgColor: color)
+        }
+        set {
+            wantsLayer = true
+            layer?.backgroundColor = newValue?.cgColor
+        }
+    }
 }
+

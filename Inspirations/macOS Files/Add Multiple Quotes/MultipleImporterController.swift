@@ -95,7 +95,7 @@ class FileImporter: MainImportController {
         
         //Clean dictionary with right keys:
         //TODO: Check for possible keys before passing.
-        let dictOfKeys=getAllPossibleKeys(dictionaryArray: dictArrayDirty)
+        //let dictOfKeys=getAllPossibleKeys(dictionaryArray: dictArrayDirty)
         //let lookUP=mapNewKeys(fromSet: dictOfKeys)
         let lookUP=["quote":"quoteString", "topic":"themeName"]
         

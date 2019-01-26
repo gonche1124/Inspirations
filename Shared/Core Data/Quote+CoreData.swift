@@ -11,7 +11,7 @@ import CoreData
 import Cocoa
 
 @objc(Quote)
-public class Quote: NSManagedObject, Codable{
+public class Quote: NSManagedObject{
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Quote> {
         return NSFetchRequest<Quote>(entityName: "Quote")
@@ -95,6 +95,7 @@ public class Quote: NSManagedObject, Codable{
     }
     
     //Decodable
+    /*
     public required convenience init(from decoder: Decoder) throws {
         guard let codingUserInfoKeyMOC = CodingUserInfoKey.managedContext,
             let moc = decoder.userInfo[codingUserInfoKeyMOC] as? NSManagedObjectContext,
@@ -131,7 +132,7 @@ public class Quote: NSManagedObject, Codable{
 
         }
     }
-    
+    */
     //Encodable
     public func encode(to encoder: Encoder) throws {
         var containter = encoder.container(keyedBy: CodingKeys.self)

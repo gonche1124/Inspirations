@@ -16,8 +16,7 @@
     <entity name="LibraryItem" representedClassName="LibraryItem" syncable="YES">
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isRootItem" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isShown" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="libraryType" attributeType="String" syncable="YES"/>
+        <attribute name="libraryTypeValue" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="sortingOrder" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -65,11 +64,12 @@
             <fetchIndexElement property="themeName" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
+    <fetchRequest name="favoriteQuotes" entity="Quote" predicateString="isFavorite == 1" resultType="1"/>
     <fetchRequest name="fetchForLeftView" entity="LibraryItem" predicateString="isRootItem == 0" includeSubentities="YES"/>
     <elements>
         <element name="Author" positionX="-146" positionY="195" width="128" height="103"/>
         <element name="Language" positionX="106" positionY="-45" width="128" height="73"/>
-        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="178"/>
+        <element name="LibraryItem" positionX="286" positionY="-153" width="128" height="163"/>
         <element name="Quote" positionX="-90" positionY="-81" width="128" height="208"/>
         <element name="QuoteList" positionX="88" positionY="-198" width="128" height="73"/>
         <element name="Tag" positionX="207" positionY="99" width="128" height="58"/>

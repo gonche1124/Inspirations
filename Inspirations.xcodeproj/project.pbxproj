@@ -56,11 +56,6 @@
 		8AFD587421F9734600A3D2A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD587221F9734600A3D2A9 /* Main.storyboard */; };
 		8AFD587621F9734700A3D2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD587521F9734700A3D2A9 /* Assets.xcassets */; };
 		8AFD587921F9734700A3D2A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD587721F9734700A3D2A9 /* LaunchScreen.storyboard */; };
-		8AFD588521F977C800A3D2A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD588421F977C800A3D2A9 /* AppDelegate.swift */; };
-		8AFD588721F977C800A3D2A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD588621F977C800A3D2A9 /* ViewController.swift */; };
-		8AFD588A21F977C800A3D2A9 /* Inspirations_macOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8AFD588821F977C800A3D2A9 /* Inspirations_macOS.xcdatamodeld */; };
-		8AFD588C21F977C900A3D2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD588B21F977C900A3D2A9 /* Assets.xcassets */; };
-		8AFD588F21F977C900A3D2A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFD588D21F977C900A3D2A9 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,7 +90,7 @@
 		8A63182220956CF000091FA6 /* EntitiesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesExtensions.swift; sourceTree = "<group>"; };
 		8A7500B42187FB0200C856FE /* Add Value.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Add Value.storyboard"; sourceTree = "<group>"; };
 		8A7500B62187FB4800C856FE /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
-		8A89E8591E842E04001F7F71 /* Inspirations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspirations.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A89E8591E842E04001F7F71 /* Inspirations-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspirations-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8A89E8681E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,14 +115,6 @@
 		8AFD587521F9734700A3D2A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8AFD587821F9734700A3D2A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AFD587A21F9734700A3D2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AFD588221F977C800A3D2A9 /* Inspirations-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspirations-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AFD588421F977C800A3D2A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8AFD588621F977C800A3D2A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8AFD588921F977C800A3D2A9 /* Inspirations_macOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Inspirations_macOS.xcdatamodel; sourceTree = "<group>"; };
-		8AFD588B21F977C900A3D2A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8AFD588E21F977C900A3D2A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8AFD589021F977C900A3D2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AFD589121F977C900A3D2A9 /* Inspirations_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Inspirations_macOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,13 +133,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AFD587F21F977C800A3D2A9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -160,17 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				8A2FF33721B1B72C0035CC08 /* BCP47.plist */,
-				8A11672F2134F1C000AC2E08 /* Split Controller */,
-				8A11672D2134E32A00AC2E08 /* Extras.swift */,
 			);
 			name = Alternate;
-			sourceTree = "<group>";
-		};
-		8A11672F2134F1C000AC2E08 /* Split Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Split Controller";
 			sourceTree = "<group>";
 		};
 		8A164B161F59186D004F0810 /* Frameworks */ = {
@@ -210,7 +181,6 @@
 				8A1A703121A790CD0061B6C9 /* Inspirations Tests.playground */,
 				8A89E85B1E842E04001F7F71 /* Inspirations */,
 				8AFD586821F9734600A3D2A9 /* Inspirations-iOS */,
-				8AFD588321F977C800A3D2A9 /* Inspirations-macOS */,
 				8A89E85A1E842E04001F7F71 /* Products */,
 				8A164B161F59186D004F0810 /* Frameworks */,
 			);
@@ -219,9 +189,8 @@
 		8A89E85A1E842E04001F7F71 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A89E8591E842E04001F7F71 /* Inspirations.app */,
+				8A89E8591E842E04001F7F71 /* Inspirations-macOS.app */,
 				8AFD586721F9734600A3D2A9 /* Inspirations-iOS.app */,
-				8AFD588221F977C800A3D2A9 /* Inspirations-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,12 +198,10 @@
 		8A89E85B1E842E04001F7F71 /* Inspirations */ = {
 			isa = PBXGroup;
 			children = (
-				8AEE1A6C21D1BA8C0011CFA3 /* Shared */,
+				8A03C0B01FBEA390008D74BA /* Assets.xcassets */,
 				8AEE1A6B21D1B9A60011CFA3 /* macOS Files */,
 				8AE5FD3A2144BB5A0085FAC2 /* Old Files */,
 				8A01F868210924BA007D1E3F /* Alternate */,
-				8A89E8681E842E04001F7F71 /* Info.plist */,
-				8A03C0B01FBEA390008D74BA /* Assets.xcassets */,
 			);
 			path = Inspirations;
 			sourceTree = "<group>";
@@ -261,32 +228,16 @@
 		8AEE1A6B21D1B9A60011CFA3 /* macOS Files */ = {
 			isa = PBXGroup;
 			children = (
+				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8AEE1A7421D1C6CF0011CFA3 /* Main Split Screen */,
 				8AEE1A7321D1C0F40011CFA3 /* Add Library Item */,
 				8AEE1A7221D1C08F0011CFA3 /* Add Multiple Quotes */,
 				8AEE1A7121D1C0290011CFA3 /* Add Single Quote */,
 				8AEE1A7021D1BED10011CFA3 /* Main */,
 				8AEE1A7521D1C7380011CFA3 /* macOS Extensions.swift */,
+				8A11672D2134E32A00AC2E08 /* Extras.swift */,
 			);
 			path = "macOS Files";
-			sourceTree = "<group>";
-		};
-		8AEE1A6C21D1BA8C0011CFA3 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				8AEE1A7721D1C99F0011CFA3 /* Extensions */,
-				8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */,
-				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
-				8AEE1A6D21D1BAEE0011CFA3 /* Core Data */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		8AEE1A6D21D1BAEE0011CFA3 /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		8AEE1A7021D1BED10011CFA3 /* Main */ = {
@@ -364,23 +315,12 @@
 			path = "Inspirations-iOS";
 			sourceTree = "<group>";
 		};
-		8AFD588321F977C800A3D2A9 /* Inspirations-macOS */ = {
-			isa = PBXGroup;
-			children = (
-				8AFD588421F977C800A3D2A9 /* AppDelegate.swift */,
-				8AFD588621F977C800A3D2A9 /* ViewController.swift */,
-				8AFD588B21F977C900A3D2A9 /* Assets.xcassets */,
-				8AFD588D21F977C900A3D2A9 /* Main.storyboard */,
-				8AFD589021F977C900A3D2A9 /* Info.plist */,
-				8AFD589121F977C900A3D2A9 /* Inspirations_macOS.entitlements */,
-				8AFD588821F977C800A3D2A9 /* Inspirations_macOS.xcdatamodeld */,
-			);
-			path = "Inspirations-macOS";
-			sourceTree = "<group>";
-		};
 		8AFD589521F979A500A3D2A9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8A01F86E210A9A52007D1E3F /* Core Data ERD.xcdatamodeld */,
+				8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */,
+				8AEE1A7721D1C99F0011CFA3 /* Extensions */,
 				8AFD589621F979D100A3D2A9 /* Core Data */,
 			);
 			path = Shared;
@@ -404,9 +344,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A89E8581E842E03001F7F71 /* Inspirations */ = {
+		8A89E8581E842E03001F7F71 /* Inspirations-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A89E8811E842E04001F7F71 /* Build configuration list for PBXNativeTarget "Inspirations" */;
+			buildConfigurationList = 8A89E8811E842E04001F7F71 /* Build configuration list for PBXNativeTarget "Inspirations-macOS" */;
 			buildPhases = (
 				8A89E8551E842E03001F7F71 /* Sources */,
 				8A89E8561E842E03001F7F71 /* Frameworks */,
@@ -419,9 +359,9 @@
 			);
 			dependencies = (
 			);
-			name = Inspirations;
+			name = "Inspirations-macOS";
 			productName = Inspirations;
-			productReference = 8A89E8591E842E04001F7F71 /* Inspirations.app */;
+			productReference = 8A89E8591E842E04001F7F71 /* Inspirations-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8AFD586621F9734600A3D2A9 /* Inspirations-iOS */ = {
@@ -441,23 +381,6 @@
 			productReference = 8AFD586721F9734600A3D2A9 /* Inspirations-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8AFD588121F977C800A3D2A9 /* Inspirations-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8AFD589221F977C900A3D2A9 /* Build configuration list for PBXNativeTarget "Inspirations-macOS" */;
-			buildPhases = (
-				8AFD587E21F977C800A3D2A9 /* Sources */,
-				8AFD587F21F977C800A3D2A9 /* Frameworks */,
-				8AFD588021F977C800A3D2A9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Inspirations-macOS";
-			productName = "Inspirations-macOS";
-			productReference = 8AFD588221F977C800A3D2A9 /* Inspirations-macOS.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -475,12 +398,7 @@
 					};
 					8AFD586621F9734600A3D2A9 = {
 						CreatedOnToolsVersion = 10.1;
-						DevelopmentTeam = Y79J779R4Z;
-						ProvisioningStyle = Automatic;
-					};
-					8AFD588121F977C800A3D2A9 = {
-						CreatedOnToolsVersion = 10.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -497,9 +415,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A89E8581E842E03001F7F71 /* Inspirations */,
+				8A89E8581E842E03001F7F71 /* Inspirations-macOS */,
 				8AFD586621F9734600A3D2A9 /* Inspirations-iOS */,
-				8AFD588121F977C800A3D2A9 /* Inspirations-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -525,15 +442,6 @@
 				8AFD587921F9734700A3D2A9 /* LaunchScreen.storyboard in Resources */,
 				8AFD587621F9734700A3D2A9 /* Assets.xcassets in Resources */,
 				8AFD587421F9734600A3D2A9 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AFD588021F977C800A3D2A9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8AFD588C21F977C900A3D2A9 /* Assets.xcassets in Resources */,
-				8AFD588F21F977C900A3D2A9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,16 +556,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AFD587E21F977C800A3D2A9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8AFD588A21F977C800A3D2A9 /* Inspirations_macOS.xcdatamodeld in Sources */,
-				8AFD588721F977C800A3D2A9 /* ViewController.swift in Sources */,
-				8AFD588521F977C800A3D2A9 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -683,14 +581,6 @@
 				8AFD587821F9734700A3D2A9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		8AFD588D21F977C900A3D2A9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8AFD588E21F977C900A3D2A9 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -811,7 +701,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Inspirations/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Inspirations/macOS Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -829,7 +719,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				INFOPLIST_FILE = Inspirations/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Inspirations/macOS Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -847,8 +737,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y79J779R4Z;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspirations-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -857,6 +747,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -872,8 +763,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y79J779R4Z;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Inspirations-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -881,53 +772,11 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		8AFD589321F977C900A3D2A9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "Inspirations-macOS/Inspirations_macOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Inspirations-macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		8AFD589421F977C900A3D2A9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "Inspirations-macOS/Inspirations_macOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Inspirations-macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -943,7 +792,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A89E8811E842E04001F7F71 /* Build configuration list for PBXNativeTarget "Inspirations" */ = {
+		8A89E8811E842E04001F7F71 /* Build configuration list for PBXNativeTarget "Inspirations-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A89E8821E842E04001F7F71 /* Debug */,
@@ -957,15 +806,6 @@
 			buildConfigurations = (
 				8AFD587C21F9734700A3D2A9 /* Debug */,
 				8AFD587D21F9734700A3D2A9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8AFD589221F977C900A3D2A9 /* Build configuration list for PBXNativeTarget "Inspirations-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8AFD589321F977C900A3D2A9 /* Debug */,
-				8AFD589421F977C900A3D2A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -991,16 +831,6 @@
 			);
 			currentVersion = 8AFD586C21F9734600A3D2A9 /* Inspirations_iOS.xcdatamodel */;
 			path = Inspirations_iOS.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		8AFD588821F977C800A3D2A9 /* Inspirations_macOS.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8AFD588921F977C800A3D2A9 /* Inspirations_macOS.xcdatamodel */,
-			);
-			currentVersion = 8AFD588921F977C800A3D2A9 /* Inspirations_macOS.xcdatamodel */;
-			path = Inspirations_macOS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -33,7 +33,7 @@ class LeftController: NSViewController {
         try! frc.performFetch()
         return frc
     }()
-    
+    //MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,7 +78,8 @@ class LeftController: NSViewController {
         //Passes the selected library item if editing.
         if clickedmenu.identifier!.rawValue=="editLibraryItem"{
             vc.selectedObject=listView.item(atRow: listView.clickedRow) as? LibraryItem
-            vc.itemType=LibraryType(rawValue: (vc.selectedObject?.libraryType)!)
+            vc.itemType=vc.selectedObject?.libraryType
+            //vc.itemType=LibraryType(rawValue: (vc.selectedObject?.libraryType)!)
         }else {
             vc.itemType=LibraryType(rawValue: clickedmenu.representedType)
         }
@@ -89,18 +90,18 @@ class LeftController: NSViewController {
     //Deletes the selected item
     @IBAction func deleteItem(_ sender: Any){
         let itemToDelete:LibraryItem=listView.item(atRow: listView.selectedRow) as! LibraryItem
-        if [LibraryType.list.rawValue,LibraryType.smartList.rawValue, LibraryType.tag.rawValue ].contains(itemToDelete.libraryType){
+        if LibraryType.deletableItems.contains(itemToDelete.libraryType){
             self.moc.delete(itemToDelete)
             try! moc.save()
         }
     }
     
     //Updates canDelete and canAdd depending on objectValue
-    //TODO: Check if this is worth it.
+    //TODO: Check if this is worth it. Think how to optimize. With NSMenu it may not be worth it.
     func updateBindings(){
-        let checkArray=[LibraryType.favorites.rawValue, LibraryType.mainLibrary.rawValue]
+        let checkArray:[LibraryType]=[.favorites, .mainLibrary]
         let isRoot=(selectedItem?.isRootItem)!
-        let isFolder=selectedItem?.libraryType==LibraryType.folder.rawValue
+        let isFolder=(selectedItem?.libraryType == .folder)
         let isMainFav=checkArray.contains((selectedItem?.libraryType)!)
         let isPrincipal=selectedItem?.name=="Library"
         
@@ -140,9 +141,8 @@ extension LeftController: NSTextFieldDelegate {
 extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        guard let libItem=item as? LibraryItem, let type=libItem.libraryType
-             else {return nil}
-        let identifier=NSUserInterfaceItemIdentifier(type)
+        guard let libItem=item as? LibraryItem else {return nil}
+        let identifier=NSUserInterfaceItemIdentifier(libItem.libraryType.rawValue)
         let myCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? AGC_DataCell
         myCell?.textField?.stringValue=libItem.name!
         if let totItems=libItem.totalQuotes, totItems>0{
@@ -157,8 +157,8 @@ extension LeftController: NSOutlineViewDelegate{
     
     //Determines if triangle should be shown.
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-        guard let libItem=item as? LibraryItem else {return false}
-        if libItem.isRootItem || libItem.libraryType == LibraryType.folder.rawValue{
+        guard let libItem=item as? LibraryItem else {return false} //TODO: SImplify with ENUMs
+        if libItem.isRootItem || libItem.libraryType == LibraryType.folder{
             return true
         }
         return false
@@ -231,7 +231,7 @@ extension LeftController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
     
         guard let destItem = item as? LibraryItem else {return NSDragOperation.init(rawValue: 0)}
-        let canDragg = (!destItem.isRootItem && (destItem.libraryType == LibraryType.list.rawValue || destItem.libraryType == LibraryType.tag.rawValue))
+        let canDragg = (!destItem.isRootItem && (destItem.libraryType == LibraryType.list || destItem.libraryType == LibraryType.tag)) //TODO: Improve through the ENUM.
         return NSDragOperation.init(rawValue: canDragg ?  1 : 0)
         }
     
@@ -304,15 +304,15 @@ extension LeftController: NSMenuDelegate{
         //Get clickedObject.
         let selItem = listView.item(atRow: listView.clickedRow) as? LibraryItem
         let isRoot = selItem?.isRootItem ?? true
-        let isFolder = (selItem?.libraryType == LibraryType.folder.rawValue)
-        let isFavOrMain = [LibraryType.favorites.rawValue,LibraryType.mainLibrary.rawValue, LibraryType.language.rawValue].contains(selItem?.libraryType)
+        let isFolder = (selItem?.libraryType == LibraryType.folder)
+        let isFavOrMain = [LibraryType.favorites,LibraryType.mainLibrary, LibraryType.language].contains(selItem?.libraryType)
         
         //Enable or diable items:
-        menu.items[0].isEnabled = !isRoot && !isFavOrMain
-        menu.items[1].isEnabled = (selItem?.name=="Tags")
-        menu.items[2].isEnabled = isFolder || (selItem?.name=="Lists")
-        menu.items[3].isEnabled = isFolder || (selItem?.name=="Lists")
-        menu.items[4].isEnabled = isFolder || (selItem?.name=="Lists")
+        menu.items[AGCMENU.edit.rawValue].isEnabled = !isRoot && !isFavOrMain
+        menu.items[AGCMENU.addTag.rawValue].isEnabled = (selItem?.name=="Tags")
+        menu.items[AGCMENU.addList.rawValue].isEnabled = isFolder || (selItem?.name=="Lists")
+        menu.items[AGCMENU.addSmartList.rawValue].isEnabled = isFolder || (selItem?.name=="Lists")
+        menu.items[AGCMENU.addFolder.rawValue].isEnabled = isFolder || (selItem?.name=="Lists")
     }
 }
 
