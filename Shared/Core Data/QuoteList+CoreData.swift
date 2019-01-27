@@ -55,7 +55,7 @@ public class QuoteList: LibraryItem {
         self.isShown = true
         self.libraryType = .list
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
-        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: moc)
+        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Lists", , ofType:inContext: moc)
 
     }
     
@@ -81,7 +81,7 @@ public class QuoteList: LibraryItem {
         self.isShown=true
         self.isRootItem=false
         self.sortingOrder=self.name
-        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Lists", inContext: inMOC)
+        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Lists", , ofType:inContext: inMOC)
         if (withSmartList != nil)  {
             self.smartPredicate=withSmartList
             self.libraryType = .smartList

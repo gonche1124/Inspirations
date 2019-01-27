@@ -12,15 +12,21 @@ import Foundation
 extension NSPredicate{
     
     //String searchs
-    static var pIsFavorite:String = "isFavorite == TRUE"
-    static var pSpelledIn:String = "spelledIn.name CONTAINS [CD] %@"
-    static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
-    static var pIsRoot:String = "isRootItem == YES"
-    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
+//    static var pIsFavorite:String = "isFavorite == TRUE"
+//    static var pSpelledIn:String = "spelledIn.name CONTAINS [CD] %@"
+//    static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
+//    static var pIsRoot:String = "isRootItem == YES"
+//    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
     
     //Predifened Predicates
     static var favoriteItems:NSPredicate = NSPredicate(format:NSPredicate.pIsFavorite)
     static var rootItems:NSPredicate = NSPredicate(format:NSPredicate.pIsRoot)
+    static var mainLibrary:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.mainLibrary.rawValue)
+    static var favoriteLibrary:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.favorites.rawValue)
+    static var rootTag:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootTag.rawValue)
+    static var rootMain:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootMain.rawValue)
+    static var rootList:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootList.rawValue)
+    static var rootLanguage:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootLanguage.rawValue)
     
     ///Predciate to search for main library
     static func getItem(ofType: LibraryType)->NSPredicate?{

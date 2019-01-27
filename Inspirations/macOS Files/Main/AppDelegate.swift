@@ -210,41 +210,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func createMainObjectsIfNotPresent() {
         
         //Create root items.
-        _ = LibraryItem.getRootItem(withName: "Library", inContext: managedObjectContext)
-        _ = LibraryItem.getRootItem(withName: "Tags", inContext: managedObjectContext)
-        _ = LibraryItem.getRootItem(withName: "Languages", inContext: managedObjectContext)
-        _ = LibraryItem.getRootItem(withName: "Lists", inContext: managedObjectContext)
+        //TODO: Change for NSLocalizedString.
+        _ = LibraryItem.getStandardItem(named: "Main", ofType: .rootMain, inContext: managedObjectContext)
+        _ = LibraryItem.getStandardItem(named: "Library", ofType: .mainLibrary, inContext: managedObjectContext)
+        _ = LibraryItem.getStandardItem(named: "Favorites", ofType: .favorites, inContext: managedObjectContext)
+        _ = LibraryItem.getStandardItem(named: "Tags", ofType: .rootTag, inContext: managedObjectContext)
+        _ = LibraryItem.getStandardItem(named: "Languages", ofType: .rootLanguage, inContext: managedObjectContext)
+        _ = LibraryItem.getStandardItem(named: "Lists", ofType: .rootList, inContext: managedObjectContext)
         
-        //Create Main Library.
-        let libPredicate=NSPredicate(format:"name == 'Library' AND isRootItem == FALSE")
-        if (LibraryItem.firstWith(predicate: libPredicate, inContext: managedObjectContext)) == nil  {
-            let mainItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Library", isRoot: false)
-            mainItem?.libraryType = .mainLibrary
-            mainItem?.sortingOrder="0"
-        }
-        
-        //Create Fav item.
-        let favPredicate=NSPredicate(format: "name == 'Favorites' AND isRootItem == FALSE")
-        if (LibraryItem.firstWith(predicate: favPredicate, inContext: managedObjectContext)) == nil {
-            let favItem=LibraryItem.init(inMOC: managedObjectContext, andName: "Favorites", isRoot: false)
-            favItem?.libraryType = .favorites
-            favItem?.sortingOrder="1"
-        }
-        
-        //Create Tags
-        ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].forEach({
-            _=Tag.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-        })
-       
-        //Create Languages:
-        ["Spanish", "English", "French", "German", "Mandarin"].forEach({
-            _=Language.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-        })
-        
-        //create Lists:
-        ["Top 25", "For Work", "From Movies", "In songs", "Crazy"].forEach({
-            _=QuoteList.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-        })
+//        //Create Tags
+//        ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].forEach({
+//            _=Tag.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+//        })
+//       
+//        //Create Languages:
+//        ["Spanish", "English", "French", "German", "Mandarin"].forEach({
+//            _=Language.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+//        })
+//        
+//        //create Lists:
+//        ["Top 25", "For Work", "From Movies", "In songs", "Crazy"].forEach({
+//            _=QuoteList.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
+//        })
         
         do{
             try self.managedObjectContext.save()

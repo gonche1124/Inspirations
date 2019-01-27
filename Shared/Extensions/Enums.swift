@@ -49,7 +49,7 @@ public enum LibraryType:String{
     }
     
     /// Array of items that cant be change the name.
-    static func nonEditableItems()->[LibraryType]{
+    static var standardItems:[LibraryType]{
         return [.rootTag, .rootList, .rootMain, .rootLanguage, .mainLibrary, .favorites]
     }
     

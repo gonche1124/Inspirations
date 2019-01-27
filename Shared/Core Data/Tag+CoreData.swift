@@ -80,7 +80,7 @@ public class Tag: LibraryItem {
         self.isShown=true
         self.isRootItem=false
         self.sortingOrder=self.name
-        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Tags", inContext: inMOC)
+        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Tags", , ofType:inContext: inMOC)
     }
     
     //Convinience Init.

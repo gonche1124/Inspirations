@@ -11,37 +11,28 @@ import CoreData
 
 
 extension LibraryItem{
+    
+    
     ///Gets root item with given name or creates one if does not exists.
-    /// - parameter itemName: name property of the root item.
+    /// - parameter named: name of the root item.
+    /// - parameter ofType: Library type of the root item.
     /// - parameter inContext: NSManagedContext of where the entity is to be looked for or created.
-    class func getRootItem(withName itemName:String, inContext:NSManagedObjectContext)->LibraryItem{
-        
-        let pred = NSPredicate(format: "name == %@ AND isRootItem == YES", itemName)
-        if let fetchedItem = LibraryItem.firstWith(predicate: pred, inContext: inContext) as? LibraryItem {
+    /// - note:
+    /// - Will fail if the Library type is not one of the root default options.
+    /// - The predicate sued for searching disregards the name to make it localizable in future releases.
+    class func getStandardItem(named:String, ofType type:LibraryType, inContext moc:NSManagedObjectContext)->LibraryItem{
+        if !LibraryType.standardItems.contains(type){
+            fatalError("Not a standard item: \(type)")
+        }
+        let pred = NSPredicate(format: "libraryTypeValue == %@", type.rawValue)
+        if let fetchedItem = LibraryItem.firstWith(predicate: pred, inContext: moc) as? LibraryItem{
             return fetchedItem
         }
         
         //Creat Library Item because it did not existed.
-        let newItem = NSEntityDescription.insertNewObject(forEntityName: self.entity().name!, into: inContext) as! LibraryItem
-        newItem.isRootItem=true
-        newItem.name=itemName
-        newItem.libraryType = .rootItem
-        switch itemName {
-        case "Library":
-            newItem.sortingOrder="0"
-        case "Tags":
-            newItem.sortingOrder="2"
-        case "Lists":
-            newItem.sortingOrder="3"
-        case "Languages":
-            newItem.sortingOrder="4"
-        default:
-            newItem.sortingOrder="5"
-        }
+        let newItem = LibraryItem.init(rootNamed: named, andType: type, inMOC: moc)
         return newItem
     }
-    
-
 }
 
 extension NSManagedObject {
@@ -65,21 +56,22 @@ extension NSManagedObject {
     }
     
     
-    /// Returns a count of all Quotes
-    var arrayOfQuotes:[Quote]?{
-        return try? Quote.allInContext(self.managedObjectContext!)
-    }
-    
-    /// Returns all favorites.
-    var arrayOfFavorites:[Quote]?{
-        return try? Quote.allInContext(self.managedObjectContext!, predicate: NSPredicate(format: NSPredicate.pIsFavorite))
-    }
+//    /// Returns a count of all Quotes
+//    var arrayOfQuotes:[Quote]?{
+//        return try? Quote.allInContext(self.managedObjectContext!)
+//    }
+//
+//    /// Returns all favorites.
+//    var arrayOfFavorites:[Quote]?{
+//        return try? Quote.allInContext(self.managedObjectContext!, predicate: NSPredicate(format: NSPredicate.pIsFavorite))
+//    }
     
     //Get first item with predicate
     class func firstWith<T: NSManagedObject>(predicate:NSPredicate, inContext:NSManagedObjectContext)->T?{
-        let request = NSFetchRequest<T>(entityName: self.className())
+        let request = T.singleRequest()
+        //let request = NSFetchRequest<T>(entityName: self.className())
         request.predicate=predicate
-        request.fetchLimit=1
+        //return try! inContext.fetch(request).first
         if let item=try? inContext.fetch(request).first{
             return item
         }
@@ -163,7 +155,7 @@ extension NSFetchRequestResult where Self: NSManagedObject {
         return fetchRequest as! NSFetchRequest<Self>
     }
     
-    //Create a simple request for fecthing
+    ///Creates a simple request for fecthing 1 item
     static public func singleRequest()->NSFetchRequest<Self>{
         let request = NSFetchRequest<Self>(entityName: self.className())
         request.fetchLimit=1
@@ -201,12 +193,26 @@ extension NSManagedObjectContext{
         return try? self.count(for: fetchR)
     }
     
-    /// Returns the main library object.
-    func getItem(ofType: LibraryType)->LibraryItem?{
+    /// Returns the standard library object chosen as parameter.
+    /// - note: It has to be one of the root items or the mian or faboeite item.
+    func get(LibraryItem ofType: LibraryType)->LibraryItem{
         let request = LibraryItem.singleRequest()
-        request.predicate = NSPredicate.getItem(ofType: ofType)
-        let item=try? self.fetch(request).first
-        return item ?? nil
+        switch ofType {
+        case .mainLibrary:
+            request.predicate=NSPredicate.mainLibrary
+        case .favorites:
+            request.predicate=NSPredicate.favoriteLibrary
+        case .rootList:
+            request.predicate=NSPredicate.rootList
+        case .rootTag:
+            request.predicate=NSPredicate.rootTag
+        case .rootLanguage:
+            request.predicate=NSPredicate.rootLanguage
+        default:
+            fatalError("No case for the Library Item selected: \(ofType)")
+        }
+        let item=try? self.fetch(request).first!
+        return item!
     }
 }
 //MARK: -

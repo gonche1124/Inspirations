@@ -42,10 +42,8 @@ public class LibraryItem: NSManagedObject {
         switch self.libraryType {
         case .mainLibrary:
             return self.managedObjectContext?.count(ofEntity: .quote)
-            //return self.arrayOfQuotes?.count
         case .favorites:
             return self.managedObjectContext?.count(ofEntity: .quote, with: NSPredicate.favoriteItems)
-            //return self.arrayOfFavorites?.count
         default:
             return nil
         }
@@ -61,7 +59,6 @@ public class LibraryItem: NSManagedObject {
         super.awakeFromInsert()
         setPrimitiveValue(NSDate(), forKey: "createdAt")
         setPrimitiveValue(NSDate(), forKey: "updatedAt")
-        setPrimitiveValue(LibraryType.rootItem, forKey: "libraryType")
         setPrimitiveValue(true, forKey: "isRootItem")
     }
     
@@ -105,15 +102,19 @@ public class LibraryItem: NSManagedObject {
     
     //MARK: - Convinience init
     
-    ///Creates a root object with a specific name.
-    convenience init?(rootWithName:String, andType type:LibraryType, inMOC:NSManagedObjectContext){
+    ///Creates a root object.
+    /// - parameter rootnamed: name of the root object.
+    /// - parameter andType: Library Type of the root object.
+    /// - parameter inMOC: NSManagedObjectContext used too init the new Core Data Entity
+    /// - Note: The library Type has to be one of the root objects, otherwise it will throw an error.
+    convenience init(standardNamed:String, andType type:LibraryType, inMOC:NSManagedObjectContext){
         guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMOC),
-            rootWithName != "", LibraryType.rootItems.contains(type)
+            standardNamed != "", LibraryType.standardItems.contains(type)
             else {
                 fatalError("Failed to create LibraryItem")}
         
         self.init(entity: entity, insertInto: inMOC)
-        self.name=rootWithName
+        self.name=standardNamed
         self.libraryType=type
         switch type {
         case .rootMain:
@@ -124,32 +125,40 @@ public class LibraryItem: NSManagedObject {
             self.sortingOrder="2"
         case .rootLanguage:
             self.sortingOrder="3"
+        case .mainLibrary:
+            self.sortingOrder="0"
+        case .favorites:
+            self.sortingOrder="1"
         default:
-            self.sortingOrder=rootWithName
+            self.sortingOrder=standardNamed
+        }
+        if [LibraryType.favorites, LibraryType.mainLibrary].contains(type){
+            self.isRootItem=false
+            self.belongsToLibraryItem=inMOC.get(LibraryItem: .rootMain)
         }
     }
     
     //TODO: ERASE OR FIX IT!
-    public convenience init?(inMOC:NSManagedObjectContext, andName:String, isRoot:Bool){
-        guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMOC),
-            andName != "" else {
-                fatalError("Failed to create LibraryItem")}
-        
-        self.init(entity: entity, insertInto: inMOC)
-        //self.libraryType = .rootItem
-        self.name=andName
-        self.isRootItem=isRoot
-        if !isRoot{
-        self.belongsToLibraryItem = LibraryItem.getRootItem(withName: "Library", inContext: inMOC)
-        }
-    }
+//    public convenience init?(inMOC:NSManagedObjectContext, andName:String, isRoot:Bool){
+//        guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMOC),
+//            andName != "" else {
+//                fatalError("Failed to create LibraryItem")}
+//
+//        self.init(entity: entity, insertInto: inMOC)
+//        //self.libraryType = .rootItem
+//        self.name=andName
+//        self.isRootItem=isRoot
+//        if !isRoot{
+//        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Library", , ofType:inContext: inMOC)
+//        }
+//    }
     
     /// Convinience Init to create a folder with a given name, in the specified context and
     /// assigning itself as child of underItem.
     /// - parameter inMoc: NSManagedContext to create the Entity
     /// - parameter folderNamed: name to assign the new entity created.
     /// - parameter underItem: CoreData entity to use as it´s parent for the relationship.
-    public convenience init?(inMoc:NSManagedObjectContext, folderNamed:String, underItem:LibraryItem){
+    public convenience init?(folderNamed:String,inMoc:NSManagedObjectContext, underItem:LibraryItem){
         guard let entity = NSEntityDescription.entity(forEntityName: "LibraryItem", in: inMoc),
             folderNamed != "" else {
                 fatalError("Failed to create LibraryItem")}
@@ -157,9 +166,9 @@ public class LibraryItem: NSManagedObject {
         self.init(entity: entity, insertInto: inMoc)
         self.libraryType = .folder
         self.name=folderNamed
-        self.isShown=true
         self.isRootItem=false
         self.belongsToLibraryItem=underItem
+        self.sortingOrder=folderNamed
     }
     
     //Prints the description
