@@ -13,7 +13,8 @@ import AppKit
 //MARK: -
 extension NSUserInterfaceItemIdentifier {
     static let dataCell = NSUserInterfaceItemIdentifier.init("DataCell")
-    static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
+    static let headerCell = NSUserInterfaceItemIdentifier.init("noImage")
+    //static let headerCell = NSUserInterfaceItemIdentifier.init("HeaderCell")
 }
 
 //MARK: -
@@ -145,4 +146,76 @@ extension NSView{
         }
     }
 }
+
+//MARK: - NSPredicateEditorRowTemplate
+extension NSPredicateEditorRowTemplate {
+    
+    ///Constants
+    static let numberOperators:[NSComparisonPredicate.Operator] = [.equalTo, .notEqualTo, .greaterThan, .greaterThanOrEqualTo, .lessThan, .lessThanOrEqualTo]
+    static let stringOperators:[NSComparisonPredicate.Operator] = [.equalTo, .notEqualTo, .beginsWith, .endsWith, .matches, .like]
+    static let boolOperators:[NSComparisonPredicate.Operator] = [.equalTo, .notEqualTo]
+    static let dateOperators:[NSComparisonPredicate.Operator] = [.equalTo, .notEqualTo, .greaterThan, .lessThan]
+    
+    
+    ///Compound convinince initalizer.
+    convenience init(compoundTypes: [NSCompoundPredicate.LogicalType] ) {
+        let compoundTypesNSNumber = compoundTypes.map{NSNumber(value: $0.rawValue)}
+        self.init( compoundTypes: compoundTypesNSNumber )
+    }
+    
+    /// Initializes row templates from a core data entity.
+    static func templates(forEntity entity:String, in moc:NSManagedObjectContext, includingRelationships:Bool=false, andPrefix:String="")->[NSPredicateEditorRowTemplate] {
+        var templateRows=[NSPredicateEditorRowTemplate]()
+        let entityDescription=NSEntityDescription.entity(forEntityName: entity, in: moc)
+        let attDict = entityDescription?.attributesByNameForPredicateEditor
+        attDict?.forEach{
+            if let newRow=NSPredicateEditorRowTemplate.init(forKeysPath: $0.key, ofType: $0.value, andPrefix:andPrefix){
+                templateRows.append(newRow)
+            }
+        }
+        
+        //Check for realtionships:
+        if includingRelationships{
+            let relationsNames = entityDescription?.relationshipsByNameForPredicateEditor
+            relationsNames?.forEach{
+                templateRows.append(contentsOf: NSPredicateEditorRowTemplate.templates(forEntity: $0.value!, in: moc, andPrefix:"\($0.key)."))
+            }
+            
+        }
+        return templateRows
+    }
+    
+    /// Generic initializer for attribute types.
+    /// - parameter keyPaths: key path to the attribute.
+    /// - parameter ofType: type of attriniute stored.
+    /// - parameter andPrefix: used for relationships.
+    /// - Note: Used to simplify the creation of core data entities by calling this with the Core Data parameters.
+    convenience init? (forKeysPath keyPaths:String, ofType type:NSAttributeType, andPrefix prefix:String=""){
+        var templateOperator = [NSNumber]()
+        
+        //Setup depending on the type
+        switch type {
+    case .decimalAttributeType, .doubleAttributeType, .floatAttributeType, .integer16AttributeType, .integer32AttributeType, .integer64AttributeType:
+            templateOperator = NSPredicateEditorRowTemplate.numberOperators.map{NSNumber(value: $0.rawValue)}
+        case .dateAttributeType:
+            templateOperator = NSPredicateEditorRowTemplate.dateOperators.map{NSNumber(value: $0.rawValue)}
+        case .stringAttributeType:
+            templateOperator = NSPredicateEditorRowTemplate.stringOperators.map{NSNumber(value: $0.rawValue)}
+        case .booleanAttributeType:
+            templateOperator = NSPredicateEditorRowTemplate.boolOperators.map{NSNumber(value: $0.rawValue)}
+        default:
+            print("Attribute type: \(type) not implemented.")
+            return nil
+        }
+        //Generic values
+        let leftExp = NSExpression(forKeyPath: prefix+keyPaths)
+        let options = type == .stringAttributeType ? (Int(NSComparisonPredicate.Options.caseInsensitive.rawValue | NSComparisonPredicate.Options.diacriticInsensitive.rawValue)):0
+        self.init( leftExpressions: [leftExp],
+                   rightExpressionAttributeType: type,
+                   modifier: .direct,
+                   operators: templateOperator,
+                   options: options )
+    }
+}
+
 

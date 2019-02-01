@@ -129,14 +129,14 @@ extension AddQuoteController: NSTokenFieldDelegate{
     func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
         let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",editingString)
         if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){return existingTag}
-        let newTag = Tag(inMOC: moc, andName: editingString)
+        let newTag = Tag.init(named: editingString, inMOC: moc)
         return newTag
     }
     
     //Shows completions list under.
     func tokenField(_ tokenField: NSTokenField, completionsForSubstring substring: String, indexOfToken tokenIndex: Int, indexOfSelectedItem selectedIndex: UnsafeMutablePointer<Int>?) -> [Any]? {
         guard let tagArray=tagsController.arrangedObjects as? Array<Tag>else {return nil}
-        return tagArray.map({$0.name!}).filter({$0.hasPrefix(substring)}).sorted()
+        return tagArray.map({$0.name}).filter({$0.hasPrefix(substring)}).sorted()
     }
     
 //    func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {

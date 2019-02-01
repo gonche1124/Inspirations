@@ -1,0 +1,100 @@
+/* 
+  PredicateFormatting.strings
+  Inspirations
+
+  Created by Andres Gonzalez Casabianca on 1/30/19.
+  Copyright © 2019 Gonche. All rights reserved.
+*/
+
+//Compound
+"%[Any]@ of the following are true" = "%[Any]@ of the following are true";
+"%[All]@ of the following are true" = "%[All]@ of the following are true";
+"%[None]@ of the following are true" = "%[None]@ of the following are true";
+
+//MARK: - Quote
+"quoteString" = "Quote";
+"%[quoteString]@ %[is]@ %@" = "%1$[Quote]@ %2$[is]@ %3$@";
+"%[quoteString]@ %[is not]@ %@" = "%1$[Quote]@ %2$[is not]@ %3$@";
+"%[quoteString]@ %[contains]@ %@" = "%1$[Quote]@ %2$[contains]@ %3$@";
+"%[quoteString]@ %[begins with]@ %@" = "%1$[Quote]@ %2$[begin with]@ %3$@";
+"%[quoteString]@ %[ends with]@ %@" = "%1$[Quote]@ %2$[end with]@ %3$@";
+
+"isFavorite" = "Favorite";
+"%[isFavorite]@ %[is]@ %@" = "%1$[Favorite]@ %2$[is]@ %3$@";
+"%[isFavorite]@ %[is not]@ %@" = "%1$[Favorite]@ %2$[is not]@ %3$@";
+
+"totalLetters"="Total letters";
+"%[totalLetters]@ %[is]@ %@" = "%1$[Total letters]@ %2$[is]@ %3$@";
+"%[totalLetters]@ %[is not]@ %@" = "%1$[Total letters]@ %2$[is not]@ %3$@";
+"%[totalLetters]@ %[is less than]@ %@" = "%1$[Total letters]@ %2$[is less than]@ %3$@";
+"%[totalLetters]@ %[is less than or equal to]@ %@" = "%1$[Total letters]@ %2$[is less than or equal to]@ %3$@";
+"%[totalLetters]@ %[is greater than]@ %@" = "%1$[Total letters]@ %2$[eis greater thane]@ %3$@";
+"%[totalLetters]@ %[is greater than or equal to]@ %@" = "%1$[Total letters]@ %2$[is greater than or equal to]@ %3$@";
+
+"totalWords"="Total words";
+"%[totalWords]@ %[is]@ %@" = "%1$[Total words]@ %2$[is]@ %3$@";
+"%[totalWords]@ %[is not]@ %@" = "%1$[Total words]@ %2$[is not]@ %3$@";
+"%[totalWords]@ %[is less than]@ %@" = "%1$[Total words]@ %2$[is less than]@ %3$@";
+"%[totalWords]@ %[is less than or equal to]@ %@" = "%1$[Total words]@ %2$[is less than or equal to]@ %3$@";
+"%[totalWords]@ %[is greater than]@ %@" = "%1$[Total words]@ %2$[eis greater thane]@ %3$@";
+"%[totalWords]@ %[is greater than or equal to]@ %@" = "%1$[Total words]@ %2$[is greater than or equal to]@ %3$@";
+
+"createdAt"="Created";
+"%[createdAt]@ %[is]@ %@" = "%1$[Created]@ %2$[is]@ %3$@";
+"%[createdAt]@ %[is not]@ %@" = "%1$[Created]@ %2$[is not]@ %3$@";
+"%[createdAt]@ %[is less than]@ %@" = "%1$[Created]@ %2$[before]@ %3$@";
+"%[createdAt]@ %[is greater than]@ %@" = "%1$[Created]@ %2$[after]@ %3$@";
+
+"updatedAt"="Modified";
+"%[updatedAt]@ %[is]@ %@" = "%1$[Modified]@ %2$[is]@ %3$@";
+"%[updatedAt]@ %[is not]@ %@" = "%1$[Modified]@ %2$[is not]@ %3$@";
+"%[updatedAt]@ %[is less than]@ %@" = "%1$[Modified]@ %2$[before]@ %3$@";
+"%[updatedAt]@ %[is greater than]@ %@" = "%1$[Modified]@ %2$[after]@ %3$@";
+
+//MARK: - Tag.
+"isTaggedWith.createdAt"="contains Tag´s added";
+"%[isTaggedWith.createdAt]@ %[is]@ %@" = "%1$[contains Tags added]@ %2$[on]@ %3$@";
+"%[isTaggedWith.createdAt]@ %[is not]@ %@" = "%1$[contains Tags added]@ %2$[not on]@ %3$@";
+"%[isTaggedWith.createdAt]@ %[is less than]@ %@" = "%1$[contains Tags added]@ %2$[before]@ %3$@";
+"%[isTaggedWith.createdAt]@ %[is greater than]@ %@" = "%1$[contains Tags added]@ %2$[after]@ %3$@";
+
+"isTaggedWith.name" = "contains Tags named";
+"%[isTaggedWith.name]@ %[is]@ %@" = "%1$[contains Tags named]@ %2$[is]@ %3$@";
+"%[isTaggedWith.name]@ %[is not]@ %@" = "%1$[contains Tags named]@ %2$[is not]@ %3$@";
+"%[isTaggedWith.name]@ %[contains]@ %@" = "%1$[contains Tags named]@ %2$[contains]@ %3$@";
+"%[isTaggedWith.name]@ %[begins with]@ %@" = "%1$[contains Tags named]@ %2$[begins with]@ %3$@";
+"%[isTaggedWith.name]@ %[ends with]@ %@" = "%1$[contains Tags named]@ %2$[ends with]@ %3$@";
+
+//MARK: - Author.
+"from.createdAt"="Author was added";
+"%[from.createdAt]@ %[is]@ %@" = "%1$[Author was added]@ %2$[on]@ %3$@";
+"%[from.createdAt]@ %[is not]@ %@" = "%1$[Author was added]@ %2$[not on]@ %3$@";
+"%[from.createdAt]@ %[is less than]@ %@" = "%1$[Author was added]@ %2$[before]@ %3$@";
+"%[from.createdAt]@ %[is greater than]@ %@" = "%1$[Author was added]@ %2$[after]@ %3$@";
+
+"from.name" = "Author´s name";
+"%[from.name]@ %[is]@ %@" = "%1$[Author]@ %2$[is]@ %3$@";
+"%[from.name]@ %[is not]@ %@" = "%1$[Author]@ %2$[is not]@ %3$@";
+"%[from.name]@ %[contains]@ %@" = "%1$[Author]@ %2$[contains]@ %3$@";
+"%[from.name]@ %[begins with]@ %@" = "%1$[Author]@ %2$[begin with]@ %3$@";
+"%[from.name]@ %[ends with]@ %@" = "%1$[Author]@ %2$[end with]@ %3$@";
+
+//MARK: - Theme.
+"isAbout.createdAt"="Theme was added";
+"%[isAbout.createdAt]@ %[is]@ %@" = "%1$[Theme was added]@ %2$[on]@ %3$@";
+"%[isAbout.createdAt]@ %[is not]@ %@" = "%1$[Theme was added]@ %2$[not on]@ %3$@";
+"%[isAbout.createdAt]@ %[is less than]@ %@" = "%1$[Theme was added]@ %2$[before]@ %3$@";
+"%[isAbout.createdAt]@ %[is greater than]@ %@" = "%1$[Theme was added]@ %2$[after]@ %3$@";
+
+"isAbout.themeName" = "Theme";
+"%[isAbout.themeName]@ %[is]@ %@" = "%1$[Theme]@ %2$[is]@ %3$@";
+"%[isAbout.themeName]@ %[is not]@ %@" = "%1$[Theme]@ %2$[is not]@ %3$@";
+"%[isAbout.themeName]@ %[contains]@ %@" = "%1$[Theme]@ %2$[contains]@ %3$@";
+"%[isAbout.themeName]@ %[begins with]@ %@" = "%1$[Theme]@ %2$[begin with]@ %3$@";
+"%[isAbout.themeName]@ %[ends with]@ %@" = "%1$[Theme]@ %2$[end with]@ %3$@";
+
+
+
+
+//"%[Department]@ %[is]@ %[Human Resources]@ %[Validate@ %[custom]@" = "%1$[Department]@ %2$[is]@ %3$[Human Resources]@ %4$[Human Resources]@ %5$[custom]@";
+//"%[department]@ %[is not]@ %[Human Resources]@" = "%1$[department]@ %2$[is not]@ %3$[Human Resources]@";

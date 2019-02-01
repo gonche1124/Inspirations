@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="WCB-UA-VqA">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +8,7 @@
         <!--Library Item Editor-->
         <scene sceneID="f2g-yC-ugY">
             <objects>
-                <viewController title="List Editor" showSeguePresentationStyle="single" id="WCB-UA-VqA" userLabel="Library Item Editor" customClass="SmartListController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="List Editor" showSeguePresentationStyle="single" id="WCB-UA-VqA" userLabel="Library Item Editor" customClass="SmartListController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="a6i-N4-AyW">
                         <rect key="frame" x="0.0" y="0.0" width="424" height="283"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -39,7 +38,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="WCB-UA-VqA" name="value" keyPath="self.nameProxy" id="Z0m-8y-WI5">
+                                                    <binding destination="WCB-UA-VqA" name="value" keyPath="self.nameProxy" id="gYq-VU-RvE">
                                                         <dictionary key="options">
                                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                         </dictionary>
@@ -71,7 +70,7 @@
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="createList:" target="WCB-UA-VqA" id="hHY-gm-p9h"/>
-                                                    <binding destination="WCB-UA-VqA" name="enabled" keyPath="self.nameProxy.length" id="ETt-3l-Ma7">
+                                                    <binding destination="WCB-UA-VqA" name="enabled" keyPath="self.nameProxy.length" id="gez-8M-dE0">
                                                         <dictionary key="options">
                                                             <integer key="NSMultipleValuesPlaceholder" value="0"/>
                                                             <integer key="NSNoSelectionPlaceholder" value="0"/>
@@ -127,189 +126,14 @@ Gw
                                                                         <menuItem title="All" id="pD2-Z9-hy7">
                                                                             <integer key="representedObject" value="1"/>
                                                                         </menuItem>
+                                                                        <menuItem title="None" id="EQx-PZ-iBe">
+                                                                            <integer key="representedObject" value="0"/>
+                                                                        </menuItem>
                                                                     </items>
                                                                 </menu>
                                                                 <menu id="NWe-ZF-5NN">
                                                                     <items>
                                                                         <menuItem title="of the following are true" state="on" id="Rhm-85-aPP"/>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpMenus>
-                                                        </predicateEditorRowTemplate>
-                                                        <predicateEditorRowTemplate rowType="simple" id="fyb-ql-4ed" userLabel="Quote String">
-                                                            <array key="leftExpressionObject">
-                                                                <expression type="keyPath">
-                                                                    <string key="keyPath">quoteString</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">from.name</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">isAbout.themeName</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">isTaggedWith.name</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">spelledIn.name</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">isIncludedIn.name</string>
-                                                                </expression>
-                                                            </array>
-                                                            <integer key="rightExpressionObject" value="700"/>
-                                                            <comparisonPredicateOptions key="options" caseInsensitive="YES" diacriticInsensitive="YES"/>
-                                                            <popUpMenus>
-                                                                <menu id="5c2-dl-xde">
-                                                                    <items>
-                                                                        <menuItem title="quoteString" state="on" id="AHm-i7-u24">
-                                                                            <expression key="representedObject" type="keyPath">
-                                                                                <string key="keyPath">quoteString</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="from.name" id="LL6-om-oaT">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">from.name</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="isAbout.themeName" id="T12-v0-D1M">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">isAbout.themeName</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="isTaggedWith.name" id="aFq-rl-0uP">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">isTaggedWith.name</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="spelledIn.name" id="One-fC-M5d">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">spelledIn.name</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="isIncludedIn.name" id="XSA-qj-BTY">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">isIncludedIn.name</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                                <menu id="4x2-mi-Gdy">
-                                                                    <items>
-                                                                        <menuItem title="contains" state="on" id="hke-bg-ZhE">
-                                                                            <integer key="representedObject" value="99"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="ends with" id="pg2-A0-rgX">
-                                                                            <integer key="representedObject" value="9"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is" id="ciq-7N-Sy6">
-                                                                            <integer key="representedObject" value="4"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is like" id="zpK-Gd-ogi">
-                                                                            <integer key="representedObject" value="7"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="matches" id="0Vl-bJ-EdM">
-                                                                            <integer key="representedObject" value="6"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="begins with" id="BlS-I7-Rgg">
-                                                                            <integer key="representedObject" value="8"/>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpMenus>
-                                                        </predicateEditorRowTemplate>
-                                                        <predicateEditorRowTemplate rowType="simple" id="v2T-pb-qIY" userLabel="Favorite">
-                                                            <array key="leftExpressionObject">
-                                                                <expression type="keyPath">
-                                                                    <string key="keyPath">isFavorite</string>
-                                                                </expression>
-                                                            </array>
-                                                            <array key="rightExpressionObject">
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">YES</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">NO</string>
-                                                                </expression>
-                                                            </array>
-                                                            <popUpMenus>
-                                                                <menu id="c3Y-C1-lQi">
-                                                                    <items>
-                                                                        <menuItem title="isFavorite" state="on" id="G8M-8m-jZh">
-                                                                            <expression key="representedObject" type="keyPath">
-                                                                                <string key="keyPath">isFavorite</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                                <menu id="cYL-ce-Xua">
-                                                                    <items>
-                                                                        <menuItem title="is" state="on" id="AxY-2s-lI8">
-                                                                            <integer key="representedObject" value="4"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is not" id="vJn-K9-Y2P">
-                                                                            <integer key="representedObject" value="5"/>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                                <menu id="6Kf-tW-BWi">
-                                                                    <items>
-                                                                        <menuItem title="YES" state="on" id="gfT-oa-GO7">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">YES</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="NO" id="zPZ-jV-RDY">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">NO</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpMenus>
-                                                        </predicateEditorRowTemplate>
-                                                        <predicateEditorRowTemplate rowType="simple" id="8tl-8i-WhT" userLabel="Tot Words">
-                                                            <array key="leftExpressionObject">
-                                                                <expression type="keyPath">
-                                                                    <string key="keyPath">totalWords</string>
-                                                                </expression>
-                                                                <expression type="constant">
-                                                                    <string key="constantValue">totalLetters</string>
-                                                                </expression>
-                                                            </array>
-                                                            <integer key="rightExpressionObject" value="300"/>
-                                                            <popUpMenus>
-                                                                <menu id="iJR-hU-d5e">
-                                                                    <items>
-                                                                        <menuItem title="totalWords" state="on" id="Azb-hr-MnV">
-                                                                            <expression key="representedObject" type="keyPath">
-                                                                                <string key="keyPath">totalWords</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                        <menuItem title="totalLetters" id="ksY-50-I1j">
-                                                                            <expression key="representedObject" type="constant">
-                                                                                <string key="constantValue">totalLetters</string>
-                                                                            </expression>
-                                                                        </menuItem>
-                                                                    </items>
-                                                                </menu>
-                                                                <menu id="7Vv-wT-LYa">
-                                                                    <items>
-                                                                        <menuItem title="is" state="on" id="jXP-5L-89r">
-                                                                            <integer key="representedObject" value="4"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is less than" id="Now-8S-mBV">
-                                                                            <integer key="representedObject" value="0"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is greater than" id="vkQ-5V-OFI">
-                                                                            <integer key="representedObject" value="2"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is greater than or equal to" id="rDp-es-thF">
-                                                                            <integer key="representedObject" value="3"/>
-                                                                        </menuItem>
-                                                                        <menuItem title="is less than or equal to" id="4eS-39-NwH">
-                                                                            <integer key="representedObject" value="1"/>
-                                                                        </menuItem>
                                                                     </items>
                                                                 </menu>
                                                             </popUpMenus>
@@ -364,7 +188,7 @@ Gw
                 </viewController>
                 <customObject id="yu0-AR-bcD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="331.5"/>
+            <point key="canvasLocation" x="131.5" y="331.5"/>
         </scene>
     </scenes>
 </document>

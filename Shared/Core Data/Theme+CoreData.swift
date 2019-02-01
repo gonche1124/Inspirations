@@ -11,7 +11,7 @@ import CoreData
 
 //TODO: Transofmr Codable to Encodable and cleanup code.
 @objc(Theme)
-public class Theme: NSManagedObject, Codable{
+public class Theme: NSManagedObject{
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Theme> {
         return NSFetchRequest<Theme>(entityName: "Theme")
@@ -50,23 +50,6 @@ public class Theme: NSManagedObject, Codable{
 //        }
     }
     
-    //Decodable
-    public required convenience init(from decoder: Decoder) throws {
-        guard let codingUserInfoKeyMOC = CodingUserInfoKey.managedContext,
-            let moc = decoder.userInfo[codingUserInfoKeyMOC] as? NSManagedObjectContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Theme", in: moc) else {
-                fatalError("Failed to decode Theme")}
-        
-        self.init(entity: entity, insertInto: moc)
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.themeName = try container.decodeIfPresent(String.self, forKey: .themeName)
-    }
-    
-    //Codable
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(themeName, forKey: .themeName)
-    }
     
     //Convinience Init.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {

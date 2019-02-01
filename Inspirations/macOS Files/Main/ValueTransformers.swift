@@ -16,7 +16,7 @@ class SetToCompoundString: ValueTransformer {
     
     override func transformedValue(_ value: Any?) -> Any? {
         guard let valueSet = value as? Set<LibraryItem> else {return nil}
-        return valueSet.map({$0.name!}).joined(separator: "\n")
+        return valueSet.map({$0.name}).joined(separator: "\n")
     }
 }
 

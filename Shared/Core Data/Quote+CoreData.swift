@@ -17,17 +17,6 @@ public class Quote: NSManagedObject{
         return NSFetchRequest<Quote>(entityName: "Quote")
     }
     
-    //Keys
-    private enum CodingKeys: String, CodingKey {
-        case isFavorite = "isFavorite"
-        case quoteString = "quote"
-        case from = "fromAuthor"
-        case isAbout = "isAbout"
-        case isIncludedIn = "inPlaylist"
-        case isTaggedWith = "isTaggedWith"
-        case spelledIn = "spelledIn"
-    }
-    
     //Properties
     @NSManaged public var isFavorite: Bool
     @NSManaged public var quoteString: String?
@@ -133,17 +122,7 @@ public class Quote: NSManagedObject{
         }
     }
     */
-    //Encodable
-    public func encode(to encoder: Encoder) throws {
-        var containter = encoder.container(keyedBy: CodingKeys.self)
-        try containter.encode(isFavorite, forKey: .isFavorite)
-        try containter.encode(quoteString, forKey: .quoteString)
-        try containter.encode(from, forKey: .from)
-        try containter.encode(isAbout, forKey: .isAbout)
-        //try containter.encode(isIncludedIn, forKey: .isIncludedIn)
-        //try containter.encode(isTaggedWith, forKey: .isTaggedWith)
-        //try containter.encode(spelledIn, forKey: .spelledIn)
-    }
+
     
     //Updates when the user changes the length of the quote.
 //    override public func didChangeValue(forKey key: String) {

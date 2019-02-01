@@ -10,16 +10,12 @@ import Foundation
 import CoreData
 
 @objc(Author)
-public class Author: NSManagedObject, Codable {
+public class Author: NSManagedObject {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Author> {
         return NSFetchRequest<Author>(entityName: "Author")
     }
     
-    //Keys
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-    }
     
     //properties
     @NSManaged public var name: String?
@@ -30,43 +26,15 @@ public class Author: NSManagedObject, Codable {
     //Overrides
     override public func awakeFromInsert() {
         setPrimitiveValue(NSDate(), forKey: "createdAt")
-         setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        setPrimitiveValue(NSDate(), forKey: "updatedAt")
     }
     
     override public func willSave() {
         if self.updatedAt.timeIntervalSinceNow>10.0 {
             setPrimitiveValue(NSDate(), forKey: "updatedAt")
         }
-//        if let updatedAt = self.updatedAt {
-//            if updatedAt.timeIntervalSince(Date()) > 10.0 {
-//                setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//                //self.updatedAt = NSDate()
-//            }
-//
-//        } else {
-//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//            //self.updatedAt = NSDate()
-//        }
     }
-    
-    //Decodable
-    public required convenience init(from decoder: Decoder) throws {
-        guard let codingUserInfoKeyMOC = CodingUserInfoKey.managedContext,
-            let moc = decoder.userInfo[codingUserInfoKeyMOC] as? NSManagedObjectContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Author", in: moc) else {
-                fatalError("Failed to decode Author")}
         
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(entity:  entity, insertInto: moc)
-        self.name = try container.decode(String.self, forKey: .name)
-    }
-    
-    //Encodable
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-    }
-    
     //Convinience Init.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
         guard let entity = NSEntityDescription.entity(forEntityName: "Author", in: moc) else {

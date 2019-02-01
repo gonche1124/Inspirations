@@ -27,7 +27,7 @@ class LeftController: NSViewController {
         //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
         fr.sortDescriptors=[NSSortDescriptor(key: "sortingOrder", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
-        fr.predicate=NSPredicate.leftPredicate(withText: "")
+        fr.predicate=NSPredicate.rootItems
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
         try! frc.performFetch()
@@ -49,8 +49,8 @@ class LeftController: NSViewController {
         listView.expandItem(nil, expandChildren: true)
         listView.endUpdates()
         
-        let mainItem = moc.getItem(ofType: .mainLibrary)
-        let itemIndex = listView.row(forItem: mainItem)
+        //Set default selected item.
+        let itemIndex = listView.row(forItem: moc.get(LibraryItem: .mainLibrary))
         listView.selectRowIndexes(IndexSet.init(integer: itemIndex), byExtendingSelection: false)
         //Register to update count.
         //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
@@ -75,14 +75,10 @@ class LeftController: NSViewController {
         segue.presentingControl = clickedmenu.menu?.identifier?.rawValue=="rightClickMenu" ? listView : addButton
         segue.preferredEdge = clickedmenu.menu?.identifier?.rawValue=="rightClickMenu" ? .maxX : .maxY
 
-        //Passes the selected library item if editing.
-        if clickedmenu.identifier!.rawValue=="editLibraryItem"{
-            vc.selectedObject=listView.item(atRow: listView.clickedRow) as? LibraryItem
-            vc.itemType=vc.selectedObject?.libraryType
-            //vc.itemType=LibraryType(rawValue: (vc.selectedObject?.libraryType)!)
-        }else {
-            vc.itemType=LibraryType(rawValue: clickedmenu.representedType)
-        }
+        //Passes the selected library item and the type of action by user.
+        vc.selectedObject=listView.item(atRow: listView.clickedRow) as? LibraryItem
+        vc.typeOfAction = (clickedmenu.identifier!.rawValue=="editLibraryItem") ? .editing : .inserting
+        vc.insertItemType = LibraryType(rawValue: clickedmenu.representedType)
     }
     
     
@@ -142,15 +138,20 @@ extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let libItem=item as? LibraryItem else {return nil}
-        let identifier=NSUserInterfaceItemIdentifier(libItem.libraryType.rawValue)
-        let myCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? AGC_DataCell
-        myCell?.textField?.stringValue=libItem.name!
+        var identifier:NSUserInterfaceItemIdentifier? = nil
+        if libItem.isRootItem {
+            identifier = NSUserInterfaceItemIdentifier.headerCell
+        }else{
+            identifier = NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
+        }
+        let myCell = outlineView.makeView(withIdentifier: identifier!, owner: self) as? AGC_DataCell
+        myCell?.textField?.stringValue=libItem.name
         if let totItems=libItem.totalQuotes, totItems>0{
             myCell?.totalButton?.isHidden=false
             myCell?.totalButton?.title="\(totItems)"
         }
         if libItem.isRootItem {
-            myCell?.textField?.stringValue=libItem.name!.uppercased()
+            myCell?.textField?.stringValue=libItem.name.uppercased()
         }
         return myCell
     }
@@ -206,7 +207,6 @@ extension LeftController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         guard let item=item as? LibraryItem else {
             return (listFRC.fetchedObjects?.count)!
-            
         }
         return (item.hasLibraryItems!.count)
     }

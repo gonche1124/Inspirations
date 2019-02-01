@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 //Extension of NSPredicate for easy building
 extension NSPredicate{
@@ -19,8 +20,8 @@ extension NSPredicate{
 //    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
     
     //Predifened Predicates
-    static var favoriteItems:NSPredicate = NSPredicate(format:NSPredicate.pIsFavorite)
-    static var rootItems:NSPredicate = NSPredicate(format:NSPredicate.pIsRoot)
+    static var favoriteItems:NSPredicate = NSPredicate(format:"isFavorite == TRUE")
+    static var rootItems:NSPredicate = NSPredicate(format:"isRootItem == YES")
     static var mainLibrary:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.mainLibrary.rawValue)
     static var favoriteLibrary:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.favorites.rawValue)
     static var rootTag:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootTag.rawValue)
@@ -36,7 +37,7 @@ extension NSPredicate{
     
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
-        if withText == "" { return NSPredicate(format: pIsRoot)}
+        if withText == "" { return NSPredicate.rootItems}
         return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
     }
     
@@ -55,15 +56,15 @@ extension NSPredicate{
     static func predicate(for libraryItem:LibraryItem)->NSPredicate? {
         switch libraryItem.libraryType {
         case .favorites:
-            return NSPredicate(format: pIsFavorite)
+            return NSPredicate.favoriteItems
         case .language:
-            return NSPredicate(format: pSpelledIn, libraryItem.name!)
+            return NSPredicate(format: "spelledIn.name CONTAINS [CD] %@", libraryItem.name)
         case .list:
-            return NSPredicate(format: pInList,  libraryItem.name!)
+            return NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  libraryItem.name)
         case .smartList:
             return (libraryItem as? QuoteList)?.smartPredicate!
         case .tag:
-            return NSPredicate(format: pIsTagged, libraryItem.name!)
+            return NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", libraryItem.name)
         case .mainLibrary:
             return NSPredicate(value: true)
         default:
@@ -76,6 +77,37 @@ extension NSPredicate{
 extension String{
     func trimWhites()->String{
         return self.trimmingCharacters(in: .whitespaces)
+    }
+    
+    ///Converts a String to a Boolean Value. Used in NSentityDescription.
+    var boolValue: Bool {
+        return NSString(string: self).boolValue
+    }
+}
+
+//MARK: -
+extension NSEntityDescription{
+    
+    ///Returns dictionary of attributes and Attribute type filtered by USER INFO[searchable]=1
+    var attributesByNameForPredicateEditor:[String : NSAttributeType]{
+        get{
+            let baseDict=self.attributesByName.filter{
+                guard let userInfo = $0.value.userInfo, let searchable=userInfo["searchable"] as? String else{return false}
+                return searchable.boolValue
+                }.mapValues{$0.attributeType}
+            return baseDict
+        }
+    }
+    
+    ///Returns dictionary of relationships and destiny Entity type filtered by USER INFO[searchable]=1
+    var relationshipsByNameForPredicateEditor:[String:String?]{
+        get{
+            let baseDict=self.relationshipsByName.filter{
+                guard let userInfo = $0.value.userInfo, let searchable=userInfo["searchable"] as? String else {return false}
+                return searchable.boolValue
+                }.mapValues{$0.destinationEntity?.name}
+            return baseDict
+        }
     }
 }
 

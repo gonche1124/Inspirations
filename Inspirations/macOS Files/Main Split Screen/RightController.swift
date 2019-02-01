@@ -150,7 +150,7 @@ extension RightController{
             let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
             NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
             //TODO. Figure out how to get notifications.
-            let item=moc.getItem(ofType: .favorites)
+            let item=moc.get(LibraryItem: .favorites)
             item?.belongsToLibraryItem?.willAccessValue(forKey: "name")
             item?.belongsToLibraryItem?.didAccessValue(forKey: "name")
             
@@ -231,12 +231,12 @@ extension RightController: NSMenuDelegate{
         case "tagMenu":
             menu.removeAllItems()
             try! Tag.allInContext(moc).forEach({
-                menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
+                menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         case "listMenu":
             menu.removeAllItems()
             try! QuoteList.allInContext(moc).forEach({
-                menu.addMenuItem(title: $0.name!,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
+                menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         default:
             break

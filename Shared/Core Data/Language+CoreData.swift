@@ -24,18 +24,23 @@ public class Language: LibraryItem {
         return hasQuotes?.count
     }
     
+    //MARK: - Overrides
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+        setPrimitiveValue(LibraryType.language.rawValue, forKey: "libraryTypeValue")
+        setPrimitiveValue(false, forKey: "isRootItem")
+    }
+    
+    //MARK: - Convinience Init.
     //Convinience init
-    public convenience init?(inMOC:NSManagedObjectContext, andName:String){
+    public convenience init?(named:String, inMOC:NSManagedObjectContext){
         guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: inMOC),
-            andName != "" else {
+            named != "" else {
                 fatalError("Failed to create Tag")}
         
         self.init(entity: entity, insertInto: inMOC)
-        self.libraryType = .language
-        self.name=andName
-        self.isShown=true
-        self.isRootItem=false
-        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Languages", , ofType:inContext: inMOC)
+        self.name=named
+        self.belongsToLibraryItem=inMOC.get(LibraryItem: .rootLanguage)
         self.sortingOrder=self.name
         
     }
@@ -53,11 +58,10 @@ public class Language: LibraryItem {
         
         self.init(entity: entity, insertInto: moc)
         self.libraryType = .language
-        self.name=langCode
+        self.name=langCode ?? "und"
         self.localizedName=langCode
-        self.isShown=true
         self.isRootItem=false
-        self.belongsToLibraryItem = LibraryItem.getRootItem(named: "Languages", , ofType:inContext: moc)
+        self.belongsToLibraryItem=moc.get(LibraryItem: .rootLanguage)
     }
     
 }

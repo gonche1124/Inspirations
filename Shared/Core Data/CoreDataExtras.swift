@@ -30,7 +30,7 @@ extension LibraryItem{
         }
         
         //Creat Library Item because it did not existed.
-        let newItem = LibraryItem.init(rootNamed: named, andType: type, inMOC: moc)
+        let newItem = LibraryItem.init(standardNamed: named, andType: type, inMOC: moc)
         return newItem
     }
 }
@@ -67,8 +67,8 @@ extension NSManagedObject {
 //    }
     
     //Get first item with predicate
-    class func firstWith<T: NSManagedObject>(predicate:NSPredicate, inContext:NSManagedObjectContext)->T?{
-        let request = T.singleRequest()
+    class func firstWith(predicate:NSPredicate, inContext:NSManagedObjectContext)->NSManagedObject?{
+        let request = self.singleRequest()
         //let request = NSFetchRequest<T>(entityName: self.className())
         request.predicate=predicate
         //return try! inContext.fetch(request).first
@@ -81,7 +81,7 @@ extension NSManagedObject {
     //returns first object with a given attribute. Convinience for not constructing NSPredciate.
     class func firstWith<T: NSManagedObject>(attribute:String, value:Any, inContext:NSManagedObjectContext)->T?{
         let predicate=NSPredicate(format:"%K == %@", attribute,value as! CVarArg)
-        return self.firstWith(predicate: predicate, inContext: inContext)
+        return self.firstWith(predicate: predicate, inContext: inContext) as? T
     }
     
     ///Returns uriRepresentation as a string.
@@ -194,10 +194,12 @@ extension NSManagedObjectContext{
     }
     
     /// Returns the standard library object chosen as parameter.
-    /// - note: It has to be one of the root items or the mian or faboeite item.
-    func get(LibraryItem ofType: LibraryType)->LibraryItem{
+    /// - note: It has to be one of the root items or the main or favorite item.
+    func get(LibraryItem ofType: LibraryType)->LibraryItem?{
         let request = LibraryItem.singleRequest()
         switch ofType {
+        case .rootMain:
+            request.predicate=NSPredicate.rootMain
         case .mainLibrary:
             request.predicate=NSPredicate.mainLibrary
         case .favorites:
@@ -211,8 +213,10 @@ extension NSManagedObjectContext{
         default:
             fatalError("No case for the Library Item selected: \(ofType)")
         }
-        let item=try? self.fetch(request).first!
-        return item!
+        if let item=try? self.fetch(request).first {
+            return item
+        }
+        return nil
     }
 }
 //MARK: -

@@ -18,6 +18,7 @@
 		8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */; };
 		8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17C2051F58FB0900814107 /* ImportExport.swift */; };
 		8A1A703021A735540061B6C9 /* MultipleImporterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A702F21A735540061B6C9 /* MultipleImporterController.swift */; };
+		8A216C512202ADC100506332 /* PredicateFormatting.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A216C502202ADC100506332 /* PredicateFormatting.strings */; };
 		8A2C311B213A008E00B8F3E1 /* Author+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */; };
 		8A2C311D213A013400B8F3E1 /* Quote+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C311C213A013400B8F3E1 /* Quote+CoreData.swift */; };
 		8A2C311F213A042700B8F3E1 /* QuoteList+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C311E213A042700B8F3E1 /* QuoteList+CoreData.swift */; };
@@ -72,6 +73,7 @@
 		8A17C2051F58FB0900814107 /* ImportExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportExport.swift; sourceTree = "<group>"; };
 		8A1A702F21A735540061B6C9 /* MultipleImporterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleImporterController.swift; sourceTree = "<group>"; };
 		8A1A703121A790CD0061B6C9 /* Inspirations Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Inspirations Tests.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8A216C502202ADC100506332 /* PredicateFormatting.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = PredicateFormatting.strings; sourceTree = "<group>"; };
 		8A2C311A213A008E00B8F3E1 /* Author+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C311C213A013400B8F3E1 /* Quote+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+CoreData.swift"; sourceTree = "<group>"; };
 		8A2C311E213A042700B8F3E1 /* QuoteList+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteList+CoreData.swift"; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */,
 				8AEE1A7721D1C99F0011CFA3 /* Extensions */,
 				8AFD589621F979D100A3D2A9 /* Core Data */,
+				8A216C502202ADC100506332 /* PredicateFormatting.strings */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				8A7500B52187FB0200C856FE /* Add Value.storyboard in Resources */,
 				8A2FF33821B1B72C0035CC08 /* BCP47.plist in Resources */,
 				8A01F86721054CA1007D1E3F /* Alternate.storyboard in Resources */,
+				8A216C512202ADC100506332 /* PredicateFormatting.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

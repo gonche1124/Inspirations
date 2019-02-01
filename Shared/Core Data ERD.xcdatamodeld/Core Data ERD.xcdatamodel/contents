@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Author" representedClassName="Author" syncable="YES">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="hasSaid" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="Quote" inverseName="from" inverseEntity="Quote" syncable="YES"/>
         <fetchIndex name="byName">
@@ -14,10 +22,18 @@
         <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="spelledIn" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="LibraryItem" representedClassName="LibraryItem" syncable="YES">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
         <attribute name="isRootItem" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="libraryTypeValue" attributeType="String" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
         <attribute name="sortingOrder" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="belongsToLibraryItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LibraryItem" inverseName="hasLibraryItems" inverseEntity="LibraryItem" syncable="YES"/>
@@ -33,16 +49,52 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="quoteString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalLetters" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="totalWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="from" maxCount="1" deletionRule="Cascade" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES"/>
-        <relationship name="isAbout" maxCount="1" deletionRule="Cascade" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="quoteString" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="totalLetters" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="totalWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <relationship name="from" maxCount="1" deletionRule="Cascade" destinationEntity="Author" inverseName="hasSaid" inverseEntity="Author" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </relationship>
+        <relationship name="isAbout" maxCount="1" deletionRule="Cascade" destinationEntity="Theme" inverseName="hasQuotes" inverseEntity="Theme" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </relationship>
         <relationship name="isIncludedIn" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="QuoteList" inverseName="hasQuotes" inverseEntity="QuoteList" syncable="YES"/>
-        <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="isTaggedWith" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="hasQuotes" inverseEntity="Tag" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </relationship>
         <relationship name="spelledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="hasQuotes" inverseEntity="Language" syncable="YES"/>
         <fetchIndex name="byQuote">
             <fetchIndexElement property="quoteString" type="Binary" order="ascending"/>
@@ -56,8 +108,16 @@
         <relationship name="hasQuotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="isTaggedWith" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Theme" representedClassName="Theme" syncable="YES">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="themeName" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
+        <attribute name="themeName" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="searchable" value="1"/>
+            </userInfo>
+        </attribute>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="hasQuotes" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="isAbout" inverseEntity="Quote" syncable="YES"/>
         <fetchIndex name="byTopic">
