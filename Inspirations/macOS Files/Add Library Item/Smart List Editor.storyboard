@@ -139,6 +139,9 @@ Gw
                                                             </popUpMenus>
                                                         </predicateEditorRowTemplate>
                                                     </rowTemplates>
+                                                    <connections>
+                                                        <action selector="predicatedChanged:" target="WCB-UA-VqA" id="dMx-K7-S4W"/>
+                                                    </connections>
                                                 </predicateEditor>
                                             </subviews>
                                         </clipView>

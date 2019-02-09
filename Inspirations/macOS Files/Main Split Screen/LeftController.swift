@@ -138,14 +138,18 @@ extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let libItem=item as? LibraryItem else {return nil}
-        var identifier:NSUserInterfaceItemIdentifier? = nil
-        if libItem.isRootItem {
-            identifier = NSUserInterfaceItemIdentifier.headerCell
-        }else{
-            identifier = NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
-        }
-        let myCell = outlineView.makeView(withIdentifier: identifier!, owner: self) as? AGC_DataCell
+        //var identifier:NSUserInterfaceItemIdentifier? = nil
+        let identifier = (libItem.isRootItem) ? NSUserInterfaceItemIdentifier.headerCell : NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
+//        if libItem.isRootItem {
+//            identifier = NSUserInterfaceItemIdentifier.headerCell
+//        }else{
+//            identifier = NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
+//        }
+        let myCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? AGC_DataCell
         myCell?.textField?.stringValue=libItem.name
+        if libItem.libraryType == .language, let localName = Locale.current.localizedString(forIdentifier: libItem.name){
+            myCell?.textField?.stringValue=localName
+        }
         if let totItems=libItem.totalQuotes, totItems>0{
             myCell?.totalButton?.isHidden=false
             myCell?.totalButton?.title="\(totItems)"
@@ -158,12 +162,11 @@ extension LeftController: NSOutlineViewDelegate{
     
     //Determines if triangle should be shown.
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-        guard let libItem=item as? LibraryItem else {return false} //TODO: SImplify with ENUMs
-        if libItem.isRootItem || libItem.libraryType == LibraryType.folder{
+        guard let libItem=item as? LibraryItem else {return false}
+        if libItem.isRootItem || libItem.libraryType == .folder{
             return true
         }
         return false
-        //return (libItem?.isRootItem)!
     }
     
     //Checks to see if it is a grouped item.
@@ -222,17 +225,12 @@ extension LeftController: NSOutlineViewDataSource {
             return libItem.hasLibraryItems![index]
     }
     
-    //Required for editing.
-    //TODO: Research if this is the best place to set the object of a cell for future the binding.
-    func outlineView(_ outlineView: NSOutlineView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, byItem item: Any?) {
-    }
-    
     //Validate if dropping is allowed.
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
     
         guard let destItem = item as? LibraryItem else {return NSDragOperation.init(rawValue: 0)}
-        let canDragg = (!destItem.isRootItem && (destItem.libraryType == LibraryType.list || destItem.libraryType == LibraryType.tag)) //TODO: Improve through the ENUM.
-        return NSDragOperation.init(rawValue: canDragg ?  1 : 0)
+        let canDragg2 = LibraryType.canDragg.contains(destItem.libraryType)
+        return NSDragOperation.init(rawValue: canDragg2 ?  1 : 0)
         }
     
     //Perform the Drop, validating the data.
@@ -243,17 +241,12 @@ extension LeftController: NSOutlineViewDataSource {
                 let quotesS = moc.getObjectsWithIDS(asStrings: stringArray) as? [Quote] else {
                     return false
             }
-    
-            if let destTag = item as? Tag{
-                destTag.addToHasQuotes(NSSet(array: quotesS))
-                try! self.moc.save()
-                return true
-            }
-            if let destList = item as? QuoteList {
-                destList.addToHasQuotes(NSSet(array: quotesS))
-                try! self.moc.save()
-                return true
-            }
+        
+        if let destinatinoEntity = item as? ManagesQuotes{
+            destinatinoEntity.addQuotes(quotes: quotesS)
+            try! self.saveMainContext()
+            return true
+        }
             return false
         }
 }
@@ -278,7 +271,7 @@ extension LeftController: NSFetchedResultsControllerDelegate {
             break
         case .update:
             // [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            print("Update")
+            print("Update..........")
             break
         }
     }

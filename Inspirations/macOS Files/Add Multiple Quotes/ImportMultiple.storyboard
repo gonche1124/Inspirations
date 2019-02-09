@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0MY-Q2-j7b">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Importer-->
         <scene sceneID="uia-JB-U1L">
             <objects>
-                <tabViewController title="Importer" showSeguePresentationStyle="single" tabStyle="toolbar" id="0MY-Q2-j7b" customClass="TabViewImportController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController title="Importer" showSeguePresentationStyle="single" tabStyle="toolbar" id="0MY-Q2-j7b" customClass="TabViewImportController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="JSON" identifier="" image="JSON Import" id="u1S-aa-sV8"/>
-                        <tabViewItem label="Web Importer" identifier="" image="Web Download" id="I92-38-4qO"/>
+                        <tabViewItem id="9ta-Tj-gQx"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" crossfade="YES"/>
                     <tabView key="tabView" id="uV3-YM-Cfw">
@@ -27,7 +25,7 @@
                     <connections>
                         <outlet property="tabView" destination="uV3-YM-Cfw" id="WLs-6Z-4m0"/>
                         <segue destination="faY-da-gFi" kind="relationship" relationship="tabItems" id="eRx-YD-fhz"/>
-                        <segue destination="vc7-B7-109" kind="relationship" relationship="tabItems" id="2hy-GR-jGv"/>
+                        <segue destination="lLR-2V-x3s" kind="relationship" relationship="tabItems" id="7ix-qv-NBp"/>
                     </connections>
                 </tabViewController>
                 <customObject id="6Tf-5p-nw7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -37,7 +35,7 @@
         <!--JSON-->
         <scene sceneID="bQh-tB-YiM">
             <objects>
-                <viewController title="JSON" showSeguePresentationStyle="single" id="faY-da-gFi" customClass="FileImporter" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="JSON" showSeguePresentationStyle="single" id="faY-da-gFi" customClass="FileImporter" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="kji-39-qOV">
                         <rect key="frame" x="0.0" y="0.0" width="416" height="139"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
@@ -175,130 +173,84 @@ Gw
             </objects>
             <point key="canvasLocation" x="603" y="184.5"/>
         </scene>
-        <!--Web Import-->
-        <scene sceneID="UlA-yH-yr8">
+        <!--Web Importer 2-->
+        <scene sceneID="JpY-0v-FEj">
             <objects>
-                <viewController title="Web Import" showSeguePresentationStyle="single" id="vc7-B7-109" customClass="WebImporter" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="wbG-2w-xsr">
-                        <rect key="frame" x="0.0" y="0.0" width="451" height="279"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <viewController title="Web Importer 2" id="lLR-2V-x3s" customClass="WebImporter" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="UEW-5j-VWe">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="398"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" verticalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aA-Cr-wjb" userLabel="Three Row Stack View">
-                                <rect key="frame" x="20" y="20" width="411" height="239"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZA-kj-cvd">
+                                <rect key="frame" x="20" y="20" width="410" height="358"/>
                                 <subviews>
-                                    <popUpButton verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-yR-PaF">
-                                        <rect key="frame" x="-2" y="215" width="416" height="25"/>
-                                        <popUpButtonCell key="cell" type="push" title="Forbes - Quote of the day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="325-HX-eFZ" id="zBa-oD-YBQ">
+                                    <popUpButton verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="X5B-WK-Epo">
+                                        <rect key="frame" x="-2" y="334" width="415" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Wikiquote - Quote of the Day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MHE-vb-h2J" id="Rco-tw-eV4">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="whB-dL-075">
+                                            <menu key="menu" id="aVv-HL-Hdm">
                                                 <items>
-                                                    <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="FeR-Sa-Lzk" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                    <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="MHE-vb-h2J" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </menuItem>
-                                                    <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="9nc-6P-K0j" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                    <menuItem title="Brainy Quote of the day" identifier="brainyQuote" id="HYj-FH-VZw" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.brainyquote.com/quote_of_the_day"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </menuItem>
-                                                    <menuItem title="Eduro" identifier="eduroQuote" id="icR-qS-9BM" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                    <menuItem title="Eduro" identifier="eduroQuote" id="KhA-yc-0vf" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.eduro.com"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </menuItem>
-                                                    <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="gGh-IU-Gjh" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                                    <menuItem title="Inspirational Words of Wisdom" identifier="InspirationalWordsOfWisdom" id="DPi-QS-Imt" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.wow4u.com/quote-of-the-day/"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </menuItem>
-                                                    <menuItem title="Forbes - Quote of the day" state="on" identifier="forbesQuote" id="325-HX-eFZ" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://www.forbes.com/quotes/"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </menuItem>
                                                 </items>
                                                 <connections>
-                                                    <outlet property="delegate" destination="vc7-B7-109" id="22h-TS-j9r"/>
+                                                    <outlet property="delegate" destination="lLR-2V-x3s" id="wy9-Bj-ve8"/>
                                                 </connections>
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <wkWebView wantsLayer="YES" verticalHuggingPriority="249" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7Iv-8o-r9G">
-                                        <rect key="frame" x="0.0" y="40" width="411" height="170"/>
+                                    <progressIndicator wantsLayer="YES" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="qiC-0Q-96R">
+                                        <rect key="frame" x="0.0" y="310" width="410" height="20"/>
+                                    </progressIndicator>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Gl3-7M-gHb">
+                                        <rect key="frame" x="121" y="286" width="169" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Failed to load the WebPage" id="xx6-En-BZU">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <containerView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Q7T-qT-PLr">
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="278"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="eAh-CZ-Tos"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="411" id="rBx-Kz-18u"/>
+                                            <constraint firstAttribute="height" priority="250" constant="278" id="oyG-X1-9cF"/>
                                         </constraints>
-                                        <wkWebViewConfiguration key="configuration">
-                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                            <wkPreferences key="preferences"/>
-                                        </wkWebViewConfiguration>
-                                    </wkWebView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="40" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCA-Dg-333" userLabel="Botom Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="411" height="32"/>
-                                        <subviews>
-                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uyO-eR-UUZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="W0X-hw-EhA"/>
-                                                    <constraint firstAttribute="width" constant="32" id="bgg-bL-CHd"/>
-                                                </constraints>
-                                            </progressIndicator>
-                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5bk-HP-Llk">
-                                                <rect key="frame" x="70" y="8" width="125" height="17"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File:" id="M18-f7-CmB">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Fex-Nm-rgs">
-                                                <rect key="frame" x="227" y="-1" width="80" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wbj-DY-sVe">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="importQuoteFromWeb:" target="vc7-B7-109" id="ohl-BF-nXo"/>
-                                                </connections>
-                                            </button>
-                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZfB-Q2-HhX">
-                                                <rect key="frame" x="335" y="-1" width="82" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fzv-mJ-0ey">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="saveAndClose:" target="vc7-B7-109" id="OHK-Hi-wkl"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                        <connections>
+                                            <segue destination="AXh-DG-pvn" kind="embed" id="oLL-jM-rJ9"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="eR2-yR-PaF" secondAttribute="trailing" id="7bk-G0-RnJ"/>
-                                    <constraint firstItem="eR2-yR-PaF" firstAttribute="leading" secondItem="2aA-Cr-wjb" secondAttribute="leading" id="ghU-ki-S2O"/>
+                                    <constraint firstAttribute="trailing" secondItem="X5B-WK-Epo" secondAttribute="trailing" id="8DK-O7-z51"/>
+                                    <constraint firstItem="qiC-0Q-96R" firstAttribute="leading" secondItem="cZA-kj-cvd" secondAttribute="leading" id="BNf-oX-bw7"/>
+                                    <constraint firstAttribute="trailing" secondItem="qiC-0Q-96R" secondAttribute="trailing" id="Boa-gy-Kli"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q7T-qT-PLr" secondAttribute="trailing" id="UJj-eO-KdA"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q7T-qT-PLr" secondAttribute="bottom" id="hCR-p4-pNE"/>
+                                    <constraint firstItem="X5B-WK-Epo" firstAttribute="leading" secondItem="cZA-kj-cvd" secondAttribute="leading" id="j6A-RL-mBL"/>
+                                    <constraint firstItem="Q7T-qT-PLr" firstAttribute="leading" secondItem="cZA-kj-cvd" secondAttribute="leading" id="w62-tM-eJk"/>
                                 </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
@@ -307,30 +259,37 @@ Gw
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="2aA-Cr-wjb" firstAttribute="top" secondItem="wbG-2w-xsr" secondAttribute="top" constant="20" id="2rh-Fx-RbJ"/>
-                            <constraint firstAttribute="trailing" secondItem="2aA-Cr-wjb" secondAttribute="trailing" constant="20" id="Cvv-wF-h92"/>
-                            <constraint firstItem="2aA-Cr-wjb" firstAttribute="leading" secondItem="wbG-2w-xsr" secondAttribute="leading" constant="20" id="b5n-Zz-nA0"/>
-                            <constraint firstAttribute="bottom" secondItem="2aA-Cr-wjb" secondAttribute="bottom" constant="20" id="bVo-aV-rJZ"/>
+                            <constraint firstAttribute="bottom" secondItem="cZA-kj-cvd" secondAttribute="bottom" constant="20" id="64x-VT-kZl"/>
+                            <constraint firstItem="cZA-kj-cvd" firstAttribute="top" secondItem="UEW-5j-VWe" secondAttribute="top" constant="20" id="86X-WW-cCG"/>
+                            <constraint firstItem="cZA-kj-cvd" firstAttribute="leading" secondItem="UEW-5j-VWe" secondAttribute="leading" constant="20" id="Lx9-kP-CFz"/>
+                            <constraint firstAttribute="trailing" secondItem="cZA-kj-cvd" secondAttribute="trailing" constant="20" id="jmA-WO-vGq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progressIndicator" destination="uyO-eR-UUZ" id="7Mz-D6-GTh"/>
-                        <outlet property="progressLabel" destination="5bk-HP-Llk" id="1bP-fE-hQn"/>
-                        <outlet property="webDisplay" destination="7Iv-8o-r9G" id="POa-F1-5qO"/>
-                        <outlet property="webPopUpButton" destination="eR2-yR-PaF" id="HJi-qm-WH8"/>
+                        <outlet property="embeddedView" destination="Q7T-qT-PLr" id="8dp-a8-Iea"/>
+                        <outlet property="notificationLabel" destination="Gl3-7M-gHb" id="93j-So-oAs"/>
+                        <outlet property="progressIndicator" destination="qiC-0Q-96R" id="CW4-3i-LXe"/>
                     </connections>
                 </viewController>
-                <customObject id="1eC-xE-3Sk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="HKm-vR-B63" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="633.5" y="602"/>
+            <point key="canvasLocation" x="620" y="583"/>
+        </scene>
+        <!--Add Value-->
+        <scene sceneID="h7l-BO-urQ">
+            <objects>
+                <controllerPlaceholder storyboardName="Add Value" id="AXh-DG-pvn" sceneMemberID="viewController"/>
+                <customObject id="hH7-IJ-hUa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621" y="1370"/>
         </scene>
     </scenes>
     <resources>
         <image name="JSON Import" width="512" height="512"/>
-        <image name="Web Download" width="512" height="512"/>
     </resources>
 </document>

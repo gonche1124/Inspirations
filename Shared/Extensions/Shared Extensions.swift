@@ -12,6 +12,7 @@ import CoreData
 //Extension of NSPredicate for easy building
 extension NSPredicate{
     
+    //TODO: Delete if no bugs.
     //String searchs
 //    static var pIsFavorite:String = "isFavorite == TRUE"
 //    static var pSpelledIn:String = "spelledIn.name CONTAINS [CD] %@"
@@ -29,11 +30,11 @@ extension NSPredicate{
     static var rootList:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootList.rawValue)
     static var rootLanguage:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootLanguage.rawValue)
     
-    ///Predciate to search for main library
-    static func getItem(ofType: LibraryType)->NSPredicate?{
+    ///Predicate to search for library items by type
+    /// - parameter ofType: Library type item.
+    static func forItem(ofType: LibraryType)->NSPredicate{
         return NSPredicate(format: "libraryTypeValue == %@", ofType.rawValue)
     }
-    
     
     //Predciate for left searchfield
     static func leftPredicate(withText:String)->NSPredicate{
@@ -53,7 +54,7 @@ extension NSPredicate{
     }
     
     //Predicate for selected left item
-    static func predicate(for libraryItem:LibraryItem)->NSPredicate? {
+    static func quotePredicate(for libraryItem:LibraryItem)->NSPredicate? {
         switch libraryItem.libraryType {
         case .favorites:
             return NSPredicate.favoriteItems
@@ -75,6 +76,7 @@ extension NSPredicate{
 
 //MARK: - 
 extension String{
+    ///Removes whitespace on both ends.
     func trimWhites()->String{
         return self.trimmingCharacters(in: .whitespaces)
     }
@@ -85,7 +87,7 @@ extension String{
     }
 }
 
-//MARK: -
+//MARK: - NSEntityDescription
 extension NSEntityDescription{
     
     ///Returns dictionary of attributes and Attribute type filtered by USER INFO[searchable]=1

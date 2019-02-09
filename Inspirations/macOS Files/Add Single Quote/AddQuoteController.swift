@@ -10,97 +10,164 @@ import Cocoa
 
 class AddQuoteController: NSViewController {
 
+    //Public ENUM that handles the case of what teh controller is actially using.
+    public enum CurrentAction{
+        case adding, editing, showing, downloading
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.nonEmptyTextField=[quoteTextField, authorComboBox, themeComboBox]
+        self.editableItems=[quoteTextField, authorComboBox, themeComboBox, favoriteCheck, tokenField ]
         
         // Do view setup here.
         if let currQuote=currQuote {
             self.assignValuesToUIFrom(quote: currQuote)
         }
-
-        
-        //Set up button.
-        isEditing = !isInfoWindow
-        saveButton.title = isInfoWindow ? "Edit":"Add"
-        saveButton.isEnabled=isInfoWindow
-        saveButton.action=isInfoWindow ? #selector(editOrSave(_:)) : #selector(addNewQuote(_:))
-        infoLabel.isHidden=true
-        cancelButton.isHidden=true
+        //refreshes UI based on state.
+        refreshViewState()
     }
 
     //MARK: - Properties
-    var isInfoWindow:Bool=false
-    var nonEmptyTextField:[NSTextField]=[NSTextField]()
+
     
-    @IBOutlet var selectionController: NSArrayController?=nil
+    //State of the view.
+    var viewType:CurrentAction = .adding {
+        didSet{
+            refreshViewState()
+        }
+    }
+    
+    //Variables
+    @objc dynamic var authorSort:[NSSortDescriptor]=[NSSortDescriptor(key: "name", ascending: true)]
+    @objc dynamic var themeSort:[NSSortDescriptor]=[NSSortDescriptor(key: "themeName", ascending: true)]
+    @objc dynamic var currQuote:Quote?
+  
+    
+    //MARK: - Outlets.
+    @IBOutlet var selectionController: NSArrayController?
     @IBOutlet var tagsController:NSArrayController!
     @IBOutlet var tokenField:NSTokenField!
-    @IBOutlet var saveButton:NSButton!
-    @IBOutlet var cancelButton:NSButton!
+    @IBOutlet var saveButton:NSButton?
+    @IBOutlet var cancelButton:NSButton?
     @IBOutlet var quoteTextField:NSTextField!
     @IBOutlet var authorComboBox:NSComboBox!
     @IBOutlet var themeComboBox:NSComboBox!
     @IBOutlet var favoriteCheck: NSButton!
-    @IBOutlet var infoLabel:NSTextField!
+    var editableItems:[NSControl] = [NSControl]()
+    
+    //MARK: - AutoLayout:
     @IBOutlet var widthConstraint:NSLayoutDimension!
+    @IBOutlet weak var rightMargin: NSLayoutConstraint?
+    @IBOutlet weak var bottomMargin: NSLayoutConstraint?
+    @IBOutlet weak var leftMargin: NSLayoutConstraint?
+    @IBOutlet weak var topMargin: NSLayoutConstraint?
     
-    //Sort descriptors used in the array controllers.
-    @objc dynamic var authorSort:[NSSortDescriptor]=[NSSortDescriptor(key: "name", ascending: true)]
-    @objc dynamic var themeSort:[NSSortDescriptor]=[NSSortDescriptor(key: "themeName", ascending: true)]
     
-    @objc dynamic var currQuote:Quote?
-    @objc dynamic var isEditing:Bool=false
     
     // MARK: - Actions
-    @IBAction func editOrSave(_ sender: NSButton){
+    ///Called when the users want to edit a quote.
+    @IBAction func editQuote(_ sender:NSButton){
         //TODO: Only works for 1 entity, figure out how to do it for multiple.
-        if !isEditing {
-            isEditing=true
-            NSAnimationContext.runAnimationGroup({
-                $0.duration=0.25
-                $0.allowsImplicitAnimation=true
-                cancelButton.isHidden=false
-                sender.title = "Save"
-                self.view.layoutSubtreeIfNeeded()
-            })
-            return
+        viewType = .editing
+    }
+    
+    //Called when the suers wants to save the changes of the selected quote.
+    @IBAction func updateQuote(_ sender:NSButton){
+        if isInterfaceValid() {
+            getValuesFromUIAndAssignTo(quote: currQuote)
+            viewType = .showing
         }
-        currQuote?.quoteString=quoteTextField.stringValue
-        getValuesFromUIAndAssignTo(quote: currQuote!)
-        isEditing=false
-        cancelButton.isHidden=true
-        sender.title = "Edit"
     }
     
     ///Ads a new quote based on the values of the UI. Assumes they all exist.
     @IBAction func addNewQuote(_ sender:NSButton){
-        let newQuote=NSEntityDescription.insertNewObject(forEntityName: Entities.quote.rawValue, into: moc) as! Quote
-        getValuesFromUIAndAssignTo(quote: newQuote)
-        self.dismiss(self)
+        if isInterfaceValid() {
+            let newQuote=NSEntityDescription.insertNewObject(forEntityName: Entities.quote.rawValue, into: moc) as! Quote
+            getValuesFromUIAndAssignTo(quote: newQuote)
+            self.dismiss(self)
+        }
     }
     
     ///Cancels any edits that the user might have done.
     @IBAction func cancelsEdits(_ sender:NSButton){
-        self.dismiss(self)
+        if viewType != .downloading {
+             self.dismiss(self)
+        }
     }
     
-    //MARK: -
+    //MARK: - UI Methods
+    ///Refreshes the view with the current state.
+    fileprivate func refreshViewState() {
+        switch self.viewType {
+        case .downloading:
+            //Adjust margins
+            topMargin?.constant=0
+            leftMargin?.constant=0
+            bottomMargin?.constant=0
+            rightMargin?.constant=0
+            saveButton?.title = "Add"
+            saveButton?.action = #selector(addNewQuote(_:))
+            cancelButton?.isHidden = true
+            editableItems.forEach{$0.isEnabled=true}
+        case .editing:
+            saveButton?.title = "Save"
+            saveButton?.action = #selector(updateQuote(_:))
+            cancelButton?.isHidden = false
+            editableItems.forEach{$0.isEnabled=true}
+        case .showing:
+            saveButton?.title = "Edit"
+            saveButton?.action = #selector(editQuote(_:))
+            cancelButton?.isHidden = true
+            editableItems.forEach{$0.isEnabled=false}
+            saveButton?.isEnabled = true
+        case .adding:
+            saveButton?.title = "Add"
+            saveButton?.action = #selector(addNewQuote(_:))
+            cancelButton?.isHidden = true
+            editableItems.forEach{$0.isEnabled=true}
+        }
+    }
+    
+    ///Validates that the interface can be added or updated.
+    fileprivate func isInterfaceValid()->Bool {
+        //Checks for value in the quote.
+        if quoteTextField.stringValue.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted).isEmpty {
+            let alert = NSAlert.init(for: .quoteField)
+            alert.runModal()
+            return false
+        }
+        //Checks author combo box.
+        if authorComboBox.stringValue.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted).isEmpty {
+            let alert = NSAlert.init(for: .author)
+            alert.runModal()
+            return false
+        }
+        
+        //Checks theme.
+        if themeComboBox.stringValue.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted).isEmpty {
+            let alert = NSAlert.init(for: .theme)
+            alert.runModal()
+            return false
+        }
+        return true
+    }
+    
     ///Completes the creation/Update of a quote passed as a parameter based on the values of the UI
-    func getValuesFromUIAndAssignTo(quote:Quote){
-        quote.quoteString=quoteTextField.stringValue
-        quote.isFavorite=Bool.init(favoriteCheck.state.rawValue != 0)
-        quote.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.stringValue], andKeys: ["name"])
-        quote.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.stringValue], andKeys: ["themeName"])
+    fileprivate func getValuesFromUIAndAssignTo(quote:Quote?){
+        quote?.quoteString=quoteTextField.stringValue
+        quote?.isFavorite=Bool.init(favoriteCheck.state.rawValue != 0)
+        quote?.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.stringValue], andKeys: ["name"])
+        quote?.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.stringValue], andKeys: ["themeName"])
         if let currTags = self.tokenField.objectValue as? [Tag]{
-            quote.addToIsTaggedWith(NSSet.init(array: currTags))
+            quote?.addToIsTaggedWith(NSSet.init(array: currTags))
         }
         //saveMainContext()
     }
     
     /// Fills the UI based on the quote passed as parameter.
-    func assignValuesToUIFrom(quote:Quote){
+    fileprivate func assignValuesToUIFrom(quote:Quote){
         quoteTextField.stringValue=quote.quoteString!
         favoriteCheck.state=NSButton.StateValue.init(quote.isFavorite ? 1:0)
         authorComboBox.stringValue=quote.from!.name!
@@ -146,22 +213,6 @@ extension AddQuoteController: NSTokenFieldDelegate{
     
 }
 
-//MARK: - NSTextFieldDelegate
-extension AddQuoteController:NSTextFieldDelegate{
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
 
-        //Configure texfield depending on values.
-        if let textField=obj.object as? NSTextField,
-            nonEmptyTextField.map({$0.identifier?.rawValue}).contains(textField.identifier?.rawValue){
-            
-            textField.layer?.borderColor = NSColor.red.withAlphaComponent(0.2).cgColor
-            textField.layer?.borderWidth = textField.hasValue ? 0:2
-            saveButton.isEnabled=nonEmptyTextField.reduce(true, {$0 && $1.hasValue })
-            //saveButton.isEnabled=[quoteTextField, authorComboBox, themeComboBox].reduce(true, {$0 && $1?.hasValue ?? true})
-            //infoLabel.isHidden=
-        }
-    }
-}
 
 

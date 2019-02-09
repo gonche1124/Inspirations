@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        print(self.applicationDocumentsDirectory.path)
+        //print(self.applicationDocumentsDirectory.path)
         
         //Creates .json for ML:
 //        let quoteArray:[Quote]=try! Quote.allInContext(self.managedObjectContext)
@@ -144,14 +144,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var managedObjectContext:NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
-//    lazy var managedObjectContext: NSManagedObjectContext = {
-//        return self.persistentContainer.viewContext
-//    }()
 
     func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
         // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
         return persistentContainer.viewContext.undoManager
-        //return managedObjectContext.undoManager
     }
     
     //MARK: - Core Data Notifications
@@ -161,9 +157,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
+        //Print if merged from background or bacthUpdated/Delete action
+        if let refreshed=userInfo[NSRefreshedObjectsKey] as? Set<NSManagedObject>{
+            print("Objects refreshed: \(refreshed.first?.changedValues().keys)")
+            //Forces refresh on left view and NSFetchedresultsController
+            let item=self.managedObjectContext.get(LibraryItem: .rootMain)
+            item?.willChangeValue(forKey: "hasLibraryItems")
+            item?.didChangeValue(forKey: "hasLibraryItems")
+        }
+        
         //Updates Notification.
         if let updated = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updated.count > 0 {
-            print("++++Changed++++:")
+            
+            print(String(repeating: "+", count: 10)+" CHANGED "+String(repeating: "+", count: 10))
             print("Total items changed: \(updated.count)")
             for itemChanged in updated{
                 if let item=itemChanged as? LibraryItem{
@@ -185,23 +191,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 ////                    }
 //                }
             }
-            print("+++++++++++++++")
         }
         
         //Inserts Notification.
        if let inserted=userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserted.count>0 {
-        print("--- INSERTS ---")
+        print(String(repeating: "+", count: 10)+" INSERTS "+String(repeating: "+", count: 10))
         print(inserted.count)
         //print(inserted)
-        print("+++++++++++++++")
         }
         
         //Deletes Notification.
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject> , deletes.count > 0 {
-            print("--- DELETES ---")
+            print(String(repeating: "+", count: 10)+" DELETES "+String(repeating: "+", count: 10))
             print(deletes.count)
             //print(deletes)
-            print("+++++++++++++++")
         }
 
     }

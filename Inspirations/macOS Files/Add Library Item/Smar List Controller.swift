@@ -21,25 +21,18 @@ class SmartListController: NSViewController {
         // Do view setup here.
         
         //Sets the formatting dictionary.
+        predicateView.rowTemplates.removeAll()
         if let stringsFile = Bundle.main.path(forResource: "PredicateFormatting", ofType: "strings"),
             let strings = try? String(contentsOfFile: stringsFile, encoding: .utf16){
             predicateView.formattingDictionary = strings.propertyListFromStringsFileFormat()
         }
         
-        //Debugging
-        predicateView.rowTemplates.removeAll()
+        //Add Core Data Rows
         let rows = NSPredicateEditorRowTemplate.templates(forEntity: "Quote", in: moc, includingRelationships: true)
         predicateView.rowTemplates.append(contentsOf:rows)
         let compoundRow=NSPredicateEditorRowTemplate.init(compoundTypes: [.and, .not, .or])
         predicateView.rowTemplates.append(compoundRow)
-        predicateView.rowTemplates.append(compoundRow)
-        
-
-        
-        //predicateView.formattingDictionary
         predicateView.addRow(nil)
-        
-        
         
         self.predicateScrollView.isHidden=true
         
@@ -130,8 +123,11 @@ class SmartListController: NSViewController {
     }
     
     //MARK: - NSpredicate Editor.
-    
+    @IBAction func predicatedChanged(_ sender:NSPredicateEditor){
+        print(predicateView.predicate!)
+    }
 }
+    
 
 
 

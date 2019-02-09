@@ -40,7 +40,6 @@ extension NSMenu{
     ///Easy way to fecth item with identifier
     func item(withIdentifier:String)->NSMenuItem?{
         return self.items.firstWith(identifier: withIdentifier)
-        //return self.items.first(where: {$0.identifier!.rawValue==withIdentifier})
     }
 }
 
@@ -49,13 +48,10 @@ extension NSTextField{
     //Used fo validation in the UI/ADD to make sure it has a value.
     @objc dynamic var hasValue:Bool{
         get {
-            print("Value: \(self.stringValue)")
             let myCharacters=CharacterSet.letters.inverted
             return !self.stringValue.trimmingCharacters(in: myCharacters).isEmpty
         }
     }
-    
-    
 }
 
 //MARK: -
@@ -91,6 +87,24 @@ extension NSViewController{
 
 //MARK: -
 extension NSAlert{
+    
+    ///Convinience initializer for UI validation
+    enum UITypeCheck:String{
+        case quoteField="Quote"
+        case author="Author"
+        case theme="Theme"
+    }
+    
+    ///Conviniencen initializer for the UI cases.
+    convenience init(for item: UITypeCheck) {
+        self.init()
+        self.addButton(withTitle: "OK")
+        self.messageText = "Value not valid"
+        self.informativeText = "The value for \(item.rawValue) is not valid. Please enter a valid value."
+        self.alertStyle = .warning
+    }
+    
+    
     convenience init(totalItems:Int, isDeleting:Bool) {
         self.init()
         self.messageText = isDeleting ? "Deletes Records":"Removes Records"
@@ -176,6 +190,7 @@ extension NSPredicateEditorRowTemplate {
         
         //Check for realtionships:
         if includingRelationships{
+            //TODO: Handle TO-MANY relationships.
             let relationsNames = entityDescription?.relationshipsByNameForPredicateEditor
             relationsNames?.forEach{
                 templateRows.append(contentsOf: NSPredicateEditorRowTemplate.templates(forEntity: $0.value!, in: moc, andPrefix:"\($0.key)."))

@@ -1,7 +1,18 @@
 import Cocoa
 
 
+//MARK: - Web Parser
+let myStringURL = "https://www.brainyquote.com/quote_of_the_day"
+let myURLWeb = URL.init(string: myStringURL)
+print(myStringURL)
 
+let myHTMLString = try String.init(contentsOf: myURLWeb!)
+print("HTML : \(myHTMLString)")
+
+
+/*
+let detectedLangauge = Locale.current.localizedString(forIdentifier: "es")
+Locale.isoLanguageCodes
 
 let alert = NSAlert.init()
 alert.informativeText="blabsda jbs dbas"
@@ -17,6 +28,8 @@ alert.addButton(withTitle: "ok")
 //self.addButton(withTitle: "OK")
 //self.addButton(withTitle: "Cancel")
 
+
+//MARK: - All Possible Values
 var str = "Hello, playground"
 let myURL = URL(fileURLWithPath: "/Users/Gonche/Desktop/exportedOnFeb24-sample.txt")
 var testData=Data()
@@ -93,3 +106,5 @@ let myKeys=getAllPossibleKeys(dictionaryArray: dictArrayDirty!)
 //
 ////let sentimentPredictor = try NLModel(mlModel: SentimentClassifier().model)
 ////sentimentPredictor.predictedLabel(for: "It was the best I've ever seen!")
+ 
+ */

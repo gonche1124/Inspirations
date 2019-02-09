@@ -22,7 +22,8 @@ class RightController: NSViewController {
     
     //Variables:
     var deletesFromDatabase:Bool{
-        return !(selectedLeftItem?.libraryType == LibraryType.mainLibrary)
+        return LibraryType.canDeleteQuotes.contains(selectedLeftItem?.libraryType ?? .mainLibrary)
+        //return !(selectedLeftItem?.libraryType == LibraryType.mainLibrary)
         //return ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
     }
     var selectedLeftItem:LibraryItem?{
@@ -45,8 +46,11 @@ class RightController: NSViewController {
         // Do view setup here.
         NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
-        let xx = self.quoteTabView.selectedTabViewItem
-        quoteTabView.selectTabViewItem(xx)
+        
+        //Binds the table.
+        if let currT = self.view.getAllSubViews().firstWith(identifier: "columnTable"), let table=currT as? NSTableView{
+                self.currentTable=table
+        }
     }
     
     override func viewDidAppear() {
@@ -68,10 +72,10 @@ class RightController: NSViewController {
     //Called before preparing for a segue.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let destinationSegue = segue.destinationController as? AddQuoteController{
-            destinationSegue.isInfoWindow=true
+            //TODO: remove isInfoWondow variable.
+            //destinationSegue.isInfoWindow=true
             destinationSegue.currQuote=quoteController.selectedObjects.first as? Quote
-            //destinationSegue.selectionController!.content=self.quoteController.selectedObjects
-            //destinationSegue.selectionController!.setSelectedObjects(quoteController.selectedObjects)
+            destinationSegue.viewType = .showing
         }
     }
     
@@ -85,7 +89,8 @@ class RightController: NSViewController {
             case "i":
                 performSegue(withIdentifier:.init("editSegue"), sender: self)
             case "f":
-                modifyFavoriteAttribute(!modFlags.contains(.shift)) //setFavorite(!modFlags.contains(.shift))
+                let virtualmenu = AGC_NSMenuItem.init(withBool: !modFlags.contains(.shift))
+                modifyFavoriteAttribute(virtualmenu)
             default:
                 break
             }
@@ -118,8 +123,7 @@ class RightController: NSViewController {
     @objc func leftTableChangedSelection(notification: Notification){
         //print("Called")
         if let selectedLib = notification.object as? LibraryItem,
-            let newPredicate = NSPredicate.predicate(for: selectedLib){
-            //print(selectedLib)
+            let newPredicate = NSPredicate.quotePredicate(for: selectedLib){
             self.selectedLeftItem=selectedLib
             self.quoteController.fetchPredicate=newPredicate
             self.quoteController.fetch(nil)
@@ -132,27 +136,20 @@ class RightController: NSViewController {
 extension RightController{
     
     ///Updates favorite attribute based on sender parameter.
-    @IBAction func modifyFavoriteAttribute(_ sender:Any){
+    @IBAction func modifyFavoriteAttribute(_ sender:AGC_NSMenuItem){
         guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
         
         //Using Batch Update to work efficiently.
-        let selectedObjectsIDs=selectedQuotes.map{$0.objectID}
         let request=NSBatchUpdateRequest(entity: Quote.entity())
-        request.predicate=NSPredicate(format: "self IN %@", selectedObjectsIDs)
+        request.predicate=NSPredicate(format: "self IN %@", selectedQuotes.map{$0.objectID})
         request.resultType = .updatedObjectIDsResultType
-        let newBool = (sender as? AGC_NSMenuItem)?.agcBool ?? false
-        request.propertiesToUpdate=["isFavorite": newBool]
-        //TODO: Change to fire KVO
+        request.propertiesToUpdate=["isFavorite": sender.agcBool]
         
         do {
-            let result = try moc.execute(request) as? NSBatchUpdateResult
-            let objectIDArray = result?.result as? [NSManagedObjectID]
-            let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
-            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
-            //TODO. Figure out how to get notifications.
-            let item=moc.get(LibraryItem: .favorites)
-            item?.belongsToLibraryItem?.willAccessValue(forKey: "name")
-            item?.belongsToLibraryItem?.didAccessValue(forKey: "name")
+            if let result = try moc.execute(request) as? NSBatchUpdateResult,let objectIDArray = result.result as? [NSManagedObjectID]{
+                let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
+            }
             
         } catch {
             fatalError("Failed to perform batch update: \(error)")
@@ -184,7 +181,7 @@ extension RightController{
                 }
             }
             currentTable?.endUpdates()
-            //self.saveMainContext()
+            self.saveMainContext()
         }
     }
 }
@@ -223,10 +220,9 @@ extension RightController: NSMenuDelegate{
     func menuNeedsUpdate(_ menu: NSMenu) {
         
         switch menu.identifier?.rawValue {
-        //TODO: See if this can be done with bindings.
         case "rightMenu":
             if let deleteItem=menu.item(withIdentifier: "deleteMenuItem"){
-                deleteItem.title=self.deletesFromDatabase ? "Delete":"Remove from \(self.selectedLeftItem?.name ?? "")"
+                deleteItem.title="Remove from \(self.selectedLeftItem?.name ?? "")"
             }
         case "tagMenu":
             menu.removeAllItems()
@@ -235,7 +231,7 @@ extension RightController: NSMenuDelegate{
             })
         case "listMenu":
             menu.removeAllItems()
-            try! QuoteList.allInContext(moc).forEach({
+            try! QuoteList.allInContext(moc, predicate: NSPredicate.forItem(ofType: .list)).forEach({
                 menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         default:

@@ -20,6 +20,12 @@ class AGC_NSMenuItem: NSMenuItem {
     @IBInspectable var customURLString:String="" //used for import controller popup item.
     @IBInspectable var representedType:String="" //Used for the rightclick menus of the left controller.
     
+    ///Quick way to initialize with a specific boolean Value.
+    convenience init(withBool:Bool) {
+        self.init()
+        self.agcBool=withBool
+    }
+    
 }
 
 //MARK: - Row template to be able to localize the interface and swho menaing text.
@@ -30,27 +36,6 @@ class CoreDataPredicateTemplate: NSPredicateEditorRowTemplate {
         
     }
     
-    
-    
-    // Constant values
-//    convenience init( forKeyPath keyPath: String, withValues values: [Any] , operators: [NSComparisonPredicate.Operator]) {
-//        
-//        let keyPaths: [NSExpression] = [NSExpression(forKeyPath: keyPath)]
-//        var constantValues: [NSExpression] = []
-//        for v in values {
-//            constantValues.append( NSExpression(forConstantValue: v) )
-//        }
-//        
-//        let operatorsNSNumber = (0..<operators.count).map { (i) -> NSNumber in
-//            return NSNumber(value: operators[i].rawValue)
-//        }
-//        
-//        self.init( leftExpressions: keyPaths,
-//                   rightExpressions: constantValues,
-//                   modifier: .direct,
-//                   operators: operatorsNSNumber,
-//                   options: (Int(NSComparisonPredicate.Options.caseInsensitive.rawValue | NSComparisonPredicate.Options.diacriticInsensitive.rawValue)) )
-//    }
     
     // String
     convenience init( stringCompareForKeyPaths keyPaths: [String] , operators: [NSComparisonPredicate.Operator]) {

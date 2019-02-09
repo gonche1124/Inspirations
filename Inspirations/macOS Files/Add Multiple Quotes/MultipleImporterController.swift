@@ -117,7 +117,6 @@ class FileImporter: MainImportController {
                         self.progressIndicator.increment(by: 5)
                     }
                 }
-      
             }
             
             //Save private moc:
@@ -214,7 +213,6 @@ class FileImporter: MainImportController {
         
         //Get valid values properties by name
         let MOM=(NSApp.delegate as? AppDelegate)?.persistentContainer.managedObjectModel
-        //let MOM=(NSApp.delegate as? AppDelegate)?.managedObjectModel
         var listOfEntities=MOM?.entities.flatMap({$0.propertiesByName.keys})
         listOfEntities?.insert("Ignore", at: 0)
         listOfEntities?.sort()
@@ -239,144 +237,6 @@ class FileImporter: MainImportController {
         return outDict
     }
 }
-//MARK: -
-class WebImporter: MainImportController {
-    
-    //Web pages available.
-    enum selectedWP:String {
-        case wikipedia = "wikiQuote"
-        case forbes = "forbesQuote"
-        case BrainyQuote = "brainyQuote"
-        case wordOfWisdom = "InspirationalWordsOfWisdom"
-        case eduro = "eduroQuote"
-    }
-    
-    //Outlets
-    @IBOutlet weak var webDisplay:WKWebView!
-    @IBOutlet weak var webPopUpButton:NSPopUpButton!
-    
-    //Used to load the initial web page.
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if let selectedMenu = webPopUpButton.selectedItem as? AGC_NSMenuItem, let selectedURL=URL.init(string:selectedMenu.customURLString){
-            webDisplay.customUserAgent="Mozilla/5.0 (iPhone)"
-            webDisplay.load(URLRequest(url:selectedURL))
-        }
-    }
-    
-    //Import Quote of the day.
-    @IBAction func importQuoteFromWeb(_ sender:NSButton){
-        
-        //Make sure it can pull the link
-        guard let selMenuItem = webPopUpButton?.menu?.highlightedItem as? AGC_NSMenuItem,
-            let selIdentifier = selMenuItem.identifier?.rawValue,
-            let rawIdentifier = selectedWP(rawValue: selIdentifier) else {return}
-        
-        showProgress(withLabel: "Parsing Html code...", andStarting: true)
-        processWebPage(forWebPage: rawIdentifier)
-    }
-    
-    //process the webpage and calls switch statement.
-    func processWebPage(forWebPage webPage:selectedWP){
-        webDisplay.evaluateJavaScript("document.documentElement.outerHTML.toString()", completionHandler: {(response:Any?, error:Error?) in
-            
-            guard let htmlString = response as? String else {
-                //TODO: Restore UI and infrom user.
-                print("Could extract HTML")
-                return
-            }
-            guard let myHTML=try? SwiftSoup.parse(htmlString) else {
-                return
-            }
-            self.extractQuotefromHTML(forWebPage: webPage, andHTML: myHTML)
-            
-        })
-    }
-    
-    //Extracts the quote.
-    func extractQuotefromHTML(forWebPage:selectedWP, andHTML:Document){
-        progressLabel.stringValue="Parsing quote..."
-        switch forWebPage {
-        case .forbes:
-            importQuoteFrom(forbes:andHTML)
-        case .wikipedia:
-            importQuoteFrom(wikipedia:andHTML)
-        case .BrainyQuote:
-            importQuoteFrom(brainyQuote: andHTML)
-        case .eduro:
-            importQuoteFrom(eduro:andHTML)
-            
-        
-        default:
-            print("To Implement")
-        }
-        self.saveAndClose("nil")
-    }
-    
-    //Extracts the data from Enduro
-    func importQuoteFrom(eduro:Document){
-        guard let quoteArray = try? eduro.select("dailyquote p").array() else {return}
-        guard let quoteString = try! quoteArray.first?.text().trimWhites() else {return}
-        guard let name = try? quoteArray[1].text().replacingOccurrences(of: "–", with: "").trimWhites() else {return}
-        
-        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Eduro", andTaggedName: "Eduro")
-    }
-    
-    //Extracts the data from Wikipedia and ads the quote.
-    func importQuoteFrom(wikipedia:Document){
-        
-        guard let quoteArray=try? wikipedia.select("#mf-qotd div table tbody tr td table tbody tr td table tbody tr td").array(), quoteArray.count==2, let quoteString = try! quoteArray.first?.text(), let name=try! quoteArray.last?.select("a").text() else {return}
-        
-        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Wikipedia", andTaggedName: "Wikipedia")
-    }
-    
-    //extracts the data from Forbes quote of the day.
-    func importQuoteFrom(forbes:Document){
-        guard let quoteString = try? forbes.select("p.p.p2.ng-binding").text() else {return}
-        guard let name = try? forbes.select("cite.ng-binding").text() else {return}
-
-        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Forbes", andTaggedName: "Forbes")
-    }
-    
-    //Extracts Quote from BrainyQuote
-    func importQuoteFrom(brainyQuote brainy:Document){
-        guard let allString = try? brainy.select("a.oncl_q").first()?.getElementsByTag("img").attr("alt"),
-        let stringArray=allString?.components(separatedBy: CharacterSet.init(charactersIn: "-")),
-            stringArray.count==2 else {
-            return
-        }
-        
-        let name = stringArray.last!.trimWhites()
-        let quoteString = stringArray.first!.trimWhites()
-        createQuote(withString: quoteString, andAuthorName: name, andTopicName: "Brainy Quote", andTaggedName: "Brainy Quote")
-        
-    }
-    
-    //Creates a Quotes with the given parameters
-    func createQuote(withString:String, andAuthorName:String, andTopicName:String, andTaggedName:String){
-        //Create quote
-        var quoteDict:[String : Any]=[String : Any]()
-        let quoteTag:[String:Any] = ["name":andTaggedName]
-        quoteDict["quoteString"]=withString as Any?
-        quoteDict["fromAuthor"]=["name":andAuthorName] as Any?
-        quoteDict["isAbout"]=["themeName":andTopicName] as Any?
-        quoteDict["isTaggedWith"]=[quoteTag] as Any?
-        _ = Quote.firstOrCreate(inContext:moc, withAttributes:quoteDict, andKeys:["quoteString"])
-        
-    }
-    
-}
-
-//MARk: - NSMenuDelegate
-extension WebImporter:NSMenuDelegate{
-    func menuDidClose(_ menu: NSMenu) {
-        guard let agcMenu = menu.highlightedItem as? AGC_NSMenuItem else {return}
-        guard let selectedURL=URL.init(string: agcMenu.customURLString) else {return}
-        webDisplay.load(URLRequest.init(url: selectedURL))
-    }
-}
-
 
 //MARK: - NSTabViewController
 class TabViewImportController:NSTabViewController{

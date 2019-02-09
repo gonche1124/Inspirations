@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0T4-WD-gnI">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -417,7 +416,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations_macOS" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="267" y="-290"/>
@@ -425,7 +424,7 @@
         <!--Window Controller-->
         <scene sceneID="bMd-Yp-ZsB">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="0T4-WD-gnI" customClass="PrincipalWindow" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="0T4-WD-gnI" customClass="PrincipalWindow" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Inspirations" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -592,7 +591,7 @@
         <!--Right Controller-->
         <scene sceneID="gib-Oy-lX9">
             <objects>
-                <viewController id="gvZ-1i-Bh3" customClass="RightController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gvZ-1i-Bh3" customClass="RightController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="TbD-zR-Fvr">
                         <rect key="frame" x="0.0" y="0.0" width="644" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -635,7 +634,7 @@
                                                                                 </textFieldCell>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="isFavorite" id="5Mp-w9-LhG" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="isFavorite" id="5Mp-w9-LhG" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="1" y="1" width="50" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -673,7 +672,7 @@
                                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="from.name"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="from.name" id="qzv-A2-DUc" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="from.name" id="qzv-A2-DUc" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="54" y="1" width="101" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -719,7 +718,7 @@
                                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="quoteString"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="quoteString" id="UbF-uz-Sql" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="quoteString" id="UbF-uz-Sql" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="158" y="1" width="295" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -761,7 +760,7 @@
                                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isAbout.themeName"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="isAbout.themeName" id="Fvc-nK-xqX" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="isAbout.themeName" id="Fvc-nK-xqX" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="456" y="1" width="80" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -807,7 +806,7 @@
                                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isTaggedWith.@count"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="isTaggedWith" id="OIS-bn-p4c" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="isTaggedWith" id="OIS-bn-p4c" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="539" y="1" width="50" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -853,7 +852,7 @@
                                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isIncludedIn.@count"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="isIncludedIn" id="gQ9-BF-Hk3" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="isIncludedIn" id="gQ9-BF-Hk3" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="592" y="1" width="48" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                         <subviews>
@@ -953,7 +952,7 @@
                                                                                 </textFieldCell>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                                 <prototypeCellViews>
-                                                                                    <tableCellView identifier="exploreCell" id="ezf-I0-myG" customClass="AGCCell" customModule="Inspirations" customModuleProvider="target">
+                                                                                    <tableCellView identifier="exploreCell" id="ezf-I0-myG" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                                                         <rect key="frame" x="1" y="1" width="639" height="70"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
@@ -1231,7 +1230,7 @@
                 </arrayController>
                 <menu identifier="rightMenu" id="gRv-eE-Tve">
                     <items>
-                        <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="R1c-wm-Cq8" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="R1c-wm-Cq8" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="agcBool" value="YES"/>
                             </userDefinedRuntimeAttributes>
@@ -1239,7 +1238,7 @@
                                 <action selector="modifyFavoriteAttribute:" target="gvZ-1i-Bh3" id="b59-od-8xN"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Set Unfavorite" tag="2" keyEquivalent="F" id="6up-KL-fU5" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Set Unfavorite" tag="2" keyEquivalent="F" id="6up-KL-fU5" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="agcBool" value="NO"/>
                             </userDefinedRuntimeAttributes>
@@ -1324,7 +1323,7 @@ CA
         <!--Left Controller-->
         <scene sceneID="u8S-Qu-zaQ">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="CWl-5U-TPh" customClass="LeftController" customModule="Inspirations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="CWl-5U-TPh" customClass="LeftController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="39X-Tg-9tL">
                         <rect key="frame" x="0.0" y="0.0" width="175" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -1355,7 +1354,7 @@ CA
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="noImage" wantsLayer="YES" id="9zt-5S-P64" userLabel="Header Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="noImage" wantsLayer="YES" id="9zt-5S-P64" userLabel="Header Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="0.0" width="170" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1399,7 +1398,7 @@ CA
                                                                 <outlet property="textField" destination="NYN-XJ-v3O" id="dQu-fm-Wsz"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DataCell" id="L7m-2A-EHj" userLabel="DataCell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="DataCell" id="L7m-2A-EHj" userLabel="DataCell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="34" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1444,7 +1443,7 @@ CA
                                                                 <outlet property="totalButton" destination="S5a-Jz-OGH" id="Akb-yG-6kX"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="folderImage" id="0vg-gh-0C1" userLabel="Folder Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="folderImage" id="0vg-gh-0C1" userLabel="Folder Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="57" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1489,7 +1488,7 @@ CA
                                                                 <outlet property="totalButton" destination="e3C-Ta-9sp" id="x05-7N-qBq"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="tagImage" id="7x4-89-9sy" userLabel="Tag Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="tagImage" id="7x4-89-9sy" userLabel="Tag Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="80" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1534,7 +1533,7 @@ CA
                                                                 <outlet property="totalButton" destination="jGC-af-ms2" id="TgU-rA-1ea"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="smartListImage" id="pIK-dA-eNt" userLabel="Smart List Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="smartListImage" id="pIK-dA-eNt" userLabel="Smart List Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="103" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1579,7 +1578,7 @@ CA
                                                                 <outlet property="totalButton" destination="uD8-B9-VRg" id="h71-48-ukK"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="languageImage" id="DZO-fx-gHv" userLabel="Language Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="languageImage" id="DZO-fx-gHv" userLabel="Language Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="126" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1624,7 +1623,7 @@ CA
                                                                 <outlet property="totalButton" destination="VSg-X6-Wes" id="R5B-qe-Wta"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="listImage" id="Yuw-ek-Rum" userLabel="List Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="listImage" id="Yuw-ek-Rum" userLabel="List Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="149" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1669,7 +1668,7 @@ CA
                                                                 <outlet property="totalButton" destination="cis-J3-lar" id="UYE-GX-aee"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="mainLibraryImage" id="0KE-Kr-SAb" userLabel="Main Library Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="mainLibraryImage" id="0KE-Kr-SAb" userLabel="Main Library Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="172" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1714,7 +1713,7 @@ CA
                                                                 <outlet property="totalButton" destination="Fk5-Qt-HyR" id="ZNy-8C-aUW"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="favoritesImage" id="sKb-hq-Xgq" userLabel="Favorites Cell" customClass="AGC_DataCell" customModule="Inspirations" customModuleProvider="target">
+                                                        <tableCellView identifier="favoritesImage" id="sKb-hq-Xgq" userLabel="Favorites Cell" customClass="AGC_DataCell" customModule="Inspirations_macOS" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="195" width="170" height="23"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1822,7 +1821,7 @@ CA
                                                     <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="ocK-Dt-WlI"/>
                                                 </connections>
                                             </menuItem>
-                                            <menuItem title="Add Tag" id="YKx-f6-tW6" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                            <menuItem title="Add Tag" id="YKx-f6-tW6" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="tagImage"/>
                                                 </userDefinedRuntimeAttributes>
@@ -1830,7 +1829,7 @@ CA
                                                     <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="git-m2-yUh"/>
                                                 </connections>
                                             </menuItem>
-                                            <menuItem title="Add List" id="Abk-eE-ghK" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                            <menuItem title="Add List" id="Abk-eE-ghK" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="listImage"/>
                                                 </userDefinedRuntimeAttributes>
@@ -1838,7 +1837,7 @@ CA
                                                     <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="bZa-zi-lZj"/>
                                                 </connections>
                                             </menuItem>
-                                            <menuItem title="Add Smart List..." id="MvA-Nh-NkO" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                            <menuItem title="Add Smart List..." id="MvA-Nh-NkO" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="smartListImage"/>
                                                 </userDefinedRuntimeAttributes>
@@ -1846,7 +1845,7 @@ CA
                                                     <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="xqZ-6U-zoG"/>
                                                 </connections>
                                             </menuItem>
-                                            <menuItem title="Add Folder" id="bMa-AX-TUZ" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                                            <menuItem title="Add Folder" id="bMa-AX-TUZ" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="folderImage"/>
                                                 </userDefinedRuntimeAttributes>
@@ -1877,18 +1876,18 @@ CA
                         <outlet property="addButton" destination="XZG-28-qmu" id="avM-tk-sip"/>
                         <outlet property="listView" destination="MHG-gB-lbk" id="ZVw-gt-boT"/>
                         <outlet property="treeController" destination="V6q-G4-YWA" id="9c7-S1-ajE"/>
-                        <segue destination="BxZ-uW-2MU" kind="custom" identifier="genericIdentifier2" customClass="AGC_PopOverSegue" customModule="Inspirations" customModuleProvider="target" id="NSo-tf-Ce5"/>
+                        <segue destination="BxZ-uW-2MU" kind="custom" identifier="genericIdentifier2" customClass="AGC_PopOverSegue" customModule="Inspirations_macOS" customModuleProvider="target" id="NSo-tf-Ce5"/>
                     </connections>
                 </viewController>
                 <customObject id="5xx-fZ-I47" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu title="Actions:" autoenablesItems="NO" identifier="rightClickMenu" id="jkP-kp-Ips">
                     <items>
-                        <menuItem title="Edit" keyEquivalent="i" identifier="editLibraryItem" id="X6W-yQ-RYv" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Edit" keyEquivalent="i" identifier="editLibraryItem" id="X6W-yQ-RYv" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <connections>
                                 <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="paM-p5-wyR"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add Tag..." identifier="addTagMenuItem" id="Kmh-W0-1fl" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Add Tag..." identifier="addTagMenuItem" id="Kmh-W0-1fl" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="tagImage"/>
@@ -1897,7 +1896,7 @@ CA
                                 <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="wtY-sr-CjQ"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add List..." identifier="addListMenuItem" id="09V-ZT-wXn" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Add List..." identifier="addListMenuItem" id="09V-ZT-wXn" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="listImage"/>
@@ -1906,7 +1905,7 @@ CA
                                 <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="UNa-eu-bOn"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add Smart List..." identifier="addSmartListMenuItem" id="UDB-iy-OhR" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Add Smart List..." identifier="addSmartListMenuItem" id="UDB-iy-OhR" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="smartListImage"/>
@@ -1915,7 +1914,7 @@ CA
                                 <action selector="identifySegueToPerform:" target="CWl-5U-TPh" id="B27-XB-EIA"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Add Folder" identifier="addFolderMenuItem" id="m0z-9B-vXX" customClass="AGC_NSMenuItem" customModule="Inspirations" customModuleProvider="target">
+                        <menuItem title="Add Folder" identifier="addFolderMenuItem" id="m0z-9B-vXX" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="representedType" value="folderImage"/>

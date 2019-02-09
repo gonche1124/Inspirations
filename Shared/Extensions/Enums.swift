@@ -43,6 +43,16 @@ public enum LibraryType:String{
         return [.tag, .folder, .list, .smartList]
     }
     
+    ///Returns an array with the items that can remove quotes
+    static var canDeleteQuotes:[LibraryType]{
+        return [.mainLibrary, .smartList]
+    }
+    
+    ///Returns an array where user can dragg items.
+    static var canDragg:[LibraryType]{
+        return [.list, .tag]
+    }
+    
     ///Array of root items.
     static var rootItems:[LibraryType]{
         return [.rootTag, .rootList, .rootMain, .rootLanguage]
