@@ -15,7 +15,6 @@ class AddQuoteController: NSViewController {
         case adding, editing, showing, downloading
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,8 +29,6 @@ class AddQuoteController: NSViewController {
     }
 
     //MARK: - Properties
-
-    
     //State of the view.
     var viewType:CurrentAction = .adding {
         didSet{
@@ -46,7 +43,7 @@ class AddQuoteController: NSViewController {
   
     
     //MARK: - Outlets.
-    @IBOutlet var selectionController: NSArrayController?
+    @IBOutlet var selectionController: NSArrayController? //DO we use this?
     @IBOutlet var tagsController:NSArrayController!
     @IBOutlet var tokenField:NSTokenField!
     @IBOutlet var saveButton:NSButton?
@@ -63,6 +60,7 @@ class AddQuoteController: NSViewController {
     @IBOutlet weak var bottomMargin: NSLayoutConstraint?
     @IBOutlet weak var leftMargin: NSLayoutConstraint?
     @IBOutlet weak var topMargin: NSLayoutConstraint?
+    @IBOutlet var margins:[NSLayoutConstraint]?
     
     
     
@@ -92,9 +90,13 @@ class AddQuoteController: NSViewController {
     
     ///Cancels any edits that the user might have done.
     @IBAction func cancelsEdits(_ sender:NSButton){
-        if viewType != .downloading {
-             self.dismiss(self)
+        switch viewType {
+        case .downloading:
+           self.view.window?.close()
+        default:
+            self.dismiss(self)
         }
+        
     }
     
     //MARK: - UI Methods
@@ -109,7 +111,7 @@ class AddQuoteController: NSViewController {
             rightMargin?.constant=0
             saveButton?.title = "Add"
             saveButton?.action = #selector(addNewQuote(_:))
-            cancelButton?.isHidden = true
+            cancelButton?.isHidden = false
             editableItems.forEach{$0.isEnabled=true}
         case .editing:
             saveButton?.title = "Save"
@@ -158,8 +160,10 @@ class AddQuoteController: NSViewController {
     fileprivate func getValuesFromUIAndAssignTo(quote:Quote?){
         quote?.quoteString=quoteTextField.stringValue
         quote?.isFavorite=Bool.init(favoriteCheck.state.rawValue != 0)
-        quote?.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.stringValue], andKeys: ["name"])
-        quote?.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.stringValue], andKeys: ["themeName"])
+        quote?.from=Author.foc(named: authorComboBox.stringValue, in: moc)
+        //quote?.from=Author.firstOrCreate(inContext: moc, withAttributes: ["name":authorComboBox.stringValue], andKeys: ["name"])
+        quote?.isAbout=Theme.foc(named: themeComboBox.stringValue, in: moc)
+        //quote?.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: ["themeName":themeComboBox.stringValue], andKeys: ["themeName"])
         if let currTags = self.tokenField.objectValue as? [Tag]{
             quote?.addToIsTaggedWith(NSSet.init(array: currTags))
         }
@@ -188,16 +192,18 @@ class AddQuoteController: NSViewController {
 //MARK: - NSTokenFieldDelegate
 extension AddQuoteController: NSTokenFieldDelegate{
     
+    //1
     func tokenField(_ tokenField: NSTokenField, displayStringForRepresentedObject representedObject: Any) -> String? {
         guard let tagInstance=representedObject as? Tag else {return nil}
         return tagInstance.name
     }
-    
+    //
     func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
         let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",editingString)
-        if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){return existingTag}
-        let newTag = Tag.init(named: editingString, inMOC: moc)
-        return newTag
+        return Tag.foc(named: editingString, in: moc)
+//        if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){return existingTag}
+//        let newTag = Tag.init(named: editingString, inMOC: moc)
+//        return newTag
     }
     
     //Shows completions list under.
@@ -205,12 +211,6 @@ extension AddQuoteController: NSTokenFieldDelegate{
         guard let tagArray=tagsController.arrangedObjects as? Array<Tag>else {return nil}
         return tagArray.map({$0.name}).filter({$0.hasPrefix(substring)}).sorted()
     }
-    
-//    func tokenField(_ tokenField: NSTokenField, shouldAdd tokens: [Any], at index: Int) -> [Any] {
-//        print("Should Add")
-//        return tokens
-//    }
-    
 }
 
 

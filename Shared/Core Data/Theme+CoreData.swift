@@ -13,43 +13,11 @@ import CoreData
 @objc(Theme)
 public class Theme: NSManagedObject{
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Theme> {
-        return NSFetchRequest<Theme>(entityName: "Theme")
-    }
-    
-    //Coding keys
-    private enum CodingKeys: String, CodingKey{
-        case themeName = "topic"
-    }
-    
     //Properties
     @NSManaged public var themeName: String?
     @NSManaged public var hasQuotes: NSSet?
     @NSManaged public var createdAt:NSDate
     @NSManaged public var updatedAt:NSDate
-    
-    //Overrides
-    override public func awakeFromInsert() {
-        setPrimitiveValue(NSDate(), forKey: "createdAt")
-        setPrimitiveValue(NSDate(), forKey: "updatedAt")
-    }
-    
-    override public func willSave() {
-        if self.updatedAt.timeIntervalSinceNow>10.0 {
-            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-        }
-//        if let updatedAt = self.updatedAt {
-//            if updatedAt.timeIntervalSince(Date()) > 10.0 {
-//                setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//                //self.updatedAt = NSDate()
-//            }
-//
-//        } else {
-//            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-//            //self.updatedAt = NSDate()
-//        }
-    }
-    
     
     //Convinience Init.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
@@ -62,8 +30,40 @@ public class Theme: NSManagedObject{
         }
     }
     
+    //Required init for CoreDataUtilities.
+    required public convenience init(named:String, in context:NSManagedObjectContext) {
+        if named.trimWhites().isEmpty {
+            fatalError("Failed to create Theme, name is empty.")
+        }
+        self.init(context: context)
+        self.themeName=named
+    }
+}
+
+//MARK: - Overrides
+extension Theme {
+    override public func validateForUpdate() throws {
+        if self.hasQuotes?.count==0 {
+            self.managedObjectContext?.delete(self)
+        }
+    }
     
+    override public func awakeFromInsert() {
+        setPrimitiveValue(NSDate(), forKey: "createdAt")
+        setPrimitiveValue(NSDate(), forKey: "updatedAt")
+    }
     
+    override public func willSave() {
+        if self.updatedAt.timeIntervalSinceNow>10.0 {
+            setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        }
+    }
+}
+
+extension Theme:CoreDataUtilities{
+    public static func createWithName(name: String, in context: NSManagedObjectContext) -> Theme {
+        return Theme(named: name, in: context)
+    }
 }
 
 // MARK: - Generated accessors for hasQuotes
@@ -83,14 +83,7 @@ extension Theme {
     
 }
 
-//MARK: - Others
-extension Theme {
-    override public func validateForUpdate() throws {
-        if self.hasQuotes?.count==0 {
-            self.managedObjectContext?.delete(self)
-        }
-    }
-}
+
 
 //MARK: - Protocols:
 extension Theme:ManagesQuotes{

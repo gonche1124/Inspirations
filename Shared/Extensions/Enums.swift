@@ -58,7 +58,7 @@ public enum LibraryType:String{
         return [.rootTag, .rootList, .rootMain, .rootLanguage]
     }
     
-    /// Array of items that cant be change the name.
+    /// Array of items that cant be modified.
     static var standardItems:[LibraryType]{
         return [.rootTag, .rootList, .rootMain, .rootLanguage, .mainLibrary, .favorites]
     }

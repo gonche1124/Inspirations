@@ -11,7 +11,7 @@
                 <tabViewController title="Importer" showSeguePresentationStyle="single" tabStyle="toolbar" id="0MY-Q2-j7b" customClass="TabViewImportController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="JSON" identifier="" image="JSON Import" id="u1S-aa-sV8"/>
-                        <tabViewItem id="9ta-Tj-gQx"/>
+                        <tabViewItem label="Web Importer" image="Web Download" id="9ta-Tj-gQx"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" crossfade="YES"/>
                     <tabView key="tabView" id="uV3-YM-Cfw">
@@ -173,10 +173,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="603" y="184.5"/>
         </scene>
-        <!--Web Importer 2-->
+        <!--Web Importer-->
         <scene sceneID="JpY-0v-FEj">
             <objects>
-                <viewController title="Web Importer 2" id="lLR-2V-x3s" customClass="WebImporter" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Web Importer" id="lLR-2V-x3s" customClass="WebImporter" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UEW-5j-VWe">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="398"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,12 +186,12 @@ Gw
                                 <subviews>
                                     <popUpButton verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="X5B-WK-Epo">
                                         <rect key="frame" x="-2" y="334" width="415" height="25"/>
-                                        <popUpButtonCell key="cell" type="push" title="Wikiquote - Quote of the Day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MHE-vb-h2J" id="Rco-tw-eV4">
+                                        <popUpButtonCell key="cell" type="push" title="Wikiquote - Quote of the Day" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MHE-vb-h2J" id="Rco-tw-eV4">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="aVv-HL-Hdm">
                                                 <items>
-                                                    <menuItem title="Wikiquote - Quote of the Day" identifier="wikiQuote" id="MHE-vb-h2J" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
+                                                    <menuItem title="Wikiquote - Quote of the Day" state="on" identifier="wikiQuote" id="MHE-vb-h2J" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="customURLString" value="https://en.wikiquote.org/wiki/Main_Page"/>
                                                         </userDefinedRuntimeAttributes>
@@ -291,5 +291,6 @@ Gw
     </scenes>
     <resources>
         <image name="JSON Import" width="512" height="512"/>
+        <image name="Web Download" width="512" height="512"/>
     </resources>
 </document>

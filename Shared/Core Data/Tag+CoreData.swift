@@ -32,26 +32,20 @@ public class Tag: LibraryItem {
     }
     
     //MARK: - Convinience Init
-    //Convinience init.
-    public convenience init?(named:String, inMOC:NSManagedObjectContext){
-        guard let entity = NSEntityDescription.entity(forEntityName: "Tag", in: inMOC),
-        named != "" else {
-            fatalError("Failed to create Tag")}
-        
-        self.init(entity: entity, insertInto: inMOC)
+    /// Initializer based on the name.
+    required public convenience init(named:String, in context:NSManagedObjectContext) {
+        if named.trimWhites().isEmpty {
+            fatalError("Failed to create, name is empty.")
+        }
+        print("CALLED FROM TAG.")
+        self.init(context: context)
         self.name=named
         self.sortingOrder=self.name
-        self.belongsToLibraryItem=inMOC.get(LibraryItem: .rootTag)
+        self.belongsToLibraryItem=context.get(standardItem: .rootTag)
     }
-    
-    //Convinience Init.
-    public convenience init?(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
-        guard let name = dictionary["name"] as? String else {
-            fatalError("Failed to decode Tag")}
-        self.init(named: name, inMOC: moc)
-    }
-    
 }
+
+
 
 // MARK: - Generated accessors for hasQuotes
 extension Tag {

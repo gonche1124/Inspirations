@@ -12,14 +12,6 @@ import CoreData
 //Extension of NSPredicate for easy building
 extension NSPredicate{
     
-    //TODO: Delete if no bugs.
-    //String searchs
-//    static var pIsFavorite:String = "isFavorite == TRUE"
-//    static var pSpelledIn:String = "spelledIn.name CONTAINS [CD] %@"
-//    static var pInList:String = "ANY isIncludedIn.name contains [CD] %@"
-//    static var pIsRoot:String = "isRootItem == YES"
-//    static var pIsTagged:String = "ANY isTaggedWith.name contains [CD] %@"
-    
     //Predifened Predicates
     static var favoriteItems:NSPredicate = NSPredicate(format:"isFavorite == TRUE")
     static var rootItems:NSPredicate = NSPredicate(format:"isRootItem == YES")
@@ -32,6 +24,7 @@ extension NSPredicate{
     
     ///Predicate to search for library items by type
     /// - parameter ofType: Library type item.
+    /// - note: it has to be one of the standard items.
     static func forItem(ofType: LibraryType)->NSPredicate{
         return NSPredicate(format: "libraryTypeValue == %@", ofType.rawValue)
     }
@@ -89,6 +82,17 @@ extension String{
 
 //MARK: - NSEntityDescription
 extension NSEntityDescription{
+    
+    /// Returns the predciate for the key used in FOC method
+    /// - parameter name: Name of the entity to look for.
+    /// - note: Used in the First or Create method to fetch entities by name.
+    func predicate(with name:String)->NSPredicate?{
+        if let K = self.attributesByName.first(where: {$0.value.userInfo?.keys.contains("FOC") ?? false})?.key {
+            return NSPredicate(format: "%K = %@", K, name)
+        }
+        return nil
+    }
+    
     
     ///Returns dictionary of attributes and Attribute type filtered by USER INFO[searchable]=1
     var attributesByNameForPredicateEditor:[String : NSAttributeType]{

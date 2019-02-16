@@ -35,6 +35,8 @@ public class Quote: NSManagedObject{
     override public func awakeFromInsert() {
         setPrimitiveValue(NSDate(), forKey: "createdAt")
         setPrimitiveValue(NSDate(), forKey: "updatedAt")
+        setPrimitiveValue(false, forKey: "isFavorite")
+        
     }
     
     override public func willSave() {
@@ -45,24 +47,29 @@ public class Quote: NSManagedObject{
     
     //MARK: -
     //Convinience Init form dictionary.
-    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
-        //Safeguards.
-        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc),
-                let quoteS = dictionary["quoteString"] as? String, quoteS != "",
-                let authorDict=dictionary["fromAuthor"] as? [String: Any],
-                let themeDict=dictionary["isAbout"] as? [String: Any] else {
-            fatalError("Failed to create Entity Quote")}
-        
-        //Create Item.
-        self.init(entity: entity, insertInto: moc)
-        self.quoteString=quoteS
-        self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
-        self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
-        if let lang = Language.firstOrCreate(inContext: moc, withAttributes: ["name":NSLinguisticTagger.dominantLanguage(for: quoteS)! as Any], andKeys: ["name"]) as? Language{
-            lang.addToHasQuotes(self)
-        }
-        
-
+//    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
+//        //Safeguards.
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc),
+//                let quoteS = dictionary["quoteString"] as? String, quoteS != "",
+//                let authorDict=dictionary["fromAuthor"] as? [String: Any],
+//                let themeDict=dictionary["isAbout"] as? [String: Any] else {
+//            fatalError("Failed to create Entity Quote")}
+//
+//        //Create Item.
+//        self.init(entity: entity, insertInto: moc)
+//        self.quoteString=quoteS
+//        self.from=Author.foc(named: authorDict["name"] as! String, in: moc)
+//        //self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
+//        self.isAbout=Theme.foc(named: themeDict["themeName"] as! String, in: moc)
+//        //self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
+//        if let langDefinition = NSLinguisticTagger.dominantLanguage(for: quoteS){
+//            self.spelledIn=Language.foc(named: langDefinition, in: moc)
+//        }
+//    }
+    
+    /// Add infromation form the dictionary if they match the keys.
+    /// - parameter from: Dictionary with values to map.
+    func addAttributes(from dictionary:Dictionary<String,Any>){
         //Check if Favorite Tag exists.
         if let isFavorite = dictionary["isFavorite"] as? Bool{
             self.isFavorite=isFavorite //TODO: Handle different cases of BOOL/NSNUMBER/STRING
@@ -71,69 +78,32 @@ public class Quote: NSManagedObject{
         //Check if there are any Tags.
         if let tags = dictionary["isTaggedWith"] as? [[String:Any]]{
             tags.forEach({
-                self.addToIsTaggedWith(Tag.firstOrCreate(inContext: moc, withAttributes: $0, andKeys: ["name"]))
+                
+                let thisTag = Tag.foc(named: $0["name"] as! String, in: self.managedObjectContext!) as? Tag
+                self.addToIsTaggedWith(thisTag!)
+                //self.addToIsTaggedWith(Tag.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
             })
         }
         
         //Check if there are any Lists.
         if let lists = dictionary["isIncludedIn"] as? [[String:Any]]{
             lists.forEach({
-                self.addToIsTaggedWith(QuoteList.firstOrCreate(inContext: moc, withAttributes: $0, andKeys: ["name"]))
+                 let thisList = QuoteList.foc(named: $0["name"] as! String, in: self.managedObjectContext!) as? QuoteList
+                self.addToIsIncludedIn(thisList!)
+               // self.addToIsIncludedIn(QuoteList.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
             })
         }
     }
     
-    //Decodable
-    /*
-    public required convenience init(from decoder: Decoder) throws {
-        guard let codingUserInfoKeyMOC = CodingUserInfoKey.managedContext,
-            let moc = decoder.userInfo[codingUserInfoKeyMOC] as? NSManagedObjectContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc) else {
-                fatalError("Failed to decode Quote")}
-        
-        
-        //https://stackoverflow.com/questions/35574928/update-change-the-rawvalue-of-a-enum-in-swift
-        
-        self.init(entity:  entity, insertInto: moc)
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        //self.isFavorite = (try container.decodeIfPresent(Bool.self, forKey: .isFavorite))! //What happens if is string/int?
-        self.quoteString = try container.decode(String.self, forKey: .quoteString)
-       
-        //let author = try container.decode(Dictionary<String:Any>, forKey: .from)
-        let theAuthor=try container.decode(Author.self, forKey: .from)
-        theAuthor.addToHasSaid(self)
-        self.from=theAuthor
-        let theTheme=try container.decode(Theme.self, forKey: .isAbout)
-        theTheme.addToHasQuotes(self)
-        self.isAbout=theTheme
-        if let inLists = try container.decodeIfPresent([QuoteList].self, forKey: .isIncludedIn){
-            self.addToIsIncludedIn(NSSet(array: inLists))
-        }
-        
-        //ProgressBar
-        if let textField = decoder.userInfo[CodingUserInfoKey.progressText!] as? NSTextField,
-            let totItems = decoder.codingPath.first?.intValue {
-            DispatchQueue.main.async {
-                let formatter = NumberFormatter()
-                formatter.numberStyle = NumberFormatter.Style.decimal
-                textField.stringValue="Imported \(formatter.string(for: totItems)!) quotes"
-            }
-
+    
+    /// Easy way to create a Quote with no Author or Theme.
+    public required convenience init(named:String, in context:NSManagedObjectContext) {
+        self.init(context: context)
+        self.quoteString=named
+        if let langDefinition = NSLinguisticTagger.dominantLanguage(for: named){
+            self.spelledIn=Language.foc(named: langDefinition, in: context) as! Language
         }
     }
-    */
-
-    
-    //Updates when the user changes the length of the quote.
-//    override public func didChangeValue(forKey key: String) {
-//        if key == "quoteString" {
-//            let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
-//            if let components = self.quoteString?.components(separatedBy: chararacterSet).filter({!$0.isEmpty}){
-//                self.totalWords = Int16(components.count)
-//                self.totalLetters = Int16(components.map({$0.count}).reduce(0,+))
-//            }
-//        }
-//    }
     
     ///Create text verison for sharing services
     func textForSharing()->String{
@@ -144,6 +114,14 @@ public class Quote: NSManagedObject{
     func textForML()->Dictionary<String, String>{
         return ["text": self.quoteString!, "topic":self.isAbout!.themeName!]
     }
+    
+}
+
+extension Quote:CoreDataUtilities{
+    public static func createWithName(name: String, in context: NSManagedObjectContext) -> Quote {
+        return Quote(named: name, in: context)
+    }
+    
     
 }
 

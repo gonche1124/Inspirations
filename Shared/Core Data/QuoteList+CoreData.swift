@@ -12,10 +12,6 @@ import CoreData
 @objc(QuoteList)
 public class QuoteList: LibraryItem {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<QuoteList> {
-        return NSFetchRequest<QuoteList>(entityName: "QuoteList")
-    }
-    
     //Properties
     @NSManaged public var smartPredicate: NSPredicate?
     @NSManaged public var hasQuotes: NSSet?
@@ -23,8 +19,7 @@ public class QuoteList: LibraryItem {
     ///Computed properties used in the left controller.
     override var totalQuotes:Int?{
         if let predicate=smartPredicate{
-            return self.managedObjectContext?.count(ofEntity: .quote, with: predicate)
-            //return self.managedObjectContext?.count(ofEntity: Entities.quote.rawValue, with: predicate)
+            return try? Quote.count(in: self.managedObjectContext!, with: predicate)
         }
         return hasQuotes?.count
     }
@@ -46,7 +41,7 @@ public class QuoteList: LibraryItem {
         self.init(entity: entity, insertInto: inMOC)
         self.name=andName
         self.sortingOrder=self.name
-        self.belongsToLibraryItem=inMOC.get(LibraryItem: .rootList)
+        self.belongsToLibraryItem=inMOC.get(standardItem: .rootList)
         if (withSmartList != nil)  {
             self.smartPredicate=withSmartList
             self.libraryType = .smartList

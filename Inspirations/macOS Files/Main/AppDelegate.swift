@@ -161,9 +161,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if let refreshed=userInfo[NSRefreshedObjectsKey] as? Set<NSManagedObject>{
             print("Objects refreshed: \(refreshed.first?.changedValues().keys)")
             //Forces refresh on left view and NSFetchedresultsController
-            let item=self.managedObjectContext.get(LibraryItem: .rootMain)
-            item?.willChangeValue(forKey: "hasLibraryItems")
-            item?.didChangeValue(forKey: "hasLibraryItems")
+            let item=self.managedObjectContext.get(standardItem: .rootMain)
+            item.willChangeValue(forKey: "hasLibraryItems")
+            item.didChangeValue(forKey: "hasLibraryItems")
         }
         
         //Updates Notification.
@@ -212,29 +212,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     //create teh default objects.
     func createMainObjectsIfNotPresent() {
         
-        //Create root items.
-        //TODO: Change for NSLocalizedString.
-        _ = LibraryItem.getStandardItem(named: "Main", ofType: .rootMain, inContext: managedObjectContext)
-        _ = LibraryItem.getStandardItem(named: "Library", ofType: .mainLibrary, inContext: managedObjectContext)
-        _ = LibraryItem.getStandardItem(named: "Favorites", ofType: .favorites, inContext: managedObjectContext)
-        _ = LibraryItem.getStandardItem(named: "Tags", ofType: .rootTag, inContext: managedObjectContext)
-        _ = LibraryItem.getStandardItem(named: "Languages", ofType: .rootLanguage, inContext: managedObjectContext)
-        _ = LibraryItem.getStandardItem(named: "Lists", ofType: .rootList, inContext: managedObjectContext)
+        //Create standard items if they dont exists items.
+        LibraryType.standardItems.forEach{
+            _=managedObjectContext.get(standardItem: $0)
+        }
         
-//        //Create Tags
-//        ["Love", "Inspirational", "Wow", "Brainer", "Cerebral"].forEach({
-//            _=Tag.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-//        })
-//       
-//        //Create Languages:
-//        ["Spanish", "English", "French", "German", "Mandarin"].forEach({
-//            _=Language.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-//        })
-//        
-//        //create Lists:
-//        ["Top 25", "For Work", "From Movies", "In songs", "Crazy"].forEach({
-//            _=QuoteList.firstOrCreate(inContext: managedObjectContext, withAttributes: ["name":$0])
-//        })
+        //TESTING
+        
+        
+        
         
         do{
             try self.managedObjectContext.save()

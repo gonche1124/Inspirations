@@ -12,10 +12,6 @@ import CoreData
 @objc(Language)
 public class Language: LibraryItem {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Language> {
-        return NSFetchRequest<Language>(entityName: "Language")
-    }
-    
     @NSManaged public var localizedName: String?
     @NSManaged public var hasQuotes: NSSet?
     
@@ -33,35 +29,17 @@ public class Language: LibraryItem {
     
     //MARK: - Convinience Init.
     //Convinience init
-    public convenience init?(named:String, inMOC:NSManagedObjectContext){
-        guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: inMOC),
-            named != "" else {
-                fatalError("Failed to create Tag")}
-        
-        self.init(entity: entity, insertInto: inMOC)
-        self.name=named
-        self.belongsToLibraryItem=inMOC.get(LibraryItem: .rootLanguage)
-        self.sortingOrder=self.name
-        
-    }
     
-    //Convinience Init.
-    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Language", in: moc) else {
-            fatalError("Failed to decode Language")}
-        
-//        guard let path = Bundle.main.path(forResource: "BCP47", ofType: "plist") else{
-//            fatalError("No dictionary for lookup codes")
-//        }
-//        let codeDictionary = NSDictionary(contentsOfFile: path)
-        let langCode=dictionary["name"] as? String
-        
-        self.init(entity: entity, insertInto: moc)
-        self.libraryType = .language
-        self.name=langCode ?? "und"
-        self.localizedName=langCode
-        self.isRootItem=false
-        self.belongsToLibraryItem=moc.get(LibraryItem: .rootLanguage)
+    /// Initializer based on the name.
+    public convenience required init(named:String, in context:NSManagedObjectContext) {
+        if named.trimWhites().isEmpty {
+            fatalError("Failed to create, name is empty.")
+        }
+        print("INIT CALLED FROM Langauge")
+        self.init(context: context)
+        self.name=named
+        self.belongsToLibraryItem=context.get(standardItem: .rootLanguage)
+        self.sortingOrder=self.name
     }
     
 }

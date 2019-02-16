@@ -12,30 +12,14 @@ import CoreData
 @objc(Author)
 public class Author: NSManagedObject {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Author> {
-        return NSFetchRequest<Author>(entityName: "Author")
-    }
-    
-    
     //properties
     @NSManaged public var name: String?
     @NSManaged public var hasSaid: Set<Quote>? //was a NSSet
     @NSManaged public var createdAt: NSDate
     @NSManaged public var updatedAt:NSDate
     
-    //Overrides
-    override public func awakeFromInsert() {
-        setPrimitiveValue(NSDate(), forKey: "createdAt")
-        setPrimitiveValue(NSDate(), forKey: "updatedAt")
-    }
-    
-    override public func willSave() {
-        if self.updatedAt.timeIntervalSinceNow>10.0 {
-            setPrimitiveValue(NSDate(), forKey: "updatedAt")
-        }
-    }
-        
-    //Convinience Init.
+    //MARK: - Initializers.
+    ///Convinience Init based on dictionary andused in JSON import.
     public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
         guard let entity = NSEntityDescription.entity(forEntityName: "Author", in: moc) else {
             fatalError("Failed to decode Author")}
@@ -45,13 +29,46 @@ public class Author: NSManagedObject {
             self.name=authorName
         }
     }
+    
+    /// Initializer based on the name.
+    required public convenience init(named:String, in context:NSManagedObjectContext) {
+        if named.trimWhites().isEmpty {
+            fatalError("Failed to create Author, name is empty.")
+        }
+        self.init(context: context)
+        self.name=named
+    }
 }
 
-//MARK: - Others
+//FOC extension.
+extension Author:CoreDataUtilities{
+    public static func createWithName(name: String, in context: NSManagedObjectContext) -> Author {
+        return Author(named: name, in: context)
+    }
+}
+
+
+//MARK: - Overrides
 extension Author {
+    
+    //Called when changing.
     override public func validateForUpdate() throws {
+        try super.validateForUpdate()
         if self.hasSaid?.count==0 {
             self.managedObjectContext?.delete(self) //TODO: Potential bug.
+        }
+    }
+    
+    //Called when inserting.
+    override public func awakeFromInsert() {
+        setPrimitiveValue(NSDate(), forKey: "createdAt")
+        setPrimitiveValue(NSDate(), forKey: "updatedAt")
+    }
+    
+    //Called when saving.
+    override public func willSave() {
+        if self.updatedAt.timeIntervalSinceNow>10.0 {
+            setPrimitiveValue(NSDate(), forKey: "updatedAt")
         }
     }
 }

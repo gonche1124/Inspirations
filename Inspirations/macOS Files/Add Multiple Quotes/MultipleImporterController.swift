@@ -109,7 +109,27 @@ class FileImporter: MainImportController {
             context.undoManager=nil //Turn off undoManager for performance.
             //Create Quotes updating the UI
             for (i, quoteDict) in dictArray.enumerated(){
-                _=Quote.firstOrCreate(inContext: context, withAttributes: quoteDict, andKeys: ["quoteString"])
+                guard let qString = quoteDict["quoteString"] as? String else {
+                    print("Cant decode the Quote.")
+                    continue
+                }
+                let newQuote = Quote.foc(named: qString, in: context)
+                guard let authorDict = quoteDict["fromAuthor"] as? Dictionary<String,Any>, let authorName=authorDict["name"] as? String else {
+                    print("Cant decode the author.")
+                    continue
+                }
+                newQuote.from = Author.foc(named: authorName, in: context)
+                guard let themeDict = quoteDict["isAbout"] as? Dictionary<String,Any>, let theme = themeDict["themeName"] as? String else {
+                    print("Cant decode the Topic.")
+                        continue
+                }
+                newQuote.isAbout = Theme.foc(named: theme, in: context)
+                
+                //Check for tags or bool
+                newQuote.addAttributes(from: quoteDict)
+                
+                
+            
                 //Does it run smoother?
                 if (i%5==0) {
                     DispatchQueue.main.async {

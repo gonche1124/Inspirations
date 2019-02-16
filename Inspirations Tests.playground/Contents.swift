@@ -2,12 +2,21 @@ import Cocoa
 
 
 //MARK: - Web Parser
-let myStringURL = "https://www.brainyquote.com/quote_of_the_day"
-let myURLWeb = URL.init(string: myStringURL)
-print(myStringURL)
 
-let myHTMLString = try String.init(contentsOf: myURLWeb!)
-print("HTML : \(myHTMLString)")
+let testArray = [nil,nil,nil, nil, nil] as [Any?]
+let x = testArray.compactMap{$0}
+if let y = x as? [Any] {
+    print("valuye: \(y)")
+}
+print(x)
+
+
+//let myStringURL = "https://www.brainyquote.com/quote_of_the_day"
+//let myURLWeb = URL.init(string: myStringURL)
+//print(myStringURL)
+//
+//let myHTMLString = try String.init(contentsOf: myURLWeb!)
+//print("HTML : \(myHTMLString)")
 
 
 /*

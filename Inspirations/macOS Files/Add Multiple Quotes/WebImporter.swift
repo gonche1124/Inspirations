@@ -19,6 +19,11 @@ class WebImporter: NSViewController {
         case eduro = "eduroQuote"
     }
     
+    ///Enum for dictionary.
+    private enum coreKey:String{
+        case author, quote, theme, tags
+    }
+    
     //Outlets.
     weak var embeddedController:AddQuoteController?
     @IBOutlet weak var progressIndicator:NSProgressIndicator?
@@ -28,7 +33,6 @@ class WebImporter: NSViewController {
     //MARK: Overwrite
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViwDIDLOAD")
         
         //Hide views while it loads.
         self.progressIndicator?.isHidden=true
@@ -47,37 +51,53 @@ class WebImporter: NSViewController {
     //MARK: - Cusotm methods.
     ///Picks the right parser and adds it to the embedded container.
     public func selectParser(for webpage:selectedWP){
-        self.embeddedView?.isHidden=false
+        var parsedQuote: Dictionary<coreKey,String>?
+        
+        //Downlaod the quote.
         switch webpage {
         case .BrainyQuote:
-            if let newQuote = self.downloadFromBrainyQuote(){
-                fillEmbeddedContainer(with: newQuote)
-            }
+            parsedQuote = self.downloadFromBrainyQuote()
         case .eduro:
-            if let newQuote = self.downloadFromEduro(){
-                fillEmbeddedContainer(with: newQuote)
-            }
+           parsedQuote = self.downloadFromEduro()
         case .wikipedia:
-            if let newQuote = self.downloadFromWikipedia(){
-                fillEmbeddedContainer(with: newQuote)
-            }
+            parsedQuote = self.downloadFromWikipedia()
         case .wordOfWisdom:
-            if let newQuote = self.downloadFromWordOfWisdom(){
-                fillEmbeddedContainer(with: newQuote)
-            }
+            parsedQuote = self.downloadFromWordOfWisdom()
         }
+        //Check for quote and fill
+        //TODO: Make this function throw error to display in the notification to the user.
+        guard let newQuote = parsedQuote else {
+            fatalError("Unable to donwload the quote.")
+        }
+        //Execute given a new quote.
+        self.embeddedView?.isHidden=false
+        self.progressIndicator?.stopAnimation(self)
+        self.progressIndicator?.isHidden = true
+        self.notificationLabel?.stringValue = "Succesfully downloaded the quote."
+        fillEmbeddedContainer(with: newQuote)
     }
     
     ///Fills the values from the dictionary into the single embedde container to let the user modify the values.
-    public func fillEmbeddedContainer(with newQuote:Dictionary<String,String>){
-        print(newQuote)
-        self.embeddedController?.quoteTextField.stringValue=newQuote["quoteString"] ?? "Unable to download quote"
-        self.embeddedController?.authorComboBox.stringValue=newQuote["name"] ?? "Unable to donwload author name"
+    private func fillEmbeddedContainer(with newQuote:Dictionary<coreKey,String>){
+        self.embeddedController?.quoteTextField.stringValue=newQuote[.quote] ?? "Unable to download quote"
+        self.embeddedController?.authorComboBox.stringValue=newQuote[.author] ?? "Unable to donwload author name"
+        if let tag = newQuote[.tags] {
+            self.embeddedController?.tokenField.objectValue=[Tag.foc(named: tag, in: moc)]
+//            let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",tag)
+//            if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){
+//                self.embeddedController?.tokenField.objectValue=[existingTag]
+//                return
+//            }else {
+//                let newTag = Tag.init(named: tag, inMOC: moc) //TODO: Update with firstOrcreate method.
+//                self.embeddedController?.tokenField.objectValue=[newTag]
+//            }
+        }
+        self.notificationLabel?.isHidden = true
     }
     
     //MARK: - Web parsers.
     //Extracts Quote from BrainyQuote and return a dictionary with the values.
-    func downloadFromBrainyQuote()->Dictionary<String,String>?{
+    private func downloadFromBrainyQuote()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://www.brainyquote.com/quote_of_the_day"
         guard let brainyURL = URL.init(string: stringURL),
@@ -90,15 +110,15 @@ class WebImporter: NSViewController {
         let quote = try? html.select("a.oncl_q > img").attr("alt").split(separator: "-")[0]
         
         //Create Dictionary:
-        var dictionaryOUT = Dictionary<String,String>()
-        dictionaryOUT["quoteString"]=String(quote ?? "")
-        dictionaryOUT["name"]=String(author ?? "")
-        dictionaryOUT["tags"]="BrainyQuote"
+        var dictionaryOUT = Dictionary<coreKey,String>()
+        dictionaryOUT[.quote]=String(quote ?? "")
+        dictionaryOUT[.author]=String(author ?? "")
+        dictionaryOUT[.tags]="BrainyQuote"
         return dictionaryOUT
     }
     
     //Extracts quote from Eduro and returns a dictionary with the info.
-    func downloadFromEduro()->Dictionary<String,String>?{
+    private func downloadFromEduro()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://www.eduro.com"
         guard let eduroURL = URL.init(string: stringURL),
@@ -110,15 +130,15 @@ class WebImporter: NSViewController {
         let author = try? html.select("dailyquote p").array()[1].text().replacingOccurrences(of: "–", with: "").trimWhites()
         
         //Create Dictionary:
-        var dictionaryOUT = Dictionary<String,String>()
-        dictionaryOUT["quoteString"]=String(quote ?? "")
-        dictionaryOUT["name"]=String(author ?? "")
-        dictionaryOUT["tags"]="Eduro"
+        var dictionaryOUT = Dictionary<coreKey,String>()
+        dictionaryOUT[.quote]=String(quote ?? "")
+        dictionaryOUT[.author]=String(author ?? "")
+        dictionaryOUT[.tags]="Eduro"
         return dictionaryOUT
     }
     
     // Extracts quote from wikipedia
-    func downloadFromWikipedia()->Dictionary<String,String>?{
+    private func downloadFromWikipedia()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://en.wikiquote.org/wiki/Main_Page"
         guard let wikipediaURL = URL.init(string: stringURL),
@@ -130,15 +150,15 @@ class WebImporter: NSViewController {
         let author = try? html.select("#mf-qotd div table tbody tr td table tbody tr td table tbody tr td").array().last?.select("a").text()
         
         //Create Dictionary:
-        var dictionaryOUT = Dictionary<String,String>()
-        dictionaryOUT["quoteString"]=String((quote ?? "") ?? "")
-        dictionaryOUT["name"]=String((author ?? "") ?? "")
-        dictionaryOUT["tags"]="Wikipedia"
+        var dictionaryOUT = Dictionary<coreKey,String>()
+        dictionaryOUT[.quote]=String((quote ?? "") ?? "")
+        dictionaryOUT[.author]=String((author ?? "") ?? "")
+        dictionaryOUT[.tags]="Wikipedia"
         return dictionaryOUT
     }
     
     // Extracts quote from wordOfWisdom
-    func downloadFromWordOfWisdom()->Dictionary<String,String>?{
+    private func downloadFromWordOfWisdom()->Dictionary<coreKey,String>?{
         return nil
         let xx="https://www.wow4u.com/quote-of-the-day/"
         //html body.ezCSS div#wrapper.ezCSS div#page.ezCSS div#content.ezCSS div#ezoic-content.ezCSS div.ezoic-wrapper.ezoic-main-content.ezoic-wrapper-content.ezCSS div#stylesheet_body div table.ez_wrap_table tbody tr td font
@@ -148,20 +168,24 @@ class WebImporter: NSViewController {
 
 //MARK: - NSMenuDelegate
 extension WebImporter:NSMenuDelegate{
+    ///Used to call the parser based on the selection.
     func menuDidClose(_ menu: NSMenu) {
-        
+        //Performs checks.
         guard let agcMenu = menu.highlightedItem as? AGC_NSMenuItem,
             let identifier=agcMenu.identifier,
             let selectedWebPage = selectedWP(rawValue: identifier.rawValue) else {
                 fatalError("No method for selected type")
         }
         
+        //Inform the user and download.
         self.notificationLabel?.isHidden=false
         self.progressIndicator?.isHidden=false
         self.progressIndicator?.isIndeterminate=true
-        self.progressIndicator?.startAnimation(nil)
-        self.notificationLabel?.stringValue = "Downloading quote"
-        
-        selectParser(for: selectedWebPage)
+        self.progressIndicator?.startAnimation(self)
+        self.notificationLabel?.stringValue = "Downloading quote..."
+        self.embeddedView?.isHidden=true
+        DispatchQueue.main.async {
+            self.selectParser(for: selectedWebPage)
+        }
     }
 }

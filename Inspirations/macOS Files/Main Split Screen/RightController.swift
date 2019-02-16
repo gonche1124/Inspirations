@@ -159,11 +159,10 @@ extension RightController{
     
     ///Adds the selected quotes to the tags or playlists specified.
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
-        if let item=moc.get(objectWithStringID: sender!.identifier!.rawValue) as? ManagesQuotes & LibraryItem
-        {
+        if let item = moc.getObjectsWithIDS(asStrings: [sender!.identifier!.rawValue])?.first as? ManagesQuotes & LibraryItem{
             item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
-            self.saveMainContext()
-        }
+            self.saveMainContext()        }
+
     }
     
     //Deletes selected record or records.
@@ -226,12 +225,12 @@ extension RightController: NSMenuDelegate{
             }
         case "tagMenu":
             menu.removeAllItems()
-            try! Tag.allInContext(moc).forEach({
+            try! Tag.objects(in: moc).forEach({
                 menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         case "listMenu":
             menu.removeAllItems()
-            try! QuoteList.allInContext(moc, predicate: NSPredicate.forItem(ofType: .list)).forEach({
+            try! QuoteList.objects(in: moc, with: NSPredicate.forItem(ofType: .list)).forEach({
                 menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         default:

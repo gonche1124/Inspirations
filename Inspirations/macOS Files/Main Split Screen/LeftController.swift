@@ -26,6 +26,7 @@ class LeftController: NSViewController {
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
         //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
+        //TODO: use keypaths: https://stoeffn.de/posts/modern-core-data-in-swift/
         fr.sortDescriptors=[NSSortDescriptor(key: "sortingOrder", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         fr.predicate=NSPredicate.rootItems
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
@@ -50,7 +51,7 @@ class LeftController: NSViewController {
         listView.endUpdates()
         
         //Set default selected item.
-        let itemIndex = listView.row(forItem: moc.get(LibraryItem: .mainLibrary))
+        let itemIndex = listView.row(forItem: moc.get(standardItem: .mainLibrary))
         listView.selectRowIndexes(IndexSet.init(integer: itemIndex), byExtendingSelection: false)
         //Register to update count.
         //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
