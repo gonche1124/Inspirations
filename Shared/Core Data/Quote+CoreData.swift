@@ -13,10 +13,6 @@ import Cocoa
 @objc(Quote)
 public class Quote: NSManagedObject{
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Quote> {
-        return NSFetchRequest<Quote>(entityName: "Quote")
-    }
-    
     //Properties
     @NSManaged public var isFavorite: Bool
     @NSManaged public var quoteString: String?
@@ -46,27 +42,6 @@ public class Quote: NSManagedObject{
     }
     
     //MARK: -
-    //Convinience Init form dictionary.
-//    public convenience init(from dictionary:[String: Any], in moc:NSManagedObjectContext) throws {
-//        //Safeguards.
-//        guard let entity = NSEntityDescription.entity(forEntityName: "Quote", in: moc),
-//                let quoteS = dictionary["quoteString"] as? String, quoteS != "",
-//                let authorDict=dictionary["fromAuthor"] as? [String: Any],
-//                let themeDict=dictionary["isAbout"] as? [String: Any] else {
-//            fatalError("Failed to create Entity Quote")}
-//
-//        //Create Item.
-//        self.init(entity: entity, insertInto: moc)
-//        self.quoteString=quoteS
-//        self.from=Author.foc(named: authorDict["name"] as! String, in: moc)
-//        //self.from=Author.firstOrCreate(inContext: moc, withAttributes: authorDict, andKeys: ["name"])
-//        self.isAbout=Theme.foc(named: themeDict["themeName"] as! String, in: moc)
-//        //self.isAbout=Theme.firstOrCreate(inContext: moc, withAttributes: themeDict, andKeys: ["themeName"])
-//        if let langDefinition = NSLinguisticTagger.dominantLanguage(for: quoteS){
-//            self.spelledIn=Language.foc(named: langDefinition, in: moc)
-//        }
-//    }
-    
     /// Add infromation form the dictionary if they match the keys.
     /// - parameter from: Dictionary with values to map.
     func addAttributes(from dictionary:Dictionary<String,Any>){
@@ -78,19 +53,14 @@ public class Quote: NSManagedObject{
         //Check if there are any Tags.
         if let tags = dictionary["isTaggedWith"] as? [[String:Any]]{
             tags.forEach({
-                
-                let thisTag = Tag.foc(named: $0["name"] as! String, in: self.managedObjectContext!) as? Tag
-                self.addToIsTaggedWith(thisTag!)
-                //self.addToIsTaggedWith(Tag.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
+                self.addToIsTaggedWith(Tag.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
             })
         }
         
         //Check if there are any Lists.
         if let lists = dictionary["isIncludedIn"] as? [[String:Any]]{
             lists.forEach({
-                 let thisList = QuoteList.foc(named: $0["name"] as! String, in: self.managedObjectContext!) as? QuoteList
-                self.addToIsIncludedIn(thisList!)
-               // self.addToIsIncludedIn(QuoteList.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
+               self.addToIsIncludedIn(QuoteList.foc(named: $0["name"] as! String, in: self.managedObjectContext!))
             })
         }
     }
@@ -101,7 +71,7 @@ public class Quote: NSManagedObject{
         self.init(context: context)
         self.quoteString=named
         if let langDefinition = NSLinguisticTagger.dominantLanguage(for: named){
-            self.spelledIn=Language.foc(named: langDefinition, in: context) as! Language
+            self.spelledIn=Language.foc(named: langDefinition, in: context)
         }
     }
     
@@ -117,13 +87,7 @@ public class Quote: NSManagedObject{
     
 }
 
-extension Quote:CoreDataUtilities{
-    public static func createWithName(name: String, in context: NSManagedObjectContext) -> Quote {
-        return Quote(named: name, in: context)
-    }
-    
-    
-}
+extension Quote:CoreDataUtilities{}
 
 
 // MARK: - Generated accessors for isTaggedWith

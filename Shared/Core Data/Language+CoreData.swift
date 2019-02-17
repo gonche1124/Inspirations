@@ -35,7 +35,6 @@ public class Language: LibraryItem {
         if named.trimWhites().isEmpty {
             fatalError("Failed to create, name is empty.")
         }
-        print("INIT CALLED FROM Langauge")
         self.init(context: context)
         self.name=named
         self.belongsToLibraryItem=context.get(standardItem: .rootLanguage)

@@ -121,7 +121,6 @@ class RightController: NSViewController {
     
     //Left selection changed
     @objc func leftTableChangedSelection(notification: Notification){
-        //print("Called")
         if let selectedLib = notification.object as? LibraryItem,
             let newPredicate = NSPredicate.quotePredicate(for: selectedLib){
             self.selectedLeftItem=selectedLib

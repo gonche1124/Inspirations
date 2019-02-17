@@ -16,7 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //Register for NSManagedObject Notifications
         let notiCenter = NotificationCenter.default
         notiCenter.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.managedObjectContext)
-        notiCenter.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: self.managedObjectContext)
+        notiCenter.addObserver(self, selector: #selector(managedObjectContextDidSave), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        
 
         //Create Main Items.
         createMainObjectsIfNotPresent()
@@ -135,7 +136,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
 
     lazy var applicationDocumentsDirectory: Foundation.URL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.apple.toolsQA.CocoaApp_CD" in the user's Application Support directory.
         let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         let appSupportURL = urls[urls.count - 1]
         return appSupportURL.appendingPathComponent("com.apple.toolsQA.CocoaApp_CD")
@@ -152,7 +152,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     //MARK: - Core Data Notifications
     @objc func managedObjectContextDidSave(notification:NSNotification){
-        print("Did Save")
+        guard let context = notification.object as? NSManagedObjectContext else {return}
+        if context.name == "MultipleImporter"{
+            self.managedObjectContext.mergeChanges(fromContextDidSave: notification as Notification)
+        }
+        print("Did Save for \(context.name ?? "")")
     }
     
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
@@ -216,12 +220,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         LibraryType.standardItems.forEach{
             _=managedObjectContext.get(standardItem: $0)
         }
-        
-        //TESTING
-        
-        
-        
-        
+    
         do{
             try self.managedObjectContext.save()
         }

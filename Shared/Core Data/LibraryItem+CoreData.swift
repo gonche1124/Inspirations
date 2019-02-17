@@ -125,17 +125,12 @@ public class LibraryItem: NSManagedObject {
         if named.trimWhites().isEmpty {
             fatalError("Failed to create, name is empty.")
         }
-        print("INIT CALLED FROM LIBRARYITEM")
         self.init(context: context)
         self.name=named
     }
 }
 
-extension LibraryItem:CoreDataUtilities{
-    public static func createWithName(name: String, in context: NSManagedObjectContext) -> LibraryItem {
-        return CoreEntity(named: name, in: context)
-    }
-}
+extension LibraryItem:CoreDataUtilities{}
 
 // MARK: - Generated accessors for hasLibraryItems
 extension LibraryItem {

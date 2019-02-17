@@ -11,11 +11,7 @@ import CoreData
 
 @objc(Tag)
 public class Tag: LibraryItem {
-    
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Tag> {
-        return NSFetchRequest<Tag>(entityName: "Tag")
-    }
-    
+
     //Properties
     @NSManaged public var hasQuotes: NSSet?
     
@@ -37,7 +33,6 @@ public class Tag: LibraryItem {
         if named.trimWhites().isEmpty {
             fatalError("Failed to create, name is empty.")
         }
-        print("CALLED FROM TAG.")
         self.init(context: context)
         self.name=named
         self.sortingOrder=self.name

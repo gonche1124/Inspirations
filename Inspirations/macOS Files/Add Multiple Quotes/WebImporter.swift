@@ -75,6 +75,7 @@ class WebImporter: NSViewController {
         self.progressIndicator?.isHidden = true
         self.notificationLabel?.stringValue = "Succesfully downloaded the quote."
         fillEmbeddedContainer(with: newQuote)
+        self.notificationLabel?.isHidden = true
     }
     
     ///Fills the values from the dictionary into the single embedde container to let the user modify the values.
@@ -83,20 +84,11 @@ class WebImporter: NSViewController {
         self.embeddedController?.authorComboBox.stringValue=newQuote[.author] ?? "Unable to donwload author name"
         if let tag = newQuote[.tags] {
             self.embeddedController?.tokenField.objectValue=[Tag.foc(named: tag, in: moc)]
-//            let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",tag)
-//            if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){
-//                self.embeddedController?.tokenField.objectValue=[existingTag]
-//                return
-//            }else {
-//                let newTag = Tag.init(named: tag, inMOC: moc) //TODO: Update with firstOrcreate method.
-//                self.embeddedController?.tokenField.objectValue=[newTag]
-//            }
         }
-        self.notificationLabel?.isHidden = true
     }
     
     //MARK: - Web parsers.
-    //Extracts Quote from BrainyQuote and return a dictionary with the values.
+    /// Extracts Quote from BrainyQuote and return a dictionary with the values.
     private func downloadFromBrainyQuote()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://www.brainyquote.com/quote_of_the_day"
@@ -117,7 +109,7 @@ class WebImporter: NSViewController {
         return dictionaryOUT
     }
     
-    //Extracts quote from Eduro and returns a dictionary with the info.
+    /// Extracts quote from Eduro and returns a dictionary with the info.
     private func downloadFromEduro()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://www.eduro.com"
@@ -137,7 +129,7 @@ class WebImporter: NSViewController {
         return dictionaryOUT
     }
     
-    // Extracts quote from wikipedia
+    /// Extracts quote from wikipedia
     private func downloadFromWikipedia()->Dictionary<coreKey,String>?{
         //Create html document.
         let stringURL = "https://en.wikiquote.org/wiki/Main_Page"

@@ -11,67 +11,30 @@ import Cocoa
 import WebKit
 import SwiftSoup
 
-//Mark: - Parent Import Controller.
-class MainImportController:NSViewController{
+class FileImporter: NSViewController {
     
-    var myFormat:NumberFormatter = {
+    //private variables
+    fileprivate var fileURL:URL?
+    fileprivate let myFormat:NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.decimal
         return formatter
     }()
     
-    //Outlets.
-    @IBOutlet weak var importQuotes:NSButton!
+    //Outlets
+    @IBOutlet weak var pathField:NSTextField!
+    @IBOutlet weak var importButton:NSButton!
     @IBOutlet weak var progressIndicator:NSProgressIndicator!
     @IBOutlet weak var progressLabel:NSTextField!
     
-    //Sets the progress idnicator and labels as enabled, not hidden and animated.
-    func showProgress(withLabel:String?=nil, andStarting:Bool=true){
-        self.progressIndicator.isHidden=false
-        self.progressLabel.isHidden=false
-        self.progressIndicator.usesThreadedAnimation=true
-        
-        if andStarting{
-            progressIndicator.startAnimation(nil)
-        }
-        if let newLabel=withLabel{
-            progressLabel.stringValue=newLabel
-        }
-    }
-    
-    //TODO: Implement isHidden through KVO for label, progress indicator and layoutconstraints.
-    
-    //Turns indefinite progress to definite
-    func convertIndicatorTodefinate(withItems:Double, andLabel:String?=nil){
-        progressIndicator.stopAnimation(nil)
-        progressIndicator.isIndeterminate = false
-        progressIndicator.minValue=1
-        progressIndicator.maxValue=withItems
-    }
-    
-    //used to override the UI parameters.
     override func viewWillAppear() {
         super.viewWillAppear()
-        self.progressIndicator.isHidden=true
-        self.progressLabel.isHidden=true
+        progressLabel.isHidden=true
+        progressIndicator.isHidden=true
+        importButton.isEnabled=false
     }
     
-    //Save and close
-    @IBAction func saveAndClose(_ sender:Any){
-        try! moc.save()
-        self.view.window?.close()
-    }
-    
-}
-//MARK: -
-class FileImporter: MainImportController {
-    
-    //private variables
-    fileprivate var fileURL:URL?
-    
-    //Outlets
-    @IBOutlet weak var pathField:NSTextField!
-    
+    //MARK: -
     //Gets the filepath and saves it to the NSTextfield
     @IBAction func chooseFile(_ sender:NSButton){
         let dialog = NSOpenPanel()
@@ -84,14 +47,25 @@ class FileImporter: MainImportController {
         }
     }
     
+    /// Closes the current window.
+    @IBAction func closeWindow(_ sender:Any){
+        self.view.window?.close()
+    }
+    
+    //MARK: - Import Methods.
+    
     //TODO: Disable import button when no file path selected.
     @IBAction func importQuotesFromJSON(_ sender:NSButton){
         
+        //Set up UI
+        self.progressIndicator.isHidden = false
+        self.progressLabel.isHidden = false
+        self.progressIndicator.usesThreadedAnimation=true
+        self.progressIndicator.startAnimation(self)
+        self.progressLabel.stringValue = "Loading quotes..."
+        
         //Create the JSON dictionary to Parse.
         guard let dictArrayDirty=getDictionary(fromURL: fileURL!) else {return}
-        
-        //Set up UI
-        showProgress(withLabel: "Loading quotes...", andStarting: true)
         
         //Clean dictionary with right keys:
         //TODO: Check for possible keys before passing.
@@ -102,34 +76,38 @@ class FileImporter: MainImportController {
         progressLabel.stringValue="Cleaninig quotes..."
         let dictArray=dictArrayDirty.map({cleanUp(dictionary: $0, mappingTo: lookUP)})
         let totItems=dictArrayDirty.count
-        self.convertIndicatorTodefinate(withItems: Double(totItems))
+        
+        progressIndicator.stopAnimation(nil)
+        progressIndicator.isIndeterminate = false
+        progressIndicator.minValue=1
+        progressIndicator.maxValue=Double(totItems)
+        
         
         //Import
         self.pContainer.performBackgroundTask{ (context) in
             context.undoManager=nil //Turn off undoManager for performance.
+            context.name="MultipleImporter"
             //Create Quotes updating the UI
+            
             for (i, quoteDict) in dictArray.enumerated(){
                 guard let qString = quoteDict["quoteString"] as? String else {
-                    print("Cant decode the Quote.")
+                    //TODO: include error counter to display at th end.
                     continue
                 }
-                let newQuote = Quote.foc(named: qString, in: context)
                 guard let authorDict = quoteDict["fromAuthor"] as? Dictionary<String,Any>, let authorName=authorDict["name"] as? String else {
-                    print("Cant decode the author.")
                     continue
                 }
-                newQuote.from = Author.foc(named: authorName, in: context)
                 guard let themeDict = quoteDict["isAbout"] as? Dictionary<String,Any>, let theme = themeDict["themeName"] as? String else {
                     print("Cant decode the Topic.")
                         continue
                 }
+                //Creates new Quote.
+                let newQuote = Quote.foc(named: qString, in: context)
+                newQuote.from = Author.foc(named: authorName, in: context)
                 newQuote.isAbout = Theme.foc(named: theme, in: context)
-                
-                //Check for tags or bool
                 newQuote.addAttributes(from: quoteDict)
                 
                 
-            
                 //Does it run smoother?
                 if (i%5==0) {
                     DispatchQueue.main.async {
@@ -149,15 +127,21 @@ class FileImporter: MainImportController {
             //Saves
             do {
                 try context.save()
-            } catch {
-                fatalError("Failure to save context: \(error)")
+            } catch let error as NSError{
+                fatalError("Failure to save context: \(error), \(error.userInfo)")
+               
             }
             
             //Dismiss
-            DispatchQueue.main.async {self.view.window?.close()}
+            DispatchQueue.main.async {
+                self.saveMainContext()
+                self.view.window?.close()}
         }
     }
     
+ 
+    
+    //MARK: -
     ///Converts the URL into a JSON dictionary to be able to parse.
     func getDictionary(fromURL:URL)->[[String:Any]]?{
         guard let testData = try? Data.init(contentsOf: fromURL) else{

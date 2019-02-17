@@ -12,19 +12,8 @@ import CoreData
 
 //Testing.
 public protocol CoreDataUtilities {
-    associatedtype CoreEntity: NSManagedObject  = Self
-    static func createWithName(name:String, in context:NSManagedObjectContext)->CoreEntity
-    init(named: String, in context:NSManagedObjectContext) //remove this line if it does not work.
+    init(named: String, in context:NSManagedObjectContext)
 }
-
-//extension CoreDataUtilities where Self:NSManagedObject{
-//
-//    static func createWithName(name: String, in context: NSManagedObjectContext) -> Self {
-//        //TODO: Finish to implement in the subclasses.
-//        return Self.init(named: name, in: context)
-//    }
-//}
-
 
 extension NSManagedObject {
 
@@ -78,19 +67,16 @@ extension NSFetchRequestResult where Self: NSManagedObject, Self:CoreDataUtiliti
     
     /// Gets the first item with the given name or creates one if no results.
     /// - parameter named: String to use as name.
-    //TODO: Add userInfo optional parameter to provide
-    static func foc(named:String, in context:NSManagedObjectContext)->CoreEntity{
+    static func foc(named:String, in context:NSManagedObjectContext)->Self{
         //Get item
         let request = NSFetchRequest<Self>(entityName: self.className())
         request.predicate = Self.entity().predicate(with: named)
         request.fetchLimit=1
         if let result = try? context.fetch(request), let item = result.first {
-            return item as! Self.CoreEntity
+            return item
         }
         //Create because it does not exists.
-        return Self(named: named, in: context) as! Self.CoreEntity
-        //TODO: FINISH!!!!!!
-        //return Self.createWithName(name: named, in: context)
+        return Self(named: named, in: context)
     }
 }
 

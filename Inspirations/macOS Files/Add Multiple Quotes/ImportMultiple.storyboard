@@ -59,7 +59,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="271" id="1Kp-mx-jwk"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fV9-pr-F2I">
+                                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fV9-pr-F2I">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -110,7 +110,7 @@ Gw
 </string>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="saveAndClose:" target="faY-da-gFi" id="Z4R-Da-ZbS"/>
+                                                    <action selector="closeWindow:" target="faY-da-gFi" id="TWv-tI-UrA"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -163,7 +163,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="importQuotes" destination="sX3-jS-7Jb" id="6ps-j8-BwY"/>
+                        <outlet property="importButton" destination="sX3-jS-7Jb" id="a9y-fO-CIu"/>
                         <outlet property="pathField" destination="GeQ-3a-8YP" id="Xes-Rx-ybu"/>
                         <outlet property="progressIndicator" destination="8wG-Jl-FMf" id="u3t-R1-Dq2"/>
                         <outlet property="progressLabel" destination="gbq-9J-gaV" id="NZf-NW-3gn"/>

@@ -60,7 +60,6 @@ class AddQuoteController: NSViewController {
     @IBOutlet weak var bottomMargin: NSLayoutConstraint?
     @IBOutlet weak var leftMargin: NSLayoutConstraint?
     @IBOutlet weak var topMargin: NSLayoutConstraint?
-    @IBOutlet var margins:[NSLayoutConstraint]?
     
     
     
@@ -84,7 +83,12 @@ class AddQuoteController: NSViewController {
         if isInterfaceValid() {
             let newQuote=NSEntityDescription.insertNewObject(forEntityName: Entities.quote.rawValue, into: moc) as! Quote
             getValuesFromUIAndAssignTo(quote: newQuote)
-            self.dismiss(self)
+            switch viewType {
+            case .downloading:
+                self.view.window?.close()
+            default:
+                self.dismiss(self)
+            }
         }
     }
     
@@ -96,7 +100,6 @@ class AddQuoteController: NSViewController {
         default:
             self.dismiss(self)
         }
-        
     }
     
     //MARK: - UI Methods
