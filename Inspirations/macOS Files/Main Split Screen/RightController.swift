@@ -20,24 +20,24 @@ class RightController: NSViewController {
     @IBOutlet weak var columnTable:NSTableView?
     @IBOutlet weak var listTable:NSTableView?
     
+    lazy var listFRC:NSFetchedResultsController<Quote> = {
+        //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
+        let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
+        //TODO: use keypaths: https://stoeffn.de/posts/modern-core-data-in-swift/
+        fr.sortDescriptors=[NSSortDescriptor(key: "quoteString", ascending: true)]
+        //fr.predicate=nil
+        let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        //frc.delegate=self
+        try! frc.performFetch()
+        return frc
+    }()
+    
     //Variables:
     var deletesFromDatabase:Bool{
         return LibraryType.canDeleteQuotes.contains(selectedLeftItem?.libraryType ?? .mainLibrary)
-        //return !(selectedLeftItem?.libraryType == LibraryType.mainLibrary)
-        //return ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
     }
-    var selectedLeftItem:LibraryItem?{
-        didSet{
-            //print(selectedLeftItem)
-            print("slectedleftItem-> updated")
-        }
-    }
-    //{
-//        didSet{
-//            //let newBool = [LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
-//            //self.deletesFromDatabase = ![LibraryType.tag.rawValue, LibraryType.list.rawValue].contains(selectedLeftItem?.libraryType)
-//        }
-    //}
+    
+    var selectedLeftItem:LibraryItem?
     var currentTable:NSTableView?
     
     //MARK: -
@@ -72,8 +72,6 @@ class RightController: NSViewController {
     //Called before preparing for a segue.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let destinationSegue = segue.destinationController as? AddQuoteController{
-            //TODO: remove isInfoWondow variable.
-            //destinationSegue.isInfoWindow=true
             destinationSegue.currQuote=quoteController.selectedObjects.first as? Quote
             destinationSegue.viewType = .showing
         }
@@ -166,6 +164,8 @@ extension RightController{
     
     //Deletes selected record or records.
     @IBAction func deleteSelectedRecord(_ sender: Any?){
+       
+        
         let confirmationD = NSAlert.init(totalItems: currentTable?.numberOfSelectedRows ?? 0, isDeleting: self.deletesFromDatabase)
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
@@ -180,6 +180,7 @@ extension RightController{
             }
             currentTable?.endUpdates()
             self.saveMainContext()
+            
         }
     }
 }
@@ -187,6 +188,16 @@ extension RightController{
 
 //MARK: - NSTableViewDataSource
 extension RightController: NSTableViewDataSource{
+    //WHEN NO BINDINGS USED:
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return listFRC.fetchedObjects?.count ?? 0
+    }
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        return listFRC.object(at: IndexPath(item: row, section: 0))
+    }
+    //WHEN NO BINDINGS USED:
+    
     
     //Copy-Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {

@@ -44,6 +44,7 @@ class FileImporter: NSViewController {
         if (dialog.runModal() == NSApplication.ModalResponse.OK), let result = dialog.url {
             pathField.stringValue=result.path
             fileURL = result
+            importButton.isEnabled = true
         }
     }
     

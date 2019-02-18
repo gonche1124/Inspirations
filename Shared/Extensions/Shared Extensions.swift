@@ -135,3 +135,10 @@ extension Array {
 }
 
 
+//extension NSFetchedResultsController{
+//    @objc func blablabla(at indexSet:IndexSet)->[ResultType]{
+//        return indexSet.map{self.object(at: IndexPath(item: $0, section: 0))}
+//    }
+//   
+//}
+

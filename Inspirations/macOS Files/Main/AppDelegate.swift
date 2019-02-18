@@ -70,6 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 fatalError("Unresolved error \(error)")
             }
         })
+        container.viewContext.name = "Main Context"
         return container
     }()
     
@@ -163,7 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard let userInfo = notification.userInfo else { return }
         //Print if merged from background or bacthUpdated/Delete action
         if let refreshed=userInfo[NSRefreshedObjectsKey] as? Set<NSManagedObject>{
-            print("Objects refreshed: \(refreshed.first?.changedValues().keys)")
+            //print("Objects refreshed: \(refreshed.first?.changedValues().keys)")
             //Forces refresh on left view and NSFetchedresultsController
             let item=self.managedObjectContext.get(standardItem: .rootMain)
             item.willChangeValue(forKey: "hasLibraryItems")
@@ -213,19 +214,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     }
     
-    //create teh default objects.
+    /// Create the default objects.
     func createMainObjectsIfNotPresent() {
         
         //Create standard items if they dont exists items.
         LibraryType.standardItems.forEach{
             _=managedObjectContext.get(standardItem: $0)
         }
-    
-        do{
-            try self.managedObjectContext.save()
-        }
-        catch{
-            print(error.localizedDescription)
+        if managedObjectContext.hasChanges {
+            do{
+                try self.managedObjectContext.save()
+            }
+            catch{
+                print(error.localizedDescription)
+            }
         }
     }
 }

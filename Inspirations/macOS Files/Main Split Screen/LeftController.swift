@@ -224,6 +224,7 @@ extension LeftController: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
             guard let  libItem = item as? LibraryItem else {return listFRC.fetchedObjects![index]}
             return libItem.hasLibraryItems![index]
+        
     }
     
     //Validate if dropping is allowed.
@@ -245,7 +246,7 @@ extension LeftController: NSOutlineViewDataSource {
         
         if let destinatinoEntity = item as? ManagesQuotes{
             destinatinoEntity.addQuotes(quotes: quotesS)
-            try! self.saveMainContext()
+            self.saveMainContext()
             return true
         }
             return false

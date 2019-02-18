@@ -202,7 +202,7 @@ extension AddQuoteController: NSTokenFieldDelegate{
     }
     //
     func tokenField(_ tokenField: NSTokenField, representedObjectForEditing editingString: String) -> Any? {
-        let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",editingString)
+        //let myPredicate=NSPredicate(format:"name == %@ AND isRootItem == NO",editingString)
         return Tag.foc(named: editingString, in: moc)
 //        if let existingTag = Tag.firstWith(predicate: myPredicate, inContext: moc){return existingTag}
 //        let newTag = Tag.init(named: editingString, inMOC: moc)

@@ -43,6 +43,15 @@ public class Language: LibraryItem {
     
 }
 
+//MARK: - Others
+extension Language {
+    override public func validateForUpdate() throws {
+        if self.hasQuotes?.count==0 {
+            self.managedObjectContext?.delete(self)
+        }
+    }
+}
+
 // MARK: - Generated accessors for hasQuotes
 extension Language {
     
