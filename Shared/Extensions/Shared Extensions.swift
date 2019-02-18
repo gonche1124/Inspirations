@@ -69,7 +69,7 @@ extension NSPredicate{
 
 //MARK: - 
 extension String{
-    ///Removes whitespace on both ends.
+    /// Removes whitespace on both ends.
     func trimWhites()->String{
         return self.trimmingCharacters(in: .whitespaces)
     }
@@ -139,6 +139,28 @@ extension Array {
 //    @objc func blablabla(at indexSet:IndexSet)->[ResultType]{
 //        return indexSet.map{self.object(at: IndexPath(item: $0, section: 0))}
 //    }
-//   
+//
+//}
+//extension NSFetchedResultsController where ResultType == NSFetchRequestResult{
+//    @objc func objects(for rows:IndexSet)->[ResultType]{
+//        return rows.map{IndexPath(item: $0, section: 0)}.map{self.object(at: $0)}
+//    }
+//}
+//extension NSFetchedResultsController{
+//    @objc func objects(for rows:IndexSet)->[Any]{
+//
+//        var outArray:[ResultType]=[ResultType]()
+//        let rr = rows.map({IndexPath(item: $0, section: 0)})
+//        for item in rr {
+//            outArray.append(self.object(at: item))
+//        }
+//        return outArray
+////        for (_, index) in indexSet.makeIterator(){
+////            let path = IndexPath(item: index, section: 0)
+////            outArray += self.object(at: path)
+////        }
+//        //return indexSet.map({self.object(at: <#T##IndexPath#>)})
+//        //return [self.object(at: IndexPath(item: 1, section: 0))]
+//    }
 //}
 

@@ -12,22 +12,20 @@ class RightController: NSViewController {
     
     //Outlets:
     @IBOutlet weak var statusTextField: NSTextField!
-    @IBOutlet weak var quoteController:NSArrayController!
     @IBOutlet weak var quoteTabView:NSTabView!
     @IBOutlet weak var bottomStackView:NSStackView!
     
     //Tables
     @IBOutlet weak var columnTable:NSTableView?
-    @IBOutlet weak var listTable:NSTableView?
+    @IBOutlet weak var exploreTable:NSTableView?
+    var selectedLeftItem:LibraryItem?
+    var currentTable:NSTableView?
     
-    lazy var listFRC:NSFetchedResultsController<Quote> = {
-        //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
+    lazy var quoteFRC:NSFetchedResultsController<Quote> = {
         let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
-        //TODO: use keypaths: https://stoeffn.de/posts/modern-core-data-in-swift/
-        fr.sortDescriptors=[NSSortDescriptor(key: "quoteString", ascending: true)]
-        //fr.predicate=nil
+        fr.sortDescriptors = [NSSortDescriptor(keyPath: \Quote.quoteString, ascending: true)]
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-        //frc.delegate=self
+        frc.delegate=self
         try! frc.performFetch()
         return frc
     }()
@@ -37,8 +35,7 @@ class RightController: NSViewController {
         return LibraryType.canDeleteQuotes.contains(selectedLeftItem?.libraryType ?? .mainLibrary)
     }
     
-    var selectedLeftItem:LibraryItem?
-    var currentTable:NSTableView?
+
     
     //MARK: -
     override func viewDidLoad() {
@@ -56,15 +53,17 @@ class RightController: NSViewController {
     override func viewDidAppear() {
         if let searchToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "mainSearchField"}){
             if let sField = searchToolbarItem.view as? NSSearchField {
-                
+                sField.delegate = self
+            
+                //TODO: SUbscribe to NSSearchfield.
                 //All
-                sField.bind(NSBindingName.predicate, to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"All",NSBindingOption.predicateFormat:pAll])
+                //sField.bind(NSBindingName.predicate, to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"All",NSBindingOption.predicateFormat:pAll])
                 
                 //Author
-                sField.bind(NSBindingName(rawValue: "predicate2"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Author",NSBindingOption.predicateFormat:pAuthor])
+                //sField.bind(NSBindingName(rawValue: "predicate2"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Author",NSBindingOption.predicateFormat:pAuthor])
                 
                 //Theme
-                sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
+                //sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
             }
         }
     }
@@ -72,8 +71,11 @@ class RightController: NSViewController {
     //Called before preparing for a segue.
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if let destinationSegue = segue.destinationController as? AddQuoteController{
-            destinationSegue.currQuote=quoteController.selectedObjects.first as? Quote
-            destinationSegue.viewType = .showing
+            if let table = currentTable{
+                let currQuote = quoteFRC.object(at: IndexPath(item: table.selectedRow, section: 0))
+                destinationSegue.currQuote=currQuote//quoteController.selectedObjects.first as? Quote
+                destinationSegue.viewType = .showing
+            }
         }
     }
     
@@ -122,8 +124,9 @@ class RightController: NSViewController {
         if let selectedLib = notification.object as? LibraryItem,
             let newPredicate = NSPredicate.quotePredicate(for: selectedLib){
             self.selectedLeftItem=selectedLib
-            self.quoteController.fetchPredicate=newPredicate
-            self.quoteController.fetch(nil)
+            self.quoteFRC.fetchRequest.predicate=newPredicate
+            try? quoteFRC.performFetch()
+            currentTable?.reloadData()
         }
     }
     
@@ -134,22 +137,26 @@ extension RightController{
     
     ///Updates favorite attribute based on sender parameter.
     @IBAction func modifyFavoriteAttribute(_ sender:AGC_NSMenuItem){
-        guard let selectedQuotes=quoteController.selectedObjects as? [Quote] else {return}
+        
+        let indexPathArray = currentTable!.selectedRowIndexes.map{IndexPath(item: $0, section: 0)}
+        let selectedQuotes = indexPathArray.map{quoteFRC.object(at: $0)}
+        let selectedIDs = selectedQuotes.map{$0.objectID}
         
         //Using Batch Update to work efficiently.
         let request=NSBatchUpdateRequest(entity: Quote.entity())
-        request.predicate=NSPredicate(format: "self IN %@", selectedQuotes.map{$0.objectID})
+        request.predicate=NSPredicate(format: "self IN %@", selectedIDs)
         request.resultType = .updatedObjectIDsResultType
         request.propertiesToUpdate=["isFavorite": sender.agcBool]
-        
-        do {
-            if let result = try moc.execute(request) as? NSBatchUpdateResult,let objectIDArray = result.result as? [NSManagedObjectID]{
-                let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
-                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [moc])
+        self.pContainer.performBackgroundTask{(context) in
+            do {
+                if let result = try context.execute(request) as? NSBatchUpdateResult,let objectIDArray = result.result as? [NSManagedObjectID]{
+                    let changes:[AnyHashable : Any] = [NSUpdatedObjectsKey : objectIDArray]
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.moc])
+                }
+                
+            } catch {
+                fatalError("Failed to perform batch update: \(error)")
             }
-            
-        } catch {
-            fatalError("Failed to perform batch update: \(error)")
         }
     }
     
@@ -157,7 +164,9 @@ extension RightController{
     ///Adds the selected quotes to the tags or playlists specified.
     @IBAction func addTagsOrPlaylists(_ sender: NSMenuItem?){
         if let item = moc.getObjectsWithIDS(asStrings: [sender!.identifier!.rawValue])?.first as? ManagesQuotes & LibraryItem{
-            item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
+            let selectedQuotes = currentTable!.selectedRowIndexes.map({IndexPath(item: $0, section: 0)}).map{quoteFRC.object(at: $0)}
+            item.addQuotes(quotes: selectedQuotes)
+            //item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
             self.saveMainContext()        }
 
     }
@@ -170,12 +179,13 @@ extension RightController{
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             currentTable?.beginUpdates()
+             let selectedObjects=currentTable!.selectedRowPaths.map{quoteFRC.object(at: $0)}//quoteController.selectedObjects as! [Quote]
             if deletesFromDatabase {
-                let selectedObjects=quoteController.selectedObjects as! [Quote]
+                //let selectedObjects=currentTable!.selectedRowPaths.map{quoteFRC.object(at: $0)}//quoteController.selectedObjects as! [Quote]
                 selectedObjects.forEach({moc.delete($0)})
             }else{
                 if let item=selectedLeftItem as? ManagesQuotes{
-                    item.removeQuotes(quote: quoteController.selectedObjects as! [Quote])
+                    item.removeQuotes(quote: selectedObjects) //quoteController.selectedObjects as! [Quote])
                 }
             }
             currentTable?.endUpdates()
@@ -190,18 +200,26 @@ extension RightController{
 extension RightController: NSTableViewDataSource{
     //WHEN NO BINDINGS USED:
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return listFRC.fetchedObjects?.count ?? 0
+        return quoteFRC.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return listFRC.object(at: IndexPath(item: row, section: 0))
+        return quoteFRC.object(at: IndexPath(item: row, section: 0))
     }
-    //WHEN NO BINDINGS USED:
+    
+    /// Used for sorting of columns.
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        guard let sortDescriptor = tableView.sortDescriptors.first else {return}
+        quoteFRC.fetchRequest.sortDescriptors = [sortDescriptor]
+        try? quoteFRC.performFetch()
+        currentTable?.reloadData()
+    }
+    //WHEN NO BINDINGS USED
     
     
     //Copy-Pasting
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let thisQuote = (quoteController.arrangedObjects as! [Quote])[row]
+        let thisQuote = quoteFRC.object(at: IndexPath(item: row, section: 0))
         let thisItem = NSPasteboardItem()
         thisItem.setString(thisQuote.getID(), forType: .string)
         return thisItem
@@ -213,12 +231,51 @@ extension RightController: NSTableViewDelegate{
     
     //Changing the selection.
     func tableViewSelectionDidChange(_ notification: Notification) {
-        if let _ = notification.object as? NSTableView,
-            let selectedArray = self.quoteController.selectedObjects as? [Quote] {
+        if let table = notification.object as? NSTableView
+             {
+                let objects = table.selectedRowPaths.map({quoteFRC.object(at: $0)}).map({$0.getID()})
             NotificationCenter.default.post(Notification(name: .selectedRowsChaged,
-                                                         object: selectedArray.map({$0.getID()}),
+                                                         object: objects,
                                                          userInfo: nil)) //Used for displaying text and for sharing selected Objects
         }
+    }
+    
+  
+}
+
+//MARK: - NSFetchedResultsControllerDelegate
+extension RightController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch(type){
+        case .delete:
+            //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Delete")
+            break
+        case .insert:
+            //[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Insert")
+            break
+        case .move:
+            //[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            // [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            print("Move")
+            break
+        case .update:
+            // [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            print("Update..........")
+            break
+        }
+    }
+    
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        currentTable!.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        currentTable!.reloadData()
+        currentTable!.endUpdates()
     }
 }
 
@@ -246,5 +303,22 @@ extension RightController: NSMenuDelegate{
         default:
             break
         }
+    }
+}
+
+extension RightController: NSSearchFieldDelegate {
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        print("didStart")
+    }
+    
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        print("didEnd")
+    }
+    
+    func controlTextDidChange(_ obj: Notification) {
+        if let searchField = obj.object as? NSSearchField{
+            print("\(searchField.stringValue)")
+        }
+        
     }
 }

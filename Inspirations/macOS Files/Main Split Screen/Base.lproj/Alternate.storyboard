@@ -465,6 +465,18 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Zdu-vf-aOV"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="XoW-kg-Cuf"/>
+                                <toolbarItem implicitItemIdentifier="74F69806-C8B7-41AD-9BA8-400881D42A62" label="Info text" paletteLabel="Information String" sizingBehavior="auto" id="FQu-ce-QpM">
+                                    <nil key="toolTip"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="59M-vL-tUh">
+                                        <rect key="frame" x="33" y="14" width="37" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="testing" id="Uog-2S-cvp">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="AD6B3976-D442-4044-851F-21F886770DB5" explicitItemIdentifier="segmentedButtonImage" label="Views" paletteLabel="Views" id="ySO-UO-BhQ" userLabel="Views Selected Image">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="103" height="23"/>
@@ -505,14 +517,14 @@
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="553348E4-1B16-4DA0-AD6D-20004041995E" label="Collections" paletteLabel="Collections" image="NSListViewTemplate" id="Us6-89-ETH" userLabel="Toggle">
+                                <toolbarItem implicitItemIdentifier="553348E4-1B16-4DA0-AD6D-20004041995E" label="Collections" paletteLabel="Collections" image="NSSidebarTemplate" id="Us6-89-ETH" userLabel="Toggle">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="35" height="25"/>
                                     <size key="maxSize" width="45" height="25"/>
                                     <button key="view" verticalHuggingPriority="750" id="gMV-o8-ZDe">
                                         <rect key="frame" x="15" y="14" width="37" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSListViewTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mej-Ov-2Ut">
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSSidebarTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mej-Ov-2Ut">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -560,10 +572,11 @@
                                 <toolbarItem reference="XoW-kg-Cuf"/>
                                 <toolbarItem reference="1oh-Le-P6p"/>
                                 <toolbarItem reference="XoW-kg-Cuf"/>
-                                <toolbarItem reference="Cue-ch-q3L"/>
+                                <toolbarItem reference="FQu-ce-QpM"/>
                                 <toolbarItem reference="XoW-kg-Cuf"/>
                                 <toolbarItem reference="N6T-ka-aco"/>
                                 <toolbarItem reference="fTD-x4-jIb"/>
+                                <toolbarItem reference="Cue-ch-q3L"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -632,6 +645,7 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
+                                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="isFavorite"/>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
                                                                                     <tableCellView identifier="isFavorite" id="5Mp-w9-LhG" customClass="AGCCell" customModule="Inspirations_macOS" customModuleProvider="target">
@@ -886,9 +900,6 @@
                                                                             </tableColumn>
                                                                         </tableColumns>
                                                                         <connections>
-                                                                            <binding destination="ffh-xi-q60" name="content" keyPath="arrangedObjects" id="VIv-cK-gpi"/>
-                                                                            <binding destination="ffh-xi-q60" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="VIv-cK-gpi" id="MkR-pk-vAe"/>
-                                                                            <binding destination="ffh-xi-q60" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="MkR-pk-vAe" id="fdR-TB-jgn"/>
                                                                             <outlet property="dataSource" destination="gvZ-1i-Bh3" id="diW-cN-7do"/>
                                                                             <outlet property="delegate" destination="gvZ-1i-Bh3" id="OXS-73-bDY"/>
                                                                             <outlet property="menu" destination="gRv-eE-Tve" id="8gj-1t-U3t"/>
@@ -1019,9 +1030,6 @@
                                                                             </tableColumn>
                                                                         </tableColumns>
                                                                         <connections>
-                                                                            <binding destination="ffh-xi-q60" name="content" keyPath="arrangedObjects" id="wct-J3-9af"/>
-                                                                            <binding destination="ffh-xi-q60" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="wct-J3-9af" id="wVN-jB-msJ"/>
-                                                                            <binding destination="ffh-xi-q60" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="wVN-jB-msJ" id="IV9-Sk-zZG"/>
                                                                             <outlet property="dataSource" destination="gvZ-1i-Bh3" id="fZ0-Z0-mih"/>
                                                                             <outlet property="delegate" destination="gvZ-1i-Bh3" id="kGM-dK-OSj"/>
                                                                             <outlet property="menu" destination="gRv-eE-Tve" id="oAg-fs-3OQ"/>
@@ -1065,14 +1073,6 @@
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
-                                                                    <connections>
-                                                                        <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selection.quoteString" id="Zke-LI-qEj">
-                                                                            <dictionary key="options">
-                                                                                <string key="NSDisplayPattern">"%{value1}@"</string>
-                                                                                <string key="NSMultipleValuesPlaceholder">Multiple quotes selected</string>
-                                                                            </dictionary>
-                                                                        </binding>
-                                                                    </connections>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qwI-25-jQZ">
                                                                     <rect key="frame" x="-2" y="0.0" width="89" height="19"/>
@@ -1081,14 +1081,6 @@
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
-                                                                    <connections>
-                                                                        <binding destination="ffh-xi-q60" name="toolTip" keyPath="selection.from.hasSaid.@count" id="Qgt-DZ-3B4"/>
-                                                                        <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selection.from.name" id="5gh-rX-VSk">
-                                                                            <dictionary key="options">
-                                                                                <string key="NSDisplayPattern">- %{value1}@</string>
-                                                                            </dictionary>
-                                                                        </binding>
-                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <visibilityPriorities>
@@ -1106,9 +1098,6 @@
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
-                                                            <connections>
-                                                                <action selector="selectPrevious:" target="ffh-xi-q60" id="6TD-SA-RJI"/>
-                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZWs-tS-TQN">
                                                             <rect key="frame" x="581" y="-7" width="69" height="32"/>
@@ -1116,9 +1105,6 @@
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
-                                                            <connections>
-                                                                <action selector="selectNext:" target="ffh-xi-q60" id="q0v-A5-SlV"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -1160,20 +1146,6 @@
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <binding destination="ffh-xi-q60" name="displayPatternValue2" keyPath="arrangedObjects.@count" previousBinding="PGb-Ru-LjY" id="Ax9-S5-i8o">
-                                                        <dictionary key="options">
-                                                            <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
-                                                            <string key="NSNoSelectionPlaceholder">No quotes selected</string>
-                                                        </dictionary>
-                                                    </binding>
-                                                    <binding destination="ffh-xi-q60" name="displayPatternValue1" keyPath="selectedObjects.@count" id="PGb-Ru-LjY">
-                                                        <dictionary key="options">
-                                                            <string key="NSDisplayPattern">%{value1}@  of %{value2}@ quotes selected</string>
-                                                            <string key="NSNoSelectionPlaceholder">No quotes selected</string>
-                                                        </dictionary>
-                                                    </binding>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1207,7 +1179,8 @@
                     </view>
                     <connections>
                         <outlet property="bottomStackView" destination="ycu-sH-6ut" id="DGt-UL-vqg"/>
-                        <outlet property="quoteController" destination="ffh-xi-q60" id="IUf-VS-yt4"/>
+                        <outlet property="columnTable" destination="54v-a9-76t" id="eR6-wV-kl5"/>
+                        <outlet property="exploreTable" destination="Jd6-qF-irS" id="FMw-4N-Wbe"/>
                         <outlet property="quoteTabView" destination="2EJ-9n-8oK" id="7PY-pk-hqL"/>
                         <outlet property="statusTextField" destination="Dbf-nk-867" id="rFx-bN-oEP"/>
                     </connections>
@@ -1223,11 +1196,6 @@
                         </menuItem>
                     </items>
                 </menu>
-                <arrayController mode="entity" entityName="Quote" automaticallyPreparesContent="YES" id="ffh-xi-q60">
-                    <connections>
-                        <binding destination="gvZ-1i-Bh3" name="managedObjectContext" keyPath="self.moc" id="bQH-Yp-UfV"/>
-                    </connections>
-                </arrayController>
                 <menu identifier="rightMenu" id="gRv-eE-Tve">
                     <items>
                         <menuItem title="Set Favorite" tag="1" keyEquivalent="f" id="R1c-wm-Cq8" customClass="AGC_NSMenuItem" customModule="Inspirations_macOS" customModuleProvider="target">
@@ -1961,6 +1929,7 @@ CA
         <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSSidebarTemplate" width="128" height="128"/>
         <image name="favoritesImage" width="512" height="512"/>
         <image name="folderImage" width="512" height="512"/>
         <image name="languageImage" width="128" height="128"/>
@@ -1970,6 +1939,6 @@ CA
         <image name="tagImage" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="btS-AB-Wjm"/>
+        <segue reference="uHa-JK-rRN"/>
     </inferredMetricsTieBreakers>
 </document>

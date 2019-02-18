@@ -233,4 +233,11 @@ extension NSPredicateEditorRowTemplate {
     }
 }
 
+extension NSTableView{
+    /// An indexPath array containing the indexes of the selected rows.
+    var selectedRowPaths:[IndexPath]{
+        return self.selectedRowIndexes.map{IndexPath(item: $0, section: 0)}
+    }
+}
+
 
