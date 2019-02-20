@@ -35,6 +35,7 @@ class SmartListController: NSViewController {
         predicateView.addRow(nil)
         
         self.predicateScrollView.isHidden=true
+        self.quotesFound.isHidden=true
         
         //Configure depending on case:
         switch typeOfAction! {
@@ -44,6 +45,7 @@ class SmartListController: NSViewController {
             self.createButton.action=#selector(updateItemName(_:))
             if let smartList=selectedObject as? QuoteList, let predc=smartList.smartPredicate {
                 self.predicateScrollView.isHidden=false
+                self.quotesFound.isHidden=false
                 self.predicateView.objectValue=predc
             }
         case .inserting:
@@ -51,16 +53,21 @@ class SmartListController: NSViewController {
             self.createButton.action=#selector(createList(_:))
             if (self.insertItemType == .smartList) {
                 self.predicateScrollView.isHidden=false
+                self.quotesFound.isHidden=false
             }
         }
     }
     
     //MARK: - Properties
-    @IBOutlet weak var nameTextField: NSTextField!
+    @IBOutlet weak var nameTextField: NSTextField!{
+        didSet{
+            print("Did Set with \(self.nameTextField.stringValue)")
+        }
+    }
     @IBOutlet weak var createButton: NSButton!
     @IBOutlet weak var predicateScrollView: NSScrollView!
     @IBOutlet weak var predicateView: NSPredicateEditor!
-    @objc dynamic var nameProxy:String? //Used for bindings to enable nsbutton.
+    @IBOutlet weak var quotesFound:NSTextField!
 
     
     //Properties set from parent view Controller
@@ -106,28 +113,26 @@ class SmartListController: NSViewController {
         }
         self.saveMainContext()
         self.dismiss(self)
-        
-//        if !nameTextField.stringValue.trimmingCharacters(in: .whitespaces).isEmpty{
-//            self.selectedObject?.name=nameTextField.stringValue
-//            self.saveMainContext()
-//            self.dismiss(self)
-//        }else{
-//            let alert = NSAlert()
-//            alert.messageText = "Empty Name"
-//            alert.informativeText = "Name can not be empty or same as other item."
-//            alert.addButton(withTitle: "OK")
-//            alert.addButton(withTitle: "Cancel")
-//            alert.alertStyle = .warning
-//            alert.runModal()
-//        }
     }
     
     //MARK: - NSpredicate Editor.
     @IBAction func predicatedChanged(_ sender:NSPredicateEditor){
-        print(predicateView.predicate!)
+        if let updatedPredicate = predicateView.predicate {
+            print(updatedPredicate)
+           let totItems = try? Quote.count(in: moc, with: updatedPredicate)
+            self.quotesFound.stringValue = "\(totItems ?? 0) items found."
+        }
     }
 }
+
+/// Extensions to enable and disable the textfield.
+extension SmartListController: NSTextFieldDelegate {
     
+    func controlTextDidChange(_ obj: Notification) {
+        self.createButton.isEnabled = !nameTextField.stringValue.isEmpty
+    }
+}
+
 
 
 

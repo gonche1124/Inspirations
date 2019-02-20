@@ -10,14 +10,14 @@
             <objects>
                 <viewController title="List Editor" showSeguePresentationStyle="single" id="WCB-UA-VqA" userLabel="Library Item Editor" customClass="SmartListController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="a6i-N4-AyW">
-                        <rect key="frame" x="0.0" y="0.0" width="424" height="283"/>
+                        <rect key="frame" x="0.0" y="0.0" width="424" height="308"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView distribution="fillEqually" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="250.99998474121094" verticalStackHuggingPriority="251" horizontalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJd-tS-OT4">
-                                <rect key="frame" x="12" y="12" width="400" height="259"/>
+                                <rect key="frame" x="12" y="12" width="400" height="284"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="1000" horizontalClippingResistancePriority="750" verticalHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3BP-U4-2Sf" userLabel="Input Row">
-                                        <rect key="frame" x="0.0" y="237" width="400" height="22"/>
+                                        <rect key="frame" x="0.0" y="262" width="400" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="twq-Qm-fFM">
                                                 <rect key="frame" x="-2" y="0.0" width="44" height="22"/>
@@ -38,11 +38,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="WCB-UA-VqA" name="value" keyPath="self.nameProxy" id="gYq-VU-RvE">
-                                                        <dictionary key="options">
-                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        </dictionary>
-                                                    </binding>
+                                                    <outlet property="delegate" destination="WCB-UA-VqA" id="Oj6-lx-Ogm"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -60,24 +56,16 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" spacing="15" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSC-Y4-QQq" userLabel="Action Row">
-                                        <rect key="frame" x="123" y="208" width="154" height="21"/>
+                                        <rect key="frame" x="123" y="233" width="154" height="21"/>
                                         <subviews>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Y6y-Bv-9VX">
                                                 <rect key="frame" x="-6" y="-7" width="81" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kqT-Wd-kIC">
+                                                <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kqT-Wd-kIC">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="createList:" target="WCB-UA-VqA" id="hHY-gm-p9h"/>
-                                                    <binding destination="WCB-UA-VqA" name="enabled" keyPath="self.nameProxy.length" id="gez-8M-dE0">
-                                                        <dictionary key="options">
-                                                            <integer key="NSMultipleValuesPlaceholder" value="0"/>
-                                                            <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                            <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                            <integer key="NSNullPlaceholder" value="0"/>
-                                                        </dictionary>
-                                                    </binding>
                                                 </connections>
                                             </button>
                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9GB-ZC-tTt">
@@ -107,7 +95,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <scrollView horizontalHuggingPriority="249" horizontalCompressionResistancePriority="1000" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-Wa-YGf">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+                                        <rect key="frame" x="0.0" y="25" width="400" height="200"/>
                                         <clipView key="contentView" id="eL3-Cv-gEC">
                                             <rect key="frame" x="1" y="1" width="398" height="198"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,17 +146,29 @@ Gw
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yGs-V0-UsX">
+                                        <rect key="frame" x="-2" y="0.0" width="404" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="0 quotes found" id="DmJ-AQ-le2">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="3BP-U4-2Sf" firstAttribute="leading" secondItem="WJd-tS-OT4" secondAttribute="leading" id="D6D-tw-aNf"/>
+                                    <constraint firstItem="yGs-V0-UsX" firstAttribute="leading" secondItem="WJd-tS-OT4" secondAttribute="leading" id="c4W-Sm-PvX"/>
+                                    <constraint firstAttribute="trailing" secondItem="yGs-V0-UsX" secondAttribute="trailing" id="cKl-gI-4fJ"/>
                                     <constraint firstAttribute="trailing" secondItem="3BP-U4-2Sf" secondAttribute="trailing" id="cX7-mZ-tuL"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -187,6 +187,7 @@ Gw
                         <outlet property="nameTextField" destination="mSm-ol-bVt" id="O0M-HJ-hbi"/>
                         <outlet property="predicateScrollView" destination="1gA-Wa-YGf" id="J8t-oV-yIl"/>
                         <outlet property="predicateView" destination="IB2-a3-wnY" id="ne4-5I-Gpx"/>
+                        <outlet property="quotesFound" destination="yGs-V0-UsX" id="TKq-gA-3d0"/>
                     </connections>
                 </viewController>
                 <customObject id="yu0-AR-bcD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

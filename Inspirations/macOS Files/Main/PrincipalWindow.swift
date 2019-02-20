@@ -13,11 +13,14 @@ class PrincipalWindow: NSWindowController {
     //Outlets
     @IBOutlet var shareButton:NSButton!
     @IBOutlet weak var mainSearchField: NSSearchField!
+    @IBOutlet weak var infoMessage:NSTextField!
     
     //Vars
     var selectedQuotesIDS:[String]?{
         didSet{
             shareButton.isEnabled=true
+            infoMessage.stringValue = "\(selectedQuotesIDS?.count ?? 0) items selected"
+            
         }
     }
     

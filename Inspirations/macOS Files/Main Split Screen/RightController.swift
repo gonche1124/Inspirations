@@ -35,8 +35,6 @@ class RightController: NSViewController {
         return LibraryType.canDeleteQuotes.contains(selectedLeftItem?.libraryType ?? .mainLibrary)
     }
     
-
-    
     //MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -313,11 +311,22 @@ extension RightController: NSSearchFieldDelegate {
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         print("didEnd")
+        if let newPredicate = NSPredicate.quotePredicate(for: selectedLeftItem!){
+            self.quoteFRC.fetchRequest.predicate=newPredicate
+            try? quoteFRC.performFetch()
+            currentTable?.reloadData()
+        }
     }
     
     func controlTextDidChange(_ obj: Notification) {
         if let searchField = obj.object as? NSSearchField{
             print("\(searchField.stringValue)")
+            //TODO: move to NSpredciate extension
+            let withString = searchField.stringValue
+            let newPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", withString, withString, withString)
+            quoteFRC.fetchRequest.predicate=newPredicate
+            try? quoteFRC.performFetch()
+            currentTable?.reloadData()
         }
         
     }

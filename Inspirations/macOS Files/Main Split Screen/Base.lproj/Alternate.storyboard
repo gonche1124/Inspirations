@@ -584,6 +584,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="infoMessage" destination="59M-vL-tUh" id="8WX-1c-ov9"/>
                         <outlet property="mainSearchField" destination="0Xx-UZ-MRd" id="hp0-bF-yyK"/>
                         <outlet property="shareButton" destination="m1q-oA-5JL" id="S5u-d6-6lm"/>
                         <segue destination="KAN-2L-YNM" kind="relationship" relationship="window.shadowedContentViewController" id="yUg-Ha-RNT"/>
@@ -627,7 +628,7 @@
                                                                 <rect key="frame" x="1" y="0.0" width="642" height="476"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <tableView identifier="columnTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnSelection="YES" autosaveColumns="NO" headerView="12p-Ta-Z5J" viewBased="YES" id="54v-a9-76t" userLabel="Column Table">
+                                                                    <tableView identifier="columnTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnSelection="YES" emptySelection="NO" autosaveColumns="NO" headerView="12p-Ta-Z5J" viewBased="YES" id="54v-a9-76t" userLabel="Column Table">
                                                                         <rect key="frame" x="0.0" y="0.0" width="642" height="451"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -941,9 +942,9 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                             <clipView key="contentView" id="33a-dW-DC1">
                                                                 <rect key="frame" x="1" y="1" width="642" height="475"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <tableView identifier="exploreTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Jd6-qF-irS" userLabel="Explore Table">
+                                                                    <tableView identifier="exploreTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" emptySelection="NO" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Jd6-qF-irS" userLabel="Explore Table">
                                                                         <rect key="frame" x="0.0" y="0.0" width="642" height="475"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -1929,7 +1930,7 @@ CA
         <image name="NSQuickLookTemplate" width="19" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSShareTemplate" width="11" height="16"/>
-        <image name="NSSidebarTemplate" width="128" height="128"/>
+        <image name="NSSidebarTemplate" width="15" height="12"/>
         <image name="favoritesImage" width="512" height="512"/>
         <image name="folderImage" width="512" height="512"/>
         <image name="languageImage" width="128" height="128"/>
