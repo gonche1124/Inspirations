@@ -53,9 +53,7 @@ class FileImporter: NSViewController {
         self.view.window?.close()
     }
     
-    //MARK: - Import Methods.
-    
-    //TODO: Disable import button when no file path selected.
+    //MARK: - Import Methods.    
     @IBAction func importQuotesFromJSON(_ sender:NSButton){
         
         //Set up UI

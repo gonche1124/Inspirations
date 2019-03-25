@@ -38,13 +38,15 @@ public class Author: NSManagedObject {
         self.init(context: context)
         self.name=named
     }
+    
+    /// quote to searh for the .....
+    var quotePredicate: NSPredicate {
+        return NSPredicate(format: "from.name contains [CD] %@", self.name ?? "")
+    }
 }
 
 //FOC extension.
 extension Author:CoreDataUtilities{
-    public static func createWithName(name: String, in context: NSManagedObjectContext) -> Author {
-        return Author(named: name, in: context)
-    }
 }
 
 

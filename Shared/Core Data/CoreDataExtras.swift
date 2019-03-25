@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-//Testing.
+/// protocol usde to define a conviniencen initializer for the FOC.
 public protocol CoreDataUtilities {
     init(named: String, in context:NSManagedObjectContext)
 }
@@ -49,10 +49,10 @@ extension NSFetchRequestResult where Self: NSManagedObject, Self:CoreDataUtiliti
     /// Gets all objects of the calling entity.
     /// - parameter in: NSManagedObjectContext used to fecth the entities.
     /// - parameter with: NSPredicate used to filter the results.
-    /// - TODO: Include NSSort descriptors.
-    static func objects(in context:NSManagedObjectContext, with predicate:NSPredicate?=nil) throws ->[Self]{
+    static func objects(in context:NSManagedObjectContext, with predicate:NSPredicate?=nil, sorted:[NSSortDescriptor]?=nil) throws ->[Self]{
         let request = NSFetchRequest<Self>(entityName: Self.className())
         request.predicate = predicate
+        request.sortDescriptors=sorted
         return try context.fetch(request)
     }
     
@@ -103,7 +103,7 @@ extension NSManagedObjectContext{
             fatalError("Not a standard item: \(ofType)")
         }
         let request = NSFetchRequest<LibraryItem>(entityName:Entities.library.rawValue)//LibraryItem.singleRequest()
-        request.predicate = NSPredicate.forItem(ofType: ofType)
+        request.predicate = NSPredicate(forItem: ofType)//NSPredicate.forItem(ofType: ofType)
         if let array = try? self.fetch(request), let item = array.first {
              return item
         } else {

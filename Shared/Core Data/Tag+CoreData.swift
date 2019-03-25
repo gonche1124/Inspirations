@@ -20,6 +20,11 @@ public class Tag: LibraryItem {
         return hasQuotes?.count
     }
     
+    /// Returns the predicate used to search for quotes based on the tag's name.
+    override var quotePredicate: NSPredicate {
+        return NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", self.name)
+    }
+    
     //MARK: - Overrides
     public override func awakeFromInsert() {
         super.awakeFromInsert()

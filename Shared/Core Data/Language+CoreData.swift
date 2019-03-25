@@ -20,6 +20,10 @@ public class Language: LibraryItem {
         return hasQuotes?.count
     }
     
+    override var quotePredicate: NSPredicate {
+        return NSPredicate(format: "spelledIn.name CONTAINS [CD] %@", self.name)
+    }
+    
     //MARK: - Overrides
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -40,8 +44,8 @@ public class Language: LibraryItem {
         self.belongsToLibraryItem=context.get(standardItem: .rootLanguage)
         self.sortingOrder=self.name
     }
-    
 }
+
 
 //MARK: - Others
 extension Language {

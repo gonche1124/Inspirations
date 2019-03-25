@@ -24,6 +24,13 @@ public class QuoteList: LibraryItem {
         return hasQuotes?.count
     }
     
+    override var quotePredicate: NSPredicate{
+        if let predicate=self.smartPredicate {
+            return predicate
+        }
+        return NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  self.name)
+    }
+    
     //MARK: - Overrides
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -37,7 +44,6 @@ public class QuoteList: LibraryItem {
         guard let entity = NSEntityDescription.entity(forEntityName: "QuoteList", in: inMOC),
             andName != "" else {
                 fatalError("Failed to create Quote List")}
-        //TODO: Handle case when it is a folder instead of a list.
         self.init(entity: entity, insertInto: inMOC)
         self.name=andName
         self.sortingOrder=self.name

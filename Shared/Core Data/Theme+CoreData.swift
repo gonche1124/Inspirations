@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-//TODO: Transofmr Codable to Encodable and cleanup code.
 @objc(Theme)
 public class Theme: NSManagedObject{
     
@@ -37,6 +36,11 @@ public class Theme: NSManagedObject{
         }
         self.init(context: context)
         self.themeName=named
+    }
+    
+    /// Returns the predicate used to search for quotes.
+    var quotePredicate:NSPredicate {
+        return NSPredicate(format: "isAbout.themeName contains [CD] %@", self.themeName!)
     }
 }
 

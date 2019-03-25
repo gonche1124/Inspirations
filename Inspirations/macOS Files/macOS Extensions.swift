@@ -190,7 +190,6 @@ extension NSPredicateEditorRowTemplate {
         
         //Check for realtionships:
         if includingRelationships{
-            //TODO: Handle TO-MANY relationships.
             let relationsNames = entityDescription?.relationshipsByNameForPredicateEditor
             relationsNames?.forEach{
                 templateRows.append(contentsOf: NSPredicateEditorRowTemplate.templates(forEntity: $0.value!, in: moc, andPrefix:"\($0.key)."))
@@ -210,7 +209,7 @@ extension NSPredicateEditorRowTemplate {
         
         //Setup depending on the type
         switch type {
-    case .decimalAttributeType, .doubleAttributeType, .floatAttributeType, .integer16AttributeType, .integer32AttributeType, .integer64AttributeType:
+        case .decimalAttributeType, .doubleAttributeType, .floatAttributeType, .integer16AttributeType, .integer32AttributeType, .integer64AttributeType:
             templateOperator = NSPredicateEditorRowTemplate.numberOperators.map{NSNumber(value: $0.rawValue)}
         case .dateAttributeType:
             templateOperator = NSPredicateEditorRowTemplate.dateOperators.map{NSNumber(value: $0.rawValue)}

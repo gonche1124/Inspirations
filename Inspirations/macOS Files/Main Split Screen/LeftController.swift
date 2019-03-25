@@ -24,10 +24,8 @@ class LeftController: NSViewController {
     }
     
     lazy var listFRC:NSFetchedResultsController<LibraryItem> = {
-        //let fr=LibraryItem.fetchRequestForEntity(inContext: <#T##NSManagedObjectContext#>)
         let fr=NSFetchRequest<LibraryItem>(entityName: Entities.library.rawValue)
-        //TODO: use keypaths: https://stoeffn.de/posts/modern-core-data-in-swift/
-        fr.sortDescriptors=[NSSortDescriptor(key: "sortingOrder", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+        fr.sortDescriptors=[NSSortDescriptor(keyPath: \LibraryItem.sortingOrder, ascending: true), NSSortDescriptor(keyPath: \LibraryItem.name, ascending: true)]
         fr.predicate=NSPredicate.rootItems
         let frc=NSFetchedResultsController(fetchRequest: fr, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate=self
@@ -53,8 +51,6 @@ class LeftController: NSViewController {
         //Set default selected item.
         let itemIndex = listView.row(forItem: moc.get(standardItem: .mainLibrary))
         listView.selectRowIndexes(IndexSet.init(integer: itemIndex), byExtendingSelection: false)
-        //Register to update count.
-        //NotificationCenter.default.addObserver(self, selector: #selector(managedObjectDidChange), name: .NSManagedObjectContextObjectsDidChange, object: self.moc)
     }
  
     @IBAction func identifySegueToPerform(_ sender:Any){
@@ -100,7 +96,8 @@ class LeftController: NSViewController {
         let isRoot=(selectedItem?.isRootItem)!
         let isFolder=(selectedItem?.libraryType == .folder)
         let isMainFav=checkArray.contains((selectedItem?.libraryType)!)
-        let isPrincipal=selectedItem?.name=="Library"
+        //let isPrincipal=selectedItem?.name=="Library"
+        let isPrincipal=selectedItem?.libraryType == LibraryType.mainLibrary
         
         if isRoot && !isPrincipal {canAddNewItem=true; canDeleteItem=false}
         if !isRoot && !isMainFav && !isFolder{canAddNewItem=false; canDeleteItem=true}
@@ -109,13 +106,11 @@ class LeftController: NSViewController {
     
     /// Checks which items have had CRUD to determine if neccesary to update view.
     /// - TODO: Review performance and do case-by-case evaluation of updates.
-    @objc func managedObjectDidChange(notification: NSNotification){
-        listView.beginUpdates()
-        //listView.reloadData()
-        listView.endUpdates()
-        //TODO: Review performance and do case-by-case evaluation of updates.
-        
-    }
+//    @objc func managedObjectDidChange(notification: NSNotification){
+//        listView.beginUpdates()
+//        //listView.reloadData()
+//        listView.endUpdates()
+//    }
 }
 
 //MARK: - NSTextFieldDelegate
@@ -124,13 +119,23 @@ extension LeftController: NSTextFieldDelegate {
     //Update search field when user enters text.
     func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
-            listFRC.fetchRequest.predicate=NSPredicate.leftPredicate(withText: searchF.stringValue)
+            listFRC.fetchRequest.predicate = NSPredicate(fromLeftSearchField: searchF)
             try! listFRC.performFetch()
             listView.beginUpdates()
             listView.reloadData()
             listView.expandItem(nil, expandChildren: true)
             listView.endUpdates()
         }
+    }
+    
+    // Updates the predicate with the root items after the user ends searching.
+    func controlTextDidEndEditing(_ obj: Notification) {
+        listFRC.fetchRequest.predicate=NSPredicate.rootItems
+        try! listFRC.performFetch()
+        listView.beginUpdates()
+        listView.reloadData()
+        listView.expandItem(nil, expandChildren: true)
+        listView.endUpdates()
     }
 }
 
@@ -139,13 +144,8 @@ extension LeftController: NSOutlineViewDelegate{
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let libItem=item as? LibraryItem else {return nil}
-        //var identifier:NSUserInterfaceItemIdentifier? = nil
         let identifier = (libItem.isRootItem) ? NSUserInterfaceItemIdentifier.headerCell : NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
-//        if libItem.isRootItem {
-//            identifier = NSUserInterfaceItemIdentifier.headerCell
-//        }else{
-//            identifier = NSUserInterfaceItemIdentifier(rawValue: libItem.libraryType.rawValue)
-//        }
+
         let myCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? AGC_DataCell
         myCell?.textField?.stringValue=libItem.name
         if libItem.libraryType == .language, let localName = Locale.current.localizedString(forIdentifier: libItem.name){

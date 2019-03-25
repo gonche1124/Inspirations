@@ -37,19 +37,6 @@ class BooleanToImage: ValueTransformer {
     }
 }
 
-//NStokenField Transformer
-//TODO: Delete because not using bindings any more.
-class EntityToToken:ValueTransformer{
-    //Transform value
-    override  func transformedValue(_ value: Any?) -> Any? {
-        guard let theTags = value as? Set<Tag> else {return nil}
-        return Array(theTags)
-        //return theTags.map({$0.name!}).joined(separator: ",")
-    }
-    
-    override class func allowsReverseTransformation()->Bool{return true}
-}
-
 //Tooltip with count of object.
 class TooltipCoreData: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {

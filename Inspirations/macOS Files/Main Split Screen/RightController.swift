@@ -52,16 +52,6 @@ class RightController: NSViewController {
         if let searchToolbarItem = view.window?.toolbar?.items.first(where: {$0.itemIdentifier.rawValue == "mainSearchField"}){
             if let sField = searchToolbarItem.view as? NSSearchField {
                 sField.delegate = self
-            
-                //TODO: SUbscribe to NSSearchfield.
-                //All
-                //sField.bind(NSBindingName.predicate, to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"All",NSBindingOption.predicateFormat:pAll])
-                
-                //Author
-                //sField.bind(NSBindingName(rawValue: "predicate2"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Author",NSBindingOption.predicateFormat:pAuthor])
-                
-                //Theme
-                //sField.bind(NSBindingName(rawValue: "predicate3"), to: quoteController, withKeyPath: "filterPredicate", options: [NSBindingOption.displayName:"Theme",NSBindingOption.predicateFormat:pTheme])
             }
         }
     }
@@ -119,10 +109,9 @@ class RightController: NSViewController {
     
     //Left selection changed
     @objc func leftTableChangedSelection(notification: Notification){
-        if let selectedLib = notification.object as? LibraryItem,
-            let newPredicate = NSPredicate.quotePredicate(for: selectedLib){
+        if let selectedLib = notification.object as? LibraryItem {
             self.selectedLeftItem=selectedLib
-            self.quoteFRC.fetchRequest.predicate=newPredicate
+            self.quoteFRC.fetchRequest.predicate=selectedLib.quotePredicate
             try? quoteFRC.performFetch()
             currentTable?.reloadData()
         }
@@ -166,20 +155,17 @@ extension RightController{
             item.addQuotes(quotes: selectedQuotes)
             //item.addQuotes(quotes: self.quoteController?.selectedObjects as! [Quote])
             self.saveMainContext()        }
-
     }
     
     //Deletes selected record or records.
     @IBAction func deleteSelectedRecord(_ sender: Any?){
        
-        
         let confirmationD = NSAlert.init(totalItems: currentTable?.numberOfSelectedRows ?? 0, isDeleting: self.deletesFromDatabase)
         let result = confirmationD.runModal()
         if result == .alertFirstButtonReturn{
             currentTable?.beginUpdates()
-             let selectedObjects=currentTable!.selectedRowPaths.map{quoteFRC.object(at: $0)}//quoteController.selectedObjects as! [Quote]
+             let selectedObjects=currentTable!.selectedRowPaths.map{quoteFRC.object(at: $0)}
             if deletesFromDatabase {
-                //let selectedObjects=currentTable!.selectedRowPaths.map{quoteFRC.object(at: $0)}//quoteController.selectedObjects as! [Quote]
                 selectedObjects.forEach({moc.delete($0)})
             }else{
                 if let item=selectedLeftItem as? ManagesQuotes{
@@ -188,7 +174,6 @@ extension RightController{
             }
             currentTable?.endUpdates()
             self.saveMainContext()
-            
         }
     }
 }
@@ -210,7 +195,9 @@ extension RightController: NSTableViewDataSource{
         guard let sortDescriptor = tableView.sortDescriptors.first else {return}
         quoteFRC.fetchRequest.sortDescriptors = [sortDescriptor]
         try? quoteFRC.performFetch()
+        currentTable?.beginUpdates()
         currentTable?.reloadData()
+        currentTable?.endUpdates()
     }
     //WHEN NO BINDINGS USED
     
@@ -237,8 +224,6 @@ extension RightController: NSTableViewDelegate{
                                                          userInfo: nil)) //Used for displaying text and for sharing selected Objects
         }
     }
-    
-  
 }
 
 //MARK: - NSFetchedResultsControllerDelegate
@@ -295,7 +280,7 @@ extension RightController: NSMenuDelegate{
             })
         case "listMenu":
             menu.removeAllItems()
-            try! QuoteList.objects(in: moc, with: NSPredicate.forItem(ofType: .list)).forEach({
+            try! QuoteList.objects(in: moc, with: NSPredicate(forItem: .list)).forEach({
                 menu.addMenuItem(title: $0.name,action: #selector(addTagsOrPlaylists(_:)),keyEquivalent: "",identifier: $0.getID())
             })
         default:
@@ -304,30 +289,26 @@ extension RightController: NSMenuDelegate{
     }
 }
 
+// MARK: -
 extension RightController: NSSearchFieldDelegate {
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        print("didStart")
-    }
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        print("didEnd")
-        if let newPredicate = NSPredicate.quotePredicate(for: selectedLeftItem!){
-            self.quoteFRC.fetchRequest.predicate=newPredicate
-            try? quoteFRC.performFetch()
-            currentTable?.reloadData()
-        }
+        self.quoteFRC.fetchRequest.predicate=selectedLeftItem!.quotePredicate
+        try? quoteFRC.performFetch()
+        currentTable?.beginUpdates()
+        currentTable?.reloadData()
+        currentTable?.endUpdates()
+        
     }
     
     func controlTextDidChange(_ obj: Notification) {
-        if let searchField = obj.object as? NSSearchField{
-            print("\(searchField.stringValue)")
-            //TODO: move to NSpredciate extension
-            let withString = searchField.stringValue
-            let newPredicate = NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", withString, withString, withString)
-            quoteFRC.fetchRequest.predicate=newPredicate
+        if let searchField = obj.object as? NSSearchField,
+            searchField.stringValue.count > 0 {
+            quoteFRC.fetchRequest.predicate=NSCompoundPredicate(ORcompundWithText: searchField.stringValue)
             try? quoteFRC.performFetch()
+            currentTable?.beginUpdates()
             currentTable?.reloadData()
+            currentTable?.endUpdates()
         }
-        
     }
 }

@@ -12,9 +12,9 @@ import CoreData
 @objc(LibraryItem)
 public class LibraryItem: NSManagedObject {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<LibraryItem> {
-        return NSFetchRequest<LibraryItem>(entityName: "LibraryItem")
-    }
+//    @nonobjc public class func fetchRequest() -> NSFetchRequest<LibraryItem> {
+//        return NSFetchRequest<LibraryItem>(entityName: "LibraryItem")
+//    }
     
     //Properties
     @NSManaged public var isRootItem: Bool
@@ -49,6 +49,14 @@ public class LibraryItem: NSManagedObject {
         }
     }
     
+    /// Returns the predicate used to search for quotes.
+    var quotePredicate:NSPredicate {
+        if self.libraryType == .favorites {
+            return NSPredicate.favoriteItems
+        }
+        return NSPredicate(value: true)
+    }
+    
     //MARK: - Overrides
     override public func awakeFromInsert() {
         super.awakeFromInsert()
@@ -77,7 +85,6 @@ public class LibraryItem: NSManagedObject {
         self.init(context: inMOC)
         self.libraryType=type
         switch type {
-        //TODO: Make it localizable.
         case .rootMain:
             self.name = "Main"
             self.sortingOrder="0"
@@ -130,7 +137,9 @@ public class LibraryItem: NSManagedObject {
     }
 }
 
-extension LibraryItem:CoreDataUtilities{}
+extension LibraryItem:CoreDataUtilities{
+
+}
 
 // MARK: - Generated accessors for hasLibraryItems
 extension LibraryItem {

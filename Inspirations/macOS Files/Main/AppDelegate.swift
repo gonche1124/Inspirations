@@ -163,7 +163,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     @objc func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         //Print if merged from background or bacthUpdated/Delete action
-        if let refreshed=userInfo[NSRefreshedObjectsKey] as? Set<NSManagedObject>{
+        if (userInfo[NSRefreshedObjectsKey] as? Set<NSManagedObject>) != nil{
             //print("Objects refreshed: \(refreshed.first?.changedValues().keys)")
             //Forces refresh on left view and NSFetchedresultsController
             let item=self.managedObjectContext.get(standardItem: .rootMain)
@@ -228,6 +228,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             catch{
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    //MARK: - Other
+    @IBAction func exportAllQuotes(_ sneder:Any){
+        let savePanel = NSSavePanel.init()
+        savePanel.nameFieldStringValue = "AllQuotes \(Date()).json"
+        if savePanel.runModal() == .OK {
+            //TODO: Finish export method.
+            let newMOC = self.persistentContainer.newBackgroundContext()
+            let fetchRequest = NSFetchRequest<Quote>.init()
+            fetchRequest.resultType = .dictionaryResultType
+            print("Will Export")
         }
     }
 }

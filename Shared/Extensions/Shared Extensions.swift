@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Cocoa
 
 //Extension of NSPredicate for easy building
 extension NSPredicate{
@@ -22,48 +23,45 @@ extension NSPredicate{
     static var rootList:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootList.rawValue)
     static var rootLanguage:NSPredicate = NSPredicate(format:"libraryTypeValue == %@", LibraryType.rootLanguage.rawValue)
     
-    ///Predicate to search for library items by type
+    /// Predicate to search for library items by type
     /// - parameter ofType: Library type item.
     /// - note: it has to be one of the standard items.
-    static func forItem(ofType: LibraryType)->NSPredicate{
-        return NSPredicate(format: "libraryTypeValue == %@", ofType.rawValue)
+    convenience init(forItem: LibraryType) {
+        self.init(format: "libraryTypeValue == %@", argumentArray: [forItem.rawValue])
     }
     
-    //Predciate for left searchfield
-    static func leftPredicate(withText:String)->NSPredicate{
-        if withText == "" { return NSPredicate.rootItems}
-        return NSPredicate(format: "(name contains [CD] %@ AND isRootItem=NO)", withText)
+    /// Initializes a predicate for the left view base on the search field.
+    /// - parameter fromLeftSearchField: Search field form the left view controller used in the NSOutlineView.
+    convenience init(fromLeftSearchField searchField:NSSearchField) {
+        self.init(format:"(name contains [CD] %@ AND isRootItem=NO)", argumentArray: [searchField.stringValue])
     }
     
-    //Array Controller String
-    static func mainPredicateString()->String{
-        return  pQuote + " OR " + pAuthor + " OR " + pTheme
+    /// Initializes a search for the quote with a given text for the Theme path.
+    /// - parameter forThemeWithText: text that the user is using.
+    convenience init(forThemeWithText textToSearch:String) {
+        self.init(format: "isAbout.themeName contains [CD] %@", argumentArray: [textToSearch])
     }
     
-    //Predicate for main table
-    static func mainFilter(withString:String)->NSPredicate {
-        if withString=="" {return NSPredicate(value: true)}
-        return NSPredicate(format: "quoteString contains [CD] %@ OR from.name contains [CD] %@ OR isAbout.themeName contains [CD] %@", withString, withString, withString)
+    /// Initializes a search for the quote with a given text for the Author path.
+    /// - parameter forAuthorWithText: text that the user is using.
+    convenience init(forAuthorWithText textToSearch:String) {
+        self.init(format: "from.name contains [CD] %@", argumentArray: [textToSearch])
     }
     
-    //Predicate for selected left item
-    static func quotePredicate(for libraryItem:LibraryItem)->NSPredicate? {
-        switch libraryItem.libraryType {
-        case .favorites:
-            return NSPredicate.favoriteItems
-        case .language:
-            return NSPredicate(format: "spelledIn.name CONTAINS [CD] %@", libraryItem.name)
-        case .list:
-            return NSPredicate(format: "ANY isIncludedIn.name contains [CD] %@",  libraryItem.name)
-        case .smartList:
-            return (libraryItem as? QuoteList)?.smartPredicate!
-        case .tag:
-            return NSPredicate(format: "ANY isTaggedWith.name contains [CD] %@", libraryItem.name)
-        case .mainLibrary:
-            return NSPredicate(value: true)
-        default:
-            return nil
-        }
+    /// Initializes a search for the quote with a given text for the Quote path.
+    /// - parameter forQuoteWithText: text that the user is using.
+    convenience init(forQuoteWithText textToSearch:String) {
+        self.init(format: "quoteString contains [CD] %@", argumentArray: [textToSearch])
+    }
+}
+
+//MARK: -
+extension NSCompoundPredicate {
+    /// Initializes a compund predciate with the given text for all the paths.
+    /// - parameter ORcompundWithText: text to search.
+    convenience init(ORcompundWithText textToSearch:String) {
+        self.init(orPredicateWithSubpredicates: [NSPredicate(forThemeWithText: textToSearch),
+                                                 NSPredicate(forAuthorWithText: textToSearch), NSPredicate(forAuthorWithText: textToSearch)])
     }
 }
 
@@ -118,14 +116,13 @@ extension NSEntityDescription{
 }
 
 //MARK: - Native Swift Extensions
-//TODO: Figure oit where this is used.
 //Used to be able to pass an IndexSet as a subscript
 extension Array {
-    subscript<Indices: Sequence>(indices: Indices) -> [Element]
-        where Indices.Iterator.Element == Int {
-            let result:[Element] = indices.map({return self[$0]})
-            return result
-    }
+//    subscript<Indices: Sequence>(indices: Indices) -> [Element]
+//        where Indices.Iterator.Element == Int {
+//            let result:[Element] = indices.map({return self[$0]})
+//            return result
+//    }
     
     func objects<T:Collection>(atIndexes:T)->[Element]
         where T.Element==Int {

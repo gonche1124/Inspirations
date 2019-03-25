@@ -67,6 +67,10 @@ public enum LibraryType:String{
     static func itemsParentOfFolder()->[LibraryType]{
         return [.folder, .rootTag, .rootList]
     }
+    
+    func predicate()->NSPredicate{
+        return NSPredicate(format: "libraryTypeValue == %@", self.rawValue)
+    }
 }
 
 //NSPopupbutton selection
