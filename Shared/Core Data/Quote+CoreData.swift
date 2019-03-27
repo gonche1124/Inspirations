@@ -20,8 +20,8 @@ public class Quote: NSManagedObject{
     @NSManaged public var totalWords: Int16
     @NSManaged public var from: Author?
     @NSManaged public var isAbout: Theme?
-    @NSManaged public var isIncludedIn: NSSet?
-    @NSManaged public var isTaggedWith: NSSet?
+    @NSManaged public var isIncludedIn: Set<QuoteList>?
+    @NSManaged public var isTaggedWith: Set<Tag>?
     @NSManaged public var spelledIn: Language?
     @NSManaged public var createdAt:NSDate
     @NSManaged public var updatedAt:NSDate
@@ -32,7 +32,6 @@ public class Quote: NSManagedObject{
         setPrimitiveValue(NSDate(), forKey: "createdAt")
         setPrimitiveValue(NSDate(), forKey: "updatedAt")
         setPrimitiveValue(false, forKey: "isFavorite")
-        
     }
     
     override public func willSave() {
@@ -88,6 +87,27 @@ public class Quote: NSManagedObject{
 }
 
 extension Quote:CoreDataUtilities{}
+
+//MARK: -
+extension Quote:Encodable{
+    
+    //Coding
+    enum CodingKeys: String, CodingKey {
+        case quoteString, isFavorite, from, isAbout, IsTaggedWith, IsIncludedIn
+    }
+  
+    
+    //Encodes the instance into JSON.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(quoteString, forKey: .quoteString)
+        try container.encode(isFavorite, forKey: .isFavorite)
+        try container.encode(from, forKey: .from)
+        try container.encode(isAbout, forKey: .isAbout)
+        try container.encodeIfPresent(isTaggedWith, forKey: .IsTaggedWith)
+        try container.encodeIfPresent(isIncludedIn, forKey: .IsIncludedIn)
+    }
+}
 
 
 // MARK: - Generated accessors for isTaggedWith

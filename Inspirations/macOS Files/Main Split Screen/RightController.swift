@@ -219,7 +219,7 @@ extension RightController: NSTableViewDelegate{
         if let table = notification.object as? NSTableView
              {
                 let objects = table.selectedRowPaths.map({quoteFRC.object(at: $0)}).map({$0.getID()})
-            NotificationCenter.default.post(Notification(name: .selectedRowsChaged,
+            NotificationCenter.default.post(Notification(name: .rightSelectedRowsChaged,
                                                          object: objects,
                                                          userInfo: nil)) //Used for displaying text and for sharing selected Objects
         }

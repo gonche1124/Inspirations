@@ -70,6 +70,19 @@ extension Theme:CoreDataUtilities{
     }
 }
 
+extension Theme:Encodable{
+    
+    enum CodingKeys: String, CodingKey {
+        case themeName
+    }
+    
+    //Encodes the instance into JSON.
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(themeName, forKey: .themeName)
+    }
+}
+
 // MARK: - Generated accessors for hasQuotes
 extension Theme {
     

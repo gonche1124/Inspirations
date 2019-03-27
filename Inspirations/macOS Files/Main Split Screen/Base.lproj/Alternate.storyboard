@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0T4-WD-gnI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="0T4-WD-gnI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -88,10 +88,16 @@
                                                 <action selector="importFromMenu:" target="Ady-hI-5gd" id="4XA-hH-Cnv"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Export selected items" enabled="NO" id="w6x-Cq-V2J">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="exportSelected:" target="Ady-hI-5gd" id="6yx-e7-cZW"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Export All" id="gtu-pE-qk4">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="exportAllQuotes:" target="Voe-Tx-rLC" id="pTn-1U-cRi"/>
+                                                <action selector="exportAll:" target="Ady-hI-5gd" id="Tyx-uS-hR1"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="NgL-qr-jOa"/>
@@ -422,7 +428,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations_macOS" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Inspirations_macOS" customModuleProvider="target">
+                    <connections>
+                        <outlet property="exportSelectedmenu" destination="w6x-Cq-V2J" id="6mP-AZ-mHH"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="267" y="-290"/>
@@ -1944,6 +1954,6 @@ CA
         <image name="tagImage" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="btS-AB-Wjm"/>
+        <segue reference="uHa-JK-rRN"/>
     </inferredMetricsTieBreakers>
 </document>

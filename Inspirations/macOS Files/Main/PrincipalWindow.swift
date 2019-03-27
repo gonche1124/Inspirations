@@ -15,15 +15,16 @@ class PrincipalWindow: NSWindowController {
     @IBOutlet weak var mainSearchField: NSSearchField!
     @IBOutlet weak var infoMessage:NSTextField!
     
+    
     //Vars
     var selectedQuotesIDS:[String]?{
         didSet{
             shareButton.isEnabled=true
             infoMessage.stringValue = "\(selectedQuotesIDS?.count ?? 0) items selected"
-            
         }
     }
     
+    //MARK: - Lifecycle:
     override func awakeFromNib() {
         super.awakeFromNib()
         //self.contentViewController?.representedObject=(NSApp.delegate as? AppDelegate)?.managedObjectContext
@@ -40,15 +41,66 @@ class PrincipalWindow: NSWindowController {
         ValueTransformer.setValueTransformer(SetToCompoundString(), forName: NSValueTransformerName(rawValue:"SetToCompoundString"))
         ValueTransformer.setValueTransformer(BooleanToImage(), forName: NSValueTransformerName(rawValue: "BooleanToImage"))
         ValueTransformer.setValueTransformer(TooltipCoreData(), forName: NSValueTransformerName(rawValue: "TooltipCoreData"))
-        
-    
-    
+
         //Register for table updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .selectedRowsChaged, object: nil)
-        
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .rightSelectedRowsChaged, object: nil)
     }
     
+    //Called before preparing for a specific segue.
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let addQ = segue.destinationController as? AddQuoteController{
+            addQ.viewType = .adding
+        }
+    }
+    
+    //MARK: - Export
+    /// Exports all the quotes in the database.
+    @IBAction func exportAll(_ sender:Any){
+        //Create panel to ask user
+        if let newFile = self.createSaveDialog(withTitle: "All Quotes -") {
+            do {
+                let newMOC = (NSApp.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+                let coreDataArray = try Quote.objects(in: newMOC)
+                try write(data: coreDataArray, toFile: newFile)
+            }catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    /// Export the selected quotes from the table currently displayed.
+    @IBAction func exportSelected (_ sender:Any){
+        if let newFile = self.createSaveDialog(withTitle: "Selected Quotes -") {
+            do {
+                let newMOC = (NSApp.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+                let coreDataArray = newMOC.getObjectsWithIDS(asStrings: self.selectedQuotesIDS!) as? [Quote]
+                try write(data: coreDataArray, toFile: newFile)
+            }catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    /// Creates and displays the save panel, returning the URL if the user chooses yes.
+    public func createSaveDialog(withTitle: String)->URL?{
+        let savePanel = NSSavePanel.init()
+        let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
+        savePanel.nameFieldStringValue = "\(withTitle) \(timestamp).json"
+        if savePanel.runModal() == .OK {
+            return savePanel.url
+        }
+        return nil
+    }
+    
+    /// Write Data to JSON
+    public func write<T: Encodable>(data:T, toFile:URL) throws{
+        let encoder = JSONEncoder.init()
+        encoder.outputFormatting = .prettyPrinted
+        let jsonArray = try encoder.encode(data.self)
+        try jsonArray.write(to: toFile)
+    }
+    
+    //MARK: - Notifications
     //Selected rows changed
     @objc func selectedRowsOfDisplayedTableChanged(_ notification:Notification){
         if let selQuotes = notification.object as? [String] {
@@ -60,14 +112,8 @@ class PrincipalWindow: NSWindowController {
     @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
         NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
         
-    }
-   
-    //Called before preparing for a specific segue.
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if let addQ = segue.destinationController as? AddQuoteController{
-            addQ.viewType = .adding
-            //addQ.isInfoWindow=false
-        }
+        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isEnabled = !(sender.indexOfSelectedItem == 2)
+        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isHidden = (sender.indexOfSelectedItem == 2)
     }
     
     @IBAction func importFromMenu(_ sender:Any){

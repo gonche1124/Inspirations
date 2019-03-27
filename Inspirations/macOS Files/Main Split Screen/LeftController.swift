@@ -164,10 +164,7 @@ extension LeftController: NSOutlineViewDelegate{
     //Determines if triangle should be shown.
     func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
         guard let libItem=item as? LibraryItem else {return false}
-        if libItem.isRootItem || libItem.libraryType == .folder{
-            return true
-        }
-        return false
+        return (libItem.isRootItem || libItem.libraryType == .folder) ? true : false
     }
     
     //Checks to see if it is a grouped item.

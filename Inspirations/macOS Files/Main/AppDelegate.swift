@@ -231,18 +231,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
     
-    //MARK: - Other
-    @IBAction func exportAllQuotes(_ sneder:Any){
-        let savePanel = NSSavePanel.init()
-        savePanel.nameFieldStringValue = "AllQuotes \(Date()).json"
-        if savePanel.runModal() == .OK {
-            //TODO: Finish export method.
-            let newMOC = self.persistentContainer.newBackgroundContext()
-            let fetchRequest = NSFetchRequest<Quote>.init()
-            fetchRequest.resultType = .dictionaryResultType
-            print("Will Export")
-        }
-    }
+    // Mark: - Other
+    @IBOutlet weak var exportSelectedmenu:NSMenuItem!
+    
+   
+    
 }
 
 
