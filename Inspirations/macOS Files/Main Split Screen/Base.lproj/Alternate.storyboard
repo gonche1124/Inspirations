@@ -621,7 +621,7 @@
         <!--Right Controller-->
         <scene sceneID="gib-Oy-lX9">
             <objects>
-                <viewController id="gvZ-1i-Bh3" customClass="RightController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="gvZ-1i-Bh3" customClass="RightController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="TbD-zR-Fvr">
                         <rect key="frame" x="0.0" y="0.0" width="644" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1281,7 +1281,7 @@ CA
         <!--Split View Controller-->
         <scene sceneID="emN-5y-h2U">
             <objects>
-                <splitViewController showSeguePresentationStyle="single" id="KAN-2L-YNM" sceneMemberID="viewController">
+                <splitViewController showSeguePresentationStyle="single" id="KAN-2L-YNM" customClass="AGCSplitViewController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="bT1-F7-Ce5" userLabel="Left Side"/>
                         <splitViewItem holdingPriority="255" behavior="contentList" id="7Nr-0F-sa6" userLabel="Right Side"/>
@@ -1954,6 +1954,6 @@ CA
         <image name="tagImage" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uHa-JK-rRN"/>
+        <segue reference="btS-AB-Wjm"/>
     </inferredMetricsTieBreakers>
 </document>

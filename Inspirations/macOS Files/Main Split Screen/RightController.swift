@@ -21,6 +21,7 @@ class RightController: NSViewController {
     var selectedLeftItem:LibraryItem?
     var currentTable:NSTableView?
     
+    
     lazy var quoteFRC:NSFetchedResultsController<Quote> = {
         let fr=NSFetchRequest<Quote>(entityName: Entities.quote.rawValue)
         fr.sortDescriptors = [NSSortDescriptor(keyPath: \Quote.quoteString, ascending: true)]
@@ -28,6 +29,7 @@ class RightController: NSViewController {
         frc.delegate=self
         try! frc.performFetch()
         return frc
+        //TODO: Check before loading if there are any filters active or a different item selected.
     }()
     
     //Variables:
@@ -35,7 +37,7 @@ class RightController: NSViewController {
         return LibraryType.canDeleteQuotes.contains(selectedLeftItem?.libraryType ?? .mainLibrary)
     }
     
-    //MARK: -
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -46,6 +48,13 @@ class RightController: NSViewController {
         if let currT = self.view.getAllSubViews().firstWith(identifier: "columnTable"), let table=currT as? NSTableView{
                 self.currentTable=table
         }
+    }
+    
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        print("viewWillAppear")
+        
     }
     
     override func viewDidAppear() {
@@ -93,11 +102,13 @@ class RightController: NSViewController {
             let tabViewItem = quoteTabView.selectedTabViewItem
             if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "columnTable"), let table=tableView as? NSTableView{
                 currentTable=table
+                currentTable?.reloadData()
                 bottomStackView.isHidden=false
                 return
             }
             if let tableView = tabViewItem?.view?.getAllSubViews().firstWith(identifier: "exploreTable"), let table=tableView as? NSTableView{
                 currentTable=table
+                currentTable?.reloadData()
                 bottomStackView.isHidden=false
                 return
             }
@@ -187,7 +198,11 @@ extension RightController: NSTableViewDataSource{
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return quoteFRC.object(at: IndexPath(item: row, section: 0))
+        if quoteFRC.fetchedObjects?.count ?? 0 > row {
+            return quoteFRC.fetchedObjects?[row]
+        }
+        return quoteFRC.fetchedObjects?.last
+        //return quoteFRC.object(at: IndexPath(item: row-1, section: 0))
     }
     
     /// Used for sorting of columns.

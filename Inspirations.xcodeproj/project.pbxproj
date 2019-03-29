@@ -40,6 +40,7 @@
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
 		8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */; };
+		8AC860C6224D7C140092ECF7 /* AGCSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC860C5224D7C140092ECF7 /* AGCSplitViewController.swift */; };
 		8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADBCF631FBBEFA5007523FF /* Utilities2.swift */; };
 		8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */; };
 		8AE614C12072F134003CB950 /* OldLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE614C02072F134003CB950 /* OldLeftController.swift */; };
@@ -100,6 +101,7 @@
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8A89E8681E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteOld.swift; sourceTree = "<group>"; };
+		8AC860C5224D7C140092ECF7 /* AGCSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGCSplitViewController.swift; sourceTree = "<group>"; };
 		8AD2CD2B219E4C890096BFC7 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/Mac/SwiftSoup.framework; sourceTree = "<group>"; };
 		8ADBCF631FBBEFA5007523FF /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		8ADDA7A0200C24D400F7E1D9 /* ValueTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransformers.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				8A395B9021D99B1A00CCFF8B /* AGC TableRows.swift */,
 				8A395B9221D9AE7100CCFF8B /* AGC Cell Views.swift */,
 				8AE8E8FF21DC54B1003A2955 /* AGC PopOverSegue.swift */,
+				8AC860C5224D7C140092ECF7 /* AGCSplitViewController.swift */,
 			);
 			path = "Main Split Screen";
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -616,6 +620,7 @@
 				8A2FF33B21B1E4E20035CC08 /* TopicModeling.mlmodel in Sources */,
 				8A2C311D213A013400B8F3E1 /* Quote+CoreData.swift in Sources */,
 				8A126EB6208D4DC100AD33B1 /* MasterViewController.swift in Sources */,
+				8AC860C6224D7C140092ECF7 /* AGCSplitViewController.swift in Sources */,
 				8A17C2061F58FB0900814107 /* ImportExport.swift in Sources */,
 				8A2C311B213A008E00B8F3E1 /* Author+CoreData.swift in Sources */,
 			);
