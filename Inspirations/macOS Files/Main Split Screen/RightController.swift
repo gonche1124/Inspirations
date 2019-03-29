@@ -29,7 +29,7 @@ class RightController: NSViewController {
         frc.delegate=self
         try! frc.performFetch()
         return frc
-        //TODO: Check before loading if there are any filters active or a different item selected.
+        //TODO: Check before loading if there are any filters active or a different item selectedd.
     }()
     
     //Variables:
