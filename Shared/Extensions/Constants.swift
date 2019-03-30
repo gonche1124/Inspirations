@@ -17,9 +17,10 @@ let pAll = pQuote + " OR " + pAuthor + " OR " + pTheme
 
 //Notification extensions
 extension Notification.Name {
-    static let selectedViewChanged = Notification.Name("selectedViewChanged")
+    //static let selectedViewChanged = Notification.Name("selectedViewChanged")
     static let leftSelectionChanged = Notification.Name("leftSelectionChanged")
     static let rightSelectedRowsChaged = Notification.Name("selectedRowsChaged")
+    static let updateDisplayText = Notification.Name("updateDisplayText")
 }
 
 

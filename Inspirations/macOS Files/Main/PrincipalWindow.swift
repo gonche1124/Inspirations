@@ -13,6 +13,7 @@ class PrincipalWindow: NSWindowController {
     //Outlets
     @IBOutlet var shareButton:NSButton!
     @IBOutlet weak var mainSearchField: NSSearchField!
+    @IBOutlet weak var segmentedButtons: NSSegmentedControl!
     @IBOutlet weak var infoMessage:NSTextField!
     
     
@@ -20,7 +21,6 @@ class PrincipalWindow: NSWindowController {
     var selectedQuotesIDS:[String]?{
         didSet{
             shareButton.isEnabled=true
-            infoMessage.stringValue = "\(selectedQuotesIDS?.count ?? 0) items selected"
         }
     }
     
@@ -43,7 +43,9 @@ class PrincipalWindow: NSWindowController {
         ValueTransformer.setValueTransformer(TooltipCoreData(), forName: NSValueTransformerName(rawValue: "TooltipCoreData"))
 
         //Register for table updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .rightSelectedRowsChaged, object: nil)
+        let noti = NotificationCenter.default
+        noti.addObserver(self, selector: #selector(selectedRowsOfDisplayedTableChanged(_:)), name: .rightSelectedRowsChaged, object: nil)
+        noti.addObserver(self, selector: #selector(updateText(_:)), name: .updateDisplayText, object: nil)
     }
     
     //Called before preparing for a specific segue.
@@ -101,6 +103,15 @@ class PrincipalWindow: NSWindowController {
     }
     
     //MARK: - Notifications
+    
+    /// Notificatoin when the text needs to be updated.
+    @objc func updateText(_ notification:Notification){
+        if let newText = notification.object as? String{
+            infoMessage.stringValue = newText
+        }
+    }
+    
+    
     //Selected rows changed
     @objc func selectedRowsOfDisplayedTableChanged(_ notification:Notification){
         if let selQuotes = notification.object as? [String] {
@@ -109,12 +120,12 @@ class PrincipalWindow: NSWindowController {
     }
     
     //Actions
-    @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
-        NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
-        
-        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isEnabled = !(sender.indexOfSelectedItem == 2)
-        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isHidden = (sender.indexOfSelectedItem == 2)
-    }
+//    @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
+//        NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
+//        
+//        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isEnabled = !(sender.indexOfSelectedItem == 2)
+//        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isHidden = (sender.indexOfSelectedItem == 2)
+//    }
     
     @IBAction func importFromMenu(_ sender:Any){
         self.performSegue(withIdentifier: "importSheet", sender: self)

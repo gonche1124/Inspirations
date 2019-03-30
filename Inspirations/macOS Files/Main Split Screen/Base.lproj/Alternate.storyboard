@@ -508,9 +508,6 @@
                                                 <segment toolTip="Shows quotes one at a time" image="NSQuickLookTemplate"/>
                                             </segments>
                                         </segmentedCell>
-                                        <connections>
-                                            <action selector="segmentedAction:" target="0T4-WD-gnI" id="0wo-a0-uIr"/>
-                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="06FD1E7B-CB5E-48C8-812D-9A937615851F" explicitItemIdentifier="segmentedButtonString" label="Views" paletteLabel="Views" id="1oh-Le-P6p" userLabel="Views Selected String">
@@ -528,9 +525,6 @@
                                                 <segment label="Large" toolTip="Shows quotes one at a time"/>
                                             </segments>
                                         </segmentedCell>
-                                        <connections>
-                                            <action selector="segmentedAction:" target="0T4-WD-gnI" id="nLf-Bb-808"/>
-                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="553348E4-1B16-4DA0-AD6D-20004041995E" label="Collections" paletteLabel="Collections" image="NSSidebarTemplate" id="Us6-89-ETH" userLabel="Toggle">
@@ -585,7 +579,7 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="Us6-89-ETH"/>
-                                <toolbarItem reference="XoW-kg-Cuf"/>
+                                <toolbarItem reference="Zdu-vf-aOV"/>
                                 <toolbarItem reference="1oh-Le-P6p"/>
                                 <toolbarItem reference="XoW-kg-Cuf"/>
                                 <toolbarItem reference="FQu-ce-QpM"/>
@@ -602,13 +596,14 @@
                     <connections>
                         <outlet property="infoMessage" destination="59M-vL-tUh" id="8WX-1c-ov9"/>
                         <outlet property="mainSearchField" destination="0Xx-UZ-MRd" id="hp0-bF-yyK"/>
+                        <outlet property="segmentedButtons" destination="8nX-PZ-WXm" id="ifm-Kz-qch"/>
                         <outlet property="shareButton" destination="m1q-oA-5JL" id="S5u-d6-6lm"/>
                         <segue destination="KAN-2L-YNM" kind="relationship" relationship="window.shadowedContentViewController" id="yUg-Ha-RNT"/>
                     </connections>
                 </windowController>
                 <customObject id="VGa-f0-ucZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-234" y="255"/>
+            <point key="canvasLocation" x="-240" y="291"/>
         </scene>
         <!--Add Value-->
         <scene sceneID="qKr-oS-34W">
@@ -956,7 +951,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                             <clipView key="contentView" id="33a-dW-DC1">
                                                                 <rect key="frame" x="1" y="1" width="642" height="475"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <tableView identifier="exploreTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" emptySelection="NO" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Jd6-qF-irS" userLabel="Explore Table">
                                                                         <rect key="frame" x="0.0" y="0.0" width="642" height="475"/>
@@ -1276,15 +1271,15 @@ CA
                     </connections>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="1042" y="870"/>
+            <point key="canvasLocation" x="871" y="938"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="emN-5y-h2U">
             <objects>
-                <splitViewController showSeguePresentationStyle="single" id="KAN-2L-YNM" customClass="AGCSplitViewController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController showSeguePresentationStyle="single" id="KAN-2L-YNM" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="bT1-F7-Ce5" userLabel="Left Side"/>
-                        <splitViewItem holdingPriority="255" behavior="contentList" id="7Nr-0F-sa6" userLabel="Right Side"/>
+                        <splitViewItem holdingPriority="255" id="WVs-cf-PLa"/>
                     </splitViewItems>
                     <splitView key="splitView" arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" id="3jE-6u-P1b">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -1296,7 +1291,7 @@ CA
                     <connections>
                         <outlet property="splitView" destination="3jE-6u-P1b" id="thH-05-AjO"/>
                         <segue destination="CWl-5U-TPh" kind="relationship" relationship="splitItems" id="Pjj-tK-bkb"/>
-                        <segue destination="gvZ-1i-Bh3" kind="relationship" relationship="splitItems" id="f6e-wT-4tp"/>
+                        <segue destination="xx5-GV-51j" kind="relationship" relationship="splitItems" id="nTm-Pa-CQq"/>
                     </connections>
                 </splitViewController>
                 <customObject id="gUM-0W-Wtx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1919,6 +1914,34 @@ CA
             </objects>
             <point key="canvasLocation" x="835.5" y="49"/>
         </scene>
+        <!--Tab Content Controller-->
+        <scene sceneID="Y9f-Z3-cef">
+            <objects>
+                <tabViewController showSeguePresentationStyle="single" selectedTabViewItemIndex="0" tabStyle="unspecified" canPropagateSelectedChildViewControllerTitle="NO" id="xx5-GV-51j" customClass="AGCTabContentController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem id="cBb-65-swz"/>
+                        <tabViewItem id="mQd-Ly-OCK"/>
+                        <tabViewItem id="qj8-zo-VYT"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="UUy-Hf-wYH">
+                        <rect key="frame" x="0.0" y="0.0" width="310" height="254"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <font key="font" metaFont="message"/>
+                        <connections>
+                            <outlet property="delegate" destination="xx5-GV-51j" id="Z6O-TC-yu2"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="UUy-Hf-wYH" id="7Pj-RR-cuH"/>
+                        <segue destination="csc-nK-g5A" kind="relationship" relationship="tabItems" id="FlG-FA-JpG"/>
+                        <segue destination="XN9-1A-nkf" kind="relationship" relationship="tabItems" id="lWP-dn-0wi"/>
+                        <segue destination="EXx-hi-6BU" kind="relationship" relationship="tabItems" id="ZYG-2A-kQa"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="9Ml-pf-8iu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="983" y="404"/>
+        </scene>
         <!--Import Multiple-->
         <scene sceneID="eWo-9c-sen">
             <objects>
@@ -1934,6 +1957,30 @@ CA
                 <customObject id="Ry8-bW-hcW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1155" y="49"/>
+        </scene>
+        <!--MultipleColumns-->
+        <scene sceneID="GEQ-BN-qO1">
+            <objects>
+                <controllerPlaceholder storyboardName="MultipleColumns" id="csc-nK-g5A" sceneMemberID="viewController"/>
+                <customObject id="6TO-72-FEB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="298"/>
+        </scene>
+        <!--SingleColumn-->
+        <scene sceneID="Dvo-wf-Qzo">
+            <objects>
+                <controllerPlaceholder storyboardName="SingleColumn" id="XN9-1A-nkf" sceneMemberID="viewController"/>
+                <customObject id="cU7-DN-TxH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1373" y="370"/>
+        </scene>
+        <!--BigView-->
+        <scene sceneID="oHv-5B-7sB">
+            <objects>
+                <controllerPlaceholder storyboardName="BigView" id="EXx-hi-6BU" sceneMemberID="viewController"/>
+                <customObject id="TGs-gL-9Qg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1356" y="450"/>
         </scene>
     </scenes>
     <resources>
@@ -1954,6 +2001,6 @@ CA
         <image name="tagImage" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="btS-AB-Wjm"/>
+        <segue reference="uHa-JK-rRN"/>
     </inferredMetricsTieBreakers>
 </document>

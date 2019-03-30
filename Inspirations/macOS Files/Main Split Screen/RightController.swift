@@ -14,6 +14,7 @@ class RightController: NSViewController {
     @IBOutlet weak var statusTextField: NSTextField!
     @IBOutlet weak var quoteTabView:NSTabView!
     @IBOutlet weak var bottomStackView:NSStackView!
+    @IBOutlet weak var rightMenu:NSMenu!
     
     //Tables
     @IBOutlet weak var columnTable:NSTableView?
@@ -41,7 +42,7 @@ class RightController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedTabView(_:)), name: .selectedViewChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(leftTableChangedSelection(notification:)), name: .leftSelectionChanged, object: nil)
         
         //Binds the table.

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="pzq-bo-ECh">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Big View Controller-->
+        <scene sceneID="GLO-xb-mnR">
+            <objects>
+                <viewController showSeguePresentationStyle="single" id="pzq-bo-ECh" customClass="BigViewController" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="MFc-ak-m1V">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="250" horizontalHuggingPriority="750" verticalHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Kr-Ke-ej2">
+                                <rect key="frame" x="183" y="118" width="85" height="65"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kad-Hm-OBQ">
+                                        <rect key="frame" x="-2" y="27" width="89" height="38"/>
+                                        <textFieldCell key="cell" selectable="YES" alignment="center" title="Quote" id="ddf-j8-PNH">
+                                            <font key="font" metaFont="system" size="31"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MIl-B6-pW7">
+                                        <rect key="frame" x="-2" y="0.0" width="89" height="19"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Author" id="W1p-7K-7ga">
+                                            <font key="font" metaFont="system" size="16"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qlU-Tn-s62">
+                                <rect key="frame" x="-6" y="-7" width="93" height="32"/>
+                                <buttonCell key="cell" type="push" title="Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3uN-eO-15j">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showPrevious:" target="pzq-bo-ECh" id="46o-yW-Swv"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wbf-aJ-0u9">
+                                <rect key="frame" x="387" y="-7" width="69" height="32"/>
+                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LRg-9k-4V9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showNext:" target="pzq-bo-ECh" id="hXq-SC-sHj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Wbf-aJ-0u9" secondAttribute="bottom" id="96n-77-f3M"/>
+                            <constraint firstAttribute="trailing" secondItem="Wbf-aJ-0u9" secondAttribute="trailing" id="Dpb-uV-bUI"/>
+                            <constraint firstAttribute="bottom" secondItem="qlU-Tn-s62" secondAttribute="bottom" id="Hgb-UH-iiA"/>
+                            <constraint firstItem="8Kr-Ke-ej2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MFc-ak-m1V" secondAttribute="leading" priority="250" constant="21" id="JJd-nq-Ksp"/>
+                            <constraint firstItem="8Kr-Ke-ej2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MFc-ak-m1V" secondAttribute="top" priority="250" constant="21" id="KRh-EN-Kad"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8Kr-Ke-ej2" secondAttribute="trailing" priority="250" constant="21" id="W9q-6m-NXD"/>
+                            <constraint firstItem="8Kr-Ke-ej2" firstAttribute="centerY" secondItem="MFc-ak-m1V" secondAttribute="centerY" id="db2-1z-4Kh"/>
+                            <constraint firstAttribute="bottom" secondItem="Wbf-aJ-0u9" secondAttribute="bottom" id="hlJ-7u-YZp"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8Kr-Ke-ej2" secondAttribute="bottom" priority="250" constant="21" id="i5Y-Yj-KDT"/>
+                            <constraint firstItem="qlU-Tn-s62" firstAttribute="leading" secondItem="MFc-ak-m1V" secondAttribute="leading" id="k6o-zK-HSg"/>
+                            <constraint firstItem="8Kr-Ke-ej2" firstAttribute="centerX" secondItem="MFc-ak-m1V" secondAttribute="centerX" id="k76-BK-2b7"/>
+                            <constraint firstItem="Wbf-aJ-0u9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qlU-Tn-s62" secondAttribute="trailing" constant="12" symbolic="YES" id="oZs-7x-igz"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="Wbf-aJ-0u9" id="CaQ-Qs-G3C"/>
+                        <outlet property="previousButton" destination="qlU-Tn-s62" id="aBJ-nQ-l4Z"/>
+                    </connections>
+                </viewController>
+                <customObject id="hNN-de-5I8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44" y="-46"/>
+        </scene>
+    </scenes>
+</document>

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BigViewController: NSViewController {
+class BigViewController2: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
