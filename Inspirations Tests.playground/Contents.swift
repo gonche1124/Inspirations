@@ -1,14 +1,11 @@
 import Cocoa
 
 
-//MARK: - Web Parser
 
-let testArray = [nil,nil,nil, nil, nil] as [Any?]
-let x = testArray.compactMap{$0}
-if let y = x as? [Any] {
-    print("valuye: \(y)")
-}
-print(x)
+
+var indices = IndexSet()
+indices.insert(integersIn: 1...10)
+print(indices.last)
 
 
 //let myStringURL = "https://www.brainyquote.com/quote_of_the_day"

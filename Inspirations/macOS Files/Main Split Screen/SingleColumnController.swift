@@ -13,6 +13,10 @@ class SingleColumnController: NSViewController {
     
     @IBOutlet weak var table: NSTableView!
     
+    var tabController:AGCTabContentController{
+        return parent as! AGCTabContentController
+    }
+    
     
     
     //MARK: - Lifecycle
@@ -31,16 +35,15 @@ class SingleColumnController: NSViewController {
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        let vc = parent as! AGCTabContentController
-        vc.lastSelectedRows = table.selectedRowIndexes
+        tabController.lastSelectedRows = table.selectedRowIndexes
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         print(#function)
-        let vc = parent as! AGCTabContentController
+        //let vc = parent as! AGCTabContentController
         //table.reloadData()
-        table.selectRowIndexes(vc.lastSelectedRows, byExtendingSelection: false)
+        table.selectRowIndexes(tabController.lastSelectedRows, byExtendingSelection: false)
     }
 }
 
@@ -52,7 +55,7 @@ extension SingleColumnController: NSTableViewDelegate{
         print(#function)
         if let table = notification.object as? NSTableView
         {
-            let frc = (parent as! AGCTabContentController).quoteFRC
+            let frc = tabController.quoteFRC
             let objects = table.selectedRowPaths.map({frc.object(at: $0)}).map({$0.getID()})
             let newtext = "\(table.numberOfSelectedRows) quotes of \(table.numberOfRows)"
             NotificationCenter.default.post(Notification(name: .updateDisplayText, object: newtext, userInfo: nil))

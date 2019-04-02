@@ -13,6 +13,10 @@ class MultipleColumnsController: NSViewController {
     //Outlets.
     @IBOutlet weak var table: NSTableView!
     
+    var tabController:AGCTabContentController{
+        return parent as! AGCTabContentController
+    }
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +27,7 @@ class MultipleColumnsController: NSViewController {
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        let vc = parent as! AGCTabContentController
-        vc.lastSelectedRows = table.selectedRowIndexes
+        tabController.lastSelectedRows = table.selectedRowIndexes
     }
     
     override func viewWillAppear() {
@@ -34,8 +37,7 @@ class MultipleColumnsController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        let vc = parent as! AGCTabContentController
-        table.selectRowIndexes(vc.lastSelectedRows, byExtendingSelection: false)
+        table.selectRowIndexes(tabController.lastSelectedRows, byExtendingSelection: false)
     }
 }
 
@@ -47,7 +49,7 @@ extension MultipleColumnsController: NSTableViewDelegate{
         print(#function)
         if let table = notification.object as? NSTableView
         {
-            let frc = (parent as! AGCTabContentController).quoteFRC
+            let frc = tabController.quoteFRC
             let objects = table.selectedRowPaths.map({frc.object(at: $0)}).map({$0.getID()})
             let newtext = "\(table.numberOfSelectedRows) quotes of \(table.numberOfRows)"
             NotificationCenter.default.post(Notification(name: .updateDisplayText, object: newtext, userInfo: nil))

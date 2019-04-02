@@ -3,8 +3,13 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/Gonche/Documents/xCode%20Projects/Inspirations/Inspirations/Inspirations%20Tests.playground#CharacterRangeLen=6&amp;CharacterRangeLoc=2237&amp;EndingColumnNumber=11&amp;EndingLineNumber=73&amp;StartingColumnNumber=5&amp;StartingLineNumber=73&amp;Timestamp=571527484.592589"
+         documentLocation = "file:///Users/Gonche/Documents/xCode%20Projects/Inspirations/Inspirations/Inspirations%20Tests.playground#CharacterRangeLen=6&amp;CharacterRangeLoc=2150&amp;EndingColumnNumber=9&amp;EndingLineNumber=70&amp;StartingColumnNumber=3&amp;StartingLineNumber=70&amp;Timestamp=575855533.63767"
          lockedSize = "{178, 397}"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/Gonche/Documents/xCode%20Projects/Inspirations/Inspirations/Inspirations%20Tests.playground#CharacterRangeLen=19&amp;CharacterRangeLoc=78&amp;EndingColumnNumber=0&amp;EndingLineNumber=8&amp;StartingColumnNumber=1&amp;StartingLineNumber=7&amp;Timestamp=575855533.637799"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>

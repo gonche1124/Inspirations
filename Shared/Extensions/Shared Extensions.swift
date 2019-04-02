@@ -56,6 +56,24 @@ extension NSPredicate{
 }
 
 //MARK: -
+extension IndexSet{
+    /// Converst the index set into a new indexSet by changing the last item by tha parameter passed.
+    /// - parameter by: integer to increment or decrease the IndexSet.
+    func changeLastIndex(by delta:Int)->IndexSet{
+        return IndexSet.init(integer: self.last ?? 0 + delta)
+    }
+    
+    /// Gives teh value of what would be the last element of the new IndexSet if increment by a value
+    /// - parameter offset: integer to increment or decrease the IndexSet
+    /// - note: This function does not change the IndexSet, just gives what the value would be.
+    mutating func lastIndex(offset delta:Int)->Int{
+        self = IndexSet(integer:Swift.max(0, self.last! + delta))
+        //self = IndexSet(integersIn: 3...6)
+        return self.last ?? 0
+    }
+}
+
+//MARK: -
 extension NSCompoundPredicate {
     /// Initializes a compund predciate with the given text for all the paths.
     /// - parameter ORcompundWithText: text to search.

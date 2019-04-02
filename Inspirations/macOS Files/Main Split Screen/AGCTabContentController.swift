@@ -21,20 +21,21 @@ class AGCTabContentController: NSTabViewController {
     }()
     
     var searchF:NSSearchField? {return principalWC?.mainSearchField}
-    var leftVC: LeftController {return (parent?.children[0] as? LeftController)!}
-    var principalWC: PrincipalWindow? {
-        return NSApp.mainWindow?.windowController as? PrincipalWindow
-    }
+    //var leftVC: LeftController {return (parent?.children[0] as? LeftController)!}
+    var principalWC: PrincipalWindow? {return NSApp.mainWindow?.windowController as? PrincipalWindow}
+    lazy var lastSelectedRows:IndexSet = IndexSet.init(integer: 0)
+    var leftItem:LibraryItem!
     
-    var lastSelectedRows:IndexSet = IndexSet.init(integer: 0){
-        didSet{
-            print("will index set: \(lastSelectedRows.endIndex)")
-        }
-    }
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        //Local variables
+        self.leftItem = pContainer.viewContext.get(standardItem: .mainLibrary)
+        
+        //Set up for notifications.
+        NotificationCenter.default.addObserver(self, selector: #selector(leftSelectionChanged(notification:)), name: .leftSelectionChanged, object: nil)
 
     }
     
@@ -95,6 +96,15 @@ class AGCTabContentController: NSTabViewController {
             selectedVC.table.reloadData()
         }
     }
+    
+    /// Called when the user changes the left selection.
+    @objc func leftSelectionChanged(notification: Notification){
+        if let selectedLib = notification.object as? LibraryItem {
+            self.leftItem=selectedLib
+            self.updateController(withPredicate: selectedLib.quotePredicate)
+        }
+    }
+    
 }
 //MARK: - 
 extension AGCTabContentController: NSTableViewDataSource{
@@ -127,7 +137,7 @@ extension AGCTabContentController: NSTableViewDataSource{
 extension AGCTabContentController: NSSearchFieldDelegate {
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        let predicate = leftVC.selectedItem?.quotePredicate ?? NSPredicate(forItem: .mainLibrary)
+        let predicate = leftItem.quotePredicate
         updateController(withPredicate: predicate)
     }
     
