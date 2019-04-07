@@ -30,6 +30,7 @@
 		8A2C3127213A068100B8F3E1 /* CoreDataExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */; };
 		8A2C3129213A06EF00B8F3E1 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C3128213A06EF00B8F3E1 /* Language+CoreData.swift */; };
 		8A2FF33B21B1E4E20035CC08 /* TopicModeling.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */; };
+		8A301EFB225A8B7A002E64CA /* AGCSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A301EFA225A8B7A002E64CA /* AGCSearchField.swift */; };
 		8A395B9121D99B1A00CCFF8B /* AGC TableRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A395B9021D99B1A00CCFF8B /* AGC TableRows.swift */; };
 		8A395B9321D9AE7100CCFF8B /* AGC Cell Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A395B9221D9AE7100CCFF8B /* AGC Cell Views.swift */; };
 		8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A546152210D240F00B6E588 /* Smart List Editor.storyboard */; };
@@ -92,6 +93,7 @@
 		8A2C3126213A068100B8F3E1 /* CoreDataExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtras.swift; sourceTree = "<group>"; };
 		8A2C3128213A06EF00B8F3E1 /* Language+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Language+CoreData.swift"; sourceTree = "<group>"; };
 		8A2FF33A21B1E4E20035CC08 /* TopicModeling.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TopicModeling.mlmodel; sourceTree = "<group>"; };
+		8A301EFA225A8B7A002E64CA /* AGCSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGCSearchField.swift; sourceTree = "<group>"; };
 		8A395B9021D99B1A00CCFF8B /* AGC TableRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AGC TableRows.swift"; sourceTree = "<group>"; };
 		8A395B9221D9AE7100CCFF8B /* AGC Cell Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AGC Cell Views.swift"; sourceTree = "<group>"; };
 		8A546151210C02C000B6E588 /* Core Data ERD V2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD V2.xcdatamodel"; sourceTree = "<group>"; };
@@ -197,6 +199,14 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		8A301EF9225A8B6D002E64CA /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8A301EFA225A8B7A002E64CA /* AGCSearchField.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		8A89E8501E842E03001F7F71 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +261,7 @@
 		8AEE1A6B21D1B9A60011CFA3 /* macOS Files */ = {
 			isa = PBXGroup;
 			children = (
+				8A301EF9225A8B6D002E64CA /* Other */,
 				8A89E8681E842E04001F7F71 /* Info.plist */,
 				8AEE1A7421D1C6CF0011CFA3 /* Main Split Screen */,
 				8AEE1A7321D1C0F40011CFA3 /* Add Library Item */,
@@ -602,6 +613,7 @@
 				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */,
 				8AEE1A7D21D1CBDE0011CFA3 /* Constants.swift in Sources */,
+				8A301EFB225A8B7A002E64CA /* AGCSearchField.swift in Sources */,
 				8A7500B82187FB4800C856FE /* AddQuoteController.swift in Sources */,
 				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,

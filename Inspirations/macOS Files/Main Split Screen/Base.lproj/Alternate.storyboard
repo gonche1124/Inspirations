@@ -450,7 +450,7 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="E6962184-A3B1-4D6D-BA25-D18B8732354B" explicitItemIdentifier="mainSearchField" label="Search" paletteLabel="Search Field" visibilityPriority="8" sizingBehavior="auto" autovalidates="NO" id="Cue-ch-q3L">
                                     <nil key="toolTip"/>
-                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="0Xx-UZ-MRd">
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="0Xx-UZ-MRd" customClass="AGCSearchField" customModule="Inspirations_macOS" customModuleProvider="target">
                                         <rect key="frame" x="4" y="14" width="64" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" maximumRecents="5" recentsAutosaveName="recentSearches" id="ygv-D1-Hg2">
@@ -458,6 +458,16 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shouldExpandWhenEditing" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="includeHistoryMenu" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="nonEditingWidth">
+                                                <real key="value" value="100"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="editingWidth">
+                                                <real key="value" value="200"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="updateFilter:" target="VGa-f0-ucZ" id="seh-zB-85v"/>
                                         </connections>
@@ -1723,13 +1733,17 @@ CA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-ud-sXy" userLabel="Add list">
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-ud-sXy" userLabel="Search Outline" customClass="AGCSearchField" customModule="Inspirations_macOS" customModuleProvider="target">
                                 <rect key="frame" x="44" y="0.0" width="131" height="22"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ADh-7h-8lK">
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" maximumRecents="5" recentsAutosaveName="outlineRecents" id="ADh-7h-8lK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shouldExpandWhenEditing" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="includeHistoryMenu" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="CWl-5U-TPh" id="beh-PM-gEB"/>
                                 </connections>

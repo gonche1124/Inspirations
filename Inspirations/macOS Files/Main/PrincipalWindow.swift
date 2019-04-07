@@ -12,7 +12,7 @@ class PrincipalWindow: NSWindowController {
     
     //Outlets
     @IBOutlet var shareButton:NSButton!
-    @IBOutlet weak var mainSearchField: NSSearchField!
+    @IBOutlet weak var mainSearchField: AGCSearchField!
     @IBOutlet weak var segmentedButtons: NSSegmentedControl!
     @IBOutlet weak var infoMessage:NSTextField!
     
@@ -33,7 +33,8 @@ class PrincipalWindow: NSWindowController {
        shareButton.sendAction(on: .leftMouseDown)
         
        //Sets up NSsearchfield.
-        self.setUp()
+        //mainSearchField.addWidthConstraints()
+        //mainSearchField.addHistoryMenu()
         
     }
     
@@ -56,31 +57,6 @@ class PrincipalWindow: NSWindowController {
         if let addQ = segue.destinationController as? AddQuoteController{
             addQ.viewType = .adding
         }
-    }
-    
-    /// Sets up the NSSearchfield
-    func setUp(){
-        let cellMenu = NSMenu.init(title: "Search menu")
-        cellMenu.addMenuItem(title: "Clear", action: nil, keyEquivalent: "", tag: NSSearchField.clearRecentsMenuItemTag, at: 0)
-        let separator = NSMenuItem.separator()
-        separator.tag = NSSearchField.recentsTitleMenuItemTag
-        cellMenu.insertItem(separator , at: 1)
-        cellMenu.addMenuItem(title: "Recent Searches", action: nil, keyEquivalent: "", tag: NSSearchField.recentsTitleMenuItemTag, at: 2)
-        cellMenu.addMenuItem(title: "SRecents", action: nil, keyEquivalent: "", tag: NSSearchField.recentsMenuItemTag, at: 3)
-        mainSearchField.searchMenuTemplate = cellMenu
-        
-        print("width: \(mainSearchField.frame.width)")
-        print("PArent: \(mainSearchField.constraints)")
-        let currentWidth = NSLayoutConstraint(item: mainSearchField,
-                                              attribute: .width,
-                                              relatedBy: .equal,
-                                              toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-        currentWidth.priority = NSLayoutConstraint.Priority(rawValue: 1000)
-        currentWidth.identifier = "currentWidth"
-        mainSearchField.addConstraint(currentWidth)
-        mainSearchField.updateConstraints()
-        print("PArent: \(mainSearchField.constraints)")
-        print("width: \(mainSearchField.frame.width)")
     }
     
     //MARK: - Export
@@ -146,14 +122,6 @@ class PrincipalWindow: NSWindowController {
             selectedQuotesIDS=selQuotes
         }
     }
-    
-    //Actions
-//    @IBAction func segmentedAction(_ sender: NSSegmentedControl) {        
-//        NotificationCenter.default.post(Notification(name: .selectedViewChanged, object:sender))
-//        
-//        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isEnabled = !(sender.indexOfSelectedItem == 2)
-//        (NSApp.delegate as? AppDelegate)?.exportSelectedmenu.isHidden = (sender.indexOfSelectedItem == 2)
-//    }
     
     @IBAction func importFromMenu(_ sender:Any){
         self.performSegue(withIdentifier: "importSheet", sender: self)

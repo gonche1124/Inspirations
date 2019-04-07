@@ -20,8 +20,7 @@ class AGCTabContentController: NSTabViewController {
         //TODO: Check before loading if there are any filters active or a different item selectedd.
     }()
     
-    var searchF:NSSearchField? {return principalWC?.mainSearchField}
-    //var leftVC: LeftController {return (parent?.children[0] as? LeftController)!}
+    var searchF:AGCSearchField? {return principalWC?.mainSearchField}
     var principalWC: PrincipalWindow? {return NSApp.mainWindow?.windowController as? PrincipalWindow}
     var lastSelectedRows:IndexSet = IndexSet.init(integer: 0)
     var leftItem:LibraryItem!
@@ -42,36 +41,12 @@ class AGCTabContentController: NSTabViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         searchF?.delegate=self
+        searchF?.target = self
+        searchF?.action = #selector(updateContents(_:))
         //Configure SegmentedView.
         principalWC?.segmentedButtons.target = self
         principalWC?.segmentedButtons.action = #selector(segmentChange(_:))
     }
-    
-    
-    //MARK: - TAB Delegate.
-//    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-//        print("Did change TabView")
-//                if let selectedVC = tabViewItem?.viewController as? MultipleColumnsController {
-//
-//                    selectedVC.table.reloadData()
-//                    selectedVC.table.selectRowIndexes(lastSelectedRows, byExtendingSelection: false)
-//                }
-//                if let selectedVC = tabViewItem?.viewController as? SingleColumnController{
-//                    selectedVC.table.reloadData()
-//                    selectedVC.table.selectRowIndexes(lastSelectedRows, byExtendingSelection: false)
-//                }
-//    }
-//    override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
-//        print("Will change TabView")
-//        if let selectedVC = tabViewItem?.viewController as? MultipleColumnsController {
-//            selectedVC.table.reloadData()
-//            selectedVC.table.selectRowIndexes(lastSelectedRows, byExtendingSelection: false)
-//        }
-//        if let selectedVC = tabViewItem?.viewController as? SingleColumnController{
-//            selectedVC.table.reloadData()
-//            selectedVC.table.selectRowIndexes(lastSelectedRows, byExtendingSelection: false)
-//        }
-//    }
     
     //MARK: - Actions
     @objc func segmentChange(_ sender: NSSegmentedControl) {
@@ -108,6 +83,14 @@ class AGCTabContentController: NSTabViewController {
         }
     }
     
+    /// Called when the user enters text in the text field.
+    @IBAction func updateContents(_ sender: NSSearchField){
+        if sender.stringValue.count > 0 {
+            let compoundPred = NSCompoundPredicate(ORcompundWithText: sender.stringValue)
+            updateController(withPredicate: compoundPred)
+        }
+    }
+    
 }
 //MARK: - 
 extension AGCTabContentController: NSTableViewDataSource{
@@ -140,42 +123,21 @@ extension AGCTabContentController: NSTableViewDataSource{
 extension AGCTabContentController: NSSearchFieldDelegate {
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        let predicate = leftItem.quotePredicate
-        updateController(withPredicate: predicate)
-//        if let newConst = sender.constraints.first(where: {($0.identifier == "currentWidth")}){
-//            newConst.animator().constant = 100
-//        }
-    }
-    
-    func controlTextDidChange(_ obj: Notification) {
-        if let searchField = obj.object as? NSSearchField,
-            searchField.stringValue.count > 0 {
-            let compoundPred = NSCompoundPredicate(ORcompundWithText: searchField.stringValue)
-            updateController(withPredicate: compoundPred)
-        }
-    }
-    
-    /// Called when the searchfield will start.
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
         print(#function)
-//        if let newConst = sender.constraints.first(where: {($0.identifier == "currentWidth")}){
-//            newConst.animator().constant = 200
+        updateController(withPredicate: leftItem.quotePredicate)
+      
+    }
+    
+    
+//    func controlTextDidChange(_ obj: Notification) {
+//        print(#function)
+//        if let searchField = obj.object as? NSSearchField,
+//            searchField.stringValue.count > 0 {
+//            let compoundPred = NSCompoundPredicate(ORcompundWithText: searchField.stringValue)
+//            updateController(withPredicate: compoundPred)
 //        }
-    }
+//    }
     
-    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        print(#function)
-        if let newConst = searchF?.constraints.first(where: {($0.identifier == "currentWidth")}){
-            newConst.animator().constant = 200
-        }
-        return true
-    }
-    
-    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
-        if let newConst = searchF?.constraints.first(where: {($0.identifier == "currentWidth")}){
-            newConst.animator().constant = 100
-        }
-        return true
-    }
+
 }
 

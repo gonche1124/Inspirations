@@ -43,19 +43,26 @@ extension NSMenu{
     }
     
     ///Less verbose to create NSMenuItem with a specified Tag and position.
-    func addMenuItem(title:String, action:Selector?, keyEquivalent:String, tag:Int, at:Int){
-        let item = NSMenuItem.init(title: title, action: action, keyEquivalent: keyEquivalent)
-        item.tag = tag
-        self.insertItem(item, at: at)
-    }
+//    func addMenuItem(title:String, action:Selector?, keyEquivalent:String, tag:Int, at:Int){
+//        let item = NSMenuItem.init(title: title, action: action, keyEquivalent: keyEquivalent)
+//        item.tag = tag
+//        self.insertItem(item, at: at)
+//    }
 }
 
-extension NSSearchField{
-    var parentToolBar:NSToolbarItem?{
-        return self.window?.toolbar?.visibleItems?.last
+//MARK: - NSMenuItem
+extension NSMenuItem{
+    
+    /// Initalices an NSMenuItem with the given tag.
+    /// - Note: used mianly in the GlobalSearchField for easy setup of menus.
+    convenience  init(title: String, action:Selector?, keyEquivalent:String, tag:Int) {
+        self.init()
+        self.title = title
+        self.action = action
+        self.keyEquivalent = keyEquivalent
+        self.tag = tag
     }
 }
-
 
 //MARK: -
 extension NSTextField{
