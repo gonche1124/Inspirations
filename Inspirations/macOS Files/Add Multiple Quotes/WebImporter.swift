@@ -143,8 +143,8 @@ class WebImporter: NSViewController {
         
         //Create Dictionary:
         var dictionaryOUT = Dictionary<coreKey,String>()
-        dictionaryOUT[.quote]=String((quote ?? "") ?? "")
-        dictionaryOUT[.author]=String((author ?? "") ?? "")
+        dictionaryOUT[.quote]=String((quote ?? "") )
+        dictionaryOUT[.author]=String((author ?? "") )
         dictionaryOUT[.tags]="Wikipedia"
         return dictionaryOUT
     }

@@ -49,7 +49,7 @@
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="EhE-8t-rus">
                                                                             <rect key="frame" x="-2" y="27" width="425" height="19"/>
                                                                             <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Quote" id="BCv-dN-72I">
-                                                                                <font key="font" metaFont="system" size="15"/>
+                                                                                <font key="font" metaFont="systemThin" size="15"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -63,7 +63,7 @@
                                                                                 <constraint firstAttribute="height" constant="19" id="rRU-DF-5AB"/>
                                                                             </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Author" id="dzQ-hj-Hfz">
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="systemThin" size="13"/>
                                                                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>

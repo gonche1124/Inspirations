@@ -264,6 +264,8 @@ extension RightController: NSFetchedResultsControllerDelegate {
             // [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             print("Update..........")
             break
+        @unknown default:
+            print("Unhandled case")
         }
     }
     

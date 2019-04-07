@@ -441,51 +441,35 @@
         <scene sceneID="bMd-Yp-ZsB">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="0T4-WD-gnI" customClass="PrincipalWindow" customModule="Inspirations_macOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Inspirations" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="P1w-qV-Wjq">
+                    <window key="window" title="Inspirations" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="P1w-qV-Wjq">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="355" y="265" width="553" height="260"/>
+                        <rect key="contentRect" x="355" y="265" width="586" height="260"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Fp4-eG-h8C">
+                        <toolbar key="toolbar" implicitIdentifier="7BA18B2D-CE29-441E-AED4-340337271A85" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="Fp4-eG-h8C">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="e6b-nv-9hy"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="5Mz-36-bxw"/>
-                                <toolbarItem implicitItemIdentifier="05D3CFD0-8E4E-4E81-A82E-B17FB20011AE" label="Import" paletteLabel="Import" sizingBehavior="auto" id="kk1-gl-NWk">
+                                <toolbarItem implicitItemIdentifier="E6962184-A3B1-4D6D-BA25-D18B8732354B" explicitItemIdentifier="mainSearchField" label="Search" paletteLabel="Search Field" visibilityPriority="8" sizingBehavior="auto" autovalidates="NO" id="Cue-ch-q3L">
                                     <nil key="toolTip"/>
-                                    <button key="view" verticalHuggingPriority="750" id="Z1e-qZ-qGu">
-                                        <rect key="frame" x="0.0" y="14" width="56" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="roundTextured" title="Import" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Xf-ID-uLf">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                    <connections>
-                                        <segue destination="UfG-VC-tKj" kind="sheet" identifier="importSheet" id="68u-ad-XKY"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="51H-Z8-9zY"/>
-                                <toolbarItem implicitItemIdentifier="E6962184-A3B1-4D6D-BA25-D18B8732354B" explicitItemIdentifier="mainSearchField" label="Search" paletteLabel="Search Field" id="Cue-ch-q3L">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="96" height="22"/>
-                                    <size key="maxSize" width="150" height="22"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="0Xx-UZ-MRd">
-                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ygv-D1-Hg2">
+                                        <rect key="frame" x="4" y="14" width="64" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" maximumRecents="5" recentsAutosaveName="recentSearches" id="ygv-D1-Hg2">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="updateFilter:" target="VGa-f0-ucZ" id="seh-zB-85v"/>
+                                        </connections>
                                     </searchField>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Zdu-vf-aOV"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="XoW-kg-Cuf"/>
-                                <toolbarItem implicitItemIdentifier="74F69806-C8B7-41AD-9BA8-400881D42A62" label="Info text" paletteLabel="Information String" sizingBehavior="auto" id="FQu-ce-QpM">
+                                <toolbarItem implicitItemIdentifier="74F69806-C8B7-41AD-9BA8-400881D42A62" label="Info text" paletteLabel="Information String" visibilityPriority="1" sizingBehavior="auto" id="FQu-ce-QpM">
                                     <nil key="toolTip"/>
                                     <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="59M-vL-tUh">
                                         <rect key="frame" x="33" y="14" width="37" height="17"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="testing" id="Uog-2S-cvp">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -493,7 +477,7 @@
                                         </textFieldCell>
                                     </textField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="AD6B3976-D442-4044-851F-21F886770DB5" explicitItemIdentifier="segmentedButtonImage" label="Views" paletteLabel="Views" id="ySO-UO-BhQ" userLabel="Views Selected Image">
+                                <toolbarItem implicitItemIdentifier="AD6B3976-D442-4044-851F-21F886770DB5" explicitItemIdentifier="segmentedButtonImage" label="Views" paletteLabel="Views" visibilityPriority="1" id="ySO-UO-BhQ" userLabel="Views Selected Image">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="103" height="23"/>
                                     <size key="maxSize" width="215" height="24"/>
@@ -510,30 +494,11 @@
                                         </segmentedCell>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="06FD1E7B-CB5E-48C8-812D-9A937615851F" explicitItemIdentifier="segmentedButtonString" label="Views" paletteLabel="Views" id="1oh-Le-P6p" userLabel="Views Selected String">
+                                <toolbarItem implicitItemIdentifier="553348E4-1B16-4DA0-AD6D-20004041995E" label="Collections" paletteLabel="Collections" image="NSSidebarTemplate" visibilityPriority="1" sizingBehavior="auto" id="Us6-89-ETH" userLabel="Toggle">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="103" height="23"/>
-                                    <size key="maxSize" width="200" height="24"/>
-                                    <segmentedControl key="view" identifier="segmentedButton" verticalHuggingPriority="750" id="8nX-PZ-WXm">
-                                        <rect key="frame" x="0.0" y="14" width="187" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="drq-mV-dFv">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="List" toolTip="Shows quotes in a column based view" selected="YES"/>
-                                                <segment label="Explore" toolTip="Shows quotes in a row based view" tag="1"/>
-                                                <segment label="Large" toolTip="Shows quotes one at a time"/>
-                                            </segments>
-                                        </segmentedCell>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="553348E4-1B16-4DA0-AD6D-20004041995E" label="Collections" paletteLabel="Collections" image="NSSidebarTemplate" id="Us6-89-ETH" userLabel="Toggle">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="35" height="25"/>
-                                    <size key="maxSize" width="45" height="25"/>
                                     <button key="view" verticalHuggingPriority="750" id="gMV-o8-ZDe">
                                         <rect key="frame" x="15" y="14" width="37" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSSidebarTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mej-Ov-2Ut">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -543,13 +508,13 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3EF4074F-D629-4CB0-91C7-C608909376A0" label="Share" paletteLabel="Share" image="NSShareTemplate" id="fTD-x4-jIb" userLabel="Export">
+                                <toolbarItem implicitItemIdentifier="3EF4074F-D629-4CB0-91C7-C608909376A0" label="Share" paletteLabel="Share" image="NSShareTemplate" visibilityPriority="1" autovalidates="NO" id="fTD-x4-jIb" userLabel="Export">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="25"/>
-                                    <size key="maxSize" width="45" height="25"/>
+                                    <size key="minSize" width="36" height="25"/>
+                                    <size key="maxSize" width="37" height="25"/>
                                     <button key="view" identifier="shareButton" verticalHuggingPriority="750" id="m1q-oA-5JL">
-                                        <rect key="frame" x="0.0" y="14" width="45" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="1" y="14" width="37" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sdc-qL-vlv">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -559,13 +524,13 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="44490A23-C864-4E21-B054-D376C6D4A796" label="New" paletteLabel="New" image="NSAddTemplate" id="N6T-ka-aco">
+                                <toolbarItem implicitItemIdentifier="44490A23-C864-4E21-B054-D376C6D4A796" label="New" paletteLabel="New" image="NSAddTemplate" visibilityPriority="1" autovalidates="NO" id="N6T-ka-aco">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="25"/>
-                                    <size key="maxSize" width="45" height="25"/>
+                                    <size key="minSize" width="36" height="25"/>
+                                    <size key="maxSize" width="37" height="25"/>
                                     <button key="view" verticalHuggingPriority="750" id="hFN-HS-Ix4">
-                                        <rect key="frame" x="0.0" y="14" width="45" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="37" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bRN-be-J7M">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -579,11 +544,12 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="Us6-89-ETH"/>
+                                <toolbarItem reference="ySO-UO-BhQ"/>
                                 <toolbarItem reference="Zdu-vf-aOV"/>
-                                <toolbarItem reference="1oh-Le-P6p"/>
                                 <toolbarItem reference="XoW-kg-Cuf"/>
                                 <toolbarItem reference="FQu-ce-QpM"/>
                                 <toolbarItem reference="XoW-kg-Cuf"/>
+                                <toolbarItem reference="Zdu-vf-aOV"/>
                                 <toolbarItem reference="N6T-ka-aco"/>
                                 <toolbarItem reference="fTD-x4-jIb"/>
                                 <toolbarItem reference="Cue-ch-q3L"/>
@@ -596,14 +562,14 @@
                     <connections>
                         <outlet property="infoMessage" destination="59M-vL-tUh" id="8WX-1c-ov9"/>
                         <outlet property="mainSearchField" destination="0Xx-UZ-MRd" id="hp0-bF-yyK"/>
-                        <outlet property="segmentedButtons" destination="8nX-PZ-WXm" id="ifm-Kz-qch"/>
+                        <outlet property="segmentedButtons" destination="XNF-kp-jWe" id="6oG-Nc-A7H"/>
                         <outlet property="shareButton" destination="m1q-oA-5JL" id="S5u-d6-6lm"/>
                         <segue destination="KAN-2L-YNM" kind="relationship" relationship="window.shadowedContentViewController" id="yUg-Ha-RNT"/>
                     </connections>
                 </windowController>
                 <customObject id="VGa-f0-ucZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-240" y="291"/>
+            <point key="canvasLocation" x="-224" y="291"/>
         </scene>
         <!--Add Value-->
         <scene sceneID="qKr-oS-34W">
@@ -951,7 +917,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="644" height="477"/>
                                                             <clipView key="contentView" id="33a-dW-DC1">
                                                                 <rect key="frame" x="1" y="1" width="642" height="475"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <tableView identifier="exploreTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" emptySelection="NO" autosaveColumns="NO" rowHeight="68" usesAutomaticRowHeights="YES" viewBased="YES" id="Jd6-qF-irS" userLabel="Explore Table">
                                                                         <rect key="frame" x="0.0" y="0.0" width="642" height="475"/>

@@ -41,7 +41,21 @@ extension NSMenu{
     func item(withIdentifier:String)->NSMenuItem?{
         return self.items.firstWith(identifier: withIdentifier)
     }
+    
+    ///Less verbose to create NSMenuItem with a specified Tag and position.
+    func addMenuItem(title:String, action:Selector?, keyEquivalent:String, tag:Int, at:Int){
+        let item = NSMenuItem.init(title: title, action: action, keyEquivalent: keyEquivalent)
+        item.tag = tag
+        self.insertItem(item, at: at)
+    }
 }
+
+extension NSSearchField{
+    var parentToolBar:NSToolbarItem?{
+        return self.window?.toolbar?.visibleItems?.last
+    }
+}
+
 
 //MARK: -
 extension NSTextField{

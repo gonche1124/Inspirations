@@ -272,6 +272,8 @@ extension LeftController: NSFetchedResultsControllerDelegate {
             // [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             print("Update..........")
             break
+        @unknown default:
+            print("Unkonwn case")
         }
     }
     

@@ -46,7 +46,6 @@ extension MultipleColumnsController: NSTableViewDelegate{
     
     //Changing the selection.
     func tableViewSelectionDidChange(_ notification: Notification) {
-        print(#function)
         if let table = notification.object as? NSTableView
         {
             let frc = tabController.quoteFRC

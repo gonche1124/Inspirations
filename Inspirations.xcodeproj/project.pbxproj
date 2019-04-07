@@ -34,12 +34,10 @@
 		8A395B9321D9AE7100CCFF8B /* AGC Cell Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A395B9221D9AE7100CCFF8B /* AGC Cell Views.swift */; };
 		8A546153210D240F00B6E588 /* Smart List Editor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A546152210D240F00B6E588 /* Smart List Editor.storyboard */; };
 		8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A546154210D2A7400B6E588 /* Smar List Controller.swift */; };
-		8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A63182220956CF000091FA6 /* EntitiesExtensions.swift */; };
 		8A7500B52187FB0200C856FE /* Add Value.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7500B42187FB0200C856FE /* Add Value.storyboard */; };
 		8A7500B82187FB4800C856FE /* AddQuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7500B62187FB4800C856FE /* AddQuoteController.swift */; };
 		8A89E85D1E842E04001F7F71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85C1E842E04001F7F71 /* AppDelegate.swift */; };
 		8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E85E1E842E04001F7F71 /* ViewController.swift */; };
-		8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */; };
 		8AC860C8224DA6690092ECF7 /* MultipleColumns.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AC860C7224DA6690092ECF7 /* MultipleColumns.storyboard */; };
 		8AC860CA224DAC500092ECF7 /* SingleColumn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AC860C9224DAC500092ECF7 /* SingleColumn.storyboard */; };
 		8AC860CC224DAE190092ECF7 /* BigView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AC860CB224DAE190092ECF7 /* BigView.storyboard */; };
@@ -99,14 +97,12 @@
 		8A546151210C02C000B6E588 /* Core Data ERD V2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data ERD V2.xcdatamodel"; sourceTree = "<group>"; };
 		8A546152210D240F00B6E588 /* Smart List Editor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Smart List Editor.storyboard"; sourceTree = "<group>"; };
 		8A546154210D2A7400B6E588 /* Smar List Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Smar List Controller.swift"; sourceTree = "<group>"; };
-		8A63182220956CF000091FA6 /* EntitiesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesExtensions.swift; sourceTree = "<group>"; };
 		8A7500B42187FB0200C856FE /* Add Value.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Add Value.storyboard"; sourceTree = "<group>"; };
 		8A7500B62187FB4800C856FE /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
 		8A89E8591E842E04001F7F71 /* Inspirations-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inspirations-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A89E85C1E842E04001F7F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A89E85E1E842E04001F7F71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8A89E8681E842E04001F7F71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddQuoteOld.swift; sourceTree = "<group>"; };
 		8AC860C7224DA6690092ECF7 /* MultipleColumns.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MultipleColumns.storyboard; sourceTree = "<group>"; };
 		8AC860C9224DAC500092ECF7 /* SingleColumn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SingleColumn.storyboard; sourceTree = "<group>"; };
 		8AC860CB224DAE190092ECF7 /* BigView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BigView.storyboard; sourceTree = "<group>"; };
@@ -195,19 +191,10 @@
 				8AE614C02072F134003CB950 /* OldLeftController.swift */,
 				8AE9B35F1FECA94D008A361F /* OldImportController.swift */,
 				8AFB528C1EDBADE50096B93F /* BigViewController2.swift */,
-				8A89E88C1E843302001F7F71 /* AddQuoteOld.swift */,
 				8A89E85E1E842E04001F7F71 /* ViewController.swift */,
 				8A126EB5208D4DC100AD33B1 /* MasterViewController.swift */,
 			);
 			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		8A63181F2095682400091FA6 /* NSManagedObjects */ = {
-			isa = PBXGroup;
-			children = (
-				8A63182220956CF000091FA6 /* EntitiesExtensions.swift */,
-			);
-			name = NSManagedObjects;
 			sourceTree = "<group>";
 		};
 		8A89E8501E842E03001F7F71 = {
@@ -257,7 +244,6 @@
 			children = (
 				8ACADE831F64B77500919332 /* Support */,
 				8A2572E11ED8B50900720C2A /* View Controllers */,
-				8A63181F2095682400091FA6 /* NSManagedObjects */,
 			);
 			name = "Old Files";
 			sourceTree = "<group>";
@@ -436,7 +422,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Gonche;
 				TargetAttributes = {
 					8A89E8581E842E03001F7F71 = {
@@ -452,10 +438,9 @@
 			};
 			buildConfigurationList = 8A89E8541E842E03001F7F71 /* Build configuration list for PBXProject "Inspirations" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -617,8 +602,6 @@
 				8A546155210D2A7400B6E588 /* Smar List Controller.swift in Sources */,
 				8ADBCF641FBBEFA5007523FF /* Utilities2.swift in Sources */,
 				8AEE1A7D21D1CBDE0011CFA3 /* Constants.swift in Sources */,
-				8A89E88D1E843302001F7F71 /* AddQuoteOld.swift in Sources */,
-				8A63182320956CF000091FA6 /* EntitiesExtensions.swift in Sources */,
 				8A7500B82187FB4800C856FE /* AddQuoteController.swift in Sources */,
 				8ADDA7A1200C24D400F7E1D9 /* ValueTransformers.swift in Sources */,
 				8A89E85F1E842E04001F7F71 /* ViewController.swift in Sources */,
@@ -695,6 +678,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -745,6 +729,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -752,6 +737,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -794,6 +780,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -812,7 +799,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -831,7 +818,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Gonche.Inspirations-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

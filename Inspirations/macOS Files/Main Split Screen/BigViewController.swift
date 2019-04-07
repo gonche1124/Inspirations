@@ -40,43 +40,43 @@ class BigViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         //Updates with latest quote.
-        let quoteArray = tabVC.quoteFRC.fetchedObjects
-        let newQuote = quoteArray?[(tabVC.lastSelectedRows.last ?? 0)]
-        self.currentQuote = newQuote
-        
-        //Sets up the slider:
-        positionalSlider.maxValue = Double(quoteArray!.count)
-        positionalSlider.minValue = 0
-        positionalSlider.altIncrementValue = 1
-        positionalSlider.integerValue = tabVC.lastSelectedRows.last ?? 0
-        
+        if let quoteArray=tabVC.quoteFRC.fetchedObjects{
+            self.currentQuote = quoteArray[tabVC.lastSelectedRows.last!]
+            updateViewFromFRC()
+        }
     }
     
     /// Updates the buttons and the slider basedon the new FRC values and selection.
     func updateViewFromFRC(){
         self.previousButton.isEnabled = !(tabVC.lastSelectedRows.last == 0)
-        self.nextButton.isEnabled = !(tabVC.quoteFRC.fetchedObjects?.count == tabVC.lastSelectedRows.last)
-        self.positionalSlider.maxValue = Double(tabVC.quoteFRC.fetchedObjects?.count ?? 0)
+        self.nextButton.isEnabled = !(tabVC.quoteFRC.fetchedObjects?.count == (tabVC.lastSelectedRows.last!+1))
+        
+        self.positionalSlider.minValue = 1
+        self.positionalSlider.maxValue = Double(tabVC.quoteFRC.fetchedObjects!.count)
+        self.positionalSlider.integerValue = tabVC.lastSelectedRows.last! + 1
+        
+        let newtext = "Quote \(positionalSlider.integerValue) of \(tabVC.quoteFRC.fetchedObjects?.count ?? 0)"
+        NotificationCenter.default.post(Notification(name: .updateDisplayText, object: newtext, userInfo: nil))
     }
     
     
     //MARK: - Actions.
+    /// Shows the previous quote in the FRC.
     @IBAction func showPrevious(_ sender: NSButton) {
-        print(#function)
-        self.currentQuote = tabVC.quoteFRC.fetchedObjects?[tabVC.lastSelectedRows.lastIndex(offset: -1)]
+        currentQuote = tabVC.quoteFRC.fetchedObjects?[tabVC.lastSelectedRows.lastIndex(offset: -1)]
         updateViewFromFRC()
     }
     
+    /// Shows the next quote in the FRC.
     @IBAction func showNext(_ sender: NSButton) {
-        print(#function)
         let newQuote = tabVC.quoteFRC.fetchedObjects?[tabVC.lastSelectedRows.lastIndex(offset: 1)]
         self.currentQuote = newQuote
         updateViewFromFRC()
     }
     
+    /// Called when the sliders moves.
     @IBAction func showQuoteX(_ sender: NSSlider) {
-        print(sender.intValue)
-        let offset = sender.integerValue - (tabVC.lastSelectedRows.last ?? 0)
+        let offset = sender.integerValue - (tabVC.lastSelectedRows.last!+1)
         let newQuote = tabVC.quoteFRC.fetchedObjects?[tabVC.lastSelectedRows.lastIndex(offset:offset)]
         self.currentQuote = newQuote
         updateViewFromFRC()

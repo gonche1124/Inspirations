@@ -44,16 +44,16 @@ class MasterViewController: NSViewController, NSTableViewDataSource, NSTableView
     
     //MARK: - Overrides.
     //Sets the information for the edit controller.
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier=="editSegue", let destC = segue.destinationController as? AddQuoteOld{
-            try! self.moc.save()
-            destC.title="Edit Quote"
-            destC.representedObject=self.representedObject
-            destC.selectedManagedObjects=quotesAC.selectedObjects as! [Quote]?
-            destC.doneButtonText="Update"
-            //destC.moc.commitEditing()
-        }
-    }
+//    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+//        if segue.identifier=="editSegue", let destC = segue.destinationController as? AddQuoteOld{
+//            try! self.moc.save()
+//            destC.title="Edit Quote"
+//            destC.representedObject=self.representedObject
+//            destC.selectedManagedObjects=quotesAC.selectedObjects as! [Quote]?
+//            destC.doneButtonText="Update"
+//            //destC.moc.commitEditing()
+//        }
+//    }
     
     //Get keyboard keystrokes.
     override func keyDown(with event: NSEvent) {

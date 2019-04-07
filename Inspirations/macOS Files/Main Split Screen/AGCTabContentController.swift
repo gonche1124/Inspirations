@@ -23,7 +23,7 @@ class AGCTabContentController: NSTabViewController {
     var searchF:NSSearchField? {return principalWC?.mainSearchField}
     //var leftVC: LeftController {return (parent?.children[0] as? LeftController)!}
     var principalWC: PrincipalWindow? {return NSApp.mainWindow?.windowController as? PrincipalWindow}
-    lazy var lastSelectedRows:IndexSet = IndexSet.init(integer: 0)
+    var lastSelectedRows:IndexSet = IndexSet.init(integer: 0)
     var leftItem:LibraryItem!
     
     //MARK: - Lifecycle
@@ -95,6 +95,9 @@ class AGCTabContentController: NSTabViewController {
         if let selectedVC = selectedVC as? SingleColumnController{
             selectedVC.table.reloadData()
         }
+        if let selectedVC = selectedVC as? BigViewController {
+            selectedVC.updateViewFromFRC()
+        }
     }
     
     /// Called when the user changes the left selection.
@@ -133,12 +136,15 @@ extension AGCTabContentController: NSTableViewDataSource{
     }
 }
 
-// MARK: -
+// MARK: - NSSearchFieldDelegate
 extension AGCTabContentController: NSSearchFieldDelegate {
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         let predicate = leftItem.quotePredicate
         updateController(withPredicate: predicate)
+//        if let newConst = sender.constraints.first(where: {($0.identifier == "currentWidth")}){
+//            newConst.animator().constant = 100
+//        }
     }
     
     func controlTextDidChange(_ obj: Notification) {
@@ -147,6 +153,29 @@ extension AGCTabContentController: NSSearchFieldDelegate {
             let compoundPred = NSCompoundPredicate(ORcompundWithText: searchField.stringValue)
             updateController(withPredicate: compoundPred)
         }
+    }
+    
+    /// Called when the searchfield will start.
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        print(#function)
+//        if let newConst = sender.constraints.first(where: {($0.identifier == "currentWidth")}){
+//            newConst.animator().constant = 200
+//        }
+    }
+    
+    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+        print(#function)
+        if let newConst = searchF?.constraints.first(where: {($0.identifier == "currentWidth")}){
+            newConst.animator().constant = 200
+        }
+        return true
+    }
+    
+    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+        if let newConst = searchF?.constraints.first(where: {($0.identifier == "currentWidth")}){
+            newConst.animator().constant = 100
+        }
+        return true
     }
 }
 

@@ -45,9 +45,9 @@
                                 <rect key="frame" x="186" y="118" width="89" height="65"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kad-Hm-OBQ">
-                                        <rect key="frame" x="0.0" y="27" width="89" height="38"/>
+                                        <rect key="frame" x="1" y="27" width="87" height="38"/>
                                         <textFieldCell key="cell" selectable="YES" alignment="center" title="Quote" id="ddf-j8-PNH">
-                                            <font key="font" metaFont="system" size="31"/>
+                                            <font key="font" metaFont="systemThin" size="31"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -55,7 +55,7 @@
                                     <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MIl-B6-pW7">
                                         <rect key="frame" x="18" y="0.0" width="53" height="19"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Author" id="W1p-7K-7ga">
-                                            <font key="font" metaFont="system" size="16"/>
+                                            <font key="font" metaFont="systemThin" size="16"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
