@@ -23,6 +23,7 @@ class BigViewController: NSViewController {
     var tabVC:AGCTabContentController{return parent as! AGCTabContentController}
     var currentQuote:Quote? {
         didSet{
+            
             textFieldQuote.stringValue = currentQuote?.quoteString ?? "No selection"
             textFieldAuthor.stringValue = currentQuote?.from?.name ?? "No selection"
             topicPill.title = currentQuote?.isAbout?.themeName ?? "No selection"

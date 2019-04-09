@@ -119,23 +119,17 @@ extension LeftController: NSTextFieldDelegate {
     //Update search field when user enters text.
     func controlTextDidChange(_ obj: Notification) {
         if let searchF = obj.object as? NSSearchField {
-            listFRC.fetchRequest.predicate = NSPredicate(fromLeftSearchField: searchF)
+            if searchF.stringValue.isEmpty{
+                listFRC.fetchRequest.predicate=NSPredicate.rootItems
+            }else{
+                listFRC.fetchRequest.predicate = NSPredicate(fromLeftSearchField: searchF)
+            }
             try! listFRC.performFetch()
             listView.beginUpdates()
             listView.reloadData()
             listView.expandItem(nil, expandChildren: true)
             listView.endUpdates()
         }
-    }
-    
-    // Updates the predicate with the root items after the user ends searching.
-    func controlTextDidEndEditing(_ obj: Notification) {
-        listFRC.fetchRequest.predicate=NSPredicate.rootItems
-        try! listFRC.performFetch()
-        listView.beginUpdates()
-        listView.reloadData()
-        listView.expandItem(nil, expandChildren: true)
-        listView.endUpdates()
     }
 }
 
