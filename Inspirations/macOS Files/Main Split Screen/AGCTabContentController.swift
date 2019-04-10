@@ -40,7 +40,6 @@ class AGCTabContentController: NSTabViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        searchF?.delegate=self
         searchF?.target = self
         searchF?.action = #selector(updateContents(_:))
         //Configure SegmentedView.
@@ -60,6 +59,7 @@ class AGCTabContentController: NSTabViewController {
     /// - parameter andSortDescriptor: Array of sort descriptors to use
     func updateController(withPredicate newPredicate: NSPredicate,
                           andSortDescriptors: [NSSortDescriptor]?=[NSSortDescriptor(keyPath: \Quote.quoteString, ascending: true)]){
+        
         quoteFRC.fetchRequest.predicate = newPredicate
         quoteFRC.fetchRequest.sortDescriptors=andSortDescriptors
         try? quoteFRC.performFetch()
@@ -71,6 +71,8 @@ class AGCTabContentController: NSTabViewController {
             selectedVC.table.reloadData()
         }
         if let selectedVC = selectedVC as? BigViewController {
+            lastSelectedRows = IndexSet(arrayLiteral: 0)
+            selectedVC.currentQuote = quoteFRC.fetchedObjects?[lastSelectedRows.first!]
             selectedVC.updateViewFromFRC()
         }
     }
@@ -83,14 +85,16 @@ class AGCTabContentController: NSTabViewController {
         }
     }
     
-    /// Called when the user enters text in the text field.
+    /// Called when the user enters text in the NSSearchfield.
     @IBAction func updateContents(_ sender: NSSearchField){
         if sender.stringValue.count > 0 {
-            let compoundPred = NSCompoundPredicate(ORcompundWithText: sender.stringValue)
-            updateController(withPredicate: compoundPred)
+            let orPred = NSCompoundPredicate(ORcompundWithText: sender.stringValue)
+            let andPred = NSCompoundPredicate(andPredicateWithSubpredicates: [orPred, leftItem.quotePredicate])
+            updateController(withPredicate: andPred)
+        }else{
+            updateController(withPredicate: leftItem.quotePredicate)
         }
     }
-    
 }
 //MARK: - 
 extension AGCTabContentController: NSTableViewDataSource{
@@ -119,25 +123,5 @@ extension AGCTabContentController: NSTableViewDataSource{
     }
 }
 
-// MARK: - NSSearchFieldDelegate
-extension AGCTabContentController: NSSearchFieldDelegate {
-    
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        print(#function)
-        updateController(withPredicate: leftItem.quotePredicate)
-      
-    }
-    
-    
-//    func controlTextDidChange(_ obj: Notification) {
-//        print(#function)
-//        if let searchField = obj.object as? NSSearchField,
-//            searchField.stringValue.count > 0 {
-//            let compoundPred = NSCompoundPredicate(ORcompundWithText: searchField.stringValue)
-//            updateController(withPredicate: compoundPred)
-//        }
-//    }
-    
 
-}
 

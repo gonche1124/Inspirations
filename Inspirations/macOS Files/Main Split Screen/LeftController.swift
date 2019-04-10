@@ -172,9 +172,6 @@ extension LeftController: NSOutlineViewDelegate{
         return LeftNSTableViewRow()
     }
     
-   
-    
-    
     //Changes the selection
     func outlineViewSelectionDidChange(_ notification: Notification) {
         //Posts notification globally
